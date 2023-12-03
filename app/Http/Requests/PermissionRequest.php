@@ -26,11 +26,7 @@ class PermissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                'min:3',
-                'max:48'
-            ],
+            'name' => 'required|regex:/^[\pL\s\-]+$/u||min:3|max:48|unique:permissions,name',
         ];
     }
 }

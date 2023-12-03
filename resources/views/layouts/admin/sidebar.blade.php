@@ -29,8 +29,8 @@
                     request()->is('admin/roles/*') ||
                     request()->is('admin/users') ||
                     request()->is('admin/users/*') ? 'active show' : '' }}">
-                <a class="nav-link with-sub" href="#">
-                    <i class="fe fe-user"></i>
+                <a class="nav-link with-sub" href="javascript:void(0)">
+                    <i class="fe fe-users"></i>
                     <span class="sidemenu-label">@lang('admin.sidebar.userManagement')</span>
                     <i class="angle fe fe-chevron-right"></i>
                 </a>

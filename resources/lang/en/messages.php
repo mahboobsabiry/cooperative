@@ -90,6 +90,12 @@ return [
         'updatedNewsMsg'    => 'News has been updated successfully!',
     ],
 
+    'permissions' => [
+        'addNewPermMsg' => 'New permission has been added successfully!',
+        'updatePermMsg' => 'Permission has been updated successfully!',
+        'deletePermMsg' => 'Permission has been deleted successfully!'
+    ],
+
     'provinces' => [
         'pMembersTitle' => 'All members from '
     ],
@@ -107,6 +113,12 @@ return [
         'reportActive'        => 'Report has been activated successfully!',
         'reportInactive'      => 'Report has been inactivated successfully!',
         'updatedReportMsg'    => 'Report has been updated successfully!',
+    ],
+
+    'roles' => [
+        'addNewRoleMsg' => 'New role has been added successfully!',
+        'updateRoleMsg' => 'Role has been updated successfully!',
+        'deleteRoleMsg' => 'Role has been deleted successfully!'
     ],
 
     'settings' => [

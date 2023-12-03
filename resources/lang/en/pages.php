@@ -172,10 +172,10 @@ return [
     ],
 
     'permissions' => [
-        'addPageTitle'  => 'Add New Permission',
-        'deletePerm'    => 'Delete Permission',
-        'editPageTitle' => 'Edit Permission',
-        'permission'    => 'Permission'
+        'addNewPermission'  => 'Add New Permission',
+        'deletePermission'  => 'Delete Permission',
+        'editPermission'    => 'Edit Permission',
+        'permission'        => 'Permission'
     ],
 
     'profile' => [
@@ -221,7 +221,8 @@ return [
     'roles' => [
         'addNewRole'    => 'Add New Role',
         'deleteRole'    => 'Delete Role',
-        'editPageTitle' => 'Edit Role',
+        'editRole'      => 'Edit Role',
+        'permissionsOf' => 'Permissions Of',
         'role'          => 'Role'
     ],
 
@@ -250,6 +251,7 @@ return [
         'deleteUser'       => 'Delete User',
         'editPageTitle'    => 'Edit User Information',
         'latestMAddedBy'   => 'List of latest members added by ',
+        'rolesOf'          => 'Roles of',
         'totalMAddedBy'    => 'List of all members added by ',
     	'user' 	           => 'User',
         'userDetails'      => 'User Details',

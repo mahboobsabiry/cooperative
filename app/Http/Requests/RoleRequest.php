@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class RoleRequest extends FormRequest
 {
@@ -11,7 +13,8 @@ class RoleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        abort_if(Gate::denies('role_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        return true;
     }
 
     /**
@@ -22,7 +25,8 @@ class RoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'          => 'required|regex:/^[\pL\s\-]+$/u||min:3|max:48|unique:roles,name',
+            'permissions'   => 'required'
         ];
     }
 }

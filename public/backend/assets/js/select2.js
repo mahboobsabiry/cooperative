@@ -9,11 +9,11 @@ $(document).ready(function() {
 		placeholder: 'Choose one',
 		 width: '100%'
 	});
-	
+
 	function formatState (state) {
 	  if (!state.id) { return state.text; }
 	  var $state = $(
-		'<span><img src="assets/plugins/flag-icon-css/flags/4x3/' +  state.element.value.toLowerCase() +
+		'<span><img src="backend/assets/plugins/flag-icon-css/flags/4x3/' +  state.element.value.toLowerCase() +
 	'.svg" class="img-flag" /> ' +
 	state.text +  '</span>'
 	 );
@@ -25,5 +25,5 @@ $(document).ready(function() {
 	  templateSelection: formatState,
 	   escapeMarkup: function(m) { return m; }
 	});
-	
+
 });

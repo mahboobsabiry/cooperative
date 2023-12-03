@@ -173,10 +173,10 @@ return [
     ],
 
     'permissions' => [
-        'addPageTitle'  => 'ثبت مجوز جدید',
-        'deletePerm'    => 'حذف مجوز',
-        'editPageTitle' => 'ویرایش مجوز',
-        'permission'    => 'مجوز'
+        'addNewPermission'  => 'ثبت مجوز جدید',
+        'deletePermission'  => 'حذف مجوز',
+        'editPermission'    => 'ویرایش مجوز',
+        'permission'        => 'مجوز'
     ],
 
     'profile' => [
@@ -223,6 +223,7 @@ return [
         'addNewRole'    => 'ثبت صلاحیت جدید',
         'deleteRole'    => 'حذف صلاحیت',
         'editPageTitle' => 'ویرایش صلاحیت',
+        'permissionsOf' => 'مجوز های',
         'role'          => 'صلاحیت'
     ],
 
@@ -251,6 +252,7 @@ return [
         'deleteUser'       => 'حذف کاربر',
         'editPageTitle'    => 'ویرایش معلومات کاربر',
         'latestMAddedBy'   => 'لیست آخرین اعضای ثبت شده توسط ',
+        'rolesOf'          => 'صلاحیت های',
         'totalMAddedBy'    => 'لیست مجموع اعضای ثبت شده توسط ',
     	'user' 	       => 'کاربر',
         'userDetails'  => 'جزئیات کاربر',

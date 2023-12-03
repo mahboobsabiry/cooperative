@@ -90,6 +90,12 @@ return [
         'updatedNewsMsg'    => 'خبر موفقانه بروزرسانی شد!',
     ],
 
+    'permissions' => [
+        'addNewPermMsg' => 'مجوز جدید موفقانه ثبت شد!',
+        'updatePermMsg' => 'مجوز موفقانه بروزرسانی شد!',
+        'deletePermMsg' => 'مجوز موفقانه حذف شد!'
+    ],
+
     'provinces' => [
         'pMembersTitle' => 'لیست اعضای حزب از ولایت'
     ],
@@ -107,6 +113,12 @@ return [
         'reportActive'        => 'گزارش موفقانه فعال شد!',
         'reportInactive'      => 'گزارش موفقانه غیرفعال شد!',
         'updatedReportMsg'    => 'گزارش موفقانه بروزرسانی شد!',
+    ],
+
+    'roles' => [
+        'addNewRoleMsg' => 'صلاحیت جدید موفقانه ثبت شد!',
+        'updateRoleMsg' => 'صلاحیت موفقانه بروزرسانی شد!',
+        'deleteRoleMsg' => 'صلاحیت موفقانه حذف شد!'
     ],
 
     'settings' => [

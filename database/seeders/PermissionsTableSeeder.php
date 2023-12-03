@@ -21,10 +21,7 @@ class PermissionsTableSeeder extends Seeder
                 'name'      => 'permission_create'
             ],
             [
-                'name'      => 'permission_edit'
-            ],
-            [
-                'name'      => 'permission_show'
+                'name'      => 'permission_update'
             ],
             [
                 'name'      => 'permission_delete'
@@ -36,10 +33,7 @@ class PermissionsTableSeeder extends Seeder
                 'name'      => 'role_create'
             ],
             [
-                'name'      => 'role_edit'
-            ],
-            [
-                'name'      => 'role_show'
+                'name'      => 'role_update'
             ],
             [
                 'name'      => 'role_delete'
@@ -51,10 +45,7 @@ class PermissionsTableSeeder extends Seeder
                 'name'      => 'user_create'
             ],
             [
-                'name'      => 'user_edit'
-            ],
-            [
-                'name'      => 'user_show'
+                'name'      => 'user_update'
             ],
             [
                 'name'      => 'user_delete'
@@ -62,14 +53,13 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name'      => 'user_access'
             ],
+
+            // Settings
             [
                 'name'      => 'setting_create'
             ],
             [
-                'name'      => 'setting_edit'
-            ],
-            [
-                'name'      => 'setting_show'
+                'name'      => 'setting_update'
             ],
             [
                 'name'      => 'setting_delete'
