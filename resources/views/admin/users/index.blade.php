@@ -12,6 +12,12 @@
     <link href="{{ asset('backend/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
     <!--Sumoselect css-->
     <link href="{{ asset('backend/assets/plugins/sumoselect/sumoselect.css') }}" rel="stylesheet">
+
+    <style>
+        table thead tr .tblBorder {
+            border: 1px solid #ddd;
+        }
+    </style>
 @endsection
 <!--/==/ End of Extra Styles -->
 
@@ -50,37 +56,47 @@
                     <!-- Table Card Body -->
                     <div class="card-body">
                         <!-- Success Message -->
-                        @if(session()->has('success'))
-                            <div class="alert alert-success mg-b-2" role="alert">
-                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <strong>@lang('global.wellDone')!</strong> {{ session()->get('success') }}
-                            </div>
-                        @endif
+                        @include('admin.inc.alerts')
 
                         <!-- Table Title -->
-                        <div>
-                            <h6 class="card-title mb-1">@lang('admin.sidebar.users')</h6>
-                            <p class="text-muted card-sub-title">Exporting data from a table can often be a key part of
-                                a complex application. The Buttons extension for DataTables provides three plug-ins that
-                                provide overlapping functionality for data export:</p>
-                        </div>
+                        <nav class="nav main-nav-line mb-3">
+                            <!-- All Users -->
+                            <a class="nav-link {{ request()->url() == route('admin.users.index') ? 'active text-primary' : '' }}"
+                               href="{{ request()->url() == route('admin.users.index') ? 'javascript:void(0)' : route('admin.users.index') }}">@lang('pages.users.allUsers')</a>
+                            <!-- Active Users -->
+                            <a class="nav-link {{ request()->url() == route('admin.users.active') ? 'active text-primary' : '' }}"
+                               href="{{ request()->url() == route('admin.users.active') ? 'javascript:void(0)' : route('admin.users.active') }}">@lang('pages.users.activeUsers')</a>
+                            <!-- Inactive Users -->
+                            <a class="nav-link {{ request()->url() == route('admin.users.inactive') ? 'active text-primary' : '' }}"
+                               href="{{ request()->url() == route('admin.users.inactive') ? 'javascript:void(0)' : route('admin.users.inactive') }}">@lang('pages.users.inactiveUsers')</a>
+                        </nav>
+                        <hr>
+{{--                        <div>--}}
+{{--                            <h6 class="card-title mb-1">@lang('admin.sidebar.users')</h6>--}}
+{{--                            <p class="text-muted card-sub-title">Exporting data from a table can often be a key part of--}}
+{{--                                a complex application. The Buttons extension for DataTables provides three plug-ins that--}}
+{{--                                provide overlapping functionality for data export:</p>--}}
+{{--                        </div>--}}
 
                         <!-- Table -->
-                        <div class="table-responsive">
+                        <div class="table-responsive mt-2">
                             <table id="exportexample"
-                                   class="table table-bordered border-t0 key-buttons text-nowrap w-100">
+                                   class="table table-bordered border-top key-buttons display text-nowrap w-100">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>@lang('form.avatar')</th>
-                                    <th>@lang('form.name')</th>
-                                    <th>@lang('form.email')</th>
-                                    <th>@lang('admin.sidebar.roles')</th>
-                                    <th>@lang('global.information')</th>
-                                    <th>@lang('global.createdDate')</th>
-                                    <th>@lang('global.action')</th>
+                                    <th rowspan="2" class="text-center tblBorder">#</th>
+                                    <th colspan="4" class="text-center tblBorder">@lang('global.personalInfo')</th>
+                                    <th colspan="3" class="text-center tblBorder">@lang('global.details')</th>
+                                    <th rowspan="2" class="text-center tblBorder">@lang('global.action')</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">@lang('form.avatar')</th>
+                                    <th class="text-center">@lang('form.name')</th>
+                                    <th class="text-center">@lang('form.phone')</th>
+                                    <th class="text-center">@lang('form.email')</th>
+                                    <th class="text-center">@lang('admin.sidebar.roles')</th>
+                                    <th class="text-center">@lang('global.information')</th>
+                                    <th class="text-center">@lang('global.createdDate')</th>
                                 </tr>
                                 </thead>
 
@@ -95,35 +111,65 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <img src="{{ asset('backend/users', $user->avatar) }}" class="card-img rounded-50">
+                                            <img src="{{ $user->image }}" class="card-img img-fluid w-50 rounded-50">
                                         </td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
+                                        <td>
+                                            @if(Cache::has('user-is-online-' . $user->id))
+                                                <span class="p-2 tx-sm-10 text-success">
+                                                    <i class="fa fa-circle bd-1 bd-dashed rounded-circle" data-placement="top"
+                                                       data-toggle="tooltip-success" title="@lang('global.online')"></i>
+                                                </span>
+                                            @else
+                                                <span class="p-2 tx-sm-10 text-dark" title="@lang('global.offline')">
+                                                    <i class="fa fa-circle bd-1 bd-dashed rounded-circle" data-placement="top"
+                                                       data-toggle="tooltip-primary" title="@lang('global.offline')"></i>
+                                                </span>
+                                            @endif
+                                            {{ $user->name }}
+                                        </td>
+                                        <!-- Email Address -->
+                                        <td class="tx-sm-12-f">
+                                            <a href="callto:{{ $user->phone }}" class="ctd">{{ $user->phone }}</a>
+                                        </td>
+                                        <!-- Email Address -->
+                                        <td><a href="mailto:{{ $user->email }}" class="tx-sm-12-f ctd">{{ $user->email }}</a></td>
+                                        <!-- Roles -->
                                         <td>
                                             @if(!empty($user->roles))
                                                 @foreach($user->roles as $role)
-                                                    <a class="modal-effect"
+                                                    <a class="modal-effect ctd"
                                                        data-effect="effect-sign" data-toggle="modal"
-                                                       href="#role_details{{ $role->id }}" style="text-decoration: underline; color: #0f0373">{{ $role->name }}</a>
+                                                       href="#role_details{{ $role->id }}">{{ $role->name }}</a>
+                                                    {{ count($user->roles) > 1 ? '|' : '' }}
 
                                                     @include('admin.users.role_details')
                                                 @endforeach
                                             @endif
                                         </td>
-                                        <td>{{ \Illuminate\Support\Str::limit($user->info, 100, '...') }}</td>
+                                        <!-- Information -->
+                                        <td class="text-nowrap tx-sm-12">{{ \Illuminate\Support\Str::limit($user->info, 30, '...') }}</td>
+                                        <!-- Created Date -->
                                         <td>
                                             @if(app()->getLocale() == 'en')
                                                 {{ date_format($user->created_at, 'Y-F-d / h:i A') }}
                                             @else
-                                                <span class="tx-bold">
+                                                <span class="text-muted tx-sm-12">
                                                 @php
-                                                     $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d / h:i A - %A', strtotime($user->created_at)); // 1395-02-19
+                                                     $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d / h:i A', strtotime($user->created_at)); // 1395-02-19
                                                      echo \Morilog\Jalali\CalendarUtils::convertNumbers($date);
                                                 @endphp
                                                 </span>
                                             @endif
-                                            </td>
+                                        </td>
+
+                                        <!-- Action -->
                                         <td>
+                                            <!-- Show -->
+                                            <a class="btn btn-sm ripple btn-secondary" href="{{ route('admin.users.show', $user->id) }}"
+                                               title="@lang('pages.users.userProfile')">
+                                                <i class="fe fe-eye"></i>
+                                            </a>
+
                                             <!-- Edit -->
                                             @can('user_update')
                                                 <a class="btn btn-sm ripple btn-info" href="{{ route('admin.users.edit', $user->id) }}"
@@ -166,7 +212,6 @@
     <!-- Data Table js -->
     <script src="{{ asset('backend/assets/plugins/datatable/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/table-data.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.js') }}"></script>
@@ -176,5 +221,8 @@
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.print.min.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.colVis.min.js') }}"></script>
+
+    <!-- Custom Scripts -->
+    <script src="{{ asset('backend/assets/js/pages/user-scripts.js') }}"></script>
 @endsection
 <!--/==/ End of Extra Scripts -->

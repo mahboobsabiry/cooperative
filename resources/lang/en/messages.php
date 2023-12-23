@@ -46,9 +46,9 @@ return [
     ],
 
     'categories' => [
-        'addedCategoryMsg'      => 'New category has been added successfully!',
-        'updatedCategoryMsg'    => 'Category has been updated successfully!',
-        'deletedCategoryMsg'    => 'Category has been deleted successfully!'
+        'addedRecordMsg'      => 'Added successfully!',
+        'updatedRecordMsg'    => 'Updated successfully!',
+        'deletedRecordMsg'    => 'Deleted successfully!'
     ],
 
     'galleries' => [
@@ -96,14 +96,22 @@ return [
         'deletePermMsg' => 'Permission has been deleted successfully!'
     ],
 
-    'provinces' => [
-        'pMembersTitle' => 'All members from '
+    'positions' => [
+        'addedPositionMsg'      => 'New position has been added successfully!',
+        'updatedPositionMsg'    => 'Position has been updated successfully!',
+        'deletedPositionMsg'    => 'Position has been deleted successfully!',
+        'positionActivated'     => 'Position activated!',
+        'positionDeactivated'   => 'Position deactivated!'
     ],
 
     'posts' => [
         'addedPostMsg'      => 'New Post has been added successfully!',
         'updatedPostMsg'    => 'Post has been updated successfully!',
         'deletedPostMsg'    => 'Post has been deleted successfully!'
+    ],
+
+    'provinces' => [
+        'pMembersTitle' => 'All members from '
     ],
 
     'reports' => [
@@ -135,5 +143,15 @@ return [
         'statementActive'        => 'Statement has been activated successfully!',
         'statementInactive'      => 'Statement has been inactivated successfully!',
         'updatedStatementMsg'    => 'Statement has been updated successfully!',
+    ],
+
+    'users' => [
+        'addNewUserMsg'     => 'New user has been added successfully!',
+        'updateUserMsg'     => 'User has been updated successfully!',
+        'deleteUserMsg'     => 'User has been deleted successfully!',
+        'deleteActivityMsg' => 'Activity has been deleted successfully!',
+        'deleteAllActivitiesMsg' => 'All activities has been deleted successfully!',
+        'userActivated'     => 'User activated!',
+        'userDeactivated'   => 'User deactivated!'
     ],
 ];

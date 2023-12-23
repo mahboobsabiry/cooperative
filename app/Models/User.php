@@ -3,15 +3,19 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\HasPhoto;
+use App\Traits\HasTazkira;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasPhoto, HasTazkira;
 
     /**
      * The attributes that are mass assignable.
@@ -19,8 +23,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'avatar',
         'name',
+        'phone',
         'email',
         'password',
         'info',
@@ -46,4 +50,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Morph Photo
+    public function photo(): MorphOne
+    {
+        return $this->morphOne(Photo::class, 'transaction');
+    }
+
+    // Morph Tazkira
+    public function tazkira(): MorphOne
+    {
+        return $this->morphOne(Tazkira::class, 'transaction');
+    }
+
+    // Activities
+    public function activities()
+    {
+        return Activity::all()->where('causer_id', $this->id);
+    }
 }

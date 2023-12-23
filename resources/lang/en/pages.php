@@ -23,13 +23,6 @@ return [
         'mostVisitedBooks'   => 'Most Visited Books'
     ],
 
-    'categories' => [
-        'addNewCat' => 'Add New Category',
-        'category'  => 'Category',
-        'deleteCat' => 'Delete Category',
-        'editCat'   => 'Edit Category'
-    ],
-
     'dashboard' => [
         'latestAddedMembers' => 'Latest added members',
         'ltMbParagMsg'       => 'List of latest member added in all over system!',
@@ -54,6 +47,7 @@ return [
     ],
 
     'employees' => [
+        'addEmpInfo'        => 'Add Employee Information',
         'addedEmpMsg'       => 'New employee has been added successfully!',
         'addNewEmployee'    => 'Add New Employee',
         'code'              => 'Employee Number',
@@ -61,6 +55,12 @@ return [
         'deleteEmployee'    => 'Delete Employee',
         'editEmployee'      => 'Edit Employee',
         'employee'          => 'Employee',
+        'employeeInfo'      => 'Employee Information',
+        'generalInfo'       => 'General Information',
+        'mainPosition'      => 'Main Position',
+        'onDuty'            => 'On Duty',
+        'otherInfo'         => 'Other Information',
+        'personalInfo'      => 'Personal Information',
         'updatedEmpMsg'     => 'Employee information has been updated successfully!'
     ],
 
@@ -178,6 +178,38 @@ return [
         'permission'        => 'Permission'
     ],
 
+    'positions' => [
+        'addPosition'       => 'Add Position',
+        'admin'             => 'Admin',
+        'administrations'   => 'Administrations',
+        'administrationsTitleNote' => 'Balkh Custom Department Administrations List',
+        'adminOrg'          => 'Administration Organization',
+        'allPositions'      => 'All Positions',
+        'afCustomsDep'      => 'Afghan Customs Department',
+        'bcdOrg'            => 'Balkh Custom Department Organization',
+        'branch'            => 'Branch',
+        'branches'          => 'Branches',
+        'branchesTitleNote' => 'Balkh Custom Department Branches List',
+        'position'          => 'Position',
+        'positionNumber'    => 'Position Number',
+        'positions'         => 'Positions',
+        'deletePosition'    => 'Delete Position',
+        'department'        => 'Department',
+        'departmentTitleNote' => 'Balkh Custom Department Organization List',
+        'editPosition'      => 'Edit Position',
+        'emptyPositions'    => 'Empty Positions',
+        'generalManager'    => 'General Manager',
+        'generalMgmt'       => 'General Management',
+        'generalMgmtOrg'    => 'General Management Organization',
+        'generalMgmts'      => 'General Managements',
+        'head'              => 'Head',
+        'managementTitleNote' => 'Balkh Custom Department General Managers List',
+        'manager'           => 'Manager',
+        'organization'      => 'Organization',
+        'responsible'       => 'Responsible',
+        'underHand'         => 'Under Hand'
+    ],
+
     'profile' => [
         'kabul'             => 'Kabul',
         'invalidCurPwd'     => 'Invalid current password',
@@ -246,15 +278,23 @@ return [
     ],
 
     'users' => [
+        'activeUsers'      => 'Active Users',
         'addNewUser'       => 'Add New User',
+        'allUsers'         => 'All Users',
+        'contactInfo'      => 'Contact Information',
+        'deleteActivity'   => 'Delete Activity',
+        'deleteAllActivities'   => 'Delete All Activities',
         'deleteAvatar'     => 'Delete Avatar',
         'deleteUser'       => 'Delete User',
-        'editPageTitle'    => 'Edit User Information',
-        'latestMAddedBy'   => 'List of latest members added by ',
+        'editUser'         => 'Edit User Information',
+        'inactiveUsers'    => 'Inactive Users',
+        'myActivities'     => 'My Activities',
+        'overview'         => 'Overview',
+        'personalInfo'     => 'Personal Information',
         'rolesOf'          => 'Roles of',
-        'totalMAddedBy'    => 'List of all members added by ',
     	'user' 	           => 'User',
         'userDetails'      => 'User Details',
+        'userProfile'      => 'User Profile',
     	'users'	           => 'Users',
         'Teacher', '0784212382'
     ],

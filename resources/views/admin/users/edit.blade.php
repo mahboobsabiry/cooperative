@@ -1,9 +1,14 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('pages.roles.editRole'))
+@section('title', config('app.name') . ' ~ ' . trans('pages.users.editUser'))
 <!-- Extra Styles -->
 @section('extra_css')
-
+    <!---Fileupload css-->
+    <link href="{{ asset('backend/assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet">
+    <!---Fancy uploader css-->
+    <link href="{{ asset('backend/assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet">
+    <!--Sumoselect css-->
+    <link href="{{ asset('backend/assets/plugins/sumoselect/sumoselect.css') }}" rel="stylesheet">
 @endsection
 <!--/==/ End of Extra Styles -->
 
@@ -14,18 +19,18 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">@lang('pages.roles.editRole')</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">@lang('pages.users.editUser')</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.roles.index') }}">@lang('admin.sidebar.roles')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">@lang('pages.roles.editRole')</li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">@lang('admin.sidebar.users')</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@lang('pages.users.editUser')</li>
                 </ol>
             </div>
 
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Back -->
-                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ route('admin.roles.index') }}">
+                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ route('admin.users.index') }}">
                     @lang('global.back')
                     <i class="fe fe-arrow-left"></i>
                 </a>
@@ -40,75 +45,127 @@
                 <div class="card custom-card overflow-hidden">
                     <!-- Card Body -->
                     <div class="card-body">
-                        <!-- Row -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <!-- Errors Message -->
-                                @if($errors->any())
-                                    @foreach($errors->all() as $error)
-                                        <div class="alert alert-danger mg-b-2" role="alert">
-                                            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            <strong@lang('global.oh')!</strong> {{ $error }}
-                                        </div>
-                                    @endforeach
-                                @endif
+                        <div class="">
+                            <!-- Errors Message -->
+                            @include('admin.inc.alerts')
 
-                                <!-- Form Title -->
-                                <div>
-                                    <h6 class="card-title mb-1">@lang('pages.roles.editRole')</h6>
-                                    <p class="text-muted card-sub-title">You can add new record here.</p>
-                                </div>
+                            <!-- Form Title -->
+                            <div>
+                                <h6 class="card-title mb-1">@lang('pages.users.editUser')</h6>
+                                <p class="text-muted card-sub-title">You can add new record here.</p>
+                            </div>
 
-                                <!-- Form -->
-                                <form method="post" action="{{ route('admin.roles.update', $role->id) }}" data-parsley-validate="">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="">
+                            <!-- Form -->
+                            <form method="post" action="{{ route('admin.users.update', $user->id) }}" data-parsley-validate="" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <!-- Name -->
                                         <div class="form-group @error('name') has-danger @enderror">
                                             <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="name" class="form-control @error('name') form-control-danger @enderror" name="name" value="{{ $role->name ?? old('name') }}" placeholder="@lang('form.name')" required>
+                                            <input type="text" id="name" class="form-control @error('name') form-control-danger @enderror" name="name" value="{{ $user->name ?? old('name') }}" placeholder="@lang('form.name')" required>
+
+                                            @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
+                                        <!--/==/ End of Name -->
 
-                                        @error('name')
-                                        <div class="form-control-feedback">{{ $message }}</div>
-                                        @enderror
+                                        <!-- Phone Number -->
+                                        <div class="form-group @error('phone') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.phone'):</p>
+                                            <input type="text" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ $user->phone ?? old('phone') }}" placeholder="@lang('form.phone')">
 
-                                        <!-- Permissions -->
-                                        <div class="form-group @error('permissions') has-danger @enderror checked1">
+                                            @error('phone')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Phone Number -->
+
+                                        <!-- Email -->
+                                        <div class="form-group @error('email') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.email'): <span class="tx-danger">*</span></p>
+                                            <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $user->email ?? old('email') }}" placeholder="@lang('form.email')" required>
+
+                                            @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Email -->
+
+                                        <!-- Status -->
+                                        <div class="form-group @error('status') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.status'):</p>
+                                            <select id="status" name="status" class="form-control">
+                                                <option value="1" {{ $user->status == 1 ? 'selected' : '' }}>@lang('global.active')</option>
+                                                <option value="0" {{ $user->status == 0 ? 'selected' : '' }}>@lang('global.inactive')</option>
+                                            </select>
+
+                                            @error('status')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Status -->
+
+                                        <!-- Information -->
+                                        <div class="form-group @error('info') has-danger @enderror">
+                                            <p class="mb-2">@lang('global.information'):</p>
+                                            <textarea name="info" class="form-control @error('info') form-control-danger @enderror" placeholder="@lang('global.information')">{{ $user->info ?? old('info') }}</textarea>
+
+                                            @error('info')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Information -->
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <!-- Avatar -->
+                                        <div class="form-group @error('avatar') has-danger @enderror">
                                             <p class="mb-2">
-                                                @lang('admin.sidebar.permissions'): <span class="tx-danger">*</span>
+                                                <!-- Delete Avatar -->
+                                                <span class="caption">
+                                                    <img src="{{ $user->image }}" class="img-fluid float-left" style="height: 30px;">
+                                                </span>
+                                                @lang('form.avatar'):
+                                            </p>
+                                            <p></p>
+                                            <input type="file" class="dropify" name="avatar" accept="image/*" data-height="200" data-max-file="4M" data-show-errors="true" />
+                                            @error('avatar')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Avatar -->
+
+                                        <!-- Roles -->
+                                        <div class="form-group @error('roles') has-danger @enderror">
+                                            <p class="mb-2">
+                                                @lang('admin.sidebar.roles'): <span class="tx-danger">*</span>
                                                 <span class="btn btn-primary btn-sm deselect-all pl-1 pr-1" id="mybutton">@lang('global.deselectAll')</span>
                                                 &nbsp;
                                                 <span class="btn btn-success btn-sm select-all" id="mybutton">@lang('global.selectAll')</span>
                                             </p>
                                             <div class="selectgroup selectgroup-pills p-2" style="border: 1px solid gainsboro;">
-                                                <div class="d-grid">
-                                                    @foreach($permissions as $permission)
+                                                <div class="">
+                                                    @foreach($roles as $role)
                                                         <label class="selectgroup-item checkboxes">
-                                                            <input id="checkAll" type="checkbox" name="permissions[]" value="{{ $permission->id }}" class="selectgroup-input"
-                                                            @if($role) {{ $role->permissions->contains($permission->id) ? 'checked' : '' }} @endif>
-                                                            <span class="selectgroup-button rounded-0">{{ $permission->name }}</span>
+                                                            <input id="checkAll" type="checkbox" name="roles[]" value="{{ $role->id }}" class="selectgroup-input" @if($user) {{ $user->roles->contains($role->id) ? 'checked' : '' }} @endif>
+                                                            <span class="selectgroup-button rounded-0 border-black">{{ $role->name }}</span>
                                                         </label>
                                                     @endforeach
                                                 </div>
                                             </div>
-
-                                            @error('permissions[]')
-                                            <div class="form-control-feedback">{{ $message }}</div>
-                                            @enderror
                                         </div>
+                                        <!--/==/ End of Roles -->
                                     </div>
-                                    <div class="modal-footer">
-                                        <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
-                                    </div>
-                                </form>
-                                <!--/==/ End of Form -->
-                            </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
+                                </div>
+                            </form>
+                            <!--/==/ End of Form -->
                         </div>
-                        <!--/==/ End of Row -->
                     </div>
                     <!--/==/ End of Card Body -->
                 </div>
@@ -122,6 +179,24 @@
 
 <!-- Extra Scripts -->
 @section('extra_js')
+    <!--Fileuploads js-->
+    <script src="{{ asset('backend/assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+    <!--Fancy uploader js-->
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
+    <!-- Form-elements js-->
+    <script src="{{ asset('backend/assets/js/advanced-form-elements.js') }}"></script>
+
+    <!--Sumoselect js-->
+    <script src="{{ asset('backend/assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
+
+    <!-- Form-elements js-->
+    <script src="{{ asset('backend/assets/js/advanced-form-elements.js') }}"></script>
+
     <!-- Form-elements js-->
     <script src="{{ asset('backend/assets/js/form-elements.js') }}"></script>
     <script>

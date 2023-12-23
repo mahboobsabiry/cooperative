@@ -18,7 +18,6 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->delete();
         $users = [
             [
-                'avatar'         => 'default-avatar.jpg',
                 'name'           => 'Admin',
                 'email'          => 'admin@admin.com',
                 'password'       => Hash::make('engineer'),
@@ -27,23 +26,13 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => null
             ],
             [
-                'avatar'         => 'default-avatar.jpg',
                 'name'           => 'Milad Sabiry',
                 'email'          => 'msabiry@gmail.com',
                 'password'       => Hash::make('engineer'),
                 'info'           => 'This is some information.',
                 'status'          => 1,
                 'remember_token' => null
-            ],
-            [
-                'avatar'         => 'default-avatar.jpg',
-                'name'           => 'Milad',
-                'email'          => 'mdsabiry@gmail.com',
-                'password'       => Hash::make('engineer'),
-                'info'           => 'This is some information.',
-                'status'          => 1,
-                'remember_token' => null
-            ],
+            ]
         ];
 
         foreach ($users as $user) {

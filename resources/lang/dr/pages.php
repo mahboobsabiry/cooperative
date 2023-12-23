@@ -23,13 +23,6 @@ return [
         'mostVisitedBooks'   => 'پْربازدیدترین کتاب‌ها'
     ],
 
-    'categories' => [
-        'addNewCat' => 'ثبت کتگوری جدید',
-        'category'  => 'کتگوری',
-        'deleteCat' => 'حذف کتگوری',
-        'editCat'   => 'ویرایش کتگوری'
-    ],
-
     'dashboard' => [
         'addedEmpMsg'       => 'کارمند جدید موفقانه ثبت شد!',
         'latestAddedMembers' => 'آخرین اعضای ثبت شده',
@@ -55,6 +48,7 @@ return [
     ],
 
     'employees' => [
+        'addEmpInfo'        => 'ثبت معلومات کارمند',
         'addedEmpMsg'       => 'کارمند جدید موفقانه ثبت شد!',
         'addNewEmployee'    => 'ثبت کارمند جدید',
         'code'              => 'شمارهٔ کارمندی',
@@ -62,6 +56,12 @@ return [
         'deleteEmployee'    => 'حذف کارمند',
         'editEmployee'      => 'ویرایش کارمند',
         'employee'          => 'کارمند',
+        'employeeInfo'      => 'معلومات کارمند',
+        'generalInfo'       => 'معلومات عمومی',
+        'mainPosition'      => 'اصل بست',
+        'onDuty'            => 'خدمتی',
+        'otherInfo'         => 'معلومات دیگر',
+        'personalInfo'      => 'معلومات شخصی',
         'updatedEmpMsg'     => 'معلومات کارمند موفقانه بروز رسانی شد!'
     ],
 
@@ -142,8 +142,6 @@ return [
         'membershipCard' => 'کارت عضویت',
         'membersList'   => 'لیست اعضاء',
         'nameLName'     => 'نام و تخلص',
-        'otherInfo'     => 'معلومات دیگر',
-        'personalInfo'  => 'معلومات شخصی',
         'privateNumber' => 'شمارهٔ خصوصی',
         'publicInfo'    => 'معلومات عمومی',
         'publicNumber'  => 'شمارهٔ عمومی'
@@ -179,6 +177,38 @@ return [
         'permission'        => 'مجوز'
     ],
 
+    'positions' => [
+        'addPosition'       => 'ثبت بست جدید',
+        'admin'             => 'آمر',
+        'administrations'   => 'آمریت ها',
+        'administrationsTitleNote' => 'لیست تشکیلات آمریت های ریاست گمرک بلخ',
+        'adminOrg'          => 'تشکیلات آمریت',
+        'allPositions'      => 'همه بست ها',
+        'afCustomsDep'      => 'ریاست عمومی گمرکات',
+        'bcdOrg'            => 'تشکیلات ریاست گمرک بلخ',
+        'branch'            => 'شعبه',
+        'branches'          => 'شعبات',
+        'branchesTitleNote' => 'لیست تشکیلات شعبات ریاست گمرک بلخ',
+        'position'          => 'بست',
+        'positionNumber'    => 'نمبر بست',
+        'positions'         => 'بست ها',
+        'deletePosition'    => 'حذف بست',
+        'department'        => 'ریاست',
+        'departmentTitleNote' => 'لیست تشکیلات مقام ریاست گمرک بلخ',
+        'editPosition'      => 'ویرایش بست',
+        'emptyPositions'    => 'بست های خالی',
+        'generalManager'    => 'مدیر عمومی',
+        'generalMgmt'       => 'مدیریت عمومی',
+        'generalMgmtOrg'    => 'تشکیلات مدیریت عمومی',
+        'generalMgmts'      => 'مدیریت های عمومی',
+        'head'              => 'رئیس',
+        'managementTitleNote' => 'لیست تشکیلات مدیریت های عمومی گمرک بلخ',
+        'manager'           => 'مسئول',
+        'organization'      => 'تشکیلات',
+        'responsible'       => 'مسئول',
+        'underHand'         => 'زیردستِ'
+    ],
+
     'profile' => [
         'kabul'             => 'کابل',
         'invalidCurPwd'     => 'رمز عبور فعلی نا درست است!',
@@ -200,13 +230,6 @@ return [
         'editProvince'   => 'ویرایش ولایت',
         'membersListTitle'  => 'اعضای ثبت شده در ولایت ',
         'province'       => 'ولایت'
-    ],
-
-    'posts' => [
-        'addNewPost' => 'ثبت پست جدید',
-        'deletePost' => 'حذف پست',
-        'editPost'   => 'ویرایش پست',
-        'post'       => 'پست'
     ],
 
     'reports' => [
@@ -247,15 +270,25 @@ return [
     ],
 
     'users' => [
+        'activeUsers'      => 'کاربران فعال',
         'addNewUser'       => 'ثبت کاربر جدید',
+        'allUsers'         => 'تمام کاربران',
+        'contactInfo'      => 'اطلاعات تماس',
+        'deleteActivity'   => 'حذف فعالیت',
+        'deleteAllActivities'   => 'حذف تمام فعالیت ها',
         'deleteAvatar'     => 'حذف آواتار',
         'deleteUser'       => 'حذف کاربر',
-        'editPageTitle'    => 'ویرایش معلومات کاربر',
+        'editUser'         => 'ویرایش معلومات کاربر',
         'latestMAddedBy'   => 'لیست آخرین اعضای ثبت شده توسط ',
+        'inactiveUsers'    => 'کاربران غیرفعال',
+        'myActivities'     => 'فعالیت های من',
+        'overview'         => 'بررسی اجمالی',
+        'personalInfo'     => 'اطلاعات شخصی',
         'rolesOf'          => 'صلاحیت های',
         'totalMAddedBy'    => 'لیست مجموع اعضای ثبت شده توسط ',
-    	'user' 	       => 'کاربر',
-        'userDetails'  => 'جزئیات کاربر',
-    	'users'	       => 'کاربران'
+    	'user' 	           => 'کاربر',
+        'userDetails'      => 'جزئیات کاربر',
+        'userProfile'      => 'پروفایل کاربر',
+    	'users'	           => 'کاربران'
     ],
 ];

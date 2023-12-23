@@ -3,7 +3,12 @@
 @section('title', config('app.name') . ' ~ ' . trans('pages.users.addNewUser'))
 <!-- Extra Styles -->
 @section('extra_css')
-
+    <!---Fileupload css-->
+    <link href="{{ asset('backend/assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet">
+    <!---Fancy uploader css-->
+    <link href="{{ asset('backend/assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet">
+    <!--Sumoselect css-->
+    <link href="{{ asset('backend/assets/plugins/sumoselect/sumoselect.css') }}" rel="stylesheet">
 @endsection
 <!--/==/ End of Extra Styles -->
 
@@ -42,16 +47,7 @@
                     <div class="card-body">
                         <div class="">
                             <!-- Errors Message -->
-                            @if($errors->any())
-                                @foreach($errors->all() as $error)
-                                    <div class="alert alert-danger mg-b-2" role="alert">
-                                        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <strong@lang('global.oh')!</strong> {{ $error }}
-                                    </div>
-                                @endforeach
-                            @endif
+                            @include('admin.inc.alerts')
 
                             <!-- Form Title -->
                             <div>
@@ -73,9 +69,19 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                    </div>
+                                        <!--/==/ End of Name -->
 
-                                    <div class="col-md-6">
+                                        <!-- Phone Number -->
+                                        <div class="form-group @error('phone') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.phone'):</p>
+                                            <input type="text" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ old('phone') }}" placeholder="@lang('form.phone')">
+
+                                            @error('phone')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Phone Number -->
+
                                         <!-- Email -->
                                         <div class="form-group @error('email') has-danger @enderror">
                                             <p class="mb-2">@lang('form.email'): <span class="tx-danger">*</span></p>
@@ -86,6 +92,40 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Email -->
+
+                                        <!-- Password -->
+                                        <div class="form-group @error('password') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.password'): <span class="tx-danger">*</span></p>
+                                            <input type="text" id="password" class="form-control @error('password') form-control-danger @enderror" name="password" value="{{ old('password') }}" placeholder="@lang('form.password')" required>
+
+                                            @error('password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Password -->
+
+                                        <!-- Information -->
+                                        <div class="form-group @error('info') has-danger @enderror">
+                                            <p class="mb-2">@lang('global.information'):</p>
+                                            <textarea name="info" class="form-control @error('info') form-control-danger @enderror" placeholder="@lang('global.information')">{{ old('info') }}</textarea>
+
+                                            @error('info')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Information -->
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <!-- Avatar -->
+                                        <div class="form-group @error('avatar') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.avatar'):</p>
+                                            <input type="file" class="dropify" name="avatar" accept="image/*" data-height="200" />
+                                            @error('avatar')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Avatar -->
 
                                         <!-- Roles -->
                                         <div class="form-group @error('roles') has-danger @enderror">
@@ -128,6 +168,21 @@
 
 <!-- Extra Scripts -->
 @section('extra_js')
+    <!--Fileuploads js-->
+    <script src="{{ asset('backend/assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+    <!--Fancy uploader js-->
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
+    <!-- Form-elements js-->
+    <script src="{{ asset('backend/assets/js/advanced-form-elements.js') }}"></script>
+
+    <!--Sumoselect js-->
+    <script src="{{ asset('backend/assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
+
     <!-- Form-elements js-->
     <script src="{{ asset('backend/assets/js/form-elements.js') }}"></script>
     <script>

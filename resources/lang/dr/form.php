@@ -3,30 +3,26 @@
 return [
     'age'		    => 'عمر',
     'avatar'        => 'آواتار',
+    'chooseOne'     => 'یکی را انتخاب کنید',
+    'code'          => 'کد',
     'confirm_password'  => 'تائید رمز عبور',
     'created_date'  => 'تاریخ ایجاد شده',
-    'code'          => 'کد',
     'cur_password'  => 'رمز عبور فعلی',
     'curAddress'    => 'آدرس فعلی',
     'description'   => 'توضیحات',
-
-    'dropzone' => [
-        'dragDropFileMsg'   => 'فایل را اینجا بکشید و یا کلیک کنید!',
-        'noImgMsg'          => 'هیچ تصویری پیدا نشد.',
-        'oppsErrMsg'        => 'متأسفیم، مشکلی پیش آمده است!',
-        'replaceImgMsg'     => 'برای تغییر فایل، فایل را اینجا بکشید و یا کلیک کنید.',
-        'youWontSeeAgain'   => 'شما دوباره قادر به دیدن این موضوع نخواهید بود.'
-    ],
-
+    'dob'           => 'تاریخ تولد',
     'email'         => 'ایمیل',
+    'empNumber'     => 'نمبر سوانح',
     'fatherName'	=> 'نام پدر',
     'female'	    => 'خانم',
     'file'	        => 'فایل',
     'guardName'		=> 'نام محافظ',
     'gender'		=> 'جنسیت',
-    'grandFName'	=> 'نام پدر کلان',
+    'grandFatherName'	=> 'نام پدر کلان',
     'id'            => 'آی دی',
+    'idCard'        => 'تذکره',
     'idNumber'      => 'نمبر تذکره',
+    'key'	        => 'کلید',
     'longDesc'      => 'شرح بیشتر',
     'mainAddress'   => 'آدرس اصلی',
     'male'          => 'آقا',
@@ -35,17 +31,20 @@ return [
     'new_password'  => 'رمز عبور جدید',
     'office'        => 'اداره',
     'lastName'	    => 'تخلص',
+    'p2number'      => 'نمبر پ 2',
     'password'      => 'رمز عبور',
     'phone'		    => 'شماره تماس',
     'photo'		    => 'تصویر',
     'photos'		=> 'تصاویر',
-    'position'		=> 'مقام',
+    'position'		=> 'بست',
+    'province'		=> 'ولایت',
     'salary'		=> 'معاش',
     'shortName'		=> 'نام کوتاه',
     'status'		=> 'وضعیت',
     'title'         => 'عنوان',
     'url'           => 'لینک یوآراِل',
     'username'	    => 'نام کاربری',
+    'value'         => 'قیمت',
     'video'         => 'ویدیو',
 
     // Finance
@@ -53,5 +52,14 @@ return [
     'empFName'      => 'نام پدر کارمند',
     'empName'       => 'نام کارمند',
     'membCharges'   => 'حق‌العضویت',
-    'payableSalary' => 'معاش قابل پرداخت'
+    'payableSalary' => 'معاش قابل پرداخت',
+
+    // Dropzone
+    'dropzone' => [
+        'dragDropFileMsg'   => 'فایل را اینجا بکشید و یا کلیک کنید!',
+        'noImgMsg'          => 'هیچ تصویری پیدا نشد.',
+        'oppsErrMsg'        => 'متأسفیم، مشکلی پیش آمده است!',
+        'replaceImgMsg'     => 'برای تغییر فایل، فایل را اینجا بکشید و یا کلیک کنید.',
+        'youWontSeeAgain'   => 'شما دوباره قادر به دیدن این موضوع نخواهید بود.'
+    ],
 ];

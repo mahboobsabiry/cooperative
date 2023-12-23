@@ -41,27 +41,8 @@
                 <div class="card custom-card overflow-hidden">
                     <!-- Table Card Body -->
                     <div class="card-body">
-                        <!-- Errors Message -->
-                        @if($errors->any())
-                            @foreach($errors->all() as $error)
-                                <div class="alert alert-danger mg-b-2" role="alert">
-                                    <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <strong@lang('global.oh')!</strong> {{ $error }}
-                                </div>
-                            @endforeach
-                        @endif
-
-                        <!-- Success Message -->
-                        @if(session()->has('success'))
-                            <div class="alert alert-success mg-b-2" role="alert">
-                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <strong>@lang('global.wellDone')!</strong> {{ session()->get('success') }}
-                            </div>
-                        @endif
+                        <!-- Message -->
+                        @include('admin.inc.alerts')
 
                         <!-- Table Title -->
                         <div>

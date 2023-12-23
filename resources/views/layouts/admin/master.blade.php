@@ -6,8 +6,11 @@
         <meta name="description" content="Dashlead -  backend Panel HTML Dashboard Template">
         <meta name="author" content="Spruko Technologies Private Limited">
         <meta name="keywords" content="sales dashboard, backend dashboard, bootstrap 4 backend template, html backend template, backend panel design, backend panel design, bootstrap 4 dashboard, backend panel template, html dashboard template, bootstrap backend panel, sales dashboard design, best sales dashboards, sales performance dashboard, html5 template, dashboard template">
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <!-- Favicon -->
-        <link rel="icon" href="{{ asset('backend/assets/img/brand/favicon.ico') }}" type="image/x-icon"/>
+        <link rel="icon" href="{{ asset('assets/images/logo.jpg') }}" type="image/x-icon"/>
 
         <!-- Title -->
         <title>@yield('title', config('app.name'))</title>
@@ -72,7 +75,11 @@
             <!---Switcher css-->
             <link href="{{ asset('backend/assets/switcher/css/switcher-rtl.css') }}" rel="stylesheet">
         @endif
+        <link rel="stylesheet" href="{{ asset('backend/assets/plugins/sweet-alert/sweetalert.css') }}">
+        <link rel="stylesheet" href="{{ asset('backend/assets/plugins/toastr/toastr.min.css') }}">
+
         <link href="{{ asset('backend/assets/switcher/demo.css') }}" rel="stylesheet">
+        <link href="{{ asset('backend/assets/css/new-style.css') }}" rel="stylesheet">
 
         @yield('extra_css')
     </head>
@@ -114,13 +121,19 @@
         <!-- Back-to-top -->
         <a href="#top" id="back-to-top"><i class="fe fe-arrow-up"></i></a>
 
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
+
         <!-- Jquery js-->
         <script src="{{ asset('backend/assets/plugins/jquery/jquery.min.js') }}"></script>
 
         <!-- Bootstrap js-->
         <script src="{{ asset('backend/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-        @yield('extra_js')
 
         <!-- Ionicons js-->
         <script src="{{ asset('backend/assets/plugins/ionicons/ionicons.js') }}"></script>
@@ -161,6 +174,10 @@
             <script src="{{ asset('backend/assets/plugins/sidebar/sidebar-rtl.js') }}"></script>
         @endif
 
+        <!-- Sweet Alert -->
+        <script src="{{ asset('backend/assets/plugins/sweet-alert/sweetalert.min.js') }}"></script>
+        <!-- Tooltip js-->
+        <script src="{{ asset('backend/assets/js/tooltip.js') }}"></script>
         <!-- Sticky js-->
         <script src="{{ asset('backend/assets/js/sticky.js') }}"></script>
 
@@ -170,6 +187,10 @@
         @else
             <script src="{{ asset('backend/assets/switcher/js/switcher-rtl.js') }}"></script>
         @endif
+
+        <script src="{{ asset('backend/assets/plugins/toastr/toastr.min.js') }}"></script>
+        @include('js.all')
+        @yield('extra_js')
 
         <!-- Custom js-->
         <script src="{{ asset('backend/assets/js/custom.js') }}"></script>

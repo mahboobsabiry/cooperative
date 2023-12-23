@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -42,8 +43,17 @@ class RoleController extends Controller
         abort_if(Gate::denies('role_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $role = Role::create($request->all());
         $role->permissions()->sync($request->input('permissions', []));
+
+        activity('added')
+            ->causedBy(Auth::user())
+            ->performedOn($role)
+            ->log(trans('messages.roles.addNewRoleMsg'));
+
         $message = trans('messages.roles.addNewRoleMsg');
-        return redirect()->route('admin.roles.index')->with('success', $message);
+        return redirect()->route('admin.roles.index')->with([
+            'message'   => $message,
+            'alertType' => 'success'
+        ]);
     }
 
     public function edit(Role $role)
@@ -69,8 +79,16 @@ class RoleController extends Controller
         $role->update($request->all());
         $role->permissions()->sync($request->input('permissions', []));
 
+        activity('updated')
+            ->causedBy(Auth::user())
+            ->performedOn($role)
+            ->log(trans('messages.roles.updateRoleMsg'));
+
         $message = trans('messages.roles.updateRoleMsg');
-        return redirect()->route('admin.roles.index')->with('success', $message);
+        return redirect()->route('admin.roles.index')->with([
+            'message'   => $message,
+            'alertType' => 'success'
+        ]);
     }
 
     public function destroy(Role $role)
@@ -78,7 +96,15 @@ class RoleController extends Controller
         abort_if(Gate::denies('role_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $role->delete();
 
+        activity('deleted')
+            ->causedBy(Auth::user())
+            ->performedOn($role)
+            ->log(trans('messages.roles.deleteRoleMsg'));
+
         $message = trans('messages.roles.deleteRoleMsg');
-        return redirect()->route('admin.roles.index')->with('success', $message);
+        return redirect()->route('admin.roles.index')->with([
+            'message'   => $message,
+            'alertType' => 'success'
+        ]);
     }
 }

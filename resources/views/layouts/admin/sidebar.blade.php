@@ -1,10 +1,11 @@
 <div class="main-sidebar main-sidebar-sticky side-menu">
     <div class="sidemenu-logo">
         <a class="main-logo" href="{{ route('index') }}" target="_blank">
-            <img src="{{ asset('backend/assets/img/brand/logo.png') }}" class="header-brand-img desktop-logo" alt="logo">
-            <img src="{{ asset('backend/assets/img/brand/icon.png') }}" class="header-brand-img icon-logo" alt="logo">
-            <img src="{{ asset('backend/assets/img/brand/logo-light.png') }}" class="header-brand-img desktop-logo theme-logo" alt="logo">
-            <img src="{{ asset('backend/assets/img/brand/icon-light.png') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
+            <span class="text-capitalize">BCHS</span>
+            <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img desktop-logo" alt="logo">
+            <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img icon-logo" alt="logo">
+            <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img desktop-logo theme-logo" alt="logo">
+            <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
         </a>
     </div>
 
@@ -18,83 +19,150 @@
                 </a>
             </li>
 
-            <!-- Applications -->
+            <!-- Pages -->
             <li class="nav-label">@lang('admin.dashboard.pages')</li>
 
-            <!-- User Management -->
-            @can('user_management_access')
-            <li class="nav-item {{ request()->is('admin/permissions') ||
-                    request()->is('admin/permissions/*') ||
-                    request()->is('admin/roles') ||
-                    request()->is('admin/roles/*') ||
-                    request()->is('admin/users') ||
-                    request()->is('admin/users/*') ? 'active show' : '' }}">
+            <!-- Positions -->
+            @can('position_access')
+            <li class="nav-item {{ request()->is('admin/department') ||
+                    request()->is('admin/department/*') ||
+                    request()->is('admin/positions') ||
+                    request()->is('admin/positions/*') ||
+                    request()->is('admin/administrations') ||
+                    request()->is('admin/administrations/*') ||
+                    request()->is('admin/management') ||
+                    request()->is('admin/management/*') ||
+                    request()->is('admin/branches') ||
+                    request()->is('admin/branches/*') ? 'active show' : '' }}">
+
                 <a class="nav-link with-sub" href="javascript:void(0)">
-                    <i class="fe fe-users"></i>
-                    <span class="sidemenu-label">@lang('admin.sidebar.userManagement')</span>
+                    <i class="fe fe-life-buoy"></i>
+                    <span class="sidemenu-label">@lang('admin.sidebar.positions')</span>
                     <i class="angle fe fe-chevron-right"></i>
                 </a>
 
                 <ul class="nav-sub">
-                    <!-- Permissions -->
-                    @can('permission_access')
-                    <li class="nav-sub-item {{ request()->is('admin/permissions') ||
-                    request()->is('admin/permissions/*') ? 'active' : '' }}">
-                        <a class="nav-sub-link" href="{{ route('admin.permissions.index') }}">@lang('admin.sidebar.permissions')</a>
+                    <!-- Positions -->
+                    <li class="nav-sub-item {{ request()->is('admin/positions') ||
+                        request()->is('admin/positions/*') ? 'active' : '' }}">
+                        <a class="nav-sub-link" href="{{ route('admin.positions.index') }}">
+                            {<span class="small text-sm-center tx-danger">M</span>}
+                            @lang('pages.positions.allPositions')
+                            ({{ count(\App\Models\Position::all()) }})
+                        </a>
                     </li>
-                    @endcan
 
-                    <!-- Roles -->
-                    @can('role_access')
-                    <li class="nav-sub-item {{ request()->is('admin/roles') ||
-                    request()->is('admin/roles/*') ? 'active' : '' }}">
-                        <a class="nav-sub-link" href="{{ route('admin.roles.index') }}">@lang('admin.sidebar.roles')</a>
+                    <!-- Departments -->
+                    <li class="nav-sub-item {{ request()->is('admin/department') ||
+                        request()->is('admin/department/*') ? 'active' : '' }}">
+                        <a class="nav-sub-link" href="{{ route('admin.department.index') }}">
+                            @lang('pages.positions.department')
+                            ({{ count(\App\Models\Position::all()->where('position_number', 2)) }})
+                        </a>
                     </li>
-                    @endcan
 
-                    <!-- Users -->
-                    @can('user_access')
-                    <li class="nav-sub-item {{ request()->is('admin/users') ||
-                    request()->is('admin/users/*') ? 'active' : '' }}">
-                        <a class="nav-sub-link" href="{{ route('admin.users.index') }}">@lang('admin.sidebar.users')</a>
+                    <!-- Administrations -->
+                    <li class="nav-sub-item {{ request()->is('admin/administrations') ||
+                        request()->is('admin/administrations/*') ? 'active' : '' }}">
+                        <a class="nav-sub-link" href="{{ route('admin.administrations.index') }}">
+                            @lang('pages.positions.administrations')
+                            ({{ count(\App\Models\Position::all()->where('position_number', 3)) }})
+                        </a>
                     </li>
-                    @endcan
+
+                    <!-- General Management -->
+                    <li class="nav-sub-item {{ request()->is('admin/management') ||
+                        request()->is('admin/management/*') ? 'active' : '' }}">
+                        <a class="nav-sub-link" href="{{ route('admin.management.index') }}">
+                            @lang('pages.positions.generalMgmts')
+                            ({{ count(\App\Models\Position::all()->where('position_number', 4)) }})
+                        </a>
+                    </li>
+
+                    <!-- Branches -->
+                    <li class="nav-sub-item {{ request()->is('admin/branches') ||
+                        request()->is('admin/branches/*') ? 'active' : '' }}">
+                        <a class="nav-sub-link" href="{{ route('admin.branches.index') }}">
+                            @lang('pages.positions.branches')
+                            ({{ count(\App\Models\Position::all()->where('position_number', '>', 4)) }})
+                        </a>
+                    </li>
                 </ul>
             </li>
             @endcan
+            <!--/==/ End of Position -->
+
+            <!-- Employees -->
+            @can('employee_access')
+                <li class="nav-item {{ request()->url() == route('admin.employees.index') || request()->is('admin/employees/*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.employees.index') }}">
+                        <i class="fa fa-user-tie"></i><span class="sidemenu-label">
+                            @lang('admin.sidebar.employees')
+                            ({{ count(\App\Models\Employee::all()) }})
+                        </span>
+                    </a>
+                </li>
+            @endcan
+
+            <!-- Applications -->
+            <li class="nav-label">@lang('admin.sidebar.applications')</li>
+
+            <!-- Settings -->
+            @can('setting_access')
+                <li class="nav-item {{ request()->url() == route('admin.settings.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.settings.index') }}">
+                        <i class="fe fe-settings"></i><span class="sidemenu-label">@lang('admin.sidebar.settings')</span>
+                    </a>
+                </li>
+            @endcan
+
+            <!-- User Management -->
+            @can('user_management_access')
+                <li class="nav-item {{ request()->is('admin/permissions') ||
+                    request()->is('admin/permissions/*') ||
+                    request()->is('admin/roles') ||
+                    request()->is('admin/roles/*') ||
+                    request()->is('admin/users') ||
+                    request()->is('admin/users/*') ||
+                    request()->is('admin/active-users') ||
+                    request()->is('admin/inactive-users') ? 'active show' : '' }}">
+                    <a class="nav-link with-sub" href="javascript:void(0)">
+                        <i class="fe fe-users"></i>
+                        <span class="sidemenu-label">@lang('admin.sidebar.userManagement')</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
+
+                    <ul class="nav-sub">
+                        <!-- Permissions -->
+                        @can('permission_access')
+                            <li class="nav-sub-item {{ request()->is('admin/permissions') ||
+                    request()->is('admin/permissions/*') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.permissions.index') }}">@lang('admin.sidebar.permissions')</a>
+                            </li>
+                        @endcan
+
+                        <!-- Roles -->
+                        @can('role_access')
+                            <li class="nav-sub-item {{ request()->is('admin/roles') ||
+                    request()->is('admin/roles/*') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.roles.index') }}">@lang('admin.sidebar.roles')</a>
+                            </li>
+                        @endcan
+
+                        <!-- Users -->
+                        @can('user_access')
+                            <li class="nav-sub-item {{ request()->is('admin/users') ||
+                    request()->is('admin/users/*') ||
+                    request()->is('admin/active-users') ||
+                    request()->is('admin/inactive-users') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.users.index') }}">@lang('admin.sidebar.users')</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
             <!--/==/ End of User Management -->
 
-            <li class="nav-item">
-                <a class="nav-link" href="widgets.html"><i class="fe fe-database"></i><span class="sidemenu-label">Widgets</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link with-sub" href="#"><i class="fe fe-mail"></i><span class="sidemenu-label">Mail</span><span class="badge badge-primary side-badge">2</span></a>
-                <ul class="nav-sub">
-                    <li class="nav-sub-item">
-                        <a class="nav-sub-link" href="mail.html">Mail-Inbox</a>
-                    </li>
-                    <li class="nav-sub-item">
-                        <a class="nav-sub-link" href="viewmail.html">View-Mail</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link with-sub" href="#"><i class="fe fe-box"></i><span class="sidemenu-label">Apps</span><i class="angle fe fe-chevron-right"></i></a>
-                <ul class="nav-sub">
-                    <li class="nav-sub-item">
-                        <a class="nav-sub-link" href="chat.html">Chat</a>
-                    </li>
-                    <li class="nav-sub-item">
-                        <a class="nav-sub-link" href="cards.html">Cards</a>
-                    </li>
-                    <li class="nav-sub-item">
-                        <a class="nav-sub-link" href="calendar.html">Calendar</a>
-                    </li>
-                    <li class="nav-sub-item">
-                        <a class="nav-sub-link" href="contacts.html">Contacts</a>
-                    </li>
-                </ul>
-            </li>
         </ul>
     </div>
 </div>

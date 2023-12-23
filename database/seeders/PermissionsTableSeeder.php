@@ -54,9 +54,37 @@ class PermissionsTableSeeder extends Seeder
                 'name'      => 'user_access'
             ],
 
+            // Positions
+            [
+                'name'      => 'position_access'
+            ],
+            [
+                'name'      => 'position_create'
+            ],
+            [
+                'name'      => 'position_update'
+            ],
+            [
+                'name'      => 'position_delete'
+            ],
+
+            // Employees
+            [
+                'name'      => 'employee_create'
+            ],
+            [
+                'name'      => 'employee_update'
+            ],
+            [
+                'name'      => 'employee_delete'
+            ],
+            [
+                'name'      => 'employee_access'
+            ],
+
             // Settings
             [
-                'name'      => 'setting_create'
+            'name'      => 'setting_create'
             ],
             [
                 'name'      => 'setting_update'

@@ -45,10 +45,12 @@ return [
         'updatedBookMsg'    => 'کتاب موفقانه بروزرسانی شد!',
     ],
 
-    'categories' => [
-        'addedCategoryMsg'      => 'کتگوری جدید موفقانه ثبت شد!',
-        'updatedCategoryMsg'    => 'معلومات کتگوری موفقانه بروز رسانی شد!',
-        'deletedCategoryMsg'    => 'کتگوری حذف شد!'
+    'employees' => [
+        'addNewEmployeeMsg' => 'کارمند جدید موفقانه ثبت شد!',
+        'updateEmployeeMsg' => 'معلومات کارمند موفقانه بروزرسانی شد!',
+        'deleteEmployeeMsg' => 'کارمند حذف شد!',
+        'employeeActivated'     => 'کارمند فعال شد!',
+        'employeeDeactivated'   => 'کارمند غیرفعال شد!'
     ],
 
     'galleries' => [
@@ -96,14 +98,22 @@ return [
         'deletePermMsg' => 'مجوز موفقانه حذف شد!'
     ],
 
-    'provinces' => [
-        'pMembersTitle' => 'لیست اعضای حزب از ولایت'
+    'positions' => [
+        'addedPositionMsg'      => 'بست جدید موفقانه ثبت شد!',
+        'updatedPositionMsg'    => 'بست موفقانه بروزرسانی شد!',
+        'deletedPositionMsg'    => 'بست موفقانه حذف شد!',
+        'positionActivated'     => 'بست فعال شد!',
+        'positionDeactivated'   => 'بست غیرفعال شد!'
     ],
 
     'posts' => [
         'addedPostMsg'      => 'پست جدید موفقانه ثبت شد!',
         'updatedPostMsg'    => 'پست موفقانه بروزرسانی شد!',
         'deletedPostMsg'    => 'پست موفقانه حذف شد!'
+    ],
+
+    'provinces' => [
+        'pMembersTitle' => 'لیست اعضای حزب از ولایت'
     ],
 
     'reports' => [
@@ -135,5 +145,14 @@ return [
         'statementActive'        => 'بیانیه موفقانه فعال شد!',
         'statementInactive'      => 'بیانیه موفقانه غیرفعال شد!',
         'updatedStatementMsg'    => 'بیانیه موفقانه بروزرسانی شد!',
+    ],
+    'users' => [
+        'addNewUserMsg'     => 'کاربر جدید موفقانه ثبت شد!',
+        'updateUserMsg'     => 'کاربر موفقانه بروزرسانی شد!',
+        'deleteUserMsg'     => 'کاربر موفقانه حذف شد!',
+        'deleteActivityMsg' => 'فعالیت موفقانه حذف شد!',
+        'deleteAllActivitiesMsg' => 'تمام فعالیت ها موفقانه حذف شد!',
+        'userActivated'     => 'کاربر فعال شد!',
+        'userDeactivated'   => 'کاربر غیرفعال شد!'
     ],
 ];

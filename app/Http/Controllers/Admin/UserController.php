@@ -7,7 +7,10 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
 use function PHPUnit\Framework\fileExists;
@@ -26,6 +29,29 @@ class UserController extends Controller
     }
 
     // Index
+    public function activeUsers()
+    {
+        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $users = User::where('status', 1)->get();
+
+        return view('admin.users.active', compact('users'));
+    }
+
+    public function inactiveUsers()
+    {
+        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $users = User::where('status', 0)->get();
+
+        return view('admin.users.inactive', compact('users'));
+    }
+    public function activities($id)
+    {
+        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $user = User::findOrFail($id);
+
+        return view('admin.users.activities', compact('user'));
+    }
+
     public function index()
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -47,49 +73,109 @@ class UserController extends Controller
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
 
-        if ($request->input('avatar', false)) {
-            // Store Avatar
+        //  Has File && Save Avatar Image
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $fileName = 'user-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $user->storeImage($avatar->storeAs('users', $fileName, 'public'));
         }
 
-        return redirect()->route('admin.users.index');
+        activity('added')
+            ->causedBy(Auth::user())
+            ->performedOn($user)
+            ->log(trans('messages.users.addNewUserMsg'));
+
+        $message = trans('messages.users.addNewUserMsg');
+        return redirect()->route('admin.users.index')->with([
+            'message'   => $message,
+            'alertType' => 'success'
+        ]);
     }
 
     public function show(User $user)
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $user->load('roles');
-        return view('admin.users.show', compact('user'));
+
+        $admin = $user->roles->first()->name == 'Admin';
+
+        return view('admin.users.show', compact('user', 'admin'));
     }
 
     public function edit(User $user)
     {
         abort_if(Gate::denies('user_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $roles = Role::all()->pluck('name', 'id');
+        $roles = Role::all();
         $user->load('roles');
 
         return view('admin.users.edit', compact('roles', 'user'));
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
         abort_if(Gate::denies('user_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $request->validate([
+            'avatar'    => 'image|mimes:jpg,png',
+            'name'      => 'required|min:2|max:64',
+            'phone'     => 'nullable|min:8|max:15|unique:users,phone,'.$user->id,
+            'email'     => 'required|min:8|max:128|unique:users,email,'.$user->id,
+            'roles.*'   => 'integer',
+            'roles'     => 'required|array',
+            'info'      => 'nullable'
+        ]);
+
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
-
-        if ($request->input('avatar', false)) {
-            // Upload Photo
-        } elseif ($user->avatar) {
-            if (file_exists($user->avatar)){
-                unlink($user->avatar);
-            }
+        //  Has File
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $fileName = 'user-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $user->updateImage($avatar->storeAs('users', $fileName, 'public'));
         }
-        return redirect()->route('admin.users.index');
+
+        activity('updated')
+            ->causedBy(Auth::user())
+            ->performedOn($user)
+            ->log(trans('messages.users.updateUserMsg'));
+
+        $message = trans('messages.users.updateUserMsg');
+
+        return redirect()->route('admin.users.index')->with([
+            'message'   => $message,
+            'alertType' => 'success'
+        ]);
     }
 
     public function destroy(User $user)
     {
         abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $user->delete();
-        return back();
+
+        activity('deleted')
+            ->causedBy(Auth::user())
+            ->performedOn($user)
+            ->log(trans('messages.users.deleteUserMsg'));
+
+        $message = trans('messages.users.deleteUserMsg');
+
+        return redirect()->route('admin.users.index')->with([
+            'message'   => $message,
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Update Status
+    public function updateUserStatus(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+            if ($data['status'] == 'Active') {
+                $status = 0;
+            } else {
+                $status = 1;
+            }
+            User::where('id', $data['user_id'])->update(['status' => $status]);
+            return response()->json(['status' => $status, 'user_id' => $data['user_id']]);
+        }
     }
 }

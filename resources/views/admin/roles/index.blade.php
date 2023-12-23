@@ -49,15 +49,8 @@
                 <div class="card custom-card overflow-hidden">
                     <!-- Table Card Body -->
                     <div class="card-body">
-                        <!-- Success Message -->
-                        @if(session()->has('success'))
-                            <div class="alert alert-success mg-b-2" role="alert">
-                                <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <strong>@lang('global.wellDone')!</strong> {{ session()->get('success') }}
-                            </div>
-                        @endif
+                        <!-- Messages -->
+                        @include('admin.inc.alerts')
 
                         <!-- Table Title -->
                         <div>
