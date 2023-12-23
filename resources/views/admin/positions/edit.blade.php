@@ -91,6 +91,17 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Title -->
+
+                                        <!-- Code -->
+                                        <div class="form-group @error('code') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.code'): <span class="tx-danger">*</span></p>
+                                            <input type="text" id="code" class="form-control @error('code') form-control-danger @enderror" name="code" value="{{ $position->code ?? old('code') }}" placeholder="BCD-000" required>
+
+                                            @error('code')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Code -->
                                     </div>
 
                                     <div class="col-md-6">

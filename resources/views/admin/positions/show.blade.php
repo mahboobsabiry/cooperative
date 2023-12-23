@@ -27,7 +27,7 @@
                         <a href="{{ route('admin.positions.index') }}">@lang('pages.positions.positions')</a>
                     </li>
                     <li class="breadcrumb-item active"
-                        aria-current="page">{{ $position->title }} @lang('global.information')</li>
+                        aria-current="page">{{ $position->title }}</li>
                 </ol>
             </div>
 
@@ -78,12 +78,13 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                <img alt="avatar" src="{{ $position->employee->image ?? '' }}">
+                                <img alt="avatar" src="{{ $position->employees->where('is_responsible', 1)->first()->image ?? '' }}">
                             </div>
                         </div>
+
                         <div class="item-user pro-user">
                             <h4 class="pro-user-username text-dark mt-2 mb-0">
-                                <span>{{ $position->employee->name ?? trans('global.empty') }} {{ $position->employee->last_name ?? '' }}</span>
+                                <span>{{ $position->employees->where('is_responsible', 1)->first()->name ?? trans('global.empty') }} {{ $position->employees->where('is_responsible', 1)->first()->last_name ?? '' }}</span>
                             </h4>
 
                             <p class="pro-user-desc text-muted mb-1">{{ $position->title }}</p>
@@ -111,10 +112,10 @@
                                 <div class="media-body">
                                     <span>@lang('form.phone')</span>
                                     <div>
-                                        <a href="callto:{{ $position->employee->phone ?? '' }}"
-                                           class="ctd">{{ $position->employee->phone ?? '--- ---- ---' }}</a>
-                                        <a href="callto:{{ $position->employee->phone2 ?? '' }}"
-                                           class="ctd">{{ $position->employee->phone2 ?? '' }}</a>
+                                        <a href="callto:{{ $position->employees->where('is_responsible', 1)->first()->phone ?? '' }}"
+                                           class="ctd">{{ $position->employees->where('is_responsible', 1)->first()->phone ?? '--- ---- ---' }}</a>
+                                        <a href="callto:{{ $position->employees->where('is_responsible', 1)->first()->phone2 ?? '' }}"
+                                           class="ctd">{{ $position->employees->where('is_responsible', 1)->first()->phone2 ?? '' }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -128,8 +129,8 @@
                                 <div class="media-body">
                                     <span>@lang('form.email')</span>
                                     <div>
-                                        <a href="mailto:{{ $position->employee->email ?? '' }}"
-                                           class="ctd">{{ $position->employee->email ?? '----@---.--' }}</a>
+                                        <a href="mailto:{{ $position->employees->where('is_responsible', 1)->first()->email ?? '' }}"
+                                           class="ctd">{{ $position->employees->where('is_responsible', 1)->first()->email ?? '----@---.--' }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +168,10 @@
                                     <!-- Manager -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('pages.positions.manager'):</th>
-                                        <td>{{ $position->employee->name ?? trans('global.empty') }}</td>
+                                        <td>
+                                            {{ $position->employees->where('is_responsible', 1)->first()->name ?? trans('global.empty') }}
+                                            {{ $position->employees->where('is_responsible', 1)->first()->last_name ?? trans('global.empty') }}
+                                        </td>
                                     </tr>
 
                                     <!-- Under Hand -->

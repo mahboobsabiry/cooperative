@@ -175,7 +175,7 @@
                                                                             <ul>
                                                                                 @foreach($mgmt->children as $mgr)
                                                                                     <li>
-                                                                                        <a href="{{ route('admin.positions.show', $mgr->id) }}" style="background: beige;">{{ $mgr->title }}</a>
+                                                                                        <a href="{{ route('admin.positions.show', $mgr->id) }}" style="background: beige;">{{ $mgr->title }} ({{ count($mgr->employees) }})</a>
                                                                                     </li>
                                                                                 @endforeach
                                                                             </ul>

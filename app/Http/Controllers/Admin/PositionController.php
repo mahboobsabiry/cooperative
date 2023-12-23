@@ -73,6 +73,7 @@ class PositionController extends Controller
     // Show
     public function show(Position $position)
     {
+        $position->load('employees');
         return view('admin.positions.show', compact('position'));
     }
 

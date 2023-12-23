@@ -348,6 +348,28 @@
                             (<span class="small text-secondary">{{ $employee->position->title }}</span>)
                         @endif
                     </div>
+
+                    <!-- Body -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="tree m-2">
+                                <ul>
+                                    <li>
+                                        <a href="{{ route('admin.positions.show', $employee->position->id) }}">{{ $employee->position->title }}</a>
+                                        <ul>
+                                            @if($employee->position->position_id == 4)
+                                                @foreach($employee->position->children as $child_emp)
+                                                    <li>
+                                                        <a href="{{ route('admin.positions.show', $child_emp->id) }}">{{ $child_emp->name }}</a>
+                                                    </li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
