@@ -104,9 +104,8 @@
                                             <td>
                                                 @if($position->employees)
                                                     @foreach($position->employees as $employee)
-                                                        @php $resp = $employee->where('is_responsible', 1)->first(); @endphp
-                                                        <a href="{{ route('admin.employees.show', $resp->id) }}">
-                                                            {{ $resp->name }} {{ $resp->last_name }}
+                                                        <a href="{{ route('admin.employees.show', $employee->id) }}" class="badge badge-pill badge-dark" target="_blank">
+                                                            {{ $employee->name }} {{ $employee->last_name }}
                                                         </a>
                                                     @endforeach
                                                 @else

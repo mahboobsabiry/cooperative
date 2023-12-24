@@ -15,7 +15,7 @@ class Employee extends Model
     protected $fillable = [
         'position_id', 'name', 'last_name', 'father_name', 'grand_f_name',
         'p2number', 'emp_number', 'dob', 'phone', 'phone2', 'email',
-        'province', 'info', 'on_duty', 'is_responsible', 'status'
+        'province', 'info', 'on_duty', 'main_position', 'is_responsible', 'status'
     ];
 
     // Morph Photo

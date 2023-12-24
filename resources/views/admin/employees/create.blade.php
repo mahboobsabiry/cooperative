@@ -81,7 +81,7 @@
                                                     <p class="mb-2">1) @lang('form.position'): <span class="tx-danger">*</span></p>
 
                                                     <select id="position_id" name="position_id" class="form-control select2 @error('position_id') form-control-danger @enderror">
-                                                        <option selected>Choose one</option>
+                                                        <option selected>@lang('form.chooseOne')</option>
                                                         @foreach($positions as $position)
                                                             <option value="{{ $position->id }}">{{ $position->title }}</option>
                                                             @foreach($position->children as $admin)
@@ -102,17 +102,32 @@
                                                 </div>
                                             </div>
 
-                                            <!-- On Duty -->
+                                            <!-- On Duty && Main Position -->
                                             <div class="col-md-6">
-                                                <div class="form-group @error('on_duty') has-danger @enderror">
-                                                    <p class="mb-2">1) @lang('form.position'): <span class="tx-danger">*</span></p>
+                                                <div class="form-group @error('main_position') has-danger @enderror">
+                                                    <p class="mb-2" id="onDutyParent">1)
+                                                        @lang('pages.employees.onDuty')
+                                                        <span><input type="checkbox" name="on_duty" id="onDutyCheck" class="custom-checkbox"></span>
 
-                                                    <select id="on_duty" name="on_duty" class="form-control @error('on_duty') form-control-danger @enderror">
-                                                        <option value="0" selected>@lang('pages.employees.mainPosition')</option>
-                                                        <option value="1">@lang('pages.employees.onDuty')</option>
+                                                        <span id="mpText" style="display: none;">@lang('pages.employees.mainPosition'):</span>
+                                                    </p>
+                                                    <select id="on_duty" name="main_position" class="form-control @error('main_position') form-control-danger @enderror" style="display: none;">
+                                                        <option value="" selected>@lang('form.chooseOne')</option>
+                                                        @foreach($positions as $position)
+                                                            <option value="{{ $position->title }}">{{ $position->title }}</option>
+                                                            @foreach($position->children as $admin)
+                                                                <option value="{{ $admin->title }}" class="text-secondary">- {{ $admin->title }}</option>
+                                                                @foreach($admin->children as $mgmt)
+                                                                    <option value="{{ $mgmt->title }}">-- {{ $mgmt->title }}</option>
+                                                                    @foreach($mgmt->children as $mgr)
+                                                                        <option value="{{ $mgr->title }}">--- {{ $mgr->title }}</option>
+                                                                    @endforeach
+                                                                @endforeach
+                                                            @endforeach
+                                                        @endforeach
                                                     </select>
 
-                                                    @error('on_duty')
+                                                    @error('main_position')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
@@ -391,6 +406,19 @@
             showOtherMonths: true,
             selectOtherMonths: true
         });
+
+        if($('input[type="checkbox"]').parents('#onDutyParent')){
+            $('#onDutyCheck').change(function() {
+                if (this.checked) {
+                    $('#mpText').show();
+                    $('#on_duty').show();
+                } else {
+                    $('#on_duty').val("0");
+                    $('#on_duty').hide();
+                    $('#mpText').hide();
+                }
+            })
+        }
     </script>
 @endsection
 <!--/==/ End of Extra Scripts -->

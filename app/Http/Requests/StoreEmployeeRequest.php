@@ -75,6 +75,11 @@ class StoreEmployeeRequest extends FormRequest
                 'min:3',
                 'max:124'
             ],
+            'main_position' => [
+                'nullable',
+                'min:3',
+                'max:224'
+            ],
             'info'  => [
                 'nullable'
             ]

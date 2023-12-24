@@ -58,9 +58,14 @@ return [
         'employeeInfo'      => 'Employee Information',
         'generalInfo'       => 'General Information',
         'mainPosition'      => 'Main Position',
+        'mpEmp'             => 'Main Position Employee',
+        'mpEmps'            => 'Main Position Employees',
         'onDuty'            => 'On Duty',
+        'onDutyEmp'         => 'On Duty Employee',
+        'onDutyEmps'        => 'On Duty Employees',
         'otherInfo'         => 'Other Information',
         'personalInfo'      => 'Personal Information',
+        'positionNature'    => 'Position Nature',
         'updatedEmpMsg'     => 'Employee information has been updated successfully!'
     ],
 

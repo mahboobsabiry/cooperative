@@ -104,21 +104,38 @@
                                                 <!--/==/ End of Position -->
                                             </div>
 
+                                            <!-- On Duty && Main Position -->
                                             <div class="col-md-6">
-                                                <!-- On Duty -->
-                                                <div class="form-group @error('on_duty') has-danger @enderror">
-                                                    <p class="mb-2">1) @lang('form.position'): <span class="tx-danger">*</span></p>
+                                                <div class="form-group @error('main_position') has-danger @enderror">
+                                                    <p class="mb-2 row" id="onDutyParent">1)
+                                                        @lang('pages.employees.onDuty')
+                                                        <span class="mr-2 ml-2">
+                                                            <input type="checkbox" name="on_duty" id="onDutyCheck"
+                                                                   class="custom-checkbox" {{ $employee->on_duty == 0 ? 'checked' : '' }}>
+                                                        </span>
 
-                                                    <select id="on_duty" name="on_duty" class="form-control @error('on_duty') form-control-danger @enderror">
-                                                        <option value="0" {{ $employee->on_duty == 0 ? 'selected' : '' }}>@lang('pages.employees.mainPosition')</option>
-                                                        <option value="1" {{ $employee->on_duty == 1 ? 'selected' : '' }}>@lang('pages.employees.onDuty')</option>
+                                                        <span id="mpText" style="display: {{ $employee->on_duty == 0 ? 'block' : 'none' }};">@lang('pages.employees.mainPosition'):</span>
+                                                    </p>
+                                                    <select id="on_duty" name="main_position" class="form-control @error('main_position') form-control-danger @enderror" style="display: {{ $employee->on_duty == 0 ? 'block' : 'none' }};">
+                                                        <option value="" selected>@lang('form.chooseOne')</option>
+                                                        @foreach($positions as $position)
+                                                            <option value="{{ $position->title }}" {{ $employee->main_position == $position->title ? 'selected' : '' }}>{{ $position->title }}</option>
+                                                            @foreach($position->children as $admin)
+                                                                <option value="{{ $admin->title }}" {{ $employee->main_position == $admin->title ? 'selected' : '' }} class="text-secondary">- {{ $admin->title }}</option>
+                                                                @foreach($admin->children as $mgmt)
+                                                                    <option value="{{ $mgmt->title }}" {{ $employee->main_position == $mgmt->title ? 'selected' : '' }}>-- {{ $mgmt->title }}</option>
+                                                                    @foreach($mgmt->children as $mgr)
+                                                                        <option value="{{ $mgr->title }}" {{ $employee->main_position == $mgr->title ? 'selected' : '' }}>--- {{ $mgr->title }}</option>
+                                                                    @endforeach
+                                                                @endforeach
+                                                            @endforeach
+                                                        @endforeach
                                                     </select>
 
-                                                    @error('on_duty')
+                                                    @error('main_position')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                <!--/==/ End of On Duty -->
                                             </div>
                                         </div>
                                         <!--/==/ End of Position && OnDuty -->
@@ -406,6 +423,20 @@
             showOtherMonths: true,
             selectOtherMonths: true
         });
+
+        // If On Duty Checkbox has been checked
+        if($('input[type="checkbox"]').parents('#onDutyParent')){
+            $('#onDutyCheck').change(function() {
+                if (this.checked) {
+                    $('#mpText').show();
+                    $('#on_duty').show();
+                } else {
+                    $('#on_duty').val("0");
+                    $('#on_duty').hide();
+                    $('#mpText').hide();
+                }
+            })
+        }
     </script>
 @endsection
 <!--/==/ End of Extra Scripts -->

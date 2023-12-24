@@ -59,9 +59,14 @@ return [
         'employeeInfo'      => 'معلومات کارمند',
         'generalInfo'       => 'معلومات عمومی',
         'mainPosition'      => 'اصل بست',
+        'mpEmp'             => 'کارمند اصل بست',
+        'mpEmps'            => 'کارمندان اصل بست',
         'onDuty'            => 'خدمتی',
+        'onDutyEmp'         => 'کارمند خدمتی',
+        'onDutyEmps'        => 'کارمندان خدمتی',
         'otherInfo'         => 'معلومات دیگر',
         'personalInfo'      => 'معلومات شخصی',
+        'positionNature'    => 'نوعیت بست',
         'updatedEmpMsg'     => 'معلومات کارمند موفقانه بروز رسانی شد!'
     ],
 

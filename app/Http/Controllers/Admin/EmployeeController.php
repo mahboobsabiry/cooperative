@@ -31,9 +31,11 @@ class EmployeeController extends Controller
     public function index()
     {
         abort_if(Gate::denies('employee_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $employees = Employee::all();
+        $employees = Employee::orderBy('created_at', 'desc')->get();
+        $mpEmp = Employee::where('on_duty', 1)->orderBy('created_at', 'desc')->get();
+        $onDuty = Employee::where('on_duty', 0)->orderBy('created_at', 'desc')->get();
 
-        return view('admin.employees.index', compact('employees'));
+        return view('admin.employees.index', compact('employees', 'mpEmp', 'onDuty'));
     }
 
     public function create()
@@ -47,7 +49,39 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request)
     {
         abort_if(Gate::denies('employee_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $employee = Employee::create($request->all());
+        // $employee = Employee::create($request->all());
+        $employee = new Employee();
+        $employee->position_id  = $request->position_id;
+        $employee->name         = $request->name;
+        $employee->last_name    = $request->last_name;
+        $employee->father_name  = $request->father_name;
+        $employee->grand_f_name = $request->grand_f_name;
+        $employee->p2number     = $request->p2number;
+        $employee->emp_number   = $request->emp_number;
+        $employee->dob          = $request->dob;
+        $employee->phone        = $request->phone;
+        $employee->phone2       = $request->phone2;
+        $employee->email        = $request->email;
+        $employee->province     = $request->province;
+        $employee->info         = $request->info;
+        // Save On Duty
+        if ($request->has('on_duty')) {
+            $on_duty = 0;
+        } else {
+            $on_duty = 1;
+        }
+        $employee->on_duty          = $on_duty;
+        $employee->main_position    = $request->main_position;
+
+        // Get Position && Save Responsible
+        $position = Position::where('id', $request->position_id)->first();
+        if (count($position->employees) > 0) {
+            $is_responsible = 0;
+        } else {
+            $is_responsible = 1;
+        }
+        $employee->is_responsible   = $is_responsible;
+        $employee->save();
 
         //  Has File && Save Avatar Image
         if ($request->hasFile('photo')) {
@@ -112,10 +146,41 @@ class EmployeeController extends Controller
             'phone2'        => 'nullable|min:8|max:15',
             'email'         => 'required|min:10|max:64|unique:employees,email,' . $employee->id,
             'province'      => 'required|min:3|max:128',
+            'main_position' => 'nullable|min:3|max:224',
             'info'          => 'nullable'
         ]);
 
-        $employee->update($request->all());
+        $employee->position_id  = $request->position_id;
+        $employee->name         = $request->name;
+        $employee->last_name    = $request->last_name;
+        $employee->father_name  = $request->father_name;
+        $employee->grand_f_name = $request->grand_f_name;
+        $employee->p2number     = $request->p2number;
+        $employee->emp_number   = $request->emp_number;
+        $employee->dob          = $request->dob;
+        $employee->phone        = $request->phone;
+        $employee->phone2       = $request->phone2;
+        $employee->email        = $request->email;
+        $employee->province     = $request->province;
+        $employee->info         = $request->info;
+        // Save On Duty
+        if ($request->has('on_duty')) {
+            $on_duty = 0;
+        } else {
+            $on_duty = 1;
+        }
+        $employee->on_duty          = $on_duty;
+        $employee->main_position    = $request->main_position;
+
+        // Get Position && Save Responsible
+        $position = Position::where('id', $request->position_id)->first();
+        if (count($position->employees) > 0) {
+            $is_responsible = 0;
+        } else {
+            $is_responsible = 1;
+        }
+        $employee->is_responsible   = $is_responsible;
+        $employee->save();
 
         //  Has File
         if ($request->hasFile('photo')) {
