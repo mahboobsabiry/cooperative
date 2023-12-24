@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('province');
             $table->string('info')->nullable();
             $table->tinyInteger('on_duty')->default(0);
+            $table->tinyInteger('is_responsible')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
 

@@ -32,6 +32,7 @@ class EmployeesTableSeeder extends Seeder
                 'province'      => 'کندز',
                 'info'          => '',
                 'on_duty'       => 0,
+                'is_responsible' => 1,
                 'status'        => 1
             ],
             [
@@ -49,6 +50,7 @@ class EmployeesTableSeeder extends Seeder
                 'province'      => 'بدخشان',
                 'info'          => '',
                 'on_duty'       => 0,
+                'is_responsible' => 1,
                 'status'        => 1
             ],
             [
@@ -66,6 +68,7 @@ class EmployeesTableSeeder extends Seeder
                 'province'      => 'بلخ',
                 'info'          => '',
                 'on_duty'       => 0,
+                'is_responsible' => 1,
                 'status'        => 1
             ],
             [
@@ -83,6 +86,7 @@ class EmployeesTableSeeder extends Seeder
                 'province'      => 'تخار',
                 'info'          => 'من یک برنامه نویس خوب هستم!',
                 'on_duty'       => 0,
+                'is_responsible' => 1,
                 'status'        => 1
             ],
         ];

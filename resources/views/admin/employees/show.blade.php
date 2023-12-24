@@ -355,15 +355,13 @@
                             <div class="tree m-2">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('admin.positions.show', $employee->position->id) }}">{{ $employee->position->title }}</a>
+                                        <a href="{{ route('admin.positions.show', $organization->id) }}">{{ $organization->title }}</a>
                                         <ul>
-                                            @if($employee->position->position_id == 4)
-                                                @foreach($employee->position->children as $child_emp)
-                                                    <li>
-                                                        <a href="{{ route('admin.positions.show', $child_emp->id) }}">{{ $child_emp->name }}</a>
-                                                    </li>
-                                                @endforeach
-                                            @endif
+                                            @foreach($organization->children as $child)
+                                                <li>
+                                                    <a href="{{ route('admin.positions.show', $child->id) }}">{{ $child->title }} ({{ count($child->employees) }})</a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </li>
                                 </ul>

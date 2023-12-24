@@ -82,7 +82,9 @@ class EmployeeController extends Controller
 
         $admin = Auth::user()->roles->first()->name == 'Admin';
 
-        return view('admin.employees.show', compact('employee', 'admin'));
+        $organization = Position::with('children')->where('id', $employee->id)->first();
+
+        return view('admin.employees.show', compact('employee', 'admin', 'organization'));
     }
 
     // Edit Info
