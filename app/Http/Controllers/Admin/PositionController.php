@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -74,7 +75,48 @@ class PositionController extends Controller
     public function show(Position $position)
     {
         $position->load('employees');
-        return view('admin.positions.show', compact('position'));
+
+        if ($position->position_number == 2) {
+            // $posEmployees = $position->employees()->get();
+            $posEmployees = Employee::all()->where('on_duty', 1);
+            $onDutyPosEmp = Employee::all()->where('on_duty', 0);
+            // $onDutyPosEmp = Employee::with('position')->where('position_id', $position->id)->where('on_duty', 0)->get();
+            foreach ($position->children() as $admin) {
+                $posEmployees = $admin->employees()->get();
+                $onDutyPosEmp = Employee::with('position')->where('position_id', $admin->id)->where('on_duty', 0)->get();
+                foreach ($admin->children() as $mgmt) {
+                    $posEmployees = $mgmt->employees();
+                    $onDutyPosEmp = Employee::with('position')->where('position_id', $mgmt->id)->where('on_duty', 0)->get();
+                    foreach ($mgmt->children() as $mgr) {
+                        $posEmployees = $mgr->employees();
+                        $onDutyPosEmp = Employee::with('position')->where('position_id', $mgr->id)->where('on_duty', 0)->get();
+                    }
+                }
+            }
+        } elseif($position->position_number == 3) {
+            $posEmployees = Employee::with('position')->where('position_id', $position->id)->get();
+            $onDutyPosEmp = Employee::with('position')->where('position_id', $position->id)->where('on_duty', 0)->get();
+            foreach ($position->children() as $mgmt) {
+                $posEmployees = Employee::with('position')->where('position_id', $mgmt->id)->get();
+                $onDutyPosEmp = Employee::with('position')->where('position_id', $mgmt->id)->where('on_duty', 0)->get();
+                foreach ($mgmt->children() as $mgr) {
+                    $posEmployees = Employee::with('position')->where('position_id', $mgr->id)->get();
+                    $onDutyPosEmp = Employee::with('position')->where('position_id', $mgr->id)->where('on_duty', 0)->get();
+                }
+            }
+        } elseif ($position->position_number == 4) {
+            $posEmployees = Employee::with('position')->where('position_id', $position->id)->get();
+            $onDutyPosEmp = Employee::with('position')->where('position_id', $position->id)->where('on_duty', 0)->get();
+            foreach ($position->children() as $mgr) {
+                $posEmployees = Employee::with('position')->where('position_id', $mgr->id)->get();
+                $onDutyPosEmp = Employee::with('position')->where('position_id', $mgr->id)->where('on_duty', 0)->get();
+            }
+        } else {
+            $posEmployees = Employee::with('position')->where('position_id', $position->id)->get();
+            $onDutyPosEmp = Employee::with('position')->where('position_id', $position->id)->where('on_duty', 0)->get();
+        }
+
+        return view('admin.positions.show', compact('position', 'posEmployees', 'onDutyPosEmp'));
     }
 
     // Edit Info

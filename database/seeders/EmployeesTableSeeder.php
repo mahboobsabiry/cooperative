@@ -31,7 +31,7 @@ class EmployeesTableSeeder extends Seeder
                 'email'         => 'm.bilal@gmail.com',
                 'province'      => 'کندز',
                 'info'          => '',
-                'on_duty'       => 0,
+                'on_duty'       => 1,
                 'is_responsible' => 1,
                 'status'        => 1
             ],
@@ -49,7 +49,7 @@ class EmployeesTableSeeder extends Seeder
                 'email'         => 'm.tariq@gmail.com',
                 'province'      => 'بدخشان',
                 'info'          => '',
-                'on_duty'       => 0,
+                'on_duty'       => 1,
                 'is_responsible' => 1,
                 'status'        => 1
             ],
@@ -67,7 +67,7 @@ class EmployeesTableSeeder extends Seeder
                 'email'         => 'naqib.safai@gmail.com',
                 'province'      => 'بلخ',
                 'info'          => '',
-                'on_duty'       => 0,
+                'on_duty'       => 1,
                 'is_responsible' => 1,
                 'status'        => 1
             ],
@@ -85,7 +85,7 @@ class EmployeesTableSeeder extends Seeder
                 'email'         => 'm.sabiry1997@gmail.com',
                 'province'      => 'تخار',
                 'info'          => 'من یک برنامه نویس خوب هستم!',
-                'on_duty'       => 0,
+                'on_duty'       => 1,
                 'is_responsible' => 1,
                 'status'        => 1
             ],
