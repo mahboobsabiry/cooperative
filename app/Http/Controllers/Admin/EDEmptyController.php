@@ -7,17 +7,19 @@ use Illuminate\Http\Request;
 
 class EDEmptyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Index
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Returned Vehicles
+    public function returnedGoods()
+    {
+        return view('admin.ed-returned.index');
+    }
+
+    // Create
     public function create()
     {
         //

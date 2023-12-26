@@ -200,8 +200,8 @@
                                                 </a>
                                             @endif
                                             <span id="update_status-{{ $user->id }}" style="display: none;">
-                                            <i class="fa fa-toggle-on" aria-hidden="true"></i>
-                                        </span>
+                                                <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                                            </span>
                                         </td>
                                     </tr>
 

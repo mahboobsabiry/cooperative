@@ -3,7 +3,7 @@ $(document).ready(function(){
     var table = $('#exportexample').DataTable( {
         scrollX: true,
         lengthChange: true,
-        buttons: ['copy', 'excel', 'pdf', 'colvis']
+        buttons: ['copy', 'excel', 'colvis']
 
     } );
     table.buttons().container()

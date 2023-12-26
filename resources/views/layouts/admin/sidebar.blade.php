@@ -108,8 +108,10 @@
             @can('exit_door')
                 <li class="nav-item {{ request()->is('admin/ed-trex') ||
                     request()->is('admin/ed-trex/*') ||
+                    request()->is('admin/ed-export') ||
                     request()->is('admin/ed-empty') ||
                     request()->is('admin/ed-empty/*') ||
+                    request()->is('admin/ed-returned') ||
                     request()->is('admin/ed-rejected') ||
                     request()->is('admin/ed-rejected/*') ? 'active show' : '' }}">
 
@@ -122,7 +124,7 @@
                     <ul class="nav-sub">
                         <!-- Transit && Export Vehicles -->
                         <li class="nav-sub-item {{ request()->is('admin/ed-trex') ||
-                        request()->is('admin/ed-trex/*') ? 'active' : '' }}">
+                        request()->is('admin/ed-trex/*') || request()->is('admin/ed-export') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.ed-trex.index') }}">
                                 @lang('pages.exitDoor.trexGoods')
                             </a>
@@ -136,7 +138,15 @@
                             </a>
                         </li>
 
-                        <!-- Empty Vehicles -->
+                        <!-- Returned Vehicles -->
+                        <li class="nav-sub-item {{ request()->is('admin/ed-returned') ||
+                        request()->is('admin/ed-returned/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.ed-returned.index') }}">
+                                @lang('pages.exitDoor.returnedGoods')
+                            </a>
+                        </li>
+
+                        <!-- Rejected Vehicles -->
                         <li class="nav-sub-item {{ request()->is('admin/ed-rejected') ||
                         request()->is('admin/ed-rejected/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.ed-rejected.index') }}">

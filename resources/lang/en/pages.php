@@ -70,14 +70,35 @@ return [
     ],
 
     'exitDoor' => [
+        'bxTotal'       => 'Box Total',
+        'bxTotalTx'     => 'Box Total Text',
+        'carrier'       => 'Carrier',
+        'carrierName'   => 'Carrier Name',
+        'cName'         => 'Company Name',
         'emptyVehicles' => 'Empty Vehicles',
+        'eaDate'        => 'Exit Again Date',
         'exitDoor'      => 'Exit Door',
         'exitVehicle'   => 'Exit Vehicle',
+        'export'        => 'Export',
+        'exportGoods'   => 'Export Goods',
+        'isExitAgain'   => 'Is Exit Again?',
+        'isReturned'    => 'Is Returned?',
+        'goodName'      => 'Good Name',
+        'goodsAmount'   => 'Goods Amount',
         'rejectedGoods'     => 'Rejected Goods',
         'rejectedVehicles'  => 'Rejected Vehicles',
+        'returnDate'        => 'Return Date',
+        'returnedGoods'     => 'Returned Goods',
+        'returnedVehicles'  => 'Returned Vehicles',
+        'transit'           => 'Transit',
+        'transitGoods'      => 'Transit Goods',
         'trex'          => 'Transit/Export',
         'trexGoods'     => 'Transit/Export Goods',
-        'trexVehicles'  => 'Transit/Export Vehicles'
+        'trexVehicles'  => 'Transit/Export Vehicles',
+        'vpNumber'      => 'Vehicle Plate Number',
+        'vptNumber'     => 'Vehicle Trailer Plate Number',
+        'weight'        => 'Weight',
+        'weightKg'      => 'Weight Kg'
     ],
 
     'finance' => [

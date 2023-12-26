@@ -51,6 +51,26 @@ return [
         'deletedRecordMsg'    => 'Deleted successfully!'
     ],
 
+    'exitDoor' => [
+        'addTrexMsg'        => 'New Transit/Export has been added successfully!',
+        'updateTrexMsg'     => 'Transit/Export has been updated successfully!',
+        'deleteTrexMsg'     => 'Transit/Export has been deleted successfully!',
+
+        'addEmptyVMsg'        => 'New Empty Vehicle has been added successfully!',
+        'updateEmptyVMsg'     => 'Empty Vehicle has been updated successfully!',
+        'deleteEmptyVMsg'     => 'Empty Vehicle has been deleted successfully!',
+
+        'addRejVMsg'        => 'New Rejected Vehicle has been added successfully!',
+        'updateRejVMsg'     => 'Rejected Vehicle has been updated successfully!',
+        'deleteRejVMsg'     => 'Rejected Vehicle has been deleted successfully!',
+
+        'vehicleReturned'   => 'Vehicle Returned',
+        'vehicleNotReturned'    => 'Vehicle Not Returned',
+
+        'vehicleEA'   => 'Vehicle Exit Again',
+        'vehicleNotEA'    => 'Vehicle Not Exit Again'
+    ],
+
     'galleries' => [
         'addedGalleryMsg'      => 'Gallery has been added successfully!',
         'deletedGalleryMsg'    => 'Gallery has been deleted successfully!',

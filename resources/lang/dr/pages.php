@@ -71,14 +71,35 @@ return [
     ],
 
     'exitDoor' => [
+        'bxTotal'       => 'محدوده',
+        'bxTotalTx'     => 'مروجه',
+        'carrier'       => 'بارچالان',
+        'carrierName'   => 'اسم بارچالانی',
+        'cName'         => 'اسم شرکت',
         'emptyVehicles' => 'وسایط خالی',
+        'eaDate'        => 'تاریخ خروج دوباره',
         'exitDoor'      => 'دروازه خروجی',
         'exitVehicle'   => 'خروج وسیله نقلیه',
+        'export'        => 'صادرات',
+        'exportGoods'   => 'اموال صادراتی',
+        'isExitAgain'   => 'آیا خروج دوباره گردید؟',
+        'isReturned'    => 'آیا بازگشت نموده است؟',
+        'goodName'      => 'اسم جنس',
+        'goodsAmount'   => 'مقدار جنس',
         'rejectedGoods'     => 'اموال مستردی',
         'rejectedVehicles'  => 'وسایط مستردی',
+        'returnDate'        => 'تاریخ بازگشت',
+        'returnedGoods'     => 'اموال بازگشتی',
+        'returnedVehicles'  => 'وسایط بازگشتی',
+        'transit'           => 'ترانزیت',
+        'transitGoods'      => 'اموال ترانزیتی',
         'trex'          => 'ترانزیت/صادرات',
         'trexGoods'     => 'اموال ترانزیت/صادرات',
-        'trexVehicles'  => 'وسایط ترانزیت/صادرات'
+        'trexVehicles'  => 'وسایط ترانزیت/صادرات',
+        'vpNumber'      => 'نمبر پلیت عراده',
+        'vptNumber'     => 'نمبر پلیت تریلر عراده',
+        'weight'        => 'وزن',
+        'weightKg'      => 'وزن به کیلوگرام'
     ],
 
     'finance' => [

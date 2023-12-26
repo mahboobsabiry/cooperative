@@ -78,7 +78,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // Exit Door
     Route::resource('ed-trex', EDTrexController::class);
+    Route::get('ed-export', [EDTrexController::class, 'exportGoods'])->name('ed-export.index');
+    Route::post('is-returned/', [EDTrexController::class, 'isReturned'])->name('ed-trex.is_returned');
+    Route::post('exit-again/', [EDTrexController::class, 'exitAgain'])->name('ed-trex.exit_again');
     Route::resource('ed-empty', EDEmptyController::class);
+    Route::get('ed-returned', [EDEmptyController::class, 'returnedGoods'])->name('ed-returned.index');
     Route::resource('ed-rejected', EDRejectedController::class);
 
     // Settings

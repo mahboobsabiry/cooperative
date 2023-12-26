@@ -53,6 +53,26 @@ return [
         'employeeDeactivated'   => 'کارمند غیرفعال شد!'
     ],
 
+    'exitDoor' => [
+        'addTrexMsg'        => 'ترانزیت/صادرات جدید موفقانه ثبت شد!',
+        'updateTrexMsg'     => 'ترانزیت/صادرات موفقانه بروزرسانی شد!',
+        'deleteTrexMsg'     => 'ترانزیت/صادرات موفقانه حذف شد!',
+
+        'addEmptyVMsg'        => 'عراده خالی جدید موفقانه ثبت شد!',
+        'updateEmptyVMsg'     => 'عراده خالی موفقانه بروزرسانی شد!',
+        'deleteEmptyVMsg'     => 'عراده خالی موفقانه حذف شد!',
+
+        'addRejVMsg'        => 'مستردی جدید موفقانه ثبت شد!',
+        'updateRejVMsg'     => 'مستردی موفقانه بروزرسانی شد!',
+        'deleteRejVMsg'     => 'مستردی موفقانه حذف شد!',
+
+        'vehicleReturned'   => 'عراده بازگشت نمود.',
+        'vehicleNotReturned'    => 'عراده بازگشت ننموده است.',
+
+        'vehicleEA'   => 'عراده خروج دوباره گردید',
+        'vehicleNotEA'    => 'عراده خروج دوباره نگردید'
+    ],
+
     'galleries' => [
         'addedGalleryMsg'      => 'گالری موفقانه ثبت شد!',
         'deletedGalleryMsg'    => 'گالری موفقانه حذف شد!',

@@ -14,7 +14,7 @@ class EDTrex extends Model
 
     protected $fillable = [
         'is_tr', 'c_name', 'vp_number', 'vpt_number',
-        'good_number', 'bx_total', 'bx_total_tx', 'weight', 'enex', 'desc',
+        'good_name', 'bx_total', 'bx_total_tx', 'weight', 'enex', 'desc',
         'is_returned', 'return_date', 'exit_again', 'ea_date'
     ];
 }
