@@ -70,6 +70,17 @@ return [
         'updatedEmpMsg'     => 'معلومات کارمند موفقانه بروز رسانی شد!'
     ],
 
+    'exitDoor' => [
+        'emptyVehicles' => 'وسایط خالی',
+        'exitDoor'      => 'دروازه خروجی',
+        'exitVehicle'   => 'خروج وسیله نقلیه',
+        'rejectedGoods'     => 'اموال مستردی',
+        'rejectedVehicles'  => 'وسایط مستردی',
+        'trex'          => 'ترانزیت/صادرات',
+        'trexGoods'     => 'اموال ترانزیت/صادرات',
+        'trexVehicles'  => 'وسایط ترانزیت/صادرات'
+    ],
+
     'finance' => [
         'employeeSalaries'  => 'معاشات کارمندان',
         'empSalaries' => [

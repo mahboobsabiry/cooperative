@@ -69,6 +69,17 @@ return [
         'updatedEmpMsg'     => 'Employee information has been updated successfully!'
     ],
 
+    'exitDoor' => [
+        'emptyVehicles' => 'Empty Vehicles',
+        'exitDoor'      => 'Exit Door',
+        'exitVehicle'   => 'Exit Vehicle',
+        'rejectedGoods'     => 'Rejected Goods',
+        'rejectedVehicles'  => 'Rejected Vehicles',
+        'trex'          => 'Transit/Export',
+        'trexGoods'     => 'Transit/Export Goods',
+        'trexVehicles'  => 'Transit/Export Vehicles'
+    ],
+
     'finance' => [
         'employeeSalaries'  => 'Employee Salaries',
         'empSalaries' => [

@@ -82,6 +82,11 @@ class PermissionsTableSeeder extends Seeder
                 'name'      => 'employee_access'
             ],
 
+            // Exit Door
+            [
+                'name'  => 'exit_door'
+            ],
+
             // Settings
             [
             'name'      => 'setting_create'

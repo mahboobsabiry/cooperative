@@ -104,6 +104,50 @@
                 </li>
             @endcan
 
+            <!-- Exit Door -->
+            @can('exit_door')
+                <li class="nav-item {{ request()->is('admin/ed-trex') ||
+                    request()->is('admin/ed-trex/*') ||
+                    request()->is('admin/ed-empty') ||
+                    request()->is('admin/ed-empty/*') ||
+                    request()->is('admin/ed-rejected') ||
+                    request()->is('admin/ed-rejected/*') ? 'active show' : '' }}">
+
+                    <a class="nav-link with-sub" href="javascript:void(0)">
+                        <i class="fa fa-door-open"></i>
+                        <span class="sidemenu-label">@lang('pages.exitDoor.exitDoor')</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
+
+                    <ul class="nav-sub">
+                        <!-- Transit && Export Vehicles -->
+                        <li class="nav-sub-item {{ request()->is('admin/ed-trex') ||
+                        request()->is('admin/ed-trex/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.ed-trex.index') }}">
+                                @lang('pages.exitDoor.trexGoods')
+                            </a>
+                        </li>
+
+                        <!-- Empty Vehicles -->
+                        <li class="nav-sub-item {{ request()->is('admin/ed-empty') ||
+                        request()->is('admin/ed-empty/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.ed-empty.index') }}">
+                                @lang('pages.exitDoor.emptyVehicles')
+                            </a>
+                        </li>
+
+                        <!-- Empty Vehicles -->
+                        <li class="nav-sub-item {{ request()->is('admin/ed-rejected') ||
+                        request()->is('admin/ed-rejected/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.ed-rejected.index') }}">
+                                @lang('pages.exitDoor.rejectedGoods')
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+            <!--/==/ End of Exit Door -->
+
             <!-- Applications -->
             <li class="nav-label">@lang('admin.sidebar.applications')</li>
 

@@ -4,6 +4,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdministrationsController;
 use App\Http\Controllers\Admin\BranchesController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\EDEmptyController;
+use App\Http\Controllers\Admin\EDRejectedController;
+use App\Http\Controllers\Admin\EDTrexController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\PositionController;
@@ -29,10 +32,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('admin.dashboard');
 })->name('index');
-
-Route::get('/us', function () {
-    return count(Auth::user()->activities());
-});
 
 Auth::routes(['register' => false]);
 
@@ -73,9 +72,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::resource('administrations', AdministrationsController::class);
     Route::resource('management', ManagementController::class);
     Route::resource('branches', BranchesController::class);
-
+    // Employees
     Route::resource('employees', EmployeeController::class);
     Route::post('update-employee-status', [EmployeeController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');
+
+    // Exit Door
+    Route::resource('ed-trex', EDTrexController::class);
+    Route::resource('ed-empty', EDEmptyController::class);
+    Route::resource('ed-rejected', EDRejectedController::class);
 
     // Settings
     Route::resource('settings', SettingController::class);
