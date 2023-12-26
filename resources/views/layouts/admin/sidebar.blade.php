@@ -111,7 +111,8 @@
                     request()->is('admin/ed-export') ||
                     request()->is('admin/ed-empty') ||
                     request()->is('admin/ed-empty/*') ||
-                    request()->is('admin/ed-returned') ||
+                    request()->is('admin/tr-returned') ||
+                    request()->is('admin/ex-returned') ||
                     request()->is('admin/ed-rejected') ||
                     request()->is('admin/ed-rejected/*') ? 'active show' : '' }}">
 
@@ -139,9 +140,9 @@
                         </li>
 
                         <!-- Returned Vehicles -->
-                        <li class="nav-sub-item {{ request()->is('admin/ed-returned') ||
-                        request()->is('admin/ed-returned/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.ed-returned.index') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/tr-returned') ||
+                        request()->is('admin/ex-returned') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.ed-trex.tr_returned') }}">
                                 @lang('pages.exitDoor.returnedGoods')
                             </a>
                         </li>

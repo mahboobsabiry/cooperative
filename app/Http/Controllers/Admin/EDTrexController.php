@@ -145,4 +145,20 @@ class EDTrexController extends Controller
             return response()->json(['exit_again' => $exit_again, 'trex_id' => $data['trex_id']]);
         }
     }
+
+    // Transit Returned Vehicles
+    public function trReturned()
+    {
+        $tr_returned = EDTrex::all()->where('is_returned', 1)->where('is_tr', 1);
+
+        return view('admin.exit-door.trex.tr_returned', compact('tr_returned'));
+    }
+
+    // Export Returned Vehicles
+    public function exReturned()
+    {
+        $ex_returned = EDTrex::all()->where('is_returned', 1)->where('is_tr', 0);
+
+        return view('admin.exit-door.trex.ex_returned', compact('ex_returned'));
+    }
 }
