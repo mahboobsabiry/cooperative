@@ -28,6 +28,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.employees.index') }}">@lang('admin.sidebar.employees')</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.employees.show', $employee->id) }}">@lang('global.details')</a></li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('pages.employees.editTitle')</li>
                 </ol>
             </div>
@@ -35,7 +36,7 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Back -->
-                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ route('admin.employees.index') }}">
+                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ route('admin.employees.show', $employee->id) }}">
                     @lang('global.back')
                     <i class="fe fe-arrow-left"></i>
                 </a>

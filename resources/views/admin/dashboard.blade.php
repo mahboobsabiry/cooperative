@@ -443,7 +443,9 @@
                                 @foreach($top_users as $user)
                                     <tr>
                                         <td class="bd-t-0">
-                                            <div class="main-img-user"><img alt="avatar" src="{{ $user->image }}"></div>
+                                            <div class="main-img-user">
+                                                <img alt="avatar" src="{{ $user->image ? $user->image : asset('assets/images/avatar-default.jpeg') }}">
+                                            </div>
                                         </td>
                                         <td class="bd-t-0">
                                             <h6 class="mg-b-0">

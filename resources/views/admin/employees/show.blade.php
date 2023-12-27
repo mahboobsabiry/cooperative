@@ -34,29 +34,33 @@
             <div class="btn btn-list">
                 <div class="d-flex">
                     <div class="mr-2">
-                        <a class="btn ripple btn-outline-info btn-sm dropdown-toggle mb-0" href="#"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="fe fe-external-link"></i> @lang('global.export') <i
-                                class="fas fa-caret-down ml-1"></i>
+                        <!-- Delete -->
+                        <a class="modal-effect btn btn-sm ripple btn-danger"
+                           data-effect="effect-sign" data-toggle="modal"
+                           href="#delete_record{{ $employee->id }}"
+                           title="@lang('pages.employees.deleteEmployee')">
+                            <i class="fe fe-trash"></i>
+                            @lang('global.delete')
                         </a>
-                        <div class="dropdown-menu tx-13">
-                            <a class="dropdown-item" href="#"><i class="far fa-file-pdf mr-2"></i> Pdf</a>
-                            <a class="dropdown-item" href="#"><i class="far fa-image mr-2"></i> Image</a>
-                            <a class="dropdown-item" href="#"><i class="far fa-file-word mr-2"></i> Word</a>
-                        </div>
+
+                        @include('admin.employees.delete')
                     </div>
+
                     <div class="mr-2">
                         <!-- Edit -->
-                        <a class="btn ripple bg-primary btn-sm tx-white"
+                        <a class="btn ripple bg-dark btn-sm tx-white"
                            href="{{ route('admin.employees.edit', $employee->id) }}">
+                            <i class="fe fe-edit"></i>
                             @lang('global.edit')
                         </a>
                     </div>
+
                     <div class="mr-2">
-                        <!-- Back -->
-                        <a class="btn ripple bg-gray-500 btn-sm tx-white" href="{{ route('admin.employees.index') }}">
-                            @lang('global.back')
-                            <i class="fa fa-arrow-{{ app()->getLocale() == 'en' ? 'right' : 'left' }}"></i>
+                        <!-- Add -->
+                        <a class="btn ripple bg-primary btn-sm tx-white"
+                           href="{{ route('admin.employees.create') }}" target="_blank">
+                            <i class="fe fe-plus-circle"></i>
+                            @lang('global.add')
                         </a>
                     </div>
                 </div>
@@ -72,7 +76,7 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                <img alt="avatar" src="{{ $employee->image }}">
+                                <img alt="avatar" src="{{ $employee->image ? $employee->image : asset('assets/images/avatar-default.jpeg') }}">
                             </div>
                         </div>
 
@@ -319,8 +323,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p>
-                                        @lang('form.idCard'):
-                                        <img src="{{ $employee->taz }}" class="img-thumbnail"
+                                        <strong>@lang('form.idCard'):</strong> <br>
+                                        <img src="{{ $employee->taz ? $employee->taz : asset('assets/images/id-card-default.png') }}" class="img-thumbnail"
                                              alt="@lang('form.idCard')">
                                     </p>
                                 </div>

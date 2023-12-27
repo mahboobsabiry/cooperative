@@ -26,7 +26,6 @@ class EmployeeController extends Controller
     // Index
     public function index()
     {
-        abort_if(Gate::denies('employee_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $employees = Employee::orderBy('created_at', 'desc')->get();
         $mpEmp = Employee::where('on_duty', 1)->orderBy('created_at', 'desc')->get();
         $onDuty = Employee::where('on_duty', 0)->orderBy('created_at', 'desc')->get();
@@ -36,7 +35,6 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('employee_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $positions = Position::tree();
         return view('admin.employees.create', compact('positions'));
     }
@@ -44,7 +42,6 @@ class EmployeeController extends Controller
     // Store Record
     public function store(StoreEmployeeRequest $request)
     {
-        abort_if(Gate::denies('employee_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         // $employee = Employee::create($request->all());
         $employee = new Employee();
         $employee->position_id  = $request->position_id;
@@ -108,27 +105,20 @@ class EmployeeController extends Controller
     // Show Info
     public function show(Employee $employee)
     {
-        abort_if(Gate::denies('employee_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $admin = Auth::user()->roles->first()->name == 'Admin';
-
         $organization = Position::with('children')->where('id', $employee->id)->first();
-
         return view('admin.employees.show', compact('employee', 'admin', 'organization'));
     }
 
     // Edit Info
     public function edit(Employee $employee)
     {
-        abort_if(Gate::denies('employee_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $positions = Position::tree();
         return view('admin.employees.edit', compact('employee', 'positions'));
     }
 
     public function update(Request $request, Employee $employee)
     {
-        abort_if(Gate::denies('employee_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $request->validate([
             'photo'         => 'image|mimes:jpg,png,jfif',
             'name'          => 'required',
@@ -207,7 +197,6 @@ class EmployeeController extends Controller
     // Delete Employee
     public function destroy(Employee $employee)
     {
-        abort_if(Gate::denies('employee_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $employee->delete();
 
         activity('deleted')
