@@ -106,7 +106,7 @@
                                         <div class="form-group @error('enex') has-danger @enderror">
                                             <p class="mb-2">EN-EX: <span class="tx-danger">*</span></p>
 
-                                            <input type="number" id="enex" class="form-control @error('enex') form-control-danger @enderror" name="enex" value="{{ $item->enex ?? old('enex') }}" placeholder="EN-EX*">
+                                            <input type="number" id="enex" class="form-control @error('enex') form-control-danger @enderror" name="enex" value="{{ $item->enex ?? old('enex') }}" placeholder="EN-EX*" required>
 
                                             @error('enex')
                                             <div class="invalid-feedback">{{ $message }}</div>

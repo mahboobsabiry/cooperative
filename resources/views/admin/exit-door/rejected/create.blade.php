@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('pages.exitDoor.emptyVehicles'))
+@section('title', config('app.name') . ' ~ ' . trans('pages.exitDoor.rejectedGoods'))
 <!-- Extra Styles -->
 @section('extra_css')
 
@@ -17,7 +17,7 @@
                 <h2 class="main-content-title tx-24 mg-b-5">@lang('global.add') @lang('global.new')</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.ed-empty.index') }}">@lang('pages.exitDoor.emptyVehicles')</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.ed-rejected.index') }}">@lang('pages.exitDoor.rejectedGoods')</a></li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('global.add') @lang('global.new')</li>
                 </ol>
             </div>
@@ -25,7 +25,7 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Back -->
-                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ route('admin.ed-empty.index') }}">
+                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ route('admin.ed-rejected.index') }}">
                     @lang('global.back')
                     <i class="fe fe-arrow-left"></i>
                 </a>
@@ -51,7 +51,7 @@
                             </div>
 
                             <!-- Form -->
-                            <form method="post" action="{{ route('admin.ed-empty.store') }}" data-parsley-validate="">
+                            <form method="post" action="{{ route('admin.ed-rejected.store') }}" data-parsley-validate="">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -100,17 +100,17 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <!-- ENEX -->
-                                        <div class="form-group @error('enex') has-danger @enderror">
-                                            <p class="mb-2">EN-EX: <span class="tx-danger">*</span></p>
+                                        <!-- Good Name -->
+                                        <div class="form-group @error('good_name') has-danger @enderror">
+                                            <p class="mb-2">@lang('page.exitDoor.goodName'): <span class="tx-danger">*</span></p>
 
-                                            <input type="number" id="enex" class="form-control @error('enex') form-control-danger @enderror" name="enex" value="{{ old('enex') }}" placeholder="EN-EX*" required>
+                                            <input type="text" id="good_name" class="form-control @error('good_name') form-control-danger @enderror" name="good_name" value="{{ old('good_name') }}" placeholder="@lang('page.exitDoor.goodName')" required>
 
-                                            @error('enex')
+                                            @error('good_name')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of ENEX -->
+                                        <!--/==/ End of Good Name -->
 
                                         <!-- Description -->
                                         <div class="form-group @error('desc') has-danger @enderror">
