@@ -24,14 +24,6 @@ class UsersTableSeeder extends Seeder
                 'info'           => 'This is some information.',
                 'status'          => 1,
                 'remember_token' => null
-            ],
-            [
-                'name'           => 'Milad Sabiry',
-                'email'          => 'msabiry@gmail.com',
-                'password'       => Hash::make('engineer'),
-                'info'           => 'This is some information.',
-                'status'          => 1,
-                'remember_token' => null
             ]
         ];
 

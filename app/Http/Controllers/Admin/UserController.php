@@ -19,57 +19,43 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:user_access|user_create|user_update|user_delete', [
-            'only' => ['index', 'create', 'store',  'edit', 'update', 'destroy']
+        $this->middleware('permission:user_mgmt', [
+            'only' => ['activeUsers', 'inactiveUsers', 'activities', 'index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'updateUserStatus']
         ]);
-        $this->middleware('permission:user_access', ['only' => ['index']]);
-        $this->middleware('permission:user_create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:user_update', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:user_delete', ['only' => ['destroy']]);
     }
 
     // Index
     public function activeUsers()
     {
-        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $users = User::where('status', 1)->get();
-
         return view('admin.users.active', compact('users'));
     }
 
     public function inactiveUsers()
     {
-        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $users = User::where('status', 0)->get();
-
         return view('admin.users.inactive', compact('users'));
     }
     public function activities($id)
     {
-        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $user = User::findOrFail($id);
-
         return view('admin.users.activities', compact('user'));
     }
 
     public function index()
     {
-        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $users = User::all();
-
         return view('admin.users.index', compact('users'));
     }
 
     public function create()
     {
-        abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $roles = Role::all();
         return view('admin.users.create', compact('roles'));
     }
 
     public function store(StoreUserRequest $request)
     {
-        abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
 
@@ -94,26 +80,20 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $user->load('roles');
-
         $admin = $user->roles->first()->name == 'Admin';
-
         return view('admin.users.show', compact('user', 'admin'));
     }
 
     public function edit(User $user)
     {
-        abort_if(Gate::denies('user_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $roles = Role::all();
         $user->load('roles');
-
         return view('admin.users.edit', compact('roles', 'user'));
     }
 
     public function update(Request $request, User $user)
     {
-        abort_if(Gate::denies('user_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $request->validate([
             'avatar'    => 'image|mimes:jpg,png',
             'name'      => 'required|min:2|max:64',
@@ -148,7 +128,6 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $user->delete();
 
         activity('deleted')

@@ -36,27 +36,23 @@
                 <div class="d-flex">
                     <div class="mr-2">
                         <!-- Edit -->
-                        @can('position_update')
-                            <a class="btn ripple bg-primary btn-sm text-white"
-                               href="{{ route('admin.positions.edit', $position->id) }}">
-                                @lang('global.edit')
-                                <i class="fe fe-edit"></i>
-                            </a>
-                        @endcan
+                        <a class="btn ripple bg-primary btn-sm text-white"
+                           href="{{ route('admin.positions.edit', $position->id) }}">
+                            @lang('global.edit')
+                            <i class="fe fe-edit"></i>
+                        </a>
                     </div>
                     <div class="mr-2">
                         <!-- Delete -->
-                        @can('position_delete')
-                            <a class="modal-effect btn btn-sm ripple btn-danger text-white"
-                               data-effect="effect-sign" data-toggle="modal"
-                               href="#delete_record{{ $position->id }}"
-                               title="@lang('global.delete')">
-                                @lang('global.delete')
-                                <i class="fe fe-trash"></i>
-                            </a>
+                        <a class="modal-effect btn btn-sm ripple btn-danger text-white"
+                           data-effect="effect-sign" data-toggle="modal"
+                           href="#delete_record{{ $position->id }}"
+                           title="@lang('global.delete')">
+                            @lang('global.delete')
+                            <i class="fe fe-trash"></i>
+                        </a>
 
-                            @include('admin.positions.delete')
-                        @endcan
+                        @include('admin.positions.delete')
                     </div>
                     <div class="mr-2">
                         <!-- Back -->
@@ -325,24 +321,20 @@
                                         </a>
 
                                         <!-- Edit -->
-                                        @can('employee_update')
-                                            <a class="btn btn-sm ripple btn-info" href="{{ route('admin.employees.edit', $employee->id) }}"
-                                               title="@lang('pages.users.editUser')">
-                                                <i class="fe fe-edit"></i>
-                                            </a>
-                                        @endcan
+                                        <a class="btn btn-sm ripple btn-info" href="{{ route('admin.employees.edit', $employee->id) }}"
+                                           title="@lang('pages.users.editUser')">
+                                            <i class="fe fe-edit"></i>
+                                        </a>
 
                                         <!-- Delete -->
-                                        @can('employee_delete')
-                                            <a class="modal-effect btn btn-sm ripple btn-danger"
-                                               data-effect="effect-sign" data-toggle="modal"
-                                               href="#delete_record{{ $employee->id }}"
-                                               title="@lang('pages.users.deleteUser')">
-                                                <i class="fe fe-delete"></i>
-                                            </a>
+                                        <a class="modal-effect btn btn-sm ripple btn-danger"
+                                           data-effect="effect-sign" data-toggle="modal"
+                                           href="#delete_record{{ $employee->id }}"
+                                           title="@lang('pages.users.deleteUser')">
+                                            <i class="fe fe-delete"></i>
+                                        </a>
 
-                                            @include('admin.employees.delete')
-                                        @endcan
+                                        @include('admin.employees.delete')
                                     </td>
                                 </tr>
                             @endforeach
@@ -423,24 +415,20 @@
                                         </a>
 
                                         <!-- Edit -->
-                                        @can('employee_update')
-                                            <a class="btn btn-sm ripple btn-info" href="{{ route('admin.employees.edit', $employee->id) }}"
-                                               title="@lang('pages.users.editUser')">
-                                                <i class="fe fe-edit"></i>
-                                            </a>
-                                        @endcan
+                                        <a class="btn btn-sm ripple btn-info" href="{{ route('admin.employees.edit', $employee->id) }}"
+                                           title="@lang('pages.users.editUser')">
+                                            <i class="fe fe-edit"></i>
+                                        </a>
 
                                         <!-- Delete -->
-                                        @can('employee_delete')
-                                            <a class="modal-effect btn btn-sm ripple btn-danger"
-                                               data-effect="effect-sign" data-toggle="modal"
-                                               href="#delete_record{{ $employee->id }}"
-                                               title="@lang('pages.users.deleteUser')">
-                                                <i class="fe fe-delete"></i>
-                                            </a>
+                                        <a class="modal-effect btn btn-sm ripple btn-danger"
+                                           data-effect="effect-sign" data-toggle="modal"
+                                           href="#delete_record{{ $employee->id }}"
+                                           title="@lang('pages.users.deleteUser')">
+                                            <i class="fe fe-delete"></i>
+                                        </a>
 
-                                            @include('admin.employees.delete')
-                                        @endcan
+                                        @include('admin.employees.delete')
                                     </td>
                                 </tr>
                             @endforeach

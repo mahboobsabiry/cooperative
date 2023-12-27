@@ -33,11 +33,9 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                @can('permission_create')
-                    <a class="btn ripple btn-primary" href="{{ route('admin.roles.create') }}" target="_blank">
-                        <i class="fe fe-plus-circle"></i> @lang('global.new')
-                    </a>
-                @endcan
+                <a class="btn ripple btn-primary" href="{{ route('admin.roles.create') }}" target="_blank">
+                    <i class="fe fe-plus-circle"></i> @lang('global.new')
+                </a>
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -109,22 +107,18 @@
                                         </td>
                                         <td>
                                             <!-- Edit -->
-                                            @can('role_update')
-                                                <a class="btn btn-sm ripple btn-info" href="{{ route('admin.roles.edit', $role->id) }}"
-                                                   title="@lang('pages.roles.editRole')">
-                                                    <i class="fe fe-edit"></i>
-                                                </a>
-                                            @endcan
+                                            <a class="btn btn-sm ripple btn-info" href="{{ route('admin.roles.edit', $role->id) }}"
+                                               title="@lang('pages.roles.editRole')">
+                                                <i class="fe fe-edit"></i>
+                                            </a>
 
                                             <!-- Delete -->
-                                            @can('role_delete')
-                                                <a class="modal-effect btn btn-sm ripple btn-danger"
-                                                   data-effect="effect-sign" data-toggle="modal"
-                                                   href="#delete_record{{ $role->id }}"
-                                                   title="@lang('pages.roles.deleteRole')">
-                                                    <i class="fe fe-delete"></i>
-                                                </a>
-                                            @endcan
+                                            <a class="modal-effect btn btn-sm ripple btn-danger"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#delete_record{{ $role->id }}"
+                                               title="@lang('pages.roles.deleteRole')">
+                                                <i class="fe fe-delete"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

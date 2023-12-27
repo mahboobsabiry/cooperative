@@ -23,7 +23,7 @@
             <li class="nav-label">@lang('admin.dashboard.pages')</li>
 
             <!-- Positions -->
-            @can('position_access')
+            @can('organization_mgmt')
             <li class="nav-item {{ request()->is('admin/department') ||
                     request()->is('admin/department/*') ||
                     request()->is('admin/positions') ||
@@ -93,7 +93,7 @@
             <!--/==/ End of Position -->
 
             <!-- Employees -->
-            @can('employee_access')
+            @can('employee_mgmt')
                 <li class="nav-item {{ request()->url() == route('admin.employees.index') || request()->is('admin/employees/*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.employees.index') }}">
                         <i class="fa fa-user-tie"></i><span class="sidemenu-label">
@@ -163,7 +163,7 @@
             <li class="nav-label">@lang('admin.sidebar.applications')</li>
 
             <!-- Settings -->
-            @can('setting_access')
+            @can('setting_mgmt')
                 <li class="nav-item {{ request()->url() == route('admin.settings.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.settings.index') }}">
                         <i class="fe fe-settings"></i><span class="sidemenu-label">@lang('admin.sidebar.settings')</span>
@@ -172,7 +172,7 @@
             @endcan
 
             <!-- User Management -->
-            @can('user_management_access')
+            @can('user_mgmt')
                 <li class="nav-item {{ request()->is('admin/permissions') ||
                     request()->is('admin/permissions/*') ||
                     request()->is('admin/roles') ||
@@ -189,35 +189,28 @@
 
                     <ul class="nav-sub">
                         <!-- Permissions -->
-                        @can('permission_access')
-                            <li class="nav-sub-item {{ request()->is('admin/permissions') ||
-                    request()->is('admin/permissions/*') ? 'active' : '' }}">
-                                <a class="nav-sub-link" href="{{ route('admin.permissions.index') }}">@lang('admin.sidebar.permissions')</a>
-                            </li>
-                        @endcan
+                        <li class="nav-sub-item {{ request()->is('admin/permissions') ||
+                            request()->is('admin/permissions/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.permissions.index') }}">@lang('admin.sidebar.permissions')</a>
+                        </li>
 
                         <!-- Roles -->
-                        @can('role_access')
-                            <li class="nav-sub-item {{ request()->is('admin/roles') ||
-                    request()->is('admin/roles/*') ? 'active' : '' }}">
-                                <a class="nav-sub-link" href="{{ route('admin.roles.index') }}">@lang('admin.sidebar.roles')</a>
-                            </li>
-                        @endcan
+                        <li class="nav-sub-item {{ request()->is('admin/roles') ||
+                            request()->is('admin/roles/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.roles.index') }}">@lang('admin.sidebar.roles')</a>
+                        </li>
 
                         <!-- Users -->
-                        @can('user_access')
-                            <li class="nav-sub-item {{ request()->is('admin/users') ||
-                    request()->is('admin/users/*') ||
-                    request()->is('admin/active-users') ||
-                    request()->is('admin/inactive-users') ? 'active' : '' }}">
-                                <a class="nav-sub-link" href="{{ route('admin.users.index') }}">@lang('admin.sidebar.users')</a>
-                            </li>
-                        @endcan
+                        <li class="nav-sub-item {{ request()->is('admin/users') ||
+                            request()->is('admin/users/*') ||
+                            request()->is('admin/active-users') ||
+                            request()->is('admin/inactive-users') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.users.index') }}">@lang('admin.sidebar.users')</a>
+                        </li>
                     </ul>
                 </li>
             @endcan
             <!--/==/ End of User Management -->
-
         </ul>
     </div>
 </div>

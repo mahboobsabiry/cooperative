@@ -23,13 +23,11 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                @can('setting_create')
-                    <a class="modal-effect btn ripple btn-primary" data-effect="effect-sign"
-                       data-toggle="modal" href="#new_record">
-                        <i class="fe fe-plus-circle"></i> @lang('global.new')
-                    </a>
-                    @include('admin.settings.create')
-                @endcan
+                <a class="modal-effect btn ripple btn-primary" data-effect="effect-sign"
+                   data-toggle="modal" href="#new_record">
+                    <i class="fe fe-plus-circle"></i> @lang('global.new')
+                </a>
+                @include('admin.settings.create')
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -90,18 +88,14 @@
                                         </td>
                                         <td>
                                             <!-- Edit -->
-                                            @can('setting_update')
-                                                <a class="modal-effect btn btn-sm ripple btn-info" data-effect="effect-sign" data-toggle="modal" href="#edit_record{{ $setting->id }}" title="@lang('pages.settings.editSetting')">
-                                                    <i class="fe fe-edit"></i>
-                                                </a>
-                                            @endcan
+                                            <a class="modal-effect btn btn-sm ripple btn-info" data-effect="effect-sign" data-toggle="modal" href="#edit_record{{ $setting->id }}" title="@lang('pages.settings.editSetting')">
+                                                <i class="fe fe-edit"></i>
+                                            </a>
 
                                             <!-- Delete -->
-                                            @can('setting_delete')
-                                                <a class="modal-effect btn btn-sm ripple btn-danger" data-effect="effect-sign" data-toggle="modal" href="#delete_record{{ $setting->id }}" title="@lang('pages.settings.deleteSetting')">
-                                                    <i class="fe fe-delete"></i>
-                                                </a>
-                                            @endcan
+                                            <a class="modal-effect btn btn-sm ripple btn-danger" data-effect="effect-sign" data-toggle="modal" href="#delete_record{{ $setting->id }}" title="@lang('pages.settings.deleteSetting')">
+                                                <i class="fe fe-delete"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

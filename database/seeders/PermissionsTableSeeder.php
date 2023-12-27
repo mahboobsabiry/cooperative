@@ -14,91 +14,26 @@ class PermissionsTableSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
+            // Admin
             [
-                'name'      => 'user_management_access'
+                'name'      => 'site_admin' // Admin special permissions
             ],
             [
-                'name'      => 'permission_create'
+                'name'      => 'user_mgmt' // Manage all Permission, Roles and Users
             ],
             [
-                'name'      => 'permission_update'
+                'name'      => 'setting_mgmt' // Manage app settings
+            ],
+            // Office
+            [
+                'name'      => 'organization_mgmt' // Manage all organization settings
             ],
             [
-                'name'      => 'permission_delete'
+                'name'      => 'employee_mgmt' // Manage employees
             ],
+            // Exit-Door
             [
-                'name'      => 'permission_access'
-            ],
-            [
-                'name'      => 'role_create'
-            ],
-            [
-                'name'      => 'role_update'
-            ],
-            [
-                'name'      => 'role_delete'
-            ],
-            [
-                'name'      => 'role_access'
-            ],
-            [
-                'name'      => 'user_create'
-            ],
-            [
-                'name'      => 'user_update'
-            ],
-            [
-                'name'      => 'user_delete'
-            ],
-            [
-                'name'      => 'user_access'
-            ],
-
-            // Positions
-            [
-                'name'      => 'position_access'
-            ],
-            [
-                'name'      => 'position_create'
-            ],
-            [
-                'name'      => 'position_update'
-            ],
-            [
-                'name'      => 'position_delete'
-            ],
-
-            // Employees
-            [
-                'name'      => 'employee_create'
-            ],
-            [
-                'name'      => 'employee_update'
-            ],
-            [
-                'name'      => 'employee_delete'
-            ],
-            [
-                'name'      => 'employee_access'
-            ],
-
-            // Exit Door
-            [
-                'name'  => 'exit_door'
-            ],
-
-            // Settings
-            [
-            'name'      => 'setting_create'
-            ],
-            [
-                'name'      => 'setting_update'
-            ],
-            [
-                'name'      => 'setting_delete'
-            ],
-            [
-                'name'      => 'setting_access'
+                'name'      => 'exit_door' // Manage Exit Door of Border Custom
             ]
         ];
 

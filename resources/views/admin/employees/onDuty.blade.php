@@ -65,24 +65,20 @@
                         </a>
 
                         <!-- Edit -->
-                        @can('employee_update')
-                            <a class="btn btn-sm ripple btn-info" href="{{ route('admin.employees.edit', $employee->id) }}"
-                               title="@lang('pages.users.editUser')">
-                                <i class="fe fe-edit"></i>
-                            </a>
-                        @endcan
+                        <a class="btn btn-sm ripple btn-info" href="{{ route('admin.employees.edit', $employee->id) }}"
+                           title="@lang('pages.users.editUser')">
+                            <i class="fe fe-edit"></i>
+                        </a>
 
                         <!-- Delete -->
-                        @can('employee_delete')
-                            <a class="modal-effect btn btn-sm ripple btn-danger"
-                               data-effect="effect-sign" data-toggle="modal"
-                               href="#delete_record{{ $employee->id }}"
-                               title="@lang('pages.users.deleteUser')">
-                                <i class="fe fe-delete"></i>
-                            </a>
+                        <a class="modal-effect btn btn-sm ripple btn-danger"
+                           data-effect="effect-sign" data-toggle="modal"
+                           href="#delete_record{{ $employee->id }}"
+                           title="@lang('pages.users.deleteUser')">
+                            <i class="fe fe-delete"></i>
+                        </a>
 
-                            @include('admin.employees.delete')
-                        @endcan
+                        @include('admin.employees.delete')
                     </td>
                 </tr>
             @endforeach

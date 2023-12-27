@@ -11,6 +11,13 @@ use Spatie\Activitylog\Models\Activity;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:site_admin', [
+            'only' => ['activities', 'deleteActivity', 'deleteAllActivities',  'deleteAllAdminActivities']
+        ]);
+    }
+
     public function dashboard()
     {
         $admin = Auth::user()->roles->first()->name == 'Admin';

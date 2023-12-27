@@ -13,7 +13,6 @@ class EDEmpty extends Model
     public $table = 'ed_empty';
 
     protected $fillable = [
-        'c_name', 'vp_number', 'vpt_number', 'enex', 'desc',
-        'is_returned', 'return_date', 'exit_again', 'ea_date'
+        'c_name', 'vp_number', 'vpt_number', 'enex', 'desc'
     ];
 }

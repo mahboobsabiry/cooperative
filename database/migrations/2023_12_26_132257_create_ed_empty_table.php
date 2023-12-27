@@ -18,11 +18,6 @@ return new class extends Migration
             $table->string('vpt_number'); // Vehicle Plate Trailer Number
             $table->bigInteger('enex')->unique(); // Enex Number
             $table->text('desc')->nullable();
-
-            $table->boolean('is_returned')->default(0); // Is Vehicle Returned?
-            $table->date('return_date')->nullable(); // Vehicle Return Date?
-            $table->boolean('exit_again')->default(0); // Vehicle Exit Again
-            $table->date('ea_date')->nullable(); // Vehicle Exit Again Date
             $table->timestamps();
         });
     }

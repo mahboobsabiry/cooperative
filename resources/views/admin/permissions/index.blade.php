@@ -23,13 +23,11 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                @can('permission_create')
-                    <a class="modal-effect btn ripple btn-primary" data-effect="effect-sign"
-                       data-toggle="modal" href="#new_record">
-                        <i class="fe fe-plus-circle"></i> @lang('global.new')
-                    </a>
-                    @include('admin.permissions.create')
-                @endcan
+                <a class="modal-effect btn ripple btn-primary" data-effect="effect-sign"
+                   data-toggle="modal" href="#new_record">
+                    <i class="fe fe-plus-circle"></i> @lang('global.new')
+                </a>
+                @include('admin.permissions.create')
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -90,18 +88,14 @@
                                         </td>
                                         <td>
                                             <!-- Edit -->
-                                            @can('permission_update')
-                                                <a class="modal-effect btn btn-sm ripple btn-info" data-effect="effect-sign" data-toggle="modal" href="#edit_record{{ $permission->id }}" title="@lang('pages.permissions.editPermission')">
-                                                    <i class="fe fe-edit"></i>
-                                                </a>
-                                            @endcan
+                                            <a class="modal-effect btn btn-sm ripple btn-info" data-effect="effect-sign" data-toggle="modal" href="#edit_record{{ $permission->id }}" title="@lang('pages.permissions.editPermission')">
+                                                <i class="fe fe-edit"></i>
+                                            </a>
 
                                             <!-- Delete -->
-                                            @can('permission_delete')
-                                                <a class="modal-effect btn btn-sm ripple btn-danger" data-effect="effect-sign" data-toggle="modal" href="#delete_record{{ $permission->id }}" title="@lang('pages.permissions.deletePermission')">
-                                                    <i class="fe fe-delete"></i>
-                                                </a>
-                                            @endcan
+                                            <a class="modal-effect btn btn-sm ripple btn-danger" data-effect="effect-sign" data-toggle="modal" href="#delete_record{{ $permission->id }}" title="@lang('pages.permissions.deletePermission')">
+                                                <i class="fe fe-delete"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

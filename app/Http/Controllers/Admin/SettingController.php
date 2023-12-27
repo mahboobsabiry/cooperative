@@ -10,21 +10,17 @@ use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
 class SettingController extends Controller
-{public function __construct()
 {
-    $this->middleware('permission:setting_access|setting_create|setting_update|setting_delete', [
-        'only' => ['index', 'create', 'store',  'edit', 'update', 'destroy']
-    ]);
-    $this->middleware('permission:setting_access', ['only' => ['index']]);
-    $this->middleware('permission:setting_create', ['only' => ['create', 'store']]);
-    $this->middleware('permission:setting_update', ['only' => ['edit', 'update']]);
-    $this->middleware('permission:setting_delete', ['only' => ['destroy']]);
-}
+    public function __construct()
+    {
+        $this->middleware('permission:setting_mgmt', [
+            'only' => ['index', 'store', 'update', 'destroy']
+        ]);
+    }
 
     // Fetch All Data
     public function index()
     {
-        abort_if(Gate::denies('setting_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $settings = Setting::all();
         return view('admin.settings.index', compact('settings'));
     }
@@ -32,7 +28,6 @@ class SettingController extends Controller
     // Store Data
     public function store(Request $request)
     {
-        abort_if(Gate::denies('setting_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $request->validate([
             'key'   => 'required|regex:/^[\pL\s\-]+$/u||min:3|max:48|unique:settings,key',
             'value' => 'required|regex:/^[\pL\s\-]+$/u||min:3'
@@ -56,9 +51,6 @@ class SettingController extends Controller
     // Update Data
     public function update(Request $request, Setting $setting)
     {
-        // Authorize
-        abort_if(Gate::denies('setting_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         // Validate
         $request->validate([
             'key'   => 'required|regex:/^[\pL\s\-]+$/u||min:3|max:48|unique:settings,key,'.$setting->id,
@@ -83,7 +75,6 @@ class SettingController extends Controller
     // Delete Data
     public function destroy(Setting $setting)
     {
-        abort_if(Gate::denies('setting_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $setting->delete();
 
         activity('deleted')

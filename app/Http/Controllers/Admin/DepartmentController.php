@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class DepartmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:organization_mgmt', [
+            'only' => ['index']
+        ]);
+    }
+
     public function index()
     {
         $department = Position::all()->where('position_number', 2);

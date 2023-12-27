@@ -12,7 +12,7 @@ class EDEmptyController extends Controller
     public function __construct()
     {
         $this->middleware('permission:exit_door', [
-            'only' => ['index', 'create', 'store',  'edit', 'update', 'destroy']
+            'only' => ['index', 'create', 'store', 'show',  'edit', 'update', 'destroy']
         ]);
     }
 

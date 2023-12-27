@@ -18,7 +18,10 @@ class RolesTableSeeder extends Seeder
                 'name'      => 'Admin'
             ],
             [
-                'name'      => 'User'
+                'name'      => 'Office'
+            ],
+            [
+                'name'      => 'Exit-Door'
             ]
         ];
 

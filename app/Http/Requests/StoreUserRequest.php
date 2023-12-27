@@ -13,7 +13,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('user_mgmt'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }
@@ -27,7 +27,8 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'avatar'     => [
-                'image|mimes:jpg,png',
+                'image',
+                'mimes:jpg,png'
             ],
             'name'     => [
                 'required',

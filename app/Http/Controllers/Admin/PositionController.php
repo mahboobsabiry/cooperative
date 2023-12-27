@@ -14,20 +14,15 @@ class PositionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:position_access|position_create|position_update|position_delete', [
-            'only' => ['index', 'create', 'store',  'edit', 'update', 'destroy']
+        $this->middleware('permission:organization_mgmt', [
+            'only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'updatePositionStatus']
         ]);
-        $this->middleware('permission:position_access', ['only' => ['index']]);
-        $this->middleware('permission:position_create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:position_update', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:position_delete', ['only' => ['destroy']]);
     }
 
     // Fetch All Data
     public function index()
     {
         $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
-        // dd($positions);
         $emptyPositions = Position::doesntHave('employees')->orderBy('position_number', 'ASC')->get();
         return view('admin.positions.index', compact('positions', 'emptyPositions'));
     }
@@ -42,7 +37,6 @@ class PositionController extends Controller
     // Store
     public function store(Request $request)
     {
-        abort_if(Gate::denies('position_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $request->validate([
             'title'     => 'required',
             'code'      => 'required',
@@ -131,7 +125,6 @@ class PositionController extends Controller
      */
     public function update(Request $request, Position $position)
     {
-        abort_if(Gate::denies('position_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $request->validate([
             'title'     => 'required',
             'code'      => 'required',
@@ -163,7 +156,6 @@ class PositionController extends Controller
      */
     public function destroy(Position $position)
     {
-        abort_if(Gate::denies('position_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $position->delete();
 
         activity('deleted')

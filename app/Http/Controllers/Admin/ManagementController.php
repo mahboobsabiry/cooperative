@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ManagementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:organization_mgmt', [
+            'only' => ['index']
+        ]);
+    }
+
     // General Management
     public function index()
     {

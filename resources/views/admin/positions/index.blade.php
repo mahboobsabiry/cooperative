@@ -40,11 +40,9 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                @can('position_create')
-                    <a class="btn ripple btn-primary" href="{{ route('admin.positions.create') }}" target="_blank">
-                        <i class="fe fe-plus-circle"></i> @lang('pages.positions.addPosition')
-                    </a>
-                @endcan
+                <a class="btn ripple btn-primary" href="{{ route('admin.positions.create') }}" target="_blank">
+                    <i class="fe fe-plus-circle"></i> @lang('pages.positions.addPosition')
+                </a>
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -130,25 +128,21 @@
                                                 </a>
 
                                                 <!-- Edit -->
-                                                @can('position_update')
-                                                    <a class="btn btn-sm ripple btn-info"
-                                                       href="{{ route('admin.positions.edit', $position->id) }}"
-                                                       title="@lang('global.edit')">
-                                                        <i class="fe fe-edit"></i>
-                                                    </a>
-                                                @endcan
+                                                <a class="btn btn-sm ripple btn-info"
+                                                   href="{{ route('admin.positions.edit', $position->id) }}"
+                                                   title="@lang('global.edit')">
+                                                    <i class="fe fe-edit"></i>
+                                                </a>
 
                                                 <!-- Delete -->
-                                                @can('position_delete')
-                                                    <a class="modal-effect btn btn-sm ripple btn-danger"
-                                                       data-effect="effect-sign" data-toggle="modal"
-                                                       href="#delete_record{{ $position->id }}"
-                                                       title="@lang('global.delete')">
-                                                        <i class="fe fe-delete"></i>
-                                                    </a>
+                                                <a class="modal-effect btn btn-sm ripple btn-danger"
+                                                   data-effect="effect-sign" data-toggle="modal"
+                                                   href="#delete_record{{ $position->id }}"
+                                                   title="@lang('global.delete')">
+                                                    <i class="fe fe-delete"></i>
+                                                </a>
 
-                                                    @include('admin.positions.delete')
-                                                @endcan
+                                                @include('admin.positions.delete')
                                             </td>
                                         </tr>
                                     @endforeach

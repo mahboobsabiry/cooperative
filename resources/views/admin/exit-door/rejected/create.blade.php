@@ -102,9 +102,9 @@
                                     <div class="col-md-6">
                                         <!-- Good Name -->
                                         <div class="form-group @error('good_name') has-danger @enderror">
-                                            <p class="mb-2">@lang('page.exitDoor.goodName'): <span class="tx-danger">*</span></p>
+                                            <p class="mb-2">@lang('pages.exitDoor.goodName'): <span class="tx-danger">*</span></p>
 
-                                            <input type="text" id="good_name" class="form-control @error('good_name') form-control-danger @enderror" name="good_name" value="{{ old('good_name') }}" placeholder="@lang('page.exitDoor.goodName')" required>
+                                            <input type="text" id="good_name" class="form-control @error('good_name') form-control-danger @enderror" name="good_name" value="{{ old('good_name') }}" placeholder="@lang('pages.exitDoor.goodName')" required>
 
                                             @error('good_name')
                                             <div class="invalid-feedback">{{ $message }}</div>

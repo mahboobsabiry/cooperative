@@ -12,7 +12,7 @@ class EDTrexController extends Controller
     public function __construct()
     {
         $this->middleware('permission:exit_door', [
-            'only' => ['index', 'create', 'store',  'edit', 'update', 'destroy']
+            'only' => ['index', 'exportGoods', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'isReturned', 'exitAgain', 'trReturned', 'exReturned']
         ]);
     }
 

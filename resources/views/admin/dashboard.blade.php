@@ -267,6 +267,7 @@
         <!-- Cards -->
         <div class="row row-sm">
             <!-- Users Card -->
+            @can('user_mgmt')
             <div class="col-sm-6 col-xl-3 col-lg-6">
                 <div class="card custom-card">
                     <div class="card-body dash1">
@@ -291,10 +292,11 @@
                     </div>
                 </div>
             </div>
+            @endcan
             <!--/==/ End of Users Card -->
 
             <!-- Employees -->
-            @can('employee_access')
+            @can('employee_mgmt')
             <div class="col-sm-6 col-xl-3 col-lg-6">
                 <div class="card custom-card">
                     <div class="card-body dash1">
@@ -368,6 +370,7 @@
         <!--End  Row -->
 
         <!-- Row -->
+        @can('site_admin')
         <div class="row row-sm">
             <!-- Activity -->
             <div class="col-sm-12 col-xl-4 col-lg-4">
@@ -539,6 +542,7 @@
                 </div>
             </div>
         </div>
+        @endcan
         <!-- End Row -->
 
         <!-- Row-->
