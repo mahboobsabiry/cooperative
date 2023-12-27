@@ -21,14 +21,14 @@ class EDTrexController extends Controller
      */
     public function index()
     {
-        $transit = EDTrex::all()->where('is_tr', 1);
+        $transit = EDTrex::where('is_tr', 1)->orderBy('created_at', 'DESC')->get();
         return view('admin.exit-door.trex.index', compact('transit'));
     }
 
     // Export Goods
     public function exportGoods()
     {
-        $export = EDTrex::all()->where('is_tr', 0);
+        $export = EDTrex::where('is_tr', 0)->orderBy('created_at', 'DESC')->get();
         return view('admin.exit-door.trex.export', compact('export'));
     }
 
@@ -149,7 +149,7 @@ class EDTrexController extends Controller
     // Transit Returned Vehicles
     public function trReturned()
     {
-        $tr_returned = EDTrex::all()->where('is_returned', 1)->where('is_tr', 1);
+        $tr_returned = EDTrex::where('is_returned', 1)->where('is_tr', 1)->orderBy('return_date', 'DESC')->get();
 
         return view('admin.exit-door.trex.tr_returned', compact('tr_returned'));
     }
@@ -157,7 +157,7 @@ class EDTrexController extends Controller
     // Export Returned Vehicles
     public function exReturned()
     {
-        $ex_returned = EDTrex::all()->where('is_returned', 1)->where('is_tr', 0);
+        $ex_returned = EDTrex::where('is_returned', 1)->where('is_tr', 0)->orderBy('return_date', 'DESC')->get();
 
         return view('admin.exit-door.trex.ex_returned', compact('ex_returned'));
     }
