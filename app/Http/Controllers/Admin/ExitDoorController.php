@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExitDoorRequest;
 use App\Models\ExitDoor;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ExitDoorController extends Controller
@@ -19,9 +20,25 @@ class ExitDoorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = ExitDoor::orderBy('created_at', 'DESC')->get();
+        $from = $request->from_date;
+        $to = $request->to_date;
+
+        if ($request->exit_type == "0") {         // Transit
+            $items = ExitDoor::where('exit_type', 0)->where('is_returned', 0)->whereBetween('created_at', [$from, Carbon::parse($to)->endOfDay()])->orderBy('created_at', 'desc')->get();
+        } elseif ($request->exit_type == "1") {   // Export
+            $items = ExitDoor::where('exit_type', 1)->where('is_returned', 0)->whereBetween('created_at', [$from, Carbon::parse($to)->endOfDay()])->orderBy('created_at', 'desc')->get();
+        } elseif ($request->exit_type == "2") {   // Empty Vehicles
+            $items = ExitDoor::where('exit_type', 2)->whereBetween('created_at', [$from, Carbon::parse($to)->endOfDay()])->orderBy('created_at', 'desc')->get();
+        } elseif($request->exit_type == "3") {    // Rejected Goods
+            $items = ExitDoor::where('exit_type', 3)->whereBetween('created_at', [$from, Carbon::parse($to)->endOfDay()])->orderBy('created_at', 'desc')->get();
+        } elseif ($request->exit_type == "4") {   // Returned Goods
+            $items = ExitDoor::where('is_returned', 1)->whereBetween('created_at', [$from, Carbon::parse($to)->endOfDay()])->orderBy('created_at', 'desc')->get();
+        } else {
+            $items = ExitDoor::orderBy('created_at', 'desc')->get();
+        }
+
         return view('admin.exit-door.index', compact('items'));
     }
 
@@ -38,31 +55,32 @@ class ExitDoorController extends Controller
      */
     public function store(StoreExitDoorRequest $request)
     {
-        $item = new ExitDoor();
+        $item = new ExitDoor;
+
+        $item->exit_type      = $request->input('exit_type');
+        $item->company_name   = $request->company_name;
+        $item->vp_number      = $request->vp_number;
+        $item->vpt_number     = $request->vpt_number;
+
         if ($request->input('exit_type') == 0 || $request->input('exit_type') == 1) {         // Transit/Export
             $item->good_name      = $request->good_name;
             $item->bx_total       = $request->bx_total;
             $item->bx_total_tx    = $request->bx_total_tx;
             $item->weight         = $request->weight;
             $item->enex           = $request->enex;
-        } elseif ($request->exit_type == 2) {   // Empty
-            $item->good_name = null;
+        } elseif ($request->input('exit_type') == 2) {   // Empty
+            $item->good_name      = "";
             $item->bx_total       = null;
-            $item->bx_total_tx    = null;
+            $item->bx_total_tx    = "";
             $item->weight         = null;
             $item->enex           = $request->enex;
         } elseif ($request->input('exit_type') == 3) {   // Rejected
             $item->good_name = $request->good_name;
             $item->bx_total       = null;
-            $item->bx_total_tx    = null;
+            $item->bx_total_tx    = "";
             $item->weight         = null;
             $item->enex           = null;
         }
-
-        $item->exit_type      = $request->input('exit_type');
-        $item->company_name   = $request->company_name;
-        $item->vp_number      = $request->vp_number;
-        $item->vpt_number     = $request->vpt_number;
 
         $item->desc           = $request->desc;
         $item->save();
@@ -70,22 +88,22 @@ class ExitDoorController extends Controller
         $message = trans('messages.exitDoor.addedItemMsg');
 
         if ($request->exit_type == 0) {         // Transit
-            return redirect()->route('admin.exit-door.transit')->with([
+            return redirect()->route('admin.ed.transit')->with([
                 'message'   => $message,
                 'alertType' => 'success'
             ]);
         } elseif ($request->exit_type == 1) {   // Export
-            return redirect()->route('admin.exit-door.export')->with([
+            return redirect()->route('admin.ed.export')->with([
                 'message'   => $message,
                 'alertType' => 'success'
             ]);
         } elseif ($request->exit_type == 2) {   // Empty
-            return redirect()->route('admin.exit-door.empty')->with([
+            return redirect()->route('admin.ed.empty')->with([
                 'message'   => $message,
                 'alertType' => 'success'
             ]);
         } elseif ($request->exit_type == 3) {   // Rejected
-            return redirect()->route('admin.exit-door.rejected')->with([
+            return redirect()->route('admin.ed.rejected')->with([
                 'message'   => $message,
                 'alertType' => 'success'
             ]);
@@ -117,7 +135,7 @@ class ExitDoorController extends Controller
             'company_name'  => 'required|min:3|max:124',
             'vp_number'     => 'required|min:2|max:64',
             'vpt_number'    => 'nullable|min:2|max:64',
-            'enex'          => 'nullable|unique:exit_door,enex,' . $item->id,
+            'enex'          => 'nullable|unique:exit_doors,enex,' . $item->id,
             'good_name'     => 'nullable|min:3|max:248',
             'desc'          => 'nullable'
         ]);

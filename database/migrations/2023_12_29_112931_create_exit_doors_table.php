@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exit_door', function (Blueprint $table) {
+        Schema::create('exit_doors', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('exit_type'); // Exit Type?
             $table->string('company_name'); // Company Name
@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('vpt_number'); // Vehicle Plate Trailer Number
 
             $table->string('good_name'); // Good Name
-            $table->bigInteger('bx_total'); // Total Boxes || Plates
+            $table->bigInteger('bx_total')->nullable(); // Total Boxes || Plates
             $table->string('bx_total_tx'); // Total Boxes || Plates Text
-            $table->bigInteger('weight'); // Goods Weight
+            $table->bigInteger('weight')->nullable(); // Goods Weight
 
-            $table->bigInteger('enex')->unique(); // Enex Number
+            $table->bigInteger('enex')->nullable()->unique(); // Enex Number
             $table->text('desc')->nullable();
 
             $table->boolean('is_returned')->default(0); // Is Vehicle Returned?
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exit_door');
+        Schema::dropIfExists('exit_doors');
     }
 };

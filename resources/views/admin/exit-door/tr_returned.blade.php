@@ -97,7 +97,7 @@
                                     <tbody>
                                     @foreach($items as $item)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->id }}</td>
                                             <td>
                                                 <a href="{{ route('admin.exit-door.show', $item->id) }}">{{ $item->company_name }}</a>
                                             </td>

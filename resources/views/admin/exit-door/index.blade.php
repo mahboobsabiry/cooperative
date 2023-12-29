@@ -47,16 +47,98 @@
         </div>
         <!--/==/ End of Page Header -->
 
+        <!-- Search Bar -->
+        <div class="advanced-search">
+            <form method="get" action="{{ route('admin.exit-door.index') }}">
+                @csrf
+                <div class="row align-items-center">
+                    <!-- From Date -->
+                    <div class="col-md-4">
+                        <div class="form-group mb-lg-0">
+                            <label class="">@lang('pages.exitDoor.fromDate') :</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fe fe-calendar lh--9 op-6"></i>
+                                    </div>
+                                </div>
+                                <input class="form-control" id="fromDate" name="from_date" value="{{ old('from_date') }}" placeholder="12/29/2023" type="text">
+                                <span id="pdFromDateSpan"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- To Date -->
+                    <div class="col-md-4">
+                        <div class="form-group mb-lg-0">
+                            <label class="">@lang('pages.exitDoor.toDate') :</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fe fe-calendar lh--9 op-6"></i>
+                                    </div>
+                                </div>
+                                <input class="form-control" id="toDate" name="to_date" value="{{ old('to_date') }}" placeholder="12/29/2023" type="text">
+                                <span id="pdToDateSpan"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exit Type -->
+                    <div class="col-md-4">
+                        <div class="form-group mb-lg-0">
+                            <label for="exit_type" class="">@lang('pages.exitDoor.exitType') :</label>
+                            <select id="exit_type" class="form-control select2" name="exit_type" data-placeholder="@lang('pages.exitDoor.exitType')">
+                                <option value="5">@lang('global.all')</option>
+                                <option value="0">@lang('pages.exitDoor.transit')</option>
+                                <option value="1">@lang('pages.exitDoor.export')</option>
+                                <option value="2">@lang('pages.exitDoor.emptyVehicles')</option>
+                                <option value="3">@lang('pages.exitDoor.rejectedGoods')</option>
+                                <option value="4">@lang('pages.exitDoor.returnedGoods')</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <!-- Submit && Reset Buttons -->
+                <div class="row">
+                    <div class="col-md-6 {{ app()->getLocale() == 'en' ? 'text-left' : 'text-right' }}">
+                        <p>
+                            <span class="bg-dark text-white p-2"><strong>تاریخ امروز:</strong> روز <span style="color: burlywood;">{{ \Morilog\Jalali\CalendarUtils::strftime('l', now())  }}</span> تاریخ <span style="color: burlywood;">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', now()) }}</span> مصادف با <span style="color: burlywood;">{{ date_format(now(), 'Y-m-d') }}</span></span>
+                        </p>
+                    </div>
+
+                    <div class="col-md-6 {{ app()->getLocale() == 'en' ? 'text-right' : 'text-left' }}">
+                        <button type="button" class="btn btn-secondary">@lang('global.reset')</button>
+
+                        <button type="submit" class="btn btn-primary">@lang('global.search')</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--/==/ End of Search Bar -->
+
         <!-- Data Table -->
         <div class="row">
             <div class="col-lg-12">
                 <!-- Table Card -->
                 <div class="card custom-card main-content-body-profile">
                     <!-- Table Title -->
-                    <div class="nav main-nav-line mb-2">
-                        <a class="nav-link active" href="javascript:void(0)">
-                            @lang('pages.exitDoor.exitDoor')
-                        </a>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="nav main-nav-line mb-2">
+                                <div class="nav-link active">
+                                    @lang('pages.exitDoor.exitDoor')
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="nav main-nav-line mb-2 float-left">
+                                <div class="nav-link">مجموع: ({{ count($items) }})</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-body tab-content h-100">
@@ -92,20 +174,20 @@
                                     <tbody>
                                     @foreach($items as $item)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->id }}</td>
                                             <td>
                                                 @if($item->exit_type == 0) <!-- Transit -->
-                                                    <a href="{{  route('admin.exit-door.transit') }}">@lang('pages.exitDoor.transitGoods')</a>
+                                                    <a href="{{  route('admin.ed.transit') }}">@lang('pages.exitDoor.transitGoods')</a>
                                                 @elseif($item->exit_type == 1) <!-- Export -->
-                                                    <a href="{{  route('admin.exit-door.export') }}">@lang('pages.exitDoor.exportGoods')</a>
+                                                    <a href="{{  route('admin.ed.export') }}">@lang('pages.exitDoor.exportGoods')</a>
                                                 @elseif($item->exit_type == 2) <!-- Empty -->
-                                                    <a href="{{  route('admin.exit-door.empty') }}">@lang('pages.exitDoor.emptyVehicles')</a>
+                                                    <a href="{{  route('admin.ed.empty') }}">@lang('pages.exitDoor.emptyVehicles')</a>
                                                 @elseif($item->exit_type == 3) <!-- Rejected -->
-                                                    <a href="{{  route('admin.exit-door.rejected') }}">@lang('pages.exitDoor.rejectedGoods')</a>
-                                                @elseif($item->exit_type == 0 && $item->is_returned == 1) <!-- Returned Transit -->
-                                                    <a href="{{  route('admin.exit-door.tr_returned') }}" target="_blank">@lang('pages.exitDoor.returnedTransit')</a>
-                                                @elseif($item->exit_type == 1 && $item->is_returned == 1) <!-- Returned Export -->
-                                                    <a href="{{  route('admin.exit-door.tr_returned') }}" target="_blank">@lang('pages.exitDoor.returnedExport')</a>
+                                                    <a href="{{  route('admin.ed.rejected') }}">@lang('pages.exitDoor.rejectedGoods')</a>
+                                                @elseif($item->is_returned == 1 && $item->exit_type == 0) <!-- Returned Transit -->
+                                                    <a href="{{  route('admin.ed.tr_returned') }}" target="_blank">@lang('pages.exitDoor.returnedTransit')</a>
+                                                @elseif($item->is_returned == 1 && $item->exit_type == 1) <!-- Returned Export -->
+                                                    <a href="{{  route('admin.ed.ex_returned') }}" target="_blank">@lang('pages.exitDoor.returnedExport')</a>
                                                 @endif
                                             </td>
                                             <td>
@@ -154,5 +236,10 @@
 
     <!-- Custom Scripts -->
     <script src="{{ asset('backend/assets/js/pages/user-scripts.js') }}"></script>
+
+    <script>
+        $("#fromDate").datepicker();
+        $("#toDate").datepicker();
+    </script>
 @endsection
 <!--/==/ End of Extra Scripts -->

@@ -25,11 +25,15 @@ class StoreExitDoorRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'exit_type'     => 'required',
             'company_name'  => 'required|min:3|max:124',
             'vp_number'     => 'required|min:2|max:64',
             'vpt_number'    => 'nullable|min:2|max:64',
-            'enex'          => 'nullable|unique:exit_type,enex',
+            'enex'          => 'nullable|unique:exit_doors,enex',
             'good_name'     => 'nullable|min:3|max:248',
+            'bx_total'      => 'nullable',
+            'bx_total_tx'   => 'nullable|min:2|max:124',
+            'weight'        => 'nullable',
             'desc'          => 'nullable'
         ];
     }

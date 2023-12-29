@@ -9,7 +9,7 @@ class ExitDoor extends Model
 {
     use HasFactory;
 
-    protected $table = 'exit_door';
+    protected $table = 'exit_doors';
 
     // Fillable
     protected $fillable = [
