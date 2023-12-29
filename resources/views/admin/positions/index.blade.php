@@ -82,7 +82,6 @@
                                         <th>@lang('pages.positions.underHand')</th>
                                         <th>@lang('pages.positions.positionNumber')</th>
                                         <th>@lang('form.description')</th>
-                                        <th>@lang('global.action')</th>
                                     </tr>
                                     </thead>
 
@@ -90,14 +89,9 @@
                                     @foreach($positions as $position)
                                         <tr>
                                             <td>
-                                                @if(app()->getLocale() == 'en')
-                                                    {{ $loop->iteration }}
-                                                @else
-                                                    <span
-                                                        class="tx-bold">{{ \Morilog\Jalali\CalendarUtils::convertNumbers($loop->iteration) }}</span>
-                                                @endif
+                                                {{ $loop->iteration }}
                                             </td>
-                                            <td>{{ $position->title }}</td>
+                                            <td><a href="{{ route('admin.positions.show', $position->id ) }}">{{ $position->title }}</a></td>
                                             <!-- Responsible -->
                                             <td>
                                                 @if($position->employees)
@@ -117,33 +111,6 @@
                                             </td>
                                             <td>{{ $position->position_number }}</td>
                                             <td>{{ \Str::limit($position->desc, 50, '...') }}</td>
-
-                                            <!-- Action -->
-                                            <td>
-                                                <!-- Show -->
-                                                <a class="btn btn-sm ripple btn-secondary"
-                                                   href="{{ route('admin.positions.show', $position->id) }}"
-                                                   title="@lang('global.details')">
-                                                    <i class="fe fe-eye"></i>
-                                                </a>
-
-                                                <!-- Edit -->
-                                                <a class="btn btn-sm ripple btn-info"
-                                                   href="{{ route('admin.positions.edit', $position->id) }}"
-                                                   title="@lang('global.edit')">
-                                                    <i class="fe fe-edit"></i>
-                                                </a>
-
-                                                <!-- Delete -->
-                                                <a class="modal-effect btn btn-sm ripple btn-danger"
-                                                   data-effect="effect-sign" data-toggle="modal"
-                                                   href="#delete_record{{ $position->id }}"
-                                                   title="@lang('global.delete')">
-                                                    <i class="fe fe-delete"></i>
-                                                </a>
-
-                                                @include('admin.positions.delete')
-                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

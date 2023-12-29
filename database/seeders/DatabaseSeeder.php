@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             RoleUserSeeder::class,
             SettingsTableSeeder::class,
             PositionsTableSeeder::class,
-            EmployeesTableSeeder::class
+            EmployeesTableSeeder::class,
+            ExitDoorSeeder::class
         ]);
     }
 }

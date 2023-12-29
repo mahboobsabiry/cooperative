@@ -50,8 +50,8 @@
     $(".updatePositionStatus").click(function () {
         var status = $(this).children("i").attr("status");
         var position_id = $(this).attr("position_id");
-        $("#position-" + position_id).hide();
-        $("#update_status-" + position_id).show();
+        $("#position_status").hide();
+        $("#update_status").show();
         // alert("test"); return false;
         $.ajaxSetup({
             headers: {
@@ -63,11 +63,11 @@
             url: '{{ route('admin.updatePositionStatus') }}',
             data: {status: status, employee_id: position_id},
             success: function (resp) {
-                $("#position-" + position_id).show();
-                $("#update_status-" + position_id).hide();
+                $("#position_status").show();
+                $("#update_status").hide();
 
                 if (resp['status'] == 0) {
-                    $("#position-" + position_id).html('<i class="fa fa-toggle-off text-danger" aria-hidden="true" status="Inactive"></i>');
+                    $("#position_status").html('<i class="fa fa-toggle-off text-danger" aria-hidden="true" status="Inactive"></i>');
                     // Change the inactivity
                     $(".acInText").html('<span id="acInText" class="text-danger">@lang('global.inactive')</span>');
                     toastr.options = {
@@ -75,7 +75,7 @@
                     };
                     toastr.warning('{{ trans('messages.positions.positionDeactivated') }}');
                 } else if (resp['status'] == 1) {
-                    $("#position-" + position_id).html('<i class="fa fa-toggle-on text-success" aria-hidden="true" status="Active"></i>');
+                    $("#position_status").html('<i class="fa fa-toggle-on text-success" aria-hidden="true" status="Active"></i>');
                     // Change the activity
                     $(".acInText").html('<span id="acInText" class="text-success">@lang('global.active')</span>');
                     toastr.options = {

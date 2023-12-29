@@ -48,7 +48,7 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                <img alt="avatar" src="{{ $user->image }}">
+                                <img alt="avatar" src="{{ $user->image ? $user->image : asset('assets/images/avatar-default.jpeg') }}">
                             </div>
                         </div>
                         <div class="item-user pro-user">

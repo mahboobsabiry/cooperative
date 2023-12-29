@@ -106,15 +106,14 @@
 
             <!-- Exit Door -->
             @can('exit_door')
-                <li class="nav-item {{ request()->is('admin/ed-trex') ||
-                    request()->is('admin/ed-trex/*') ||
-                    request()->is('admin/ed-export') ||
-                    request()->is('admin/ed-empty') ||
-                    request()->is('admin/ed-empty/*') ||
-                    request()->is('admin/tr-returned') ||
-                    request()->is('admin/ex-returned') ||
-                    request()->is('admin/ed-rejected') ||
-                    request()->is('admin/ed-rejected/*') ? 'active show' : '' }}">
+                <li class="nav-item {{ request()->is('admin/exit-door') ||
+                    request()->is('admin/exit-door/*') ||
+                    request()->is('admin/ed/transit') ||
+                    request()->is('admin/ed/export') ||
+                    request()->is('admin/ed/empty') ||
+                    request()->is('admin/ed/rejected') ||
+                    request()->is('admin/ed/tr-returned') ||
+                    request()->is('admin/ed/ex-returned') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fa fa-door-open"></i>
@@ -123,35 +122,46 @@
                     </a>
 
                     <ul class="nav-sub">
-                        <!-- Transit && Export Vehicles -->
-                        <li class="nav-sub-item {{ request()->is('admin/ed-trex') ||
-                        request()->is('admin/ed-trex/*') || request()->is('admin/ed-export') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.ed-trex.index') }}">
-                                @lang('pages.exitDoor.trexGoods')
+                        <!-- All -->
+                        <li class="nav-sub-item {{ request()->is('admin/exit-door') || request()->is('admin/exit-door/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.exit-door.index') }}">
+                                @lang('pages.exitDoor.exitDoor')
+                            </a>
+                        </li>
+
+                        <!-- Transit Vehicles -->
+                        <li class="nav-sub-item {{ request()->is('admin/ed/transit') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.ed.transit') }}">
+                                @lang('pages.exitDoor.transitGoods')
+                            </a>
+                        </li>
+
+                        <!-- Export Vehicles -->
+                        <li class="nav-sub-item {{ request()->is('admin/ed/export') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.ed.export') }}">
+                                @lang('pages.exitDoor.exportGoods')
                             </a>
                         </li>
 
                         <!-- Empty Vehicles -->
-                        <li class="nav-sub-item {{ request()->is('admin/ed-empty') ||
-                        request()->is('admin/ed-empty/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.ed-empty.index') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/ed/empty') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.ed.empty') }}">
                                 @lang('pages.exitDoor.emptyVehicles')
                             </a>
                         </li>
 
-                        <!-- Returned Vehicles -->
-                        <li class="nav-sub-item {{ request()->is('admin/tr-returned') ||
-                        request()->is('admin/ex-returned') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.ed-trex.tr_returned') }}">
-                                @lang('pages.exitDoor.returnedGoods')
+                        <!-- Rejected Vehicles -->
+                        <li class="nav-sub-item {{ request()->is('admin/ed/rejected') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.ed.rejected') }}">
+                                @lang('pages.exitDoor.rejectedGoods')
                             </a>
                         </li>
 
-                        <!-- Rejected Vehicles -->
-                        <li class="nav-sub-item {{ request()->is('admin/ed-rejected') ||
-                        request()->is('admin/ed-rejected/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.ed-rejected.index') }}">
-                                @lang('pages.exitDoor.rejectedGoods')
+                        <!-- Returned Vehicles -->
+                        <li class="nav-sub-item {{ request()->is('admin/ed/tr-returned') ||
+                        request()->is('admin/ed/ex-returned') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.ed.tr_returned') }}">
+                                @lang('pages.exitDoor.returnedGoods')
                             </a>
                         </li>
                     </ul>

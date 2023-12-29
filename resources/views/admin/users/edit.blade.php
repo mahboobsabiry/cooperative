@@ -23,6 +23,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">@lang('admin.sidebar.users')</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.users.show', $user->id) }}">@lang('global.details')</a></li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('pages.users.editUser')</li>
                 </ol>
             </div>
@@ -30,7 +31,7 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Back -->
-                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ route('admin.users.index') }}">
+                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ route('admin.users.show', $user->id) }}">
                     @lang('global.back')
                     <i class="fe fe-arrow-left"></i>
                 </a>

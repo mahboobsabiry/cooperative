@@ -69,12 +69,6 @@
                                href="{{ request()->url() == route('admin.users.inactive') ? 'javascript:void(0)' : route('admin.users.inactive') }}">@lang('pages.users.inactiveUsers')</a>
                         </nav>
                         <hr>
-{{--                        <div>--}}
-{{--                            <h6 class="card-title mb-1">@lang('admin.sidebar.users')</h6>--}}
-{{--                            <p class="text-muted card-sub-title">Exporting data from a table can often be a key part of--}}
-{{--                                a complex application. The Buttons extension for DataTables provides three plug-ins that--}}
-{{--                                provide overlapping functionality for data export:</p>--}}
-{{--                        </div>--}}
 
                         <!-- Table -->
                         <div class="table-responsive mt-2">
@@ -85,7 +79,6 @@
                                     <th rowspan="2" class="text-center tblBorder">#</th>
                                     <th colspan="4" class="text-center tblBorder">@lang('global.personalInfo')</th>
                                     <th colspan="3" class="text-center tblBorder">@lang('global.details')</th>
-                                    <th rowspan="2" class="text-center tblBorder">@lang('global.action')</th>
                                 </tr>
                                 <tr>
                                     <th class="text-center">@lang('form.avatar')</th>
@@ -102,14 +95,10 @@
                                 @foreach($users as $user)
                                     <tr>
                                         <td>
-                                            @if(app()->getLocale() == 'en')
-                                                {{ $loop->iteration }}
-                                            @else
-                                                <span class="tx-bold">{{ \Morilog\Jalali\CalendarUtils::convertNumbers($loop->iteration) }}</span>
-                                            @endif
+                                            {{ $loop->iteration }}
                                         </td>
                                         <td>
-                                            <img src="{{ $user->image }}" class="card-img img-fluid w-50 rounded-50">
+                                            <img src="{{ $user->image ?? asset('assets/images/avatar-default.jpeg') }}" width="50" class="rounded-circle">
                                         </td>
                                         <td>
                                             @if(Cache::has('user-is-online-' . $user->id))
@@ -123,9 +112,9 @@
                                                        data-toggle="tooltip-primary" title="@lang('global.offline')"></i>
                                                 </span>
                                             @endif
-                                            {{ $user->name }}
+                                            <a href="{{ route('admin.users.show', $user->id) }}" class="ctd">{{ $user->name }}</a>
                                         </td>
-                                        <!-- Email Address -->
+                                        <!-- Phone Number -->
                                         <td class="tx-sm-12-f">
                                             <a href="callto:{{ $user->phone }}" class="ctd">{{ $user->phone }}</a>
                                         </td>
@@ -135,7 +124,7 @@
                                         <td>
                                             @if(!empty($user->roles))
                                                 @foreach($user->roles as $role)
-                                                    <a class="modal-effect ctd"
+                                                    <a class="modal-effect"
                                                        data-effect="effect-sign" data-toggle="modal"
                                                        href="#role_details{{ $role->id }}">{{ $role->name }}</a>
                                                     {{ count($user->roles) > 1 ? '|' : '' }}
@@ -149,40 +138,15 @@
                                         <!-- Created Date -->
                                         <td>
                                             @if(app()->getLocale() == 'en')
-                                                {{ date_format($user->created_at, 'Y-F-d / h:i A') }}
+                                                {{ date_format($user->created_at, 'Y-F-d') }}
                                             @else
-                                                <span class="text-muted tx-sm-12">
+                                                <span class="">
                                                 @php
-                                                     $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d / h:i A', strtotime($user->created_at)); // 1395-02-19
+                                                     $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($user->created_at)); // 1395-02-19
                                                      echo \Morilog\Jalali\CalendarUtils::convertNumbers($date);
                                                 @endphp
                                                 </span>
                                             @endif
-                                        </td>
-
-                                        <!-- Action -->
-                                        <td>
-                                            <!-- Show -->
-                                            <a class="btn btn-sm ripple btn-secondary" href="{{ route('admin.users.show', $user->id) }}"
-                                               title="@lang('pages.users.userProfile')">
-                                                <i class="fe fe-eye"></i>
-                                            </a>
-
-                                            <!-- Edit -->
-                                            <a class="btn btn-sm ripple btn-info" href="{{ route('admin.users.edit', $user->id) }}"
-                                               title="@lang('pages.users.editUser')">
-                                                <i class="fe fe-edit"></i>
-                                            </a>
-
-                                            <!-- Delete -->
-                                            <a class="modal-effect btn btn-sm ripple btn-danger"
-                                               data-effect="effect-sign" data-toggle="modal"
-                                               href="#delete_record{{ $user->id }}"
-                                               title="@lang('pages.users.deleteUser')">
-                                                <i class="fe fe-delete"></i>
-                                            </a>
-
-                                            @include('admin.users.delete')
                                         </td>
                                     </tr>
                                 @endforeach

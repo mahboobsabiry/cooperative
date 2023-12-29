@@ -20,31 +20,17 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        $admin = Auth::user()->roles->first()->name == 'Admin';
-        if ($admin){
-             $top_users = User::all()->take(6);
-             $logActivities = Activity::orderBy('created_at', 'desc')->take(6)->get();
-        } else {
-            $logActivities = Activity::orderBy('created_at', 'desc')->causedBy(Auth::user())->take(6)->get();
-            $top_users = '';
-        }
-
-        return view('admin.dashboard', compact('logActivities', 'top_users', 'admin'));
+         $top_users = User::all()->take(6);
+         $logActivities = Activity::orderBy('created_at', 'desc')->take(6)->get();
+         return view('admin.dashboard', compact('logActivities', 'top_users'));
     }
 
     public function activities()
     {
-        $admin = Auth::user()->roles->first()->name == 'Admin';
+        $logActivities = Activity::orderBy('created_at', 'desc')->get();
+        $myActivities = Activity::orderBy('created_at', 'desc')->causedBy(Auth::user())->get();
 
-        if ($admin){
-            $logActivities = Activity::orderBy('created_at', 'desc')->get();
-            $myActivities = Activity::orderBy('created_at', 'desc')->causedBy(Auth::user())->get();
-        } else {
-            $logActivities = Activity::orderBy('created_at', 'desc')->causedBy(Auth::user())->get();
-            $myActivities = '';
-        }
-
-        return view('admin.activities', compact('logActivities', 'myActivities', 'admin'));
+        return view('admin.activities', compact('logActivities', 'myActivities'));
     }
 
     public function deleteActivity($id)
@@ -61,12 +47,7 @@ class AdminController extends Controller
     // Delete All Activities
     public function deleteAllActivities()
     {
-        $authUser = Auth::user();
-        if ($authUser->roles->first()->name == 'Admin') {
-            $activities = Activity::all();
-        } else {
-            $activities = Activity::all()->where('causer_id', $authUser->id);
-        }
+        $activities = Activity::all();
 
         foreach ($activities as $activity) {
             $activity->delete();
@@ -81,11 +62,7 @@ class AdminController extends Controller
     // Delete All Activities
     public function deleteAllAdminActivities()
     {
-        $authUser = Auth::user();
-        $admin = $authUser->roles->first()->name == 'Admin';
-        if ($admin) {
-            $activities = Activity::all()->where('causer_id', $authUser->id);
-        }
+        $activities = Activity::all()->where('causer_id', auth()->user()->id);
 
         foreach ($activities as $activity) {
             $activity->delete();

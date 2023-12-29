@@ -35,14 +35,6 @@
             <div class="btn btn-list">
                 <div class="d-flex">
                     <div class="mr-2">
-                        <!-- Edit -->
-                        <a class="btn ripple bg-primary btn-sm text-white"
-                           href="{{ route('admin.positions.edit', $position->id) }}">
-                            @lang('global.edit')
-                            <i class="fe fe-edit"></i>
-                        </a>
-                    </div>
-                    <div class="mr-2">
                         <!-- Delete -->
                         <a class="modal-effect btn btn-sm ripple btn-danger text-white"
                            data-effect="effect-sign" data-toggle="modal"
@@ -55,10 +47,18 @@
                         @include('admin.positions.delete')
                     </div>
                     <div class="mr-2">
-                        <!-- Back -->
-                        <a class="btn ripple bg-gray-500 btn-sm" href="{{ route('admin.positions.index') }}">
-                            @lang('global.back')
-                            <i class="fa fa-arrow-{{ app()->getLocale() == 'en' ? 'right' : 'left' }}"></i>
+                        <!-- Edit -->
+                        <a class="btn ripple bg-dark btn-sm text-white"
+                           href="{{ route('admin.positions.edit', $position->id) }}">
+                            @lang('global.edit')
+                            <i class="fe fe-edit"></i>
+                        </a>
+                    </div>
+                    <div class="mr-2">
+                        <!-- Add -->
+                        <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.positions.create') }}" target="_blank">
+                            @lang('global.new')
+                            <i class="fe fe-plus-circle"></i>
                         </a>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                <img alt="avatar" src="{{ $position->employees->where('is_responsible', 1)->first()->image ?? '' }}">
+                                <img alt="avatar" src="{{ $position->employees->where('is_responsible', 1)->first()->image ?? asset('assets/images/avatar-default.jpeg') }}">
                             </div>
                         </div>
 
@@ -188,19 +188,19 @@
                                             </span>
                                             ----
                                             @if($position->status == 1)
-                                                <a class="updatePositionStatus" id="position-{{ $position->id }}"
+                                                <a class="updatePositionStatus" id="position_status"
                                                    position_id="{{ $position->id }}" href="javascript:void(0)">
                                                     <i class="fa fa-toggle-on text-success" aria-hidden="true"
                                                        status="Active"></i>
                                                 </a>
                                             @else
-                                                <a class="updatePositionStatus" id="user-{{ $position->id }}"
+                                                <a class="updatePositionStatus" id="position_status"
                                                    position_id="{{ $position->id }}" href="javascript:void(0)">
                                                     <i class="fa fa-toggle-off text-danger" aria-hidden="true"
                                                        status="Inactive"></i>
                                                 </a>
                                             @endif
-                                            <span id="update_status-{{ $position->id }}" style="display: none;">
+                                            <span id="update_status" style="display: none;">
                                             <i class="fa fa-toggle-on" aria-hidden="true"></i>
                                         </span>
                                         </td>
@@ -267,7 +267,6 @@
                                 <th rowspan="2" class="text-center tblBorder">#</th>
                                 <th colspan="4" class="text-center tblBorder">@lang('global.personalInfo')</th>
                                 <th colspan="4" class="text-center tblBorder">@lang('pages.employees.generalInfo')</th>
-                                <th rowspan="2" class="text-center tblBorder">@lang('global.action')</th>
                             </tr>
                             <tr>
                                 <th class="text-center">@lang('form.photo')</th>
@@ -285,16 +284,12 @@
                             @foreach($posEmployees as $employee)
                                 <tr>
                                     <td>
-                                        @if(app()->getLocale() == 'en')
-                                            {{ $loop->iteration }}
-                                        @else
-                                            <span class="tx-bold">{{ \Morilog\Jalali\CalendarUtils::convertNumbers($loop->iteration) }}</span>
-                                        @endif
+                                        {{ $loop->iteration }}
                                     </td>
                                     <td>
-                                        <img src="{{ $employee->image }}" class="card-img img-fluid w-50 rounded-50">
+                                        <img src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}" width="50" class=rounded-circle">
                                     </td>
-                                    <td>{{ $employee->name }} {{ $employee->last_name }}</td>
+                                    <td><a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a></td>
                                     <!-- Email Address -->
                                     <td class="tx-sm-12-f">
                                         <a href="callto:{{ $employee->phone }}" class="ctd">{{ $employee->phone }}</a>
@@ -311,31 +306,6 @@
                                     <td>{{ $employee->position->position_number }}</td>
                                     <!-- Position Nature -->
                                     <td>{{ $employee->on_duty == 1 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}</td>
-
-                                    <!-- Action -->
-                                    <td>
-                                        <!-- Show -->
-                                        <a class="btn btn-sm ripple btn-secondary" href="{{ route('admin.employees.show', $employee->id) }}"
-                                           title="@lang('pages.users.userProfile')">
-                                            <i class="fe fe-eye"></i>
-                                        </a>
-
-                                        <!-- Edit -->
-                                        <a class="btn btn-sm ripple btn-info" href="{{ route('admin.employees.edit', $employee->id) }}"
-                                           title="@lang('pages.users.editUser')">
-                                            <i class="fe fe-edit"></i>
-                                        </a>
-
-                                        <!-- Delete -->
-                                        <a class="modal-effect btn btn-sm ripple btn-danger"
-                                           data-effect="effect-sign" data-toggle="modal"
-                                           href="#delete_record{{ $employee->id }}"
-                                           title="@lang('pages.users.deleteUser')">
-                                            <i class="fe fe-delete"></i>
-                                        </a>
-
-                                        @include('admin.employees.delete')
-                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -361,7 +331,6 @@
                                 <th rowspan="2" class="text-center tblBorder">#</th>
                                 <th colspan="4" class="text-center tblBorder">@lang('global.personalInfo')</th>
                                 <th colspan="4" class="text-center tblBorder">@lang('pages.employees.generalInfo')</th>
-                                <th rowspan="2" class="text-center tblBorder">@lang('global.action')</th>
                             </tr>
                             <tr>
                                 <th class="text-center">@lang('form.photo')</th>
@@ -379,17 +348,13 @@
                             @foreach($onDutyPosEmp as $employee)
                                 <tr>
                                     <td>
-                                        @if(app()->getLocale() == 'en')
-                                            {{ $loop->iteration }}
-                                        @else
-                                            <span class="tx-bold">{{ \Morilog\Jalali\CalendarUtils::convertNumbers($loop->iteration) }}</span>
-                                        @endif
+                                        {{ $loop->iteration }}
                                     </td>
                                     <td>
-                                        <img src="{{ $employee->image }}" class="card-img img-fluid w-50 rounded-50">
+                                        <img src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}" width="50" class=rounded-circle">
                                     </td>
-                                    <td>{{ $employee->name }} {{ $employee->last_name }}</td>
-                                    <!-- Email Address -->
+                                    <td><a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a></td>
+                                    <!-- Phone Number -->
                                     <td class="tx-sm-12-f">
                                         <a href="callto:{{ $employee->phone }}" class="ctd">{{ $employee->phone }}</a>
                                     </td>
@@ -405,31 +370,6 @@
                                     <td>{{ $employee->position->position_number }}</td>
                                     <!-- Position Nature -->
                                     <td>{{ $employee->on_duty == 1 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}</td>
-
-                                    <!-- Action -->
-                                    <td>
-                                        <!-- Show -->
-                                        <a class="btn btn-sm ripple btn-secondary" href="{{ route('admin.employees.show', $employee->id) }}"
-                                           title="@lang('pages.users.userProfile')">
-                                            <i class="fe fe-eye"></i>
-                                        </a>
-
-                                        <!-- Edit -->
-                                        <a class="btn btn-sm ripple btn-info" href="{{ route('admin.employees.edit', $employee->id) }}"
-                                           title="@lang('pages.users.editUser')">
-                                            <i class="fe fe-edit"></i>
-                                        </a>
-
-                                        <!-- Delete -->
-                                        <a class="modal-effect btn btn-sm ripple btn-danger"
-                                           data-effect="effect-sign" data-toggle="modal"
-                                           href="#delete_record{{ $employee->id }}"
-                                           title="@lang('pages.users.deleteUser')">
-                                            <i class="fe fe-delete"></i>
-                                        </a>
-
-                                        @include('admin.employees.delete')
-                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

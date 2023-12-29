@@ -6,8 +6,10 @@ use App\Http\Controllers\Admin\BranchesController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\EDEmptyController;
 use App\Http\Controllers\Admin\EDRejectedController;
+use App\Http\Controllers\Admin\EDReportingController;
 use App\Http\Controllers\Admin\EDTrexController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\ExitDoorController;
 use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -77,16 +79,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::post('update-employee-status', [EmployeeController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');
 
     // Exit Door
-    Route::resource('ed-trex', EDTrexController::class);
-    Route::get('ed-export', [EDTrexController::class, 'exportGoods'])->name('ed-export.index');
-
-    Route::get('tr-returned', [EDTrexController::class, 'trReturned'])->name('ed-trex.tr_returned');
-    Route::get('ex-returned', [EDTrexController::class, 'exReturned'])->name('ed-trex.ex_returned');
-
-    Route::post('is-returned/', [EDTrexController::class, 'isReturned'])->name('ed-trex.is_returned');
-    Route::post('exit-again/', [EDTrexController::class, 'exitAgain'])->name('ed-trex.exit_again');
-    Route::resource('ed-empty', EDEmptyController::class);
-    Route::resource('ed-rejected', EDRejectedController::class);
+    Route::resource('exit-door', ExitDoorController::class);
+    Route::get('ed/transit', [ExitDoorController::class, 'transit'])->name('ed.transit');
+    Route::get('ed/export', [ExitDoorController::class, 'export'])->name('ed.export');
+    Route::get('ed/empty', [ExitDoorController::class, 'empty'])->name('ed.empty');
+    Route::get('ed/rejected', [ExitDoorController::class, 'rejected'])->name('ed.rejected');
+    // Transit/Export Returned
+    Route::get('ed/tr-returned', [ExitDoorController::class, 'tr_returned'])->name('ed.tr_returned');
+    Route::get('ed/ex-returned', [ExitDoorController::class, 'ex_returned'])->name('ed.ex_returned');
+    // Returned && Exit Again
+    Route::post('is-returned/', [ExitDoorController::class, 'isReturned'])->name('ed.is_returned');
+    Route::post('exit-again/', [ExitDoorController::class, 'exitAgain'])->name('ed.exit_again');
 
     // Settings
     Route::resource('settings', SettingController::class);

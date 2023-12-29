@@ -28,18 +28,33 @@
 
             <!-- Btn List -->
             <div class="btn btn-list">
+
                 <div class="d-flex">
                     <div class="mr-2">
+                        <!-- Delete -->
+                        <a class="modal-effect btn btn-sm ripple btn-danger text-white"
+                           data-effect="effect-sign" data-toggle="modal"
+                           href="#delete_record{{ $user->id }}"
+                           title="@lang('global.delete')">
+                            @lang('global.delete')
+                            <i class="fe fe-trash"></i>
+                        </a>
+
+                        @include('admin.users.delete')
+                    </div>
+                    <div class="mr-2">
                         <!-- Edit -->
-                        <a class="btn ripple bg-primary btn-sm" href="{{ route('admin.users.edit', $user->id) }}">
+                        <a class="btn ripple bg-dark btn-sm text-white"
+                           href="{{ route('admin.users.edit', $user->id) }}">
                             @lang('global.edit')
+                            <i class="fe fe-edit"></i>
                         </a>
                     </div>
                     <div class="mr-2">
-                        <!-- Back -->
-                        <a class="btn ripple bg-gray-500 btn-sm" href="{{ route('admin.users.index') }}">
-                            @lang('global.back')
-                            <i class="fa fa-arrow-{{ app()->getLocale() == 'en' ? 'right' : 'left' }}"></i>
+                        <!-- Add -->
+                        <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.users.create') }}" target="_blank">
+                            @lang('global.new')
+                            <i class="fe fe-plus-circle"></i>
                         </a>
                     </div>
                 </div>
@@ -67,7 +82,7 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                <img alt="avatar" src="{{ $user->image }}">
+                                <img alt="avatar" src="{{ $user->image ?? asset('assets/images/avatar-default.jpeg') }}">
                             </div>
                         </div>
                         <div class="item-user pro-user">
@@ -76,23 +91,6 @@
                             </h4>
 
                             <p class="pro-user-desc text-muted mb-1">{{ $user->roles->first()->name }}</p>
-                            <!-- User Star -->
-                            <p class="user-info-rating">
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                @if($user->status == 0)
-                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                @elseif($user->status == 1)
-                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                    <a href="javascript:void(0);"><i class="far fa-star text-warning"> </i></a>
-                                @else
-                                    <a href="javascript:void(0);"><i class="far fa-star text-warning"> </i></a>
-                                    <a href="javascript:void(0);"><i class="far fa-star text-warning"> </i></a>
-                                @endif
-                            </p>
-                            <!--/==/ End of User Star -->
                         </div>
                     </div>
                 </div>
