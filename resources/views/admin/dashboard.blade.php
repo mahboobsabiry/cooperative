@@ -5,7 +5,7 @@
         <!-- Page Header -->
         <div class="page-header">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">@lang('admin.dashboard.welcomeToBCHS')</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">به سیستم کمکی گمرک سرحدی حیرتان خوش آمدید!</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('index') }}" target="_blank">@lang('global.home')</a></li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('admin.dashboard.dashboard')</li>
@@ -56,30 +56,165 @@
 
             <!-- Employees -->
             @can('employee_mgmt')
-            <div class="col-sm-6 col-xl-3 col-lg-6">
-                <div class="card custom-card">
-                    <div class="card-body dash1">
-                        <div class="d-flex">
-                            <p class="mb-1 tx-inverse">@lang('admin.sidebar.employees')</p>
-                            <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                <i class="fa fa-user-tie fs-20 text-secondary"></i>
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse">@lang('admin.sidebar.employees')</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fa fa-user-tie fs-20 text-secondary"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <h3 class="dash-25">{{ count(\App\Models\Employee::all()) }}</h3>
-                        </div>
-                        <div class="progress mb-1">
-                            <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar progress-bar-xs wd-60p bg-secondary" role="progressbar"></div>
-                        </div>
-                        <div class="expansion-label d-flex">
-                            <span class="text-muted">Last Month</span>
-                            <span class="ml-auto"><i class="fas fa-caret-down mr-1 text-danger"></i>0.43%</span>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\Employee::all()) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar progress-bar-xs wd-60p bg-secondary" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="text-muted">Last Month</span>
+                                <span class="ml-auto"><i class="fas fa-caret-down mr-1 text-danger"></i>0.43%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endcan
             <!--/==/ End of Employees -->
+
+            <!-- Transit Exit -->
+            @can('exit_door')
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse">اموال ترانزیتی خروجی (پل)</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fa fa-door-open fs-20 text-info"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\ExitDoor::all()->where('exit_type', 0)) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar progress-bar-xs wd-60p bg-info" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="text-muted">امروز</span>
+                                <span class="ml-auto"><i class="fas fa-caret-down mr-1 text-info"></i>{{ count(\App\Models\ExitDoor::all()) }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <!--/==/ End of Transit Exit -->
+
+            <!-- Export Exit -->
+            @can('exit_door')
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse">اموال صادراتی خروجی (پل)</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fa fa-door-open fs-20 text-info"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\ExitDoor::all()->where('exit_type', 1)) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar progress-bar-xs wd-60p bg-info" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="text-muted">امروز</span>
+                                <span class="ml-auto"><i class="fas fa-caret-down mr-1 text-info"></i>{{ count(\App\Models\ExitDoor::all()) }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <!--/==/ End of Export Exit -->
+
+            <!-- Returned Exit -->
+            @can('exit_door')
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse">اموال بازگشتی (پل)</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fa fa-door-open fs-20 text-info"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\ExitDoor::all()->where('is_returned', 1)) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar progress-bar-xs wd-60p bg-info" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="text-muted">امروز</span>
+                                <span class="ml-auto"><i class="fas fa-caret-down mr-1 text-info"></i>{{ count(\App\Models\ExitDoor::all()) }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <!--/==/ End of Returned Exit -->
+
+            <!-- Empty Exit -->
+            @can('exit_door')
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse">وسایط خالی (پل)</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fa fa-door-open fs-20 text-info"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\ExitDoor::all()->where('exit_type', 2)) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar progress-bar-xs wd-60p bg-info" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="text-muted">امروز</span>
+                                <span class="ml-auto"><i class="fas fa-caret-down mr-1 text-info"></i>{{ count(\App\Models\ExitDoor::all()) }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <!--/==/ End of Empty Exit -->
+
+            <!-- Rejected Exit -->
+            @can('exit_door')
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse">اموال مستردی (پل)</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fa fa-door-open fs-20 text-info"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\ExitDoor::all()->where('exit_type', 3)) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar progress-bar-xs wd-60p bg-info" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="text-muted">امروز</span>
+                                <span class="ml-auto"><i class="fas fa-caret-down mr-1 text-info"></i>{{ count(\App\Models\ExitDoor::all()) }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <!--/==/ End of Rejected Exit -->
         </div>
         <!--End  Row -->
 
