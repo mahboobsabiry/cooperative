@@ -77,7 +77,7 @@
 
                             <!-- Table -->
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100">
+                                <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100" style="width: 100%;">
                                     <thead>
                                     <tr>
                                         <th>#</th>
