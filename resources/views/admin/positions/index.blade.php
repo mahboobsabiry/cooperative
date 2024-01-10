@@ -46,7 +46,7 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                <a class="btn ripple btn-primary" href="{{ route('admin.positions.create') }}" target="_blank">
+                <a class="btn ripple btn-primary" href="{{ route('admin.positions.create') }}">
                     <i class="fe fe-plus-circle"></i> @lang('pages.positions.addPosition')
                 </a>
             </div>

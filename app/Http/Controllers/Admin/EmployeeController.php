@@ -50,8 +50,8 @@ class EmployeeController extends Controller
         $employee->father_name  = $request->father_name;
         $employee->gender       = $request->gender;
         $employee->emp_number   = $request->emp_number;
-        $employee->appointmen_number    = $request->appointmen_number;
-        $employee->appointmen_date      = $request->appointmen_date;
+        $employee->appointment_number   = $request->appointment_number;
+        $employee->appointment_date     = $request->appointment_date;
         $employee->last_duty        = $request->last_duty;
         $employee->birth_year       = $request->birth_year;
         $employee->education        = $request->education;
@@ -123,16 +123,38 @@ class EmployeeController extends Controller
         return view('admin.employees.edit', compact('employee', 'positions'));
     }
 
-    public function update(UpdateEmployeeRequest $request, Employee $employee)
+    public function update(Request $request, Employee $employee)
     {
+        $request->validate([
+            'photo'         => 'image|mimes:jpg,png,jfif',
+            'name'          => 'required|min:3|max:64',
+            'last_name'     => 'required|min:3|max:64',
+            'father_name'   => 'required|min:3|max:64',
+            'gender'        => 'required',
+            'emp_number'    => 'required|unique:employees,emp_number,' . $employee->id,
+            'appointment_number'    => 'required|unique:employees,appointment_number,' . $employee->id,
+            'appointment_date'      => 'nullable',
+            'last_duty'     => 'nullable',
+            'birth_year'    => 'required',
+            'education'     => 'nullable',
+            'prr_npr'       => 'required',
+            'prr_date'      => 'nullable',
+            'phone'         => 'nullable|unique:employees,phone,' . $employee->id,
+            'phone2'        => 'nullable|unique:employees,phone2,' . $employee->id,
+            'email'         => 'nullable|unique:employees,email,' . $employee->id,
+            'main_province'     => 'required|min:3|max:64',
+            'current_province'  => 'required|min:3|max:64',
+            'info'          => 'nullable',
+        ]);
+
         $employee->position_id  = $request->position_id;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
         $employee->father_name  = $request->father_name;
         $employee->gender       = $request->gender;
         $employee->emp_number   = $request->emp_number;
-        $employee->appointmen_number    = $request->appointmen_number;
-        $employee->appointmen_date      = $request->appointmen_date;
+        $employee->appointment_number    = $request->appointment_number;
+        $employee->appointment_date      = $request->appointment_date;
         $employee->last_duty        = $request->last_duty;
         $employee->birth_year       = $request->birth_year;
         $employee->education        = $request->education;

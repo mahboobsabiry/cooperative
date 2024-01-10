@@ -54,6 +54,33 @@
             @endcan
             <!--/==/ End of Users Card -->
 
+            <!-- Positions -->
+            @can('organization_mgmt')
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse">@lang('admin.sidebar.positions')</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fe fe-activity fs-20 text-info"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\Position::all()) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar progress-bar-xs wd-60p bg-info" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="text-muted">Last Month</span>
+                                <span class="ml-auto"><i class="fas fa-caret-down mr-1 text-info"></i>0.43%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <!--/==/ End of Positions -->
+
             <!-- Employees -->
             @can('employee_mgmt')
                 <div class="col-sm-6 col-xl-3 col-lg-6">

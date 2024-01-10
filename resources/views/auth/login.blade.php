@@ -6,19 +6,19 @@
             <h4 class="text-center">@lang('admin.login.loginToYourAcc')</h4>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <!-- Email Address -->
+                <!-- Username -->
                 <div class="form-group text-right">
-                    <label for="email">@lang('form.email')</label>
+                    <label for="username">@lang('form.username')</label>
 
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="@lang('admin.login.enterYourEmail')" required autocomplete="email" autofocus>
+                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" placeholder="@lang('form.username')" required autocomplete="username" autofocus>
 
-                    @error('email')
+                    @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-                <!--/==/ End of Email Address -->
+                <!--/==/ End of Username -->
 
                 <!-- Password -->
                 <div class="form-group text-right">

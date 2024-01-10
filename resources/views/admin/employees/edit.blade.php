@@ -76,22 +76,21 @@
 
                                         <!-- Position && OnDuty -->
                                         <div class="row">
+                                            <!-- Position -->
                                             <div class="col-md-6">
-                                                <!-- Position -->
                                                 <div class="form-group @error('position_id') has-danger @enderror">
                                                     <p class="mb-2">1) @lang('form.position'): <span class="tx-danger">*</span></p>
 
                                                     <select id="position_id" name="position_id" class="form-control select2 @error('position_id') form-control-danger @enderror">
-                                                        <option label="Choose one">
-                                                        </option>
+                                                        <option selected>@lang('form.chooseOne')</option>
                                                         @foreach($positions as $position)
-                                                            <option value="{{ $position->id }}" {{ $employee->position_id == $position->id ? 'selected' : '' }}>{{ $position->title }}</option>
+                                                            <option value="{{ $position->id }}" {{ $employee->position->id == $position->id ? 'selected' : '' }}>{{ $position->title }}</option>
                                                             @foreach($position->children as $admin)
-                                                                <option value="{{ $admin->id }}" class="text-secondary" {{ $employee->position_id == $admin->id ? 'selected' : '' }}>- {{ $admin->title }}</option>
+                                                                <option value="{{ $admin->id }}" {{ $employee->position->id == $admin->id ? 'selected' : '' }} class="text-secondary">- {{ $admin->title }}</option>
                                                                 @foreach($admin->children as $mgmt)
-                                                                    <option value="{{ $mgmt->id }}" {{ $employee->position_id == $mgmt->id ? 'selected' : '' }}>-- {{ $mgmt->title }}</option>
+                                                                    <option value="{{ $mgmt->id }}" {{ $employee->position->id == $mgmt->id ? 'selected' : '' }}>-- {{ $mgmt->title }}</option>
                                                                     @foreach($mgmt->children as $mgr)
-                                                                        <option value="{{ $mgr->id }}" {{ $employee->position_id == $mgr->id ? 'selected' : '' }}>--- {{ $mgr->title }}</option>
+                                                                        <option value="{{ $mgr->id }}" {{ $employee->position->id == $mgr->id ? 'selected' : '' }}>--- {{ $mgr->title }}</option>
                                                                     @endforeach
                                                                 @endforeach
                                                             @endforeach
@@ -102,22 +101,18 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                <!--/==/ End of Position -->
                                             </div>
 
                                             <!-- On Duty && Main Position -->
                                             <div class="col-md-6">
                                                 <div class="form-group @error('main_position') has-danger @enderror">
-                                                    <p class="mb-2 row" id="onDutyParent">1)
+                                                    <p class="mb-2" id="onDutyParent">1)
                                                         @lang('pages.employees.onDuty')
-                                                        <span class="mr-2 ml-2">
-                                                            <input type="checkbox" name="on_duty" id="onDutyCheck"
-                                                                   class="custom-checkbox" {{ $employee->on_duty == 0 ? 'checked' : '' }}>
-                                                        </span>
+                                                        <span><input type="checkbox" name="on_duty" id="onDutyCheck" class="custom-checkbox" {{ $employee->on_duty == 0 ? 'checked' : '' }}></span>
 
-                                                        <span id="mpText" style="display: {{ $employee->on_duty == 0 ? 'block' : 'none' }};">@lang('pages.employees.mainPosition'):</span>
+                                                        <span id="mpText" style="display: none;">@lang('pages.employees.mainPosition'):</span>
                                                     </p>
-                                                    <select id="on_duty" name="main_position" class="form-control @error('main_position') form-control-danger @enderror" style="display: {{ $employee->on_duty == 0 ? 'block' : 'none' }};">
+                                                    <select id="on_duty" name="main_position" class="form-control @error('main_position') form-control-danger @enderror" style="display: none;">
                                                         <option value="" selected>@lang('form.chooseOne')</option>
                                                         @foreach($positions as $position)
                                                             <option value="{{ $position->title }}" {{ $employee->main_position == $position->title ? 'selected' : '' }}>{{ $position->title }}</option>
@@ -169,7 +164,7 @@
                                         </div>
                                         <!--/==/ End of Name & Last Name -->
 
-                                        <!-- Father and Grand Father Name -->
+                                        <!-- Father and Gender -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <!-- Father Name -->
@@ -185,35 +180,93 @@
                                             </div>
 
                                             <div class="col-md-6">
-                                                <!-- Grand Father Name -->
-                                                <div class="form-group @error('grand_f_name') has-danger @enderror">
-                                                    <p class="mb-2">5) @lang('form.grandFatherName'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="grand_f_name" class="form-control @error('grand_f_name') form-control-danger @enderror" name="grand_f_name" value="{{ $employee->grand_f_name ?? old('grand_f_name') }}" placeholder="@lang('form.grandFatherName')" required>
+                                                <!-- Gender -->
+                                                <div class="form-group @error('gender') has-danger @enderror">
+                                                    <p class="mb-2">5) @lang('form.gender'): <span class="tx-danger">*</span></p>
 
-                                                    @error('grand_f_name')
+                                                    <select class="form-control" name="gender" id="gender">
+                                                        <option value="1" {{ $employee->gender == 1 ? 'selected' : '' }}>@lang('form.male')</option>
+                                                        <option value="0" {{ $employee->gender == 0 ? 'selected' : '' }}>@lang('form.female')</option>
+                                                    </select>
+
+                                                    @error('gender')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                <!--/==/ End of Grand Father Name -->
+                                                <!--/==/ End of Gender -->
                                             </div>
                                         </div>
                                         <!--/==/ End of Father and Grand Father Name -->
 
-                                        <!-- P2 Number and Employee Number -->
+                                        <!-- Birth Year & Last Duty -->
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <!-- P2 Number -->
-                                                <div class="form-group @error('p2number') has-danger @enderror">
-                                                    <p class="mb-2">6) @lang('form.p2number'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="p2number" class="form-control @error('p2number') form-control-danger @enderror" name="p2number" value="{{ $employee->p2number ?? old('p2number') }}" placeholder="@lang('form.p2number')" required>
+                                                <!-- Last Duty -->
+                                                <div class="form-group @error('last_duty') has-danger @enderror">
+                                                    <p class="mb-2">6) @lang('form.lastDuty'): <span class="tx-danger">*</span></p>
+                                                    <input type="text" id="last_duty" class="form-control @error('last_duty') form-control-danger @enderror" name="last_duty" value="{{ $employee->last_duty ?? old('last_duty') }}" placeholder="@lang('form.lastDuty')" required>
 
-                                                    @error('p2number')
+                                                    @error('last_duty')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                <!--/==/ End of P2 Number -->
+                                                <!--/==/ End of Last Duty -->
                                             </div>
 
+                                            <div class="col-md-6">
+                                                <!-- Birth Year -->
+                                                <div class="form-group @error('birth_year') has-danger @enderror">
+                                                    <p class="mb-2">6) @lang('form.birthYear'): <span class="tx-danger">*</span></p>
+                                                    <input type="number" id="birth_year" class="form-control @error('birth_year') form-control-danger @enderror" name="birth_year" value="{{ $employee->birth_year ?? old('birth_year') }}" placeholder="@lang('form.birthYear')" required>
+
+                                                    @error('birth_year')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of Birth Year -->
+                                            </div>
+                                        </div>
+                                        <!--/==/ End of Birth Year & Last Duty -->
+                                        <!--/==/ End of Personal Information -->
+
+                                        <!-- General Information -->
+                                        <p class="bd-b mb-2 tx-bold pb-2">
+                                            <span class="badge badge-primary badge-pill">2</span>
+                                            @lang('pages.employees.generalInfo')
+                                        </p>
+
+                                        <!-- Appointment Number & Date -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <!-- Appointment Number -->
+                                                <div class="form-group @error('appointment_number') has-danger @enderror">
+                                                    <p class="mb-2">6) @lang('form.appointmentNumber'): <span class="tx-danger">*</span></p>
+                                                    <input type="text" id="appointment_number" class="form-control @error('appointment_number') form-control-danger @enderror" name="appointment_number" value="{{ $employee->appointment_number ?? old('appointment_number') }}" placeholder="@lang('form.appointmentNumber')" required>
+
+                                                    @error('appointment_number')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of Appointment Number -->
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <!-- Appointment Date -->
+                                                <div class="form-group @error('appointment_date') has-danger @enderror">
+                                                    <p class="mb-2">6) @lang('form.appointmentDate'): <span class="tx-danger">*</span></p>
+                                                    <input data-jdp data-jdp-max="today" type="text" id="appointment_date" class="form-control @error('appointment_date') form-control-danger @enderror" name="appointment_date" value="{{ $employee->appointment_date ?? old('appointment_date') }}" placeholder="@lang('form.appointmentDate')" required>
+
+                                                    @error('appointment_date')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of Appointment Date -->
+                                            </div>
+                                        </div>
+                                        <!--/==/ End of Appointment Number and Date -->
+
+                                        <!-- Employee Number and Email -->
+                                        <div class="row">
                                             <div class="col-md-6">
                                                 <!-- Employee Number -->
                                                 <div class="form-group @error('emp_number') has-danger @enderror">
@@ -226,41 +279,12 @@
                                                 </div>
                                                 <!--/==/ End of Employee Number -->
                                             </div>
-                                        </div>
-                                        <!--/==/ End of P2 Number and Employee Number -->
-                                        <!--/==/ End of Personal Information -->
-
-                                        <!-- General Information -->
-                                        <p class="bd-b mb-2 tx-bold pb-2">
-                                            <span class="badge badge-primary badge-pill">2</span>
-                                            @lang('pages.employees.generalInfo')
-                                        </p>
-
-                                        <!-- Date of Birth and Email -->
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <!-- Date of Birth -->
-                                                <p class="mb-2">8) @lang('form.dob') <span class="small tx-gray-600">(میلادی)</span>: <span class="tx-danger">*</span></p>
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text">
-                                                            <i class="fe fe-calendar lh--9 op-6"></i>
-                                                        </div>
-                                                    </div>
-                                                    <input name="dob" class="form-control fc-datepicker" type="text" value="{{ $employee->dob ?? old('dob') }}" placeholder="MM/DD/YYYY" required>
-
-                                                    @error('dob')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <!--/==/ End of Date of Birth -->
-                                            </div>
 
                                             <div class="col-md-6">
                                                 <!-- Email Address -->
                                                 <div class="form-group @error('email') has-danger @enderror">
-                                                    <p class="mb-2">9) @lang('form.email'): <span class="tx-danger">*</span></p>
-                                                    <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $employee->email ?? old('email') }}" placeholder="@lang('form.email')" required>
+                                                    <p class="mb-2">9) @lang('form.email'):</p>
+                                                    <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $employee->email ?? old('email') }}" placeholder="@lang('form.email')">
 
                                                     @error('email')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -269,15 +293,49 @@
                                                 <!--/==/ End of Email Address -->
                                             </div>
                                         </div>
-                                        <!--/==/ End of Date of Birth and Email Address -->
+                                        <!--/==/ End of Employee Number and Email Address -->
+
+                                        <!-- PRR/NPR -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <!-- PRR/NPR -->
+                                                <div class="form-group @error('prr_npr') has-danger @enderror">
+                                                    <p class="mb-2">7) PRR/NPR: <span class="tx-danger">*</span></p>
+
+                                                    <select class="form-control" name="prr_npr" id="prr_npr">
+                                                        <option value="PRR" {{ $employee->prr_npr == 'PRR' ? 'selected' : '' }}>PRR</option>
+                                                        <option value="NPR" {{ $employee->prr_npr == 'NPR' ? 'selected' : '' }}>NPR</option>
+                                                    </select>
+
+                                                    @error('prr_npr')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of PRR/NPR -->
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <!-- PRR Date -->
+                                                <div class="form-group @error('prr_date') has-danger @enderror">
+                                                    <p class="mb-2">9) PRR Date:</p>
+                                                    <input data-jdp data-jdp-max="today" type="text" id="email" class="form-control @error('prr_date') form-control-danger @enderror" name="prr_date" value="{{ $employee->prr_date ?? old('prr_date') }}" placeholder="1402/01/12">
+
+                                                    @error('prr_date')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of PRR Date -->
+                                            </div>
+                                        </div>
+                                        <!--/==/ End of PRR/NPR -->
 
                                         <!-- Phone Number -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <!-- Phone Number -->
                                                 <div class="form-group @error('phone') has-danger @enderror">
-                                                    <p class="mb-2">10) @lang('form.phone'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ $employee->phone ?? old('phone') }}" placeholder="@lang('form.phone')" required>
+                                                    <p class="mb-2">10) @lang('form.phone'):</p>
+                                                    <input type="text" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ $employee->phone ?? old('phone') }}" placeholder="@lang('form.phone')">
 
                                                     @error('phone')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -301,16 +359,34 @@
                                         </div>
                                         <!--/==/ End of Phone Number -->
 
-                                        <!-- Province -->
-                                        <div class="form-group @error('province') has-danger @enderror">
-                                            <p class="mb-2">12) @lang('form.province'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="province" class="form-control @error('province') form-control-danger @enderror" name="province" value="{{ $employee->province ?? old('province') }}" placeholder="@lang('form.province')" required>
+                                        <!-- Address -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <!-- Main Province -->
+                                                <div class="form-group @error('main_province') has-danger @enderror">
+                                                    <p class="mb-2">12) @lang('form.mainProvince'): <span class="tx-danger">*</span></p>
+                                                    <input type="text" id="main_province" class="form-control @error('main_province') form-control-danger @enderror" name="main_province" value="{{ $employee->main_province ?? old('main_province') }}" placeholder="@lang('form.mainProvince')" required>
 
-                                            @error('province')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
+                                                    @error('main_province')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of Main Province -->
+                                            </div>
+                                            <div class="col-md-6">
+                                                <!-- Current Province -->
+                                                <div class="form-group @error('current_province') has-danger @enderror">
+                                                    <p class="mb-2">12) @lang('form.currentProvince'): <span class="tx-danger">*</span></p>
+                                                    <input type="text" id="current_province" class="form-control @error('current_province') form-control-danger @enderror" name="current_province" value="{{ $employee->current_province ?? old('current_province') }}" placeholder="@lang('form.currentProvince')" required>
+
+                                                    @error('current_province')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of Current Province -->
+                                            </div>
                                         </div>
-                                        <!--/==/ End of Province -->
+                                        <!--/==/ End of Address -->
 
                                         <!--/==/ End of General Information -->
                                     </div>
@@ -324,14 +400,10 @@
 
                                         <!-- Photo -->
                                         <div class="form-group @error('photo') has-danger @enderror">
-                                            <p class="mb-2">
-                                                <!-- Photo -->
-                                                <span class="caption">
-                                                    <img src="{{ $employee->image }}" class="img-fluid float-left" style="height: 30px;">
-                                                </span>
-                                                13) @lang('form.photo'):
-                                            </p>
-
+                                            <p class="mb-2">13) @lang('form.photo'):</p>
+                                            @if($employee->image)
+                                                <img src="{{ $employee->image }}" alt="{{ $employee->name }}" width="30">
+                                            @endif
                                             <input type="file" class="dropify" name="photo" accept="image/*" data-height="200" />
                                             @error('photo')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -343,14 +415,12 @@
                                         <div class="form-group @error('tazkira') has-danger @enderror">
                                             <p class="mb-2">
                                                 <!-- Tazkira -->
-                                                @if($employee->taz)
-                                                    <span class="caption">
-                                                        <img src="{{ $employee->taz }}" class="img-fluid float-left" style="height: 30px;">
-                                                    </span>
-                                                @endif
                                                 14) @lang('form.idCard'): <br>
                                                 <span class="caption bg-gray-300">نوت: اگر تذکره الکترونیکی دارید، آن را در یک فایل قرار داده و آپلود نمایید.</span>
                                             </p>
+                                            @if($employee->taz)
+                                                <img src="{{ $employee->taz }}" alt="{{ $employee->name }}" width="30">
+                                            @endif
 
                                             <input type="file" class="dropify" name="tazkira" accept="image/*" data-height="200" />
                                             @error('tazkira')
@@ -358,6 +428,17 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Tazkira -->
+
+                                        <!-- Education -->
+                                        <div class="form-group @error('education') has-danger @enderror">
+                                            <p class="mb-2">10) @lang('form.education'):</p>
+                                            <input type="text" id="education" class="form-control @error('education') form-control-danger @enderror" name="education" value="{{ $employee->education ?? old('education') }}" placeholder="@lang('form.education')">
+
+                                            @error('education')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Education -->
 
                                         <!-- Information -->
                                         <div class="form-group @error('info') has-danger @enderror">

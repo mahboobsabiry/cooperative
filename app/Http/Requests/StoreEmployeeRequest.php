@@ -26,7 +26,8 @@ class StoreEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'photo'         => 'image|mimes:jpg,png,jfif',
+            'photo'         => 'nullable|image|mimes:jpg,png,jfif',
+            'tazkira'       => 'nullable|image|mimes:jpg,png,jfif',
             'name'          => 'required|min:3|max:64',
             'last_name'     => 'required|min:3|max:64',
             'father_name'   => 'required|min:3|max:64',

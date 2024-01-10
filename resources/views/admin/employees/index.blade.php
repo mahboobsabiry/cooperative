@@ -39,7 +39,7 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                <a class="btn ripple btn-primary" href="{{ route('admin.employees.create') }}" target="_blank">
+                <a class="btn ripple btn-primary" href="{{ route('admin.employees.create') }}">
                     <i class="fe fe-plus-circle"></i> @lang('global.new')
                 </a>
             </div>
@@ -80,8 +80,6 @@
                                 <table class="table table-striped table-bordered export-table border-top key-buttons display text-nowrap w-100">
                                     <thead>
                                     <tr>
-                                    </tr>
-                                    <tr>
                                         <th>#</th>
                                         <th>@lang('form.photo')</th>
                                         <th>@lang('form.name')</th>
@@ -111,13 +109,15 @@
                                             <td>
                                                 <img src="{{ $employee->image ? $employee->image : asset('assets/images/avatar-default.jpeg') }}" width="50" class="rounded-50">
                                             </td>
-                                            <td>{{ $employee->name }} {{ $employee->last_name }}</td>
+                                            <td>
+                                                <a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
+                                            </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
                                             <td>{{ $employee->gender == 1 ? trans('form.male') : trans('form.female') }}</td>
                                             <td>{{ $employee->emp_number ?? '' }}</td>
                                             <td>{{ $employee->appointment_number ?? '' }}</td>
                                             <td>{{ $employee->appointment_date ?? '' }}</td>
-                                            <td>{{ $employee->lastDuty ?? '' }}</td>
+                                            <td>{{ $employee->last_duty ?? '' }}</td>
                                             <td>{{ $employee->birth_year ?? '' }}</td>
                                             <td>{{ $employee->education ?? '' }}</td>
                                             <td>{{ $employee->prr_npr ?? '' }}</td>

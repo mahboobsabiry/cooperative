@@ -39,7 +39,7 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                <a class="btn ripple btn-primary" href="{{ route('admin.users.create') }}" target="_blank">
+                <a class="btn ripple btn-primary" href="{{ route('admin.users.create') }}">
                     <i class="fe fe-plus-circle"></i> @lang('global.new')
                 </a>
             </div>
