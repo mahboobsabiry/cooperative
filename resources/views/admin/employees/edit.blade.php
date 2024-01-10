@@ -318,7 +318,7 @@
                                                 <!-- PRR Date -->
                                                 <div class="form-group @error('prr_date') has-danger @enderror">
                                                     <p class="mb-2">9) PRR Date:</p>
-                                                    <input data-jdp data-jdp-max="today" type="text" id="email" class="form-control @error('prr_date') form-control-danger @enderror" name="prr_date" value="{{ $employee->prr_date ?? old('prr_date') }}" placeholder="1402/01/12">
+                                                    <input data-jdp data-jdp-max-date="today" type="text" id="email" class="form-control @error('prr_date') form-control-danger @enderror" name="prr_date" value="{{ $employee->prr_date ?? old('prr_date') }}" placeholder="1402/01/12">
 
                                                     @error('prr_date')
                                                     <div class="invalid-feedback">{{ $message }}</div>

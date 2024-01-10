@@ -78,6 +78,8 @@
         <link rel="stylesheet" href="{{ asset('backend/assets/plugins/sweet-alert/sweetalert.css') }}">
         <link rel="stylesheet" href="{{ asset('backend/assets/plugins/toastr/toastr.min.css') }}">
 
+        <link rel="stylesheet" href="{{ asset('backend/assets/plugins/jdatepicker/jalalidatepicker.min.css') }}">
+
         <link href="{{ asset('backend/assets/switcher/demo.css') }}" rel="stylesheet">
         <link href="{{ asset('backend/assets/css/new-style.css') }}" rel="stylesheet">
 
@@ -189,10 +191,21 @@
         @endif
 
         <script src="{{ asset('backend/assets/plugins/toastr/toastr.min.js') }}"></script>
+
+        <script type="text/javascript"
+                src="{{ asset('backend/assets/plugins/jdatepicker/jalalidatepicker.min.js') }}"></script>
         @include('js.all')
         @yield('extra_js')
 
         <!-- Custom js-->
         <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+                jalaliDatepicker.startWatch({
+                    months: ["حمل", "ثور", "جوزا", "سرطان", "اسد", "سنبله", "میزان", "عقرب", "قوس", "جدی", "دلو", "حوت"],
+                    maxDate: "attr"
+                });
+            });
+        </script>
     </body>
 </html>

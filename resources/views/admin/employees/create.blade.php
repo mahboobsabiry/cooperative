@@ -253,7 +253,7 @@
                                                 <!-- Appointment Date -->
                                                 <div class="form-group @error('appointment_date') has-danger @enderror">
                                                     <p class="mb-2">6) @lang('form.appointmentDate'): <span class="tx-danger">*</span></p>
-                                                    <input data-jdp data-jdp-max="today" type="text" id="appointment_date" class="form-control @error('appointment_date') form-control-danger @enderror" name="appointment_date" value="{{ old('appointment_date') }}" placeholder="@lang('form.appointmentDate')" required>
+                                                    <input data-jdp data-jdp-max-date="today" type="text" id="appointment_date" class="form-control @error('appointment_date') form-control-danger @enderror" name="appointment_date" value="{{ old('appointment_date') }}" placeholder="@lang('form.appointmentDate')" required>
 
                                                     @error('appointment_date')
                                                     <div class="invalid-feedback">{{ $message }}</div>
