@@ -81,7 +81,6 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user->load('roles');
-        $admin = $user->roles->first()->name == 'Admin';
         return view('admin.users.show', compact('user', 'admin'));
     }
 
@@ -92,18 +91,8 @@ class UserController extends Controller
         return view('admin.users.edit', compact('roles', 'user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $request->validate([
-            'avatar'    => 'image|mimes:jpg,png',
-            'name'      => 'required|min:2|max:64',
-            'phone'     => 'nullable|min:8|max:15|unique:users,phone,'.$user->id,
-            'email'     => 'required|min:8|max:128|unique:users,email,'.$user->id,
-            'roles.*'   => 'integer',
-            'roles'     => 'required|array',
-            'info'      => 'nullable'
-        ]);
-
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
         //  Has File

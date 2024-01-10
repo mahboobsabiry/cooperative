@@ -71,17 +71,17 @@
                         <hr>
                         <!-- Table -->
                         <div class="table-responsive mt-2">
-                            <table id="exportexample"
-                                   class="table table-bordered border-top key-buttons display text-nowrap w-100">
+                            <table class="table table-bordered export-table border-top key-buttons display text-nowrap w-100">
                                 <thead>
                                 <tr>
                                     <th rowspan="2" class="text-center tblBorder">#</th>
-                                    <th colspan="4" class="text-center tblBorder">@lang('global.personalInfo')</th>
+                                    <th colspan="5" class="text-center tblBorder">@lang('global.personalInfo')</th>
                                     <th colspan="3" class="text-center tblBorder">@lang('global.details')</th>
                                 </tr>
                                 <tr>
                                     <th class="text-center">@lang('form.avatar')</th>
                                     <th class="text-center">@lang('form.name')</th>
+                                    <th class="text-center">@lang('form.username')</th>
                                     <th class="text-center">@lang('form.phone')</th>
                                     <th class="text-center">@lang('form.email')</th>
                                     <th class="text-center">@lang('admin.sidebar.roles')</th>
@@ -93,9 +93,7 @@
                                 <tbody>
                                 @foreach($users as $user)
                                     <tr>
-                                        <td>
-                                            {{ $loop->iteration }}
-                                        </td>
+                                        <td>{{ $user->id }}</td>
                                         <td>
                                             <img src="{{ $user->image ?? asset('assets/images/avatar-default.jpeg') }}" width="50" class="rounded-circle">
                                         </td>
@@ -113,6 +111,7 @@
                                             @endif
                                             <a href="{{ route('admin.users.show', $user->id) }}" class="ctd">{{ $user->name }}</a>
                                         </td>
+                                        <td>{{ $user->username }}</td>
                                         <!-- Phone Number -->
                                         <td class="tx-sm-12-f">
                                             <a href="callto:{{ $user->phone }}" class="ctd">{{ $user->phone }}</a>
@@ -180,6 +179,6 @@
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.colVis.min.js') }}"></script>
 
     <!-- Custom Scripts -->
-    <script src="{{ asset('backend/assets/js/pages/user-scripts.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/datatable.js') }}"></script>
 @endsection
 <!--/==/ End of Extra Scripts -->

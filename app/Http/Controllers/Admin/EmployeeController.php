@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
 use App\Models\Position;
 use App\Models\User;
@@ -42,21 +43,26 @@ class EmployeeController extends Controller
     // Store Record
     public function store(StoreEmployeeRequest $request)
     {
-        // $employee = Employee::create($request->all());
         $employee = new Employee();
         $employee->position_id  = $request->position_id;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
         $employee->father_name  = $request->father_name;
-        $employee->grand_f_name = $request->grand_f_name;
-        $employee->p2number     = $request->p2number;
+        $employee->gender       = $request->gender;
         $employee->emp_number   = $request->emp_number;
-        $employee->dob          = $request->dob;
-        $employee->phone        = $request->phone;
-        $employee->phone2       = $request->phone2;
-        $employee->email        = $request->email;
-        $employee->province     = $request->province;
-        $employee->info         = $request->info;
+        $employee->appointmen_number    = $request->appointmen_number;
+        $employee->appointmen_date      = $request->appointmen_date;
+        $employee->last_duty        = $request->last_duty;
+        $employee->birth_year       = $request->birth_year;
+        $employee->education        = $request->education;
+        $employee->prr_npr          = $request->prr_npr;
+        $employee->prr_date         = $request->prr_date;
+        $employee->phone            = $request->phone;
+        $employee->phone2           = $request->phone2;
+        $employee->email            = $request->email;
+        $employee->main_province    = $request->main_province;
+        $employee->current_province = $request->current_province;
+        $employee->info             = $request->info;
         // Save On Duty
         if ($request->has('on_duty')) {
             $on_duty = 0;
@@ -117,38 +123,27 @@ class EmployeeController extends Controller
         return view('admin.employees.edit', compact('employee', 'positions'));
     }
 
-    public function update(Request $request, Employee $employee)
+    public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        $request->validate([
-            'photo'         => 'image|mimes:jpg,png,jfif',
-            'name'          => 'required',
-            'last_name'     => 'nullable',
-            'father_name'   => 'required',
-            'grand_f_name'  => 'required',
-            'p2number'      => 'required|unique:employees,p2number,' . $employee->id,
-            'emp_number'    => 'required|unique:employees,emp_number,' . $employee->id,
-            'dob'           => 'required',
-            'phone'         => 'required|min:8|max:15|unique:employees,phone,' . $employee->id,
-            'phone2'        => 'nullable|min:8|max:15',
-            'email'         => 'required|min:10|max:64|unique:employees,email,' . $employee->id,
-            'province'      => 'required|min:3|max:128',
-            'main_position' => 'nullable|min:3|max:224',
-            'info'          => 'nullable'
-        ]);
-
         $employee->position_id  = $request->position_id;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
         $employee->father_name  = $request->father_name;
-        $employee->grand_f_name = $request->grand_f_name;
-        $employee->p2number     = $request->p2number;
+        $employee->gender       = $request->gender;
         $employee->emp_number   = $request->emp_number;
-        $employee->dob          = $request->dob;
-        $employee->phone        = $request->phone;
-        $employee->phone2       = $request->phone2;
-        $employee->email        = $request->email;
-        $employee->province     = $request->province;
-        $employee->info         = $request->info;
+        $employee->appointmen_number    = $request->appointmen_number;
+        $employee->appointmen_date      = $request->appointmen_date;
+        $employee->last_duty        = $request->last_duty;
+        $employee->birth_year       = $request->birth_year;
+        $employee->education        = $request->education;
+        $employee->prr_npr          = $request->prr_npr;
+        $employee->prr_date         = $request->prr_date;
+        $employee->phone            = $request->phone;
+        $employee->phone2           = $request->phone2;
+        $employee->email            = $request->email;
+        $employee->main_province    = $request->main_province;
+        $employee->current_province = $request->current_province;
+        $employee->info             = $request->info;
         // Save On Duty
         if ($request->has('on_duty')) {
             $on_duty = 0;

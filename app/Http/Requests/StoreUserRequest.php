@@ -33,6 +33,9 @@ class StoreUserRequest extends FormRequest
             'name'     => [
                 'required',
             ],
+            'username' => [
+                'required|unique:users,username',
+            ],
             'phone'    => [
                 'nullable',
                 'min:8',
@@ -40,7 +43,7 @@ class StoreUserRequest extends FormRequest
                 'unique:users,phone'
             ],
             'email'    => [
-                'required',
+                'nullable',
                 'min:10',
                 'max:64',
                 'unique:users,email'

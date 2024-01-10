@@ -77,8 +77,7 @@
 
                             <!-- Table -->
                             <div class="table-responsive mt-2">
-                                <table id="exportexample"
-                                       class="table table-bordered border-top key-buttons display text-nowrap w-100">
+                                <table class="table table-striped table-bordered export-table border-top key-buttons display text-nowrap w-100">
                                     <thead>
                                     <tr>
                                     </tr>
@@ -100,7 +99,7 @@
                                         <th>@lang('form.email')</th>
                                         <th>@lang('form.mainProvince')</th>
                                         <th>@lang('form.currentProvince')</th>
-                                        <th>@lang('form.onDuty')</th>
+                                        <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
                                         <th>@lang('form.info')</th>
                                     </tr>
                                     </thead>
@@ -172,6 +171,6 @@
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.colVis.min.js') }}"></script>
 
     <!-- Custom Scripts -->
-    <script src="{{ asset('backend/assets/js/pages/user-scripts.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/datatable.js') }}"></script>
 @endsection
 <!--/==/ End of Extra Scripts -->

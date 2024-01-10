@@ -3,19 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response;
 
-class StoreEmployeeRequest extends FormRequest
+class UpdateEmployeeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        abort_if(Gate::denies('employee_mgmt'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return true;
+        return false;
     }
 
     /**
@@ -31,17 +27,17 @@ class StoreEmployeeRequest extends FormRequest
             'last_name'     => 'required|min:3|max:64',
             'father_name'   => 'required|min:3|max:64',
             'gender'        => 'required',
-            'emp_number'    => 'required|unique:employees,emp_number',
-            'appointment_number'    => 'required|unique:employees,appointment_number',
+            'emp_number'    => "required|unique:employees,emp_number,$this->id,id",
+            'appointment_number'    => "required|unique:employees,appointment_number,$this->id,id",
             'appointment_date'      => 'nullable',
             'last_duty'     => 'nullable',
             'birth_year'    => 'required',
             'education'     => 'nullable',
             'prr_npr'       => 'required',
             'prr_date'      => 'nullable',
-            'phone'         => 'nullable|unique:employees,phone',
-            'phone2'        => 'nullable|unique:employees,phone2',
-            'email'         => 'nullable|unique:employees,email',
+            'phone'         => "nullable|unique:employees,phone,$this->id,id",
+            'phone2'        => "nullable|unique:employees,phone2,$this->id,id",
+            'email'         => "nullable|unique:employees,email,$this->id,id",
             'main_province'     => 'required|min:3|max:64',
             'current_province'  => 'required|min:3|max:64',
             'info'          => 'nullable',

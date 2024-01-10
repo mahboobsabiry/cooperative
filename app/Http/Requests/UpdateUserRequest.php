@@ -26,19 +26,13 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'    => [
-                'required',
-            ],
-            'email'   => [
-                'required',
-            ],
-            'roles.*' => [
-                'integer',
-            ],
-            'roles'   => [
-                'required',
-                'array',
-            ],
+            'avatar'    => 'image|mimes:jpg,png',
+            'name'      => 'required|min:2|max:64',
+            'phone'     => "nullable|min:8|max:15|unique:users,phone,$this->id,id",
+            'email'     => "nullable|min:8|max:128|unique:users,email,$this->id,id",
+            'roles.*'   => 'integer',
+            'roles'     => 'required|array',
+            'info'      => 'nullable'
         ];
     }
 }
