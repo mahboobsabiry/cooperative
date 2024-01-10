@@ -6,7 +6,6 @@ $(document).ready(function() {
         ],
         order: [[0, 'desc']],
         scrollCollapse: true,
-        scrollX: true,
-        scrollY: '50vh'
+        scrollX: true
     } );
 });
