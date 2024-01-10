@@ -70,26 +70,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // Positions
     Route::resource('positions', PositionController::class);
     Route::post('update-position-status', [PositionController::class, 'updatePositionStatus'])->name('updatePositionStatus');
-    Route::resource('department', DepartmentController::class);
-    Route::resource('administrations', AdministrationsController::class);
-    Route::resource('management', ManagementController::class);
-    Route::resource('branches', BranchesController::class);
     // Employees
     Route::resource('employees', EmployeeController::class);
     Route::post('update-employee-status', [EmployeeController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');
-
-    // Exit Door
-    Route::resource('exit-door', ExitDoorController::class);
-    Route::get('ed/transit', [ExitDoorController::class, 'transit'])->name('ed.transit');
-    Route::get('ed/export', [ExitDoorController::class, 'export'])->name('ed.export');
-    Route::get('ed/empty', [ExitDoorController::class, 'empty'])->name('ed.empty');
-    Route::get('ed/rejected', [ExitDoorController::class, 'rejected'])->name('ed.rejected');
-    // Transit/Export Returned
-    Route::get('ed/tr-returned', [ExitDoorController::class, 'tr_returned'])->name('ed.tr_returned');
-    Route::get('ed/ex-returned', [ExitDoorController::class, 'ex_returned'])->name('ed.ex_returned');
-    // Returned && Exit Again
-    Route::post('is-returned/', [ExitDoorController::class, 'isReturned'])->name('ed.is_returned');
-    Route::post('exit-again/', [ExitDoorController::class, 'exitAgain'])->name('ed.exit_again');
 
     // Settings
     Route::resource('settings', SettingController::class);

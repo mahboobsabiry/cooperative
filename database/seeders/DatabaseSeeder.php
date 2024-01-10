@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
             SettingsTableSeeder::class,
             PositionsTableSeeder::class,
             EmployeesTableSeeder::class,
-            ExitDoorSeeder::class
         ]);
     }
 }

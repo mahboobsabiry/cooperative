@@ -13,9 +13,12 @@ class Employee extends Model
     use HasFactory, HasPhoto, HasTazkira;
 
     protected $fillable = [
-        'position_id', 'name', 'last_name', 'father_name', 'grand_f_name',
-        'p2number', 'emp_number', 'dob', 'phone', 'phone2', 'email',
-        'province', 'info', 'on_duty', 'main_position', 'is_responsible', 'status'
+        'position_id', 'name', 'last_name', 'father_name', 'gender',
+        'emp_number', 'appointment_number', 'appointment_date', 'last_duty', 'birth_year',
+        'education', 'prr_npr', 'prr_date',
+        'phone', 'phone2', 'email',
+        'main_province', 'current_province', 'info',
+        'on_duty', 'main_position', 'is_responsible', 'status'
     ];
 
     // Morph Photo

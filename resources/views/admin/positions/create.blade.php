@@ -92,7 +92,7 @@
                                         <!-- Code -->
                                         <div class="form-group @error('code') has-danger @enderror">
                                             <p class="mb-2">@lang('form.code'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="code" class="form-control @error('code') form-control-danger @enderror" name="code" value="BCD-{{ old('code') }}" placeholder="BCD-000" required>
+                                            <input type="text" id="code" class="form-control @error('code') form-control-danger @enderror" name="code" value="{{ old('code') }}" placeholder="029" required>
 
                                             @error('code')
                                             <div class="invalid-feedback">{{ $message }}</div>

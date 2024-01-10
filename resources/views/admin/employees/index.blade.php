@@ -81,52 +81,59 @@
                                        class="table table-bordered border-top key-buttons display text-nowrap w-100">
                                     <thead>
                                     <tr>
-                                        <th rowspan="2" class="text-center tblBorder">#</th>
-                                        <th colspan="4" class="text-center tblBorder">@lang('global.personalInfo')</th>
-                                        <th colspan="4" class="text-center tblBorder">@lang('pages.employees.generalInfo')</th>
                                     </tr>
                                     <tr>
-                                        <th class="text-center">@lang('form.photo')</th>
-                                        <th class="text-center">@lang('form.name')</th>
-                                        <th class="text-center">@lang('form.phone')</th>
-                                        <th class="text-center">@lang('form.email')</th>
-                                        <th class="text-center">@lang('form.empNumber')</th>
-                                        <th class="text-center">@lang('form.position')</th>
-                                        <th class="text-center">@lang('pages.positions.positionNumber')</th>
-                                        <th class="text-center">@lang('pages.employees.positionNature')</th>
+                                        <th>#</th>
+                                        <th>@lang('form.photo')</th>
+                                        <th>@lang('form.name')</th>
+                                        <th>@lang('form.fatherName')</th>
+                                        <th>@lang('form.gender')</th>
+                                        <th>@lang('form.empNumber')</th>
+                                        <th>@lang('form.appointmentNumber')</th>
+                                        <th>@lang('form.appointmentDate')</th>
+                                        <th>@lang('form.lastDuty')</th>
+                                        <th>@lang('form.birthYear')</th>
+                                        <th>@lang('form.education')</th>
+                                        <th>PRR/NPR</th>
+                                        <th>PRR Date</th>
+                                        <th>@lang('form.phone')</th>
+                                        <th>@lang('form.email')</th>
+                                        <th>@lang('form.mainProvince')</th>
+                                        <th>@lang('form.currentProvince')</th>
+                                        <th>@lang('form.onDuty')</th>
+                                        <th>@lang('form.info')</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
                                     @foreach($employees as $employee)
                                         <tr>
-                                            <td>
-                                                @if(app()->getLocale() == 'en')
-                                                    {{ $loop->iteration }}
-                                                @else
-                                                    <span class="tx-bold">{{ \Morilog\Jalali\CalendarUtils::convertNumbers($loop->iteration) }}</span>
-                                                @endif
-                                            </td>
+                                            <td>{{ $employee->id }}</td>
                                             <td>
                                                 <img src="{{ $employee->image ? $employee->image : asset('assets/images/avatar-default.jpeg') }}" width="50" class="rounded-50">
                                             </td>
                                             <td>{{ $employee->name }} {{ $employee->last_name }}</td>
+                                            <td>{{ $employee->father_name ?? '' }}</td>
+                                            <td>{{ $employee->gender == 1 ? trans('form.male') : trans('form.female') }}</td>
+                                            <td>{{ $employee->emp_number ?? '' }}</td>
+                                            <td>{{ $employee->appointment_number ?? '' }}</td>
+                                            <td>{{ $employee->appointment_date ?? '' }}</td>
+                                            <td>{{ $employee->lastDuty ?? '' }}</td>
+                                            <td>{{ $employee->birth_year ?? '' }}</td>
+                                            <td>{{ $employee->education ?? '' }}</td>
+                                            <td>{{ $employee->prr_npr ?? '' }}</td>
+                                            <td>{{ $employee->prr_date ?? '' }}</td>
                                             <!-- Email Address -->
                                             <td class="tx-sm-12-f">
-                                                <a href="callto:{{ $employee->phone }}" class="ctd">{{ $employee->phone }}</a>
+                                                <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
+                                                <a href="callto:{{ $employee->phone2 ?? '' }}" class="ctd">{{ $employee->phone2 ?? '' }}</a>
                                             </td>
                                             <!-- Email Address -->
-                                            <td><a href="mailto:{{ $employee->email }}" class="tx-sm-12-f ctd">{{ $employee->email }}</a></td>
-                                            <!-- Employee Number -->
-                                            <td>{{ $employee->emp_number }}</td>
-                                            <!-- Office -->
-                                            <td>
-                                                <a href="{{ route('admin.positions.show', $employee->position->id) }}" class="ctd">{{ $employee->position->title }}</a>
-                                            </td>
-                                            <!-- Position -->
-                                            <td>{{ $employee->position->position_number }}</td>
-                                            <!-- Position Nature -->
-                                            <td>{{ $employee->on_duty == 1 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}</td>
+                                            <td><a href="mailto:{{ $employee->email ?? '' }}" class="tx-sm-12-f ctd">{{ $employee->email ?? '' }}</a></td>
+                                            <td>{{ $employee->main_province ?? '' }}</td>
+                                            <td>{{ $employee->current_province ?? '' }}</td>
+                                            <td>{{ $employee->onDuty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}</td>
+                                            <td>{{ $employee->info }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

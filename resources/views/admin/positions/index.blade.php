@@ -13,6 +13,12 @@
     <!--Sumoselect css-->
     <link href="{{ asset('backend/assets/plugins/sumoselect/sumoselect.css') }}" rel="stylesheet">
 
+    @if(app()->getLocale() == 'en')
+        <link href="{{ asset('assets/css/treeview.css') }}" rel="stylesheet">
+    @else
+        <link href="{{ asset('assets/css/treeview.css') }}" rel="stylesheet">
+    @endif
+
     <style>
         table thead tr .tblBorder {
             border: 1px solid #ddd;
@@ -60,6 +66,10 @@
                         <a class="nav-link" data-toggle="tab" href="#emptyPositions">
                             @lang('pages.positions.emptyPositions')
                         </a>
+
+                        <a class="nav-link" data-toggle="tab" href="#organ">
+                            @lang('pages.positions.organization')
+                        </a>
                     </div>
 
                     <div class="card-body tab-content h-100">
@@ -68,12 +78,11 @@
                         <!-- All Positions -->
                         <div class="tab-pane active" id="allPositions">
                             <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.positions.allPositions')
+                                @lang('pages.positions.allPositions') ({{ count($positions) }})
                             </div>
                             <!-- Table -->
                             <div class="table-responsive mt-2">
-                                <table id="exportexample"
-                                       class="table table-bordered border-top key-buttons display text-nowrap w-100">
+                                <table class="table table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100">
                                     <thead>
                                     <tr>
                                         <th>#</th>
@@ -81,6 +90,7 @@
                                         <th>@lang('pages.positions.responsible')</th>
                                         <th>@lang('pages.positions.underHand')</th>
                                         <th>@lang('pages.positions.positionNumber')</th>
+                                        <th>@lang('form.code')</th>
                                         <th>@lang('form.description')</th>
                                     </tr>
                                     </thead>
@@ -95,11 +105,21 @@
                                             <!-- Responsible -->
                                             <td>
                                                 @if($position->employees)
-                                                    @foreach($position->employees as $employee)
-                                                        <a href="{{ route('admin.employees.show', $employee->id) }}" class="badge badge-pill badge-dark" target="_blank">
-                                                            {{ $employee->name }} {{ $employee->last_name }}
+                                                    @php
+                                                    $emp = $position->employees()->where('is_responsible', 1)->first();
+                                                    @endphp
+
+                                                    @if(!empty($emp->name))
+                                                        <a href="{{ route('admin.employees.show', $emp->id) }}">
+                                                            {{ $emp->name }}
+                                                            {{ $emp->last_name }}
+                                                            (<span class="text-danger text-sm-center">
+                                                                {{ $emp->on_duty == 1 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
+                                                            </span>)
                                                         </a>
-                                                    @endforeach
+                                                    @else
+                                                        @lang('global.empty')
+                                                    @endif
                                                 @else
                                                     @lang('global.empty')
                                                 @endif
@@ -110,7 +130,8 @@
                                                 {{ $position->parent->title ?? trans('pages.positions.afCustomsDep') }}
                                             </td>
                                             <td>{{ $position->position_number }}</td>
-                                            <td>{{ \Str::limit($position->desc, 50, '...') }}</td>
+                                            <td>{{ $position->code }}</td>
+                                            <td>{{ $position->desc }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -123,7 +144,7 @@
                         <!-- Empty Positions -->
                         <div class="tab-pane" id="emptyPositions">
                             <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.positions.emptyPositions')
+                                @lang('pages.positions.emptyPositions') ({{ count($emptyPositions) }})
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered row">
@@ -133,6 +154,7 @@
                                         <th class="font-weight-bold">@lang('form.title')</th>
                                         <th class="font-weight-bold">@lang('pages.positions.positionNumber')</th>
                                         <th class="font-weight-bold">@lang('pages.positions.underHand')</th>
+                                        <th class="font-weight-bold">@lang('form.code')</th>
                                         <th class="font-weight-bold">@lang('form.status')</th>
                                     </tr>
                                     @foreach($emptyPositions as $post)
@@ -140,6 +162,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $post->title }}</td>
                                             <td>{{ $post->position_number }}</td>
+                                            <td>{{ $post->code }}</td>
                                             <td>{{ $post->parent->title ?? trans('pages.positions.afCustomsDep') }}</td>
                                             <td>@lang('global.empty')</td>
                                         </tr>
@@ -149,6 +172,49 @@
                             </div>
                         </div>
                         <!--/==/ End of Empty Positions -->
+
+                        <!-- Organization -->
+                        <div class="tab-pane" id="organ">
+                            <div class="main-content-label tx-13 mg-b-20">
+                                @lang('pages.positions.bcdOrg')
+                            </div>
+
+                            <div class="container">
+                                <div class="row bd">
+                                    <div class="tree m-2">
+                                        <ul>
+                                            @foreach($organization as $organ)
+                                                <li>
+                                                    <a href="{{ route('admin.positions.show', $organ->id) }}" style="background: #ba8b00; color: beige">{{ $organ->title }}</a>
+                                                    <ul>
+                                                        @foreach($organ->children as $admin)
+                                                            <li>
+                                                                <a href="{{ route('admin.positions.show', $admin->id) }}" style="background: burlywood;">{{ $admin->title }}</a>
+                                                                <ul>
+                                                                    @foreach($admin->children as $mgmt)
+                                                                        <li>
+                                                                            <a href="{{ route('admin.positions.show', $mgmt->id) }}" style="background: bisque;">{{ $mgmt->title }}</a>
+                                                                            <ul>
+                                                                                @foreach($mgmt->children as $mgr)
+                                                                                    <li>
+                                                                                        <a href="{{ route('admin.positions.show', $mgr->id) }}" style="background: beige;">{{ $mgr->title }} ({{ count($mgr->employees) }})</a>
+                                                                                    </li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/==/ End of Organization -->
                     </div>
                 </div>
                 <!--/==/ End of Table Card -->
@@ -175,6 +241,6 @@
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.colVis.min.js') }}"></script>
 
     <!-- Custom Scripts -->
-    <script src="{{ asset('backend/assets/js/pages/user-scripts.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/datatable.js') }}"></script>
 @endsection
 <!--/==/ End of Extra Scripts -->

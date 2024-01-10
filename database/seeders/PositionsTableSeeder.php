@@ -19,52 +19,59 @@ class PositionsTableSeeder extends Seeder
         $positions = [
             [
                 'parent_id' => 0,
-                'title'     => 'رئیس',
-                'code'      => "BCD-001",
+                'title'     => 'ریاست گمرک بلخ',
+                'code'      => "20-27-01-001",
                 'position_number' => 2,
                 'desc'      => 'مقام ریاست گمرک بلخ'
             ],
             [
                 'parent_id' => 1,
+                'title'     => 'مدیر اجرائیه',
+                'code'      => "20-27-01-002",
+                'position_number' => 5,
+                'desc'      => ''
+            ],
+            [
+                'parent_id' => 1,
                 'title'     => 'آمر عملیاتی',
-                'code'      => "BCD-002",
+                'code'      => "20-27-01-029",
                 'position_number' => 3,
                 'desc'      => 'آمریت عملیاتی گمرک بلخ'
             ],
             [
                 'parent_id' => 1,
                 'title'     => 'آمر تخنیکی و مسلکی',
-                'code'      => "BCD-003",
+                'code'      => "20-27-01-118",
                 'position_number' => 3,
                 'desc'      => 'آمریت تخنیکی و مسلکی ریاست گمرک بلخ'
             ],
             [
                 'parent_id' => 1,
                 'title'     => 'آمر گمرک سرحدی حیرتان',
-                'code'      => "BCD-004",
+                'code'      => "20-27-01-154",
                 'position_number' => 3,
                 'desc'      => 'آمریت گمرک سرحدی حیرتان واقع لب مرز با کشور اوزبیکستان'
             ],
             [
-                'parent_id'     => 2,
-                'title'         => 'مدیر عمومی اداری',
-                'code'          => "BCD-005",
+                'parent_id'     => 1,
+                'title'         => 'مدیر عمومی مالی و اداری',
+                'code'          => "20-27-01-008",
                 'position_number' => 4,
                 'desc'          => 'مدیریت عمومی اداری ریاست گمرک بلخ'
             ],
             [
                 'parent_id'     => 3,
-                'title'         => 'مدیر عمومی سیستم',
-                'code'          => "BCD-001=6",
+                'title'         => 'مدیر عمومی اسیکودا و سیستم های گمرکی',
+                'code'          => "20-27-01-115",
                 'position_number' => 4,
                 'desc'          => 'مدیریت عمومی سیستم ریاست گمرک بلخ'
             ],
             [
-                'parent_id'     => 4,
+                'parent_id'     => 5,
                 'title'         => 'مدیر عمومی تشریح اموال',
-                'code'          => "BCD-007",
+                'code'          => "20-27-01-172",
                 'position_number' => 4,
-                'desc'          => 'مدیریت عمومی اداری آمریت گمرک سرحدی حیرتان'
+                'desc'          => ' آمریت گمرک سرحدی حیرتان'
             ],
         ];
 

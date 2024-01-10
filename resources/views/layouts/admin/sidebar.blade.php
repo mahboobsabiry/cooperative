@@ -51,42 +51,6 @@
                             ({{ count(\App\Models\Position::all()) }})
                         </a>
                     </li>
-
-                    <!-- Departments -->
-                    <li class="nav-sub-item {{ request()->is('admin/department') ||
-                        request()->is('admin/department/*') ? 'active' : '' }}">
-                        <a class="nav-sub-link" href="{{ route('admin.department.index') }}">
-                            @lang('pages.positions.department')
-                            ({{ count(\App\Models\Position::all()->where('position_number', 2)) }})
-                        </a>
-                    </li>
-
-                    <!-- Administrations -->
-                    <li class="nav-sub-item {{ request()->is('admin/administrations') ||
-                        request()->is('admin/administrations/*') ? 'active' : '' }}">
-                        <a class="nav-sub-link" href="{{ route('admin.administrations.index') }}">
-                            @lang('pages.positions.administrations')
-                            ({{ count(\App\Models\Position::all()->where('position_number', 3)) }})
-                        </a>
-                    </li>
-
-                    <!-- General Management -->
-                    <li class="nav-sub-item {{ request()->is('admin/management') ||
-                        request()->is('admin/management/*') ? 'active' : '' }}">
-                        <a class="nav-sub-link" href="{{ route('admin.management.index') }}">
-                            @lang('pages.positions.generalMgmts')
-                            ({{ count(\App\Models\Position::all()->where('position_number', 4)) }})
-                        </a>
-                    </li>
-
-                    <!-- Branches -->
-                    <li class="nav-sub-item {{ request()->is('admin/branches') ||
-                        request()->is('admin/branches/*') ? 'active' : '' }}">
-                        <a class="nav-sub-link" href="{{ route('admin.branches.index') }}">
-                            @lang('pages.positions.branches')
-                            ({{ count(\App\Models\Position::all()->where('position_number', '>', 4)) }})
-                        </a>
-                    </li>
                 </ul>
             </li>
             @endcan
@@ -103,71 +67,6 @@
                     </a>
                 </li>
             @endcan
-
-            <!-- Exit Door -->
-            @can('exit_door')
-                <li class="nav-item {{ request()->is('admin/exit-door') ||
-                    request()->is('admin/exit-door/*') ||
-                    request()->is('admin/ed/transit') ||
-                    request()->is('admin/ed/export') ||
-                    request()->is('admin/ed/empty') ||
-                    request()->is('admin/ed/rejected') ||
-                    request()->is('admin/ed/tr-returned') ||
-                    request()->is('admin/ed/ex-returned') ? 'active show' : '' }}">
-
-                    <a class="nav-link with-sub" href="javascript:void(0)">
-                        <i class="fa fa-door-open"></i>
-                        <span class="sidemenu-label">@lang('pages.exitDoor.exitDoor')</span>
-                        <i class="angle fe fe-chevron-right"></i>
-                    </a>
-
-                    <ul class="nav-sub">
-                        <!-- All -->
-                        <li class="nav-sub-item {{ request()->is('admin/exit-door') || request()->is('admin/exit-door/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.exit-door.index') }}">
-                                @lang('pages.exitDoor.exitDoor')
-                            </a>
-                        </li>
-
-                        <!-- Transit Vehicles -->
-                        <li class="nav-sub-item {{ request()->is('admin/ed/transit') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.ed.transit') }}">
-                                @lang('pages.exitDoor.transitGoods')
-                            </a>
-                        </li>
-
-                        <!-- Export Vehicles -->
-                        <li class="nav-sub-item {{ request()->is('admin/ed/export') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.ed.export') }}">
-                                @lang('pages.exitDoor.exportGoods')
-                            </a>
-                        </li>
-
-                        <!-- Empty Vehicles -->
-                        <li class="nav-sub-item {{ request()->is('admin/ed/empty') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.ed.empty') }}">
-                                @lang('pages.exitDoor.emptyVehicles')
-                            </a>
-                        </li>
-
-                        <!-- Rejected Vehicles -->
-                        <li class="nav-sub-item {{ request()->is('admin/ed/rejected') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.ed.rejected') }}">
-                                @lang('pages.exitDoor.rejectedGoods')
-                            </a>
-                        </li>
-
-                        <!-- Returned Vehicles -->
-                        <li class="nav-sub-item {{ request()->is('admin/ed/tr-returned') ||
-                        request()->is('admin/ed/ex-returned') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.ed.tr_returned') }}">
-                                @lang('pages.exitDoor.returnedGoods')
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            @endcan
-            <!--/==/ End of Exit Door -->
 
             <!-- Applications -->
             <li class="nav-label">@lang('admin.sidebar.applications')</li>

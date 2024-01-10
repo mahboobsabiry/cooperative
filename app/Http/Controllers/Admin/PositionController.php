@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePositionRequest;
+use App\Http\Requests\UpdatePositionRequest;
 use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Http\Request;
@@ -24,7 +26,8 @@ class PositionController extends Controller
     {
         $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
         $emptyPositions = Position::doesntHave('employees')->orderBy('position_number', 'ASC')->get();
-        return view('admin.positions.index', compact('positions', 'emptyPositions'));
+        $organization = Position::tree();
+        return view('admin.positions.index', compact('positions', 'emptyPositions', 'organization'));
     }
 
     // Create
@@ -35,19 +38,12 @@ class PositionController extends Controller
     }
 
     // Store
-    public function store(Request $request)
+    public function store(StorePositionRequest $request)
     {
-        $request->validate([
-            'title'     => 'required',
-            'code'      => 'required',
-            'position_number'   => 'required',
-            'desc'      => 'nullable'
-        ]);
-
         $position           = new Position();
         $position->parent_id    = $request->parent_id;
         $position->title        = $request->title;
-        $position->code         = $request->code;
+        $position->code         = '20-27-01-' . $request->code;
         $position->position_number = $request->position_number;
         $position->desc         = $request->desc;
         $position->status       = 1;
@@ -123,7 +119,7 @@ class PositionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Position $position)
+    public function update(UpdatePositionRequest $request, Position $position)
     {
         $request->validate([
             'title'     => 'required',
@@ -134,7 +130,7 @@ class PositionController extends Controller
 
         $position->parent_id    = $request->parent_id;
         $position->title        = $request->title;
-        $position->code         = $request->code;
+        $position->code         = '20-27-01-' . $request->code;
         $position->position_number = $request->position_number;
         $position->desc         = $request->desc;
         $position->save();

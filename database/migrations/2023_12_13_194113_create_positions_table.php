@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('parent_id')->default(0);
             $table->string('title');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->bigInteger('position_number');
             $table->text('desc')->nullable();
             $table->tinyInteger('status')->default(1);
