@@ -27,7 +27,8 @@
                 <li class="nav-item {{ request()->is('admin/positions') ||
                     request()->is('admin/positions/*') ||
                     request()->is('admin/appointment-positions') ||
-                    request()->is('admin/empty-positions') ? 'active show' : '' }}">
+                    request()->is('admin/empty-positions') ||
+                    request()->is('admin/inactive-positions') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fe fe-life-buoy"></i>
@@ -60,6 +61,14 @@
                             <a class="nav-sub-link" href="{{ route('admin.positions.empty') }}">
                                 @lang('pages.positions.emptyPositions')
                                 ({{ \App\Models\Position::all()->sum('num_of_pos') - \App\Models\Employee::all()->count() }})
+                            </a>
+                        </li>
+
+                        <!-- Inactive Positions -->
+                        <li class="nav-sub-item {{ request()->is('admin/inactive-positions') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.positions.inactive') }}">
+                                @lang('pages.positions.inactivePositions')
+                                ({{ \App\Models\Position::all()->where('status', 0)->count() }})
                             </a>
                         </li>
                     </ul>

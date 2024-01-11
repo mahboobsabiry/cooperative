@@ -108,8 +108,7 @@ class EmployeeController extends Controller
     public function show(Employee $employee)
     {
         $admin = Auth::user()->roles->first()->name == 'Admin';
-        $organization = Position::with('children')->where('id', $employee->id)->first();
-        return view('admin.employees.show', compact('employee', 'admin', 'organization'));
+        return view('admin.employees.show', compact('employee', 'admin'));
     }
 
     // Edit Info
@@ -142,6 +141,14 @@ class EmployeeController extends Controller
             'current_province'  => 'required|min:3|max:64',
             'info'          => 'nullable',
         ]);
+
+        $position = Position::where('id', $request->position_id)->first();
+        if ($position->employees()->count() > $position->num_of_pos) {
+            return back()->with([
+                'alertType' => 'danger',
+                'message'   => 'بست مورد نظر تکمیل میباشد.'
+            ]);
+        }
 
         $employee->position_id  = $request->position_id;
         $employee->name         = $request->name;

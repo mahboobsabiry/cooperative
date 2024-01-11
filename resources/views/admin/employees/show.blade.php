@@ -187,10 +187,10 @@
                                         <td>{{ $employee->last_name }}</td>
                                     </tr>
 
-                                    <!-- P2 Number -->
+                                    <!-- Gender -->
                                     <tr>
-                                        <th><strong>@lang('form.p2number') :</strong></th>
-                                        <td>{{ $employee->p2number }}</td>
+                                        <th><strong>@lang('form.gender') :</strong></th>
+                                        <td>{{ $employee->gender == 1 ? trans('form.male') : trans('form.female') }}</td>
                                     </tr>
 
                                     <!-- Left Column -->
@@ -202,10 +202,10 @@
                                         <td>{{ $employee->father_name }}</td>
                                     </tr>
 
-                                    <!-- Grand Father Name -->
+                                    <!-- Birth Year -->
                                     <tr>
-                                        <th><strong>@lang('form.grandFatherName') :</strong></th>
-                                        <td>{{ $employee->grand_f_name }}</td>
+                                        <th><strong>@lang('form.birthYear') :</strong></th>
+                                        <td>{{ $employee->birth_year }} ({{ \Morilog\Jalali\Jalalian::now()->getYear() - $employee->birth_year }} ساله)</td>
                                     </tr>
 
                                     <!-- Employee Number -->
@@ -226,10 +226,16 @@
                             <div class="table-responsive">
                                 <table class="table row table-borderless">
                                     <tbody class="col-lg-12 col-xl-6 p-0">
-                                    <!-- Date of Birth -->
+                                    <!-- Appointment Number -->
                                     <tr>
-                                        <th><strong>@lang('form.dob'): </strong></th>
-                                        <td>{{ $employee->dob }}</td>
+                                        <th><strong>@lang('form.appointmentNumber'): </strong></th>
+                                        <td>{{ $employee->appointment_number }}</td>
+                                    </tr>
+
+                                    <!-- Appointment Date -->
+                                    <tr>
+                                        <th><strong>@lang('form.appointmentDate'): </strong></th>
+                                        <td>{{ $employee->appointment_date }}</td>
                                     </tr>
 
                                     <!-- Email Address -->
@@ -241,45 +247,55 @@
                                         </td>
                                     </tr>
 
-                                    <!-- Province -->
+                                    <!-- Education -->
                                     <tr>
-                                        <th><strong>@lang('form.province'): </strong></th>
-                                        <td>{{ $employee->province }}</td>
+                                        <th><strong>@lang('form.education'): </strong></th>
+                                        <td>{{ $employee->education }}</td>
+                                    </tr>
+
+                                    <!-- PRR/NPR -->
+                                    <tr>
+                                        <th><strong>PRR/NPR: </strong></th>
+                                        <td>{{ $employee->prr_npr }}</td>
+                                    </tr>
+
+                                    <!-- NPR Date -->
+                                    <tr>
+                                        <th><strong>NPR/Date: </strong></th>
+                                        <td>{{ $employee->npr_date }}</td>
                                     </tr>
                                     </tbody>
 
                                     <tbody class="col-lg-12 col-xl-6 p-0">
                                     <!-- Status -->
-                                    @if($admin)
-                                        <tr>
-                                            <th><strong>@lang('form.status'): </strong></th>
-                                            <td>
-                                                <span class="acInText">
-                                                    <span id="acInText"
-                                                          class="{{ $employee->status == 1 ? 'text-success' : 'text-danger' }}">
-                                                        {{ $employee->status == 1 ? trans('global.active') : trans('global.inactive') }}
-                                                    </span>
+                                    <tr>
+                                        <th><strong>@lang('form.status'): </strong></th>
+                                        <td>
+                                            <span class="acInText">
+                                                <span id="acInText"
+                                                      class="{{ $employee->status == 1 ? 'text-success' : 'text-danger' }}">
+                                                    {{ $employee->status == 1 ? trans('global.active') : trans('global.inactive') }}
                                                 </span>
-                                                ----
-                                                @if($employee->status == 1)
-                                                    <a class="updateEmployeeStatus" id="employee-{{ $employee->id }}"
-                                                       employee_id="{{ $employee->id }}" href="javascript:void(0)">
-                                                        <i class="fa fa-toggle-on text-success" aria-hidden="true"
-                                                           status="Active"></i>
-                                                    </a>
-                                                @else
-                                                    <a class="updateEmployeeStatus" id="employee-{{ $employee->id }}"
-                                                       employee_id="{{ $employee->id }}" href="javascript:void(0)">
-                                                        <i class="fa fa-toggle-off text-danger" aria-hidden="true"
-                                                           status="Inactive"></i>
-                                                    </a>
-                                                @endif
-                                                <span id="update_status-{{ $employee->id }}" style="display: none;">
-                                                    <i class="fa fa-toggle-on" aria-hidden="true"></i>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    @endif
+                                            </span>
+                                            ----
+                                            @if($employee->status == 1)
+                                                <a class="updateEmployeeStatus" id="employee_status"
+                                                   employee_id="{{ $employee->id }}" href="javascript:void(0)">
+                                                    <i class="fa fa-toggle-on text-success" aria-hidden="true"
+                                                       status="Active"></i>
+                                                </a>
+                                            @else
+                                                <a class="updateEmployeeStatus" id="employee_status"
+                                                   employee_id="{{ $employee->id }}" href="javascript:void(0)">
+                                                    <i class="fa fa-toggle-off text-danger" aria-hidden="true"
+                                                       status="Inactive"></i>
+                                                </a>
+                                            @endif
+                                            <span id="update_status" style="display: none;">
+                                                <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                                            </span>
+                                        </td>
+                                    </tr>
 
                                     <!-- Phone Number -->
                                     <tr>
@@ -296,16 +312,34 @@
 
                                     <!-- Position -->
                                     <tr>
-                                        <th><strong>
-                                                <a href="{{ route('admin.positions.show', $employee->position->id) }}"
-                                                   class="ctd">
-                                                    @lang('form.position')
-                                                </a>: </strong>
+                                        <th><strong>@lang('form.position'): </strong>
                                         </th>
-                                        <td>{{ $employee->position->title }}
-                                            (<span
-                                                class="small text-success">{{ $employee->onDuty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}</span>)
+                                        <td>
+                                            {{ $employee->position->position_number }} -
+                                            <a href="{{ route('admin.positions.show', $employee->position->id) }}">
+                                                {{ $employee->position->title }}
+                                            </a>
+                                            (<span class="small text-success">{{ $employee->onDuty == 0 ? trans('pages.employees.mainPosition') : ' - ' . trans('pages.employees.onDuty') }} {{ $employee->onDuty == 1 ? $employee->main_position : '' }}</span>)
+                                            [{{ $employee->position->code }}]
                                         </td>
+                                    </tr>
+
+                                    <!-- Last Duty -->
+                                    <tr>
+                                        <th><strong>@lang('form.lastDuty'): </strong></th>
+                                        <td>{{ $employee->last_duty }}</td>
+                                    </tr>
+
+                                    <!-- Main Province -->
+                                    <tr>
+                                        <th><strong>@lang('form.mainProvince'): </strong></th>
+                                        <td>{{ $employee->main_province }}</td>
+                                    </tr>
+
+                                    <!-- Education -->
+                                    <tr>
+                                        <th><strong>@lang('form.currentProvince'): </strong></th>
+                                        <td>{{ $employee->current_province }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -351,26 +385,6 @@
                             {{ $employee->name }} {{ $employee->last_name }}
                             (<span class="small text-secondary">{{ $employee->position->title }}</span>)
                         @endif
-                    </div>
-
-                    <!-- Body -->
-                    <div class="container">
-                        <div class="row">
-                            <div class="tree m-2">
-                                <ul>
-                                    <li>
-                                        <a href="{{ route('admin.positions.show', $organization->id) }}">{{ $organization->title }}</a>
-                                        <ul>
-                                            @foreach($organization->children as $child)
-                                                <li>
-                                                    <a href="{{ route('admin.positions.show', $child->id) }}">{{ $child->title }} ({{ count($child->employees) }})</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

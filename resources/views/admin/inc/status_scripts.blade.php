@@ -61,7 +61,7 @@
         $.ajax({
             type: 'post',
             url: '{{ route('admin.updatePositionStatus') }}',
-            data: {status: status, employee_id: position_id},
+            data: {status: status, position_id: position_id},
             success: function (resp) {
                 $("#position_status").show();
                 $("#update_status").hide();
@@ -97,8 +97,8 @@
     $(".updateEmployeeStatus").click(function () {
         var status = $(this).children("i").attr("status");
         var employee_id = $(this).attr("employee_id");
-        $("#employee-" + employee_id).hide();
-        $("#update_status-" + employee_id).show();
+        $("#employee_status").hide();
+        $("#update_status").show();
         // alert("test"); return false;
         $.ajaxSetup({
             headers: {
@@ -108,13 +108,13 @@
         $.ajax({
             type: 'post',
             url: '/admin/update-employee-status',
-            data: {status: status, user_id: employee_id},
+            data: {status: status, employee_id: employee_id},
             success: function (resp) {
-                $("#employee-" + employee_id).show();
-                $("#update_status-" + employee_id).hide();
+                $("#employee_status").show();
+                $("#update_status").hide();
 
                 if (resp['status'] == 0) {
-                    $("#employee-" + employee_id).html('<i class="fa fa-toggle-off text-danger" aria-hidden="true" status="Inactive"></i>');
+                    $("#employee_status").html('<i class="fa fa-toggle-off text-danger" aria-hidden="true" status="Inactive"></i>');
                     // Change the inactivity
                     $(".acInText").html('<span id="acInText" class="text-danger">@lang('global.inactive')</span>');
                     toastr.options = {
@@ -122,7 +122,7 @@
                     };
                     toastr.warning('{{ trans('messages.employees.employeeDeactivated') }}');
                 } else if (resp['status'] == 1) {
-                    $("#employee-" + employee_id).html('<i class="fa fa-toggle-on text-success" aria-hidden="true" status="Active"></i>');
+                    $("#employee_status").html('<i class="fa fa-toggle-on text-success" aria-hidden="true" status="Active"></i>');
                     // Change the activity
                     $(".acInText").html('<span id="acInText" class="text-success">@lang('global.active')</span>');
                     toastr.options = {

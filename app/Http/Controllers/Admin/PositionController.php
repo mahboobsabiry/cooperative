@@ -168,4 +168,11 @@ class PositionController extends Controller
         $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
         return view('admin.positions.empty', compact('positions', 'empty_positions'));
     }
+
+    // Fetch All Data
+    public function inactive()
+    {
+        $positions = Position::with('employees')->where('status', 0)->orderBy('created_at', 'desc')->get();
+        return view('admin.positions.inactive', compact('positions'));
+    }
 }

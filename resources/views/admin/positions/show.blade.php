@@ -79,9 +79,13 @@
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
                                 @if($position->num_of_pos == 1)
-                                    <img alt="avatar" src="{{ $position->employees->first()->image ?? asset('assets/images/avatar-default.jpeg') }}">
+                                    <a href="{{ $position->employees->first()->image ?? asset('assets/images/avatar-default.jpeg') }}" target="_blank">
+                                        <img alt="avatar" src="{{ $position->employees->first()->image ?? asset('assets/images/avatar-default.jpeg') }}">
+                                    </a>
                                 @else
-                                    <img alt="avatar" src="{{ asset('assets/images/avatar-default.jpeg') }}">
+                                    <a href="{{ asset('assets/images/avatar-default.jpeg') }}" target="_blank">
+                                        <img alt="avatar" src="{{ asset('assets/images/avatar-default.jpeg') }}">
+                                    </a>
                                 @endif
                             </div>
                         </div>
@@ -299,6 +303,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>@lang('form.photo')</th>
+                                <th>@lang('form.idCard')</th>
                                 <th>@lang('form.name')</th>
                                 <th>@lang('form.fatherName')</th>
                                 <th>@lang('form.position')</th>
@@ -326,7 +331,14 @@
                                 <tr>
                                     <td>{{ $employee->id }}</td>
                                     <td>
-                                        <img src="{{ $employee->image ? $employee->image : asset('assets/images/avatar-default.jpeg') }}" width="50" class="rounded-50">
+                                        <a href="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}" target="_blank">
+                                            <img src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}" width="50" class="rounded-50">
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}" target="_blank">
+                                            <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}" width="50" class="rounded-50">
+                                        </a>
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
