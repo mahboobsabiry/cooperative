@@ -72,7 +72,7 @@
                         <!-- Employees -->
                         <div class="tab-pane active" id="employees">
                             <div class="main-content-label tx-13 mg-b-20">
-{{--                                @lang('admin.sidebar.employees')--}}
+                                @lang('admin.sidebar.employees')
                             </div>
 
                             <!-- Table -->
@@ -85,8 +85,7 @@
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.fatherName')</th>
                                         <th>@lang('form.position')</th>
-                                        <th>@lang('form.code')</th>
-                                        <th>@lang('form.position')</th>
+                                        <th>@lang('pages.positions.positionCode')</th>
                                         <th>@lang('form.gender')</th>
                                         <th>@lang('form.empNumber')</th>
                                         <th>@lang('form.appointmentNumber')</th>
@@ -116,9 +115,8 @@
                                                 <a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
                                             </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
-                                            <td>{{ $employee->position->title ?? '' }}</td>
+                                            <td>{{ $employee->position->title ?? '' }} - {{ $employee->position->position_number ?? '' }}</td>
                                             <td>{{ $employee->position->code ?? '' }}</td>
-                                            <td>{{ $employee->position->position_number ?? '' }}</td>
                                             <td>{{ $employee->gender == 1 ? trans('form.male') : trans('form.female') }}</td>
                                             <td>{{ $employee->emp_number ?? '' }}</td>
                                             <td>{{ $employee->appointment_number ?? '' }}</td>

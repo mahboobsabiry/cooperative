@@ -1,28 +1,6 @@
 <?php
 
 return [
-    'articles' => [
-        'articleDetails' => 'جزئیات مقاله',
-        'addNewArticle'  => 'ثبت مقاله جدید',
-        'article'        => 'مقاله',
-        'deleteArticle'  => 'حذف مقاله',
-        'editArticle'    => 'ویرایش مقاله',
-        'latestArticles' => 'آخرین مقالات',
-        'mostContArticles'      => 'پْربحث‌ترین مقالات',
-        'mostVisitedArticles'   => 'پْربازدیدترین مقالات'
-    ],
-
-    'books' => [
-        'addNewBook'  => 'ثبت کتاب جدید',
-        'book'        => 'کتاب',
-        'bookDetails' => 'جزئیات کتاب',
-        'deleteBook'  => 'حذف کتاب',
-        'editBook'    => 'ویرایش کتاب',
-        'latestBooks' => 'آخرین کتاب‌ها',
-        'mostContBooks'      => 'پْربحث‌ترین کتاب‌ها',
-        'mostVisitedBooks'   => 'پْربازدیدترین کتاب‌ها'
-    ],
-
     'dashboard' => [
         'addedEmpMsg'       => 'کارمند جدید موفقانه ثبت شد!',
         'latestAddedMembers' => 'آخرین اعضای ثبت شده',
@@ -39,12 +17,6 @@ return [
     	'totalInactiveMembers' 	=> 'مجموع اعضای غیرفعال',
         'usersActivities'    => 'فعالیت های کاربران',
         'userAcParagMsg'     => 'تمام فعالیت های کاربران از جمله: ثبت و بروز رسانی معلومات اعضاء؛'
-    ],
-
-    'districts' => [
-        'deleteDistrict'    => 'حذف ولسوالی',
-        'editDistrict'      => 'ویرایش ولسوالی',
-        'district'          => 'ولسوالی'
     ],
 
     'employees' => [
@@ -70,148 +42,6 @@ return [
         'updatedEmpMsg'     => 'معلومات کارمند موفقانه بروز رسانی شد!'
     ],
 
-    'exitDoor' => [
-        'bxTotal'       => 'محدوده',
-        'bxTotalTx'     => 'مروجه',
-        'carrier'       => 'بارچالان',
-        'carrierName'   => 'اسم بارچالانی',
-        'cName'         => 'اسم شرکت',
-        'emptyVehicles' => 'وسایط خالی',
-        'eaDate'        => 'تاریخ خروج دوباره',
-        'exitDoor'      => 'دروازه خروجی',
-        'exitType'      => 'نوع خروج',
-        'exitVehicle'   => 'خروج وسیله نقلیه',
-        'export'        => 'صادرات',
-        'exportGoods'   => 'اموال صادراتی',
-        'fromDate'      => 'از تاریخ',
-        'isExitAgain'   => 'آیا خروج دوباره گردید؟',
-        'isReturned'    => 'آیا بازگشت نموده است؟',
-        'goodName'      => 'اسم جنس',
-        'goodsAmount'   => 'مقدار جنس',
-        'rejectedGoods'     => 'اموال مستردی',
-        'rejectedVehicles'  => 'وسایط مستردی',
-        'returnDate'        => 'تاریخ بازگشت',
-        'returnedExport'    => 'بازگشتی صادراتی',
-        'returnedGoods'     => 'اموال بازگشتی',
-        'returnedTransit'   => 'بازگشتی ترانزیتی',
-        'returnedVehicles'  => 'وسایط بازگشتی',
-        'toDate'            => 'الی تاریخ',
-        'transit'           => 'ترانزیت',
-        'transitGoods'      => 'اموال ترانزیتی',
-        'trex'          => 'ترانزیت/صادرات',
-        'trexGoods'     => 'اموال ترانزیت/صادرات',
-        'trexVehicles'  => 'وسایط ترانزیت/صادرات',
-        'vpNumber'      => 'نمبر پلیت عراده',
-        'vptNumber'     => 'نمبر پلیت تریلر عراده',
-        'weight'        => 'وزن',
-        'weightKg'      => 'وزن به کیلوگرام'
-    ],
-
-    'finance' => [
-        'employeeSalaries'  => 'معاشات کارمندان',
-        'empSalaries' => [
-            'addEmpSalary'      => 'ثبت معاش کارمند',
-            'deleteEmpSalary'   => 'حذف معاش کارمند',
-            'editEmpSalary'     => 'ویرایش معاش کارمند',
-            'empSalary'         => 'معاش کارمند',
-            'showEmpSalary'     => 'جزئیات معاش کارمند'
-        ],
-        'expensesCodes' => [
-            'addExpenseCode'    => 'ثبت کد مصرف',
-            'deleteExpenseCode' => 'حذف کد مصرف',
-            'editExpenseCode'   => 'ویرایش کد مصرف',
-            'expenseCode'       => 'کد مصرف',
-            'expensesCodes'     => 'کدهای مصارفاتی',
-            'showExpenseCode'   => 'ویرایش کد مصرف'
-        ],
-        'moneys' => [
-            'addMoney'      => 'ثبت پول',
-            'deductedMoneys'    => 'پول‌های کسرشده',
-            'deleteMoney'   => 'حذف پول',
-            'editMoney'     => 'ویرایش پول',
-            'leftOverAmount'    => 'مبلغ باقیمانده',
-            'leftOverMoneys'    => 'پول‌های باقیمانده',
-            'mainMoney'     => 'پول اصلی',
-            'money'         => 'پول',
-            'moneys'        => 'پول‌ها',
-            'spentAmount'   => 'مبلغ مصرف شده'
-        ],
-        'months' => [
-            'addMonth'      => 'ثبت ماه',
-            'deleteMonth'   => 'حذف ماه',
-            'editMonth'     => 'ویرایش ماه',
-            'month'         => 'ماه'
-        ]
-    ],
-
-    'galleries' => [
-        'addNewGallery'  => 'ثبت گالری جدید',
-        'gallery'        => 'گالری',
-        'galleryDetails' => 'جزئیات گالری',
-        'deleteGallery'  => 'حذف گالری',
-        'editGallery'    => 'ویرایش گالری',
-        'latestGalleries'       => 'آخرین تصاویر',
-        'mostContGalleries'     => 'پْربحث‌ترین تصاویر',
-        'mostVisitedGalleries'  => 'پْربازدیدترین تصاویر'
-    ],
-
-    'interviews' => [
-        'addNewInterview'  => 'ثبت مصاحبه جدید',
-        'deleteInterview'  => 'حذف مصاحبه',
-        'editInterview'    => 'ویرایش مصاحبه',
-        'interviewDetails' => 'جزئیات مصاحبه',
-        'latestInterviews' => 'آخرین مصاحبه‌ها',
-        'mostContInterviews'      => 'پْربحث‌ترین مصاحبه‌ها',
-        'mostVisitedInterviews'   => 'پْربازدیدترین مصاحبه‌ها'
-    ],
-
-    'mails' => [
-        'compose'   => 'کامپوز',
-        'inbox'     => 'انبوکس',
-        'mailInbox' => 'انبوکس-ایمیل',
-        'mail'      => 'ایمیل',
-        'subject'   => 'موضوع'
-    ],
-
-    'membersReport' => 'گزارش اعضاء',
-
-    'members' => [
-        'addNewMember'  => 'ثبت عضو جدید',
-        'deleteMember'  => 'حذف عضو',
-        'editMember'    => 'ویرایش عضو',
-        'letterOfCommitment'    => 'تعهدنامه',
-        'memberDetails' => 'جزئیات عضو',
-        'membershipCard' => 'کارت عضویت',
-        'membersList'   => 'لیست اعضاء',
-        'nameLName'     => 'نام و تخلص',
-        'privateNumber' => 'شمارهٔ خصوصی',
-        'publicInfo'    => 'معلومات عمومی',
-        'publicNumber'  => 'شمارهٔ عمومی'
-    ],
-
-    'movies' => [
-        'addNewMovie'  => 'ثبت فیلم جدید',
-        'deleteMovie'  => 'حذف فیلم',
-        'editMovie'    => 'ویرایش فیلم',
-        'latestMovies' => 'آخرین فیلم‌ها',
-        'mostContMovies'      => 'پْربحث‌ترین فیلم‌ها',
-        'mostVisitedMovies'   => 'پْربازدیدترین فیلم‌ها',
-        'movie'        => 'فیلم',
-        'movieDetails' => 'جزئیات فیلم',
-        'trailer'      => 'پیش‌پرده'
-    ],
-
-    'news' => [
-        'addImages'   => 'اضافه کردن تصاویر',
-        'addNewNews'  => 'ثبت خبر جدید',
-        'deleteNews'  => 'حذف خبر',
-        'editNews'    => 'ویرایش خبر',
-        'latestNews'  => 'آخرین اخبار',
-        'mostContNews'      => 'پْربحث‌ترین خبرها',
-        'mostVisitedNews'   => 'پْربازدیدترین خبرها',
-        'newsDetails' => 'جزئیات خبر'
-    ],
-
     'permissions' => [
         'addNewPermission'  => 'ثبت مجوز جدید',
         'deletePermission'  => 'حذف مجوز',
@@ -233,6 +63,7 @@ return [
         'branchesTitleNote' => 'لیست تشکیلات شعبات ریاست گمرک بلخ',
         'position'          => 'بست',
         'positionNumber'    => 'نمبر بست',
+        'positionCode'      => 'کد بست',
         'positions'         => 'بست ها',
         'deletePosition'    => 'حذف بست',
         'department'        => 'ریاست',
@@ -246,7 +77,9 @@ return [
         'head'              => 'رئیس',
         'managementTitleNote' => 'لیست تشکیلات مدیریت های عمومی گمرک بلخ',
         'manager'           => 'مسئول',
+        'officials_emps'    => 'مسئولین و کارمندان',
         'organization'      => 'تشکیلات',
+        'num_of_empty_pos'  => 'تعداد بست خالی',
         'responsible'       => 'مسئول',
         'underHand'         => 'زیردستِ'
     ],

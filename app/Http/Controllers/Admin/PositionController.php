@@ -25,7 +25,7 @@ class PositionController extends Controller
     public function index()
     {
         $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
-        $emptyPositions = Position::doesntHave('employees')->orderBy('position_number', 'ASC')->get();
+        $emptyPositions = Position::with('employees')->orderBy('position_number', 'ASC')->get();
         $organization = Position::tree();
         return view('admin.positions.index', compact('positions', 'emptyPositions', 'organization'));
     }
@@ -45,6 +45,7 @@ class PositionController extends Controller
         $position->title        = $request->title;
         $position->code         = '20-27-01-' . $request->code;
         $position->position_number = $request->position_number;
+        $position->num_of_pos   = $request->num_of_pos;
         $position->desc         = $request->desc;
         $position->status       = 1;
         $position->save();
@@ -132,6 +133,7 @@ class PositionController extends Controller
         $position->title        = $request->title;
         $position->code         = '20-27-01-' . $request->code;
         $position->position_number = $request->position_number;
+        $position->num_of_pos   = $request->num_of_pos;
         $position->desc         = $request->desc;
         $position->save();
 

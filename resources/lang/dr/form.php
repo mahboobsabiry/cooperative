@@ -38,6 +38,7 @@ return [
     'message'       => 'پیام',
     'name'		    => 'نام',
     'new_password'  => 'رمز عبور جدید',
+    'num_of_pos'    => 'تعداد بست',
     'office'        => 'اداره',
     'onDuty'        => 'خدمتی',
     'lastName'	    => 'تخلص',

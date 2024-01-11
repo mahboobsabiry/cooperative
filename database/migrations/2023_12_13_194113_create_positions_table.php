@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('code')->unique();
             $table->bigInteger('position_number');
+            $table->bigInteger('num_of_pos')->default(1);
             $table->text('desc')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

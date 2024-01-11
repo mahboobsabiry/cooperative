@@ -87,9 +87,10 @@
                                     <tr>
                                         <th>#</th>
                                         <th>@lang('form.title')</th>
-                                        <th>@lang('pages.positions.responsible')</th>
+                                        <th>@lang('pages.positions.officials_emps')</th>
                                         <th>@lang('pages.positions.underHand')</th>
                                         <th>@lang('pages.positions.positionNumber')</th>
+                                        <th>@lang('form.num_of_pos')</th>
                                         <th>@lang('form.code')</th>
                                         <th>@lang('form.description')</th>
                                     </tr>
@@ -102,24 +103,19 @@
                                                 {{ $loop->iteration }}
                                             </td>
                                             <td><a href="{{ route('admin.positions.show', $position->id ) }}">{{ $position->title }}</a></td>
-                                            <!-- Responsible -->
+
+                                            <!-- Employees and Officials -->
                                             <td>
                                                 @if($position->employees)
-                                                    @php
-                                                    $emp = $position->employees()->where('is_responsible', 1)->first();
-                                                    @endphp
-
-                                                    @if(!empty($emp->name))
-                                                        <a href="{{ route('admin.employees.show', $emp->id) }}">
-                                                            {{ $emp->name }}
-                                                            {{ $emp->last_name }}
-                                                            (<span class="text-danger text-sm-center">
-                                                                {{ $emp->on_duty == 1 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
-                                                            </span>)
-                                                        </a>
-                                                    @else
-                                                        @lang('global.empty')
-                                                    @endif
+                                                    @foreach($position->employees as $emp)
+                                                    <a href="{{ route('admin.employees.show', $emp->id) }}">
+                                                        {{ $emp->name }}
+                                                        {{ $emp->last_name }}
+                                                        (<span class="text-danger text-sm-center">
+                                                            {{ $emp->on_duty == 1 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
+                                                        </span>)
+                                                    </a>{{ $position->num_of_pos > 1 ? ', ' : '' }}
+                                                    @endforeach
                                                 @else
                                                     @lang('global.empty')
                                                 @endif
@@ -130,6 +126,16 @@
                                                 {{ $position->parent->title ?? trans('pages.positions.afCustomsDep') }}
                                             </td>
                                             <td>{{ $position->position_number }}</td>
+                                            <td>
+                                                {{ $position->num_of_pos }}
+                                                @if($position->employees->count() < $position->num_of_pos)
+                                                    {<span class="text-danger small">@lang('global.empty')</span>}
+                                                @elseif($position->employees->count() == $position->num_of_pos)
+
+                                                @elseif($position->employees->count() > $position->num_of_pos)
+                                                    {<span class="text-danger small">{{ $position->employees->count() - $position->num_of_pos }} @lang('global.empty')</span>}
+                                                @endif
+                                            </td>
                                             <td>{{ $position->code }}</td>
                                             <td>{{ $position->desc }}</td>
                                         </tr>
@@ -152,20 +158,32 @@
                                     <tr class="bg-gray-500">
                                         <th class="font-weight-bold">#</th>
                                         <th class="font-weight-bold">@lang('form.title')</th>
-                                        <th class="font-weight-bold">@lang('pages.positions.positionNumber')</th>
+                                        <th class="font-weight-bold">@lang('pages.positions.position')</th>
+                                        <th class="font-weight-bold">@lang('pages.positions.num_of_empty_pos')</th>
                                         <th class="font-weight-bold">@lang('pages.positions.underHand')</th>
                                         <th class="font-weight-bold">@lang('form.code')</th>
                                         <th class="font-weight-bold">@lang('form.status')</th>
                                     </tr>
                                     @foreach($emptyPositions as $post)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $post->title }}</td>
-                                            <td>{{ $post->position_number }}</td>
-                                            <td>{{ $post->code }}</td>
-                                            <td>{{ $post->parent->title ?? trans('pages.positions.afCustomsDep') }}</td>
-                                            <td>@lang('global.empty')</td>
-                                        </tr>
+                                        @if($post->employees->count() < $post->num_of_pos)
+                                            <tr>
+                                                <td>{{ $post->id }}</td>
+                                                <td>{{ $post->title }}</td>
+                                                <td>{{ $post->position_number }}</td>
+                                                <td>
+                                                    {{ $post->num_of_pos }}
+                                                    @if($post->employees->count() < $post->num_of_pos)
+                                                        {<span class="text-danger small">@lang('global.empty')</span>}
+                                                    @elseif($post->employees->count() == $post->num_of_pos)
+
+                                                    @elseif($post->employees->count() > $post->num_of_pos)
+                                                        {<span class="text-danger small">{{ $post->employees->count() - $post->num_of_pos }} @lang('global.empty')</span>}
+                                                    @endif</td>
+                                                <td>{{ $post->code }}</td>
+                                                <td>{{ $post->parent->title ?? trans('pages.positions.afCustomsDep') }}</td>
+                                                <td>@lang('global.empty')</td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                     </tbody>
                                 </table>

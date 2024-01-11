@@ -105,6 +105,17 @@
                                     </div>
 
                                     <div class="col-md-6">
+                                        <!-- Number of Positions -->
+                                        <div class="form-group @error('num_of_pos') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.num_of_pos'): <span class="tx-danger">*</span></p>
+                                            <input type="number" id="num_of_pos" class="form-control @error('num_of_pos') form-control-danger @enderror" name="num_of_pos" value="{{ $position->num_of_pos ?? old('num_of_pos') }}" placeholder="@lang('form.num_of_pos')" required>
+
+                                            @error('num_of_pos')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Number of Positions -->
+
                                         <!-- Position Number -->
                                         <div class="form-group @error('position_number') has-danger @enderror">
                                             <p class="mb-2">@lang('form.position'): <span class="tx-danger">*</span></p>

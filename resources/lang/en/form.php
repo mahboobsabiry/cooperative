@@ -38,6 +38,7 @@ return [
     'message'       => 'Message',
     'name'		    => 'Name',
     'new_password'  => 'New Password',
+    'num_of_pos'    => 'Number Of Positions',
     'office'        => 'Office',
     'onDuty'        => 'On Duty',
     'lastName'	    => 'Last Name',

@@ -69,150 +69,6 @@ return [
         'updatedEmpMsg'     => 'Employee information has been updated successfully!'
     ],
 
-    'exitDoor' => [
-        'bxTotal'       => 'Box Total',
-        'bxTotalTx'     => 'Box Total Text',
-        'carrier'       => 'Carrier',
-        'carrierName'   => 'Carrier Name',
-        'cName'         => 'Company Name',
-        'emptyVehicles' => 'Empty Vehicles',
-        'eaDate'        => 'Exit Again Date',
-        'exitDoor'      => 'Exit Door',
-        'exitType'      => 'Exit Type',
-        'exitVehicle'   => 'Exit Vehicle',
-        'export'        => 'Export',
-        'exportGoods'   => 'Export Goods',
-        'fromDate'      => 'From Date',
-        'isExitAgain'   => 'Is Exit Again?',
-        'isReturned'    => 'Is Returned?',
-        'goodName'      => 'Good Name',
-        'goodsAmount'   => 'Goods Amount',
-        'rejectedGoods'     => 'Rejected Goods',
-        'rejectedVehicles'  => 'Rejected Vehicles',
-        'returnDate'        => 'Return Date',
-        'returnedExport'    => 'Returned Export',
-        'returnedGoods'     => 'Returned Goods',
-        'returnedTransit'   => 'Returned Transit',
-        'returnedVehicles'  => 'Returned Vehicles',
-        'toDate'            => 'To Date',
-        'transit'           => 'Transit',
-        'transitGoods'      => 'Transit Goods',
-        'trex'          => 'Transit/Export',
-        'trexGoods'     => 'Transit/Export Goods',
-        'trexVehicles'  => 'Transit/Export Vehicles',
-        'vpNumber'      => 'Vehicle Plate Number',
-        'vptNumber'     => 'Vehicle Trailer Plate Number',
-        'weight'        => 'Weight',
-        'weightKg'      => 'Weight Kg'
-    ],
-
-    'finance' => [
-        'employeeSalaries'  => 'Employee Salaries',
-        'empSalaries' => [
-            'addEmpSalary'      => 'Add Employee Salary',
-            'deleteEmpSalary'   => 'Delete Employee Salary',
-            'editEmpSalary'     => 'Edit Employee Salary',
-            'empSalary'         => 'Employee Salary',
-            'showEmpSalary'     => 'Employee Salary Details'
-        ],
-        'expensesCodes' => [
-            'addExpenseCode'    => 'Add Expense Code',
-            'deleteExpenseCode' => 'Delete Expense Code',
-            'editExpenseCode'   => 'Edit Expense Code',
-            'expenseCode'       => 'Expense Code',
-            'expensesCodes'     => 'Expenses Codes',
-            'showExpenseCode'   => 'Show Expense Code'
-        ],
-        'moneys' => [
-            'addMoney'      => 'Add Money',
-            'deductedMoneys'    => 'Deducted Moneys',
-            'deleteMoney'   => 'Delete Money',
-            'editMoney'     => 'Edit Money',
-            'leftOverAmount'    => 'Left Over Amount',
-            'leftOverMoneys'    => 'Left Over Moneys',
-            'mainMoney'     => 'Main Money',
-            'money'         => 'Money',
-            'moneys'        => 'Moneys',
-            'spentAmount'   => 'Spent Amount'
-        ],
-        'months' => [
-            'addMonth'      => 'Add Month',
-            'deleteMonth'   => 'Delete Month',
-            'editMonth'     => 'Edit Month',
-            'month'         => 'Month'
-        ]
-    ],
-
-    'galleries' => [
-        'addNewGallery'  => 'Add New Gallery',
-        'gallery'        => 'Gallery',
-        'galleryDetails' => 'Gallery Details',
-        'deleteGallery'  => 'Delete Gallery',
-        'editGallery'    => 'Edit Gallery',
-        'latestGalleries'       => 'Latest Galleries',
-        'mostContGalleries'     => 'Most Controversial Galleries',
-        'mostVisitedGalleries'  => 'Most Visited Galleries'
-    ],
-
-    'interviews' => [
-        'addNewInterview'  => 'Add New Interview',
-        'deleteInterview'  => 'Delete Interview',
-        'editInterview'    => 'Edit Interview',
-        'interviewDetails' => 'Interview Details',
-        'latestInterviews' => 'Latest Interviews',
-        'mostContInterviews'      => 'Most Controversial Interviews',
-        'mostVisitedInterviews'   => 'Most Visited Interviews'
-    ],
-
-    'mails' => [
-        'compose'   => 'Compose',
-        'inbox'     => 'Inbox',
-        'mail'      => 'Mail',
-        'mailInbox' => 'Mail-Inbox',
-        'subject'   => 'Subject'
-    ],
-
-    'membersReport' => 'Members Report',
-
-    'members' => [
-        'addNewMember'  => 'Add New Member',
-        'deleteMember'  => 'Delete Member',
-        'editMember'    => 'Edit Member',
-        'letterOfCommitment'    => 'Letter of Commitment',
-        'memberDetails'     => 'Member Details',
-        'membershipCard'    => 'Membership Card',
-        'membersList'   => 'Members List',
-        'nameLName'     => 'First Name and Last Name',
-        'otherInfo'     => 'Other Information',
-        'personalInfo'  => 'Personal Information',
-        'privateNumber' => 'Private Number',
-        'publicInfo'    => 'Public Information',
-        'publicNumber'  => 'Public Number'
-    ],
-
-    'movies' => [
-        'addNewMovie'  => 'Add New Movie',
-        'deleteMovie'  => 'Delete Movie',
-        'editMovie'    => 'Edit Movie',
-        'latestMovies' => 'Latest Movies',
-        'mostContMovies'      => 'Most Controversial Movies',
-        'mostVisitedMovies'   => 'Most Visited Movies',
-        'movie'        => 'Movie',
-        'movieDetails' => 'Movie Details',
-        'trailer'      => 'Trailer'
-    ],
-
-    'news' => [
-        'addImages'   => 'Add Images',
-        'addNewNews'  => 'Add New News',
-        'deleteNews'  => 'Delete News',
-        'editNews'    => 'Edit News',
-        'latestNews'  => 'Latest News',
-        'mostContNews'      => 'Most Controversial News',
-        'mostVisitedNews'   => 'Most Visited News',
-        'newsDetails' => 'News Details'
-    ],
-
     'permissions' => [
         'addNewPermission'  => 'Add New Permission',
         'deletePermission'  => 'Delete Permission',
@@ -234,6 +90,7 @@ return [
         'branchesTitleNote' => 'Balkh Custom Department Branches List',
         'position'          => 'Position',
         'positionNumber'    => 'Position Number',
+        'positionCode'      => 'Position Code',
         'positions'         => 'Positions',
         'deletePosition'    => 'Delete Position',
         'department'        => 'Department',
@@ -247,7 +104,9 @@ return [
         'head'              => 'Head',
         'managementTitleNote' => 'Balkh Custom Department General Managers List',
         'manager'           => 'Manager',
+        'officials_emps'    => 'Officials and Employees',
         'organization'      => 'Organization',
+        'num_of_empty_pos'  => 'Number of Empty Positions',
         'responsible'       => 'Responsible',
         'underHand'         => 'Under Hand'
     ],
@@ -265,21 +124,6 @@ return [
         'updatePassword'    => 'Update Password',
         'updPwdErrMsg'      => 'Current password not match!',
         'updPwdMsg'         => 'Your password has been updated successfully!'
-    ],
-
-    'provinces' => [
-        'addNewProvince' => 'Add New Province',
-        'deleteProvince' => 'Delete Province',
-        'editProvince'   => 'Edit Province',
-        'membersListTitle'  => 'All members added in ',
-        'province'       => 'Province'
-    ],
-
-    'posts' => [
-        'addNewPost' => 'Add New Post',
-        'deletePost' => 'Delete Post',
-        'editPost'   => 'Edit Post',
-        'post'       => 'Post'
     ],
 
     'reports' => [
@@ -306,17 +150,6 @@ return [
         'setting'        => 'Setting',
         'deleteSetting'  => 'Delete Setting',
         'editSetting'    => 'Edit Setting'
-    ],
-
-    'statements' => [
-        'addNewStatement'  => 'Add New Statement',
-        'deleteStatement'  => 'Delete Statement',
-        'editStatement'    => 'Edit Statement',
-        'latestStatements' => 'Latest Statements',
-        'mostContStatements'      => 'Most Controversial Statements',
-        'mostVisitedStatements'   => 'Most Visited Statements',
-        'statement'        => 'Statement',
-        'statementDetails' => 'Statement Details'
     ],
 
     'users' => [

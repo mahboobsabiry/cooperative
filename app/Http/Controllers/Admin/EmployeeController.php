@@ -71,15 +71,6 @@ class EmployeeController extends Controller
         }
         $employee->on_duty          = $on_duty;
         $employee->main_position    = $request->main_position;
-
-        // Get Position && Save Responsible
-        $position = Position::where('id', $request->position_id)->first();
-        if (count($position->employees) > 0) {
-            $is_responsible = 0;
-        } else {
-            $is_responsible = 1;
-        }
-        $employee->is_responsible   = $is_responsible;
         $employee->save();
 
         //  Has File && Save Avatar Image
@@ -174,15 +165,6 @@ class EmployeeController extends Controller
         }
         $employee->on_duty          = $on_duty;
         $employee->main_position    = $request->main_position;
-
-        // Get Position && Save Responsible
-        $position = Position::where('id', $request->position_id)->first();
-        if (count($position->employees) > 0) {
-            $is_responsible = 0;
-        } else {
-            $is_responsible = 1;
-        }
-        $employee->is_responsible   = $is_responsible;
         $employee->save();
 
         //  Has File

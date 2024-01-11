@@ -34,7 +34,6 @@ return new class extends Migration
             $table->string('info')->nullable();
             $table->tinyInteger('on_duty')->default(0);
             $table->string('main_position')->nullable();
-            $table->tinyInteger('is_responsible')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
 

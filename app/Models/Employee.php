@@ -18,7 +18,7 @@ class Employee extends Model
         'education', 'prr_npr', 'prr_date',
         'phone', 'phone2', 'email',
         'main_province', 'current_province', 'info',
-        'on_duty', 'main_position', 'is_responsible', 'status'
+        'on_duty', 'main_position', 'status'
     ];
 
     // Morph Photo
