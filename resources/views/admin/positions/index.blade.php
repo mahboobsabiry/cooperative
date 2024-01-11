@@ -96,7 +96,7 @@
                                     @foreach($positions as $position)
                                         <tr>
                                             <td>
-                                                {{ $loop->iteration }}
+                                                {{ $position->id }}
                                             </td>
                                             <td><a href="{{ route('admin.positions.show', $position->id ) }}">{{ $position->title }}</a></td>
 

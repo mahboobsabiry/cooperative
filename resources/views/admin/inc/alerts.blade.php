@@ -1,5 +1,5 @@
 @if(session()->has('message'))
-	<div class="alert alert-solid-{{ session()->get('alertType') }}" role="alert" id="alertMessages">
+	<div class="alert alert-{{ session()->get('alertType') }}" role="alert" id="alertMessages">
 		<button aria-label="Close" class="close" data-dismiss="alert" type="button">
 		<span aria-hidden="true">&times;</span></button>
 		{{ session()->get('message') }}

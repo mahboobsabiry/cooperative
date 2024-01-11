@@ -65,65 +65,24 @@ class PositionController extends Controller
     public function show(Position $position)
     {
         $position->load('employees');
-
-        if ($position->position_number == 2) {
-            // $posEmployees = $position->employees()->get();
-            $posEmployees = Employee::all()->where('on_duty', 1);
-            $onDutyPosEmp = Employee::all()->where('on_duty', 0);
-            // $onDutyPosEmp = Employee::with('position')->where('position_id', $position->id)->where('on_duty', 0)->get();
-            foreach ($position->children() as $admin) {
-                $posEmployees = $admin->employees()->get();
-                $onDutyPosEmp = Employee::with('position')->where('position_id', $admin->id)->where('on_duty', 0)->get();
-                foreach ($admin->children() as $mgmt) {
-                    $posEmployees = $mgmt->employees();
-                    $onDutyPosEmp = Employee::with('position')->where('position_id', $mgmt->id)->where('on_duty', 0)->get();
-                    foreach ($mgmt->children() as $mgr) {
-                        $posEmployees = $mgr->employees();
-                        $onDutyPosEmp = Employee::with('position')->where('position_id', $mgr->id)->where('on_duty', 0)->get();
-                    }
-                }
-            }
-        } elseif($position->position_number == 3) {
-            $posEmployees = Employee::with('position')->where('position_id', $position->id)->get();
-            $onDutyPosEmp = Employee::with('position')->where('position_id', $position->id)->where('on_duty', 0)->get();
-            foreach ($position->children() as $mgmt) {
-                $posEmployees = Employee::with('position')->where('position_id', $mgmt->id)->get();
-                $onDutyPosEmp = Employee::with('position')->where('position_id', $mgmt->id)->where('on_duty', 0)->get();
-                foreach ($mgmt->children() as $mgr) {
-                    $posEmployees = Employee::with('position')->where('position_id', $mgr->id)->get();
-                    $onDutyPosEmp = Employee::with('position')->where('position_id', $mgr->id)->where('on_duty', 0)->get();
-                }
-            }
-        } elseif ($position->position_number == 4) {
-            $posEmployees = Employee::with('position')->where('position_id', $position->id)->get();
-            $onDutyPosEmp = Employee::with('position')->where('position_id', $position->id)->where('on_duty', 0)->get();
-            foreach ($position->children() as $mgr) {
-                $posEmployees = Employee::with('position')->where('position_id', $mgr->id)->get();
-                $onDutyPosEmp = Employee::with('position')->where('position_id', $mgr->id)->where('on_duty', 0)->get();
-            }
-        } else {
-            $posEmployees = Employee::with('position')->where('position_id', $position->id)->get();
-            $onDutyPosEmp = Employee::with('position')->where('position_id', $position->id)->where('on_duty', 0)->get();
-        }
-
-        return view('admin.positions.show', compact('position', 'posEmployees', 'onDutyPosEmp'));
+        return view('admin.positions.show', compact('position'));
     }
 
     // Edit Info
     public function edit(Position $position)
     {
-        $positions = Position::where('position_number', '<', 5)->get();
+        $positions = Position::get();
         return view('admin.positions.edit', compact('position', 'positions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePositionRequest $request, Position $position)
+    public function update(Request $request, Position $position)
     {
         $request->validate([
-            'title'     => 'required',
-            'code'      => 'required',
+            'title'     => 'required|min:3|max:255',
+            'code'      => 'required|unique:positions,code,' . $position->id,
             'position_number'   => 'required',
             'desc'      => 'nullable'
         ]);
@@ -142,7 +101,7 @@ class PositionController extends Controller
             ->log(trans('messages.positions.updatedPositionMsg'));
 
         $message = trans('messages.positions.updatedPositionMsg');
-        return redirect()->route('admin.positions.index')->with([
+        return redirect()->route('admin.positions.show', $position->id)->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);

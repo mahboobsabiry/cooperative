@@ -41,6 +41,13 @@ class EmployeeController extends Controller
     // Store Record
     public function store(StoreEmployeeRequest $request)
     {
+        $position = Position::where('id', $request->position_id)->first();
+        if ($position->employees()->count() >= $position->num_of_pos) {
+            return back()->with([
+                'alertType' => 'danger',
+                'message'   => 'بست مورد نظر تکمیل میباشد.'
+            ]);
+        }
         $employee = new Employee();
         $employee->position_id  = $request->position_id;
         $employee->name         = $request->name;

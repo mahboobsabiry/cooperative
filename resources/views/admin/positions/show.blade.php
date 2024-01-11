@@ -3,6 +3,10 @@
 @section('title', $position->title)
 <!-- Extra Styles -->
 @section('extra_css')
+    <!---DataTables css-->
+    <link href="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/assets/plugins/datatable/responsivebootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.css') }}" rel="stylesheet">
     @if(app()->getLocale() == 'en')
         <link href="{{ asset('assets/css/treeview.css') }}" rel="stylesheet">
     @else
@@ -56,7 +60,7 @@
                     </div>
                     <div class="mr-2">
                         <!-- Add -->
-                        <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.positions.create') }}" target="_blank">
+                        <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.positions.create') }}">
                             @lang('global.new')
                             <i class="fe fe-plus-circle"></i>
                         </a>
@@ -74,13 +78,22 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                <img alt="avatar" src="{{ $position->employees->where('is_responsible', 1)->first()->image ?? asset('assets/images/avatar-default.jpeg') }}">
+                                @if($position->num_of_pos == 1)
+                                    <img alt="avatar" src="{{ $position->employees->first()->image ?? asset('assets/images/avatar-default.jpeg') }}">
+                                @else
+                                    <img alt="avatar" src="{{ asset('assets/images/avatar-default.jpeg') }}">
+                                @endif
                             </div>
                         </div>
 
                         <div class="item-user pro-user">
                             <h4 class="pro-user-username text-dark mt-2 mb-0">
-                                <span>{{ $position->employees->where('is_responsible', 1)->first()->name ?? trans('global.empty') }} {{ $position->employees->where('is_responsible', 1)->first()->last_name ?? '' }}</span>
+                                @if($position->num_of_pos == 1)
+                                    <span>{{ $position->employees->first()->name ?? trans('global.empty') }} {{ $position->employees->first()->last_name ?? '' }}</span>
+                                @else
+                                    <span>{{ $position->title }}</span>
+                                @endif
+
                             </h4>
 
                             <p class="pro-user-desc text-muted mb-1">{{ $position->title }}</p>
@@ -90,50 +103,52 @@
                 <!--/==/ End of Profile Main Info -->
 
                 <!-- Contact Information -->
-                <div class="card custom-card">
-                    <div class="card-header custom-card-header">
-                        <div>
-                            <h6 class="card-title mb-0">
-                                @lang('pages.users.contactInfo')
-                            </h6>
+                @if($position->num_of_pos == 1)
+                    <div class="card custom-card">
+                        <div class="card-header custom-card-header">
+                            <div>
+                                <h6 class="card-title mb-0">
+                                    @lang('pages.users.contactInfo')
+                                </h6>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="main-profile-contact-list main-profile-work-list">
-                            <!-- Phone Number -->
-                            <div class="media">
-                                <div class="media-logo bg-light text-dark">
-                                    <i class="fe fe-smartphone"></i>
-                                </div>
-                                <div class="media-body">
-                                    <span>@lang('form.phone')</span>
-                                    <div>
-                                        <a href="callto:{{ $position->employees->where('is_responsible', 1)->first()->phone ?? '' }}"
-                                           class="ctd">{{ $position->employees->where('is_responsible', 1)->first()->phone ?? '--- ---- ---' }}</a>
-                                        <a href="callto:{{ $position->employees->where('is_responsible', 1)->first()->phone2 ?? '' }}"
-                                           class="ctd">{{ $position->employees->where('is_responsible', 1)->first()->phone2 ?? '' }}</a>
+                        <div class="card-body">
+                            <div class="main-profile-contact-list main-profile-work-list">
+                                <!-- Phone Number -->
+                                <div class="media">
+                                    <div class="media-logo bg-light text-dark">
+                                        <i class="fe fe-smartphone"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span>@lang('form.phone')</span>
+                                        <div>
+                                            <a href="callto:{{ $position->employees->first()->phone ?? '' }}"
+                                               class="ctd">{{ $position->employees->first()->phone ?? '--- ---- ---' }}</a>
+                                            <a href="callto:{{ $position->employees->first()->phone2 ?? '' }}"
+                                               class="ctd">{{ $position->employees->first()->phone2 ?? '' }}</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--/==/ End of Phone Number -->
+                                <!--/==/ End of Phone Number -->
 
-                            <!-- Email Address -->
-                            <div class="media">
-                                <div class="media-logo bg-light text-dark">
-                                    <i class="fe fe-mail"></i>
-                                </div>
-                                <div class="media-body">
-                                    <span>@lang('form.email')</span>
-                                    <div>
-                                        <a href="mailto:{{ $position->employees->where('is_responsible', 1)->first()->email ?? '' }}"
-                                           class="ctd">{{ $position->employees->where('is_responsible', 1)->first()->email ?? '----@---.--' }}</a>
+                                <!-- Email Address -->
+                                <div class="media">
+                                    <div class="media-logo bg-light text-dark">
+                                        <i class="fe fe-mail"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span>@lang('form.email')</span>
+                                        <div>
+                                            <a href="mailto:{{ $position->employees->first()->email ?? '' }}"
+                                               class="ctd">{{ $position->employees->first()->email ?? '----@---.--' }}</a>
+                                        </div>
                                     </div>
                                 </div>
+                                <!--/==/ End of Email Address -->
                             </div>
-                            <!--/==/ End of Email Address -->
                         </div>
                     </div>
-                </div>
+                @endif
                 <!--/==/ End of Contact Information -->
             </div>
             <div class="col-lg-8 col-md-12">
@@ -163,10 +178,15 @@
 
                                     <!-- Manager -->
                                     <tr>
-                                        <th class="font-weight-bold">@lang('pages.positions.manager'):</th>
+                                        <th class="font-weight-bold">@lang('pages.positions.officials_emps'):</th>
                                         <td>
-                                            {{ $position->employees->where('is_responsible', 1)->first()->name ?? trans('global.empty') }}
-                                            {{ $position->employees->where('is_responsible', 1)->first()->last_name ?? trans('global.empty') }}
+                                            {{ $position->employees()->count() == 0 ? trans('global.empty') : '' }}
+                                            @foreach($position->employees as $employee)
+                                                <a href="{{ route('admin.employees.show', $employee->id) }}" class="">
+                                                    {{ $employee->name }} {{ $employee->last_name }}
+                                                    {{ $position->num_of_pos > 1 ? ', ' : '' }}
+                                                </a>
+                                            @endforeach
                                         </td>
                                     </tr>
 
@@ -210,16 +230,37 @@
 
                                     <!-- Left Column -->
                                     <tbody class="col-lg-12 col-xl-6 p-0">
+                                    <!-- Number of Positions -->
+                                    <tr>
+                                        <th class="font-weight-bold">@lang('form.num_of_pos'):</th>
+                                        <td>{{ $position->num_of_pos }}</td>
+                                    </tr>
+
                                     <!-- Position Number -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('pages.positions.positionNumber'):</th>
                                         <td>{{ $position->position_number }}</td>
                                     </tr>
 
+                                    <!-- Number of empty positions -->
+                                    <tr>
+                                        <th class="font-weight-bold">@lang('pages.positions.num_of_empty_pos'):</th>
+                                        <td>
+                                            {{ $position->num_of_pos - $position->employees()->count() }}
+                                        </td>
+                                    </tr>
+
                                     <!-- Code -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('form.code'):</th>
                                         <td>{{ $position->code }}</td>
+                                    </tr>
+
+
+                                    <!-- Date of creation -->
+                                    <tr>
+                                        <th class="font-weight-bold">@lang('global.date'):</th>
+                                        <td>{{ $position->created_at->diffForHumans() }}</td>
                                     </tr>
 
                                     </tbody>
@@ -243,69 +284,76 @@
         <div class="card custom-card main-content-body-profile">
             <!-- Table Title -->
             <div class="nav main-nav-line mb-2">
-                <a class="nav-link active" data-toggle="tab" href="#mpEmployees">
-                    @lang('pages.employees.mpEmps')
-                </a>
-                <a class="nav-link" data-toggle="tab" href="#onDutyEmployees">
-                    @lang('pages.employees.onDutyEmps')
+                <a class="nav-link active" data-toggle="tab" href="javascript:void(0);">
+                    @lang('admin.sidebar.employees')
                 </a>
             </div>
 
             <div class="card-body tab-content h-100">
                 <!-- Main Position Employees -->
-                <div class="tab-pane active" id="mpEmployees">
-                    <div class="main-content-label tx-13 mg-b-20">
-                        @lang('pages.employees.mpEmps')
-                    </div>
-
+                <div class="tab-pane active">
                     <!-- Table -->
-                    <div class="table-responsive mt-2">
-                        <table id=""
-                               class="table table-bordered border-top key-buttons display text-nowrap w-100">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100" style="width: 100%;">
                             <thead>
                             <tr>
-                                <th rowspan="2" class="text-center tblBorder">#</th>
-                                <th colspan="4" class="text-center tblBorder">@lang('global.personalInfo')</th>
-                                <th colspan="4" class="text-center tblBorder">@lang('pages.employees.generalInfo')</th>
-                            </tr>
-                            <tr>
-                                <th class="text-center">@lang('form.photo')</th>
-                                <th class="text-center">@lang('form.name')</th>
-                                <th class="text-center">@lang('form.phone')</th>
-                                <th class="text-center">@lang('form.email')</th>
-                                <th class="text-center">@lang('form.empNumber')</th>
-                                <th class="text-center">@lang('form.position')</th>
-                                <th class="text-center">@lang('pages.positions.positionNumber')</th>
-                                <th class="text-center">@lang('pages.employees.positionNature')</th>
+                                <th>#</th>
+                                <th>@lang('form.photo')</th>
+                                <th>@lang('form.name')</th>
+                                <th>@lang('form.fatherName')</th>
+                                <th>@lang('form.position')</th>
+                                <th>@lang('pages.positions.positionCode')</th>
+                                <th>@lang('form.gender')</th>
+                                <th>@lang('form.empNumber')</th>
+                                <th>@lang('form.appointmentNumber')</th>
+                                <th>@lang('form.appointmentDate')</th>
+                                <th>@lang('form.lastDuty')</th>
+                                <th>@lang('form.birthYear')</th>
+                                <th>@lang('form.education')</th>
+                                <th>PRR/NPR</th>
+                                <th>PRR Date</th>
+                                <th>@lang('form.phone')</th>
+                                <th>@lang('form.email')</th>
+                                <th>@lang('form.mainProvince')</th>
+                                <th>@lang('form.currentProvince')</th>
+                                <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
+                                <th>@lang('form.info')</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            @foreach($posEmployees as $employee)
+                            @foreach($position->employees as $employee)
                                 <tr>
+                                    <td>{{ $employee->id }}</td>
                                     <td>
-                                        {{ $loop->iteration }}
+                                        <img src="{{ $employee->image ? $employee->image : asset('assets/images/avatar-default.jpeg') }}" width="50" class="rounded-50">
                                     </td>
                                     <td>
-                                        <img src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}" width="50" class=rounded-circle">
+                                        <a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
                                     </td>
-                                    <td><a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a></td>
+                                    <td>{{ $employee->father_name ?? '' }}</td>
+                                    <td>{{ $employee->position->title ?? '' }} - {{ $employee->position->position_number ?? '' }}</td>
+                                    <td>{{ $employee->position->code ?? '' }}</td>
+                                    <td>{{ $employee->gender == 1 ? trans('form.male') : trans('form.female') }}</td>
+                                    <td>{{ $employee->emp_number ?? '' }}</td>
+                                    <td>{{ $employee->appointment_number ?? '' }}</td>
+                                    <td>{{ $employee->appointment_date ?? '' }}</td>
+                                    <td>{{ $employee->last_duty ?? '' }}</td>
+                                    <td>{{ $employee->birth_year ?? '' }}</td>
+                                    <td>{{ $employee->education ?? '' }}</td>
+                                    <td>{{ $employee->prr_npr ?? '' }}</td>
+                                    <td>{{ $employee->prr_date ?? '' }}</td>
                                     <!-- Email Address -->
                                     <td class="tx-sm-12-f">
-                                        <a href="callto:{{ $employee->phone }}" class="ctd">{{ $employee->phone }}</a>
+                                        <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
+                                        <a href="callto:{{ $employee->phone2 ?? '' }}" class="ctd">{{ $employee->phone2 ?? '' }}</a>
                                     </td>
                                     <!-- Email Address -->
-                                    <td><a href="mailto:{{ $employee->email }}" class="tx-sm-12-f ctd">{{ $employee->email }}</a></td>
-                                    <!-- Employee Number -->
-                                    <td>{{ $employee->emp_number }}</td>
-                                    <!-- Office -->
-                                    <td>
-                                        <a href="{{ route('admin.positions.show', $employee->position->id) }}" class="ctd">{{ $employee->position->title }}</a>
-                                    </td>
-                                    <!-- Position -->
-                                    <td>{{ $employee->position->position_number }}</td>
-                                    <!-- Position Nature -->
-                                    <td>{{ $employee->on_duty == 1 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}</td>
+                                    <td><a href="mailto:{{ $employee->email ?? '' }}" class="tx-sm-12-f ctd">{{ $employee->email ?? '' }}</a></td>
+                                    <td>{{ $employee->main_province ?? '' }}</td>
+                                    <td>{{ $employee->current_province ?? '' }}</td>
+                                    <td>{{ $employee->onDuty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}</td>
+                                    <td>{{ $employee->info }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -314,70 +362,6 @@
                     <!--/==/ End of Table -->
                 </div>
                 <!--/==/ End of Main Position Employees -->
-
-
-                <!-- On Duty Employees -->
-                <div class="tab-pane" id="onDutyEmployees">
-                    <div class="main-content-label tx-13 mg-b-20">
-                        @lang('pages.employees.onDutyEmps')
-                    </div>
-
-                    <!-- Table -->
-                    <div class="table-responsive mt-2">
-                        <table id=""
-                               class="table table-bordered border-top key-buttons display text-nowrap w-100">
-                            <thead>
-                            <tr>
-                                <th rowspan="2" class="text-center tblBorder">#</th>
-                                <th colspan="4" class="text-center tblBorder">@lang('global.personalInfo')</th>
-                                <th colspan="4" class="text-center tblBorder">@lang('pages.employees.generalInfo')</th>
-                            </tr>
-                            <tr>
-                                <th class="text-center">@lang('form.photo')</th>
-                                <th class="text-center">@lang('form.name')</th>
-                                <th class="text-center">@lang('form.phone')</th>
-                                <th class="text-center">@lang('form.email')</th>
-                                <th class="text-center">@lang('form.empNumber')</th>
-                                <th class="text-center">@lang('form.position')</th>
-                                <th class="text-center">@lang('pages.positions.positionNumber')</th>
-                                <th class="text-center">@lang('pages.employees.positionNature')</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            @foreach($onDutyPosEmp as $employee)
-                                <tr>
-                                    <td>
-                                        {{ $loop->iteration }}
-                                    </td>
-                                    <td>
-                                        <img src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}" width="50" class=rounded-circle">
-                                    </td>
-                                    <td><a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a></td>
-                                    <!-- Phone Number -->
-                                    <td class="tx-sm-12-f">
-                                        <a href="callto:{{ $employee->phone }}" class="ctd">{{ $employee->phone }}</a>
-                                    </td>
-                                    <!-- Email Address -->
-                                    <td><a href="mailto:{{ $employee->email }}" class="tx-sm-12-f ctd">{{ $employee->email }}</a></td>
-                                    <!-- Employee Number -->
-                                    <td>{{ $employee->emp_number }}</td>
-                                    <!-- Office -->
-                                    <td>
-                                        <a href="{{ route('admin.positions.show', $employee->position->id) }}" class="ctd">{{ $employee->position->title }}</a>
-                                    </td>
-                                    <!-- Position -->
-                                    <td>{{ $employee->position->position_number }}</td>
-                                    <!-- Position Nature -->
-                                    <td>{{ $employee->on_duty == 1 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--/==/ End of Table -->
-                </div>
-                <!--/==/ End of On Duty Employees -->
             </div>
         </div>
         <!--/==/ End of Employees -->
@@ -396,7 +380,22 @@
 
                     <div class="container">
                         <div class="row">
-                            @include('admin.inc.org_tree')
+                            <div class="tree m-2">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0)"
+                                           style="background: burlywood; color: black;">{{ $position->title }} ({{ $position->num_of_pos }})</a>
+                                        <ul>
+                                            @foreach($position->children as $child)
+                                                <li>
+                                                    <a href="javascript:void(0)"
+                                                       style="background: #ba8b00; color: beige">{{ $child->title }} ({{ $child->num_of_pos }})</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -409,7 +408,21 @@
 
 <!-- Extra Scripts -->
 @section('extra_js')
-    <script src="{{ asset('backend/assets/js/pages/user-scripts.js') }}"></script>
+    <!-- Data Table js -->
+    <script src="{{ asset('backend/assets/plugins/datatable/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/jszip.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.colVis.min.js') }}"></script>
+
+    <!-- Custom Scripts -->
+    <script src="{{ asset('backend/assets/js/datatable.js') }}"></script>
 
     @include('admin.inc.status_scripts')
 @endsection
