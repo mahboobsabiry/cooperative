@@ -24,49 +24,92 @@
 
             <!-- Positions -->
             @can('organization_mgmt')
-            <li class="nav-item {{ request()->is('admin/department') ||
-                    request()->is('admin/department/*') ||
-                    request()->is('admin/positions') ||
+                <li class="nav-item {{ request()->is('admin/positions') ||
                     request()->is('admin/positions/*') ||
-                    request()->is('admin/administrations') ||
-                    request()->is('admin/administrations/*') ||
-                    request()->is('admin/management') ||
-                    request()->is('admin/management/*') ||
-                    request()->is('admin/branches') ||
-                    request()->is('admin/branches/*') ? 'active show' : '' }}">
+                    request()->is('admin/appointment-positions') ||
+                    request()->is('admin/empty-positions') ? 'active show' : '' }}">
 
-                <a class="nav-link with-sub" href="javascript:void(0)">
-                    <i class="fe fe-life-buoy"></i>
-                    <span class="sidemenu-label">@lang('admin.sidebar.positions')</span>
-                    <i class="angle fe fe-chevron-right"></i>
-                </a>
+                    <a class="nav-link with-sub" href="javascript:void(0)">
+                        <i class="fe fe-life-buoy"></i>
+                        <span class="sidemenu-label">@lang('admin.sidebar.positions')</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
 
-                <ul class="nav-sub">
-                    <!-- Positions -->
-                    <li class="nav-sub-item {{ request()->is('admin/positions') ||
+                    <ul class="nav-sub">
+                        <!-- Positions -->
+                        <li class="nav-sub-item {{ request()->is('admin/positions') ||
                         request()->is('admin/positions/*') ? 'active' : '' }}">
-                        <a class="nav-sub-link" href="{{ route('admin.positions.index') }}">
-                            {<span class="small text-sm-center tx-danger">M</span>}
-                            @lang('pages.positions.allPositions')
-                            ({{ count(\App\Models\Position::all()) }})
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                            <a class="nav-sub-link" href="{{ route('admin.positions.index') }}">
+                                {<span class="small text-sm-center tx-danger">M</span>}
+                                @lang('pages.positions.allPositions')
+                                ({{ count(\App\Models\Position::all()) }})
+                            </a>
+                        </li>
+
+                        <!-- Appointment Positions -->
+                        <li class="nav-sub-item {{ request()->is('admin/appointment-positions') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.positions.appointment') }}">
+                                @lang('pages.positions.appointmentPositions')
+                                    <?php $appointment = \App\Models\Position::all()->sum('num_of_pos') - \App\Models\Employee::all()->count(); ?>
+                                ({{ \App\Models\Position::all()->sum('num_of_pos') - $appointment }})
+                            </a>
+                        </li>
+
+                        <!-- Empty Positions -->
+                        <li class="nav-sub-item {{ request()->is('admin/empty-positions') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.positions.empty') }}">
+                                @lang('pages.positions.emptyPositions')
+                                ({{ \App\Models\Position::all()->sum('num_of_pos') - \App\Models\Employee::all()->count() }})
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             @endcan
             <!--/==/ End of Position -->
 
             <!-- Employees -->
             @can('employee_mgmt')
-                <li class="nav-item {{ request()->url() == route('admin.employees.index') || request()->is('admin/employees/*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('admin.employees.index') }}">
-                        <i class="fa fa-user-tie"></i><span class="sidemenu-label">
-                            @lang('admin.sidebar.employees')
-                            ({{ count(\App\Models\Employee::all()) }})
-                        </span>
+                <li class="nav-item {{ request()->is('admin/employees') ||
+                    request()->is('admin/employees/*') ||
+                    request()->is('admin/main-employees') ||
+                    request()->is('admin/on-duty-employees') ? 'active show' : '' }}">
+
+                    <a class="nav-link with-sub" href="javascript:void(0)">
+                        <i class="fa fa-user-tie"></i>
+                        <span class="sidemenu-label">@lang('admin.sidebar.employees')</span>
+                        <i class="angle fe fe-chevron-right"></i>
                     </a>
+
+                    <ul class="nav-sub">
+                        <!-- All Employees -->
+                        <li class="nav-sub-item {{ request()->is('admin/employees') ||
+                        request()->is('admin/employees/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.employees.index') }}">
+                                {<span class="small text-sm-center tx-danger">M</span>}
+                                @lang('admin.sidebar.employees')
+                                ({{ count(\App\Models\Employee::all()) }})
+                            </a>
+                        </li>
+
+                        <!-- Main Position Employees -->
+                        <li class="nav-sub-item {{ request()->is('admin/main-employees') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.employees.main') }}">
+                                @lang('pages.employees.mainPosition')
+                                ({{ \App\Models\Employee::all()->where('on_duty', 0)->count() }})
+                            </a>
+                        </li>
+
+                        <!-- On Duty Employees -->
+                        <li class="nav-sub-item {{ request()->is('admin/on-duty-employees') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.employees.on_duty') }}">
+                                @lang('pages.employees.onDuty')
+                                ({{ \App\Models\Employee::all()->where('on_duty', 1)->count() }})
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             @endcan
+            <!--/==/ End of Position -->
 
             <!-- Applications -->
             <li class="nav-label">@lang('admin.sidebar.applications')</li>

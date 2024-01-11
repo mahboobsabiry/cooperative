@@ -12,17 +12,6 @@ return [
         'mostVisitedArticles'   => 'Most Visited Articles'
     ],
 
-    'books' => [
-        'addNewBook'  => 'Add New Book',
-        'book'        => 'Book',
-        'bookDetails' => 'Book Details',
-        'deleteBook'  => 'Delete Book',
-        'editBook'    => 'Edit Book',
-        'latestBooks' => 'Latest Books',
-        'mostContBooks'      => 'Most Controversial Books',
-        'mostVisitedBooks'   => 'Most Visited Books'
-    ],
-
     'dashboard' => [
         'latestAddedMembers' => 'Latest added members',
         'ltMbParagMsg'       => 'List of latest member added in all over system!',
@@ -38,12 +27,6 @@ return [
         'totalUsers'         => 'Total Users',
         'usersActivities'    => 'Users Activities',
         'userAcParagMsg'     => 'Users all activities including add or update members;'
-    ],
-
-    'districts' => [
-        'deleteDistrict'    => 'Delete District',
-        'editDistrict'      => 'Edit District',
-        'district'          => 'District'
     ],
 
     'employees' => [
@@ -82,6 +65,8 @@ return [
         'administrations'   => 'Administrations',
         'administrationsTitleNote' => 'Balkh Custom Department Administrations List',
         'adminOrg'          => 'Administration Organization',
+        'appointed'         => 'Appointed',
+        'appointmentPositions' => 'Appointment Positions',
         'allPositions'      => 'All Positions',
         'afCustomsDep'      => 'Afghan Customs Department',
         'bcdOrg'            => 'Balkh Custom Department Organization',

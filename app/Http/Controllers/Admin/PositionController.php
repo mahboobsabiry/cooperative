@@ -25,9 +25,8 @@ class PositionController extends Controller
     public function index()
     {
         $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
-        $emptyPositions = Position::with('employees')->orderBy('position_number', 'ASC')->get();
         $organization = Position::tree();
-        return view('admin.positions.index', compact('positions', 'emptyPositions', 'organization'));
+        return view('admin.positions.index', compact('positions', 'organization'));
     }
 
     // Create
@@ -181,5 +180,33 @@ class PositionController extends Controller
             Position::where('id', $data['position_id'])->update(['status' => $status]);
             return response()->json(['status' => $status, 'position_id' => $data['position_id']]);
         }
+    }
+
+    // Appointment Positions
+    public function appointment()
+    {// Send appointment and empty positions count to dashboard
+        // Sum number of positions
+        $sum_appointment = Position::all()->sum('num_of_pos');
+        // Count all employees
+        $employees_count = Employee::all()->count();
+        // Count all empty positions
+        $empty_positions = $sum_appointment - $employees_count;
+        // Count all appointment positions
+        $appointment_positions = $sum_appointment - $empty_positions;
+        $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
+        return view('admin.positions.appointment', compact('positions', 'appointment_positions'));
+    }
+
+    // Empty Positions
+    public function empty()
+    {// Send appointment and empty positions count to dashboard
+        // Sum number of positions
+        $sum_appointment = Position::all()->sum('num_of_pos');
+        // Count all employees
+        $employees_count = Employee::all()->count();
+        // Count all empty positions
+        $empty_positions = $sum_appointment - $employees_count;
+        $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
+        return view('admin.positions.empty', compact('positions', 'empty_positions'));
     }
 }

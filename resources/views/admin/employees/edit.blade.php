@@ -108,7 +108,7 @@
                                                 <div class="form-group @error('main_position') has-danger @enderror">
                                                     <p class="mb-2" id="onDutyParent">1)
                                                         @lang('pages.employees.onDuty')
-                                                        <span><input type="checkbox" name="on_duty" id="onDutyCheck" class="custom-checkbox" {{ $employee->on_duty == 0 ? 'checked' : '' }}></span>
+                                                        <span><input type="checkbox" name="on_duty" id="onDutyCheck" class="custom-checkbox" {{ $employee->on_duty == 1 ? 'checked' : '' }}></span>
 
                                                         <span id="mpText" style="display: none;">@lang('pages.employees.mainPosition'):</span>
                                                     </p>

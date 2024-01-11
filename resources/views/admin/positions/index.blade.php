@@ -63,10 +63,6 @@
                         <a class="nav-link active" data-toggle="tab" href="#allPositions">
                             @lang('pages.positions.allPositions')
                         </a>
-                        <a class="nav-link" data-toggle="tab" href="#emptyPositions">
-                            @lang('pages.positions.emptyPositions')
-                        </a>
-
                         <a class="nav-link" data-toggle="tab" href="#organ">
                             @lang('pages.positions.organization')
                         </a>
@@ -146,50 +142,6 @@
                             <!--/==/ End of Table -->
                         </div>
                         <!--/==/ End of All Positions -->
-
-                        <!-- Empty Positions -->
-                        <div class="tab-pane" id="emptyPositions">
-                            <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.positions.emptyPositions') ({{ count($emptyPositions) }})
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered row">
-                                    <tbody>
-                                    <tr class="bg-gray-500">
-                                        <th class="font-weight-bold">#</th>
-                                        <th class="font-weight-bold">@lang('form.title')</th>
-                                        <th class="font-weight-bold">@lang('pages.positions.position')</th>
-                                        <th class="font-weight-bold">@lang('pages.positions.num_of_empty_pos')</th>
-                                        <th class="font-weight-bold">@lang('pages.positions.underHand')</th>
-                                        <th class="font-weight-bold">@lang('form.code')</th>
-                                        <th class="font-weight-bold">@lang('form.status')</th>
-                                    </tr>
-                                    @foreach($emptyPositions as $post)
-                                        @if($post->employees->count() < $post->num_of_pos)
-                                            <tr>
-                                                <td>{{ $post->id }}</td>
-                                                <td>{{ $post->title }}</td>
-                                                <td>{{ $post->position_number }}</td>
-                                                <td>
-                                                    {{ $post->num_of_pos }}
-                                                    @if($post->employees->count() < $post->num_of_pos)
-                                                        {<span class="text-danger small">@lang('global.empty')</span>}
-                                                    @elseif($post->employees->count() == $post->num_of_pos)
-
-                                                    @elseif($post->employees->count() > $post->num_of_pos)
-                                                        {<span class="text-danger small">{{ $post->employees->count() - $post->num_of_pos }} @lang('global.empty')</span>}
-                                                    @endif</td>
-                                                <td>{{ $post->code }}</td>
-                                                <td>{{ $post->parent->title ?? trans('pages.positions.afCustomsDep') }}</td>
-                                                <td>@lang('global.empty')</td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!--/==/ End of Empty Positions -->
 
                         <!-- Organization -->
                         <div class="tab-pane" id="organ">

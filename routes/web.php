@@ -70,9 +70,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // Positions
     Route::resource('positions', PositionController::class);
     Route::post('update-position-status', [PositionController::class, 'updatePositionStatus'])->name('updatePositionStatus');
+    Route::get('appointment-positions', [PositionController::class, 'appointment'])->name('positions.appointment');
+    Route::get('empty-positions', [PositionController::class, 'empty'])->name('positions.empty');
     // Employees
     Route::resource('employees', EmployeeController::class);
     Route::post('update-employee-status', [EmployeeController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');
+    Route::get('main-employees', [EmployeeController::class, 'main_employees'])->name('employees.main');
+    Route::get('on-duty-employees', [EmployeeController::class, 'on_duty_employees'])->name('employees.on_duty');
 
     // Settings
     Route::resource('settings', SettingController::class);

@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('admin.sidebar.employees'))
+@section('title', config('app.name') . ' ~ ' . trans('pages.employees.mainPosition'))
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -32,7 +32,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a
                             href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">@lang('admin.sidebar.employees')</li>
+                    <li class="breadcrumb-item active" aria-current="page">@lang('pages.employees.mainPosition')</li>
                 </ol>
             </div>
 
@@ -54,7 +54,7 @@
                     <!-- Table Title -->
                     <div class="nav main-nav-line mb-2">
                         <a class="nav-link active" data-toggle="tab" href="javascript:void(0);">
-                            @lang('admin.sidebar.employees')
+                            @lang('pages.employees.mainPosition')
                         </a>
                     </div>
 
@@ -66,7 +66,7 @@
                         <!-- Employees -->
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
-                                @lang('admin.sidebar.employees') ({{ count(\App\Models\Employee::all()) }})
+                                @lang('pages.employees.mainPosition') ({{ count(\App\Models\Employee::all()->where('on_duty', 0)) }})
                             </div>
 
                             <!-- Table -->

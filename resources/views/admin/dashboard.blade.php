@@ -5,7 +5,7 @@
         <!-- Page Header -->
         <div class="page-header">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">به سیستم کمکی گمرک سرحدی حیرتان خوش آمدید!</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">به سیستم کمکی گمرک بلخ خوش آمدید!</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('index') }}" target="_blank">@lang('global.home')</a></li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('admin.dashboard.dashboard')</li>
@@ -31,7 +31,7 @@
                 <div class="card custom-card">
                     <div class="card-body dash1">
                         <div class="d-flex">
-                            <p class="mb-1 tx-inverse">@lang('admin.sidebar.users')</p>
+                            <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.users')</p>
                             <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
                                 <i class="fas fa-users fs-20 text-primary"></i>
                             </div>
@@ -43,9 +43,13 @@
                             <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar progress-bar-xs wd-100p" role="progressbar"></div>
                         </div>
                         <div class="expansion-label d-flex">
-                            <span class="text-muted">@lang('admin.dashboard.lastMonth')</span>
-                            <span class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                <i class="fas fa-caret-up mr-1 text-success"></i>100.0%
+                            <span class="font-weight-bold">@lang('pages.users.activeUsers')</span>
+                            <span class="ml-auto">
+                                <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 1)->count() > \App\Models\User::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-success"></i>{{ \App\Models\User::all()->where('status', 1)->count() }}
+                            </span>
+                            <span class="font-weight-bold">@lang('pages.users.inactiveUsers')</span>
+                            <span class="ml-auto">
+                                <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 0)->count() > \App\Models\User::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-success"></i>{{ \App\Models\User::all()->where('status', 0)->count() }}
                             </span>
                         </div>
                     </div>
@@ -60,7 +64,7 @@
                     <div class="card custom-card">
                         <div class="card-body dash1">
                             <div class="d-flex">
-                                <p class="mb-1 tx-inverse">@lang('admin.sidebar.positions')</p>
+                                <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.positions')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
                                     <i class="fe fe-activity fs-20 text-info"></i>
                                 </div>
@@ -69,11 +73,19 @@
                                 <h3 class="dash-25">{{ count(\App\Models\Position::all()) }}</h3>
                             </div>
                             <div class="progress mb-1">
-                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar progress-bar-xs wd-60p bg-info" role="progressbar"></div>
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar progress-bar-xs wd-100p bg-info" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="text-muted">Last Month</span>
-                                <span class="ml-auto"><i class="fas fa-caret-down mr-1 text-info"></i>0.43%</span>
+                                <span class="font-weight-bold">@lang('pages.positions.appointed')</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ $appointment_positions > $empty_positions ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    {{ $appointment_positions }}
+                                </span>
+                                <span class="font-weight-bold">@lang('global.empty')</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ $empty_positions > $appointment_positions ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    {{ $empty_positions }}
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -87,7 +99,7 @@
                     <div class="card custom-card">
                         <div class="card-body dash1">
                             <div class="d-flex">
-                                <p class="mb-1 tx-inverse">@lang('admin.sidebar.employees')</p>
+                                <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.employees')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
                                     <i class="fa fa-user-tie fs-20 text-secondary"></i>
                                 </div>
@@ -96,11 +108,19 @@
                                 <h3 class="dash-25">{{ count(\App\Models\Employee::all()) }}</h3>
                             </div>
                             <div class="progress mb-1">
-                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" class="progress-bar progress-bar-xs wd-60p bg-secondary" role="progressbar"></div>
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar progress-bar-xs wd-100p bg-secondary" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="text-muted">Last Month</span>
-                                <span class="ml-auto"><i class="fas fa-caret-down mr-1 text-danger"></i>0.43%</span>
+                                <span class="font-weight-bold">@lang('pages.employees.mainPosition')</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('on_duty', 1)->count() > \App\Models\Employee::all()->where('on_duty', 0)->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    {{ \App\Models\Employee::all()->where('on_duty', 1)->count() }}
+                                </span>
+                                <span class="font-weight-bold">@lang('pages.employees.onDuty')</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('on_duty', 0)->count() > \App\Models\Employee::all()->where('on_duty', 1)->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    {{ \App\Models\Employee::all()->where('on_duty', 0)->count() }}
+                                </span>
                             </div>
                         </div>
                     </div>

@@ -28,10 +28,8 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::orderBy('created_at', 'desc')->get();
-        $mpEmp = Employee::where('on_duty', 1)->orderBy('created_at', 'desc')->get();
-        $onDuty = Employee::where('on_duty', 0)->orderBy('created_at', 'desc')->get();
 
-        return view('admin.employees.index', compact('employees', 'mpEmp', 'onDuty'));
+        return view('admin.employees.index', compact('employees'));
     }
 
     public function create()
@@ -224,5 +222,21 @@ class EmployeeController extends Controller
             Employee::where('id', $data['employee_id'])->update(['status' => $status]);
             return response()->json(['status' => $status, 'employee_id' => $data['employee_id']]);
         }
+    }
+
+    // Main Position Employees
+    public function main_employees()
+    {
+        $employees = Employee::where('on_duty', 0)->orderBy('created_at', 'desc')->get();
+
+        return view('admin.employees.main', compact('employees'));
+    }
+
+    // On Duty Employees
+    public function on_duty_employees()
+    {
+        $employees = Employee::where('on_duty', 1)->orderBy('created_at', 'desc')->get();
+
+        return view('admin.employees.on_duty', compact('employees'));
     }
 }

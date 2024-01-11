@@ -55,6 +55,8 @@ return [
         'administrations'   => 'آمریت ها',
         'administrationsTitleNote' => 'لیست تشکیلات آمریت های ریاست گمرک بلخ',
         'adminOrg'          => 'تشکیلات آمریت',
+        'appointed'         => 'تعیین بست',
+        'appointmentPositions' => 'بست های تعیین شده',
         'allPositions'      => 'همه بست ها',
         'afCustomsDep'      => 'ریاست عمومی گمرکات',
         'bcdOrg'            => 'تشکیلات ریاست گمرک بلخ',
