@@ -37,7 +37,7 @@ class EmployeesTableSeeder extends Seeder
                 'main_province'     => 'غزنی',
                 'current_province'  => 'کابل',
                 'info'          => '',
-                'on_duty'       => 1,
+                'on_duty'       => 0,
                 'status'        => 1
             ],
             [
@@ -60,7 +60,7 @@ class EmployeesTableSeeder extends Seeder
                 'main_province'     => 'بغلان',
                 'current_province'  => 'بغلان',
                 'info'          => '',
-                'on_duty'       => 1,
+                'on_duty'       => 0,
                 'status'        => 1
             ],
             [
@@ -83,7 +83,7 @@ class EmployeesTableSeeder extends Seeder
                 'main_province'     => 'بدخشان',
                 'current_province'  => 'کابل',
                 'info'          => '',
-                'on_duty'       => 1,
+                'on_duty'       => 0,
                 'status'        => 1
             ],
         ];

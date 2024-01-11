@@ -51,13 +51,6 @@
             <div class="col-lg-12">
                 <!-- Table Card -->
                 <div class="card custom-card main-content-body-profile">
-                    <!-- Table Title -->
-                    <div class="nav main-nav-line mb-2">
-                        <a class="nav-link active" data-toggle="tab" href="javascript:void(0);">
-                            @lang('pages.employees.mainPosition')
-                        </a>
-                    </div>
-
                     <!-- Table Card Body -->
                     <div class="card-body tab-content h-100">
                         <!-- Success Message -->
@@ -137,7 +130,7 @@
                                             <td><a href="mailto:{{ $employee->email ?? '' }}" class="tx-sm-12-f ctd">{{ $employee->email ?? '' }}</a></td>
                                             <td>{{ $employee->main_province ?? '' }}</td>
                                             <td>{{ $employee->current_province ?? '' }}</td>
-                                            <td>{{ $employee->onDuty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}</td>
+                                            <td>{{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }} ({{ $employee->duty_position ?? '' }})</td>
                                             <td>{{ $employee->info }}</td>
                                         </tr>
                                     @endforeach

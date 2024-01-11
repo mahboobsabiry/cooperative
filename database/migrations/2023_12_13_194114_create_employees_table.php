@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('current_province');
             $table->string('info')->nullable();
             $table->tinyInteger('on_duty')->default(0);
-            $table->string('main_position')->nullable();
+            $table->string('duty_position')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
 

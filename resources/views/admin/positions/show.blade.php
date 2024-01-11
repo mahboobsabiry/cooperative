@@ -364,7 +364,7 @@
                                     <td><a href="mailto:{{ $employee->email ?? '' }}" class="tx-sm-12-f ctd">{{ $employee->email ?? '' }}</a></td>
                                     <td>{{ $employee->main_province ?? '' }}</td>
                                     <td>{{ $employee->current_province ?? '' }}</td>
-                                    <td>{{ $employee->onDuty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}</td>
+                                    <td>{{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }} ({{ $employee->duty_position ?? '' }})</td>
                                     <td>{{ $employee->info }}</td>
                                 </tr>
                             @endforeach

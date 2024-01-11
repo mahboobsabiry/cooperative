@@ -58,13 +58,6 @@
             <div class="col-lg-12">
                 <!-- Table Card -->
                 <div class="card custom-card main-content-body-profile">
-                    <!-- Table Title -->
-                    <div class="nav main-nav-line mb-2">
-                        <a class="nav-link active" data-toggle="tab" href="javascript:void(0)">
-                            @lang('pages.positions.appointmentPositions')
-                        </a>
-                    </div>
-
                     <div class="card-body tab-content h-100">
                         <!-- Success Message -->
                         @include('admin.inc.alerts')

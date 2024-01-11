@@ -319,7 +319,7 @@
                                             <a href="{{ route('admin.positions.show', $employee->position->id) }}">
                                                 {{ $employee->position->title }}
                                             </a>
-                                            (<span class="small text-success">{{ $employee->onDuty == 0 ? trans('pages.employees.mainPosition') : ' - ' . trans('pages.employees.onDuty') }} {{ $employee->onDuty == 1 ? $employee->main_position : '' }}</span>)
+                                            (<span class="text-danger">{{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') . ' - ' }} {{ $employee->on_duty == 1 ? $employee->duty_position : '' }}</span>)
                                             [{{ $employee->position->code }}]
                                         </td>
                                     </tr>

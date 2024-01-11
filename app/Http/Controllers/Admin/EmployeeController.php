@@ -75,7 +75,7 @@ class EmployeeController extends Controller
             $on_duty = 1;
         }
         $employee->on_duty          = $on_duty;
-        $employee->main_position    = $request->main_position;
+        $employee->duty_position    = $request->duty_position;
         $employee->save();
 
         //  Has File && Save Avatar Image
@@ -176,7 +176,7 @@ class EmployeeController extends Controller
             $on_duty = 1;
         }
         $employee->on_duty          = $on_duty;
-        $employee->main_position    = $request->main_position;
+        $employee->duty_position    = $request->duty_position;
         $employee->save();
 
         //  Has File
