@@ -39,6 +39,7 @@ return [
     'edit'		=> 'Edit',
     'empty'		=> 'Empty',
     'export'    => 'Export',
+    'extraInfo' => 'Extra Information',
     'finance'   => 'Finance',
     'financeBranch' => 'Finance Branch',
     'flag'      => 'Flag',

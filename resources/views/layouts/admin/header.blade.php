@@ -72,32 +72,22 @@
 
                     <!-- Profile -->
                     <a class="dropdown-item border-top" href="{{ route('admin.profile') }}">
-                        <i class="fe fe-user"></i> My Profile
+                        <i class="fe fe-user"></i> @lang('admin.header.myProfile')
                     </a>
 
                     <!-- Edit Profile -->
                     <a class="dropdown-item" href="{{ route('admin.edit.profile') }}">
-                        <i class="fe fe-edit"></i> Edit Profile
-                    </a>
-
-                    <!-- Account Settings -->
-                    <a class="dropdown-item" href="{{ url('admin/account-settings') }}">
-                        <i class="fe fe-settings"></i> Account Settings
-                    </a>
-
-                    <!-- Support -->
-                    <a class="dropdown-item" href="{{ url('admin/support') }}">
-                        <i class="fe fe-settings"></i> Support
+                        <i class="fe fe-edit"></i> @lang('admin.header.editProfile')
                     </a>
 
                     <!-- Activity -->
                     <a class="dropdown-item" href="{{ route('admin.activities') }}">
-                        <i class="fe fe-compass"></i> Activity
+                        <i class="fe fe-compass"></i> @lang('global.activity')
                     </a>
 
                     <!-- Logout -->
                     <a class="dropdown-item" href="javascript:void(0)" id="logout-account">
-                        <i class="fe fe-power"></i> Sign Out
+                        <i class="fe fe-power"></i> @lang('global.logout')
                     </a>
                 </div>
             </div>

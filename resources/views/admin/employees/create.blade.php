@@ -435,8 +435,8 @@
 
                                         <!-- Information -->
                                         <div class="form-group @error('info') has-danger @enderror">
-                                            <p class="mb-2">15) @lang('global.information'):</p>
-                                            <textarea name="info" class="form-control @error('info') form-control-danger @enderror" placeholder="@lang('global.information')">{{ old('info') }}</textarea>
+                                            <p class="mb-2">15) @lang('global.extraInfo'):</p>
+                                            <textarea name="info" class="form-control @error('info') form-control-danger @enderror" placeholder="@lang('global.extraInfo')">{{ old('info') }}</textarea>
 
                                             @error('info')
                                             <div class="invalid-feedback">{{ $message }}</div>

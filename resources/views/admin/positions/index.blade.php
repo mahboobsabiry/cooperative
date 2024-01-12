@@ -88,7 +88,7 @@
                                         <th>@lang('pages.positions.positionNumber')</th>
                                         <th>@lang('form.num_of_pos')</th>
                                         <th>@lang('form.code')</th>
-                                        <th>@lang('form.description')</th>
+                                        <th>@lang('form.extraInfo')</th>
                                     </tr>
                                     </thead>
 

@@ -86,7 +86,7 @@
                                     <th class="text-center">@lang('form.phone')</th>
                                     <th class="text-center">@lang('form.email')</th>
                                     <th class="text-center">@lang('admin.sidebar.roles')</th>
-                                    <th class="text-center">@lang('global.information')</th>
+                                    <th class="text-center">@lang('global.extraInfo')</th>
                                     <th class="text-center">@lang('global.createdDate')</th>
                                 </tr>
                                 </thead>

@@ -272,8 +272,8 @@
                             </div>
                             <!--/==/ End of Personal Information Table -->
 
-                            <div class="main-content-label tx-13 mg-b-20" style="border-top: 1px solid #ddd;">
-                                @lang('global.about')
+                            <div class="main-content-label tx-13 mg-b-20 pt-2" style="border-top: 1px solid #ddd;">
+                                @lang('global.extraInfo')
                             </div>
                             <p>{{ $position->desc ?? '--' }}</p>
                         </div>

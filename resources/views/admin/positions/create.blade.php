@@ -126,8 +126,8 @@
 
                                         <!-- Description -->
                                         <div class="form-group @error('desc') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.description'):</p>
-                                            <textarea name="desc" class="form-control @error('desc') form-control-danger @enderror" placeholder="@lang('form.description')">{{ old('desc') }}</textarea>
+                                            <p class="mb-2">@lang('form.extraInfo'):</p>
+                                            <textarea name="desc" class="form-control @error('desc') form-control-danger @enderror" placeholder="@lang('form.extraInfo')">{{ old('desc') }}</textarea>
 
                                             @error('desc')
                                             <div class="invalid-feedback">{{ $message }}</div>

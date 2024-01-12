@@ -38,6 +38,7 @@ return [
     'edit'      => 'ویرایش',
     'empty'		=> 'خالی',
     'export'    => 'بیرون کردن',
+    'extraInfo' => 'معلومات اضافی',
     'finance'   => 'مالی',
     'financeBranch' => 'بخش مالی',
     'flag'      => 'بیرق',

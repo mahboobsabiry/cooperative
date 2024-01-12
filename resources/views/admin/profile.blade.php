@@ -180,7 +180,7 @@
                             <!--/==/ End of Personal Information Table -->
 
                             <div class="main-content-label tx-13 mg-b-20" style="border-top: 1px solid #ddd;">
-                                @lang('global.about')
+                                @lang('global.extraInfo')
                             </div>
                             <p>{{ $user->info ?? '--' }}</p>
                         </div>

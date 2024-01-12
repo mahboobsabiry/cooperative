@@ -88,7 +88,7 @@
                                         <th>@lang('form.mainProvince')</th>
                                         <th>@lang('form.currentProvince')</th>
                                         <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
-                                        <th>@lang('form.info')</th>
+                                        <th>@lang('form.extraInfo')</th>
                                     </tr>
                                     </thead>
 
