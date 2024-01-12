@@ -167,11 +167,18 @@
                                     <!-- Phone Number -->
                                     <tr>
                                         <td><strong>@lang('form.phone'): </strong>
-                                            @if($user->photo)
+                                            @if($user->phone)
                                                 <a href="callto:{{ $user->phone }}" class="ctd">{{ $user->phone }}</a>
                                             @else
                                                 --- --- ----
                                             @endif
+                                        </td>
+                                    </tr>
+
+                                    <!-- Username -->
+                                    <tr>
+                                        <td><strong>@lang('form.username'): </strong>
+                                            {{ $user->username }}
                                         </td>
                                     </tr>
                                     </tbody>
@@ -179,7 +186,7 @@
                             </div>
                             <!--/==/ End of Personal Information Table -->
 
-                            <div class="main-content-label tx-13 mg-b-20" style="border-top: 1px solid #ddd;">
+                            <div class="main-content-label tx-13 mg-b-20 pt-2" style="border-top: 1px solid #ddd;">
                                 @lang('global.extraInfo')
                             </div>
                             <p>{{ $user->info ?? '--' }}</p>

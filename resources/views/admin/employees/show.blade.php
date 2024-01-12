@@ -370,26 +370,6 @@
             </div>
         </div>
         <!--/==/ End of Row Content -->
-
-        <!-- Organization -->
-        <div class="card custom-card">
-            <div class="card-body">
-                <div class="p-2 bd">
-                    <div class="main-content-label tx-13 mg-b-20">
-                        @if(app()->getLocale() == 'en')
-                            {{ $employee->name }} {{ $employee->last_name }}
-                            (<span class="small text-secondary">{{ $employee->position->title }}</span>)
-                            @lang('pages.positions.organization')
-                        @else
-                            @lang('pages.positions.organization')
-                            {{ $employee->name }} {{ $employee->last_name }}
-                            (<span class="small text-secondary">{{ $employee->position->title }}</span>)
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--/==/ End of Organization -->
     </div>
 @endsection
 <!--/==/ End of Page Content -->
