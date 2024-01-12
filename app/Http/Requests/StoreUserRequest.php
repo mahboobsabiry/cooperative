@@ -26,41 +26,15 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar'     => [
-                'image',
-                'mimes:jpg,png'
-            ],
-            'name'     => [
-                'required',
-            ],
-            'username' => [
-                'required|unique:users,username',
-            ],
-            'phone'    => [
-                'nullable',
-                'min:8',
-                'max:15',
-                'unique:users,phone'
-            ],
-            'email'    => [
-                'nullable',
-                'min:10',
-                'max:64',
-                'unique:users,email'
-            ],
-            'password' => [
-                'required',
-            ],
-            'roles.*'  => [
-                'integer',
-            ],
-            'roles'    => [
-                'required',
-                'array',
-            ],
-            'info'  => [
-                'nullable'
-            ]
+            'avatar'    => 'image|mimes:jpg,png',
+            'name'      => 'required',
+            'username'  => 'required|unique:users,username',
+            'phone'     => 'nullable|min:8|max:15|unique:users,phone',
+            'email'     => 'nullable|min:8|max:64|unique:users,email',
+            'password'  => 'required|min:3|max:64',
+            'roles.*'   => 'integer',
+            'roles'     => 'required|array',
+            'info'      => 'nullable'
         ];
     }
 }

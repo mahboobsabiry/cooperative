@@ -73,6 +73,17 @@
                                         </div>
                                         <!--/==/ End of Name -->
 
+                                        <!-- Username -->
+                                        <div class="form-group @error('username') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.username'): <span class="tx-danger">*</span></p>
+                                            <input type="text" id="username" class="form-control @error('username') form-control-danger @enderror" name="username" value="{{ $user->username ?? old('username') }}" placeholder="@lang('form.username')" required>
+
+                                            @error('username')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Username -->
+
                                         <!-- Phone Number -->
                                         <div class="form-group @error('phone') has-danger @enderror">
                                             <p class="mb-2">@lang('form.phone'):</p>
@@ -94,20 +105,6 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Email -->
-
-                                        <!-- Status -->
-                                        <div class="form-group @error('status') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.status'):</p>
-                                            <select id="status" name="status" class="form-control">
-                                                <option value="1" {{ $user->status == 1 ? 'selected' : '' }}>@lang('global.active')</option>
-                                                <option value="0" {{ $user->status == 0 ? 'selected' : '' }}>@lang('global.inactive')</option>
-                                            </select>
-
-                                            @error('status')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Status -->
 
                                         <!-- Information -->
                                         <div class="form-group @error('info') has-danger @enderror">

@@ -155,19 +155,19 @@
                                         <ul>
                                             @foreach($organization as $organ)
                                                 <li>
-                                                    <a href="{{ route('admin.positions.show', $organ->id) }}" style="background: #ba8b00; color: beige">{{ $organ->title }}</a>
+                                                    <a href="{{ route('admin.positions.show', $organ->id) }}" style="background: #ba8b00; color: beige">{{ $organ->title }} ({{ $organ->num_of_pos }})</a>
                                                     <ul>
                                                         @foreach($organ->children as $admin)
                                                             <li>
-                                                                <a href="{{ route('admin.positions.show', $admin->id) }}" style="background: burlywood;">{{ $admin->title }}</a>
+                                                                <a href="{{ route('admin.positions.show', $admin->id) }}" style="background: burlywood;">{{ $admin->title }} ({{ $admin->num_of_pos }})</a>
                                                                 <ul>
                                                                     @foreach($admin->children as $mgmt)
                                                                         <li>
-                                                                            <a href="{{ route('admin.positions.show', $mgmt->id) }}" style="background: bisque;">{{ $mgmt->title }}</a>
+                                                                            <a href="{{ route('admin.positions.show', $mgmt->id) }}" style="background: bisque;">{{ $mgmt->title }} ({{ $mgmt->num_of_pos }})</a>
                                                                             <ul>
                                                                                 @foreach($mgmt->children as $mgr)
                                                                                     <li>
-                                                                                        <a href="{{ route('admin.positions.show', $mgr->id) }}" style="background: beige;">{{ $mgr->title }} ({{ count($mgr->employees) }})</a>
+                                                                                        <a href="{{ route('admin.positions.show', $mgr->id) }}" style="background: beige;">{{ $mgr->title }}  ({{ $mgr->num_of_pos }})</a>
                                                                                     </li>
                                                                                 @endforeach
                                                                             </ul>

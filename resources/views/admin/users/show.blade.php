@@ -90,7 +90,7 @@
                                 <span>{{ $user->name }}</span>
                             </h4>
 
-                            <p class="pro-user-desc text-muted mb-1">{{ $user->roles->first()->name }}</p>
+                            <p class="pro-user-desc text-muted mb-1">{{ $user->username }}</p>
                         </div>
                     </div>
                 </div>
@@ -217,11 +217,18 @@
                                     <!-- Phone Number -->
                                     <tr>
                                         <td><strong>@lang('form.phone'): </strong>
-                                            @if($user->photo)
+                                            @if($user->phone)
                                                 <a href="callto:{{ $user->phone }}" class="ctd">{{ $user->phone }}</a>
                                             @else
                                                 --- --- ----
                                             @endif
+                                        </td>
+                                    </tr>
+
+                                    <!-- Username -->
+                                    <tr>
+                                        <td><strong>@lang('form.username'): </strong>
+                                            {{ $user->username }}
                                         </td>
                                     </tr>
                                     </tbody>
