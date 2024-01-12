@@ -5,7 +5,7 @@
         <!-- Page Header -->
         <div class="page-header">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">به سیستم کمکی گمرک بلخ خوش آمدید!</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">@lang('admin.dashboard.welcomeToBCHS')!</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('index') }}" target="_blank">@lang('global.home')</a></li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('admin.dashboard.dashboard')</li>
