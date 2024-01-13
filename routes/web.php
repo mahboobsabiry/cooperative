@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\EDReportingController;
 use App\Http\Controllers\Admin\EDTrexController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ExitDoorController;
+use App\Http\Controllers\Admin\HostelController;
 use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -75,6 +76,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('appointment-positions', [PositionController::class, 'appointment'])->name('positions.appointment');
     Route::get('empty-positions', [PositionController::class, 'empty'])->name('positions.empty');
     Route::get('inactive-positions', [PositionController::class, 'inactive'])->name('positions.inactive');
+    // Hostel
+    Route::resource('hostel', HostelController::class);
     // Employees
     Route::resource('employees', EmployeeController::class);
     Route::post('update-employee-status', [EmployeeController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');

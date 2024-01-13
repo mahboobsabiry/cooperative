@@ -128,7 +128,7 @@
                     request()->is('admin/agents/*') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
-                        <i class="fa fa-building"></i>
+                        <i class="fa fa-shopping-bag"></i>
                         <span class="sidemenu-label">@lang('admin.sidebar.companies')</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
@@ -154,6 +154,15 @@
                 </li>
             @endcan
             <!--/==/ End of Companies -->
+
+            <!-- Hostel -->
+            @can('hostel_mgmt')
+                <li class="nav-item {{ request()->url() == route('admin.hostel.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.hostel.index') }}">
+                        <i class="fa fa-building"></i><span class="sidemenu-label">@lang('pages.hostel.hostel')</span>
+                    </a>
+                </li>
+            @endcan
 
             <!-- Applications -->
             <li class="nav-label">@lang('admin.sidebar.applications')</li>

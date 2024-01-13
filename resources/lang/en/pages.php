@@ -58,6 +58,13 @@ return [
         'updatedEmpMsg'     => 'Employee information has been updated successfully!'
     ],
 
+    'hostel' => [
+        'hostel'    => 'Hostel',
+        'roomNumber'    => 'Room Number',
+        'roomSection'   => 'Room Section',
+        'section'       => 'Section'
+    ],
+
     'permissions' => [
         'addNewPermission'  => 'Add New Permission',
         'deletePermission'  => 'Delete Permission',

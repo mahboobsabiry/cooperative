@@ -7,13 +7,14 @@ use App\Traits\HasTazkira;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Employee extends Model
 {
     use HasFactory, HasPhoto, HasTazkira;
 
     protected $fillable = [
-        'position_id', 'name', 'last_name', 'father_name', 'gender',
+        'position_id', 'hostel_id', 'name', 'last_name', 'father_name', 'gender',
         'emp_number', 'appointment_number', 'appointment_date', 'last_duty', 'birth_year',
         'education', 'prr_npr', 'prr_date',
         'phone', 'phone2', 'email',
@@ -37,5 +38,11 @@ class Employee extends Model
     public function position()
     {
         return $this->belongsTo(Position::class, 'position_id');
+    }
+
+    // Hostel
+    public function hostel(): Relation
+    {
+        return $this->belongsTo(Hostel::class, 'hostel_id');
     }
 }

@@ -48,6 +48,13 @@ return [
         'updatedEmpMsg'     => 'معلومات کارمند موفقانه بروز رسانی شد!'
     ],
 
+    'hostel' => [
+        'hostel'    => 'لیلیه',
+        'roomNumber'    => 'نمبر اتاق',
+        'roomSection'   => 'سکشن اتاق',
+        'section'       => 'سکشن'
+    ],
+
     'permissions' => [
         'addNewPermission'  => 'ثبت مجوز جدید',
         'deletePermission'  => 'حذف مجوز',

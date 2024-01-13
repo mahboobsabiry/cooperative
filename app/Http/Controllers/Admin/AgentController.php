@@ -13,7 +13,7 @@ class AgentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:agent_mgmt', ['only' => ['index','store', 'update', 'destroy']]);
+        $this->middleware('permission:agent_mgmt', ['only' => ['index', 'create','store', 'show', 'edit', 'update', 'destroy']]);
     }
 
     // Fetch All Data

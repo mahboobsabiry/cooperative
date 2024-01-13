@@ -50,6 +50,7 @@ class EmployeeController extends Controller
         }
         $employee = new Employee();
         $employee->position_id  = $request->position_id;
+        $employee->hostel_id    = $request->hostel_id;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
         $employee->father_name  = $request->father_name;
@@ -157,6 +158,7 @@ class EmployeeController extends Controller
         }
 
         $employee->position_id  = $request->position_id;
+        $employee->hostel_id    = $request->hostel_id;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
         $employee->father_name  = $request->father_name;
