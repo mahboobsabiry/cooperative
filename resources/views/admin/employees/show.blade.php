@@ -264,6 +264,12 @@
                                         <th><strong>NPR/Date: </strong></th>
                                         <td>{{ $employee->npr_date }}</td>
                                     </tr>
+
+                                    <!-- Introducer -->
+                                    <tr>
+                                        <th><strong>@lang('form.introducer'): </strong></th>
+                                        <td>{{ $employee->introducer }}</td>
+                                    </tr>
                                     </tbody>
 
                                     <tbody class="col-lg-12 col-xl-6 p-0">
@@ -332,14 +338,14 @@
 
                                     <!-- Main Province -->
                                     <tr>
-                                        <th><strong>@lang('form.mainProvince'): </strong></th>
-                                        <td>{{ $employee->main_province }}</td>
+                                        <th><strong>@lang('form.mainAddress'): </strong></th>
+                                        <td>{{ $employee->main_province }}, {{ $employee->main_district }}</td>
                                     </tr>
 
-                                    <!-- Education -->
+                                    <!-- Current Address -->
                                     <tr>
-                                        <th><strong>@lang('form.currentProvince'): </strong></th>
-                                        <td>{{ $employee->current_province }}</td>
+                                        <th><strong>@lang('form.curAddress'): </strong></th>
+                                        <td>{{ $employee->current_province }}, {{ $employee->current_district }}</td>
                                     </tr>
                                     </tbody>
                                 </table>

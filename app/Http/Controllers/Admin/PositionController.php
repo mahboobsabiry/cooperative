@@ -42,7 +42,7 @@ class PositionController extends Controller
         $position           = new Position();
         $position->parent_id    = $request->parent_id;
         $position->title        = $request->title;
-        $position->code         = '20-27-01-' . $request->code;
+        $position->code         = $request->code;
         $position->position_number = $request->position_number;
         $position->num_of_pos   = $request->num_of_pos;
         $position->desc         = $request->desc;
@@ -89,7 +89,7 @@ class PositionController extends Controller
 
         $position->parent_id    = $request->parent_id;
         $position->title        = $request->title;
-        $position->code         = '20-27-01-' . $request->code;
+        $position->code         = $request->code;
         $position->position_number = $request->position_number;
         $position->num_of_pos   = $request->num_of_pos;
         $position->desc         = $request->desc;

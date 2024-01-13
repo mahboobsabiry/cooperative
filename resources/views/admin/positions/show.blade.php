@@ -257,16 +257,14 @@
                                     <!-- Code -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('form.code'):</th>
-                                        <td>{{ $position->code }}</td>
+                                        <td>20-27-01-{{ $position->code }}</td>
                                     </tr>
-
 
                                     <!-- Date of creation -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('global.date'):</th>
                                         <td>{{ $position->created_at->diffForHumans() }}</td>
                                     </tr>
-
                                     </tbody>
                                 </table>
                             </div>

@@ -17,7 +17,7 @@ class Employee extends Model
         'emp_number', 'appointment_number', 'appointment_date', 'last_duty', 'birth_year',
         'education', 'prr_npr', 'prr_date',
         'phone', 'phone2', 'email',
-        'main_province', 'current_province', 'info',
+        'main_province', 'main_district', 'current_province', 'current_district', 'introducer', 'info',
         'on_duty', 'duty_position', 'status'
     ];
 

@@ -68,6 +68,7 @@ return [
     'next'      => 'Next',
     'no'        => 'No',
     'notFound'  => 'Not Found',
+    'number'    => 'Number',
     'offline'   => 'Offline',
     'oh'		=> 'Oh',
     'online'    => 'Online',

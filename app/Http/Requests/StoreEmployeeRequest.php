@@ -44,8 +44,11 @@ class StoreEmployeeRequest extends FormRequest
             'phone2'        => 'nullable|unique:employees,phone2',
             'email'         => 'nullable|unique:employees,email',
             'main_province'     => 'required|min:3|max:64',
+            'main_district'     => 'required|min:3|max:64',
             'current_province'  => 'required|min:3|max:64',
-            'info'          => 'nullable',
+            'current_district'  => 'required|min:3|max:64',
+            'introducer'        => 'nullable|min:3|max:64',
+            'info'              => 'nullable',
         ];
     }
 }

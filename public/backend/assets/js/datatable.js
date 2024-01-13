@@ -4,7 +4,7 @@ $(document).ready(function() {
         buttons: [
             'excelHtml5'
         ],
-        order: [[0, 'desc']],
+        order: [[0, 'ASC']],
         scrollCollapse: true,
         scrollX: true,
         responsive: true

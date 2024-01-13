@@ -66,7 +66,10 @@ class EmployeeController extends Controller
         $employee->phone2           = $request->phone2;
         $employee->email            = $request->email;
         $employee->main_province    = $request->main_province;
+        $employee->main_district    = $request->main_district;
         $employee->current_province = $request->current_province;
+        $employee->current_district = $request->current_district;
+        $employee->introducer       = $request->introducer;
         $employee->info             = $request->info;
         // Save On Duty
         if ($request->has('on_duty')) {
@@ -138,8 +141,11 @@ class EmployeeController extends Controller
             'phone2'        => 'nullable|unique:employees,phone2,' . $employee->id,
             'email'         => 'nullable|unique:employees,email,' . $employee->id,
             'main_province'     => 'required|min:3|max:64',
+            'main_district'     => 'required|min:3|max:64',
             'current_province'  => 'required|min:3|max:64',
-            'info'          => 'nullable',
+            'current_district'  => 'required|min:3|max:64',
+            'introducer'        => 'nullable|min:3|max:64',
+            'info'              => 'nullable',
         ]);
 
         $position = Position::where('id', $request->position_id)->first();
@@ -167,7 +173,10 @@ class EmployeeController extends Controller
         $employee->phone2           = $request->phone2;
         $employee->email            = $request->email;
         $employee->main_province    = $request->main_province;
+        $employee->main_district    = $request->main_district;
         $employee->current_province = $request->current_province;
+        $employee->current_district = $request->current_district;
+        $employee->introducer       = $request->introducer;
         $employee->info             = $request->info;
         // Save On Duty
         if ($request->has('on_duty')) {

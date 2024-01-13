@@ -68,27 +68,15 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>@lang('form.photo')</th>
-                                        <th>@lang('form.idCard')</th>
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.fatherName')</th>
                                         <th>@lang('form.position')</th>
                                         <th>@lang('pages.positions.positionCode')</th>
-                                        <th>@lang('form.gender')</th>
-                                        <th>@lang('form.empNumber')</th>
-                                        <th>@lang('form.appointmentNumber')</th>
-                                        <th>@lang('form.appointmentDate')</th>
-                                        <th>@lang('form.lastDuty')</th>
-                                        <th>@lang('form.birthYear')</th>
-                                        <th>@lang('form.education')</th>
-                                        <th>PRR/NPR</th>
-                                        <th>PRR Date</th>
                                         <th>@lang('form.phone')</th>
-                                        <th>@lang('form.email')</th>
-                                        <th>@lang('form.mainProvince')</th>
                                         <th>@lang('form.currentProvince')</th>
+                                        <th>@lang('form.currentDistrict')</th>
                                         <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
-                                        <th>@lang('form.extraInfo')</th>
+                                        <th>@lang('form.introducer')</th>
                                     </tr>
                                     </thead>
 
@@ -97,41 +85,22 @@
                                         <tr>
                                             <td>{{ $employee->id }}</td>
                                             <td>
-                                                <a href="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}" target="_blank">
-                                                    <img src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}" width="50" class="rounded-50">
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a href="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}" target="_blank">
-                                                    <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}" width="50" class="rounded-50">
-                                                </a>
-                                            </td>
-                                            <td>
                                                 <a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
                                             </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
-                                            <td>{{ $employee->position->title ?? '' }} - {{ $employee->position->position_number ?? '' }}</td>
+                                            <td>{{ $employee->position->title ?? '' }} {{ $employee->position->position_number ?? '' }}</td>
                                             <td>{{ $employee->position->code ?? '' }}</td>
-                                            <td>{{ $employee->gender == 1 ? trans('form.male') : trans('form.female') }}</td>
-                                            <td>{{ $employee->emp_number ?? '' }}</td>
-                                            <td>{{ $employee->appointment_number ?? '' }}</td>
-                                            <td>{{ $employee->appointment_date ?? '' }}</td>
-                                            <td>{{ $employee->last_duty ?? '' }}</td>
-                                            <td>{{ $employee->birth_year ?? '' }}</td>
-                                            <td>{{ $employee->education ?? '' }}</td>
-                                            <td>{{ $employee->prr_npr ?? '' }}</td>
-                                            <td>{{ $employee->prr_date ?? '' }}</td>
-                                            <!-- Email Address -->
                                             <td class="tx-sm-12-f">
                                                 <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
-                                                <a href="callto:{{ $employee->phone2 ?? '' }}" class="ctd">{{ $employee->phone2 ?? '' }}</a>
                                             </td>
-                                            <!-- Email Address -->
-                                            <td><a href="mailto:{{ $employee->email ?? '' }}" class="tx-sm-12-f ctd">{{ $employee->email ?? '' }}</a></td>
-                                            <td>{{ $employee->main_province ?? '' }}</td>
                                             <td>{{ $employee->current_province ?? '' }}</td>
-                                            <td>{{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }} ({{ $employee->duty_position ?? '' }})</td>
-                                            <td>{{ $employee->info }}</td>
+                                            <td>{{ $employee->current_district ?? '' }}</td>
+                                            <td>
+                                                {{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
+                                                {{ $employee->duty_position ? ' - ' : '' }}
+                                                {{ $employee->duty_position ?? '' }}
+                                            </td>
+                                            <td>{{ $employee->introducer ?? '' }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

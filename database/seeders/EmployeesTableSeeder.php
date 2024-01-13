@@ -35,7 +35,10 @@ class EmployeesTableSeeder extends Seeder
                 'phone2'        => null,
                 'email'         => null,
                 'main_province'     => 'غزنی',
+                'main_district'     => 'مرکز',
                 'current_province'  => 'کابل',
+                'current_district'  => 'مرکز',
+                'introducer'        => null,
                 'info'          => '',
                 'on_duty'       => 0,
                 'status'        => 1
@@ -58,7 +61,10 @@ class EmployeesTableSeeder extends Seeder
                 'phone2'        => null,
                 'email'         => null,
                 'main_province'     => 'بغلان',
+                'main_district'     => 'نهرین',
                 'current_province'  => 'بغلان',
+                'current_district'  => 'نهرین',
+                'introducer'        => null,
                 'info'          => '',
                 'on_duty'       => 0,
                 'status'        => 1
@@ -81,7 +87,10 @@ class EmployeesTableSeeder extends Seeder
                 'phone2'        => null,
                 'email'         => null,
                 'main_province'     => 'بدخشان',
+                'main_district'     => 'شهر بزرگ',
                 'current_province'  => 'کابل',
+                'current_district'  => 'مرکز',
+                'introducer'        => null,
                 'info'          => '',
                 'on_duty'       => 0,
                 'status'        => 1

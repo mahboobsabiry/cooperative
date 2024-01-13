@@ -19,7 +19,7 @@ return [
         'jamiatAllM'            => 'تمام اعضای حزب',
         'usersAcDetails'        => 'فعالیت های کاربران با جزئیات',
         'usersWithMostAc'       => 'لیست کاربران بر اساس میزان فعالیت آنان',
-        'welcomeToBCHS'         => 'به سیستم کمکی گمرک بلخ خوش آمدید!',
+        'welcomeToBCHS'         => 'به سیستم کمکی گمرک بلخ خوش آمدید',
         'welcomeToDashboard'    => 'به داشبورد خوش آمدید'
     ],
     'header' => [

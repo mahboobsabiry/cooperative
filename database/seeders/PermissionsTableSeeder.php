@@ -31,9 +31,8 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name'      => 'employee_mgmt' // Manage employees
             ],
-            // Exit-Door
             [
-                'name'      => 'exit_door' // Manage Exit Door of Border Custom
+                'name'      => 'hostel_mgmt' // Manage Hostel Employees
             ]
         ];
 
