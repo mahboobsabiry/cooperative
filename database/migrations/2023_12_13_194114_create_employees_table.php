@@ -24,13 +24,16 @@ return new class extends Migration
             $table->string('last_duty')->default('جدیدالشمول');
             $table->bigInteger('birth_year');
             $table->string('education')->nullable();
-            $table->enum('prr_npr', ['PRR', 'NPR']);
+            $table->enum('prr_npr', ['PRR', 'NPR'])->default('NPR');
             $table->date('prr_date')->nullable();
             $table->string('phone')->nullable();
             $table->string('phone2')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('main_province');
+            $table->string('main_district');
             $table->string('current_province');
+            $table->string('current_district');
+            $table->string('introducer')->nullable();
             $table->string('info')->nullable();
             $table->tinyInteger('on_duty')->default(0);
             $table->string('duty_position')->nullable();

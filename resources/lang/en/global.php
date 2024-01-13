@@ -8,6 +8,7 @@ return [
     'activity'      => 'Activity',
     'activities'    => 'Activities',
     'add'           => 'Add',
+    'address'       => 'Address',
     'admin'         => 'Admin',
     'afghani'       => 'AFN',
     'all'           => 'All',

@@ -8,6 +8,7 @@ return [
     'activity'      => 'فعالیت',
     'activities'    => 'فعالیت لر',
     'add'           => 'ثبت',
+    'address'       => 'آدرس',
     'admin'         => 'ادمین',
     'afghani'       => 'افغانی',
     'all'           => 'همه',

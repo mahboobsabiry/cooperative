@@ -69,13 +69,14 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->tin }}</td>
+                                        <td>{{ $company->agents()->count() }}</td>
                                         <td>
                                             @if(app()->getLocale() == 'en')
-                                                {{ date_format($company->created_at, 'Y-F-d / h:i A') }}
+                                                {{ date_format($company->created_at, 'Y-F-d') }}
                                             @else
                                                 <span class="tx-bold">
                                                 @php
-                                                    $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d / h:i A - %A', strtotime($company->created_at)); // 1395-02-19
+                                                    $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($company->created_at)); // 1395-02-19
                                                     echo \Morilog\Jalali\CalendarUtils::convertNumbers($date);
                                                 @endphp
                                                 </span>

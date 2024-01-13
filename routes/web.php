@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdministrationsController;
+use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\Admin\BranchesController;
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\EDEmptyController;
 use App\Http\Controllers\Admin\EDRejectedController;
@@ -78,6 +80,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::post('update-employee-status', [EmployeeController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');
     Route::get('main-employees', [EmployeeController::class, 'main_employees'])->name('employees.main');
     Route::get('on-duty-employees', [EmployeeController::class, 'on_duty_employees'])->name('employees.on_duty');
+
+    // Companies
+    Route::resource('companies', CompanyController::class);
+    Route::resource('agents', AgentController::class);
 
     // Settings
     Route::resource('settings', SettingController::class);

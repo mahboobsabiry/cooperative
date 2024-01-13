@@ -45,11 +45,11 @@
                         <div class="expansion-label d-flex">
                             <span class="font-weight-bold">@lang('pages.users.activeUsers')</span>
                             <span class="ml-auto">
-                                <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 1)->count() > \App\Models\User::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-success"></i>{{ \App\Models\User::all()->where('status', 1)->count() }}
+                                <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 1)->count() > \App\Models\User::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-primary"></i>{{ \App\Models\User::all()->where('status', 1)->count() }}
                             </span>
                             <span class="font-weight-bold">@lang('pages.users.inactiveUsers')</span>
                             <span class="ml-auto">
-                                <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 0)->count() > \App\Models\User::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-success"></i>{{ \App\Models\User::all()->where('status', 0)->count() }}
+                                <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 0)->count() > \App\Models\User::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-primary"></i>{{ \App\Models\User::all()->where('status', 0)->count() }}
                             </span>
                         </div>
                     </div>
@@ -78,12 +78,12 @@
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">@lang('pages.positions.appointed')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ $appointment_positions > $empty_positions ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    <i class="fas fa-caret-{{ $appointment_positions > $empty_positions ? 'up' : 'down' }} mr-1 text-info"></i>
                                     {{ $appointment_positions }}
                                 </span>
                                 <span class="font-weight-bold">@lang('global.empty')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ $empty_positions > $appointment_positions ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    <i class="fas fa-caret-{{ $empty_positions > $appointment_positions ? 'up' : 'down' }} mr-1 text-info"></i>
                                     {{ $empty_positions }}
                                 </span>
                             </div>
@@ -113,12 +113,12 @@
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">@lang('pages.employees.mainPosition')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('on_duty', 1)->count() > \App\Models\Employee::all()->where('on_duty', 0)->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('on_duty', 1)->count() > \App\Models\Employee::all()->where('on_duty', 0)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
                                     {{ \App\Models\Employee::all()->where('on_duty', 1)->count() }}
                                 </span>
                                 <span class="font-weight-bold">@lang('pages.employees.onDuty')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('on_duty', 0)->count() > \App\Models\Employee::all()->where('on_duty', 1)->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('on_duty', 0)->count() > \App\Models\Employee::all()->where('on_duty', 1)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
                                     {{ \App\Models\Employee::all()->where('on_duty', 0)->count() }}
                                 </span>
                             </div>
@@ -127,6 +127,41 @@
                 </div>
             @endcan
             <!--/==/ End of Employees -->
+
+            <!-- Companies -->
+            @can('company_mgmt')
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.companies')</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fa fa-user-tie fs-20 text-danger"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\Company::all()) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar progress-bar-xs wd-100p bg-danger" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="font-weight-bold">@lang('pages.employees.mainPosition')</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-down mr-1 text-danger"></i>
+                                    {{ \App\Models\Company::all()->count() }}
+                                </span>
+                                <span class="font-weight-bold">@lang('pages.employees.onDuty')</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-up mr-1 text-danger"></i>
+                                    {{ \App\Models\Agent::all()->count() }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <!--/==/ End of Companies -->
         </div>
         <!--End  Row -->
 
