@@ -41,6 +41,7 @@ return [
 
     'sidebar' => [
         'applications'      => 'Applications',
+        'companies'         => 'شرکت لر',
         'employees'         => 'کارمندلر',
         'organization'      => 'تشکیلات',
         'pages'             => 'صحیفه لر',

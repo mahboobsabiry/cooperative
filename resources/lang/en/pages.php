@@ -29,6 +29,12 @@ return [
         'userAcParagMsg'     => 'Users all activities including add or update members;'
     ],
 
+    'companies' => [
+        'company'   => 'Company',
+        'agent'     => 'Agent',
+        'agents'    => 'Agents'
+    ],
+
     'employees' => [
         'addEmpInfo'        => 'Add Employee Information',
         'addedEmpMsg'       => 'New employee has been added successfully!',

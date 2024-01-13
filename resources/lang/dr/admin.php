@@ -47,7 +47,7 @@ return [
         'applications'      => 'آپلیکیشن ها',
         'articles'          => 'مقالات',
         'books'             => 'کتاب‌ها',
-        'categories'        => 'کتگوری ها',
+        'companies'         => 'شرکت ها',
         'districts'         => 'ولسوالی ها',
         'employees'         => 'کارمندان',
         'galleries'         => 'گالری‌ها',

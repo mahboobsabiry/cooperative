@@ -48,7 +48,7 @@ return [
         'applications'      => 'Applications',
         'articles'          => 'Articles',
         'books'             => 'Books',
-        'categories'        => 'Categories',
+        'companies'         => 'Companies',
         'districts'         => 'Districts',
         'employees'         => 'Employees',
         'galleries'         => 'Galleries',

@@ -41,6 +41,7 @@ return [
 
     'sidebar' => [
         'applications'      => 'Applications',
+        'companies'         => 'شرکتونه',
         'employees'         => 'کارمندان',
         'organization'      => 'Organization',
         'pages'             => 'پانی',

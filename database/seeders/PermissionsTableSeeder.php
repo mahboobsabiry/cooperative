@@ -33,6 +33,12 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'name'      => 'hostel_mgmt' // Manage Hostel Employees
+            ],
+            [
+                'name'      => 'company_mgmt' // Manage Companies
+            ],
+            [
+                'name'      => 'agent_mgmt' // Manage Companies Agents
             ]
         ];
 
