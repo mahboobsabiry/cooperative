@@ -20,9 +20,11 @@ return [
     ],
 
     'companies' => [
-        'company'   => 'شرکت',
         'agent'     => 'استازی',
-        'agents'    => 'استازی'
+        'agents'    => 'استازی',
+        'company'   => 'شرکت',
+        'export'    => 'صادراتی',
+        'import'    => 'وارداتی'
     ],
 
     'employees' => [

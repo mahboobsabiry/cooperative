@@ -30,9 +30,11 @@ return [
     ],
 
     'companies' => [
-        'company'   => 'Company',
         'agent'     => 'Agent',
-        'agents'    => 'Agents'
+        'agents'    => 'Agents',
+        'company'   => 'Company',
+        'export'    => 'Export',
+        'import'    => 'Import'
     ],
 
     'employees' => [

@@ -146,15 +146,15 @@
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar progress-bar-xs wd-100p bg-danger" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">@lang('pages.employees.mainPosition')</span>
+                                <span class="font-weight-bold">@lang('pages.companies.import')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-down mr-1 text-danger"></i>
-                                    {{ \App\Models\Company::all()->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Company::all()->where('type', 0)->count() > \App\Models\Company::all()->where('type', 1)->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    {{ \App\Models\Company::all()->where('type', 0)->count() }}
                                 </span>
-                                <span class="font-weight-bold">@lang('pages.employees.onDuty')</span>
+                                <span class="font-weight-bold">@lang('pages.companies.export')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-up mr-1 text-danger"></i>
-                                    {{ \App\Models\Agent::all()->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Company::all()->where('type', 1)->count() > \App\Models\Company::all()->where('type', 0)->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    {{ \App\Models\Company::all()->where('type', 1)->count() }}
                                 </span>
                             </div>
                         </div>

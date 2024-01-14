@@ -353,6 +353,7 @@
                                         <th><strong>@lang('pages.hostel.hostel')/@lang('global.home'): </strong></th>
                                         <td>
                                             @if($employee->hostel)
+                                                @lang('pages.hostel.hostel') -
                                                 @lang('pages.hostel.roomNumber')
                                                 {{ $employee->hostel->number }}
                                                 @lang('pages.hostel.section')

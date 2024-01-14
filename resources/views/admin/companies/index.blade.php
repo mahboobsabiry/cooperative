@@ -70,7 +70,7 @@
                                         <td>{{ $company->id }}</td>
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->tin }}</td>
-                                        <td>{{ $company->type == 0 ? 'وارداتی' : 'صادراتی' }}</td>
+                                        <td>{{ $company->type == 0 ? trans('pages.companies.import') : trans('pages.companies.export') }}</td>
                                         <td>{{ $company->agents()->count() }}</td>
                                         <td>
                                             @if(app()->getLocale() == 'en')
