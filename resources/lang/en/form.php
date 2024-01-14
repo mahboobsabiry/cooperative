@@ -55,6 +55,7 @@ return [
     'salary'		=> 'Salary',
     'shortName'		=> 'Short Name',
     'status'		=> 'Status',
+    'tin'           => 'TIN',
     'title'         => 'Title',
     'url'           => 'URL',
     'username'	    => 'Username',

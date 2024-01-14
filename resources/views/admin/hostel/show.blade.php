@@ -100,6 +100,33 @@
 
                                     <!-- Left Column -->
                                     <tbody class="col-lg-12 col-xl-6 p-0">
+                                    <!-- Number Of Members -->
+                                    <tr>
+                                        <th class="font-weight-bold">@lang('pages.hostel.numOfMembers'):</th>
+                                        <td>
+                                            @php
+                                                if (!$hostel->employees || $hostel->employees->count() == 0) {
+                                                    $count_number = 0;
+                                                } elseif ($hostel->employees->count() == 1) {
+                                                    $count_number = 20;
+                                                } elseif ($hostel->employees->count() == 2) {
+                                                    $count_number = 40;
+                                                } elseif ($hostel->employees->count() == 3) {
+                                                    $count_number = 60;
+                                                } elseif ($hostel->employees->count() == 4) {
+                                                    $count_number = 80;
+                                                } elseif ($hostel->employees->count() == 5) {
+                                                    $count_number = 100;
+                                                } else {
+                                                    $count_number = 0;
+                                                }
+                                            @endphp
+                                            <div class="progress mb-1">
+                                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ $count_number }}" class="progress-bar progress-bar-lg wd-{{ $count_number }}p bg-info" role="progressbar">{{ count($hostel->employees) }}</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
                                     <!-- Date of creation -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('global.date'):</th>

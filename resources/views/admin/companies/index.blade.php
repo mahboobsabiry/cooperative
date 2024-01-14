@@ -50,12 +50,13 @@
 
                         <!-- Table -->
                         <div class="table-responsive">
-                            <table id="exportexample" class="table table-bordered border-t0 key-buttons text-nowrap w-100" >
+                            <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100" >
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>@lang('form.name')</th>
                                     <th>@lang('form.tin')</th>
+                                    <th>@lang('global.type')</th>
                                     <th>@lang('pages.companies.agents')</th>
                                     <th>@lang('global.createdDate')</th>
                                     <th>@lang('global.action')</th>
@@ -66,19 +67,17 @@
                                 @foreach($companies as $company)
                                     <tr>
                                         @include('admin.companies.ed')
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $company->id }}</td>
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->tin }}</td>
+                                        <td>{{ $company->type == 0 ? 'وارداتی' : 'صادراتی' }}</td>
                                         <td>{{ $company->agents()->count() }}</td>
                                         <td>
                                             @if(app()->getLocale() == 'en')
                                                 {{ date_format($company->created_at, 'Y-F-d') }}
                                             @else
                                                 <span class="tx-bold">
-                                                @php
-                                                    $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($company->created_at)); // 1395-02-19
-                                                    echo \Morilog\Jalali\CalendarUtils::convertNumbers($date);
-                                                @endphp
+                                                    {{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($company->created_at)) }}
                                                 </span>
                                             @endif
                                         </td>
@@ -113,7 +112,6 @@
     <!-- Data Table js -->
     <script src="{{ asset('backend/assets/plugins/datatable/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/table-data.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.js') }}"></script>
