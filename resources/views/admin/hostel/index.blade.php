@@ -64,7 +64,7 @@
                         <!-- All Positions -->
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.hostel.hostel') ({{ \App\Models\Hostel::select('number')->distinct('number')->count() }})
+                                @lang('pages.hostel.hostel') دارای ({{ \App\Models\Hostel::select('number')->distinct('number')->count() }}) اتاق
                             </div>
                             <!-- Table -->
                             <div class="table-responsive mt-2">
@@ -74,6 +74,7 @@
                                         <th>#</th>
                                         <th>@lang('pages.hostel.roomNumber')</th>
                                         <th>@lang('pages.hostel.section')</th>
+                                        <th>@lang('pages.hostel.numOfMembers')</th>
                                         <th>@lang('admin.sidebar.employees')</th>
                                     </tr>
                                     </thead>
@@ -85,8 +86,33 @@
                                             <td><a href="{{ route('admin.hostel.show', $hostel->id ) }}">{{ $hostel->number }}</a></td>
                                             <td>{{ $hostel->section }}</td>
                                             <td>
+                                                @php
+                                                if (!$hostel->employees || $hostel->employees->count() == 0) {
+                                                    $count_number = 0;
+                                                } elseif ($hostel->employees->count() == 1) {
+                                                    $count_number = 20;
+                                                } elseif ($hostel->employees->count() == 2) {
+                                                    $count_number = 40;
+                                                } elseif ($hostel->employees->count() == 3) {
+                                                    $count_number = 60;
+                                                } elseif ($hostel->employees->count() == 4) {
+                                                    $count_number = 80;
+                                                } elseif ($hostel->employees->count() == 5) {
+                                                    $count_number = 100;
+                                                } else {
+                                                    $count_number = 0;
+                                                }
+                                                @endphp
+                                                <div class="progress mb-1">
+                                                    <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ $count_number }}" class="progress-bar progress-bar-lg wd-{{ $count_number }}p bg-info" role="progressbar">{{ count($hostel->employees) }}</div>
+                                                </div>
+                                            </td>
+                                            <td>
                                                 @foreach($hostel->employees as $employee)
-                                                    <a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
+                                                    <a href="{{ route('admin.employees.show', $employee->id) }}">
+                                                        {{ count($hostel->employees) > 1 ? ' - ' : '' }}
+                                                        {{ $employee->name }} {{ $employee->last_name }}
+                                                    </a>
                                                 @endforeach
                                             </td>
                                         </tr>
@@ -123,6 +149,7 @@
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.colVis.min.js') }}"></script>
 
     <!-- Custom Scripts -->
-    <script src="{{ asset('backend/assets/js/datatable.js') }}"></script>
+{{--    <script src="{{ asset('backend/assets/js/datatable.js') }}"></script>--}}
+    <script src="{{ asset('assets/js/datatable.js') }}"></script>
 @endsection
 <!--/==/ End of Extra Scripts -->

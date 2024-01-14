@@ -60,6 +60,7 @@ return [
 
     'hostel' => [
         'hostel'    => 'Hostel',
+        'numOfMembers'  => 'Number of Room Members',
         'roomNumber'    => 'Room Number',
         'roomSection'   => 'Room Section',
         'section'       => 'Section'

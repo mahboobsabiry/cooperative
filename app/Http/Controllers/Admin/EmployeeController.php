@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
+use App\Models\Hostel;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class EmployeeController extends Controller
     // Index
     public function index()
     {
-        $employees = Employee::orderBy('created_at', 'desc')->get();
+        $employees = Employee::orderBy('created_at', 'ASC')->get();
 
         return view('admin.employees.index', compact('employees'));
     }
@@ -35,7 +36,8 @@ class EmployeeController extends Controller
     public function create()
     {
         $positions = Position::tree();
-        return view('admin.employees.create', compact('positions'));
+        $hostels = Hostel::all();
+        return view('admin.employees.create', compact('positions', 'hostels'));
     }
 
     // Store Record
@@ -46,6 +48,13 @@ class EmployeeController extends Controller
             return back()->with([
                 'alertType' => 'danger',
                 'message'   => 'بست مورد نظر تکمیل میباشد.'
+            ]);
+        }
+        $hostel = Hostel::where('id', $request->hostel_id)->first();
+        if ($hostel->employees()->count() > 5) {
+            return back()->with([
+                'alertType' => 'danger',
+                'message'   => 'اتاق مورد نظر گنجایش ندارد.'
             ]);
         }
         $employee = new Employee();
@@ -74,9 +83,9 @@ class EmployeeController extends Controller
         $employee->info             = $request->info;
         // Save On Duty
         if ($request->has('on_duty')) {
-            $on_duty = 0;
-        } else {
             $on_duty = 1;
+        } else {
+            $on_duty = 0;
         }
         $employee->on_duty          = $on_duty;
         $employee->duty_position    = $request->duty_position;
@@ -119,7 +128,8 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         $positions = Position::tree();
-        return view('admin.employees.edit', compact('employee', 'positions'));
+        $hostels = Hostel::all();
+        return view('admin.employees.edit', compact('employee', 'positions', 'hostels'));
     }
 
     public function update(Request $request, Employee $employee)
@@ -157,6 +167,14 @@ class EmployeeController extends Controller
             ]);
         }
 
+        $hostel = Hostel::where('id', $request->hostel_id)->first();
+        if ($hostel->employees()->count() > 5) {
+            return back()->with([
+                'alertType' => 'danger',
+                'message'   => 'اتاق مورد نظر گنجایش ندارد.'
+            ]);
+        }
+
         $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
         $employee->name         = $request->name;
@@ -182,9 +200,9 @@ class EmployeeController extends Controller
         $employee->info             = $request->info;
         // Save On Duty
         if ($request->has('on_duty')) {
-            $on_duty = 0;
-        } else {
             $on_duty = 1;
+        } else {
+            $on_duty = 0;
         }
         $employee->on_duty          = $on_duty;
         $employee->duty_position    = $request->duty_position;

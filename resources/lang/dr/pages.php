@@ -50,6 +50,7 @@ return [
 
     'hostel' => [
         'hostel'    => 'لیلیه',
+        'numOfMembers'  => 'تعداد اعضای اتاق',
         'roomNumber'    => 'نمبر اتاق',
         'roomSection'   => 'سکشن اتاق',
         'section'       => 'سکشن'

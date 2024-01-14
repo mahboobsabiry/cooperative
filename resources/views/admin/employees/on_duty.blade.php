@@ -136,6 +136,6 @@
     <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.colVis.min.js') }}"></script>
 
     <!-- Custom Scripts -->
-    <script src="{{ asset('backend/assets/js/datatable.js') }}"></script>
+    <script src="{{ asset('assets/js/datatable.js') }}"></script>
 @endsection
 <!--/==/ End of Extra Scripts -->
