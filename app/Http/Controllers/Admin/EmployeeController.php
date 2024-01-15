@@ -137,9 +137,8 @@ class EmployeeController extends Controller
         $request->validate([
             'photo'         => 'image|mimes:jpg,png,jfif',
             'name'          => 'required|min:3|max:64',
-            'last_name'     => 'required|min:3|max:64',
+            'last_name'     => 'nullable|min:3|max:64',
             'father_name'   => 'required|min:3|max:64',
-            'gender'        => 'required',
             'emp_number'    => 'required|unique:employees,emp_number,' . $employee->id,
             'appointment_number'    => 'required|unique:employees,appointment_number,' . $employee->id,
             'appointment_date'      => 'nullable',

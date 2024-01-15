@@ -19,14 +19,14 @@ class AgentController extends Controller
     // Fetch All Data
     public function index()
     {
-        $agents = Agent::all();
+        $agents = Agent::get();
         return view('admin.agents.index', compact('agents'));
     }
 
     // Create
     public function create()
     {
-        $companies = Company::all();
+        $companies = Company::get();
         return view('admin.agents.create', compact('companies'));
     }
 
@@ -51,7 +51,7 @@ class AgentController extends Controller
     // Edit
     public function edit(Agent $agent)
     {
-        $companies = Company::all();
+        $companies = Company::get();
         return view('admin.agents.edit', compact('agent', 'companies'));
     }
 

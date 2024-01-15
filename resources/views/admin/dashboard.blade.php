@@ -113,13 +113,13 @@
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">@lang('pages.employees.mainPosition')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('on_duty', 1)->count() > \App\Models\Employee::all()->where('on_duty', 0)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
-                                    {{ \App\Models\Employee::all()->where('on_duty', 1)->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('on_duty', 0)->count() > \App\Models\Employee::all()->where('on_duty', 1)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    {{ \App\Models\Employee::all()->where('on_duty', 0)->count() }}
                                 </span>
                                 <span class="font-weight-bold">@lang('pages.employees.onDuty')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('on_duty', 0)->count() > \App\Models\Employee::all()->where('on_duty', 1)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
-                                    {{ \App\Models\Employee::all()->where('on_duty', 0)->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('on_duty', 1)->count() > \App\Models\Employee::all()->where('on_duty', 0)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    {{ \App\Models\Employee::all()->where('on_duty', 1)->count() }}
                                 </span>
                             </div>
                         </div>

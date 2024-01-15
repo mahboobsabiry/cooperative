@@ -21,7 +21,7 @@ class RolesTableSeeder extends Seeder
                 'name'      => 'Office'
             ],
             [
-                'name'      => 'Exit-Door'
+                'name'      => 'Hostel Office'
             ]
         ];
 

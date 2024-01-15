@@ -124,8 +124,12 @@
                                                 @foreach($user->roles as $role)
                                                     <a class="modal-effect"
                                                        data-effect="effect-sign" data-toggle="modal"
-                                                       href="#role_details{{ $role->id }}">{{ $role->name }}</a>
-                                                    {{ count($user->roles) > 1 ? '|' : '' }}
+                                                       href="#role_details{{ $role->id }}">
+                                                        <span class="tag tag-success tag-pill mt-1 mb-1 pr-0" style="cursor:pointer;">
+                                                            <span class="tag tag-dark tag-pill ml-1 mr-0">{{ $loop->iteration }}</span>
+                                                            {{ $role->name }}
+                                                        </span>
+                                                    </a>
 
                                                     @include('admin.users.role_details')
                                                 @endforeach

@@ -17,14 +17,14 @@ class CompanyController extends Controller
     // Fetch All Data
     public function index()
     {
-        $companies = Company::all();
+        $companies = Company::get();
         return view('admin.companies.index', compact('companies'));
     }
 
     // Store Data
     public function store(StoreCompanyRequest $request)
     {
-        $perm = Company::create($request->all());
+        Company::create($request->all());
 
         $message = 'ثبت شد!';
         return redirect()->route('admin.companies.index')->with([

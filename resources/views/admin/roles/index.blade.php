@@ -88,20 +88,23 @@
                                         <td>{{ $role->name }}</td>
                                         <td>{{ $role->guard_name }}</td>
                                         <td>
-                                            <a class="modal-effect tx-orange text-decoration-underline"
+                                            {{-- <a class="modal-effect tx-orange text-decoration-underline"
                                                data-effect="effect-sign" data-toggle="modal"
                                                href="#show_record{{ $role->id }}">@lang('global.show') <i
-                                                    class="fa fa-eye-dropper"></i></a>
+                                                    class="fa fa-eye-dropper"></i></a> --}}
+                                            @foreach($role->permissions as $permission)
+                                                <div class="tag tag-success tag-pill mt-1 mb-1 pr-0">
+                                                    <span class="tag tag-dark tag-pill ml-1 mr-0">{{ $loop->iteration }}</span>
+                                                    {{ $permission->name }}
+                                                </div>
+                                            @endforeach
                                         </td>
                                         <td>
                                             @if(app()->getLocale() == 'en')
-                                                {{ date_format($role->created_at, 'Y-F-d / h:i A') }}
+                                                {{ date_format($role->created_at, 'Y-F-d') }}
                                             @else
                                                 <span class="tx-bold">
-                                                @php
-                                                    $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d / h:i A - %A', strtotime($role->created_at)); // 1395-02-19
-                                                    echo \Morilog\Jalali\CalendarUtils::convertNumbers($date);
-                                                @endphp
+                                                {{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($role->created_at)) }}
                                                 </span>
                                             @endif
                                         </td>
