@@ -101,6 +101,14 @@
                             </h4>
 
                             <p class="pro-user-desc text-muted mb-1">{{ $position->title }}</p>
+
+                            <!-- Position Star -->
+                            <p class="user-info-rating">
+                                @for($i=1; $i<=$position->position_number; $i++)
+                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                @endfor
+                            </p>
+                            <!--/==/ End of Position Star -->
                         </div>
                     </div>
                 </div>
