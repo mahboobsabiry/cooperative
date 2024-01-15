@@ -60,6 +60,7 @@ class EmployeeController extends Controller
         $employee = new Employee();
         $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
+        $employee->position_code = $request->position_code;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
         $employee->father_name  = $request->father_name;
@@ -135,12 +136,14 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $request->validate([
-            'photo'         => 'image|mimes:jpg,png,jfif',
+            'photo'         => 'nullable|image|mimes:jpg,png,jfif',
+            'tazkira'       => 'nullable|image|mimes:jpg,png,jfif',
             'name'          => 'required|min:3|max:64',
+            'position_code' => 'required|min:3|max:4|unique:employees,position_code,' . $employee->id,
             'last_name'     => 'nullable|min:3|max:64',
             'father_name'   => 'required|min:3|max:64',
-            'emp_number'    => 'required|unique:employees,emp_number,' . $employee->id,
-            'appointment_number'    => 'required|unique:employees,appointment_number,' . $employee->id,
+            'emp_number'    => 'nullable|unique:employees,emp_number,' . $employee->id,
+            'appointment_number'    => 'required',
             'appointment_date'      => 'nullable',
             'last_duty'     => 'nullable',
             'birth_year'    => 'required',
@@ -176,6 +179,7 @@ class EmployeeController extends Controller
 
         $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
+        $employee->position_code = $request->position_code;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
         $employee->father_name  = $request->father_name;

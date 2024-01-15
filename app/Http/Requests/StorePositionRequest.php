@@ -27,7 +27,6 @@ class StorePositionRequest extends FormRequest
     {
         return [
             'title'     => 'required|min:3|max:255',
-            'code'      => 'required|unique:positions,code',
             'position_number'   => 'required',
             'desc'      => 'nullable'
         ];

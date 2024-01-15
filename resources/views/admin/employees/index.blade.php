@@ -71,7 +71,7 @@
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.fatherName')</th>
                                         <th>@lang('form.position')</th>
-                                        <th>@lang('pages.positions.positionCode')</th>
+                                        <th>@lang('form.positionCode')</th>
                                         <th>@lang('form.phone')</th>
                                         <th>@lang('form.currentProvince')</th>
                                         <th>@lang('form.currentDistrict')</th>
@@ -89,7 +89,7 @@
                                             </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
                                             <td>{{ $employee->position->title ?? '' }} {{ $employee->position->position_number ?? '' }}</td>
-                                            <td>{{ $employee->position->code ?? '' }}</td>
+                                            <td>{{ $employee->position_code ?? '' }}</td>
                                             <td class="tx-sm-12-f">
                                                 <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
                                             </td>

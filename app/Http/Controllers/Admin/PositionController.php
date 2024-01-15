@@ -42,7 +42,6 @@ class PositionController extends Controller
         $position           = new Position();
         $position->parent_id    = $request->parent_id;
         $position->title        = $request->title;
-        $position->code         = $request->code;
         $position->position_number = $request->position_number;
         $position->num_of_pos   = $request->num_of_pos;
         $position->desc         = $request->desc;
@@ -82,14 +81,12 @@ class PositionController extends Controller
     {
         $request->validate([
             'title'     => 'required|min:3|max:255',
-            'code'      => 'required|unique:positions,code,' . $position->id,
             'position_number'   => 'required',
             'desc'      => 'nullable'
         ]);
 
         $position->parent_id    = $request->parent_id;
         $position->title        = $request->title;
-        $position->code         = $request->code;
         $position->position_number = $request->position_number;
         $position->num_of_pos   = $request->num_of_pos;
         $position->desc         = $request->desc;

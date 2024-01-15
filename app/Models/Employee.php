@@ -14,7 +14,7 @@ class Employee extends Model
     use HasFactory, HasPhoto, HasTazkira;
 
     protected $fillable = [
-        'position_id', 'hostel_id', 'name', 'last_name', 'father_name', 'gender',
+        'position_id', 'hostel_id', 'position_code', 'name', 'last_name', 'father_name', 'gender',
         'emp_number', 'appointment_number', 'appointment_date', 'last_duty', 'birth_year',
         'education', 'prr_npr', 'prr_date',
         'phone', 'phone2', 'email',

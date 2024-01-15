@@ -262,12 +262,6 @@
                                         </td>
                                     </tr>
 
-                                    <!-- Code -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('form.code'):</th>
-                                        <td>20-27-01-{{ $position->code }}</td>
-                                    </tr>
-
                                     <!-- Date of creation -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('global.date'):</th>
@@ -311,7 +305,7 @@
                                 <th>@lang('form.name')</th>
                                 <th>@lang('form.fatherName')</th>
                                 <th>@lang('form.position')</th>
-                                <th>@lang('pages.positions.positionCode')</th>
+                                <th>@lang('form.positionCode')</th>
                                 <th>@lang('form.phone')</th>
                                 <th>@lang('form.currentProvince')</th>
                                 <th>@lang('form.currentDistrict')</th>
@@ -329,7 +323,7 @@
                                     </td>
                                     <td>{{ $employee->father_name ?? '' }}</td>
                                     <td>{{ $employee->position->title ?? '' }} {{ $employee->position->position_number ?? '' }}</td>
-                                    <td>{{ $employee->position->code ?? '' }}</td>
+                                    <td>{{ $employee->position_code ?? '' }}</td>
                                     <td class="tx-sm-12-f">
                                         <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
                                     </td>

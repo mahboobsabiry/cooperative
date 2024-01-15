@@ -51,6 +51,7 @@ return [
     'photo'		    => 'صورت',
     'photos'		=> 'صورت لر',
     'position'		=> 'بست',
+    'positionCode'  => 'بست کد',
     'province'		=> 'ولایت',
     'salary'		=> 'معاش',
     'shortName'		=> 'کلته اسم',

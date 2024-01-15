@@ -51,6 +51,7 @@ return [
     'photo'		    => 'Photo',
     'photos'		=> 'Photos',
     'position'		=> 'Position',
+    'positionCode'  => 'Position Code',
     'province'		=> 'Province',
     'salary'		=> 'Salary',
     'shortName'		=> 'Short Name',

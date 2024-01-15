@@ -316,7 +316,7 @@
                                                 {{ $employee->position->title }}
                                             </a>
                                             (<span class="text-danger">{{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') . ' - ' }} {{ $employee->on_duty == 1 ? $employee->duty_position : '' }}</span>)
-                                            [{{ $employee->position->code }}]
+                                            [{{ $employee->position_code }}]
                                         </td>
                                     </tr>
 

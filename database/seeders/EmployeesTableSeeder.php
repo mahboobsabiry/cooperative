@@ -20,6 +20,7 @@ class EmployeesTableSeeder extends Seeder
             [
                 'position_id'   => 1,
                 'hostel_id'     => null,
+                'position_code' => '001',
                 'name'      => 'مولوی عبدالله',
                 'last_name' => 'بلال',
                 'father_name'   => 'محمد یونس',
@@ -47,6 +48,7 @@ class EmployeesTableSeeder extends Seeder
             [
                 'position_id'   => 3,
                 'hostel_id'     => 13,
+                'position_code' => '029',
                 'name'      => 'علی خان',
                 'last_name' => null,
                 'father_name'   => 'سلطان محمد',
@@ -74,6 +76,7 @@ class EmployeesTableSeeder extends Seeder
             [
                 'position_id'   => 5,
                 'hostel_id'     => null,
+                'position_code' => '154',
                 'name'      => 'محمد اعظم',
                 'last_name' => 'طارق',
                 'father_name'   => 'اسلام',

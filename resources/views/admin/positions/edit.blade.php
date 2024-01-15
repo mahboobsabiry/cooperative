@@ -64,7 +64,7 @@
                                         <div class="form-group @error('parent_id') has-danger @enderror">
                                             <p class="mb-2">@lang('pages.positions.underHand'): <span class="tx-danger">*</span></p>
 
-                                            <select id="parent_id" name="parent_id" class="form-control @error('parent_id') form-control-danger @enderror">
+                                            <select id="parent_id" name="parent_id" class="form-control select2 @error('parent_id') form-control-danger @enderror">
                                                 @if($position->parent_id == 0)
                                                     <option value="0" selected>@lang('pages.positions.afCustomsDep')</option>
                                                 @endif
@@ -92,19 +92,6 @@
                                         </div>
                                         <!--/==/ End of Title -->
 
-                                        <!-- Code -->
-                                        <div class="form-group @error('code') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.code'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="code" class="form-control @error('code') form-control-danger @enderror" name="code" value="{{ $position->code ?? old('code') }}" placeholder="029" required>
-
-                                            @error('code')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Code -->
-                                    </div>
-
-                                    <div class="col-md-6">
                                         <!-- Number of Positions -->
                                         <div class="form-group @error('num_of_pos') has-danger @enderror">
                                             <p class="mb-2">@lang('form.num_of_pos'): <span class="tx-danger">*</span></p>
@@ -115,7 +102,9 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Number of Positions -->
+                                    </div>
 
+                                    <div class="col-md-6">
                                         <!-- Position Number -->
                                         <div class="form-group @error('position_number') has-danger @enderror">
                                             <p class="mb-2">@lang('form.position'): <span class="tx-danger">*</span></p>

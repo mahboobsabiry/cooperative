@@ -51,6 +51,7 @@ return [
     'photo'		    => 'انحور',
     'photos'		=> 'انحورونه',
     'position'		=> 'بست',
+    'positionCode'  => 'د بست کد',
     'province'		=> 'ولایت',
     'salary'		=> 'معاش',
     'shortName'		=> 'کوتاه نوم',

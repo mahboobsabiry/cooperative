@@ -51,6 +51,7 @@ return [
     'photo'		    => 'تصویر',
     'photos'		=> 'تصاویر',
     'position'		=> 'بست',
+    'positionCode'  => 'کد بست',
     'province'		=> 'ولایت',
     'salary'		=> 'معاش',
     'shortName'		=> 'نام کوتاه',
