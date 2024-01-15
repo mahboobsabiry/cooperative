@@ -88,19 +88,9 @@
                             <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title }}</p>
                             <!-- Employee Star -->
                             <p class="user-info-rating">
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                @if($employee->status == 0)
+                                @for($i=1; $i<=$employee->position->position_number; $i++)
                                     <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                @elseif($employee->status == 1)
-                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                    <a href="javascript:void(0);"><i class="far fa-star text-warning"> </i></a>
-                                @else
-                                    <a href="javascript:void(0);"><i class="far fa-star text-warning"> </i></a>
-                                    <a href="javascript:void(0);"><i class="far fa-star text-warning"> </i></a>
-                                @endif
+                                @endfor
                             </p>
                             <!--/==/ End of Employee Star -->
                         </div>
