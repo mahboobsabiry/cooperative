@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('position_id');
             $table->bigInteger('hostel_id')->unsigned()->index()->nullable();
-            $table->date('start_duty');
+            $table->date('start_job');
             $table->string('position_code')->unique();
             $table->string('name');
             $table->string('last_name')->nullable();
@@ -38,10 +38,14 @@ return new class extends Migration
             $table->string('current_district');
             $table->string('introducer')->nullable();
             $table->string('info')->nullable();
+            $table->tinyInteger('status')->default(1);
+
+            // Duty
             $table->tinyInteger('on_duty')->default(0);
+            $table->date('start_duty')->nullable();
+            $table->string('duty_doc_number')->nullable();
             $table->string('duty_position')->nullable();
             $table->longText('background')->nullable();
-            $table->tinyInteger('status')->default(1);
             $table->timestamps();
 
             $table->foreign('position_id')->references('id')->on('positions')->onUpdate('cascade')->onDelete('cascade');

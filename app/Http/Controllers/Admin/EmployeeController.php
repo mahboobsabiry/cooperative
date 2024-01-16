@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Morilog\Jalali\CalendarUtils;
 use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -60,7 +61,7 @@ class EmployeeController extends Controller
         $employee = new Employee();
         $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
-        $employee->start_duty   = $request->start_duty;
+        $employee->start_job    = $request->start_job;
         $employee->position_code = $request->position_code;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
@@ -139,7 +140,7 @@ class EmployeeController extends Controller
             'photo'         => 'nullable|image|mimes:jpg,png,jfif',
             'card'          => 'nullable|image|mimes:jpg,png,jfif',
             'tazkira'       => 'nullable|image|mimes:jpg,png,jfif',
-            'start_duty'    => 'required',
+            'start_job'     => 'required',
             'name'          => 'required|min:3|max:64',
             'position_code' => 'required|min:3|max:4|unique:employees,position_code,' . $employee->id,
             'last_name'     => 'nullable|min:3|max:64',
@@ -181,7 +182,7 @@ class EmployeeController extends Controller
 
         $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
-        $employee->start_duty   = $request->start_duty;
+        $employee->start_job    = $request->start_job;
         $employee->position_code = $request->position_code;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
@@ -293,7 +294,7 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'from_date'     => 'required',
-            'to_date'       => 'nullable',
+            'to_date'       => 'required',
             'doc_number'    => 'required',
             'doc_date'      => 'required',
             'bg_position'   => 'required',
@@ -301,34 +302,62 @@ class EmployeeController extends Controller
 
         $employee = Employee::find($id);
 
-        if ($request->has('now_date')) {
-            $to_date = 'اکنون';
-
-            if (!empty($employee->background)) {
-                $employee->update([
-                    'background' => $employee->background . "<br>" . 'از تاریخ ' . $request->from_date . ' الی ' . $to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه میگردد.<br>"
-                ]);
-            } else {
-                $employee->update([
-                    'background' => 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
-                ]);
-            }
+        if (!empty($employee->background)) {
+            $employee->update([
+                'background' => $employee->background . 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
+            ]);
         } else {
-            $to_date = $request->to_date;
-
-            if (!empty($employee->background)) {
-                $employee->update([
-                    'background' => $employee->background . "<br>" . 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
-                ]);
-            } else {
-                $employee->update([
-                    'background' => 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
-                ]);
-            }
+            $employee->update([
+                'background' => 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
+            ]);
         }
 
         return back()->with([
             'message'   => 'موفقانه ثبت شد!',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Add Duty Position
+    public function duty_position(Request $request, $id)
+    {
+        // Validate Form
+        $request->validate([
+            'start_duty'    => 'required',
+            'duty_doc_number' => 'required',
+            'duty_position' => 'required',
+        ]);
+
+        // Get the employee
+        $employee = Employee::find($id);
+        // Update duty position
+        $employee->update([
+            'on_duty'   => 1,
+            'start_duty'        => $request->start_duty,
+            'duty_doc_number'   => $request->duty_doc_number,
+            'duty_position'     => $request->duty_position
+        ]);
+
+        // Redirect back with success message
+        return back()->with([
+            'message'   => 'ثبت شد',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Reset Position
+    public function reset_position($id)
+    {
+        $employee = Employee::find($id);
+        $employee->update([
+            'background'        => $employee->background . 'از تاریخ ' . $employee->start_duty . ' الی تاریخ ' . CalendarUtils::strftime('Y/m/d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $employee->duty_doc_number . ' مورخ ' . CalendarUtils::strftime('Y/m/d', strtotime(now())) . " استحصال وظیفه گردید.<br>",
+            'on_duty'           => 0,
+            'start_duty'        => null,
+            'duty_doc_number'   => null,
+            'duty_position'     => null
+        ]);
+        return back()->with([
+            'message'   => 'کارمند به اصل بست تبدیل گردید.',
             'alertType' => 'success'
         ]);
     }

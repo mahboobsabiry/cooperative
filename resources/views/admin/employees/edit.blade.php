@@ -120,13 +120,13 @@
 
                                         <!-- Start Duty and Education -->
                                         <div class="row">
-                                            <!-- Start Duty -->
+                                            <!-- Start Job -->
                                             <div class="col-md-6">
-                                                <div class="form-group @error('start_duty') has-danger @enderror">
-                                                    <p class="mb-2">3) @lang('form.startDuty'): <span class="tx-danger">*</span></p>
-                                                    <input data-jdp data-jdp-max-date="today" type="text" id="start_duty" class="form-control @error('start_duty') form-control-danger @enderror" name="start_duty" value="{{ $employee->start_duty ?? old('start_duty') }}" required>
+                                                <div class="form-group @error('start_job') has-danger @enderror">
+                                                    <p class="mb-2">3) @lang('form.startJob'): <span class="tx-danger">*</span></p>
+                                                    <input data-jdp data-jdp-max-date="today" type="text" id="start_job" class="form-control @error('start_job') form-control-danger @enderror" name="start_job" value="{{ $employee->start_job ?? old('start_job') }}" required>
 
-                                                    @error('start_duty')
+                                                    @error('start_job')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>

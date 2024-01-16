@@ -15,12 +15,13 @@ class Employee extends Model
     use HasFactory, HasPhoto, HasTazkira, HasCustomCard;
 
     protected $fillable = [
-        'position_id', 'hostel_id', 'start_duty', 'position_code', 'name', 'last_name', 'father_name', 'gender',
+        'position_id', 'hostel_id', 'start_job', 'position_code', 'name', 'last_name', 'father_name', 'gender',
         'emp_number', 'appointment_number', 'appointment_date', 'last_duty', 'birth_year',
         'education', 'prr_npr', 'prr_date',
         'phone', 'phone2', 'email',
-        'main_province', 'main_district', 'current_province', 'current_district', 'introducer', 'info',
-        'on_duty', 'duty_position', 'background', 'status'
+        'main_province', 'main_district', 'current_province', 'current_district',
+        'introducer', 'info','status', 'background',
+        'on_duty', 'start_duty', 'duty_doc_number', 'duty_position',
     ];
 
     // Morph Photo

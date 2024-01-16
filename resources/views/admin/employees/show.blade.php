@@ -216,12 +216,6 @@
                             <div class="table-responsive">
                                 <table class="table row table-borderless">
                                     <tbody class="col-lg-12 col-xl-6 p-0">
-                                    <!-- Start Duty -->
-                                    <tr>
-                                        <th><strong>@lang('form.startDuty'): </strong></th>
-                                        <td>{{ $employee->start_duty }}</td>
-                                    </tr>
-
                                     <!-- Appointment Number -->
                                     <tr>
                                         <th><strong>@lang('form.appointmentNumber'): </strong></th>
@@ -320,9 +314,22 @@
                                             {{ $employee->position->position_number }} -
                                             <a href="{{ route('admin.positions.show', $employee->position->id) }}">
                                                 {{ $employee->position->title }}
-                                            </a>
-                                            (<span class="text-danger">{{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') . ' - ' }} {{ $employee->on_duty == 1 ? $employee->duty_position : '' }}</span>)
-                                            [{{ $employee->position_code }}]
+                                            </a> ({{ $employee->position_code }})
+
+                                            @if($employee->on_duty == 0)
+                                                [<a class="modal-effect text-danger"
+                                                    data-effect="effect-sign" data-toggle="modal"
+                                                    href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>]
+
+                                                @include('admin.employees.inc.duty_position')
+                                            @else
+                                                [@lang('pages.employees.onDuty') - {{ $employee->duty_position }}]
+                                                <a class="modal-effect text-danger"
+                                                   data-effect="effect-sign" data-toggle="modal"
+                                                   href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
+
+                                                @include('admin.employees.inc.reset_position')
+                                            @endif
                                         </td>
                                     </tr>
 
@@ -374,7 +381,7 @@
                                 <div class="col-md-6">
                                     <!-- Background -->
                                     <p><strong>@lang('form.background'): </strong>
-                                        <br>شروع خدمت از تاریخ {{ $employee->start_duty }}... <br> {!! $employee->background ?? '--' !!}
+                                        <br>شروع وظیفه از تاریخ {{ $employee->start_job }} <br> {!! $employee->background ?? '--' !!}
                                         <a class="modal-effect text-primary"
                                            data-effect="effect-sign" data-toggle="modal"
                                            href="#add_background{{ $employee->id }}"><span class="underline">@lang('global.add')</span></a>

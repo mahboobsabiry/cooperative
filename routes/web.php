@@ -85,6 +85,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('on-duty-employees', [EmployeeController::class, 'on_duty_employees'])->name('employees.on_duty');
     // Add Background
     Route::post('employee/add-background/{id}', [EmployeeController::class, 'add_background'])->name('employees.add_background');
+    // Add Duty Position
+    Route::post('employee/duty-position/{id}', [EmployeeController::class, 'duty_position'])->name('employees.duty_position');
+    // Reset to Main Position
+    Route::get('employee/reset-position/{id}', [EmployeeController::class, 'reset_position'])->name('employees.reset_position');
 
     // Companies
     Route::resource('companies', CompanyController::class);
