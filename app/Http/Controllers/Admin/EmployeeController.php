@@ -44,14 +44,14 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request)
     {
         $position = Position::where('id', $request->position_id)->first();
-        if ($position->employees()->count() >= $position->num_of_pos) {
+        if ($position->employees && $position->employees()->count() >= $position->num_of_pos) {
             return back()->with([
                 'alertType' => 'danger',
                 'message'   => 'بست مورد نظر تکمیل میباشد.'
             ]);
         }
         $hostel = Hostel::where('id', $request->hostel_id)->first();
-        if ($hostel->employees()->count() > 5) {
+        if ($hostel->employees && $hostel->employees()->count() > 5) {
             return back()->with([
                 'alertType' => 'danger',
                 'message'   => 'اتاق مورد نظر گنجایش ندارد.'
@@ -60,6 +60,7 @@ class EmployeeController extends Controller
         $employee = new Employee();
         $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
+        $employee->start_duty   = $request->start_duty;
         $employee->position_code = $request->position_code;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
@@ -82,14 +83,6 @@ class EmployeeController extends Controller
         $employee->current_district = $request->current_district;
         $employee->introducer       = $request->introducer;
         $employee->info             = $request->info;
-        // Save On Duty
-        if ($request->has('on_duty')) {
-            $on_duty = 1;
-        } else {
-            $on_duty = 0;
-        }
-        $employee->on_duty          = $on_duty;
-        $employee->duty_position    = $request->duty_position;
         $employee->save();
 
         //  Has File && Save Avatar Image
@@ -138,6 +131,7 @@ class EmployeeController extends Controller
         $request->validate([
             'photo'         => 'nullable|image|mimes:jpg,png,jfif',
             'tazkira'       => 'nullable|image|mimes:jpg,png,jfif',
+            'start_duty'    => 'required',
             'name'          => 'required|min:3|max:64',
             'position_code' => 'required|min:3|max:4|unique:employees,position_code,' . $employee->id,
             'last_name'     => 'nullable|min:3|max:64',
@@ -162,7 +156,7 @@ class EmployeeController extends Controller
         ]);
 
         $position = Position::where('id', $request->position_id)->first();
-        if ($position->employees()->count() > $position->num_of_pos) {
+        if ($position->employees && $position->employees()->count() > $position->num_of_pos) {
             return back()->with([
                 'alertType' => 'danger',
                 'message'   => 'بست مورد نظر تکمیل میباشد.'
@@ -170,7 +164,7 @@ class EmployeeController extends Controller
         }
 
         $hostel = Hostel::where('id', $request->hostel_id)->first();
-        if ($hostel->employees()->count() > 5) {
+        if ($hostel->employees && $hostel->employees()->count() > 5) {
             return back()->with([
                 'alertType' => 'danger',
                 'message'   => 'اتاق مورد نظر گنجایش ندارد.'
@@ -179,6 +173,7 @@ class EmployeeController extends Controller
 
         $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
+        $employee->start_duty   = $request->start_duty;
         $employee->position_code = $request->position_code;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
@@ -201,14 +196,6 @@ class EmployeeController extends Controller
         $employee->current_district = $request->current_district;
         $employee->introducer       = $request->introducer;
         $employee->info             = $request->info;
-        // Save On Duty
-        if ($request->has('on_duty')) {
-            $on_duty = 1;
-        } else {
-            $on_duty = 0;
-        }
-        $employee->on_duty          = $on_duty;
-        $employee->duty_position    = $request->duty_position;
         $employee->save();
 
         //  Has File

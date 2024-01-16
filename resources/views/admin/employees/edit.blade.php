@@ -74,7 +74,7 @@
                                             @lang('pages.employees.personalInfo')
                                         </p>
 
-                                        <!-- Position && OnDuty -->
+                                        <!-- Position && Position Code -->
                                         <div class="row">
                                             <!-- Position -->
                                             <div class="col-md-6">
@@ -103,50 +103,30 @@
                                                 </div>
                                             </div>
 
-                                            <!-- On Duty && Main Position -->
-                                            <div class="col-md-6">
-                                                <div class="form-group @error('main_position') has-danger @enderror">
-                                                    <p class="mb-2" id="onDutyParent">2)
-                                                        @lang('pages.employees.onDuty')
-                                                        <span><input type="checkbox" name="on_duty" id="onDutyCheck" class="custom-checkbox" {{ $employee->on_duty == 1 ? 'checked' : '' }}></span>
-
-                                                        <span id="mpText" style="display: none;">@lang('pages.employees.mainPosition'):</span>
-                                                    </p>
-                                                    <div id="duty_position_div">
-                                                        <select id="duty_position" name="duty_position" class="form-control select2 @error('duty_position') form-control-danger @enderror" style="display: none;">
-                                                            <option value="">@lang('form.chooseOne')</option>
-                                                            @foreach($positions as $position)
-                                                                <option value="{{ $position->title }}" {{ $employee->duty_position == $position->title ? 'selected' : '' }}>{{ $position->title }}</option>
-                                                                @foreach($position->children as $admin)
-                                                                    <option value="{{ $admin->title }}" {{ $employee->duty_position == $admin->title ? 'selected' : '' }}>- {{ $admin->title }}</option>
-                                                                    @foreach($admin->children as $mgmt)
-                                                                        <option value="{{ $mgmt->title }}" {{ $employee->duty_position == $mgmt->title ? 'selected' : '' }}>-- {{ $mgmt->title }}</option>
-                                                                        @foreach($mgmt->children as $mgr)
-                                                                            <option value="{{ $mgr->title }}" {{ $employee->duty_position == $mgr->title ? 'selected' : '' }}>--- {{ $mgr->title }}</option>
-                                                                        @endforeach
-                                                                    @endforeach
-                                                                @endforeach
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                    @error('main_position')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--/==/ End of Position && OnDuty -->
-
-                                        <!-- Position Code and Education -->
-                                        <div class="row">
                                             <!-- Position Code -->
                                             <div class="col-md-6">
+                                                <!-- Position Code -->
                                                 <div class="form-group @error('position_code') has-danger @enderror">
                                                     <p class="mb-2">3) @lang('form.positionCode'): <span class="tx-danger">*</span></p>
                                                     <input type="text" id="position_code" class="form-control @error('position_code') form-control-danger @enderror" name="position_code" value="{{ $employee->position_code ?? old('position_code') }}" required>
 
                                                     @error('position_code')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/==/ End of Position && Position Code -->
+
+                                        <!-- Start Duty and Education -->
+                                        <div class="row">
+                                            <!-- Start Duty -->
+                                            <div class="col-md-6">
+                                                <div class="form-group @error('start_duty') has-danger @enderror">
+                                                    <p class="mb-2">3) @lang('form.startDuty'): <span class="tx-danger">*</span></p>
+                                                    <input data-jdp data-jdp-max-date="today" type="text" id="start_duty" class="form-control @error('start_duty') form-control-danger @enderror" name="start_duty" value="{{ $employee->start_duty ?? old('start_duty') }}" required>
+
+                                                    @error('start_duty')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
@@ -164,7 +144,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--/==/ End of Position Code and Education-->
+                                        <!--/==/ End of Start Duty and Education-->
 
                                         <!-- Name & Last Name -->
                                         <div class="row">
@@ -451,7 +431,7 @@
                                         </div>
                                         <!--/==/ End of PRR/NPR -->
 
-                                        <!-- Education & Hostel -->
+                                        <!-- Introducer & Hostel -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <!-- Hostel -->
@@ -483,7 +463,7 @@
                                                 <!--/==/ End of Introducer -->
                                             </div>
                                         </div>
-                                        <!-- End of Education and Hostel -->
+                                        <!-- End of Introducer and Hostel -->
 
                                         <!-- Other Information -->
                                         <p class="bd-b mb-2 tx-bold pb-2">

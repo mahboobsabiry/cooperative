@@ -73,7 +73,7 @@
                                             @lang('pages.employees.personalInfo')
                                         </p>
 
-                                        <!-- Position && OnDuty -->
+                                        <!-- Position && Position Code -->
                                         <div class="row">
                                             <!-- Position -->
                                             <div class="col-md-6">
@@ -102,50 +102,29 @@
                                                 </div>
                                             </div>
 
-                                            <!-- On Duty && Main Position -->
+                                            <!-- Position Code -->
                                             <div class="col-md-6">
-                                                <div class="form-group @error('main_position') has-danger @enderror">
-                                                    <p class="mb-2" id="onDutyParent">2)
-                                                        @lang('pages.employees.onDuty')
-                                                        <span><input type="checkbox" name="on_duty" id="onDutyCheck" class="custom-checkbox"></span>
+                                                <div class="form-group @error('position_code') has-danger @enderror">
+                                                    <p class="mb-2">2) @lang('form.positionCode'): <span class="tx-danger">*</span></p>
+                                                    <input type="text" id="position_code" class="form-control @error('position_code') form-control-danger @enderror" name="position_code" value="{{ old('position_code') }}" required>
 
-                                                        <span id="mpText" style="display: none;">@lang('pages.employees.mainPosition'):</span>
-                                                    </p>
-                                                    <div id="duty_position_div">
-                                                        <select id="duty_position" name="duty_position" class="form-control select2 @error('duty_position') form-control-danger @enderror" style="display: none;">
-                                                            <option value="" selected>@lang('form.chooseOne')</option>
-                                                            @foreach($positions as $position)
-                                                                <option value="{{ $position->title }}">{{ $position->title }}</option>
-                                                                @foreach($position->children as $admin)
-                                                                    <option value="{{ $admin->title }}" class="text-secondary">- {{ $admin->title }}</option>
-                                                                    @foreach($admin->children as $mgmt)
-                                                                        <option value="{{ $mgmt->title }}">-- {{ $mgmt->title }}</option>
-                                                                        @foreach($mgmt->children as $mgr)
-                                                                            <option value="{{ $mgr->title }}">--- {{ $mgr->title }}</option>
-                                                                        @endforeach
-                                                                    @endforeach
-                                                                @endforeach
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                    @error('main_position')
+                                                    @error('position_code')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--/==/ End of Position && OnDuty -->
+                                        <!--/==/ End of Position && Position Code -->
 
-                                        <!-- Position Code and Education -->
+                                        <!-- Start Duty and Education -->
                                         <div class="row">
-                                            <!-- Position Code -->
+                                            <!-- Start Duty -->
                                             <div class="col-md-6">
-                                                <div class="form-group @error('position_code') has-danger @enderror">
-                                                    <p class="mb-2">3) @lang('form.positionCode'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="position_code" class="form-control @error('position_code') form-control-danger @enderror" name="position_code" value="{{ old('position_code') }}" required>
+                                                <div class="form-group @error('start_duty') has-danger @enderror">
+                                                    <p class="mb-2">3) @lang('form.startDuty'): <span class="tx-danger">*</span></p>
+                                                    <input data-jdp data-jdp-max-date="today" type="text" id="start_duty" class="form-control @error('start_duty') form-control-danger @enderror" name="start_duty" value="{{ old('start_duty') }}" required>
 
-                                                    @error('position_code')
+                                                    @error('start_duty')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>

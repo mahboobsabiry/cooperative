@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('position_id');
             $table->bigInteger('hostel_id')->unsigned()->index()->nullable();
+            $table->date('start_duty');
             $table->string('position_code')->unique();
             $table->string('name');
             $table->string('last_name')->nullable();
@@ -39,6 +40,7 @@ return new class extends Migration
             $table->string('info')->nullable();
             $table->tinyInteger('on_duty')->default(0);
             $table->string('duty_position')->nullable();
+            $table->longText('background')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
 

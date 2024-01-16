@@ -216,6 +216,12 @@
                             <div class="table-responsive">
                                 <table class="table row table-borderless">
                                     <tbody class="col-lg-12 col-xl-6 p-0">
+                                    <!-- Start Duty -->
+                                    <tr>
+                                        <th><strong>@lang('form.startDuty'): </strong></th>
+                                        <td>{{ $employee->start_duty }}</td>
+                                    </tr>
+
                                     <!-- Appointment Number -->
                                     <tr>
                                         <th><strong>@lang('form.appointmentNumber'): </strong></th>
@@ -353,6 +359,12 @@
                                             @endif
                                         </td>
                                     </tr>
+
+                                    <!-- Background -->
+                                    <tr>
+                                        <th><strong>@lang('form.background'): </strong></th>
+                                        <td>{{ $employee->background }}</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -365,7 +377,10 @@
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p>- {{ $employee->info ?? '--' }}</p>
+                                    <p><strong>@lang('form.background'): </strong>
+                                        <br>شروع خدمت از تاریخ {{ $employee->start_duty }}... <br> {{ $employee->background ?? '--' }}
+                                    </p>
+                                    <p><strong>@lang('global.extraInfo'): </strong><br> {{ $employee->info ?? '--' }}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p>
