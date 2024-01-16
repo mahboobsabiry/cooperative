@@ -51,7 +51,7 @@ class EmployeeController extends Controller
             ]);
         }
         $hostel = Hostel::where('id', $request->hostel_id)->first();
-        if ($hostel->employees && $hostel->employees()->count() > 5) {
+        if (!empty($hostel->employees) && $hostel->employees()->count() > 5) {
             return back()->with([
                 'alertType' => 'danger',
                 'message'   => 'اتاق مورد نظر گنجایش ندارد.'
@@ -164,7 +164,7 @@ class EmployeeController extends Controller
         }
 
         $hostel = Hostel::where('id', $request->hostel_id)->first();
-        if ($hostel->employees && $hostel->employees()->count() > 5) {
+        if (!empty($hostel->employees) && $hostel->employees()->count() > 5) {
             return back()->with([
                 'alertType' => 'danger',
                 'message'   => 'اتاق مورد نظر گنجایش ندارد.'
@@ -271,5 +271,26 @@ class EmployeeController extends Controller
         $employees = Employee::where('on_duty', 1)->orderBy('created_at', 'desc')->get();
 
         return view('admin.employees.on_duty', compact('employees'));
+    }
+
+    // Add Employee Background
+    public function add_background(Request $request, $id)
+    {
+        $request->validate([
+            'from_date'     => 'required',
+            'to_date'       => 'required',
+            'doc_number'    => 'required',
+            'doc_date'      => 'required',
+            'bg_position'   => 'required',
+        ]);
+
+        $employee = Employee::find($id);
+        $employee->update([
+            'background' => 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
+        ]);
+        return back()->with([
+            'message'   => 'موفقانه ثبت شد!',
+            'alertType' => 'success'
+        ]);
     }
 }

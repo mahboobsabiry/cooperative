@@ -28,10 +28,13 @@ return [
     ],
 
     'employees' => [
+        'addBackground'     => 'ثبت سابقه کاری',
         'addEmpInfo'        => 'ثبت معلومات کارمند',
         'addedEmpMsg'       => 'کارمند جدید موفقانه ثبت شد!',
         'addNewEmployee'    => 'ثبت کارمند جدید',
         'code'              => 'شمارهٔ کارمندی',
+        'docDate'           => 'تاریخ مکتوب',
+        'docNumber'         => 'نمبر مکتوب',
         'editTitle'         => 'ویرایش معلومات کارمند',
         'deleteEmployee'    => 'حذف کارمند',
         'editEmployee'      => 'ویرایش کارمند',

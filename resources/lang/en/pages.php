@@ -38,12 +38,15 @@ return [
     ],
 
     'employees' => [
+        'addBackground'     => 'Add Background',
         'addEmpInfo'        => 'Add Employee Information',
         'addedEmpMsg'       => 'New employee has been added successfully!',
         'addNewEmployee'    => 'Add New Employee',
         'code'              => 'Employee Number',
-        'editTitle'         => 'Edit Employee Information',
         'deleteEmployee'    => 'Delete Employee',
+        'docDate'           => 'Document Date',
+        'docNumber'         => 'Document Number',
+        'editTitle'         => 'Edit Employee Information',
         'editEmployee'      => 'Edit Employee',
         'employee'          => 'Employee',
         'employeeInfo'      => 'Employee Information',

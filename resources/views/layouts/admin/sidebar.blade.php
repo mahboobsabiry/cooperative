@@ -167,15 +167,6 @@
             <!-- Applications -->
             <li class="nav-label">@lang('admin.sidebar.applications')</li>
 
-            <!-- Settings -->
-            @can('setting_mgmt')
-                <li class="nav-item {{ request()->url() == route('admin.settings.index') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('admin.settings.index') }}">
-                        <i class="fe fe-settings"></i><span class="sidemenu-label">@lang('admin.sidebar.settings')</span>
-                    </a>
-                </li>
-            @endcan
-
             <!-- User Management -->
             @can('user_mgmt')
                 <li class="nav-item {{ request()->is('admin/permissions') ||
@@ -216,6 +207,15 @@
                 </li>
             @endcan
             <!--/==/ End of User Management -->
+
+            <!-- Settings -->
+            @can('setting_mgmt')
+                <li class="nav-item {{ request()->url() == route('admin.settings.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.settings.index') }}">
+                        <i class="fe fe-settings"></i><span class="sidemenu-label">@lang('admin.sidebar.settings')</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </div>

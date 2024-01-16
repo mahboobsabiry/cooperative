@@ -58,7 +58,7 @@
                     <div class="mr-2">
                         <!-- Add -->
                         <a class="btn ripple bg-primary btn-sm tx-white"
-                           href="{{ route('admin.employees.create') }}" target="_blank">
+                           href="{{ route('admin.employees.create') }}">
                             <i class="fe fe-plus-circle"></i>
                             @lang('global.add')
                         </a>
@@ -359,12 +359,6 @@
                                             @endif
                                         </td>
                                     </tr>
-
-                                    <!-- Background -->
-                                    <tr>
-                                        <th><strong>@lang('form.background'): </strong></th>
-                                        <td>{{ $employee->background }}</td>
-                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -375,14 +369,26 @@
                                 @lang('pages.employees.otherInfo')
                             </div>
 
+                            <!-- Other Information -->
                             <div class="row">
                                 <div class="col-md-6">
+                                    <!-- Background -->
                                     <p><strong>@lang('form.background'): </strong>
-                                        <br>شروع خدمت از تاریخ {{ $employee->start_duty }}... <br> {{ $employee->background ?? '--' }}
+                                        <br>شروع خدمت از تاریخ {{ $employee->start_duty }}... <br> {!! $employee->background ?? '--' !!}
+                                        <a class="modal-effect text-primary"
+                                           data-effect="effect-sign" data-toggle="modal"
+                                           href="#add_background{{ $employee->id }}"><span class="underline">@lang('global.add')</span></a>
+
+                                        @include('admin.employees.inc.add_background')
                                     </p>
-                                    <p><strong>@lang('global.extraInfo'): </strong><br> {{ $employee->info ?? '--' }}</p>
+
+                                    <!-- Extra Information -->
+                                    <p><strong>@lang('global.extraInfo'): </strong>
+                                        <br> {{ $employee->info ?? '--' }}
+                                    </p>
                                 </div>
                                 <div class="col-md-6">
+                                    <!-- National ID Card -->
                                     <p>
                                         <strong>@lang('form.idCard'):</strong> <br>
                                         <img src="{{ $employee->taz ? $employee->taz : asset('assets/images/id-card-default.png') }}" class="img-thumbnail"
