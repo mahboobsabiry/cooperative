@@ -9,23 +9,24 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.employees.add_background', $employee->id) }}">
+            <form method="post" action="{{ route('admin.employees.add_background', $employee->id) }}" class="background_form">
                 @csrf
                 <div class="modal-body">
                     <!-- From Date -->
                     <div class="form-group @error('from_date') has-danger @enderror">
                         <p class="mb-2">2) @lang('form.fromDate'): <span class="tx-danger">*</span></p>
-                        <input data-jdp data-jdp-max-date="today" type="text" id="from_date" class="form-control @error('from_date') form-control-danger @enderror" name="from_date" value="{{ old('from_date') }}" required>
+                        <input type="text" id="from_date" class="form-control @error('from_date') form-control-danger @enderror" name="from_date" value="{{ old('from_date') }}" required>
 
                         @error('from_date')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
+                    <p class="mb-2">2) @lang('form.toDate'): <input type="checkbox" name="now_date" id="now_date">  اکنون</p>
+
                     <!-- To Date -->
-                    <div class="form-group @error('to_date') has-danger @enderror">
-                        <p class="mb-2">2) @lang('form.toDate'): <span class="tx-danger">*</span></p>
-                        <input data-jdp data-jdp-max-date="today" type="text" id="to_date" class="form-control @error('to_date') form-control-danger @enderror" name="to_date" value="{{ old('to_date') }}" required>
+                    <div class="form-group @error('to_date') has-danger @enderror" id="to_date_div">
+                        <input type="text" id="to_date" class="form-control @error('to_date') form-control-danger @enderror" name="to_date" value="{{ old('to_date') }}">
 
                         @error('to_date')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -45,7 +46,7 @@
                     <!-- Document Date -->
                     <div class="form-group @error('doc_date') has-danger @enderror">
                         <p class="mb-2">2) @lang('pages.employees.docDate'): <span class="tx-danger">*</span></p>
-                        <input data-jdp data-jdp-max-date="today"  type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
+                        <input type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
 
                         @error('doc_date')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -72,3 +73,15 @@
     </div>
 </div>
 <!--/==/ End of Delete -->
+
+<script>
+    if($('input[type="checkbox"]').parents('.modal-body')) {
+        $("#to_date").change(function () {
+            if ($("#to_date").checked) {
+                $("#to_date_div").hide();
+            } else {
+                $("#to_date_div").show();
+            }
+        });
+    }
+</script>

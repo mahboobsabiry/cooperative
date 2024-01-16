@@ -15,6 +15,7 @@ return [
     'currentProvince'  => 'اوسنی ولایت',
     'cur_password'  => 'اوسنی پسورد',
     'curAddress'    => 'اوسنی آدرس',
+    'customCard'    => 'د گمرک پیژندلی کارت',
     'description'   => 'توضیحات',
     'dob'           => 'زیژیدلی نیته',
     'education'     => 'تحصیل',

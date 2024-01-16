@@ -381,18 +381,31 @@
 
                                         @include('admin.employees.inc.add_background')
                                     </p>
-
+                                </div>
+                                <div class="col-md-6">
                                     <!-- Extra Information -->
                                     <p><strong>@lang('global.extraInfo'): </strong>
                                         <br> {{ $employee->info ?? '--' }}
                                     </p>
                                 </div>
+                            </div>
+
+                            <!-- National ID Card & Custom Card -->
+                            <div class="row">
                                 <div class="col-md-6">
                                     <!-- National ID Card -->
                                     <p>
                                         <strong>@lang('form.idCard'):</strong> <br>
-                                        <img src="{{ $employee->taz ? $employee->taz : asset('assets/images/id-card-default.png') }}" class="img-thumbnail"
+                                        <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail"
                                              alt="@lang('form.idCard')">
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- Custom Card -->
+                                    <p>
+                                        <strong>@lang('form.customCard'):</strong> <br>
+                                        <img src="{{ $employee->card ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail"
+                                             alt="@lang('form.customCard')">
                                     </p>
                                 </div>
                             </div>

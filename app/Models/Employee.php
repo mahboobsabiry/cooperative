@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasCustomCard;
 use App\Traits\HasPhoto;
 use App\Traits\HasTazkira;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Employee extends Model
 {
-    use HasFactory, HasPhoto, HasTazkira;
+    use HasFactory, HasPhoto, HasTazkira, HasCustomCard;
 
     protected $fillable = [
         'position_id', 'hostel_id', 'start_duty', 'position_code', 'name', 'last_name', 'father_name', 'gender',
@@ -26,6 +27,12 @@ class Employee extends Model
     public function photo(): MorphOne
     {
         return $this->morphOne(Photo::class, 'transaction');
+    }
+
+    // Morph Card
+    public function custom_card(): MorphOne
+    {
+        return $this->morphOne(Card::class, 'transaction');
     }
 
     // Morph Photo

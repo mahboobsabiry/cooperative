@@ -27,6 +27,7 @@ class StoreEmployeeRequest extends FormRequest
     {
         return [
             'photo'         => 'nullable|image|mimes:jpg,png,jfif',
+            'card'          => 'nullable|image|mimes:jpg,png,jfif',
             'tazkira'       => 'nullable|image|mimes:jpg,png,jfif',
             'start_duty'    => 'required',
             'name'          => 'required|min:3|max:64',

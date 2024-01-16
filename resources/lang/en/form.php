@@ -15,6 +15,7 @@ return [
     'currentProvince'  => 'Current Province',
     'cur_password'  => 'Current Password',
     'curAddress'    => 'Current Address',
+    'customCard'    => 'Custom ID Card',
     'description'   => 'Description',
     'dob'           => 'Date of Birth',
     'education'     => 'Education',

@@ -92,6 +92,13 @@ class EmployeeController extends Controller
             $employee->storeImage($avatar->storeAs('employees', $fileName, 'public'));
         }
 
+        //  Has File && Save Card Image
+        if ($request->hasFile('card')) {
+            $card = $request->file('card');
+            $fileName = 'customIdCard-' . time() . '.' . $card->getClientOriginalExtension();
+            $employee->storeCard($card->storeAs('employees/custom-cards', $fileName, 'public'));
+        }
+
         //  Has File && Save Tazkira Image
         if ($request->hasFile('tazkira')) {
             $tazkira = $request->file('tazkira');
@@ -130,6 +137,7 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'photo'         => 'nullable|image|mimes:jpg,png,jfif',
+            'card'          => 'nullable|image|mimes:jpg,png,jfif',
             'tazkira'       => 'nullable|image|mimes:jpg,png,jfif',
             'start_duty'    => 'required',
             'name'          => 'required|min:3|max:64',
@@ -198,11 +206,18 @@ class EmployeeController extends Controller
         $employee->info             = $request->info;
         $employee->save();
 
-        //  Has File
+        //  Has Photo
         if ($request->hasFile('photo')) {
             $avatar = $request->file('photo');
             $fileName = 'employee-' . time() . '.' . $avatar->getClientOriginalExtension();
             $employee->updateImage($avatar->storeAs('employees', $fileName, 'public'));
+        }
+
+        //  Has Card
+        if ($request->hasFile('card')) {
+            $card = $request->file('card');
+            $fileName = 'customIdCard-' . time() . '.' . $card->getClientOriginalExtension();
+            $employee->updateCard($card->storeAs('employees/cards', $fileName, 'public'));
         }
 
         //  Has Tazkira
@@ -278,16 +293,40 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'from_date'     => 'required',
-            'to_date'       => 'required',
+            'to_date'       => 'nullable',
             'doc_number'    => 'required',
             'doc_date'      => 'required',
             'bg_position'   => 'required',
         ]);
 
         $employee = Employee::find($id);
-        $employee->update([
-            'background' => 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
-        ]);
+
+        if ($request->has('now_date')) {
+            $to_date = 'اکنون';
+
+            if (!empty($employee->background)) {
+                $employee->update([
+                    'background' => $employee->background . "<br>" . 'از تاریخ ' . $request->from_date . ' الی ' . $to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه میگردد.<br>"
+                ]);
+            } else {
+                $employee->update([
+                    'background' => 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
+                ]);
+            }
+        } else {
+            $to_date = $request->to_date;
+
+            if (!empty($employee->background)) {
+                $employee->update([
+                    'background' => $employee->background . "<br>" . 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
+                ]);
+            } else {
+                $employee->update([
+                    'background' => 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
+                ]);
+            }
+        }
+
         return back()->with([
             'message'   => 'موفقانه ثبت شد!',
             'alertType' => 'success'

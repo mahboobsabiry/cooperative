@@ -15,6 +15,7 @@ return [
     'currentProvince'   => 'ولایت فعلی',
     'cur_password'  => 'رمز عبور فعلی',
     'curAddress'    => 'آدرس فعلی',
+    'customCard'    => 'کارت هویت گمرکی',
     'description'   => 'توضیحات',
     'dob'           => 'تاریخ تولد',
     'education'     => 'تحصیل',

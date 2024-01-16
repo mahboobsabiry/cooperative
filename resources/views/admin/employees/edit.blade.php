@@ -393,10 +393,6 @@
                                         </div>
                                         <!--/==/ End of Current Address -->
 
-                                        <!--/==/ End of General Information -->
-                                    </div>
-
-                                    <div class="col-md-6">
                                         <!-- PRR/NPR -->
                                         <div class="row">
                                             <div class="col-md-6">
@@ -431,6 +427,10 @@
                                         </div>
                                         <!--/==/ End of PRR/NPR -->
 
+                                        <!--/==/ End of General Information -->
+                                    </div>
+
+                                    <div class="col-md-6">
                                         <!-- Introducer & Hostel -->
                                         <div class="row">
                                             <div class="col-md-6">
@@ -493,13 +493,26 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Photo] -->
+                                        <!--/==/ End of Photo -->
+
+                                        <!-- Card -->
+                                        <div class="form-group @error('card') has-danger @enderror">
+                                            <p class="mb-2">27) @lang('form.customCard'):</p>
+                                            @if($employee->card)
+                                                <img src="{{ $employee->card }}" width="30">
+                                            @endif
+                                            <input type="file" class="dropify" name="card" accept="image/*" data-height="200" />
+                                            @error('card')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Card -->
 
                                         <!-- Tazkira -->
                                         <div class="form-group @error('tazkira') has-danger @enderror">
                                             <p class="mb-2">
                                                 <!-- Tazkira -->
-                                                27) @lang('form.idCard'): <br>
+                                                28) @lang('form.idCard'): <br>
                                                 <span class="caption bg-gray-300">نوت: اگر تذکره الکترونیکی دارید، آن را در یک فایل قرار داده و آپلود نمایید.</span>
                                             </p>
                                             @if($employee->taz)

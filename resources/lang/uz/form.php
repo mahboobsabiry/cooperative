@@ -15,6 +15,7 @@ return [
     'currentProvince'  => 'حاضر ولایتی',
     'cur_password'  => 'حاضر پسوردی',
     'curAddress'    => 'حاضر جایی',
+    'customCard'    => 'گمرک شناسه سی',
     'description'   => 'توصیف',
     'dob'           => 'توغیلگن سنسی',
     'education'     => 'تعلیم',
