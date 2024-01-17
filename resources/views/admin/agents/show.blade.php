@@ -20,7 +20,7 @@
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.positions.index') }}">@lang('pages.positions.positions')</a>
+                        <a href="{{ route('admin.agents.index') }}">@lang('pages.companies.agents')</a>
                     </li>
                     <li class="breadcrumb-item active"
                         aria-current="page">@lang('global.details')</li>
@@ -88,10 +88,10 @@
                                         <td>{{ $agent->name }}</td>
                                     </tr>
 
-                                    <!-- Manager -->
+                                    <!-- Companies -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('pages.companies.company'):</th>
-                                        <td>{{ $agent->company->name }}</td>
+                                        <td>{{ $agent->companies->count() }}</td>
                                     </tr>
 
                                     <!-- Address -->
@@ -106,7 +106,7 @@
                                     <!-- Phone -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('form.phone'):</th>
-                                        <td>{{ $agent->phone }}{{ $agent->phon2 ? ', ' : '' }} {{ $agent->phon2 }}</td>
+                                        <td>{{ $agent->phone }} {{ $agent->phone2 ? ', ' : '' }} {{ $agent->phone2 }}</td>
                                     </tr>
 
                                     <!-- Date of creation -->
@@ -118,6 +118,47 @@
                                 </table>
                             </div>
                             <!--/==/ End of Personal Information Table -->
+
+                            <!-- Table -->
+                            <div class="table-responsive">
+                                <h5 class="font-weight-bold">@lang('admin.sidebar.companies')</h5>
+
+                                <table class="table table-striped table-bordered w-100">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th>@lang('form.name')</th>
+                                        <th>@lang('form.tin')</th>
+                                        <th>@lang('global.type')</th>
+                                        <th>@lang('form.fromDate')</th>
+                                        <th>@lang('form.toDate')</th>
+                                        <th>@lang('pages.employees.docNumber')</th>
+                                        <th>@lang('global.validationStatus')</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    @if($agent->companies->count() > 0)
+                                        @foreach($agent->companies as $company)
+                                            <tr>
+                                                <th scope="row">{{ $company->id }}</th>
+                                                <td>{{ $company->name }}</td>
+                                                <td>{{ $company->tin }}</td>
+                                                <td>{{ $company->type == 0 ? trans('form.import') : trans('form.export') }}</td>
+                                                <td>{{ $company->agent->from_date }}</td>
+                                                <td>{{ $company->agent->to_date }}</td>
+                                                <td>{{ $company->agent->doc_number }}</td>
+                                                <td>STATUS</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <th colspan="8" class="text-center">شرکتی پیدا نشد!</th>
+                                        </tr>
+                                    @endif
+                                    </tbody>
+                                </table>
+                            </div>
 
                             <div class="main-content-label tx-13 mg-b-20 pt-2" style="border-top: 1px solid #ddd;">
                                 @lang('global.extraInfo')

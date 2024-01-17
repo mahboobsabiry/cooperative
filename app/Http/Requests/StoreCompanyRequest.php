@@ -25,7 +25,7 @@ class StoreCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'agent_id' => 'required',
+            'agent_id' => 'nullable',
             'name'  => 'required|min:3|max:255|unique:companies,name',
             'tin'   => 'required|unique:companies,tin'
         ];

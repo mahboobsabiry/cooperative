@@ -38,6 +38,7 @@ class CompanyController extends Controller
     {
         // Validate
         $request->validate([
+            'agent_id'  => 'nullable',
             'name'  => 'required|min:3|max:48|unique:companies,name,' . $company->id,
             'tin'   => 'required|unique:companies,tin,' . $company->id
         ]);
