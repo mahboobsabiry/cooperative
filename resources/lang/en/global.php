@@ -105,6 +105,7 @@ return [
     'type'      => 'Type',
     'update'    => 'Update',
     'url'       => 'URL',
+    'validationStatus' => 'Validation Status',
     'videos'    => 'Videos',
     'view'      => 'View',
     'viewAll'   => 'View All',

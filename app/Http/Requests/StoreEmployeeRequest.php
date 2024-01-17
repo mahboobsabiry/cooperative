@@ -43,7 +43,7 @@ class StoreEmployeeRequest extends FormRequest
             'prr_npr'       => 'required',
             'prr_date'      => 'nullable',
             'phone'         => 'nullable|unique:employees,phone',
-            'phone2'        => 'nullable|unique:employees,phone2',
+            'phone2'        => 'nullable',
             'email'         => 'nullable|unique:employees,email',
             'main_province'     => 'required|min:3|max:64',
             'main_district'     => 'required|min:3|max:64',

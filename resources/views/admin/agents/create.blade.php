@@ -55,47 +55,58 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <!-- Company -->
-                                        <div class="form-group @error('company_id') has-danger @enderror">
-                                            <p class="mb-2">@lang('pages.companies.company'): <span class="tx-danger">*</span></p>
-
-                                            <select id="company_id" name="company_id" class="form-control @error('company_id') form-control-danger @enderror">
-                                                <option selected>Choose one</option>
-                                                @foreach($companies as $company)
-                                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
-                                                @endforeach
-                                            </select>
-
-                                            @error('company_id')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Company -->
-
                                         <!-- Name -->
                                         <div class="form-group @error('name') has-danger @enderror">
                                             <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="name" class="form-control @error('name') form-control-danger @enderror" name="name" value="{{ old('name') }}" placeholder="@lang('form.name')" required>
+                                            <input type="text" id="name" class="form-control @error('name') form-control-danger @enderror" name="name" value="{{ old('name') }}" required>
 
                                             @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Name -->
 
+                                        <!-- From Date -->
+                                        <div class="form-group @error('from_date') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.fromDate'): <span class="tx-danger">*</span></p>
+                                            <input data-jdp type="text" id="from_date" class="form-control @error('from_date') form-control-danger @enderror" name="from_date" value="{{ old('from_date') }}" required>
+
+                                            @error('from_date')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <!-- To Date -->
+                                        <div class="form-group @error('to_date') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.toDate'): <span class="tx-danger">*</span></p>
+                                            <input data-jdp type="text" id="to_date" class="form-control @error('to_date') form-control-danger @enderror" name="to_date" value="{{ old('to_date') }}" required>
+
+                                            @error('to_date')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <!-- Document Number -->
+                                        <div class="form-group @error('doc_number') has-danger @enderror">
+                                            <p class="mb-2">@lang('pages.employees.docNumber'): <span class="tx-danger">*</span></p>
+                                            <input type="text" id="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" name="doc_number" value="{{ old('doc_number') }}" required>
+
+                                            @error('doc_number')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
                                         <!-- Address -->
                                         <div class="form-group @error('address') has-danger @enderror">
                                             <p class="mb-2">@lang('global.address'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="address" class="form-control @error('address') form-control-danger @enderror" name="address" value="{{ old('address') }}" placeholder="@lang('global.address')" required>
+                                            <input type="text" id="address" class="form-control @error('address') form-control-danger @enderror" name="address" value="{{ old('address') }}" required>
 
                                             @error('address')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Address -->
-                                    </div>
 
-                                    <div class="col-md-6">
                                         <!-- Phone -->
                                         <div class="form-group @error('phone') has-danger @enderror">
                                             <p class="mb-2">@lang('form.phone'): <span class="tx-danger">*</span></p>
@@ -105,23 +116,21 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Phone -->
 
                                         <!-- Phone2 -->
                                         <div class="form-group @error('phone2') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.phone'): <span class="tx-danger">*</span></p>
-                                            <input type="tel" id="phone2" class="form-control @error('phone2') form-control-danger @enderror" name="phone2" value="{{ old('phone2') }}" placeholder="@lang('form.phone')" required>
+                                            <p class="mb-2">@lang('form.phone') 2:</p>
+                                            <input type="tel" id="phone2" class="form-control @error('phone2') form-control-danger @enderror" name="phone2" value="{{ old('phone2') }}">
 
                                             @error('phone2')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Phone2 -->
 
                                         <!-- Description -->
                                         <div class="form-group @error('info') has-danger @enderror">
                                             <p class="mb-2">@lang('form.extraInfo'):</p>
-                                            <textarea name="info" class="form-control @error('info') form-control-danger @enderror" placeholder="@lang('form.extraInfo')">{{ old('info') }}</textarea>
+                                            <textarea name="info" class="form-control @error('info') form-control-danger @enderror">{{ old('info') }}</textarea>
 
                                             @error('info')
                                             <div class="invalid-feedback">{{ $message }}</div>

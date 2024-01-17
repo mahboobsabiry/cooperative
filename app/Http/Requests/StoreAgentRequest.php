@@ -26,11 +26,13 @@ class StoreAgentRequest extends FormRequest
     {
         return [
             'name'      => 'required|min:3|max:128',
-            'company_id' => 'required',
             'phone'     => 'required|min:8|max:15|unique:agents,phone',
-            'phone2'    => 'nullable|min:8|max:15|unique:agents,phone2',
+            'phone2'    => 'nullable|min:8|max:15',
             'address'   => 'nullable|min:3|max:128',
-            'info'      => 'nullable'
+            'info'      => 'nullable',
+            'from_date' => 'required',
+            'to_date'   => 'required',
+            'doc_number'=> 'required'
         ];
     }
 }

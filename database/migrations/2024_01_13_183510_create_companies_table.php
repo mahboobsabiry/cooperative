@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('agent_id');
             $table->string('name')->unique();
             $table->bigInteger('tin')->unique();
+            $table->tinyInteger('type')->default(0);
             $table->timestamps();
+
+            $table->foreign('agent_id')->references('id')->on('agents')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

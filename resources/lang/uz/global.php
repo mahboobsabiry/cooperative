@@ -104,6 +104,7 @@ return [
     'type'      => 'نوع',
     'update'    => 'بروز رسانی',
     'url'       => 'لینک',
+    'validationStatus' => 'وضعیت اعتبار',
     'videos'    => 'ویدیوها',
     'view'      => 'مشاهده',
     'viewAll'   => 'مشاهده همه',

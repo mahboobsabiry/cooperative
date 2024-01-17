@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Company extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'tin'];
+    protected $fillable = ['agent_id', 'name', 'tin', 'type', 'created_at', 'updated_at'];
 
-    public function agents(): HasMany
+    public function agent(): Relation
     {
-        return $this->hasMany(Agent::class);
+        return $this->belongsTo(Agent::class);
     }
 }

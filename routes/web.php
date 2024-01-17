@@ -90,9 +90,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // Reset to Main Position
     Route::get('employee/reset-position/{id}', [EmployeeController::class, 'reset_position'])->name('employees.reset_position');
 
-    // Companies
-    Route::resource('companies', CompanyController::class);
+    // Agents & Companies
     Route::resource('agents', AgentController::class);
+    Route::resource('companies', CompanyController::class);
 
     // Settings
     Route::resource('settings', SettingController::class);

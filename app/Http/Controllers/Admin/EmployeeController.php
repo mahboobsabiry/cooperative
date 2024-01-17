@@ -154,7 +154,7 @@ class EmployeeController extends Controller
             'prr_npr'       => 'required',
             'prr_date'      => 'nullable',
             'phone'         => 'nullable|unique:employees,phone,' . $employee->id,
-            'phone2'        => 'nullable|unique:employees,phone2,' . $employee->id,
+            'phone2'        => 'nullable',
             'email'         => 'nullable|unique:employees,email,' . $employee->id,
             'main_province'     => 'required|min:3|max:64',
             'main_district'     => 'required|min:3|max:64',

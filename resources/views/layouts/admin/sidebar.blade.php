@@ -134,20 +134,20 @@
                     </a>
 
                     <ul class="nav-sub">
+                        <!-- Agents -->
+                        <li class="nav-sub-item {{ request()->is('admin/agents') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.agents.index') }}">
+                                @lang('pages.companies.agents')
+                                ({{ \App\Models\Agent::all()->count() }})
+                            </a>
+                        </li>
+
                         <!-- All Companies -->
                         <li class="nav-sub-item {{ request()->is('admin/companies') ||
                         request()->is('admin/companies/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.companies.index') }}">
                                 @lang('admin.sidebar.companies')
                                 ({{ count(\App\Models\Company::all()) }})
-                            </a>
-                        </li>
-
-                        <!-- Agents -->
-                        <li class="nav-sub-item {{ request()->is('admin/agents') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.agents.index') }}">
-                                @lang('pages.companies.agents')
-                                ({{ \App\Models\Agent::all()->count() }})
                             </a>
                         </li>
                     </ul>

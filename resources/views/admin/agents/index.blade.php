@@ -72,8 +72,11 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>@lang('pages.companies.company')</th>
                                         <th>@lang('form.name')</th>
+                                        <th>@lang('form.fromDate')</th>
+                                        <th>@lang('form.toDate')</th>
+                                        <th>@lang('pages.employees.docNumber')</th>
+                                        <th>@lang('global.validationStatus')</th>
                                         <th>@lang('form.phone')</th>
                                         <th>@lang('global.address')</th>
                                         <th>@lang('form.extraInfo')</th>
@@ -84,8 +87,17 @@
                                     @foreach($agents as $agent)
                                         <tr>
                                             <td>{{ $agent->id }}</td>
-                                            <td>{{ $agent->company->name }}</td>
                                             <td><a href="{{ route('admin.agents.show', $agent->id ) }}">{{ $agent->name }}</a></td>
+                                            <td>{{ $agent->from_date }}</td>
+                                            <td>{{ $agent->to_date }}</td>
+                                            <td>{{ $agent->doc_number }}</td>
+                                            <td>
+                                                @php
+                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
+                                                    $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+                                                @endphp
+                                                {{ $valid_days <= 0 ? 'تاریخ ختم شده' : $valid_days . ' روز باقی مانده' }}
+                                            </td>
                                             <td>{{ $agent->phone }}{{ $agent->phone2 ? ', ' : '' }} {{ $agent->phone2 ?? '' }}</td>
                                             <td>{{ $agent->address }}</td>
                                             <td>{{ $agent->info }}</td>

@@ -7,7 +7,9 @@ use App\Http\Requests\StoreAgentRequest;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Models\Agent;
 use App\Models\Company;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Morilog\Jalali\Jalalian;
 
 class AgentController extends Controller
 {
@@ -26,8 +28,7 @@ class AgentController extends Controller
     // Create
     public function create()
     {
-        $companies = Company::get();
-        return view('admin.agents.create', compact('companies'));
+        return view('admin.agents.create');
     }
 
     // Store Data
@@ -51,8 +52,7 @@ class AgentController extends Controller
     // Edit
     public function edit(Agent $agent)
     {
-        $companies = Company::get();
-        return view('admin.agents.edit', compact('agent', 'companies'));
+        return view('admin.agents.edit', compact('agent'));
     }
 
     // Update Data
@@ -60,13 +60,14 @@ class AgentController extends Controller
     {
         // Validate
         $request->validate([
-
             'name'      => 'required|min:3|max:128',
-            'company_id' => 'required',
             'phone'     => 'required|min:8|max:15|unique:agents,phone,' . $agent->id,
-            'phone2'    => 'nullable|min:8|max:15|unique:agents,phone2,' . $agent->id,
+            'phone2'    => 'nullable|min:8|max:15',
             'address'   => 'nullable|min:3|max:128',
-            'info'      => 'nullable'
+            'info'      => 'nullable',
+            'from_date' => 'required',
+            'to_date'   => 'required',
+            'doc_number'=> 'required'
         ]);
 
         // Save Record
