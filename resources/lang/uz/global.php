@@ -21,6 +21,7 @@ return [
     'budgets'       => 'بودجه‌ها',
     'by'            => 'توسط',
     'cancel'        => 'لغو',
+    'change'        => 'تغییر',
     'close'         => 'بستن',
     'code'          => 'کد',
     'coincidesWith' => 'مصادف با',

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\EDEmptyController;
 use App\Http\Controllers\Admin\EDRejectedController;
 use App\Http\Controllers\Admin\EDReportingController;
 use App\Http\Controllers\Admin\EDTrexController;
+use App\Http\Controllers\Admin\EmpController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ExitDoorController;
 use App\Http\Controllers\Admin\HostelController;
@@ -89,6 +90,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::post('employee/duty-position/{id}', [EmployeeController::class, 'duty_position'])->name('employees.duty_position');
     // Reset to Main Position
     Route::get('employee/reset-position/{id}', [EmployeeController::class, 'reset_position'])->name('employees.reset_position');
+
+    // Employee Change Position to other customs
+    Route::post('employee/change-position-ocustom/{id}', [EmpController::class, 'change_position_ocustom'])->name('employees.change_position_ocustom');
+    // Change Position Employees
+    Route::get('employee/change-position-employees', [EmpController::class, 'change_position_employees'])->name('employees.change_position_employees');
 
     // Agents & Companies
     Route::resource('agents', AgentController::class);

@@ -21,6 +21,7 @@ return [
     'budgets'       => 'بودجه‌ها',
     'by'            => 'لخوا',
     'cancel'        => 'لغوه کړئ',
+    'change'        => 'تغییر',
     'close'         => 'تړل',
     'code'          => 'کد',
     'coincidesWith' => 'سره سمون لری',

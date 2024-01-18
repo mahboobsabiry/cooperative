@@ -81,7 +81,8 @@
                 <li class="nav-item {{ request()->is('admin/employees') ||
                     request()->is('admin/employees/*') ||
                     request()->is('admin/main-employees') ||
-                    request()->is('admin/on-duty-employees') ? 'active show' : '' }}">
+                    request()->is('admin/on-duty-employees') ||
+                    request()->is('admin/change-position-employees') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fa fa-user-tie"></i>
@@ -95,7 +96,7 @@
                         request()->is('admin/employees/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.employees.index') }}">
                                 {<span class="small text-sm-center tx-danger">M</span>}
-                                @lang('admin.sidebar.employees')
+                                همه کارمندان
                                 ({{ count(\App\Models\Employee::all()) }})
                             </a>
                         </li>
@@ -104,7 +105,7 @@
                         <li class="nav-sub-item {{ request()->is('admin/main-employees') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.employees.main') }}">
                                 @lang('pages.employees.mainPosition')
-                                ({{ \App\Models\Employee::all()->where('on_duty', 0)->count() }})
+                                ({{ \App\Models\Employee::all()->where('status', 1)->where('on_duty', 0)->count() }})
                             </a>
                         </li>
 
@@ -112,7 +113,15 @@
                         <li class="nav-sub-item {{ request()->is('admin/on-duty-employees') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.employees.on_duty') }}">
                                 @lang('pages.employees.onDuty')
-                                ({{ \App\Models\Employee::all()->where('on_duty', 1)->count() }})
+                                ({{ \App\Models\Employee::all()->where('status', 1)->where('on_duty', 1)->count() }})
+                            </a>
+                        </li>
+
+                        <!-- Change Position Employees -->
+                        <li class="nav-sub-item {{ request()->is('admin/change-position-employees') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.employees.change_position_employees') }}">
+                                تبدیل شده
+                                ({{ \App\Models\Employee::all()->where('status', 0)->count() }})
                             </a>
                         </li>
                     </ul>

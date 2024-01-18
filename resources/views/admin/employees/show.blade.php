@@ -85,13 +85,15 @@
                                 <span>{{ $employee->name }} {{ $employee->last_name }}</span>
                             </h4>
 
-                            <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title }}</p>
+                            <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
                             <!-- Employee Star -->
-                            <p class="user-info-rating">
-                                @for($i=1; $i<=$employee->position->position_number; $i++)
-                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                @endfor
-                            </p>
+                            @if($employee->position)
+                                <p class="user-info-rating">
+                                    @for($i=1; $i<=$employee->position->position_number; $i++)
+                                        <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                    @endfor
+                                </p>
+                            @endif
                             <!--/==/ End of Employee Star -->
                         </div>
                     </div>
@@ -268,27 +270,9 @@
                                         <th><strong>@lang('form.status'): </strong></th>
                                         <td>
                                             <span class="acInText">
-                                                <span id="acInText"
-                                                      class="{{ $employee->status == 1 ? 'text-success' : 'text-danger' }}">
-                                                    {{ $employee->status == 1 ? trans('global.active') : trans('global.inactive') }}
+                                                <span id="acInText" >
+                                                    {{ $employee->status == 1 ? 'کارمند برحال این ریاست' : 'تبدیل شده به اداره/ارگان دیگر' }}
                                                 </span>
-                                            </span>
-                                            ----
-                                            @if($employee->status == 1)
-                                                <a class="updateEmployeeStatus" id="employee_status"
-                                                   employee_id="{{ $employee->id }}" href="javascript:void(0)">
-                                                    <i class="fa fa-toggle-on text-success" aria-hidden="true"
-                                                       status="Active"></i>
-                                                </a>
-                                            @else
-                                                <a class="updateEmployeeStatus" id="employee_status"
-                                                   employee_id="{{ $employee->id }}" href="javascript:void(0)">
-                                                    <i class="fa fa-toggle-off text-danger" aria-hidden="true"
-                                                       status="Inactive"></i>
-                                                </a>
-                                            @endif
-                                            <span id="update_status" style="display: none;">
-                                                <i class="fa fa-toggle-on" aria-hidden="true"></i>
                                             </span>
                                         </td>
                                     </tr>
@@ -311,24 +295,33 @@
                                         <th><strong>@lang('form.position'): </strong>
                                         </th>
                                         <td>
-                                            {{ $employee->position->position_number }} -
-                                            <a href="{{ route('admin.positions.show', $employee->position->id) }}">
-                                                {{ $employee->position->title }}
-                                            </a> ({{ $employee->position_code }})
+                                            @if($employee->position)
+                                                {{ $employee->position->position_number }} -
+                                                <a href="{{ route('admin.positions.show', $employee->position->id) }}">
+                                                    {{ $employee->position->title }}
+                                                </a> ({{ $employee->position_code }})
 
-                                            @if($employee->on_duty == 0)
-                                                [<a class="modal-effect text-danger"
-                                                    data-effect="effect-sign" data-toggle="modal"
-                                                    href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>]
+                                                @if($employee->on_duty == 0)
+                                                    [<a class="modal-effect text-danger"
+                                                        data-effect="effect-sign" data-toggle="modal"
+                                                        href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>]
 
-                                                @include('admin.employees.inc.duty_position')
-                                            @else
-                                                [@lang('pages.employees.onDuty') - {{ $employee->duty_position }}]
-                                                <a class="modal-effect text-danger"
+                                                    @include('admin.employees.inc.duty_position')
+                                                @else
+                                                    [@lang('pages.employees.onDuty') - {{ $employee->duty_position }}]
+                                                    <a class="modal-effect text-danger"
+                                                       data-effect="effect-sign" data-toggle="modal"
+                                                       href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
+
+                                                    @include('admin.employees.inc.reset_position')
+                                                @endif
+                                                <br>
+                                                <a class="modal-effect text-danger mt-2"
                                                    data-effect="effect-sign" data-toggle="modal"
-                                                   href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
-
-                                                @include('admin.employees.inc.reset_position')
+                                                   href="#change_position_ocustom{{ $employee->id }}" style="text-decoration: underline;">تغییر اصل بست؟</a>
+                                                @include('admin.employees.inc.change_position_ocustom')
+                                            @else
+                                                تبدیل شده به اداره/ارگان دیگر
                                             @endif
                                         </td>
                                     </tr>
@@ -382,11 +375,14 @@
                                     <!-- Background -->
                                     <p><strong>@lang('form.background'): </strong>
                                         <br>شروع وظیفه از تاریخ {{ $employee->start_job }} <br> {!! $employee->background ?? '--' !!}
-                                        <a class="modal-effect text-primary"
-                                           data-effect="effect-sign" data-toggle="modal"
-                                           href="#add_background{{ $employee->id }}"><span class="underline">@lang('global.add')</span></a>
 
-                                        @include('admin.employees.inc.add_background')
+                                        @if($employee->position)
+                                            <a class="modal-effect text-primary"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#add_background{{ $employee->id }}"><span class="underline">@lang('global.add')</span></a>
+
+                                            @include('admin.employees.inc.add_background')
+                                        @endif
                                     </p>
                                 </div>
                                 <div class="col-md-6">

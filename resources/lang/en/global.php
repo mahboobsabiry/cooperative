@@ -21,6 +21,7 @@ return [
     'budgets'       => 'Budgets',
     'by'            => 'By',
     'cancel'        => 'Cancel',
+    'change'        => 'Change',
     'close'         => 'Close',
     'code'          => 'Code',
     'coincidesWith' => 'Coincides With',

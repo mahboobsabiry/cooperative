@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('pages.employees.onDuty'))
+@section('title', config('app.name') . ' ~ ' . 'کارمندان تبدیل شده')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -32,16 +32,13 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a
                             href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">@lang('pages.employees.onDuty')</li>
+                    <li class="breadcrumb-item active" aria-current="page">کارمندان تبدیل شده</li>
                 </ol>
             </div>
 
             <!-- Btn List -->
             <div class="btn btn-list">
-                <!-- Add New -->
-                <a class="btn ripple btn-primary" href="{{ route('admin.employees.create') }}">
-                    <i class="fe fe-plus-circle"></i> @lang('global.new')
-                </a>
+
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -59,7 +56,7 @@
                         <!-- Employees -->
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.employees.onDuty') ({{ count($employees) }})
+                                کارمندان تبدیل شده به ادارات/ارگان های دیگر ({{ count($employees) }})
                             </div>
 
                             <!-- Table -->
@@ -70,12 +67,10 @@
                                         <th>#</th>
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.fatherName')</th>
-                                        <th>@lang('form.position')</th>
-                                        <th>@lang('form.positionCode')</th>
+                                        <th>@lang('form.background')</th>
                                         <th>@lang('form.phone')</th>
-                                        <th>@lang('form.currentProvince')</th>
-                                        <th>@lang('form.currentDistrict')</th>
-                                        <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
+                                        <th>@lang('form.empNumber')</th>
+                                        <th>@lang('form.birthYear')</th>
                                         <th>@lang('form.introducer')</th>
                                     </tr>
                                     </thead>
@@ -88,18 +83,12 @@
                                                 <a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
                                             </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
-                                            <td>{{ $employee->position->title ?? '' }} {{ $employee->position->position_number ?? '' }}</td>
-                                            <td>{{ $employee->position_code ?? '' }}</td>
+                                            <td>{!! $employee->background !!}</td>
                                             <td class="tx-sm-12-f">
                                                 <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
                                             </td>
-                                            <td>{{ $employee->current_province ?? '' }}</td>
-                                            <td>{{ $employee->current_district ?? '' }}</td>
-                                            <td>
-                                                {{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
-                                                {{ $employee->duty_position ? ' - ' : '' }}
-                                                {{ $employee->duty_position ?? '' }}
-                                            </td>
+                                            <td>{{ $employee->emp_number ?? '' }}</td>
+                                            <td>{{ $employee->birth_year }} ({{ \Morilog\Jalali\Jalalian::now()->getYear() - $employee->birth_year }} ساله)</td>
                                             <td>{{ $employee->introducer ?? '' }}</td>
                                         </tr>
                                     @endforeach

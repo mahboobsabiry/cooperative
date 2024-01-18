@@ -59,7 +59,7 @@
                         <!-- Employees -->
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.employees.mainPosition') ({{ count(\App\Models\Employee::all()->where('on_duty', 0)) }})
+                                @lang('pages.employees.mainPosition') ({{ count($employees) }})
                             </div>
 
                             <!-- Table -->

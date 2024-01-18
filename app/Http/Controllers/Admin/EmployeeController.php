@@ -29,7 +29,7 @@ class EmployeeController extends Controller
     // Index
     public function index()
     {
-        $employees = Employee::orderBy('created_at', 'ASC')->get();
+        $employees = Employee::where('status', 1)->orderBy('created_at', 'ASC')->get();
 
         return view('admin.employees.index', compact('employees'));
     }
@@ -276,7 +276,7 @@ class EmployeeController extends Controller
     // Main Position Employees
     public function main_employees()
     {
-        $employees = Employee::where('on_duty', 0)->orderBy('created_at', 'desc')->get();
+        $employees = Employee::where('status', 1)->where('on_duty', 0)->orderBy('created_at', 'desc')->get();
 
         return view('admin.employees.main', compact('employees'));
     }
@@ -284,7 +284,7 @@ class EmployeeController extends Controller
     // On Duty Employees
     public function on_duty_employees()
     {
-        $employees = Employee::where('on_duty', 1)->orderBy('created_at', 'desc')->get();
+        $employees = Employee::where('status', 1)->where('on_duty', 1)->orderBy('created_at', 'desc')->get();
 
         return view('admin.employees.on_duty', compact('employees'));
     }
@@ -335,7 +335,8 @@ class EmployeeController extends Controller
             'on_duty'   => 1,
             'start_duty'        => $request->start_duty,
             'duty_doc_number'   => $request->duty_doc_number,
-            'duty_position'     => $request->duty_position
+            'duty_position'     => $request->duty_position,
+            'background'        => $employee->background . ' از تاریخ ' . $request->start_duty . ' نظر به مکتوب نمبر ' . $request->duty_doc_number . ' در بست ' . $request->duty_position .  " خدمتی ایفای وظیفه نمود.<br>"
         ]);
 
         // Redirect back with success message
@@ -350,7 +351,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         $employee->update([
-            'background'        => $employee->background . 'از تاریخ ' . $employee->start_duty . ' الی تاریخ ' . CalendarUtils::strftime('Y/m/d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $employee->duty_doc_number . ' مورخ ' . CalendarUtils::strftime('Y/m/d', strtotime(now())) . " استحصال وظیفه گردید.<br>",
+            'background'        => $employee->background . 'از تاریخ ' . $employee->start_duty . ' الی تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $employee->duty_doc_number . ' مورخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' در بست ' . $employee->duty_position . " استحصال وظیفه گردید.<br>",
             'on_duty'           => 0,
             'start_duty'        => null,
             'duty_doc_number'   => null,
