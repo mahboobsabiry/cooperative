@@ -159,127 +159,57 @@
                         <div class="p-2">
                             <!-- Personal Information -->
                             <div class="main-content-label tx-13 mg-b-20 bd-b tx-bold pb-2">
-                                <span class="badge badge-primary badge-pill">1</span>
-                                @lang('pages.employees.personalInfo')
+                                @lang('global.details')
                             </div>
                             <!-- Personal Information Table -->
                             <div class="table-responsive ">
-                                <table class="table row table-borderless">
-                                    <!-- Right Column -->
-                                    <tbody class="col-lg-12 col-xl-6 p-0">
-                                    <!-- Name -->
+                                <table class="table table-bordered">
+                                    <!-- First Row -->
+                                    <tbody class="p-0">
+                                    <!-- Details -->
+                                    <tr>
+                                        <td colspan="6" class="font-weight-bold">
+                                            <span class="badge badge-primary badge-pill">1</span>
+                                            @lang('pages.employees.personalInfo')
+                                        </td>
+                                    </tr>
+
+                                    <!-- Name, Last Name & Father Name -->
                                     <tr>
                                         <th><strong>@lang('form.name') :</strong></th>
-                                        <td>{{ $employee->name }}</td>
-                                    </tr>
-
-                                    <!-- Last Name -->
-                                    <tr>
                                         <th><strong>@lang('form.lastName') :</strong></th>
-                                        <td>{{ $employee->last_name }}</td>
-                                    </tr>
-
-                                    <!-- Gender -->
-                                    <tr>
-                                        <th><strong>@lang('form.gender') :</strong></th>
-                                        <td>{{ $employee->gender == 1 ? trans('form.male') : trans('form.female') }}</td>
-                                    </tr>
-
-                                    <!-- Left Column -->
-                                    </tbody>
-                                    <tbody class="col-lg-12 col-xl-6 p-0">
-                                    <!-- Father Name -->
-                                    <tr>
                                         <th><strong>@lang('form.fatherName') :</strong></th>
-                                        <td>{{ $employee->father_name }}</td>
-                                    </tr>
-
-                                    <!-- Birth Year -->
-                                    <tr>
+                                        <th><strong>@lang('form.gender') :</strong></th>
                                         <th><strong>@lang('form.birthYear') :</strong></th>
-                                        <td>{{ $employee->birth_year }} ({{ \Morilog\Jalali\Jalalian::now()->getYear() - $employee->birth_year }} ساله)</td>
+                                        <th><strong>@lang('form.empNumber') :</strong></th>
                                     </tr>
 
-                                    <!-- Employee Number -->
+                                    <!-- Gender, Birth Year & Employee Number -->
                                     <tr>
-                                        <th><strong>@lang('form.empNumber') :</strong></th>
+                                        <td>{{ $employee->name }}</td>
+                                        <td>{{ $employee->last_name }}</td>
+                                        <td>{{ $employee->father_name }}</td>
+                                        <td>{{ $employee->gender == 1 ? trans('form.male') : trans('form.female') }}</td>
+                                        <td>{{ $employee->birth_year }} ({{ \Morilog\Jalali\Jalalian::now()->getYear() - $employee->birth_year }} ساله)</td>
                                         <td>{{ $employee->emp_number }}</td>
                                     </tr>
                                     </tbody>
-                                </table>
-                            </div>
-                            <!--/==/ End of Personal Information -->
 
-                            <!-- General Information -->
-                            <div class="main-content-label tx-13 mg-b-20 bd-b tx-bold pb-2">
-                                <span class="badge badge-primary badge-pill">2</span>
-                                @lang('pages.employees.generalInfo')
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table row table-borderless">
-                                    <tbody class="col-lg-12 col-xl-6 p-0">
-                                    <!-- Appointment Number -->
-                                    <tr>
-                                        <th><strong>@lang('form.appointmentNumber'): </strong></th>
-                                        <td>{{ $employee->appointment_number }}</td>
-                                    </tr>
-
-                                    <!-- Appointment Date -->
-                                    <tr>
-                                        <th><strong>@lang('form.appointmentDate'): </strong></th>
-                                        <td>{{ $employee->appointment_date }}</td>
-                                    </tr>
-
-                                    <!-- Email Address -->
+                                    <!-- Second Row -->
+                                    <tbody>
                                     <tr>
                                         <th><strong>@lang('form.email'): </strong></th>
+                                        <th><strong>@lang('form.phone'): </strong></th>
+                                        <th><strong>@lang('form.appointmentNumber'): </strong></th>
+                                        <th><strong>@lang('form.appointmentDate'): </strong></th>
+                                        <th><strong>@lang('form.lastDuty'): </strong></th>
+                                        <th><strong>@lang('pages.hostel.hostel')/@lang('global.home'): </strong></th>
+                                    </tr>
+                                    <tr>
                                         <td>
                                             <a href="mailto:{{ $employee->email }}"
                                                class="ctd">{{ $employee->email }}</a>
                                         </td>
-                                    </tr>
-
-                                    <!-- Education -->
-                                    <tr>
-                                        <th><strong>@lang('form.education'): </strong></th>
-                                        <td>{{ $employee->education }}</td>
-                                    </tr>
-
-                                    <!-- PRR/NPR -->
-                                    <tr>
-                                        <th><strong>PRR/NPR: </strong></th>
-                                        <td>{{ $employee->prr_npr }}</td>
-                                    </tr>
-
-                                    <!-- NPR Date -->
-                                    <tr>
-                                        <th><strong>NPR/Date: </strong></th>
-                                        <td>{{ $employee->npr_date }}</td>
-                                    </tr>
-
-                                    <!-- Introducer -->
-                                    <tr>
-                                        <th><strong>@lang('form.introducer'): </strong></th>
-                                        <td>{{ $employee->introducer }}</td>
-                                    </tr>
-                                    </tbody>
-
-                                    <tbody class="col-lg-12 col-xl-6 p-0">
-                                    <!-- Status -->
-                                    <tr>
-                                        <th><strong>@lang('form.status'): </strong></th>
-                                        <td>
-                                            <span class="acInText">
-                                                <span id="acInText" >
-                                                    {{ $employee->status == 1 ? 'کارمند برحال این ریاست' : 'تبدیل شده به اداره/ارگان دیگر' }}
-                                                </span>
-                                            </span>
-                                        </td>
-                                    </tr>
-
-                                    <!-- Phone Number -->
-                                    <tr>
-                                        <th><strong>@lang('form.phone'): </strong></th>
                                         <td>
                                             <a href="callto:{{ $employee->phone }}"
                                                class="ctd">{{ $employee->phone }}</a>
@@ -288,65 +218,9 @@
                                                      class="ctd">{{ $employee->phone2 }}</a>
                                             @endif
                                         </td>
-                                    </tr>
-
-                                    <!-- Position -->
-                                    <tr>
-                                        <th><strong>@lang('form.position'): </strong>
-                                        </th>
-                                        <td>
-                                            @if($employee->position)
-                                                {{ $employee->position->position_number }} -
-                                                <a href="{{ route('admin.positions.show', $employee->position->id) }}">
-                                                    {{ $employee->position->title }}
-                                                </a> ({{ $employee->position_code }})
-
-                                                @if($employee->on_duty == 0)
-                                                    [<a class="modal-effect text-danger"
-                                                        data-effect="effect-sign" data-toggle="modal"
-                                                        href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>]
-
-                                                    @include('admin.employees.inc.duty_position')
-                                                @else
-                                                    [@lang('pages.employees.onDuty') - {{ $employee->duty_position }}]
-                                                    <a class="modal-effect text-danger"
-                                                       data-effect="effect-sign" data-toggle="modal"
-                                                       href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
-
-                                                    @include('admin.employees.inc.reset_position')
-                                                @endif
-                                                <br>
-                                                <a class="modal-effect text-danger mt-2"
-                                                   data-effect="effect-sign" data-toggle="modal"
-                                                   href="#change_position_ocustom{{ $employee->id }}" style="text-decoration: underline;">تغییر اصل بست؟</a>
-                                                @include('admin.employees.inc.change_position_ocustom')
-                                            @else
-                                                تبدیل شده به اداره/ارگان دیگر
-                                            @endif
-                                        </td>
-                                    </tr>
-
-                                    <!-- Last Duty -->
-                                    <tr>
-                                        <th><strong>@lang('form.lastDuty'): </strong></th>
+                                        <td>{{ $employee->appointment_number }}</td>
+                                        <td>{{ $employee->appointment_date }}</td>
                                         <td>{{ $employee->last_duty }}</td>
-                                    </tr>
-
-                                    <!-- Main Province -->
-                                    <tr>
-                                        <th><strong>@lang('form.mainAddress'): </strong></th>
-                                        <td>{{ $employee->main_province }}, {{ $employee->main_district }}</td>
-                                    </tr>
-
-                                    <!-- Current Address -->
-                                    <tr>
-                                        <th><strong>@lang('form.curAddress'): </strong></th>
-                                        <td>{{ $employee->current_province }}, {{ $employee->current_district }}</td>
-                                    </tr>
-
-                                    <!-- Hostel -->
-                                    <tr>
-                                        <th><strong>@lang('pages.hostel.hostel')/@lang('global.home'): </strong></th>
                                         <td>
                                             @if($employee->hostel)
                                                 @lang('pages.hostel.hostel') -
@@ -360,41 +234,189 @@
                                         </td>
                                     </tr>
                                     </tbody>
+
+                                    <!-- Third Row -->
+                                    <tbody class="p-0">
+                                    <!-- Details -->
+                                    <tr>
+                                        <td colspan="6" class="font-weight-bold">
+                                            <span class="badge badge-primary badge-pill">2</span>
+                                            @lang('pages.employees.generalInfo')
+                                        </td>
+                                    </tr>
+
+                                    <!-- Education, Last Name & Father Name -->
+                                    <tr>
+                                        <th><strong>@lang('form.education') :</strong></th>
+                                        <th><strong>PRR/NPR :</strong></th>
+                                        <th><strong>PRR Date :</strong></th>
+                                        <th><strong>@lang('form.mainAddress') :</strong></th>
+                                        <th><strong>@lang('form.curAddress') :</strong></th>
+                                        <th><strong>@lang('form.introducer') :</strong></th>
+                                    </tr>
+
+                                    <!-- Gender, Birth Year & Employee Number -->
+                                    <tr>
+                                        <td>{{ $employee->education }}</td>
+                                        <td>{{ $employee->prr_npr }}</td>
+                                        <td>{{ $employee->prr_date }}</td>
+                                        <td>{{ $employee->main_province }}, {{ $employee->main_district }}</td>
+                                        <td>{{ $employee->current_province }}, {{ $employee->current_district }}</td>
+                                        <td>{{ $employee->introducer }}</td>
+                                    </tr>
+                                    </tbody>
+
+                                    <!-- Fourth Row -->
+                                    <tbody>
+                                    <!-- Details -->
+                                    <tr>
+                                        <td colspan="6" class="font-weight-bold">
+                                            <span class="badge badge-primary badge-pill">3</span>
+                                            @lang('pages.employees.otherInfo')
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3"><strong>@lang('form.status'): </strong></th>
+                                        <th colspan="3"><strong>@lang('global.extraInfo'): </strong></th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <span class="acInText">
+                                                <span id="acInText" >
+                                                    {{ $employee->status == 1 ? 'کارمند برحال این ریاست' : 'تبدیل شده به اداره/ارگان دیگر' }}
+                                                </span>
+                                            </span>
+                                        </td>
+                                        <td colspan="3">{{ $employee->info }}</td>
+                                    </tr>
+                                    </tbody>
                                 </table>
                             </div>
-                            <!--/==/ End of Personal Information Table -->
+                            <!--/==/ End of Personal Information -->
 
-                            <div class="main-content-label tx-13 mg-b-20 bd-b tx-bold pb-2">
-                                <span class="badge badge-primary badge-pill">3</span>
-                                @lang('pages.employees.otherInfo')
-                            </div>
+                            <!-- Position and Background -->
+                            <div class="row border m-2">
+                                <div class="col-md-6 border-left">
+                                    <h6 class="font-weight-bold">@lang('form.background')</h6>
+                                    <div>
+                                        شروع وظیفه از تاریخ {{ $employee->start_job }} <br> {!! $employee->background ?? '--' !!}
 
-                            <!-- Other Information -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <!-- Background -->
-                                    <p><strong>@lang('form.background'): </strong>
-                                        <br>شروع وظیفه از تاریخ {{ $employee->start_job }} <br> {!! $employee->background ?? '--' !!}
+                                    @if($employee->position)
+                                        {{--                                            <a class="modal-effect text-primary"--}}
+                                        {{--                                               data-effect="effect-sign" data-toggle="modal"--}}
+                                        {{--                                               href="#add_background{{ $employee->id }}"><span class="underline">@lang('global.add')</span></a>--}}
 
-                                        @if($employee->position)
-                                            <a class="modal-effect text-primary"
-                                               data-effect="effect-sign" data-toggle="modal"
-                                               href="#add_background{{ $employee->id }}"><span class="underline">@lang('global.add')</span></a>
+                                        <a aria-controls="collapseAddBackground" aria-expanded="false" class="text-danger" data-toggle="collapse" href="#collapseAddBackground">@lang('global.add')</a>
 
-                                            @include('admin.employees.inc.add_background')
+                                        <div class="collapse mg-t-5" id="collapseAddBackground">
+                                            <div class="card card-body">
+                                                <!-- Header -->
+                                                <div class="">
+                                                    <h6 class="">@lang('pages.employees.addBackground') <i class="fe fe-plus-circle"></i></h6>
+                                                </div>
+
+                                                <!-- Form -->
+                                                <form method="post" action="{{ route('admin.employees.add_background', $employee->id) }}" class="background_form">
+                                                    @csrf
+                                                    <div class="">
+                                                        <!-- From Date -->
+                                                        <div class="form-group @error('from_date') has-danger @enderror">
+                                                            <p class="mb-2">1) @lang('form.fromDate'): <span class="tx-danger">*</span></p>
+                                                            <input type="text" id="from_date" class="form-control @error('from_date') form-control-danger @enderror" name="from_date" value="{{ old('from_date') }}" required>
+
+                                                            @error('from_date')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+
+                                                        <!-- To Date -->
+                                                        <div class="form-group @error('to_date') has-danger @enderror" id="to_date_div">
+                                                            <p class="mb-2">2) @lang('form.toDate'): <span class="tx-danger">*</span></p>
+                                                            <input type="text" id="to_date" class="form-control @error('to_date') form-control-danger @enderror" name="to_date" value="{{ old('to_date') }}" required>
+
+                                                            @error('to_date')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+
+                                                        <!-- Document Number -->
+                                                        <div class="form-group @error('doc_number') has-danger @enderror">
+                                                            <p class="mb-2">3) @lang('pages.employees.docNumber'): <span class="tx-danger">*</span></p>
+                                                            <input type="text" id="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" name="doc_number" value="{{ old('doc_number') }}" required>
+
+                                                            @error('doc_number')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+
+                                                        <!-- Document Date -->
+                                                        <div class="form-group @error('doc_date') has-danger @enderror">
+                                                            <p class="mb-2">4) @lang('pages.employees.docDate'): <span class="tx-danger">*</span></p>
+                                                            <input type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
+
+                                                            @error('doc_date')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+
+                                                        <!-- Position -->
+                                                        <div class="form-group @error('bg_position') has-danger @enderror">
+                                                            <p class="mb-2">5) @lang('form.position'): <span class="tx-danger">*</span></p>
+                                                            <input type="text" id="bg_position" class="form-control @error('bg_position') form-control-danger @enderror" name="bg_position" value="{{ old('bg_position') }}" required>
+
+                                                            @error('bg_position')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="">
+                                                        <button class="btn ripple btn-primary" type="submit">@lang('global.save')</button>
+                                                    </div>
+                                                </form>
+                                                <!--/==/ End of Form -->
+                                            </div>
+                                        </div>
+                                        {{--                                            @include('admin.employees.inc.add_background')--}}
                                         @endif
-                                    </p>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <!-- Extra Information -->
-                                    <p><strong>@lang('global.extraInfo'): </strong>
-                                        <br> {{ $employee->info ?? '--' }}
-                                    </p>
+                                    <h6 class="font-weight-bold">@lang('form.background')</h6>
+                                    <div>
+                                        @if($employee->position)
+                                            {{ $employee->position->position_number }} -
+                                            <a href="{{ route('admin.positions.show', $employee->position->id) }}">
+                                                {{ $employee->position->title }}
+                                            </a> ({{ $employee->position_code }})
+
+                                            @if($employee->on_duty == 0)
+                                                [<a class="modal-effect text-danger"
+                                                    data-effect="effect-sign" data-toggle="modal"
+                                                    href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>]
+
+                                                @include('admin.employees.inc.duty_position')
+                                            @else
+                                                [@lang('pages.employees.onDuty') - {{ $employee->duty_position }}]
+                                                <a class="modal-effect text-danger"
+                                                   data-effect="effect-sign" data-toggle="modal"
+                                                   href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
+
+                                                @include('admin.employees.inc.reset_position')
+                                            @endif
+                                            <hr>
+                                            <a class="modal-effect text-danger mt-2"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#change_position_ocustom{{ $employee->id }}" style="text-decoration: underline;">تغییر اصل بست؟</a>
+                                            @include('admin.employees.inc.change_position_ocustom')
+                                        @else
+                                            تبدیل شده به اداره/ارگان دیگر
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- National ID Card & Custom Card -->
-                            <div class="row">
+                            <div class="row border-top">
                                 <div class="col-md-6">
                                     <!-- National ID Card -->
                                     <p>

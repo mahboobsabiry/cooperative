@@ -336,7 +336,7 @@ class EmployeeController extends Controller
             'start_duty'        => $request->start_duty,
             'duty_doc_number'   => $request->duty_doc_number,
             'duty_position'     => $request->duty_position,
-            'background'        => $employee->background . ' از تاریخ ' . $request->start_duty . ' نظر به مکتوب نمبر ' . $request->duty_doc_number . ' در بست ' . $request->duty_position .  " خدمتی ایفای وظیفه نمود.<br>"
+            'background'        => $employee->background . ' از تاریخ ' . $request->start_duty . ' نظر به مکتوب نمبر ' . $request->duty_doc_number . ' در بست ' . $request->duty_position .  " طور خدمتی ایفای وظیفه نمود.<br>"
         ]);
 
         // Redirect back with success message

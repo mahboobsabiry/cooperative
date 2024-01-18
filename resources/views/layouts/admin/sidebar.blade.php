@@ -82,7 +82,7 @@
                     request()->is('admin/employees/*') ||
                     request()->is('admin/main-employees') ||
                     request()->is('admin/on-duty-employees') ||
-                    request()->is('admin/change-position-employees') ? 'active show' : '' }}">
+                    request()->is('admin/employee/change-position-employees') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fa fa-user-tie"></i>
@@ -97,7 +97,7 @@
                             <a class="nav-sub-link" href="{{ route('admin.employees.index') }}">
                                 {<span class="small text-sm-center tx-danger">M</span>}
                                 همه کارمندان
-                                ({{ count(\App\Models\Employee::all()) }})
+                                ({{ count(\App\Models\Employee::all()->where('status', 1)) }})
                             </a>
                         </li>
 
@@ -118,7 +118,7 @@
                         </li>
 
                         <!-- Change Position Employees -->
-                        <li class="nav-sub-item {{ request()->is('admin/change-position-employees') ? 'active' : '' }}">
+                        <li class="nav-sub-item {{ request()->is('admin/employee/change-position-employees') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.employees.change_position_employees') }}">
                                 تبدیل شده
                                 ({{ \App\Models\Employee::all()->where('status', 0)->count() }})
