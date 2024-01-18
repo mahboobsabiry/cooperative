@@ -95,6 +95,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::post('employee/change-position-ocustom/{id}', [EmpController::class, 'change_position_ocustom'])->name('employees.change_position_ocustom');
     // Change Position Employees
     Route::get('employee/change-position-employees', [EmpController::class, 'change_position_employees'])->name('employees.change_position_employees');
+    // Employee Change Position In Return
+    Route::post('employee/change-position-in-return/{id}', [EmpController::class, 'in_return'])->name('employees.in_return');
 
     // Agents & Companies
     Route::resource('agents', AgentController::class);

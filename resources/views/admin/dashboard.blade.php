@@ -23,7 +23,7 @@
         </div>
         <!-- End Page Header -->
 
-        <!-- Cards -->
+        <!-- First Cards Row -->
         <div class="row row-sm">
             <!-- Users Card -->
             @can('user_mgmt')
@@ -136,7 +136,7 @@
                             <div class="d-flex">
                                 <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.companies')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fa fa-user-tie fs-20 text-danger"></i>
+                                    <i class="fas fa-shopping-bag fs-20 text-danger"></i>
                                 </div>
                             </div>
                             <div>
@@ -163,7 +163,149 @@
             @endcan
             <!--/==/ End of Companies -->
         </div>
-        <!--End  Row -->
+        <!--/==/ End of First Cards Row -->
+
+        <!-- Second Cards Row -->
+        <div class="row row-sm">
+            <!-- Positions Card -->
+            @can('organization_mgmt')
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse font-weight-bold">بست های فعال و غیرفعال</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fas fa-users fs-20 text-info"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\Position::all()) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar progress-bar-xs wd-100p bg-info" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="font-weight-bold">بست های فعال</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ \App\Models\Position::all()->where('status', 1)->count() > \App\Models\Position::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-info"></i>{{ \App\Models\Position::all()->where('status', 1)->count() }}
+                                </span>
+                                <span class="font-weight-bold">بست های غیرفعال</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ \App\Models\Position::all()->where('status', 0)->count() > \App\Models\Position::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-info"></i>{{ \App\Models\Position::all()->where('status', 0)->count() }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <!--/==/ End of Positions Card -->
+
+            <!-- Employees Change Position/Main Position -->
+            @can('employee_mgmt')
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse font-weight-bold">کارمندان براساس برحالی و تبدیلی</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fe fe-activity fs-20 text-secondary"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\Employee::all()) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar progress-bar-xs wd-100p bg-secondary" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="font-weight-bold">کارمندان برحال</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('status', 1)->count() > \App\Models\Employee::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    {{ \App\Models\Employee::all()->where('status', 1)->count() }}
+                                </span>
+                                <span class="font-weight-bold">کارمندان تبدیل شده</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('status', 0)->count() > \App\Models\Employee::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    {{ \App\Models\Employee::all()->where('status', 0)->count() }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <!--/==/ End of Employees Change Position/Main Position -->
+
+            <!-- Employees Have Home/Hostel -->
+            @can('employee_mgmt')
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse font-weight-bold">کارمندان بر اساس بودوباش</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fas fa-building fs-20 text-secondary"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\Employee::all()->where('status', 1)) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar progress-bar-xs wd-100p bg-secondary" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="font-weight-bold">کارمندان در خانه</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('status', 1)->whereNull('hostel_id')->count() > \App\Models\Employee::all()->where('status', 1)->whereNotNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    {{ \App\Models\Employee::all()->where('status', 1)->whereNull('hostel_id')->count() }}
+                                </span>
+                                <span class="font-weight-bold">کارمندان در لیلیه</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ \App\Models\Employee::all()->where('status', 1)->whereNotNull('hostel_id')->count() > \App\Models\Employee::all()->where('status', 1)->whereNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    {{ \App\Models\Employee::all()->where('status', 1)->whereNotNull('hostel_id')->count() }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <!--/==/ End of Employees Have Home/Hostel -->
+
+            <!-- Companies Have Agents Or Not -->
+            @can('company_mgmt')
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <div class="card custom-card">
+                        <div class="card-body dash1">
+                            <div class="d-flex">
+                                <p class="mb-1 tx-inverse font-weight-bold">شرکت های دارای نماینده/بدون نماینده</p>
+                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
+                                    <i class="fa fa-shopping-bag fs-20 text-danger"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="dash-25">{{ count(\App\Models\Company::all()) }}</h3>
+                            </div>
+                            <div class="progress mb-1">
+                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar progress-bar-xs wd-100p bg-danger" role="progressbar"></div>
+                            </div>
+                            <div class="expansion-label d-flex">
+                                <span class="font-weight-bold">دارای نماینده</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ \App\Models\Company::all()->whereNotNull('agent_id')->count() > \App\Models\Company::all()->whereNull('agent_id')->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    {{ \App\Models\Company::all()->whereNotNull('agent_id')->count() }}
+                                </span>
+                                <span class="font-weight-bold">بدون نماینده</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-caret-{{ \App\Models\Company::all()->whereNull('agent_id')->count() > \App\Models\Company::all()->whereNotNull('agent_id')->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    {{ \App\Models\Company::all()->whereNull('agent_id')->count() }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <!--/==/ End of Companies Have Agents Or Not -->
+        </div>
+        <!--/==/ End of Second Cards Row -->
 
         <!-- Row -->
         @can('site_admin')

@@ -22,7 +22,9 @@ class EmployeeController extends Controller
     public function __construct()
     {
         $this->middleware('permission:employee_mgmt', [
-            'only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'updateEmployeeStatus']
+            'only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy',
+                'updateEmployeeStatus', 'main_employees', 'on_duty_employees',
+                'add_background', 'duty_position', 'reset_position']
         ]);
     }
 
@@ -123,7 +125,8 @@ class EmployeeController extends Controller
     public function show(Employee $employee)
     {
         $admin = Auth::user()->roles->first()->name == 'Admin';
-        return view('admin.employees.show', compact('employee', 'admin'));
+        $active_employees = Employee::where('status', 1)->whereNotNull('position_id')->where('position_id', '!=', $employee->position_id)->get();
+        return view('admin.employees.show', compact('employee', 'admin', 'active_employees'));
     }
 
     // Edit Info

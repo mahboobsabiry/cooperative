@@ -86,7 +86,7 @@
         @yield('extra_css')
     </head>
 
-    <body>
+    <body style="font-family: Calibri !important;">
         <!-- Start Switcher -->
         @include('layouts.admin.switcher')
         <!-- End Switcher -->

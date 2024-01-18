@@ -51,7 +51,7 @@
                         <li class="nav-sub-item {{ request()->is('admin/appointment-positions') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.positions.appointment') }}">
                                 @lang('pages.positions.appointmentPositions')
-                                    <?php $appointment = \App\Models\Position::all()->sum('num_of_pos') - \App\Models\Employee::all()->count(); ?>
+                                    <?php $appointment = \App\Models\Position::all()->sum('num_of_pos') - \App\Models\Employee::all()->where('status', 1)->count(); ?>
                                 ({{ \App\Models\Position::all()->sum('num_of_pos') - $appointment }})
                             </a>
                         </li>
@@ -60,7 +60,7 @@
                         <li class="nav-sub-item {{ request()->is('admin/empty-positions') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.positions.empty') }}">
                                 @lang('pages.positions.emptyPositions')
-                                ({{ \App\Models\Position::all()->sum('num_of_pos') - \App\Models\Employee::all()->count() }})
+                                ({{ \App\Models\Position::all()->sum('num_of_pos') - \App\Models\Employee::all()->where('status', 1)->count() }})
                             </a>
                         </li>
 

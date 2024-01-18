@@ -146,6 +146,30 @@
                     </div>
                 </div>
                 <!--/==/ End of Contact Information -->
+
+                <!-- National ID Card -->
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h6 class="font-weight-bold">
+                            @lang('form.idCard')
+                        </h6>
+
+                        <a href="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}" target="_blank">
+                            <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail"
+                                 alt="@lang('form.idCard')">
+                        </a>
+                        <hr>
+                        <h6 class="font-weight-bold">
+                            @lang('form.customCard')
+                        </h6>
+
+                        <a href="{{ $employee->card ?? asset('assets/images/id-card-default.png') }}" target="_blank">
+                            <img src="{{ $employee->card ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail"
+                                 alt="@lang('form.customCard')">
+                        </a>
+                    </div>
+                </div>
+                <!--/==/ End of Contact Information -->
             </div>
             <div class="col-lg-8 col-md-12">
                 <div class="card custom-card main-content-body-profile">
@@ -290,150 +314,90 @@
                                         <td colspan="3">{{ $employee->info }}</td>
                                     </tr>
                                     </tbody>
+
+                                    <!-- Fifth Row -->
+                                    <tbody>
+                                    <tr>
+                                        <th colspan="3"><strong>@lang('form.background'): </strong></th>
+                                        <th colspan="3"><strong>@lang('form.position'): </strong></th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <div>
+                                                شروع وظیفه از تاریخ {{ $employee->start_job }} <br> {!! $employee->background ?? '--' !!}
+
+                                                @if($employee->position)
+                                                    <a aria-controls="collapseAddBackground" aria-expanded="false" class="text-danger" data-toggle="collapse" href="#collapseAddBackground">@lang('global.add')</a>
+
+                                                    @include('admin.employees.inc.add_background')
+                                                @endif
+                                            </div>
+                                        </td>
+                                        <td colspan="3">
+                                            @if($employee->position)
+                                                {{ $employee->position->position_number }} -
+                                                <a href="{{ route('admin.positions.show', $employee->position->id) }}">
+                                                    {{ $employee->position->title }}
+                                                </a> (کد - {{ $employee->position_code }})
+
+                                                @if($employee->on_duty == 0)
+                                                    [<a class="modal-effect text-danger"
+                                                        data-effect="effect-sign" data-toggle="modal"
+                                                        href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>]
+
+                                                    @include('admin.employees.inc.duty_position')
+                                                @else
+                                                    [@lang('pages.employees.onDuty') - {{ $employee->duty_position }}]
+                                                    <a class="modal-effect text-danger"
+                                                       data-effect="effect-sign" data-toggle="modal"
+                                                       href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
+
+                                                    @include('admin.employees.inc.reset_position')
+                                                @endif
+                                                <br>
+                                                -- <a aria-controls="collapseChangePosition" aria-expanded="false" class="text-danger" data-toggle="collapse" href="#collapseChangePosition">تبدیل به اداره/ارگان دیگر؟</a>
+
+                                                @include('admin.employees.inc.change_position_ocustom')
+                                            @else
+                                                تبدیل شده به اداره/ارگان دیگر
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                    <!-- Sixth Row -->
+                                    <tbody>
+                                    <!-- Details -->
+                                    <tr>
+                                        <td colspan="6" class="font-weight-bold">
+                                            تبدیل بست در این ریاست
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3"><strong>بالمعاوضه: </strong></th>
+                                        <th colspan="3"><strong>تنزیل/ارتقا: </strong></th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <form action="{{ route('admin.employees.in_return', $employee->id) }}" method="post">
+                                                @csrf
+                                                <div class="form-group @error('position_id') @enderror">
+                                                    <p><strong>@lang('pages.employees.employee'): </strong></p>
+                                                    <select class="form-control select2" name="position_id">
+                                                        @foreach($active_employees as $emp)
+                                                            <option value="{{ $emp->position_id }}">{{ $emp->name }} {{ $emp->last_name ?? '' }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <button class="btn btn-primary btn-sm" type="submit">@lang('global.save')</button>
+                                            </form>
+                                        </td>
+                                        <td colspan="3"></td>
+                                    </tr>
+                                    </tbody>
                                 </table>
                             </div>
                             <!--/==/ End of Personal Information -->
-
-                            <!-- Position and Background -->
-                            <div class="row border m-2">
-                                <div class="col-md-6 border-left">
-                                    <h6 class="font-weight-bold">@lang('form.background')</h6>
-                                    <div>
-                                        شروع وظیفه از تاریخ {{ $employee->start_job }} <br> {!! $employee->background ?? '--' !!}
-
-                                    @if($employee->position)
-                                        {{--                                            <a class="modal-effect text-primary"--}}
-                                        {{--                                               data-effect="effect-sign" data-toggle="modal"--}}
-                                        {{--                                               href="#add_background{{ $employee->id }}"><span class="underline">@lang('global.add')</span></a>--}}
-
-                                        <a aria-controls="collapseAddBackground" aria-expanded="false" class="text-danger" data-toggle="collapse" href="#collapseAddBackground">@lang('global.add')</a>
-
-                                        <div class="collapse mg-t-5" id="collapseAddBackground">
-                                            <div class="card card-body">
-                                                <!-- Header -->
-                                                <div class="">
-                                                    <h6 class="">@lang('pages.employees.addBackground') <i class="fe fe-plus-circle"></i></h6>
-                                                </div>
-
-                                                <!-- Form -->
-                                                <form method="post" action="{{ route('admin.employees.add_background', $employee->id) }}" class="background_form">
-                                                    @csrf
-                                                    <div class="">
-                                                        <!-- From Date -->
-                                                        <div class="form-group @error('from_date') has-danger @enderror">
-                                                            <p class="mb-2">1) @lang('form.fromDate'): <span class="tx-danger">*</span></p>
-                                                            <input type="text" id="from_date" class="form-control @error('from_date') form-control-danger @enderror" name="from_date" value="{{ old('from_date') }}" required>
-
-                                                            @error('from_date')
-                                                            <div class="invalid-feedback">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-
-                                                        <!-- To Date -->
-                                                        <div class="form-group @error('to_date') has-danger @enderror" id="to_date_div">
-                                                            <p class="mb-2">2) @lang('form.toDate'): <span class="tx-danger">*</span></p>
-                                                            <input type="text" id="to_date" class="form-control @error('to_date') form-control-danger @enderror" name="to_date" value="{{ old('to_date') }}" required>
-
-                                                            @error('to_date')
-                                                            <div class="invalid-feedback">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-
-                                                        <!-- Document Number -->
-                                                        <div class="form-group @error('doc_number') has-danger @enderror">
-                                                            <p class="mb-2">3) @lang('pages.employees.docNumber'): <span class="tx-danger">*</span></p>
-                                                            <input type="text" id="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" name="doc_number" value="{{ old('doc_number') }}" required>
-
-                                                            @error('doc_number')
-                                                            <div class="invalid-feedback">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-
-                                                        <!-- Document Date -->
-                                                        <div class="form-group @error('doc_date') has-danger @enderror">
-                                                            <p class="mb-2">4) @lang('pages.employees.docDate'): <span class="tx-danger">*</span></p>
-                                                            <input type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
-
-                                                            @error('doc_date')
-                                                            <div class="invalid-feedback">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-
-                                                        <!-- Position -->
-                                                        <div class="form-group @error('bg_position') has-danger @enderror">
-                                                            <p class="mb-2">5) @lang('form.position'): <span class="tx-danger">*</span></p>
-                                                            <input type="text" id="bg_position" class="form-control @error('bg_position') form-control-danger @enderror" name="bg_position" value="{{ old('bg_position') }}" required>
-
-                                                            @error('bg_position')
-                                                            <div class="invalid-feedback">{{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="">
-                                                        <button class="btn ripple btn-primary" type="submit">@lang('global.save')</button>
-                                                    </div>
-                                                </form>
-                                                <!--/==/ End of Form -->
-                                            </div>
-                                        </div>
-                                        {{--                                            @include('admin.employees.inc.add_background')--}}
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <h6 class="font-weight-bold">@lang('form.background')</h6>
-                                    <div>
-                                        @if($employee->position)
-                                            {{ $employee->position->position_number }} -
-                                            <a href="{{ route('admin.positions.show', $employee->position->id) }}">
-                                                {{ $employee->position->title }}
-                                            </a> ({{ $employee->position_code }})
-
-                                            @if($employee->on_duty == 0)
-                                                [<a class="modal-effect text-danger"
-                                                    data-effect="effect-sign" data-toggle="modal"
-                                                    href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>]
-
-                                                @include('admin.employees.inc.duty_position')
-                                            @else
-                                                [@lang('pages.employees.onDuty') - {{ $employee->duty_position }}]
-                                                <a class="modal-effect text-danger"
-                                                   data-effect="effect-sign" data-toggle="modal"
-                                                   href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
-
-                                                @include('admin.employees.inc.reset_position')
-                                            @endif
-                                            <hr>
-                                            <a class="modal-effect text-danger mt-2"
-                                               data-effect="effect-sign" data-toggle="modal"
-                                               href="#change_position_ocustom{{ $employee->id }}" style="text-decoration: underline;">تغییر اصل بست؟</a>
-                                            @include('admin.employees.inc.change_position_ocustom')
-                                        @else
-                                            تبدیل شده به اداره/ارگان دیگر
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- National ID Card & Custom Card -->
-                            <div class="row border-top">
-                                <div class="col-md-6">
-                                    <!-- National ID Card -->
-                                    <p>
-                                        <strong>@lang('form.idCard'):</strong> <br>
-                                        <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail"
-                                             alt="@lang('form.idCard')">
-                                    </p>
-                                </div>
-                                <div class="col-md-6">
-                                    <!-- Custom Card -->
-                                    <p>
-                                        <strong>@lang('form.customCard'):</strong> <br>
-                                        <img src="{{ $employee->card ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail"
-                                             alt="@lang('form.customCard')">
-                                    </p>
-                                </div>
-                            </div>
                         </div>
                         <!--/==/ End of User Information Details -->
                     </div>
