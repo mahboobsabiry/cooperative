@@ -32,20 +32,22 @@
 
             <!-- Btn List -->
             <div class="btn btn-list">
-                @if($employee->status == 1)
+                @if($employee->status != 0 || $employee->status != 2)
                     <div class="d-flex">
-                        <div class="mr-2">
-                            <!-- Delete -->
-                            <a class="modal-effect btn btn-sm ripple btn-danger"
-                               data-effect="effect-sign" data-toggle="modal"
-                               href="#delete_record{{ $employee->id }}"
-                               title="@lang('pages.employees.deleteEmployee')">
-                                <i class="fe fe-trash"></i>
-                                @lang('global.delete')
-                            </a>
+                        @can('site_admin')
+                            <div class="mr-2">
+                                <!-- Delete -->
+                                <a class="modal-effect btn btn-sm ripple btn-danger"
+                                   data-effect="effect-sign" data-toggle="modal"
+                                   href="#delete_record{{ $employee->id }}"
+                                   title="@lang('pages.employees.deleteEmployee')">
+                                    <i class="fe fe-trash"></i>
+                                    @lang('global.delete')
+                                </a>
 
-                            @include('admin.employees.delete')
-                        </div>
+                                @include('admin.employees.delete')
+                            </div>
+                        @endcan
 
                         <div class="mr-2">
                             <!-- Edit -->
@@ -308,9 +310,23 @@
                                     <tr>
                                         <td colspan="3">
                                             <span class="acInText">
-                                                <span id="acInText" >
-                                                    {{ $employee->status == 1 ? 'کارمند برحال این ریاست' : 'تبدیل شده به اداره/ارگان دیگر' }}
-                                                </span>
+                                                @if($employee->status == 0)
+                                                    <span class="text-secondary italic font-italic">
+                                                        در اداره/ارگان دیگر تبدیل شده است
+                                                    </span>
+                                                @elseif($employee->status == 1)
+                                                    <span class="text-success italic font-italic">
+                                                        کارمند برحال این ریاست میباشد
+                                                    </span>
+                                                @elseif($employee->status == 2)
+                                                    <span class="text-danger italic font-italic">
+                                                        منفک گردیده است
+                                                    </span>
+                                                @elseif($employee->status == 3)
+                                                    <span class="text-warning italic font-italic">
+                                                        در حالت تعلیق میباشد
+                                                    </span>
+                                                @endif
                                             </span>
                                         </td>
                                         <td colspan="3">{{ $employee->info }}</td>
@@ -342,26 +358,37 @@
                                                     {{ $employee->position->title }}
                                                 </a> (کد - {{ $employee->position_code }})
 
+                                                <!-- Change to main/duty position -->
+                                                <br>
                                                 @if($employee->on_duty == 0)
-                                                    [<a class="modal-effect text-danger"
+                                                    -- <a class="modal-effect text-danger"
                                                         data-effect="effect-sign" data-toggle="modal"
-                                                        href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>]
+                                                        href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>
 
                                                     @include('admin.employees.inc.duty_position')
                                                 @else
-                                                    [@lang('pages.employees.onDuty') - {{ $employee->duty_position }}]
+                                                    -- @lang('pages.employees.onDuty') - {{ $employee->duty_position }}
                                                     <a class="modal-effect text-danger"
                                                        data-effect="effect-sign" data-toggle="modal"
                                                        href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
 
                                                     @include('admin.employees.inc.reset_position')
                                                 @endif
+
+                                                <!-- Fire Employee -->
+                                                <br>
+                                                -- <a class="modal-effect text-danger"
+                                                      data-effect="effect-sign" data-toggle="modal"
+                                                      href="#fire_employee{{ $employee->id }}">منفک شود؟</a>
+
+                                                @include('admin.employees.inc.fire_employee')
+
+                                                <!-- Change position to other organ -->
                                                 <br>
                                                 -- <a aria-controls="collapseChangePosition" aria-expanded="false" class="text-danger" data-toggle="collapse" href="#collapseChangePosition">تبدیل به اداره/ارگان دیگر؟</a>
 
                                                 @include('admin.employees.inc.change_position_ocustom')
                                             @else
-                                                تبدیل شده به اداره/ارگان دیگر
                                             @endif
                                         </td>
                                     </tr>

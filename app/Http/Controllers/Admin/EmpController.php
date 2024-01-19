@@ -123,16 +123,16 @@ class EmpController extends Controller
 
         $request->validate([
             'position_id'   => 'required',
-            'position_code' => 'required|unique:employees,position_code,' . $employee->id,
+            'position_code' => 'required',
             'code'
         ]);
 
         if ($position->num_of_pos == 1) {
             if ($position->employees->count() == 1) {
-                $pos_emp = $position->employees->first();
-                $pos_emp->update([
+                $emp_posc->update([
                     'position_id'   => null,
-                    'position_code' => null
+                    'position_code' => null,
+                    'status'        => 3
                 ]);
                 if ($employee->on_duty == 0) {
                     $employee->update([
@@ -151,35 +151,35 @@ class EmpController extends Controller
                         'duty_position'     => null
                     ]);
                 }
+
+                $message = 'موفقانه بست تبدیل گردید! لطفا به صفحه کارمند ' . "<a href=" . ' " ' . route("admin.employees.show", $emp_posc
+->id) . ' ">' . $emp_posc->name . "</a>" . ' رفته و سرنوشت آن را تعیین نمایید.';
             } else {
                 $employee->update([
                     'position_id'   => $position->id,
                     'position_code' => $request->position_code,
                     'background'    => $employee->background . ' از تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $request->doc_number . ' منحیث ' . $position->title . " ایفای وظیفه نمود.<br>"
                 ]);
+                $message = 'موفقانه تبدیل گردید';
             }
         } else {
-            if ($position->employees->count() < $position->num_of_pos) {
-                $employee->update([
-                    'position_id'   => $position->id,
-                    'position_code' => $request->position_code,
-                    'background'    => $employee->background . ' از تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $request->doc_number . ' منحیث ' . $position->title . " ایفای وظیفه نمود.<br>"
-                ]);
-            }elseif ($position->employees->count() == $position->num_of_pos) {
-                $emp_posc->update([
-                    'position_id'   => null,
-                    'position_code' => null
-                ]);
-                $employee->update([
-                    'position_id'   => $position->id,
-                    'position_code' => $request->position_code,
-                    'background'    => $employee->background . ' از تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $request->doc_number . ' منحیث ' . $position->title . " ایفای وظیفه نمود.<br>"
-                ]);
-            }
+            $emp_posc->update([
+                'position_id'   => null,
+                'position_code' => null,
+                'status'        => 3
+            ]);
+            $employee->update([
+                'position_id'   => $position->id,
+                'position_code' => $request->position_code,
+                'background'    => $employee->background . ' از تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $request->doc_number . ' منحیث ' . $position->title . " ایفای وظیفه نمود.<br>"
+            ]);
+
+            $message = 'موفقانه بست تبدیل گردید! لطفا به صفحه کارمند ' . "<a href=" . ' " ' . route("admin.employees.show", $emp_posc
+                    ->id) . ' ">' . $emp_posc->name . "</a>" . ' رفته و سرنوشت آن را تعیین نمایید.';
         }
 
         return redirect()->back()->with([
-            'message'   => 'تبدیلی انجام شد!',
+            'message'   => $message,
             'alertType' => 'success'
         ]);
     }
@@ -187,6 +187,34 @@ class EmpController extends Controller
     // Fired Employees
     public function fired_employees()
     {
-        return 'OK';
+        $fired_employees = Employee::where('status', 2)->get();
+        return view('admin.employees.fired_employees', compact('fired_employees'));
+    }
+
+    // Fire Employee
+    public function fire_employee(Request $request, $id)
+    {
+        $request->validate([
+            'info'  => 'required'
+        ]);
+        $fire_employee = Employee::find($id);
+        $fire_employee->update([
+            'position_id'   => null,
+            'hostel_id'     => null,
+            'position_code' => null,
+            'status'        => 2,
+            'info'          => $request->info
+        ]);
+        return redirect()->back()->with([
+            'message'   => 'کارمند منفک گردید!',
+            'alertType' => 'danger'
+        ]);
+    }
+
+    // Suspended Employees
+    public function suspended_employees()
+    {
+        $suspended_employees = Employee::where('status', 3)->get();
+        return view('admin.employees.suspended_employees', compact('suspended_employees'));
     }
 }

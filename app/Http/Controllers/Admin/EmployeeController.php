@@ -47,7 +47,7 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request)
     {
         $position = Position::where('id', $request->position_id)->first();
-        if ($position->employees && $position->employees()->count() >= $position->num_of_pos) {
+        if (!empty($position->employees) && $position->employees()->count() >= $position->num_of_pos) {
             return back()->with([
                 'alertType' => 'danger',
                 'message'   => 'بست مورد نظر تکمیل میباشد.'
@@ -132,7 +132,7 @@ class EmployeeController extends Controller
     // Edit Info
     public function edit(Employee $employee)
     {
-        if ($employee->status == 1) {
+        if ($employee->status == 1 || $employee->status == 3) {
             $positions = Position::tree();
             $hostels = Hostel::all();
             return view('admin.employees.edit', compact('employee', 'positions', 'hostels'));
@@ -152,7 +152,7 @@ class EmployeeController extends Controller
             'tazkira'       => 'nullable|image|mimes:jpg,png,jfif',
             'start_job'     => 'required',
             'name'          => 'required|min:3|max:64',
-            'position_code' => 'required|min:3|max:4|unique:employees,position_code,' . $employee->id,
+            'position_code' => 'nullable|min:3|max:4|unique:employees,position_code,' . $employee->id,
             'last_name'     => 'nullable|min:3|max:64',
             'father_name'   => 'required|min:3|max:64',
             'emp_number'    => 'nullable|unique:employees,emp_number,' . $employee->id,
@@ -175,7 +175,7 @@ class EmployeeController extends Controller
         ]);
 
         $position = Position::where('id', $request->position_id)->first();
-        if ($position->employees && $position->employees()->count() > $position->num_of_pos) {
+        if (!empty($position->employees) && $position->employees()->count() > $position->num_of_pos) {
             return back()->with([
                 'alertType' => 'danger',
                 'message'   => 'بست مورد نظر تکمیل میباشد.'
@@ -189,6 +189,8 @@ class EmployeeController extends Controller
                 'message'   => 'اتاق مورد نظر گنجایش ندارد.'
             ]);
         }
+
+        $pos_id = $employee->position_id;
 
         $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
@@ -215,6 +217,17 @@ class EmployeeController extends Controller
         $employee->current_district = $request->current_district;
         $employee->introducer       = $request->introducer;
         $employee->info             = $request->info;
+        // If the employee is suspended
+        if ($request->position_id != '' && $employee->status == 3) {
+            $status = 1;
+        } else {
+            $status = $employee->status;
+        }
+        $employee->status = $status;
+        // If the position is empty, update the background
+        if ($pos_id == null && $request->position_id != '') {
+            $employee->background = $employee->background . ' از تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $request->doc_number . ' در بست ' . $position->title . "<br> ایفای وظیفه نمود.";
+        }
         $employee->save();
 
         //  Has Photo

@@ -88,7 +88,7 @@
                                                 <a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
                                             </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
-                                            <td>{{ $employee->position->title ?? '' }} {{ $employee->position->position_number ?? '' }}</td>
+                                            <td>{{ $employee->position->title ?? '' }} - {{ $employee->position->position_number ?? '' }}</td>
                                             <td>{{ $employee->position_code ?? '' }}</td>
                                             <td class="tx-sm-12-f">
                                                 <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>

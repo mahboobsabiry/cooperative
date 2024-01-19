@@ -59,7 +59,7 @@
                         <!-- Employees -->
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
-                                @lang('admin.sidebar.employees') ({{ count(\App\Models\Employee::all()) }})
+                                @lang('admin.sidebar.employees') ({{ count($employees) }})
                             </div>
 
                             <!-- Table -->
@@ -88,7 +88,7 @@
                                                 <a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
                                             </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
-                                            <td>{{ $employee->position->title ?? '' }} {{ $employee->position->position_number ?? '' }}</td>
+                                            <td>{{ $employee->position->title ?? '' }} - {{ $employee->position->position_number ?? '' }}</td>
                                             <td>{{ $employee->position_code ?? '' }}</td>
                                             <td class="tx-sm-12-f">
                                                 <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
