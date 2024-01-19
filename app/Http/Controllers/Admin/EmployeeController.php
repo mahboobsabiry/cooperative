@@ -31,7 +31,7 @@ class EmployeeController extends Controller
     // Index
     public function index()
     {
-        $employees = Employee::where('status', 1)->orderBy('created_at', 'ASC')->get();
+        $employees = Employee::whereNotNull('position_id')->where('status', 1)->orderBy('created_at', 'ASC')->get();
 
         return view('admin.employees.index', compact('employees'));
     }
@@ -132,9 +132,16 @@ class EmployeeController extends Controller
     // Edit Info
     public function edit(Employee $employee)
     {
-        $positions = Position::tree();
-        $hostels = Hostel::all();
-        return view('admin.employees.edit', compact('employee', 'positions', 'hostels'));
+        if ($employee->status == 1) {
+            $positions = Position::tree();
+            $hostels = Hostel::all();
+            return view('admin.employees.edit', compact('employee', 'positions', 'hostels'));
+        } else {
+            return  redirect()->back()->with([
+                'message'   => 'شما اجازه ویرایش این کاربر را ندارید.',
+                'alertType' => 'danger'
+            ]);
+        }
     }
 
     public function update(Request $request, Employee $employee)
@@ -279,7 +286,7 @@ class EmployeeController extends Controller
     // Main Position Employees
     public function main_employees()
     {
-        $employees = Employee::where('status', 1)->where('on_duty', 0)->orderBy('created_at', 'desc')->get();
+        $employees = Employee::where('status', 1)->whereNotNull('position_id')->where('on_duty', 0)->orderBy('created_at', 'desc')->get();
 
         return view('admin.employees.main', compact('employees'));
     }
@@ -287,7 +294,7 @@ class EmployeeController extends Controller
     // On Duty Employees
     public function on_duty_employees()
     {
-        $employees = Employee::where('status', 1)->where('on_duty', 1)->orderBy('created_at', 'desc')->get();
+        $employees = Employee::where('status', 1)->whereNotNull('position_id')->where('on_duty', 1)->orderBy('created_at', 'desc')->get();
 
         return view('admin.employees.on_duty', compact('employees'));
     }

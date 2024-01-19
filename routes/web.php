@@ -97,6 +97,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('employee/change-position-employees', [EmpController::class, 'change_position_employees'])->name('employees.change_position_employees');
     // Employee Change Position In Return
     Route::post('employee/change-position-in-return/{id}', [EmpController::class, 'in_return'])->name('employees.in_return');
+    // Employee Discount/Update/Change Position
+    Route::post('employee/duc-position/{id}', [EmpController::class, 'duc_position'])->name('employees.duc_position');
+    // Fired Employees
+    Route::get('employee/fired-employees', [EmpController::class, 'fired_employees'])->name('employees.fired_employees');
 
     // Agents & Companies
     Route::resource('agents', AgentController::class);

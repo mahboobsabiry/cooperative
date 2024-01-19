@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
+use App\Models\Position;
 use Illuminate\Http\Request;
 use Morilog\Jalali\CalendarUtils;
 
@@ -111,5 +112,81 @@ class EmpController extends Controller
             'message'   => 'بالمعاوضه موفقانه انجام شد!',
             'alertType' => 'success'
         ]);
+    }
+
+    // Discount/Upgrade/Discount Position
+    public function duc_position(Request $request, $id)
+    {
+        $employee = Employee::find($id);
+        $position = Position::where('id', $request->position_id)->first();
+        $emp_posc = Employee::where('position_code', $request->position_code)->first();
+
+        $request->validate([
+            'position_id'   => 'required',
+            'position_code' => 'required|unique:employees,position_code,' . $employee->id,
+            'code'
+        ]);
+
+        if ($position->num_of_pos == 1) {
+            if ($position->employees->count() == 1) {
+                $pos_emp = $position->employees->first();
+                $pos_emp->update([
+                    'position_id'   => null,
+                    'position_code' => null
+                ]);
+                if ($employee->on_duty == 0) {
+                    $employee->update([
+                        'position_id'   => $position->id,
+                        'position_code' => $request->position_code,
+                        'background'    => $employee->background . ' از تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' به بست ' . $position->title . ' نظر به مکتوب نمبر ' . $request->doc_number . ' مورخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . " تغییر بست گردید.<br>"
+                    ]);
+                } else {
+                    $employee->update([
+                        'position_id'   => $position->id,
+                        'position_code' => $request->position_code,
+                        'background'    => $employee->background. ' الی تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())). ' منحیث ' . $employee->duty_position. ' طور خدمتی ایفای وظیفه نموده و از تاریخ متذکره ' . ' به بست ' . $position->title . ' نظر به مکتوب نمبر ' . $request->doc_number . ' مورخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . " تغییر بست گردید.<br>",
+                        'on_duty'   => 0,
+                        'start_duty'    => null,
+                        'duty_doc_number'   => null,
+                        'duty_position'     => null
+                    ]);
+                }
+            } else {
+                $employee->update([
+                    'position_id'   => $position->id,
+                    'position_code' => $request->position_code,
+                    'background'    => $employee->background . ' از تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $request->doc_number . ' منحیث ' . $position->title . " ایفای وظیفه نمود.<br>"
+                ]);
+            }
+        } else {
+            if ($position->employees->count() < $position->num_of_pos) {
+                $employee->update([
+                    'position_id'   => $position->id,
+                    'position_code' => $request->position_code,
+                    'background'    => $employee->background . ' از تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $request->doc_number . ' منحیث ' . $position->title . " ایفای وظیفه نمود.<br>"
+                ]);
+            }elseif ($position->employees->count() == $position->num_of_pos) {
+                $emp_posc->update([
+                    'position_id'   => null,
+                    'position_code' => null
+                ]);
+                $employee->update([
+                    'position_id'   => $position->id,
+                    'position_code' => $request->position_code,
+                    'background'    => $employee->background . ' از تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $request->doc_number . ' منحیث ' . $position->title . " ایفای وظیفه نمود.<br>"
+                ]);
+            }
+        }
+
+        return redirect()->back()->with([
+            'message'   => 'تبدیلی انجام شد!',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Fired Employees
+    public function fired_employees()
+    {
+        return 'OK';
     }
 }
