@@ -75,7 +75,7 @@
                         @include('admin.inc.alerts')
 
                         <!-- User Information Details -->
-                        <div class="p-2 bd">
+                        <div class="p-2">
                             <div class="main-content-label tx-13 mg-b-20">
                                 @lang('global.details')
                             </div>
