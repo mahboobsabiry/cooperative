@@ -192,7 +192,7 @@
                             <!-- Personal Information Table -->
                             <div class="table-responsive ">
                                 <table class="table table-bordered">
-                                    <!-- First Row -->
+                                    <!-- First Table -->
                                     <tbody class="p-0">
                                     <!-- Details -->
                                     <tr>
@@ -222,8 +222,9 @@
                                         <td>{{ $employee->emp_number }}</td>
                                     </tr>
                                     </tbody>
+                                    <!--/==/ End of First Table -->
 
-                                    <!-- Second Row -->
+                                    <!-- Second Table -->
                                     <tbody>
                                     <tr>
                                         <th><strong>@lang('form.email'): </strong></th>
@@ -262,8 +263,9 @@
                                         </td>
                                     </tr>
                                     </tbody>
+                                    <!--/==/ End of Second Table -->
 
-                                    <!-- Third Row -->
+                                    <!-- Third Table -->
                                     <tbody class="p-0">
                                     <!-- Details -->
                                     <tr>
@@ -293,8 +295,9 @@
                                         <td>{{ $employee->introducer }}</td>
                                     </tr>
                                     </tbody>
+                                    <!--/==/ End of Third Table -->
 
-                                    <!-- Fourth Row -->
+                                    <!-- Fourth Table -->
                                     <tbody>
                                     <!-- Details -->
                                     <tr>
@@ -332,8 +335,9 @@
                                         <td colspan="3">{{ $employee->info }}</td>
                                     </tr>
                                     </tbody>
+                                    <!--/==/ End of Fourth Table -->
 
-                                    <!-- Fifth Row -->
+                                    <!-- Fifth Table -->
                                     <tbody>
                                     <tr>
                                         <th colspan="3"><strong>@lang('form.background'): </strong></th>
@@ -393,8 +397,9 @@
                                         </td>
                                     </tr>
                                     </tbody>
+                                    <!--/==/ End of Fifth Table -->
 
-                                    <!-- Sixth Row -->
+                                    <!-- Sixth Table -->
                                     @if($employee->status == 1)
                                         <tbody>
                                         <!-- Details -->
@@ -464,6 +469,7 @@
                                         </tr>
                                         </tbody>
                                     @endif
+                                    <!--/==/ End of Sixth Table -->
                                 </table>
                             </div>
                             <!--/==/ End of Personal Information -->

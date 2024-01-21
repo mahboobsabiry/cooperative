@@ -82,27 +82,23 @@
 
                             <!-- Personal Information Table -->
                             <div class="table-responsive ">
-                                <table class="table row table-borderless">
-                                    <!-- Right Column -->
-                                    <tbody class="col-lg-12 col-xl-6 p-0">
-                                    <!-- Number -->
+                                <table class="table table-bordered">
+                                    <!-- Table -->
+                                    <tbody class="p-0">
+                                    <!-- Header -->
                                     <tr>
-                                        <th class="font-weight-bold">@lang('pages.hostel.roomNumber'):</th>
+                                        <th><strong>#: </strong></th>
+                                        <th><strong>@lang('pages.hostel.roomNumber'): </strong></th>
+                                        <th><strong>@lang('pages.hostel.roomSection'): </strong></th>
+                                        <th><strong>@lang('pages.hostel.numOfMembers'): </strong></th>
+                                        <th><strong>@lang('global.extraInfo'): </strong></th>
+                                    </tr>
+
+                                    <!-- Body -->
+                                    <tr>
+                                        <td>{{ $hostel->id }}</td>
                                         <td>{{ $hostel->number }}</td>
-                                    </tr>
-
-                                    <!-- Section -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('pages.hostel.roomSection'):</th>
                                         <td>{{ $hostel->section }}</td>
-                                    </tr>
-                                    </tbody>
-
-                                    <!-- Left Column -->
-                                    <tbody class="col-lg-12 col-xl-6 p-0">
-                                    <!-- Number Of Members -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('pages.hostel.numOfMembers'):</th>
                                         <td>
                                             @php
                                                 if (!$hostel->employees || $hostel->employees->count() == 0) {
@@ -125,24 +121,13 @@
                                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{ $count_number }}" class="progress-bar progress-bar-lg wd-{{ $count_number }}p bg-info" role="progressbar">{{ count($hostel->employees) }}</div>
                                             </div>
                                         </td>
-                                    </tr>
-
-                                    <!-- Date of creation -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('global.date'):</th>
-                                        <td>{{ $hostel->created_at->diffForHumans() }}</td>
+                                        <td>{{ $hostel->info }}</td>
                                     </tr>
                                     </tbody>
+                                    <!--/==/ End of Table -->
                                 </table>
                             </div>
-                            <!--/==/ End of Personal Information Table -->
-
-                            <div class="main-content-label tx-13 mg-b-20 pt-2" style="border-top: 1px solid #ddd;">
-                                @lang('global.extraInfo')
-                            </div>
-                            <p>{{ $hostel->info ?? '--' }}</p>
                         </div>
-                        <!--/==/ End of User Information Details -->
                     </div>
                 </div>
             </div>
