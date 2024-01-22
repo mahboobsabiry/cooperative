@@ -17,10 +17,18 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('phone2')->nullable();
             $table->string('address')->nullable();
-            $table->date('from_date');
-            $table->date('to_date');
-            $table->string('doc_number');
+            $table->date('from_date')->nullable();
+            $table->date('to_date')->nullable();
+            $table->string('doc_number')->nullable();
+            $table->date('from_date2')->nullable();
+            $table->date('to_date2')->nullable();
+            $table->string('doc_number2')->nullable();
+            $table->date('from_date3')->nullable();
+            $table->date('to_date3')->nullable();
+            $table->string('doc_number3')->nullable();
+            $table->text('background')->nullable();
             $table->text('info')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

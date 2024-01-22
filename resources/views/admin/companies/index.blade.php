@@ -23,11 +23,9 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                <a class="modal-effect btn ripple btn-primary" data-effect="effect-sign"
-                   data-toggle="modal" href="#new_record">
-                    <i class="fe fe-plus-circle"></i> @lang('global.new')
-                </a>
-                @include('admin.companies.create')
+{{--                <a class="modal-effect btn ripple btn-primary" href="{{ route('admin.companies.create') }}">--}}
+{{--                    <i class="fe fe-plus-circle"></i> @lang('global.new')--}}
+{{--                </a>--}}
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -59,39 +57,17 @@
                                     <th>@lang('global.type')</th>
                                     <th>@lang('pages.companies.agents')</th>
                                     <th>@lang('global.createdDate')</th>
-                                    <th>@lang('global.action')</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
                                 @foreach($companies as $company)
                                     <tr>
-                                        @include('admin.companies.ed')
                                         <td>{{ $company->id }}</td>
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->tin }}</td>
                                         <td>{{ $company->type == 0 ? trans('pages.companies.import') : trans('pages.companies.export') }}</td>
                                         <td>{{ $company->agents()->count() }}</td>
-                                        <td>
-                                            @if(app()->getLocale() == 'en')
-                                                {{ date_format($company->created_at, 'Y-F-d') }}
-                                            @else
-                                                <span class="tx-bold">
-                                                    {{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($company->created_at)) }}
-                                                </span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <!-- Edit -->
-                                            <a class="modal-effect btn btn-sm ripple btn-info" data-effect="effect-sign" data-toggle="modal" href="#edit_record{{ $company->id }}" title="@lang('global.edit')">
-                                                <i class="fe fe-edit"></i>
-                                            </a>
-
-                                            <!-- Delete -->
-                                            <a class="modal-effect btn btn-sm ripple btn-danger" data-effect="effect-sign" data-toggle="modal" href="#delete_record{{ $company->id }}" title="@lang('global.delete')">
-                                                <i class="fe fe-delete"></i>
-                                            </a>
-                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

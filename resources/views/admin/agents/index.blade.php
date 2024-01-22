@@ -77,9 +77,9 @@
                                         <th>@lang('form.toDate')</th>
                                         <th>@lang('pages.employees.docNumber')</th>
                                         <th>@lang('global.validationStatus')</th>
+                                        <th>@lang('admin.sidebar.companies')</th>
                                         <th>@lang('form.phone')</th>
                                         <th>@lang('global.address')</th>
-                                        <th>@lang('form.extraInfo')</th>
                                     </tr>
                                     </thead>
 
@@ -88,19 +88,56 @@
                                         <tr>
                                             <td>{{ $agent->id }}</td>
                                             <td><a href="{{ route('admin.agents.show', $agent->id ) }}">{{ $agent->name }}</a></td>
-                                            <td>{{ $agent->from_date }}</td>
-                                            <td>{{ $agent->to_date }}</td>
-                                            <td>{{ $agent->doc_number }}</td>
                                             <td>
-                                                @php
-                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
-                                                    $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
-                                                @endphp
-                                                {{ $valid_days <= 0 ? 'تاریخ ختم شده' : $valid_days . ' روز باقی مانده' }}
+                                                <span class="bd-b">{{ $agent->from_date ?? '---' }}</span> <br>
+                                                <span class="bd-b">{{ $agent->from_date2 ?? '---' }}</span> <br>
+                                                <span class="bd-b">{{ $agent->from_date3 ?? '---' }}</span> <br>
                                             </td>
+                                            <td>
+                                                <span class="bd-b">{{ $agent->to_date ?? '---' }}</span> <br>
+                                                <span class="bd-b">{{ $agent->to_date2 ?? '---' }}</span> <br>
+                                                <span class="bd-b">{{ $agent->to_date3 ?? '---' }}</span> <br>
+                                            </td>
+                                            <td>
+                                                <span class="bd-b">{{ $agent->doc_number ?? '---' }}</span> <br>
+                                                <span class="bd-b">{{ $agent->doc_number2 ?? '---' }}</span> <br>
+                                                <span class="bd-b">{{ $agent->doc_number3 ?? '---' }}</span> <br>
+                                            </td>
+                                            <td>
+                                                <!-- First Company -->
+                                                @if($agent->to_date)
+                                                    <span class="bd-b">
+                                                        @php
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
+                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+                                                        @endphp
+                                                        {{ $valid_days <= 0 ? 'تاریخ ختم شده' : $valid_days . ' روز باقی مانده' }}
+                                                    </span> <br>
+                                                @endif
+                                                <!-- Second Company -->
+                                                @if($agent->to_date2)
+                                                    <span class="bd-b">
+                                                        @php
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
+                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+                                                        @endphp
+                                                        {{ $valid_days <= 0 ? 'تاریخ ختم شده' : $valid_days . ' روز باقی مانده' }}
+                                                    </span> <br>
+                                                @endif
+                                                <!-- Third Company -->
+                                                @if($agent->to_date3)
+                                                    <span class="bd-b">
+                                                        @php
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
+                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+                                                        @endphp
+                                                        {{ $valid_days <= 0 ? 'تاریخ ختم شده' : $valid_days . ' روز باقی مانده' }}
+                                                    </span> <br>
+                                                @endif
+                                            </td>
+                                            <td>{{ $agent->companies->count() }}</td>
                                             <td>{{ $agent->phone }}{{ $agent->phone2 ? ', ' : '' }} {{ $agent->phone2 ?? '' }}</td>
                                             <td>{{ $agent->address }}</td>
-                                            <td>{{ $agent->info }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

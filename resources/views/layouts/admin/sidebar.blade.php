@@ -162,7 +162,7 @@
 
                     <ul class="nav-sub">
                         <!-- Agents -->
-                        <li class="nav-sub-item {{ request()->is('admin/agents') ? 'active' : '' }}">
+                        <li class="nav-sub-item {{ request()->is('admin/agents') || request()->is('admin/agents/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.agents.index') }}">
                                 @lang('pages.companies.agents')
                                 ({{ \App\Models\Agent::all()->count() }})

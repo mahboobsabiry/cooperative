@@ -68,6 +68,9 @@
                 <div class="card custom-card main-content-body-profile">
                     <!-- Card Body -->
                     <div class="card-body tab-content h-100">
+                        <!-- Success Message -->
+                        @include('admin.inc.alerts')
+
                         <!-- User Information Details -->
                         <div class="p-2 bd">
                             <div class="main-content-label tx-13 mg-b-20">
@@ -79,13 +82,7 @@
                                 <table class="table row table-borderless">
                                     <!-- Right Column -->
                                     <tbody class="col-lg-12 col-xl-6 p-0">
-                                    <!-- ID -->
-                                    <tr>
-                                        <th class="font-weight-bold">نمبر مسلسل:</th>
-                                        <td>AG-{{ $agent->id }}</td>
-                                    </tr>
-
-                                    <!-- Name -->
+                                    <!-- Title -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('form.name'):</th>
                                         <td>{{ $agent->name }}</td>
@@ -96,16 +93,16 @@
                                         <th class="font-weight-bold">@lang('pages.companies.company'):</th>
                                         <td>{{ $agent->companies->count() }}</td>
                                     </tr>
-                                    </tbody>
 
-                                    <!-- Left Column -->
-                                    <tbody class="col-lg-12 col-xl-6 p-0">
                                     <!-- Address -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('global.address'):</th>
                                         <td>{{ $agent->address ?? '' }}</td>
                                     </tr>
+                                    </tbody>
 
+                                    <!-- Left Column -->
+                                    <tbody class="col-lg-12 col-xl-6 p-0">
                                     <!-- Phone -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('form.phone'):</th>
@@ -121,9 +118,6 @@
                                 </table>
                             </div>
                             <!--/==/ End of Personal Information Table -->
-
-                            <!-- Success Message -->
-                            @include('admin.inc.alerts')
 
                             <!-- Table -->
                             <div class="table-responsive">

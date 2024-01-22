@@ -29,10 +29,7 @@ class StoreAgentRequest extends FormRequest
             'phone'     => 'required|min:8|max:15|unique:agents,phone',
             'phone2'    => 'nullable|min:8|max:15',
             'address'   => 'nullable|min:3|max:128',
-            'info'      => 'nullable',
-            'from_date' => 'required',
-            'to_date'   => 'required',
-            'doc_number'=> 'required'
+            'info'      => 'nullable'
         ];
     }
 }
