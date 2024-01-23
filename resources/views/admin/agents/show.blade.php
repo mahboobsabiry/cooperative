@@ -77,8 +77,24 @@
                             <!-- Personal Information Table -->
                             <div class="table-responsive ">
                                 <table class="table row table-borderless">
+                                    <!-- Photo -->
+                                    <tbody class="col-lg-12 col-xl-2 p-0">
+                                    <!-- ID -->
+                                    <tr>
+                                        <td>
+                                            <div class="main-profile-overview widget-user-image text-center">
+                                                <div class="main-img-user">
+                                                    <a href="{{ $agent->image ?? asset('assets/images/avatar-default.jpeg') }}" target="_blank">
+                                                        <img alt="avatar" src="{{ $agent->image ?? asset('assets/images/avatar-default.jpeg') }}">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
                                     <!-- Right Column -->
-                                    <tbody class="col-lg-12 col-xl-6 p-0">
+                                    <tbody class="col-lg-12 col-xl-5 p-0">
                                     <!-- ID -->
                                     <tr>
                                         <th class="font-weight-bold">نمبر مسلسل:</th>
@@ -99,7 +115,7 @@
                                     </tbody>
 
                                     <!-- Left Column -->
-                                    <tbody class="col-lg-12 col-xl-6 p-0">
+                                    <tbody class="col-lg-12 col-xl-5 p-0">
                                     <!-- Address -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('global.address'):</th>
@@ -241,7 +257,7 @@
                                                             // $diff_days = $to_date->diffInDays($from_date);
                                                             $valid_days = now()->diffInDays($to_date);
                                                             if ($to_date > today()) {
-                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                                echo "<span class='text-secondary'>$valid_days روز باقیمانده</span>";
                                                             } else {
                                                                 echo "<span class='text-danger'>تاریخ ختم شده</span>";
                                                             }
@@ -257,7 +273,7 @@
                                                             // $diff_days = $to_date->diffInDays($from_date);
                                                             $valid_days = now()->diffInDays($to_date);
                                                             if ($to_date > today()) {
-                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                                echo "<span class='text-secondary'>$valid_days روز باقیمانده</span>";
                                                             } else {
                                                                 echo "<span class='text-danger'>تاریخ ختم شده</span>";
                                                             }
@@ -273,7 +289,7 @@
                                                             // $diff_days = $to_date->diffInDays($from_date);
                                                             $valid_days = now()->diffInDays($to_date);
                                                             if ($to_date > today()) {
-                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                                echo "<span class='text-secondary'>$valid_days روز باقیمانده</span>";
                                                             } else {
                                                                 echo "<span class='text-danger'>تاریخ ختم شده</span>";
                                                             }

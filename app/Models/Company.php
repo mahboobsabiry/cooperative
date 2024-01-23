@@ -10,7 +10,7 @@ class Company extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['agent_id', 'name', 'tin', 'type', 'background', 'created_at', 'updated_at'];
+    protected $fillable = ['agent_id', 'name', 'tin', 'type', 'background', 'status', 'created_at', 'updated_at'];
 
     public function agent(): Relation
     {

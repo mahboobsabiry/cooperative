@@ -25,6 +25,7 @@ class StoreAgentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'photo'     => 'nullable|image|mimes:jpg,png,jfif',
             'name'      => 'required|min:3|max:128',
             'phone'     => 'required|min:8|max:15|unique:agents,phone',
             'phone2'    => 'nullable|min:8|max:15',

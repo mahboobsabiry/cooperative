@@ -34,7 +34,14 @@ class AgentController extends Controller
     // Store Data
     public function store(StoreAgentRequest $request)
     {
-        Agent::create($request->all());
+        $agent = Agent::create($request->all());
+
+        //  Has File && Save Avatar Image
+        if ($request->hasFile('photo')) {
+            $avatar = $request->file('photo');
+            $fileName = 'agent-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $agent->storeImage($avatar->storeAs('agents', $fileName, 'public'));
+        }
 
         $message = 'ثبت شد!';
         return redirect()->route('admin.agents.index')->with([
@@ -60,6 +67,7 @@ class AgentController extends Controller
     {
         // Validate
         $request->validate([
+            'photo'     => 'nullable|image|mimes:jpg,png,jfif',
             'name'      => 'required|min:3|max:128',
             'phone'     => 'required|min:8|max:15|unique:agents,phone,' . $agent->id,
             'phone2'    => 'nullable|min:8|max:15',
@@ -69,6 +77,13 @@ class AgentController extends Controller
 
         // Save Record
         $agent->update($request->all());
+
+        //  Has Photo
+        if ($request->hasFile('photo')) {
+            $avatar = $request->file('photo');
+            $fileName = 'agent-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $agent->updateImage($avatar->storeAs('agents', $fileName, 'public'));
+        }
 
         $message = 'بروزرسانی گردید!';
         return redirect()->route('admin.agents.index')->with([
@@ -127,20 +142,19 @@ class AgentController extends Controller
             $agent->doc_number2  = $request->doc_number;
             $agent->company_name2    = $request->company_name;
             $agent->company_tin2     = $request->tin;
-            $agent->save();
         } elseif ($agent->company_name3 == null) {
             $agent->from_date3   = $request->from_date;
             $agent->to_date3     = $request->to_date;
             $agent->doc_number3  = $request->doc_number;
             $agent->company_name3    = $request->company_name;
             $agent->company_tin3     = $request->tin;
-            $agent->save();
         } elseif(!empty($agent->company_name) && !empty($agent->company_name2) && !empty($agent->company_name3)) {
             return redirect()->back()->with([
                 'message'   => 'یک شخص نماینده بیشتر از یک شرکت بوده نمی تواند.',
                 'alertType' => 'danger'
             ]);
         }
+        $agent->status = 1;
         $agent->save();
         $saved_company = Company::where('name', $request->company_name)->where('tin', $request->tin)->first();
         if ($saved_company) {
@@ -240,6 +254,13 @@ class AgentController extends Controller
                     ]);
                 }
             }
+        }
+
+        // If agent does not have any company then should be inactive
+        if ($agent->company_name == null && $agent->company_name2 == null && $agent->company_name3 == null) {
+            $agent->update([
+                'status' => 0
+            ]);
         }
 
         return redirect()->back()->with([

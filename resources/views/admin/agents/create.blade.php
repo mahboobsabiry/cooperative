@@ -3,7 +3,12 @@
 @section('title', trans('global.new') . ' ~ ' . trans('pages.companies.agents'))
 <!-- Extra Styles -->
 @section('extra_css')
-
+    <!---Fileupload css-->
+    <link href="{{ asset('backend/assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet">
+    <!---Fancy uploader css-->
+    <link href="{{ asset('backend/assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet">
+    <!--Sumoselect css-->
+    <link href="{{ asset('backend/assets/plugins/sumoselect/sumoselect.css') }}" rel="stylesheet">
 @endsection
 <!--/==/ End of Extra Styles -->
 
@@ -51,13 +56,13 @@
                             </div>
 
                             <!-- Form -->
-                            <form method="post" action="{{ route('admin.agents.store') }}">
+                            <form method="post" action="{{ route('admin.agents.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <!-- Name -->
                                         <div class="form-group @error('name') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
+                                            <p class="mb-2">1) @lang('form.name'): <span class="tx-danger">*</span></p>
                                             <input type="text" id="name" class="form-control @error('name') form-control-danger @enderror" name="name" value="{{ old('name') }}" required>
 
                                             @error('name')
@@ -67,7 +72,7 @@
 
                                         <!-- Phone -->
                                         <div class="form-group @error('phone') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.phone'): <span class="tx-danger">*</span></p>
+                                            <p class="mb-2">2) @lang('form.phone'): <span class="tx-danger">*</span></p>
                                             <input type="tel" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ old('phone') }}" placeholder="@lang('form.phone')" required>
 
                                             @error('phone')
@@ -77,29 +82,29 @@
 
                                         <!-- Phone2 -->
                                         <div class="form-group @error('phone2') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.phone') 2:</p>
+                                            <p class="mb-2">3) @lang('form.phone') 2:</p>
                                             <input type="tel" id="phone2" class="form-control @error('phone2') form-control-danger @enderror" name="phone2" value="{{ old('phone2') }}">
 
                                             @error('phone2')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-6">
                                         <!-- Address -->
                                         <div class="form-group @error('address') has-danger @enderror">
-                                            <p class="mb-2">@lang('global.address'): <span class="tx-danger">*</span></p>
+                                            <p class="mb-2">4) @lang('global.address'): <span class="tx-danger">*</span></p>
                                             <input type="text" id="address" class="form-control @error('address') form-control-danger @enderror" name="address" value="{{ old('address') }}" required>
 
                                             @error('address')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                    </div>
 
+                                    <div class="col-md-6">
                                         <!-- Description -->
                                         <div class="form-group @error('info') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.extraInfo'):</p>
+                                            <p class="mb-2">5) @lang('form.extraInfo'):</p>
                                             <textarea name="info" class="form-control @error('info') form-control-danger @enderror">{{ old('info') }}</textarea>
 
                                             @error('info')
@@ -107,6 +112,16 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Description -->
+
+                                        <!-- Photo -->
+                                        <div class="form-group @error('photo') has-danger @enderror">
+                                            <p class="mb-2">6) @lang('form.photo'):</p>
+                                            <input type="file" class="dropify" name="photo" accept="image/*" data-height="200" />
+                                            @error('photo')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Photo -->
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -128,6 +143,15 @@
 
 <!-- Extra Scripts -->
 @section('extra_js')
+    <!--Fileuploads js-->
+    <script src="{{ asset('backend/assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+    <!--Fancy uploader js-->
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
     <!-- Form-elements js-->
     <script src="{{ asset('backend/assets/js/advanced-form-elements.js') }}"></script>
 

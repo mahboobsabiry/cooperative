@@ -72,6 +72,7 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>@lang('form.photo')</th>
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.phone')</th>
                                         <th>@lang('global.address')</th>
@@ -84,6 +85,11 @@
                                     @foreach($agents as $agent)
                                         <tr>
                                             <td>{{ $agent->id }}</td>
+                                            <td>
+                                                <a href="{{ $agent->image ?? asset('assets/images/avatar-default.jpeg') }}" target="_blank">
+                                                    <img src="{{ $agent->image ?? asset('assets/images/avatar-default.jpeg') }}" width="40">
+                                                </a>
+                                            </td>
                                             <td><a href="{{ route('admin.agents.show', $agent->id ) }}">{{ $agent->name }}</a></td>
 
                                             <td>{{ $agent->phone }}{{ $agent->phone2 ? ', ' : '' }} {{ $agent->phone2 ?? '' }}</td>

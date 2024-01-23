@@ -80,7 +80,7 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                <img alt="avatar" src="{{ $employee->image ? $employee->image : asset('assets/images/avatar-default.jpeg') }}">
+                                <img alt="avatar" src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}">
                             </div>
                         </div>
 

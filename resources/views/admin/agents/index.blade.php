@@ -72,14 +72,14 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>@lang('form.photo')</th>
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.fromDate')</th>
                                         <th>@lang('form.toDate')</th>
                                         <th>@lang('pages.employees.docNumber')</th>
+                                        <th>شرکت</th>
                                         <th>@lang('global.validationStatus')</th>
-                                        <th>تعداد شرکت ها</th>
                                         <th>@lang('form.phone')</th>
-                                        <th>@lang('global.address')</th>
                                     </tr>
                                     </thead>
 
@@ -87,22 +87,41 @@
                                     @foreach($agents as $agent)
                                         <tr>
                                             <td>{{ $agent->id }}</td>
+                                            <td>
+                                                <a href="{{ $agent->image ?? asset('assets/images/avatar-default.jpeg') }}" target="_blank">
+                                                    <img src="{{ $agent->image ?? asset('assets/images/avatar-default.jpeg') }}" width="40">
+                                                </a>
+                                            </td>
                                             <td><a href="{{ route('admin.agents.show', $agent->id ) }}">{{ $agent->name }}</a></td>
+                                            <!-- From Date -->
                                             <td>
                                                 <span class="bd-b">{{ $agent->from_date ?? '---' }}</span> <br>
                                                 <span class="bd-b">{{ $agent->from_date2 ?? '---' }}</span> <br>
                                                 <span class="bd-b">{{ $agent->from_date3 ?? '---' }}</span> <br>
                                             </td>
+
+                                            <!-- To Date -->
                                             <td>
                                                 <span class="bd-b">{{ $agent->to_date ?? '---' }}</span> <br>
                                                 <span class="bd-b">{{ $agent->to_date2 ?? '---' }}</span> <br>
                                                 <span class="bd-b">{{ $agent->to_date3 ?? '---' }}</span> <br>
                                             </td>
+
+                                            <!-- Document Number -->
                                             <td>
                                                 <span class="bd-b">{{ $agent->doc_number ?? '---' }}</span> <br>
                                                 <span class="bd-b">{{ $agent->doc_number2 ?? '---' }}</span> <br>
                                                 <span class="bd-b">{{ $agent->doc_number3 ?? '---' }}</span> <br>
                                             </td>
+
+                                            <!-- Company Name -->
+                                            <td>
+                                                <span class="bd-b">{{ $agent->company_name ?? '---' }}</span> <br>
+                                                <span class="bd-b">{{ $agent->company_name2 ?? '---' }}</span> <br>
+                                                <span class="bd-b">{{ $agent->company_name3 ?? '---' }}</span> <br>
+                                            </td>
+
+                                            <!-- Validation Date Status -->
                                             <td>
                                                 <!-- First Company -->
                                                 @if($agent->to_date)
@@ -113,7 +132,7 @@
                                                             // $diff_days = $to_date->diffInDays($from_date);
                                                             $valid_days = now()->diffInDays($to_date);
                                                             if ($to_date > today()) {
-                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                                echo "<span class='text-secondary'>$valid_days روز باقیمانده</span>";
                                                             } else {
                                                                 echo "<span class='text-danger'>تاریخ ختم شده</span>";
                                                             }
@@ -132,7 +151,7 @@
                                                             // $diff_days = $to_date->diffInDays($from_date);
                                                             $valid_days = now()->diffInDays($to_date);
                                                             if ($to_date > today()) {
-                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                                echo "<span class='text-secondary'>$valid_days روز باقیمانده</span>";
                                                             } else {
                                                                 echo "<span class='text-danger'>تاریخ ختم شده</span>";
                                                             }
@@ -151,7 +170,7 @@
                                                             // $diff_days = $to_date->diffInDays($from_date);
                                                             $valid_days = now()->diffInDays($to_date);
                                                             if ($to_date > today()) {
-                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                                echo "<span class='text-secondary'>$valid_days روز باقیمانده</span>";
                                                             } else {
                                                                 echo "<span class='text-danger'>تاریخ ختم شده</span>";
                                                             }
@@ -161,9 +180,9 @@
                                                     <span class="bdb">---</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $agent->companies->count() }}</td>
+                                            <!--/==/ End of Validation Date Status -->
+
                                             <td>{{ $agent->phone }}{{ $agent->phone2 ? ', ' : '' }} {{ $agent->phone2 ?? '' }}</td>
-                                            <td>{{ $agent->address }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
