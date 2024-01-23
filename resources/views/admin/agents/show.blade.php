@@ -115,7 +115,7 @@
                                     <!-- Date of creation -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('global.date'):</th>
-                                        <td>{{ $agent->created_at->diffForHumans() }}</td>
+                                        <td>{{ \Morilog\Jalali\CalendarUtils::date('Y-m-d', $agent->created_at) }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -123,7 +123,6 @@
                             <!--/==/ End of Personal Information Table -->
 
                             <hr>
-
                             <!-- Success Message -->
                             @include('admin.inc.alerts')
 
@@ -134,9 +133,20 @@
                                         <h5 class="font-weight-bold">@lang('admin.sidebar.companies')</h5>
                                     </div>
                                     <div class="col-md-6">
-                                        <a class="btn btn-primary btn-sm ripple float-left" href="{{ route('admin.agents.add_company', $agent->id) }}">
-                                            @lang('global.new')
+                                        @if($agent->companies->count() != 3)
+                                            <a class="btn btn-primary btn-sm ripple float-left mr-2"
+                                               href="{{ route('admin.agents.add_company', $agent->id) }}">
+                                                @lang('global.new')
+                                            </a>
+                                        @endif
+                                        <!-- Refresh Company -->
+                                        <a class="modal-effect btn btn-sm ripple btn-info float-left"
+                                           data-effect="effect-sign" data-toggle="modal"
+                                           href="#refresh_agent{{ $agent->id }}">
+                                            تازه سازی
                                         </a>
+
+                                        @include('admin.agents.refresh_agent')
                                     </div>
                                 </div>
 
@@ -150,6 +160,7 @@
                                         <th>@lang('form.fromDate')</th>
                                         <th>@lang('form.toDate')</th>
                                         <th>@lang('pages.employees.docNumber')</th>
+                                        <th>مدت اعتبار</th>
                                         <th>@lang('global.validationStatus')</th>
                                     </tr>
                                     </thead>
@@ -163,57 +174,123 @@
                                                 <td>{{ $company->tin }}</td>
                                                 <td>{{ $company->type == 0 ? trans('pages.companies.import') : trans('pages.companies.export') }}</td>
                                                 <td>
-                                                    {{ $company->agent->from_date ?? '' }}
-                                                    {{ $company->agent->from_date2 ?? '' }}
-                                                    {{ $company->agent->from_date3 ?? '' }}
+                                                    @if($company->name == $agent->company_name)
+                                                        {{ $company->agent->from_date }}
+                                                    @elseif($company->name == $agent->company_name2)
+                                                        {{ $company->agent->from_date2 }}
+                                                    @else
+                                                        {{ $company->agent->from_date3 }}
+                                                    @endif
                                                 </td>
                                                 <td>
-                                                    {{ $company->agent->to_date }}
-                                                    {{ $company->agent->to_date2 }}
-                                                    {{ $company->agent->to_date3 }}
+                                                    @if($company->name == $agent->company_name)
+                                                        {{ $company->agent->to_date }}
+                                                    @elseif($company->name == $agent->company_name2)
+                                                        {{ $company->agent->to_date2 }}
+                                                    @else
+                                                        {{ $company->agent->to_date3 }}
+                                                    @endif
                                                 </td>
                                                 <td>
-                                                    {{ $company->agent->doc_number }}
-                                                    {{ $company->agent->doc_number2 }}
-                                                    {{ $company->agent->doc_number3 }}
+                                                    @if($company->name == $agent->company_name)
+                                                        {{ $company->agent->doc_number }}
+                                                    @elseif($company->name == $agent->company_name2)
+                                                        {{ $company->agent->doc_number2 }}
+                                                    @else
+                                                        {{ $company->agent->doc_number3 }}
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     <!-- First Company -->
-                                                    @if($agent->to_date)
-                                                        <span class="bd-b">
+                                                    @if($company->name == $agent->company_name)
                                                         @php
+                                                            $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date)->toCarbon();
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
-                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+                                                            $valid_days = $to_date->diffInDays($from_date);
+                                                            echo $valid_days;
                                                         @endphp
-                                                            {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
-                                                    </span> <br>
                                                     @endif
+
                                                     <!-- Second Company -->
-                                                    @if($agent->to_date2)
-                                                        <span class="bd-b">
+                                                    @if($company->name == $agent->company_name2)
                                                         @php
+                                                            $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date2)->toCarbon();
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
-                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+                                                            $valid_days = $to_date->diffInDays($from_date);
+                                                            echo $valid_days;
                                                         @endphp
-                                                            {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
-                                                    </span> <br>
                                                     @endif
+
                                                     <!-- Third Company -->
-                                                    @if($agent->to_date3)
-                                                        <span class="bd-b">
+                                                    @if($company->name == $agent->company_name3)
                                                         @php
+                                                            $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date3)->toCarbon();
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
-                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+                                                            $valid_days = $to_date->diffInDays($from_date);
+                                                            echo $valid_days;
                                                         @endphp
-                                                            {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
-                                                    </span> <br>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <!-- First Company -->
+                                                    @if($company->name == $agent->company_name)
+                                                        @php
+                                                            $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date)->toCarbon();
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
+
+                                                            $diff_days = $to_date->diffInDays($from_date);
+                                                            $diff2_days = $diff_days + now()->diffInDays($to_date);
+                                                            $valid_days = $diff2_days - $diff_days;
+                                                        @endphp
+
+                                                        @if($valid_days < 1)
+                                                            <span class="text-danger">میعاد ختم شده</span>
+                                                        @elseif($valid_days > 1)
+                                                            <span class="text-danger">{{ $valid_days }} روز باقیمانده</span>
+                                                        @endif
+                                                    @endif
+
+                                                    <!-- Second Company -->
+                                                    @if($company->name == $agent->company_name2)
+                                                        @php
+                                                            $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date2)->toCarbon();
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
+
+                                                            $diff_days = $to_date->diffInDays($from_date);
+                                                            $diff2_days = $diff_days + now()->diffInDays($to_date);
+                                                            $valid_days = $diff2_days - $diff_days;
+                                                        @endphp
+
+                                                        @if($valid_days < 1)
+                                                            <span class="text-danger">میعاد ختم شده</span>
+                                                        @elseif($valid_days > 1)
+                                                            <span class="text-danger">{{ $valid_days }} روز باقیمانده</span>
+                                                        @endif
+                                                    @endif
+
+                                                    <!-- Third Company -->
+                                                    @if($company->name == $agent->company_name3)
+                                                        @php
+                                                            $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date3)->toCarbon();
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
+
+                                                            $diff_days = $to_date->diffInDays($from_date);
+                                                            $diff2_days = $diff_days + now()->diffInDays($to_date);
+                                                            $valid_days = $diff2_days - $diff_days;
+                                                        @endphp
+
+                                                        @if($valid_days < 1)
+                                                            <span class="text-danger">میعاد ختم شده</span>
+                                                        @elseif($valid_days > 1)
+                                                            <span class="text-danger">{{ $valid_days }} روز باقیمانده</span>
+                                                        @endif
                                                     @endif
                                                 </td>
                                             </tr>
                                         @endforeach
                                     @else
                                         <tr>
-                                            <th colspan="8" class="text-center">شرکتی پیدا نشد!</th>
+                                            <th colspan="9" class="text-center">شرکتی پیدا نشد!</th>
                                         </tr>
                                     @endif
                                     </tbody>
@@ -223,6 +300,7 @@
                             <div class="main-content-label tx-13 mg-b-20 pt-2" style="border-top: 1px solid #ddd;">
                                 @lang('global.extraInfo')
                             </div>
+                            <p>{!! $agent->background !!}</p>
                             <p>{{ $agent->info ?? '--' }}</p>
                         </div>
                         <!--/==/ End of User Information Details -->

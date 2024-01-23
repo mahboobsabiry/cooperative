@@ -77,7 +77,7 @@
                                         <th>@lang('form.toDate')</th>
                                         <th>@lang('pages.employees.docNumber')</th>
                                         <th>@lang('global.validationStatus')</th>
-                                        <th>@lang('admin.sidebar.companies')</th>
+                                        <th>تعداد شرکت ها</th>
                                         <th>@lang('form.phone')</th>
                                         <th>@lang('global.address')</th>
                                     </tr>

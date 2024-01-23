@@ -113,15 +113,21 @@ class AgentController extends Controller
             $agent->from_date   = $request->from_date;
             $agent->to_date     = $request->to_date;
             $agent->doc_number  = $request->doc_number;
+            $agent->company_name    = $request->company_name;
+            $agent->company_tin     = $request->tin;
         } elseif (!empty($agent->from_date) && empty($agent->from_date2)) {
-            $agent->from_date2   = $request->from_date2;
-            $agent->to_date2     = $request->to_date2;
-            $agent->doc_number2  = $request->doc_number2;
+            $agent->from_date2   = $request->from_date;
+            $agent->to_date2     = $request->to_date;
+            $agent->doc_number2  = $request->doc_number;
+            $agent->company_name2    = $request->company_name;
+            $agent->company_tin2     = $request->tin;
             $agent->save();
         } elseif (!empty($agent->from_date) && !empty($agent->from_date2) && empty($agent->from_date3)) {
-            $agent->from_date3   = $request->from_date3;
-            $agent->to_date3     = $request->to_date3;
-            $agent->doc_number3  = $request->doc_number3;
+            $agent->from_date3   = $request->from_date;
+            $agent->to_date3     = $request->to_date;
+            $agent->doc_number3  = $request->doc_number;
+            $agent->company_name3    = $request->company_name;
+            $agent->company_tin3     = $request->tin;
             $agent->save();
         } else {
             return redirect()->back()->with([
@@ -139,6 +145,94 @@ class AgentController extends Controller
 
         return redirect()->route('admin.agents.show', $agent->id)->with([
             'message'   => 'شرکت موفقانه ثبت شد!',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Refresh Agent
+    public function refresh_agent($id)
+    {
+        $agent = Agent::find($id);
+        // $company = Company::where('agent_id', $agent->id)->first();
+        foreach ($agent->companies as $company) {
+            // First Company
+            if ($company->name == $agent->company_name) {
+                $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date)->toCarbon();
+                $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
+
+                $diff_days = $to_date->diffInDays($from_date);
+                $valid_days = $diff_days - now()->diffInDays($to_date);
+                // Do Refresh When The Time Is Over
+                if ($valid_days < 1) {
+                    $company->update([
+                        'background'    => $company->background . 'از تاریخ ' . $company->agent->from_date . ' الی تاریخ ' . $company->agent->to_date. '  نظر به مکتوب نمبر ' . $company->agent->doc_number . '، ' . $company->agent->name . " را منحیث نماینده معرفی نمود.<br>",
+                        'agent_id'      => null,
+                    ]);
+
+                    $agent->update([
+                        'background'    => $agent->background . 'از تاریخ ' . $agent->from_date . ' الی تاریخ ' . $agent->to_date . ' منحیث نماینده شرکت ' . $agent->company_name . '  نظر به مکتوب نمبر ' . $agent->doc_number . " معرفی گردید.<br>",
+                        'from_date'     => null,
+                        'to_date'       => null,
+                        'doc_number'    => null,
+                        'company_name'  => null,
+                        'company_tin'   => null
+                    ]);
+                }
+            }
+
+            // Second Company
+            if ($company->name == $agent->company_name2) {
+                $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date2)->toCarbon();
+                $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
+
+                $diff_days = $to_date->diffInDays($from_date);
+                $valid_days = $diff_days - now()->diffInDays($to_date);
+                // Do Refresh When The Time Is Over
+                if ($valid_days < 1) {
+                    $company->update([
+                        'background'    => $company->background . 'از تاریخ ' . $company->agent->from_date2 . ' الی تاریخ ' . $company->agent->to_date2. '  نظر به مکتوب نمبر ' . $company->agent->doc_number2 . '، ' . $company->agent->name . " را منحیث نماینده معرفی نمود.<br>",
+                        'agent_id'      => null,
+                    ]);
+
+                    $agent->update([
+                        'background'    => $agent->background . 'از تاریخ ' . $agent->from_date2 . ' الی تاریخ ' . $agent->to_date2 . ' منحیث نماینده شرکت ' . $agent->company_name2 . '  نظر به مکتوب نمبر ' . $agent->doc_number2 . " معرفی گردید.<br>",
+                        'from_date2'     => null,
+                        'to_date2'       => null,
+                        'doc_number2'    => null,
+                        'company_name2'  => null,
+                        'company_tin2'   => null
+                    ]);
+                }
+            }
+
+            // Third Company
+            if ($company->name == $agent->company_name3) {
+                $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date3)->toCarbon();
+                $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
+
+                $diff_days = $to_date->diffInDays($from_date);
+                $valid_days = $diff_days - now()->diffInDays($to_date);
+                // Do Refresh When The Time Is Over
+                if ($valid_days < 1) {
+                    $company->update([
+                        'background'    => $company->background . 'از تاریخ ' . $company->agent->from_date3 . ' الی تاریخ ' . $company->agent->to_date3. '  نظر به مکتوب نمبر ' . $company->agent->doc_number3 . '، ' . $company->agent->name . " را منحیث نماینده معرفی نمود.<br>",
+                        'agent_id'      => null,
+                    ]);
+
+                    $agent->update([
+                        'background'    => $agent->background . 'از تاریخ ' . $agent->from_date3 . ' الی تاریخ ' . $agent->to_date3 . ' منحیث نماینده شرکت ' . $agent->company_name3 . '  نظر به مکتوب نمبر ' . $agent->doc_number3 . " معرفی گردید.<br>",
+                        'from_date3'     => null,
+                        'to_date3'       => null,
+                        'doc_number3'    => null,
+                        'company_name3'  => null,
+                        'company_tin3'   => null
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->back()->with([
+            'message'   => 'تازه سازی انجام شد!',
             'alertType' => 'success'
         ]);
     }

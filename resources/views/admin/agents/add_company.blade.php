@@ -25,11 +25,7 @@
 
             <!-- Btn List -->
             <div class="btn btn-list">
-                <!-- Back -->
-                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ route('admin.companies.index') }}">
-                    @lang('global.back')
-                    <i class="fe fe-arrow-left"></i>
-                </a>
+
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -58,11 +54,7 @@
                                         <!-- Name -->
                                         <div class="form-group @error('name') has-danger @enderror">
                                             <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
-                                            <p type="text" id="name" class="form-control">{{ $agent->name }}</p>
-
-                                            @error('name')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
+                                            <p type="text" id="name" class="form-control bg-gray-300 text-dark">{{ $agent->name }}</p>
                                         </div>
 
                                         <!-- From Date -->

@@ -56,6 +56,7 @@
                                     <th>@lang('form.tin')</th>
                                     <th>@lang('global.type')</th>
                                     <th>@lang('pages.companies.agent')</th>
+                                    <th>ملاحظات</th>
                                 </tr>
                                 </thead>
 
@@ -67,6 +68,7 @@
                                         <td>{{ $company->tin }}</td>
                                         <td>{{ $company->type == 0 ? trans('pages.companies.import') : trans('pages.companies.export') }}</td>
                                         <td>{{ $company->agent->name ?? 'ندارد' }}</td>
+                                        <td>{!! $company->background !!}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

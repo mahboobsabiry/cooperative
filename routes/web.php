@@ -111,6 +111,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // Agent Add Company Page
     Route::get('agent/add-company/{id}', [AgentController::class, 'add_company'])->name('agents.add_company');
     Route::post('agent/add-agent-company/{id}', [AgentController::class, 'add_agent_company'])->name('agents.add_agent_company');
+    Route::post('agent/refresh-agent/{id}', [AgentController::class, 'refresh_agent'])->name('agents.refresh_agent');
 
     Route::resource('companies', CompanyController::class);
 

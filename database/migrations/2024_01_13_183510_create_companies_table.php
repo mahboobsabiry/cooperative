@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->bigInteger('tin')->unique();
             $table->tinyInteger('type')->default(0);
+            $table->text('background')->nullable();
             $table->timestamps();
 
             $table->foreign('agent_id')->references('id')->on('agents')->onUpdate('cascade')->onDelete('cascade');
