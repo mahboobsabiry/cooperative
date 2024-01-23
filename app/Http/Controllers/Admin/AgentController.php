@@ -88,4 +88,58 @@ class AgentController extends Controller
             'alertType' => 'success'
         ]);
     }
+
+    // Add Company
+    public function add_company($id)
+    {
+        $agent = Agent::find($id);
+        $companies = Company::all();
+        return view('admin.agents.add_company', compact('agent', 'companies'));
+    }
+
+    // Add Agent Company
+    public function add_agent_company(Request $request, $id)
+    {
+        $agent = Agent::find($id);
+        $request->validate([
+            'from_date'     => 'required',
+            'to_date'       => 'required',
+            'doc_number'    => 'required',
+            'company_name'  => 'required',
+            'tin'           => 'required'
+        ]);
+
+        if (empty($agent->from_date)) {
+            $agent->from_date   = $request->from_date;
+            $agent->to_date     = $request->to_date;
+            $agent->doc_number  = $request->doc_number;
+        } elseif (!empty($agent->from_date) && empty($agent->from_date2)) {
+            $agent->from_date2   = $request->from_date2;
+            $agent->to_date2     = $request->to_date2;
+            $agent->doc_number2  = $request->doc_number2;
+            $agent->save();
+        } elseif (!empty($agent->from_date) && !empty($agent->from_date2) && empty($agent->from_date3)) {
+            $agent->from_date3   = $request->from_date3;
+            $agent->to_date3     = $request->to_date3;
+            $agent->doc_number3  = $request->doc_number3;
+            $agent->save();
+        } else {
+            return redirect()->back()->with([
+                'message'   => 'نماینده بیشتر از سه شرکت نمیتواند بگیرد.',
+                'alertType' => 'danger'
+            ]);
+        }
+        $agent->save();
+        $company = new Company();
+        $company->agent_id  = $agent->id;
+        $company->name      = $request->company_name;
+        $company->tin       = $request->tin;
+        $company->type      = $request->type;
+        $company->save();
+
+        return redirect()->route('admin.agents.show', $agent->id)->with([
+            'message'   => 'شرکت موفقانه ثبت شد!',
+            'alertType' => 'success'
+        ]);
+    }
 }

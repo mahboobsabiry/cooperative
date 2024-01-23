@@ -55,8 +55,7 @@
                                     <th>@lang('form.name')</th>
                                     <th>@lang('form.tin')</th>
                                     <th>@lang('global.type')</th>
-                                    <th>@lang('pages.companies.agents')</th>
-                                    <th>@lang('global.createdDate')</th>
+                                    <th>@lang('pages.companies.agent')</th>
                                 </tr>
                                 </thead>
 
@@ -67,7 +66,7 @@
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->tin }}</td>
                                         <td>{{ $company->type == 0 ? trans('pages.companies.import') : trans('pages.companies.export') }}</td>
-                                        <td>{{ $company->agents()->count() }}</td>
+                                        <td>{{ $company->agent->name ?? 'ندارد' }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

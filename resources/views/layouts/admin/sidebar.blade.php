@@ -152,7 +152,8 @@
                 <li class="nav-item {{ request()->is('admin/companies') ||
                     request()->is('admin/companies/*') ||
                     request()->is('admin/agents') ||
-                    request()->is('admin/agents/*') ? 'active show' : '' }}">
+                    request()->is('admin/agents/*') ||
+                    request()->is('admin/agent/add-company/*') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fa fa-shopping-bag"></i>
@@ -162,7 +163,7 @@
 
                     <ul class="nav-sub">
                         <!-- Agents -->
-                        <li class="nav-sub-item {{ request()->is('admin/agents') || request()->is('admin/agents/*') ? 'active' : '' }}">
+                        <li class="nav-sub-item {{ request()->is('admin/agents') || request()->is('admin/agents/*') || request()->is('admin/agent/add-company/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.agents.index') }}">
                                 @lang('pages.companies.agents')
                                 ({{ \App\Models\Agent::all()->count() }})

@@ -111,7 +111,7 @@
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
                                                             $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
                                                         @endphp
-                                                        {{ $valid_days <= 0 ? 'تاریخ ختم شده' : $valid_days . ' روز باقی مانده' }}
+                                                        {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
                                                     </span> <br>
                                                 @endif
                                                 <!-- Second Company -->
@@ -121,7 +121,7 @@
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
                                                             $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
                                                         @endphp
-                                                        {{ $valid_days <= 0 ? 'تاریخ ختم شده' : $valid_days . ' روز باقی مانده' }}
+                                                        {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
                                                     </span> <br>
                                                 @endif
                                                 <!-- Third Company -->
@@ -131,7 +131,7 @@
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
                                                             $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
                                                         @endphp
-                                                        {{ $valid_days <= 0 ? 'تاریخ ختم شده' : $valid_days . ' روز باقی مانده' }}
+                                                        {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
                                                     </span> <br>
                                                 @endif
                                             </td>

@@ -122,12 +122,23 @@
                             </div>
                             <!--/==/ End of Personal Information Table -->
 
+                            <hr>
+
                             <!-- Success Message -->
                             @include('admin.inc.alerts')
 
                             <!-- Table -->
                             <div class="table-responsive">
-                                <h5 class="font-weight-bold">@lang('admin.sidebar.companies')</h5>
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <h5 class="font-weight-bold">@lang('admin.sidebar.companies')</h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a class="btn btn-primary btn-sm ripple float-left" href="{{ route('admin.agents.add_company', $agent->id) }}">
+                                            @lang('global.new')
+                                        </a>
+                                    </div>
+                                </div>
 
                                 <table class="table table-striped table-bordered w-100">
                                     <thead>
@@ -150,11 +161,54 @@
                                                 <th scope="row">{{ $company->id }}</th>
                                                 <td>{{ $company->name }}</td>
                                                 <td>{{ $company->tin }}</td>
-                                                <td>{{ $company->type == 0 ? trans('form.import') : trans('form.export') }}</td>
-                                                <td>{{ $company->agent->from_date }}</td>
-                                                <td>{{ $company->agent->to_date }}</td>
-                                                <td>{{ $company->agent->doc_number }}</td>
-                                                <td>STATUS</td>
+                                                <td>{{ $company->type == 0 ? trans('pages.companies.import') : trans('pages.companies.export') }}</td>
+                                                <td>
+                                                    {{ $company->agent->from_date ?? '' }}
+                                                    {{ $company->agent->from_date2 ?? '' }}
+                                                    {{ $company->agent->from_date3 ?? '' }}
+                                                </td>
+                                                <td>
+                                                    {{ $company->agent->to_date }}
+                                                    {{ $company->agent->to_date2 }}
+                                                    {{ $company->agent->to_date3 }}
+                                                </td>
+                                                <td>
+                                                    {{ $company->agent->doc_number }}
+                                                    {{ $company->agent->doc_number2 }}
+                                                    {{ $company->agent->doc_number3 }}
+                                                </td>
+                                                <td>
+                                                    <!-- First Company -->
+                                                    @if($agent->to_date)
+                                                        <span class="bd-b">
+                                                        @php
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
+                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+                                                        @endphp
+                                                            {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
+                                                    </span> <br>
+                                                    @endif
+                                                    <!-- Second Company -->
+                                                    @if($agent->to_date2)
+                                                        <span class="bd-b">
+                                                        @php
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
+                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+                                                        @endphp
+                                                            {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
+                                                    </span> <br>
+                                                    @endif
+                                                    <!-- Third Company -->
+                                                    @if($agent->to_date3)
+                                                        <span class="bd-b">
+                                                        @php
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
+                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+                                                        @endphp
+                                                            {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
+                                                    </span> <br>
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @else
