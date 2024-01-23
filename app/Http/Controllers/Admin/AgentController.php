@@ -21,7 +21,7 @@ class AgentController extends Controller
     // Fetch All Data
     public function index()
     {
-        $agents = Agent::get();
+        $agents = Agent::where('status', 1)->get();
         return view('admin.agents.index', compact('agents'));
     }
 
@@ -93,8 +93,14 @@ class AgentController extends Controller
     public function add_company($id)
     {
         $agent = Agent::find($id);
-        $companies = Company::all();
-        return view('admin.agents.add_company', compact('agent', 'companies'));
+        if (!empty($agent->company_name) && !empty($agent->company_name2) && !empty($agent->company_name3)) {
+            return redirect()->back()->with([
+                'message'   => 'یک شخص نماینده بیشتر از یک شرکت بوده نمی تواند.',
+                'alertType' => 'danger'
+            ]);
+        } else {
+            return view('admin.agents.add_company', compact('agent'));
+        }
     }
 
     // Add Agent Company
@@ -109,38 +115,49 @@ class AgentController extends Controller
             'tin'           => 'required'
         ]);
 
-        if (empty($agent->from_date)) {
+        if ($agent->company_name == null) {
             $agent->from_date   = $request->from_date;
             $agent->to_date     = $request->to_date;
             $agent->doc_number  = $request->doc_number;
             $agent->company_name    = $request->company_name;
             $agent->company_tin     = $request->tin;
-        } elseif (!empty($agent->from_date) && empty($agent->from_date2)) {
+        } elseif ($agent->company_name2 == null) {
             $agent->from_date2   = $request->from_date;
             $agent->to_date2     = $request->to_date;
             $agent->doc_number2  = $request->doc_number;
             $agent->company_name2    = $request->company_name;
             $agent->company_tin2     = $request->tin;
             $agent->save();
-        } elseif (!empty($agent->from_date) && !empty($agent->from_date2) && empty($agent->from_date3)) {
+        } elseif ($agent->company_name3 == null) {
             $agent->from_date3   = $request->from_date;
             $agent->to_date3     = $request->to_date;
             $agent->doc_number3  = $request->doc_number;
             $agent->company_name3    = $request->company_name;
             $agent->company_tin3     = $request->tin;
             $agent->save();
-        } else {
+        } elseif(!empty($agent->company_name) && !empty($agent->company_name2) && !empty($agent->company_name3)) {
             return redirect()->back()->with([
-                'message'   => 'نماینده بیشتر از سه شرکت نمیتواند بگیرد.',
+                'message'   => 'یک شخص نماینده بیشتر از یک شرکت بوده نمی تواند.',
                 'alertType' => 'danger'
             ]);
         }
         $agent->save();
-        $company = new Company();
-        $company->agent_id  = $agent->id;
-        $company->name      = $request->company_name;
-        $company->tin       = $request->tin;
-        $company->type      = $request->type;
+        $saved_company = Company::where('name', $request->company_name)->where('tin', $request->tin)->first();
+        if ($saved_company) {
+            $company = $saved_company;
+            $company->agent_id  = $agent->id;
+            $company->name      = $saved_company->name;
+            $company->tin       = $saved_company->tin;
+            $company->type      = $saved_company->type;
+            $company->status    = 1;
+        } else {
+            $company = new Company();
+            $company->agent_id  = $agent->id;
+            $company->name      = $request->company_name;
+            $company->tin       = $request->tin;
+            $company->type      = $request->type;
+        }
+
         $company->save();
 
         return redirect()->route('admin.agents.show', $agent->id)->with([
@@ -157,16 +174,14 @@ class AgentController extends Controller
         foreach ($agent->companies as $company) {
             // First Company
             if ($company->name == $agent->company_name) {
-                $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date)->toCarbon();
                 $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
 
-                $diff_days = $to_date->diffInDays($from_date);
-                $valid_days = $diff_days - now()->diffInDays($to_date);
                 // Do Refresh When The Time Is Over
-                if ($valid_days < 1) {
+                if ($to_date < today()) {
                     $company->update([
                         'background'    => $company->background . 'از تاریخ ' . $company->agent->from_date . ' الی تاریخ ' . $company->agent->to_date. '  نظر به مکتوب نمبر ' . $company->agent->doc_number . '، ' . $company->agent->name . " را منحیث نماینده معرفی نمود.<br>",
                         'agent_id'      => null,
+                        'status'        => 0
                     ]);
 
                     $agent->update([
@@ -182,16 +197,14 @@ class AgentController extends Controller
 
             // Second Company
             if ($company->name == $agent->company_name2) {
-                $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date2)->toCarbon();
                 $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
 
-                $diff_days = $to_date->diffInDays($from_date);
-                $valid_days = $diff_days - now()->diffInDays($to_date);
                 // Do Refresh When The Time Is Over
-                if ($valid_days < 1) {
+                if ($to_date < today()) {
                     $company->update([
                         'background'    => $company->background . 'از تاریخ ' . $company->agent->from_date2 . ' الی تاریخ ' . $company->agent->to_date2. '  نظر به مکتوب نمبر ' . $company->agent->doc_number2 . '، ' . $company->agent->name . " را منحیث نماینده معرفی نمود.<br>",
                         'agent_id'      => null,
+                        'status'        => 0
                     ]);
 
                     $agent->update([
@@ -207,16 +220,14 @@ class AgentController extends Controller
 
             // Third Company
             if ($company->name == $agent->company_name3) {
-                $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date3)->toCarbon();
                 $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
 
-                $diff_days = $to_date->diffInDays($from_date);
-                $valid_days = $diff_days - now()->diffInDays($to_date);
                 // Do Refresh When The Time Is Over
-                if ($valid_days < 1) {
+                if ($to_date < today()) {
                     $company->update([
                         'background'    => $company->background . 'از تاریخ ' . $company->agent->from_date3 . ' الی تاریخ ' . $company->agent->to_date3. '  نظر به مکتوب نمبر ' . $company->agent->doc_number3 . '، ' . $company->agent->name . " را منحیث نماینده معرفی نمود.<br>",
                         'agent_id'      => null,
+                        'status'        => 0
                     ]);
 
                     $agent->update([
@@ -235,5 +246,12 @@ class AgentController extends Controller
             'message'   => 'تازه سازی انجام شد!',
             'alertType' => 'success'
         ]);
+    }
+
+    // Inactive Agents
+    public function inactive()
+    {
+        $agents = Agent::where('status', 0)->get();
+        return view('admin.agents.inactive', compact('agents'));
     }
 }

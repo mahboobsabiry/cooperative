@@ -109,30 +109,56 @@
                                                     <span class="bd-b">
                                                         @php
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
-                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+
+                                                            // $diff_days = $to_date->diffInDays($from_date);
+                                                            $valid_days = now()->diffInDays($to_date);
+                                                            if ($to_date > today()) {
+                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                            } else {
+                                                                echo "<span class='text-danger'>تاریخ ختم شده</span>";
+                                                            }
                                                         @endphp
-                                                        {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
-                                                    </span> <br>
+                                                    </span>
+                                                @else
+                                                    <span class="bdb">---</span>
                                                 @endif
+                                                <br>
                                                 <!-- Second Company -->
                                                 @if($agent->to_date2)
                                                     <span class="bd-b">
                                                         @php
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
-                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+
+                                                            // $diff_days = $to_date->diffInDays($from_date);
+                                                            $valid_days = now()->diffInDays($to_date);
+                                                            if ($to_date > today()) {
+                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                            } else {
+                                                                echo "<span class='text-danger'>تاریخ ختم شده</span>";
+                                                            }
                                                         @endphp
-                                                        {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
-                                                    </span> <br>
+                                                    </span>
+                                                @else
+                                                    <span class="bdb">---</span>
                                                 @endif
+                                                <br>
                                                 <!-- Third Company -->
                                                 @if($agent->to_date3)
                                                     <span class="bd-b">
                                                         @php
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
-                                                            $valid_days = \Carbon\Carbon::now()->diffInDays($to_date);
+
+                                                            // $diff_days = $to_date->diffInDays($from_date);
+                                                            $valid_days = now()->diffInDays($to_date);
+                                                            if ($to_date > today()) {
+                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                            } else {
+                                                                echo "<span class='text-danger'>تاریخ ختم شده</span>";
+                                                            }
                                                         @endphp
-                                                        {!! $valid_days < 0 ? "<span class='text-danger'>تاریخ ختم شده</span>" : $valid_days . "<span class='text-secondary'> روز باقیمانده</span>" !!}
-                                                    </span> <br>
+                                                    </span>
+                                                @else
+                                                    <span class="bdb">---</span>
                                                 @endif
                                             </td>
                                             <td>{{ $agent->companies->count() }}</td>

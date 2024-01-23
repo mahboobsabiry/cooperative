@@ -112,8 +112,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('agent/add-company/{id}', [AgentController::class, 'add_company'])->name('agents.add_company');
     Route::post('agent/add-agent-company/{id}', [AgentController::class, 'add_agent_company'])->name('agents.add_agent_company');
     Route::post('agent/refresh-agent/{id}', [AgentController::class, 'refresh_agent'])->name('agents.refresh_agent');
+    // Inactive Agents
+    Route::get('inactive-agents', [AgentController::class, 'inactive'])->name('agents.inactive');
 
     Route::resource('companies', CompanyController::class);
+    Route::get('inactive-companies', [CompanyController::class, 'inactive'])->name('companies.inactive');
 
     // Settings
     Route::resource('settings', SettingController::class);

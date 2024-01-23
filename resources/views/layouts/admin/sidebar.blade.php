@@ -147,17 +147,16 @@
             @endcan
             <!--/==/ End of Employees -->
 
-            <!-- Companies -->
-            @can('company_mgmt')
-                <li class="nav-item {{ request()->is('admin/companies') ||
-                    request()->is('admin/companies/*') ||
-                    request()->is('admin/agents') ||
+            <!-- Agents -->
+            @can('agent_mgmt')
+                <li class="nav-item {{ request()->is('admin/agents') ||
                     request()->is('admin/agents/*') ||
-                    request()->is('admin/agent/add-company/*') ? 'active show' : '' }}">
+                    request()->is('admin/agent/add-company/*') ||
+                    request()->is('admin/inactive-agents') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
-                        <i class="fa fa-shopping-bag"></i>
-                        <span class="sidemenu-label">@lang('admin.sidebar.companies')</span>
+                        <i class="fa fa-user-tie"></i>
+                        <span class="sidemenu-label">@lang('pages.companies.agents')</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
 
@@ -166,16 +165,49 @@
                         <li class="nav-sub-item {{ request()->is('admin/agents') || request()->is('admin/agents/*') || request()->is('admin/agent/add-company/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.agents.index') }}">
                                 @lang('pages.companies.agents')
-                                ({{ \App\Models\Agent::all()->count() }})
+                                ({{ \App\Models\Agent::all()->where('status', 1)->count() }})
                             </a>
                         </li>
 
-                        <!-- All Companies -->
+                        <!-- Inactive Agents -->
+                        <li class="nav-sub-item {{ request()->is('admin/inactive-agents') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.agents.inactive') }}">
+                                نماینده های غیرفعال
+                                ({{ count(\App\Models\Agent::all()->where('status', 0)) }})
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+            <!--/==/ End of Agents -->
+
+            <!-- Companies -->
+            @can('company_mgmt')
+                <li class="nav-item {{ request()->is('admin/companies') ||
+                    request()->is('admin/companies/*') ||
+                    request()->is('admin/inactive-companies') ? 'active show' : '' }}">
+
+                    <a class="nav-link with-sub" href="javascript:void(0)">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span class="sidemenu-label">@lang('admin.sidebar.companies')</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
+
+                    <ul class="nav-sub">
+                        <!-- Active Companies -->
                         <li class="nav-sub-item {{ request()->is('admin/companies') ||
                         request()->is('admin/companies/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.companies.index') }}">
                                 @lang('admin.sidebar.companies')
-                                ({{ count(\App\Models\Company::all()) }})
+                                ({{ count(\App\Models\Company::all()->where('status', 1)) }})
+                            </a>
+                        </li>
+
+                        <!-- Inactive Companies -->
+                        <li class="nav-sub-item {{ request()->is('admin/inactive-companies') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.companies.inactive') }}">
+                                شرکت های غیرفعال
+                                ({{ count(\App\Models\Company::all()->where('status', 0)) }})
                             </a>
                         </li>
                     </ul>

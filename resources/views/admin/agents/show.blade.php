@@ -238,16 +238,14 @@
                                                             $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date)->toCarbon();
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
 
-                                                            $diff_days = $to_date->diffInDays($from_date);
-                                                            $diff2_days = $diff_days + now()->diffInDays($to_date);
-                                                            $valid_days = $diff2_days - $diff_days;
+                                                            // $diff_days = $to_date->diffInDays($from_date);
+                                                            $valid_days = now()->diffInDays($to_date);
+                                                            if ($to_date > today()) {
+                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                            } else {
+                                                                echo "<span class='text-danger'>تاریخ ختم شده</span>";
+                                                            }
                                                         @endphp
-
-                                                        @if($valid_days < 1)
-                                                            <span class="text-danger">میعاد ختم شده</span>
-                                                        @elseif($valid_days > 1)
-                                                            <span class="text-danger">{{ $valid_days }} روز باقیمانده</span>
-                                                        @endif
                                                     @endif
 
                                                     <!-- Second Company -->
@@ -256,16 +254,14 @@
                                                             $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date2)->toCarbon();
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
 
-                                                            $diff_days = $to_date->diffInDays($from_date);
-                                                            $diff2_days = $diff_days + now()->diffInDays($to_date);
-                                                            $valid_days = $diff2_days - $diff_days;
+                                                            // $diff_days = $to_date->diffInDays($from_date);
+                                                            $valid_days = now()->diffInDays($to_date);
+                                                            if ($to_date > today()) {
+                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                            } else {
+                                                                echo "<span class='text-danger'>تاریخ ختم شده</span>";
+                                                            }
                                                         @endphp
-
-                                                        @if($valid_days < 1)
-                                                            <span class="text-danger">میعاد ختم شده</span>
-                                                        @elseif($valid_days > 1)
-                                                            <span class="text-danger">{{ $valid_days }} روز باقیمانده</span>
-                                                        @endif
                                                     @endif
 
                                                     <!-- Third Company -->
@@ -274,16 +270,14 @@
                                                             $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date3)->toCarbon();
                                                             $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
 
-                                                            $diff_days = $to_date->diffInDays($from_date);
-                                                            $diff2_days = $diff_days + now()->diffInDays($to_date);
-                                                            $valid_days = $diff2_days - $diff_days;
+                                                            // $diff_days = $to_date->diffInDays($from_date);
+                                                            $valid_days = now()->diffInDays($to_date);
+                                                            if ($to_date > today()) {
+                                                                echo "<span class='text-secondary'>$valid_days باقیمانده</span>";
+                                                            } else {
+                                                                echo "<span class='text-danger'>تاریخ ختم شده</span>";
+                                                            }
                                                         @endphp
-
-                                                        @if($valid_days < 1)
-                                                            <span class="text-danger">میعاد ختم شده</span>
-                                                        @elseif($valid_days > 1)
-                                                            <span class="text-danger">{{ $valid_days }} روز باقیمانده</span>
-                                                        @endif
                                                     @endif
                                                 </td>
                                             </tr>

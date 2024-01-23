@@ -17,7 +17,7 @@ class CompanyController extends Controller
     // Fetch All Data
     public function index()
     {
-        $companies = Company::get();
+        $companies = Company::where('status', 1)->get();
         return view('admin.companies.index', compact('companies'));
     }
 
@@ -63,5 +63,12 @@ class CompanyController extends Controller
             'message'   => $message,
             'alertType' => 'success'
         ]);
+    }
+
+    // Fetch All Data
+    public function inactive()
+    {
+        $companies = Company::where('status', 0)->get();
+        return view('admin.companies.inactive', compact('companies'));
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-@section('title', config('app.name') . ' ~ ' . trans('admin.sidebar.companies'))
+@section('title', config('app.name') . ' ~ شرکت های غیرفعال')
 @section('extra_css')
     <!---DataTables css-->
     <link href="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
@@ -16,16 +16,13 @@
                 <h2 class="main-content-title tx-24 mg-b-5">@lang('admin.sidebar.companies')</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">@lang('admin.sidebar.companies')</li>
+                    <li class="breadcrumb-item active" aria-current="page">شرکت های غیرفعال</li>
                 </ol>
             </div>
 
             <!-- Btn List -->
             <div class="btn btn-list">
-                <!-- Add New -->
-{{--                <a class="modal-effect btn ripple btn-primary" href="{{ route('admin.companies.create') }}">--}}
-{{--                    <i class="fe fe-plus-circle"></i> @lang('global.new')--}}
-{{--                </a>--}}
+
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -42,7 +39,7 @@
 
                         <!-- Table Title -->
                         <div>
-                            <h6 class="card-title mb-1">@lang('admin.sidebar.companies') ({{ count($companies) }})</h6>
+                            <h6 class="card-title mb-1">شرکت های غیرفعال ({{ count($companies) }})</h6>
                         </div>
 
                         <!-- Table -->
