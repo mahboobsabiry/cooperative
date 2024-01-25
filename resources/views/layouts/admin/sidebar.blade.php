@@ -152,7 +152,10 @@
                 <li class="nav-item {{ request()->is('admin/agents') ||
                     request()->is('admin/agents/*') ||
                     request()->is('admin/agent/add-company/*') ||
-                    request()->is('admin/inactive-agents') ? 'active show' : '' }}">
+                    request()->is('admin/agent/add-colleague/*') ||
+                    request()->is('admin/inactive-agents') ||
+                    request()->is('admin/agent-colleagues') ||
+                    request()->is('admin/agent-colleagues/*') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fa fa-user-tie"></i>
@@ -165,8 +168,7 @@
                         <li class="nav-sub-item {{ request()->is('admin/agents') ||
                             request()->is('admin/agents/*') ||
                             request()->is('admin/agent/add-company/*') ||
-                            request()->is('admin/agent-colleagues') ||
-                            request()->is('admin/agent-colleagues/*') ? 'active' : '' }}">
+                            request()->is('admin/agent/add-colleague/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.agents.index') }}">
                                 @lang('pages.companies.agents')
                                 ({{ \App\Models\Agent::all()->where('status', 1)->count() }})
@@ -185,7 +187,7 @@
                         <li class="nav-sub-item {{ request()->is('admin/agent-colleagues') ||
                             request()->is('admin/agent-colleagues/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.agent-colleagues.index') }}">
-                                همکاران نمایند ها
+                                همکاران نماینده ها
                                 ({{ count(\App\Models\AgentColleague::all()) }})
                             </a>
                         </li>

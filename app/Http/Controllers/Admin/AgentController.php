@@ -306,6 +306,7 @@ class AgentController extends Controller
         $colleague->to_date     = $request->to_date;
         $colleague->doc_number  = $request->doc_number;
         $colleague->address     = $request->address;
+        $colleague->info        = $request->info;
         $colleague->status = 1;
         $colleague->save();
 

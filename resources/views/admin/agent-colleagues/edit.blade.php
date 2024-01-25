@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', trans('global.edit') . ' ~ ' . trans('pages.companies.agents'))
+@section('title', 'ویرایش همکار نماینده')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---Fileupload css-->
@@ -19,22 +19,18 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">@lang('global.edit')</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">@lang('global.new')</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.agents.index') }}">@lang('pages.companies.agents')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.agents.show', $agent->id) }}">@lang('global.details')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">@lang('global.edit')</li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.agent-colleagues.show', $colleague->id) }}">@lang('global.details')</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">ویرایش همکار نماینده</li>
                 </ol>
             </div>
 
             <!-- Btn List -->
             <div class="btn btn-list">
-                <!-- Back -->
-                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ route('admin.agents.show', $agent->id) }}">
-                    @lang('global.back')
-                    <i class="fe fe-arrow-left"></i>
-                </a>
+
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -52,20 +48,19 @@
 
                             <!-- Form Title -->
                             <div>
-                                <h6 class="card-title mb-1">@lang('pages.companies.agents')</h6>
-                                <p class="text-muted card-sub-title">You can add new record here.</p>
+                                <h6 class="card-title mb-1">ویرایش همکار نماینده ({{ $colleague->name }})</h6>
                             </div>
 
                             <!-- Form -->
-                            <form method="post" action="{{ route('admin.agents.update', $agent->id) }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('admin.agent-colleagues.update', $colleague->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
                                     <div class="col-md-6">
                                         <!-- Name -->
                                         <div class="form-group @error('name') has-danger @enderror">
-                                            <p class="mb-2">1) @lang('form.name'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="name" class="form-control @error('name') form-control-danger @enderror" name="name" value="{{ $agent->name ?? old('name') }}" required>
+                                            <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
+                                            <input type="text" id="name" class="form-control @error('name') form-control-danger @enderror" name="name" value="{{ $colleague->name ?? old('name') }}" required>
 
                                             @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -74,18 +69,18 @@
 
                                         <!-- Phone -->
                                         <div class="form-group @error('phone') has-danger @enderror">
-                                            <p class="mb-2">2) @lang('form.phone'): <span class="tx-danger">*</span></p>
-                                            <input type="tel" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ $agent->phone ?? old('phone') }}" placeholder="@lang('form.phone')" required>
+                                            <p class="mb-2">@lang('form.phone'): <span class="tx-danger">*</span></p>
+                                            <input type="text" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ $colleague->phone ?? old('phone') }}" required>
 
                                             @error('phone')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
 
-                                        <!-- Phone2 -->
+                                        <!-- Phone 2 -->
                                         <div class="form-group @error('phone2') has-danger @enderror">
-                                            <p class="mb-2">3) @lang('form.phone') 2:</p>
-                                            <input type="tel" id="phone2" class="form-control @error('phone2') form-control-danger @enderror" name="phone2" value="{{ $agent->phone2 ?? old('phone2') }}">
+                                            <p class="mb-2">@lang('form.phone') 2:</p>
+                                            <input type="text" id="phone2" class="form-control @error('phone') form-control-danger @enderror" name="phone2" value="{{ $colleague->phone2 ?? old('phone2') }}">
 
                                             @error('phone2')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -94,8 +89,8 @@
 
                                         <!-- Address -->
                                         <div class="form-group @error('address') has-danger @enderror">
-                                            <p class="mb-2">4) @lang('global.address'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="address" class="form-control @error('address') form-control-danger @enderror" name="address" value="{{ $agent->address ?? old('address') }}" required>
+                                            <p class="mb-2">@lang('global.address'): <span class="tx-danger">*</span></p>
+                                            <input type="text" id="address" class="form-control @error('address') form-control-danger @enderror" name="address" value="{{ $colleague->address ?? old('address') }}" required>
 
                                             @error('address')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -106,8 +101,8 @@
                                     <div class="col-md-6">
                                         <!-- Description -->
                                         <div class="form-group @error('info') has-danger @enderror">
-                                            <p class="mb-2">5) @lang('form.extraInfo'):</p>
-                                            <textarea name="info" class="form-control @error('info') form-control-danger @enderror">{{ $agent->info ?? old('info') }}</textarea>
+                                            <p class="mb-2">@lang('form.extraInfo'):</p>
+                                            <textarea name="info" class="form-control @error('info') form-control-danger @enderror">{{ $colleague->info ?? old('info') }}</textarea>
 
                                             @error('info')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -117,11 +112,9 @@
 
                                         <!-- Photo -->
                                         <div class="form-group @error('photo') has-danger @enderror">
-                                            <p class="mb-2">6) @lang('form.photo'):</p>
-                                            @if($agent->image)
-                                                <a href="{{ $agent->image }}" target="_blank">
-                                                    <img src="{{ $agent->image ?? asset('assets/images/avatar-default.jpeg') }}" alt="{{ $agent->name }}" width="40">
-                                                </a>
+                                            <p class="mb-2">@lang('form.photo'):</p>
+                                            @if($colleague->image)
+                                                <img src="{{ $colleague->image ?? asset('assets/images/avatar-default.jpeg') }}" alt="{{ $colleague->name }}" width="40">
                                             @endif
                                             <input type="file" class="dropify" name="photo" accept="image/*" data-height="200" />
                                             @error('photo')

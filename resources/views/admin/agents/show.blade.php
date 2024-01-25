@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', $agent->title)
+@section('title', $agent->name)
 <!-- Extra Styles -->
 @section('extra_css')
 
@@ -14,7 +14,7 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">{{ $agent->title }}</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">{{ $agent->name }}</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
