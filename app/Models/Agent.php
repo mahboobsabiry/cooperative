@@ -30,4 +30,10 @@ class Agent extends Model
     {
         return $this->hasMany(Company::class);
     }
+
+    // Has Many Colleagues
+    public function colleagues(): HasMany
+    {
+        return $this->hasMany(AgentColleague::class);
+    }
 }

@@ -74,6 +74,7 @@
                                         <th>#</th>
                                         <th>@lang('form.photo')</th>
                                         <th>@lang('form.name')</th>
+                                        <th>تعداد همکاران</th>
                                         <th>@lang('form.fromDate')</th>
                                         <th>@lang('form.toDate')</th>
                                         <th>@lang('pages.employees.docNumber')</th>
@@ -93,6 +94,7 @@
                                                 </a>
                                             </td>
                                             <td><a href="{{ route('admin.agents.show', $agent->id ) }}">{{ $agent->name }}</a></td>
+                                            <td>{{ $agent->colleagues->count() }}</td>
                                             <!-- From Date -->
                                             <td>
                                                 <span class="bd-b">{{ $agent->from_date ?? '---' }}</span> <br>

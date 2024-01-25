@@ -162,7 +162,11 @@
 
                     <ul class="nav-sub">
                         <!-- Agents -->
-                        <li class="nav-sub-item {{ request()->is('admin/agents') || request()->is('admin/agents/*') || request()->is('admin/agent/add-company/*') ? 'active' : '' }}">
+                        <li class="nav-sub-item {{ request()->is('admin/agents') ||
+                            request()->is('admin/agents/*') ||
+                            request()->is('admin/agent/add-company/*') ||
+                            request()->is('admin/agent-colleagues') ||
+                            request()->is('admin/agent-colleagues/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.agents.index') }}">
                                 @lang('pages.companies.agents')
                                 ({{ \App\Models\Agent::all()->where('status', 1)->count() }})
@@ -174,6 +178,15 @@
                             <a class="nav-sub-link" href="{{ route('admin.agents.inactive') }}">
                                 نماینده های غیرفعال
                                 ({{ count(\App\Models\Agent::all()->where('status', 0)) }})
+                            </a>
+                        </li>
+
+                        <!-- Agent Colleagues -->
+                        <li class="nav-sub-item {{ request()->is('admin/agent-colleagues') ||
+                            request()->is('admin/agent-colleagues/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.agent-colleagues.index') }}">
+                                همکاران نمایند ها
+                                ({{ count(\App\Models\AgentColleague::all()) }})
                             </a>
                         </li>
                     </ul>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdministrationsController;
+use App\Http\Controllers\Admin\AgentColleagueController;
 use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\Admin\BranchesController;
 use App\Http\Controllers\Admin\CompanyController;
@@ -112,9 +113,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('agent/add-company/{id}', [AgentController::class, 'add_company'])->name('agents.add_company');
     Route::post('agent/add-agent-company/{id}', [AgentController::class, 'add_agent_company'])->name('agents.add_agent_company');
     Route::post('agent/refresh-agent/{id}', [AgentController::class, 'refresh_agent'])->name('agents.refresh_agent');
+    // Agent Add Colleagues Page
+    Route::get('agent/add-colleague/{id}', [AgentController::class, 'add_colleague'])->name('agents.add_colleague');
+    Route::post('agent/add-agent-colleague/{id}', [AgentController::class, 'add_agent_colleague'])->name('agents.add_agent_colleague');
     // Inactive Agents
     Route::get('inactive-agents', [AgentController::class, 'inactive'])->name('agents.inactive');
 
+    // Agent Colleagues
+    Route::resource('agent-colleagues', AgentColleagueController::class);
+    Route::get('inactive-agent-colleagues', [AgentController::class, 'inactive'])->name('colleagues.inactive');
+
+    // Companies
     Route::resource('companies', CompanyController::class);
     Route::get('inactive-companies', [CompanyController::class, 'inactive'])->name('companies.inactive');
 

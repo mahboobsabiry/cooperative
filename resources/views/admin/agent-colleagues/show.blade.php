@@ -352,9 +352,7 @@
                                         @foreach($agent->colleagues as $colleague)
                                             <tr>
                                                 <th scope="row">{{ $colleague->id }}</th>
-                                                <td>
-                                                    <a href="{{ route('admin.agent-colleagues.show', $colleague->id) }}">{{ $colleague->name }}</a>
-                                                </td>
+                                                <td>{{ $colleague->name }}</td>
                                                 <td>{{ $colleague->agent->name }}</td>
                                                 <td>{{ $colleague->phone ?? '' }} {{ $colleague->phone2? ', ' : '' }} {{ $colleague->phone2 ?? '' }}</td>
                                                 <td>{{ $colleague->from_date }}</td>

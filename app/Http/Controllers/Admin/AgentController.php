@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAgentRequest;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Models\Agent;
+use App\Models\AgentColleague;
 use App\Models\Company;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -188,7 +189,7 @@ class AgentController extends Controller
         foreach ($agent->companies as $company) {
             // First Company
             if ($company->name == $agent->company_name) {
-                $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
+                $to_date = Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
 
                 // Do Refresh When The Time Is Over
                 if ($to_date < today()) {
@@ -211,7 +212,7 @@ class AgentController extends Controller
 
             // Second Company
             if ($company->name == $agent->company_name2) {
-                $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
+                $to_date = Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
 
                 // Do Refresh When The Time Is Over
                 if ($to_date < today()) {
@@ -234,7 +235,7 @@ class AgentController extends Controller
 
             // Third Company
             if ($company->name == $agent->company_name3) {
-                $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
+                $to_date = Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
 
                 // Do Refresh When The Time Is Over
                 if ($to_date < today()) {
@@ -274,5 +275,50 @@ class AgentController extends Controller
     {
         $agents = Agent::where('status', 0)->get();
         return view('admin.agents.inactive', compact('agents'));
+    }
+
+    // Add Colleague
+    public function add_colleague($id)
+    {
+        $agent = Agent::find($id);
+        return view('admin.agents.add_colleague', compact('agent'));
+    }
+
+    // Add Agent Colleague
+    public function add_agent_colleague(Request $request, $id)
+    {
+        $agent = Agent::find($id);
+        $request->validate([
+            'name'          => 'required|min:3|max:128',
+            'phone'         => 'required|min:8|max:15',
+            'address'       => 'required|min:3|max:128',
+            'from_date'     => 'required',
+            'to_date'       => 'required',
+            'doc_number'    => 'required',
+        ]);
+
+        $colleague              = new AgentColleague();
+        $colleague->agent_id    = $agent->id;
+        $colleague->name        = $request->name;
+        $colleague->phone       = $request->phone;
+        $colleague->phone2      = $request->phone2;
+        $colleague->from_date   = $request->from_date;
+        $colleague->to_date     = $request->to_date;
+        $colleague->doc_number  = $request->doc_number;
+        $colleague->address     = $request->address;
+        $colleague->status = 1;
+        $colleague->save();
+
+        //  Has File && Save Avatar Image
+        if ($request->hasFile('photo')) {
+            $avatar = $request->file('photo');
+            $fileName = 'agent-colleague-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $colleague->storeImage($avatar->storeAs('agent-colleagues', $fileName, 'public'));
+        }
+
+        return redirect()->route('admin.agent-colleagues.show', $colleague->id)->with([
+            'message'   => 'همکار موفقانه ثبت شد!',
+            'alertType' => 'success'
+        ]);
     }
 }
