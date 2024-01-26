@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ همکاران نمایندگان')
+@section('title', config('app.name') . ' ~ همکاران نمایندگان - غیرفعال')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -42,7 +42,7 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.agents.index') }}">@lang('pages.companies.agents')</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">همکاران نمایندگان</li>
+                    <li class="breadcrumb-item active" aria-current="page">همکاران نمایندگان - غیرفعال</li>
                 </ol>
             </div>
 
@@ -65,7 +65,7 @@
                         <!-- All Positions -->
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
-                                همکاران نمایندگان ({{ count($colleagues) }})
+                                همکاران نمایندگان - غیرفعال ({{ count($colleagues) }})
                             </div>
                             <!-- Table -->
                             <div class="table-responsive mt-2">
@@ -75,13 +75,9 @@
                                         <th>#</th>
                                         <th>@lang('form.photo')</th>
                                         <th>@lang('form.name')</th>
-                                        <th>مافوق</th>
-                                        <th>@lang('form.fromDate')</th>
-                                        <th>@lang('form.toDate')</th>
-                                        <th>@lang('pages.employees.docNumber')</th>
-                                        <th>@lang('global.validationStatus')</th>
                                         <th>@lang('form.phone')</th>
                                         <th>@lang('global.address')</th>
+                                        <th>ملاحظات</th>
                                     </tr>
                                     </thead>
 
@@ -95,32 +91,9 @@
                                                 </a>
                                             </td>
                                             <td><a href="{{ route('admin.agent-colleagues.show', $colleague->id ) }}">{{ $colleague->name }}</a></td>
-                                            <td>{{ $colleague->agent->name }}</td>
-                                            <!-- From Date -->
-                                            <td>{{ $colleague->from_date }}</td>
-                                            <!-- To Date -->
-                                            <td>{{ $colleague->to_date ?? '---' }}</td>
-                                            <!-- Document Number -->
-                                            <td>{{ $colleague->doc_number ?? '---' }} </td>
-
-                                            <!-- Validation Date Status -->
-                                            <td>
-                                                @php
-                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
-
-                                                    // $diff_days = $to_date->diffInDays($from_date);
-                                                    $valid_days = now()->diffInDays($to_date);
-                                                    if ($to_date > today()) {
-                                                        echo "<span class='text-secondary'>$valid_days روز باقیمانده</span>";
-                                                    } else {
-                                                        echo "<span class='text-danger'>تاریخ ختم شده</span>";
-                                                    }
-                                                @endphp
-                                            </td>
-                                            <!--/==/ End of Validation Date Status -->
-
                                             <td>{{ $colleague->phone }}{{ $colleague->phone2 ? ', ' : '' }} {{ $colleague->phone2 ?? '' }}</td>
                                             <td>{{ $colleague->address }}</td>
+                                            <td>{!! $colleague->background !!}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

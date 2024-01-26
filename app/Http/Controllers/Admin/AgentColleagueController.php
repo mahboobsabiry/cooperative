@@ -17,8 +17,15 @@ class AgentColleagueController extends Controller
     // Index
     public function index()
     {
-        $colleagues = AgentColleague::all();
+        $colleagues = AgentColleague::all()->where('status', 1);
         return view('admin.agent-colleagues.index', compact('colleagues'));
+    }
+
+    // Index
+    public function inactive()
+    {
+        $colleagues = AgentColleague::all()->where('status', 0);
+        return view('admin.agent-colleagues.inactive', compact('colleagues'));
     }
 
     // Show

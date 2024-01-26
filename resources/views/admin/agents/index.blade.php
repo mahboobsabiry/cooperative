@@ -87,7 +87,7 @@
                                     <tbody>
                                     @foreach($agents as $agent)
                                         <tr>
-                                            <td>{{ $agent->id }}</td>
+                                            <td>AG-{{ $agent->id }}</td>
                                             <td>
                                                 <a href="{{ $agent->image ?? asset('assets/images/avatar-default.jpeg') }}" target="_blank">
                                                     <img src="{{ $agent->image ?? asset('assets/images/avatar-default.jpeg') }}" width="40">

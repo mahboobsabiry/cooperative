@@ -270,6 +270,36 @@ class AgentController extends Controller
         ]);
     }
 
+    // Refresh Agent Colleague
+    public function refresh_colleague($id)
+    {
+        $agent = Agent::find($id);
+        foreach ($agent->colleagues as $colleague) {
+            $to_date = Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
+
+            // Do Refresh When The Time Is Over
+            if ($to_date < today()) {
+                $agent->update([
+                    'background'    => $agent->background . 'از تاریخ ' . $colleague->from_date . ' الی تاریخ ' . $colleague->to_date . '  نظر به مکتوب نمبر ' . $colleague->doc_number . ', ' . $colleague->name . " را منحیث همکار با خود داشت.<br>"
+                ]);
+
+                $colleague->update([
+                    'background'    => $colleague->background . 'از تاریخ ' . $colleague->from_date . ' الی تاریخ ' . $colleague->to_date. '  نظر به مکتوب نمبر ' . $colleague->doc_number . '، منحیث همکار ' . $colleague->agent->name . " معرفی گردید.<br>",
+                    'agent_id'      => null,
+                    'from_date'     => null,
+                    'to_date'       => null,
+                    'doc_number'    => null,
+                    'status'        => 0
+                ]);
+            }
+        }
+
+        return redirect()->back()->with([
+            'message'   => 'تازه سازی انجام شد!',
+            'alertType' => 'success'
+        ]);
+    }
+
     // Inactive Agents
     public function inactive()
     {
@@ -317,7 +347,7 @@ class AgentController extends Controller
             $colleague->storeImage($avatar->storeAs('agent-colleagues', $fileName, 'public'));
         }
 
-        return redirect()->route('admin.agent-colleagues.show', $colleague->id)->with([
+        return redirect()->route('admin.agents.show', $agent->id)->with([
             'message'   => 'همکار موفقانه ثبت شد!',
             'alertType' => 'success'
         ]);

@@ -320,14 +320,14 @@
                                             @lang('global.new')
                                         </a>
 
-{{--                                        <!-- Refresh Company -->--}}
-{{--                                        <a class="modal-effect btn btn-sm ripple btn-info float-left"--}}
-{{--                                           data-effect="effect-sign" data-toggle="modal"--}}
-{{--                                           href="#refresh_agent{{ $agent->id }}">--}}
-{{--                                            تازه سازی--}}
-{{--                                        </a>--}}
+                                        <!-- Refresh Agent Colleague -->
+                                        <a class="modal-effect btn btn-sm ripple btn-info float-left"
+                                           data-effect="effect-sign" data-toggle="modal"
+                                           href="#refresh_colleague{{ $agent->id }}">
+                                            تازه سازی
+                                        </a>
 
-{{--                                        @include('admin.agents.refresh_agent')--}}
+                                        @include('admin.agents.refresh_colleague')
                                     </div>
                                 </div>
 

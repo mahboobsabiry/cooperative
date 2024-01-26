@@ -155,7 +155,8 @@
                     request()->is('admin/agent/add-colleague/*') ||
                     request()->is('admin/inactive-agents') ||
                     request()->is('admin/agent-colleagues') ||
-                    request()->is('admin/agent-colleagues/*') ? 'active show' : '' }}">
+                    request()->is('admin/agent-colleagues/*') ||
+                    request()->is('admin/inactive-agent-colleagues') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fa fa-user-tie"></i>
@@ -188,7 +189,15 @@
                             request()->is('admin/agent-colleagues/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.agent-colleagues.index') }}">
                                 همکاران نماینده ها
-                                ({{ count(\App\Models\AgentColleague::all()) }})
+                                ({{ count(\App\Models\AgentColleague::all()->where('status', 1)) }})
+                            </a>
+                        </li>
+
+                        <!-- Agent Inactive Colleagues -->
+                        <li class="nav-sub-item {{ request()->is('admin/inactive-agent-colleagues') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.agent-colleagues.inactive') }}">
+                                همکاران نماینده ها (غیرفعال)
+                                ({{ count(\App\Models\AgentColleague::all()->where('status', 0)) }})
                             </a>
                         </li>
                     </ul>

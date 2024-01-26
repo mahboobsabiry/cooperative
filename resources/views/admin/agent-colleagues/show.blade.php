@@ -55,11 +55,7 @@
                     </div>
                     <div class="mr-2">
                         <!-- Add -->
-                        <a class="btn ripple bg-primary btn-sm text-white"
-                           href="{{ route('admin.agents.add_colleague', $colleague->agent->id) }}">
-                            @lang('global.new')
-                            <i class="fe fe-edit"></i>
-                        </a>
+
                     </div>
                 </div>
             </div>
@@ -114,7 +110,7 @@
                                     <!-- Agent -->
                                     <tr>
                                         <th class="font-weight-bold">مافوق:</th>
-                                        <td>{{ $colleague->agent->name }}</td>
+                                        <td>{{ $colleague->agent->name ?? trans('global.empty') }}</td>
                                     </tr>
 
                                     <!-- Address -->
@@ -131,61 +127,63 @@
                                     </tbody>
 
                                     <!-- Left Column -->
-                                    <tbody class="col-lg-12 col-xl-5 p-0">
-                                    <!-- From Date -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('form.fromDate'):</th>
-                                        <td>{{ $colleague->from_date }}</td>
-                                    </tr>
+                                    @if($colleague->agent)
+                                        <tbody class="col-lg-12 col-xl-5 p-0">
+                                        <!-- From Date -->
+                                        <tr>
+                                            <th class="font-weight-bold">@lang('form.fromDate'):</th>
+                                            <td>{{ $colleague->from_date }}</td>
+                                        </tr>
 
-                                    <!-- To Date -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('form.toDate'):</th>
-                                        <td>{{ $colleague->to_date }}</td>
-                                    </tr>
+                                        <!-- To Date -->
+                                        <tr>
+                                            <th class="font-weight-bold">@lang('form.toDate'):</th>
+                                            <td>{{ $colleague->to_date }}</td>
+                                        </tr>
 
-                                    <!-- Document Number -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('pages.employees.docNumber'):</th>
-                                        <td>{{ $colleague->doc_number }}</td>
-                                    </tr>
+                                        <!-- Document Number -->
+                                        <tr>
+                                            <th class="font-weight-bold">@lang('pages.employees.docNumber'):</th>
+                                            <td>{{ $colleague->doc_number }}</td>
+                                        </tr>
 
-                                    <!-- Validation Duration -->
-                                    <tr>
-                                        <th class="font-weight-bold">مدت اعتبار:</th>
+                                        <!-- Validation Duration -->
+                                        <tr>
+                                            <th class="font-weight-bold">مدت اعتبار:</th>
 
-                                        <!-- Validation Date Status -->
-                                        <td>
-                                            @php
-                                                $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->from_date)->toCarbon();
-                                                $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
-                                                $valid_days = $from_date->diffInDays($to_date);
-                                                echo $valid_days . ' روز';
-                                            @endphp
-                                        </td>
-                                    </tr>
+                                            <!-- Validation Date Status -->
+                                            <td>
+                                                @php
+                                                    $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->from_date)->toCarbon();
+                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
+                                                    $valid_days = $from_date->diffInDays($to_date);
+                                                    echo $valid_days . ' روز';
+                                                @endphp
+                                            </td>
+                                        </tr>
 
-                                    <!-- Validation Status -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('global.validationStatus'):</th>
+                                        <!-- Validation Status -->
+                                        <tr>
+                                            <th class="font-weight-bold">@lang('global.validationStatus'):</th>
 
-                                        <!-- Validation Date Status -->
-                                        <td>
-                                            @php
-                                                $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
+                                            <!-- Validation Date Status -->
+                                            <td>
+                                                @php
+                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
 
-                                                // $diff_days = $to_date->diffInDays($from_date);
-                                                $valid_days = now()->diffInDays($to_date);
-                                                if ($to_date > today()) {
-                                                    echo "<span class='text-secondary'>$valid_days روز باقیمانده</span>";
-                                                } else {
-                                                    echo "<span class='text-danger'>تاریخ ختم شده</span>";
-                                                }
-                                            @endphp
-                                        </td>
-                                        <!--/==/ End of Validation Date Status -->
-                                    </tr>
-                                    </tbody>
+                                                    // $diff_days = $to_date->diffInDays($from_date);
+                                                    $valid_days = now()->diffInDays($to_date);
+                                                    if ($to_date > today()) {
+                                                        echo "<span class='text-secondary'>$valid_days روز باقیمانده</span>";
+                                                    } else {
+                                                        echo "<span class='text-danger'>تاریخ ختم شده</span>";
+                                                    }
+                                                @endphp
+                                            </td>
+                                            <!--/==/ End of Validation Date Status -->
+                                        </tr>
+                                        </tbody>
+                                    @endif
                                 </table>
                             </div>
                             <!--/==/ End of Personal Information Table -->
