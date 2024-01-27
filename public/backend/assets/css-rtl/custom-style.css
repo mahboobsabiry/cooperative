@@ -25,7 +25,7 @@ body{
 	transition: .3s background;
 }
 ::-webkit-scrollbar-thumb {
-	background: #e1e6f1;
+	background: #1e1e3e;
 }
 *:hover::-webkit-scrollbar-thumb {
 	background: #adb5bd;
@@ -302,7 +302,7 @@ body{
 		border-right: 14px solid #cad4e4 !important;
 		border-left: 0 solid #cad4e4 !important;
 		left: -14px !important;
-		right: auto !important;		
+		right: auto !important;
 	}
 	.vtimeline .timeline-wrapper.timeline-inverted{
 		padding-left:0 !important
@@ -876,7 +876,7 @@ body{
     background: #edeff7;
 }
 .clip-widget{
-	position:relative; 
+	position:relative;
 }
 .clipboard-icon {
     position: absolute;
@@ -975,7 +975,7 @@ body{
 .language-css .token.string,
 .style .token.string,
 .token.variable {
-	background: none; 
+	background: none;
 }
 .user-lock img{
 	width:70px;
@@ -1142,7 +1142,7 @@ body{
 	transform: scale(1);
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
-	
+
 }
 .product-img:hover img{
 	-webkit-transform: scale(1.2);
@@ -2087,7 +2087,7 @@ select.form-control.select-sm {
 	border-color: #b4bdce;
 	box-shadow: none !important;
 }
-.main-form-search .form-control:focus+.btn, .main-form-search .sp-container .form-control:focus+button, 
+.main-form-search .form-control:focus+.btn, .main-form-search .sp-container .form-control:focus+button,
 .sp-container .main-form-search .form-control:focus+button {
 	color: #99a6b7;
 }
@@ -2102,8 +2102,8 @@ select.form-control.select-sm {
 	font-size: 16px;
 	padding-right: 13px;
 }
-.main-form-search .btn:hover, .main-form-search .sp-container button:hover, .sp-container 
-.main-form-search button:hover, .main-form-search .btn:focus, .main-form-search .sp-container button:focus, 
+.main-form-search .btn:hover, .main-form-search .sp-container button:hover, .sp-container
+.main-form-search button:hover, .main-form-search .btn:focus, .main-form-search .sp-container button:focus,
 .sp-container .main-form-search button:focus {
 	color:#334151;
 }

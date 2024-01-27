@@ -317,42 +317,12 @@
                                         </div>
                                         <!--/==/ End of Employee Number and Email Address -->
 
-                                        <!-- Phone Number -->
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <!-- Phone Number -->
-                                                <div class="form-group @error('phone') has-danger @enderror">
-                                                    <p class="mb-2">15) @lang('form.phone'):</p>
-                                                    <input type="text" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ $employee->phone ?? old('phone') }}">
-
-                                                    @error('phone')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <!--/==/ End of Phone Number -->
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <!-- Phone Number 2 -->
-                                                <div class="form-group @error('phone2') has-danger @enderror">
-                                                    <p class="mb-2">16) @lang('form.phone') @lang('global.alternative'): </p>
-                                                    <input type="text" id="phone2" class="form-control @error('phone2') form-control-danger @enderror" name="phone2" value="{{ $employee->phone2 ?? old('phone2') }}">
-
-                                                    @error('phone2')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <!--/==/ End of Phone Number 2 -->
-                                            </div>
-                                        </div>
-                                        <!--/==/ End of Phone Number -->
-
                                         <!-- Main Address -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <!-- Main Province -->
                                                 <div class="form-group @error('main_province') has-danger @enderror">
-                                                    <p class="mb-2">17) @lang('form.mainProvince'): <span class="tx-danger">*</span></p>
+                                                    <p class="mb-2">15) @lang('form.mainProvince'): <span class="tx-danger">*</span></p>
                                                     <input type="text" id="main_province" class="form-control @error('main_province') form-control-danger @enderror" name="main_province" value="{{ $employee->main_province ?? old('main_province') }}" required>
 
                                                     @error('main_province')
@@ -364,7 +334,7 @@
                                             <div class="col-md-6">
                                                 <!-- Main District -->
                                                 <div class="form-group @error('main_district') has-danger @enderror">
-                                                    <p class="mb-2">18) @lang('form.mainDistrict'): <span class="tx-danger">*</span></p>
+                                                    <p class="mb-2">16) @lang('form.mainDistrict'): <span class="tx-danger">*</span></p>
                                                     <input type="text" id="main_district" class="form-control @error('main_district') form-control-danger @enderror" name="main_district" value="{{ $employee->main_district ?? old('main_district') }}" required>
 
                                                     @error('main_district')
@@ -381,7 +351,7 @@
                                             <div class="col-md-6">
                                                 <!-- Current Province -->
                                                 <div class="form-group @error('current_province') has-danger @enderror">
-                                                    <p class="mb-2">19) @lang('form.currentProvince'): <span class="tx-danger">*</span></p>
+                                                    <p class="mb-2">17) @lang('form.currentProvince'): <span class="tx-danger">*</span></p>
                                                     <input type="text" id="current_province" class="form-control @error('current_province') form-control-danger @enderror" name="current_province" value="{{ $employee->current_province ?? old('current_province') }}" required>
 
                                                     @error('current_province')
@@ -393,7 +363,7 @@
                                             <div class="col-md-6">
                                                 <!-- Current District -->
                                                 <div class="form-group @error('current_district') has-danger @enderror">
-                                                    <p class="mb-2">20) @lang('form.currentDistrict'): <span class="tx-danger">*</span></p>
+                                                    <p class="mb-2">18) @lang('form.currentDistrict'): <span class="tx-danger">*</span></p>
                                                     <input type="text" id="current_district" class="form-control @error('current_district') form-control-danger @enderror" name="current_district" value="{{ $employee->current_district ?? old('current_district') }}" required>
 
                                                     @error('current_district')
@@ -404,6 +374,40 @@
                                             </div>
                                         </div>
                                         <!--/==/ End of Current Address -->
+
+                                        <!--/==/ End of General Information -->
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <!-- Phone Number -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <!-- Phone Number -->
+                                                <div class="form-group @error('phone') has-danger @enderror">
+                                                    <p class="mb-2">19) @lang('form.phone'):</p>
+                                                    <input type="text" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ $employee->phone ?? old('phone') }}">
+
+                                                    @error('phone')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of Phone Number -->
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <!-- Phone Number 2 -->
+                                                <div class="form-group @error('phone2') has-danger @enderror">
+                                                    <p class="mb-2">20) @lang('form.phone') @lang('global.alternative'): </p>
+                                                    <input type="text" id="phone2" class="form-control @error('phone2') form-control-danger @enderror" name="phone2" value="{{ $employee->phone2 ?? old('phone2') }}">
+
+                                                    @error('phone2')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of Phone Number 2 -->
+                                            </div>
+                                        </div>
+                                        <!--/==/ End of Phone Number -->
 
                                         <!-- PRR/NPR -->
                                         <div class="row">
@@ -439,10 +443,6 @@
                                         </div>
                                         <!--/==/ End of PRR/NPR -->
 
-                                        <!--/==/ End of General Information -->
-                                    </div>
-
-                                    <div class="col-md-6">
                                         <!-- Introducer & Hostel -->
                                         <div class="row">
                                             <div class="col-md-6">
@@ -507,41 +507,27 @@
                                         </div>
                                         <!--/==/ End of Photo -->
 
-                                        <!-- Card -->
-                                        <div class="form-group @error('card') has-danger @enderror">
-                                            <p class="mb-2">27) @lang('form.customCard'):</p>
-                                            @if($employee->card)
-                                                <img src="{{ $employee->card }}" width="30">
-                                            @endif
-                                            <input type="file" class="dropify" name="card" accept="image/*" data-height="200" />
-                                            @error('card')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Card -->
-
-                                        <!-- Tazkira -->
-                                        <div class="form-group @error('tazkira') has-danger @enderror">
+                                        <!-- Documents -->
+                                        <div class="form-group @error('document') has-danger @enderror">
                                             <p class="mb-2">
-                                                <!-- Tazkira -->
-                                                28) @lang('form.idCard'): <br>
-                                                <span class="caption bg-gray-300">نوت: اگر تذکره الکترونیکی دارید، آن را در یک فایل قرار داده و آپلود نمایید.</span>
+                                                <!-- Documents -->
+                                                27) اسناد: <br>
+                                                <span class="caption bg-gray-300">نوت: اگر تذکره الکترونیکی دارید، آن را در یک فایل قرار داده و آپلود نمایید. فایل آپلود شده باید از نوع تصویر باشد.</span>
                                             </p>
-                                            @if($employee->taz)
-                                                <img src="{{ $employee->taz }}" width="30">
-                                            @endif
 
-                                            <input type="file" class="dropify" name="tazkira" accept="image/*" data-height="200" />
-                                            @error('tazkira')
+                                            <div class="bd p-2">
+                                                <input type="file" class="form-control-file" name="document[]" accept="image/*" data-height="200" multiple />
+                                            </div>
+                                            @error('document')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Tazkira -->
-                                    </div>
-                                </div>
+                                        <!--/==/ End of Documents -->
 
-                                <div class="modal-footer">
-                                    <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.update')</button>
+                                        <div class="form-group float-left">
+                                            <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                             <!--/==/ End of Form -->

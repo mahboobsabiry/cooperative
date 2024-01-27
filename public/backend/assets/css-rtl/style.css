@@ -2111,7 +2111,7 @@ a.btn.disabled, fieldset:disabled a.btn {
 	box-shadow: 0 0 0 1px rgb(56, 210, 80);
 }
 .btn-outline-success.disabled, .btn-outline-success:disabled {
-	color: #03c895 !important; 
+	color: #03c895 !important;
 	background-color: transparent;
 }
 .btn-outline-success:not(:disabled):not(.disabled):active, .btn-outline-success:not(:disabled):not(.disabled).active, .show>.btn-outline-success.dropdown-toggle {
@@ -2183,7 +2183,7 @@ a.btn.disabled, fieldset:disabled a.btn {
 	box-shadow: 0 0 0 1px rgb(255, 71, 61);
 }
 .btn-outline-danger.disabled, .btn-outline-danger:disabled {
-	color: #ff473d !important; 
+	color: #ff473d !important;
 	background-color: transparent;
 }
 .btn-outline-danger:not(:disabled):not(.disabled):active, .btn-outline-danger:not(:disabled):not(.disabled).active, .show>.btn-outline-danger.dropdown-toggle {
@@ -2827,7 +2827,7 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 	line-height: 1.5;
 	color: #596882;
 	vertical-align: middle;
-	
+
 	background-color: #fff;
 	border: 1px solid #e1e6f1;
 	border-radius: 0px;
@@ -9778,7 +9778,7 @@ input.parsley-success:focus, textarea.parsley-success:focus {
 	overflow: hidden;
 }
 .ps>.ps__rail-y {
-	width: 5px;
+	width: 10px;
 	background-color: rgba(28, 39, 60, 0.04);
 	z-index: 10;
 	position: absolute;
@@ -9795,7 +9795,7 @@ input.parsley-success:focus, textarea.parsley-success:focus {
 .ps>.ps__rail-y>.ps__thumb-y {
 	position: absolute;
 	border-radius: 0;
-	width: 3px;
+	width: 10px;
 	right: 1px;
 	background-color: #99a6b7;
 }
@@ -15168,7 +15168,7 @@ body {
 	color: #1e1635;
 	position: relative;
 }
-.main-chat-body .media.flex-row-reverse .main-msg-wrapper:before,  
+.main-chat-body .media.flex-row-reverse .main-msg-wrapper:before,
 .main-chat-body .media.flex-row-reverse .main-msg-wrapper:after{
 	left: auto;
     right: 100%;
@@ -15185,7 +15185,7 @@ body {
 .main-msg-wrapper{
 	position:relative
 }
-.main-msg-wrapper:before,  
+.main-msg-wrapper:before,
 .main-msg-wrapper:after{
 	border-color: transparent #f1f2f9 transparent transparent;
     border-image: none;
