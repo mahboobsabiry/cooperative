@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('appointment_number');
             $table->string('appointment_date');
             $table->string('last_duty')->default('جدیدالشمول');
-            $table->bigInteger('birth_year');
+            $table->integer('birth_year');
             $table->string('education')->nullable();
             $table->enum('prr_npr', ['PRR', 'NPR'])->default('NPR');
             $table->string('prr_date')->nullable();

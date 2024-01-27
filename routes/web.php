@@ -106,6 +106,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::post('employee/fire-employee/{id}', [EmpController::class, 'fire_employee'])->name('employees.fire_employee');
     // Suspended Employees
     Route::get('employee/suspended-employees', [EmpController::class, 'suspended_employees'])->name('employees.suspended_employees');
+    // Retired Employees
+    Route::get('employee/retired-employees', [EmpController::class, 'retired_employees'])->name('employees.retired_employees');
+    Route::get('employee/retire-employee/{id}', [EmpController::class, 'retire_employee'])->name('employees.retire_employee');
 
     // Agents & Companies
     Route::resource('agents', AgentController::class);

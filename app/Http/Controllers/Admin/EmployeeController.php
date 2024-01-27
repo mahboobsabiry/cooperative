@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Morilog\Jalali\CalendarUtils;
+use Morilog\Jalali\Jalalian;
 use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -73,6 +74,7 @@ class EmployeeController extends Controller
         $employee->appointment_number   = $request->appointment_number;
         $employee->appointment_date     = $request->appointment_date;
         $employee->last_duty        = $request->last_duty;
+
         $employee->birth_year       = $request->birth_year;
         $employee->education        = $request->education;
         $employee->prr_npr          = $request->prr_npr;
@@ -204,6 +206,7 @@ class EmployeeController extends Controller
         $employee->appointment_number    = $request->appointment_number;
         $employee->appointment_date      = $request->appointment_date;
         $employee->last_duty        = $request->last_duty;
+
         $employee->birth_year       = $request->birth_year;
         $employee->education        = $request->education;
         $employee->prr_npr          = $request->prr_npr;

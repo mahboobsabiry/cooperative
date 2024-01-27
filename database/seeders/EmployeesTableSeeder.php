@@ -6,6 +6,7 @@ use App\Models\Employee;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Morilog\Jalali\Jalalian;
 
 class EmployeesTableSeeder extends Seeder
 {

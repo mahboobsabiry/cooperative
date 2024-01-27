@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use Morilog\Jalali\CalendarUtils;
+use Morilog\Jalali\Jalalian;
 
 class EmpController extends Controller
 {
@@ -216,5 +217,40 @@ class EmpController extends Controller
     {
         $suspended_employees = Employee::where('status', 3)->get();
         return view('admin.employees.suspended_employees', compact('suspended_employees'));
+    }
+
+    // Retired Employees
+    public function retired_employees()
+    {
+        $retired_employees = Employee::where('status', 4)->get();
+        return view('admin.employees.retired_employees', compact('retired_employees'));
+    }
+
+    // Retire Employee
+    public function retire_employee($id)
+    {
+        $employee = Employee::find($id);
+
+        $get_year = Jalalian::now()->getYear() - $employee->birth_year;
+
+        if ($get_year > 65) {
+            $employee->update([
+                'position_id'   => null,
+                'hostel_id'     => null,
+                'position_code' => null,
+                'status'        => 4,
+                'background'    => $employee->background . 'به تاریخ ' . CalendarUtils::date('Y-m-d', now()) . ' تقاعد نمود.'
+            ]);
+
+            return redirect()->back()->with([
+                'message'   => 'کارمند متذکره تقاعد نمود.',
+                'alertType' => 'success'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'message'   => 'کارمند واجد شرایط تقاعدی نمی باشد.',
+                'alertType' => 'danger'
+            ]);
+        }
     }
 }

@@ -80,7 +80,8 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                <img alt="avatar" src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}">
+                                <img alt="avatar"
+                                     src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}">
                             </div>
                         </div>
 
@@ -159,7 +160,8 @@
                         </h6>
 
                         <a href="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}" target="_blank">
-                            <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail"
+                            <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
+                                 class="img-thumbnail"
                                  alt="@lang('form.idCard')">
                         </a>
                         <hr>
@@ -168,7 +170,8 @@
                         </h6>
 
                         <a href="{{ $employee->card ?? asset('assets/images/id-card-default.png') }}" target="_blank">
-                            <img src="{{ $employee->card ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail"
+                            <img src="{{ $employee->card ?? asset('assets/images/id-card-default.png') }}"
+                                 class="img-thumbnail"
                                  alt="@lang('form.customCard')">
                         </a>
                     </div>
@@ -329,6 +332,10 @@
                                                     <span class="text-warning italic font-italic">
                                                         در حالت تعلیق میباشد
                                                     </span>
+                                                @elseif($employee->status == 4)
+                                                    <span class="text-warning italic font-italic">
+                                                        تقاعد نموده است.
+                                                    </span>
                                                 @endif
                                             </span>
                                         </td>
@@ -346,10 +353,13 @@
                                     <tr>
                                         <td colspan="3">
                                             <div>
-                                                شروع وظیفه از تاریخ {{ $employee->start_job }} <br> {!! $employee->background ?? '--' !!}
+                                                شروع وظیفه از تاریخ {{ $employee->start_job }}
+                                                <br> {!! $employee->background ?? '--' !!}
 
                                                 @if($employee->position)
-                                                    <a aria-controls="collapseAddBackground" aria-expanded="false" class="text-danger" data-toggle="collapse" href="#collapseAddBackground">@lang('global.add')</a>
+                                                    <a aria-controls="collapseAddBackground" aria-expanded="false"
+                                                       class="text-danger" data-toggle="collapse"
+                                                       href="#collapseAddBackground">@lang('global.add')</a>
 
                                                     @include('admin.employees.inc.add_background')
                                                 @endif
@@ -366,30 +376,34 @@
                                                 <br>
                                                 @if($employee->on_duty == 0)
                                                     -- <a class="modal-effect text-danger"
-                                                        data-effect="effect-sign" data-toggle="modal"
-                                                        href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>
-
-                                                    @include('admin.employees.inc.duty_position')
+                                                          data-effect="effect-sign" data-toggle="modal"
+                                                          href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>
                                                 @else
                                                     -- @lang('pages.employees.onDuty') - {{ $employee->duty_position }}
                                                     <a class="modal-effect text-danger"
                                                        data-effect="effect-sign" data-toggle="modal"
                                                        href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
-
-                                                    @include('admin.employees.inc.reset_position')
                                                 @endif
 
                                                 <!-- Fire Employee -->
                                                 <br>
                                                 -- <a class="modal-effect text-danger"
                                                       data-effect="effect-sign" data-toggle="modal"
-                                                      href="#fire_employee{{ $employee->id }}">منفک شود؟</a>
+                                                      href="#fire_employee{{ $employee->id }}">منفک؟</a>
 
-                                                @include('admin.employees.inc.fire_employee')
+                                                <!-- Retire Employee -->
+                                                <br>
+                                                -- <a class="modal-effect text-danger"
+                                                      data-effect="effect-sign" data-toggle="modal"
+                                                      href="#retire_employee{{ $employee->id }}">تقاعد؟</a>
 
                                                 <!-- Change position to other organ -->
                                                 <br>
-                                                -- <a aria-controls="collapseChangePosition" aria-expanded="false" class="text-danger" data-toggle="collapse" href="#collapseChangePosition">تبدیل به اداره/ارگان دیگر؟</a>
+                                                -- <a aria-controls="collapseChangePosition" aria-expanded="false"
+                                                      class="text-danger" data-toggle="collapse"
+                                                      href="#collapseChangePosition">تبدیل به اداره/ارگان دیگر؟</a>
+
+                                                @include('admin.employees.inc.modals')
 
                                                 @include('admin.employees.inc.change_position_ocustom')
                                             @else
@@ -414,28 +428,35 @@
                                         </tr>
                                         <tr>
                                             <td colspan="3">
-                                                <form action="{{ route('admin.employees.in_return', $employee->id) }}" method="post">
+                                                <form action="{{ route('admin.employees.in_return', $employee->id) }}"
+                                                      method="post">
                                                     @csrf
                                                     <div class="form-group @error('position_id') @enderror">
                                                         <p><strong>@lang('pages.employees.employee'): </strong></p>
                                                         <select class="form-control select2" name="position_id">
                                                             @foreach($active_employees as $emp)
-                                                                <option value="{{ $emp->position_id }}">{{ $emp->name }} {{ $emp->last_name ?? '' }}</option>
+                                                                <option
+                                                                    value="{{ $emp->position_id }}">{{ $emp->name }} {{ $emp->last_name ?? '' }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    <button class="btn btn-primary btn-sm" type="submit">@lang('global.save')</button>
+                                                    <button class="btn btn-primary btn-sm"
+                                                            type="submit">@lang('global.save')</button>
                                                 </form>
                                             </td>
                                             <td colspan="3">
-                                                <form action="{{ route('admin.employees.duc_position', $employee->id) }}" method="post">
+                                                <form
+                                                    action="{{ route('admin.employees.duc_position', $employee->id) }}"
+                                                    method="post">
                                                     @csrf
                                                     <!-- Position -->
                                                     <div class="form-group @error('position_id') @enderror">
-                                                        <p><strong>@lang('form.position'): <span class="text-danger">*</span></strong></p>
+                                                        <p><strong>@lang('form.position'): <span
+                                                                    class="text-danger">*</span></strong></p>
                                                         <select class="form-control select2" name="position_id">
                                                             @foreach(\App\Models\Position::all()->where('id', '!=', $employee->position_id) as $position)
-                                                                <option value="{{ $position->id }}">{{ $position->title }}</option>
+                                                                <option
+                                                                    value="{{ $position->id }}">{{ $position->title }}</option>
                                                             @endforeach
                                                         </select>
 
@@ -446,8 +467,11 @@
 
                                                     <!-- Position Code -->
                                                     <div class="form-group @error('position_code') @enderror">
-                                                        <p><strong>@lang('form.positionCode'): <span class="text-danger">*</span></strong></p>
-                                                        <input type="text" name="position_code" class="form-control @error('position_code') form-control-danger @enderror" value="{{ old('position_code') }}" required>
+                                                        <p><strong>@lang('form.positionCode'): <span
+                                                                    class="text-danger">*</span></strong></p>
+                                                        <input type="text" name="position_code"
+                                                               class="form-control @error('position_code') form-control-danger @enderror"
+                                                               value="{{ old('position_code') }}" required>
 
                                                         @error('position_code')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -456,14 +480,18 @@
 
                                                     <!-- Doc Number -->
                                                     <div class="form-group @error('doc_number') @enderror">
-                                                        <p><strong>نمبر مکتوب: <span class="text-danger">*</span></strong></p>
-                                                        <input type="text" name="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" value="{{ old('doc_number') }}" required>
+                                                        <p><strong>نمبر مکتوب: <span
+                                                                    class="text-danger">*</span></strong></p>
+                                                        <input type="text" name="doc_number"
+                                                               class="form-control @error('doc_number') form-control-danger @enderror"
+                                                               value="{{ old('doc_number') }}" required>
 
                                                         @error('doc_number')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                    <button class="btn btn-primary btn-sm" type="submit">@lang('global.save')</button>
+                                                    <button class="btn btn-primary btn-sm"
+                                                            type="submit">@lang('global.save')</button>
                                                 </form>
                                             </td>
                                         </tr>

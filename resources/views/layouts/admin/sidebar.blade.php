@@ -83,8 +83,9 @@
                     request()->is('admin/main-employees') ||
                     request()->is('admin/on-duty-employees') ||
                     request()->is('admin/employee/change-position-employees') ||
-                    request()->is('admin/employee/fired-employees')  ||
-                    request()->is('admin/employee/suspended-employees') ? 'active show' : '' }}">
+                    request()->is('admin/employee/fired-employees') ||
+                    request()->is('admin/employee/suspended-employees') ||
+                    request()->is('admin/employee/retired-employees') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fa fa-user-tie"></i>
@@ -140,6 +141,14 @@
                             <a class="nav-sub-link" href="{{ route('admin.employees.suspended_employees') }}">
                                 معلق
                                 ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 3)->count() }})
+                            </a>
+                        </li>
+
+                        <!-- Retired Employees -->
+                        <li class="nav-sub-item {{ request()->is('admin/employee/retired-employees') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.employees.retired_employees') }}">
+                                متقاعدین
+                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 4)->count() }})
                             </a>
                         </li>
                     </ul>
