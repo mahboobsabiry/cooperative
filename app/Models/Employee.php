@@ -53,4 +53,10 @@ class Employee extends Model
     {
         return $this->belongsTo(Hostel::class, 'hostel_id');
     }
+
+    // Has One Asycuda User
+    public function asycuda_user()
+    {
+        return $this->hasOne(AsycudaUser::class);
+    }
 }

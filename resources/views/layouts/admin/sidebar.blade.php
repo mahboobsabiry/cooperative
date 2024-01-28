@@ -22,6 +22,30 @@
             <!-- Pages -->
             <li class="nav-label">@lang('admin.dashboard.pages')</li>
 
+            <!-- Asycuda -->
+            @can('asycuda_mgmt')
+                <li class="nav-item {{ request()->is('admin/asycuda-users') ||
+                    request()->is('admin/asycuda-users/*') ? 'active show' : '' }}">
+
+                    <a class="nav-link with-sub" href="javascript:void(0)">
+                        <i class="ion ion-ios-desktop"></i>
+                        <span class="sidemenu-label">اسیکودا</span>
+                        <i class="angle fe fe-chevron-right"></i>
+                    </a>
+
+                    <ul class="nav-sub">
+                        <!-- Employees Users -->
+                        <li class="nav-sub-item {{ request()->is('admin/asycuda-users') || request()->is('admin/asycuda-users/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.asycuda-users.index') }}">
+                                یوزر ها
+                                ({{ count(\App\Models\AsycudaUser::all()) }})
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endcan
+            <!--/==/ End of Asycuda -->
+
             <!-- Positions -->
             @can('organization_mgmt')
                 <li class="nav-item {{ request()->is('admin/positions') ||
@@ -136,19 +160,19 @@
                             </a>
                         </li>
 
-                        <!-- Suspended Employees -->
-                        <li class="nav-sub-item {{ request()->is('admin/employee/suspended-employees') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.employees.suspended_employees') }}">
-                                معلق
-                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 3)->count() }})
-                            </a>
-                        </li>
-
                         <!-- Retired Employees -->
                         <li class="nav-sub-item {{ request()->is('admin/employee/retired-employees') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.employees.retired_employees') }}">
                                 متقاعدین
                                 ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 4)->count() }})
+                            </a>
+                        </li>
+
+                        <!-- Suspended Employees -->
+                        <li class="nav-sub-item {{ request()->is('admin/employee/suspended-employees') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.employees.suspended_employees') }}">
+                                <span class="text-secondary">معلق </span>&nbsp;
+                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 3)->count() }})
                             </a>
                         </li>
                     </ul>

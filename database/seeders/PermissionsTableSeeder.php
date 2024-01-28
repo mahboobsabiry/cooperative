@@ -39,6 +39,9 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'name'      => 'agent_mgmt' // Manage Companies Agents
+            ],
+            [
+                'name'      => 'asycuda_mgmt' // Manage Asycuda
             ]
         ];
 
