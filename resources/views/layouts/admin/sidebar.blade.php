@@ -293,7 +293,7 @@
 
             <!-- Hostel -->
             @can('hostel_mgmt')
-                <li class="nav-item {{ request()->url() == route('admin.hostel.index') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->url() == route('admin.hostel.index') || request()->is('admin/hostel/*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.hostel.index') }}">
                         <i class="fa fa-building"></i><span class="sidemenu-label">@lang('pages.hostel.hostel')</span>
                     </a>

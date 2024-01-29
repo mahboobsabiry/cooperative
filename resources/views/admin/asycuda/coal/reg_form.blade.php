@@ -85,11 +85,10 @@
 
         <style>
             body {
-                height: 8.268in;
-                width: 11.693in;
+                height: 11.69in;
+                width: 8.27in;
                 /* to centre page on screen*/
-                margin-left: auto;
-                margin-right: auto;
+                margin: auto;
                 background-color: #cccccc;
             }
             .grid-container {
@@ -105,15 +104,18 @@
                 /*font-size: 30px;*/
                 text-align: center;
             }
+            .ff-times {
+                font-family: "Times New Roman";
+            }
         </style>
     </head>
 
     <body style="font-family: Calibri !important;">
         <!-- Page -->
-        <div class="app" style="height: 11.693in; width: 8.268in; padding: 20px; background-color: white;">
+        <div style="width: 998px; height: 1254px; padding: 40px; background-color: white;">
             <!-- Header -->
             <div class="grid-container" style="position:relative; font-size: 16px; line-height: 5px; font-weight: bolder;">
-                <div class="grid-item text-center align-content-center justify-content-center">
+                <div class="grid-item">
                     <img src="{{ asset('assets/images/emirate-logo.jpg') }}" width="90">
                     <div style="font-family: Calibri; margin-top: 20px;">
                         <p>د افغانستان اسلامی امارت</p>
@@ -122,17 +124,17 @@
                         <p>د گمرکونو لوی ریاست</p>
                     </div>
                 </div>
-                <div class="grid-item text-center align-content-center justify-content-center">
+                <div class="grid-item">
                     <div style="margin-top: 100px;">
-                        <p style="font-family: 'Times New Roman';">Islamic Emirate of Afghanistan</p>
-                        <p style="font-family: 'Times New Roman';">Ministry of Finance</p>
-                        <p style="font-family: 'Times New Roman';">Afghan Customs Department</p>
-                        <p style="font-family: Calibri;">د گمرکونو عملیاتی ریاست</p>
+                        <p class="ff-times">Islamic Emirate of Afghanistan</p>
+                        <p class="ff-times">Ministry of Finance</p>
+                        <p class="ff-times">Afghan Customs Department</p>
+                        <p>د گمرکونو عملیاتی ریاست</p>
                     </div>
                 </div>
-                <div class="grid-item text-center align-content-center justify-content-center">
+                <div class="grid-item">
                     <img src="{{ asset('assets/images/logo.jpg') }}" width="90">
-                    <div style="font-family: Calibri; margin-top: 20px;">
+                    <div class="mt-4">
                         <p>امارت اسلامی افغانستان</p>
                         <p>وزارت مالیه</p>
                         <p>معینیت عواید و گمرکات</p>
@@ -143,7 +145,7 @@
             <!--/==/ End of Header -->
 
             <!-- Title -->
-            <p class="text-center mt-2" style="font-size: 20px;">د اسیکودا په سیستم کی د جواز ثبتولو فورمه (<span style="font-family: 'Times New Roman';">C1</span>)</p>
+            <p class="text-center mt-2" style="font-size: 20px;">د اسیکودا په سیستم کی د جواز ثبتولو فورمه (<span class="ff-times">C1</span>)</p>
 
             <!-- Table -->
             <div>
@@ -158,19 +160,19 @@
                     <tr>
                         <th class="font-weight-bold">د جواز ثبتولو د غوښتونکی نوم:</th>
                         <td>{{ $cal->owner_name }}</td>
-                        <td><strong>مبایل شمیره: </strong> {{ $cal->owner_phone }}</td>
+                        <td><strong>مبایل شمیره: </strong> <span class="ff-times">{{ $cal->owner_phone }}</span></td>
                     </tr>
                     <!-- TIN & Export Date -->
                     <tr>
-                        <th class="font-weight-bold">د <span style="font-family: 'Times New Roman';">TIN</span> شمیره</th>
+                        <th class="font-weight-bold">د <span class="ff-times">TIN</span> شمیره</th>
                         <td>{{ $cal->company_tin }}</td>
-                        <td><strong>د صادریدو  نیټه: </strong> {{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->export_date)) }}</td>
+                        <td><strong>د صادریدو  نیټه: </strong> <span class="ff-times">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->export_date)) }}</span></td>
                     </tr>
                     <!-- License Number & Expire Date -->
                     <tr>
                         <th class="font-weight-bold">د جواز نمبر</th>
                         <td>{{ $cal->license_number }}</td>
-                        <td><strong>د ختمیدو  نیټه: </strong> {{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->expire_date)) }}</td>
+                        <td><strong>د ختمیدو  نیټه: </strong> <span class="ff-times">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->expire_date)) }}</span></td>
                     </tr>
                     <!-- Company Address -->
                     <tr>
@@ -180,11 +182,11 @@
                     <!-- Company Phone -->
                     <tr>
                         <th class="font-weight-bold">د آړیکو شمیره</th>
-                        <td colspan="2">د SMS (لنډ پیغام) د لاسته راوړلو لپاره شمیره:  {{ $cal->phone }}</td>
+                        <td colspan="2">د <span class="ff-times">SMS</span> (لنډ پیغام) د لاسته راوړلو لپاره شمیره:  <span class="ff-times">{{ $cal->phone }}</span></td>
                     </tr>
                     <!-- Company Phone -->
                     <tr>
-                        <th colspan="3"><strong>بریښنالیک</strong> {{ $cal->email }}</th>
+                        <th colspan="3"><strong>بریښنالیک</strong> <span class="ff-times">{{ $cal->email }}</span></th>
                     </tr>
                     </tbody>
                 </table>
@@ -193,7 +195,7 @@
 
             <!-- Verification -->
             <div>
-                <p style="font-size: 16px;">د پورتنی معلوماتو تصدیق او د غوښتونکی لاسلیک او د شرکت ټاپه: -------------------------------------------------- نیته: {{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->created_at)) }}</p>
+                <p style="font-size: 16px;">د پورتنی معلوماتو تصدیق او د غوښتونکی لاسلیک او د شرکت ټاپه: -------------------------------------------------- نیته: <span class="ff-times">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->created_at)) }}</span></p>
             </div>
 
             <!-- Terms -->
@@ -225,15 +227,15 @@
                     <tbody>
                     <tr>
                         <th>تلفون</th>
-                        <td></td>
+                        <td class="ff-times"></td>
                     </tr>
                     <tr>
                         <th>بریښنالیک</th>
-                        <td>asywaf.license@yahoo.com</td>
+                        <td class="ff-times">asywaf.license@yahoo.com</td>
                     </tr>
                     <tr>
                         <th>ویبپانه</th>
-                        <td>www.asycuda.gov.af</td>
+                        <td class="ff-times">www.asycuda.gov.af</td>
                     </tr>
                     </tbody>
                 </table>
@@ -241,7 +243,7 @@
             <!--/==/ End of Table 2 -->
 
             <div style="font-size: 15px;">
-                <p>د ثبت کوونکی یا ایمیل کوونکی مامور لاسلیک: ---------------------------------------- نیټه: {{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime(now())) }}</p>
+                <p>د ثبت کوونکی یا ایمیل کوونکی مامور لاسلیک: ---------------------------------------- نیټه: <span class="ff-times">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime(now())) }}</span></p>
             </div>
 
             <div class="text-center" style="font-size: 15px;">
@@ -249,6 +251,7 @@
             </div>
         </div>
         <!-- End Page -->
+
         <!-- Jquery js-->
         <script src="{{ asset('backend/assets/plugins/jquery/jquery.min.js') }}"></script>
 
