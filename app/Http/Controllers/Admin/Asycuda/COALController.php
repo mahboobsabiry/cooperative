@@ -58,6 +58,13 @@ class COALController extends Controller
         return view('admin.asycuda.coal.show', compact('cal'));
     }
 
+    // Reg Form
+    public function reg_form($id)
+    {
+        $cal = COAL::find($id);
+        return view('admin.asycuda.coal.reg_form', compact('cal'));
+    }
+
     // Edit
     public function edit($id)
     {

@@ -136,6 +136,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::group(['prefix' => 'asycuda', 'as' => 'asycuda.', 'middleware' => ['auth']], function () {
         Route::resource('users', AsycudaUserController::class);
         Route::resource('coal', COALController::class);
+        Route::get('registration-form/{id}', [COALController::class, 'reg_form'])->name('coal.reg_form');
     });
 
     // Settings

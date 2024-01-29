@@ -92,7 +92,7 @@
                                     <tbody class="p-0">
                                     <!-- Details -->
                                     <tr>
-                                        <td colspan="6" class="font-weight-bold">
+                                        <td colspan="8" class="font-weight-bold">
                                             معلومات
                                         </td>
                                     </tr>
@@ -104,6 +104,8 @@
                                         <th><strong>جواز فعالیت</strong></th>
                                         <th><strong>تاریخ صدور جواز</strong></th>
                                         <th><strong>تاریخ ختم جواز</strong></th>
+                                        <th><strong>مدت اعتبار</strong></th>
+                                        <th><strong>زمان باقیمانده</strong></th>
                                     </tr>
 
                                     <tr>
@@ -113,6 +115,19 @@
                                         <td>{{ $cal->license_number }}</td>
                                         <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->export_date)) }}</td>
                                         <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->expire_date)) }}</td>
+                                        <td>
+                                            {{ now()->diffInDays($cal->export_date) + now()->diffInDays($cal->expire_date) + 1 }}
+                                        </td>
+                                        <td>
+                                            @php
+                                                $v_date = now()->diffInDays($cal->expire_date);
+                                                if (today() < $cal->expire_date) {
+                                                    echo $v_date . " روز باقیمانده";
+                                                } else {
+                                                    echo "تاریخ ختم شده";
+                                                }
+                                            @endphp
+                                        </td>
                                     </tr>
                                     </tbody>
                                     <!--/==/ End of First Table -->
@@ -120,41 +135,19 @@
                                     <!-- Second Table -->
                                     <tbody class="p-0">
                                     <tr>
-                                        <th><strong>مدت اعتبار</strong></th>
-                                        <th><strong>زمان باقیمانده</strong></th>
                                         <th><strong>نام مالک/رئیس</strong></th>
                                         <th><strong>شماره تماس مالک/رئیس</strong></th>
                                         <th><strong>شماره تماس</strong></th>
                                         <th><strong>آدرس</strong></th>
+                                        <th colspan="4"><strong>@lang('global.extraInfo')</strong></th>
                                     </tr>
 
                                     <tr>
-                                        <td>
-                                            @php
-                                                $export_date = $cal->export_date;
-                                                $expire_date = $cal->expire_date;
-
-                                                // echo $export_date->diffInDays($expire_date);
-                                                echo "";
-                                            @endphp
-                                        </td>
-                                        <td>
-                                            @php
-                                                $export_date = $cal->export_date;
-                                                $expire_date = $cal->expire_date;
-
-                                                $v_date = now()->diffInDays($expire_date);
-                                                if (today() < $expire_date) {
-                                                    echo $v_date . " روز باقیمانده";
-                                                } else {
-                                                    echo "تاریخ ختم شده";
-                                                }
-                                            @endphp
-                                        </td>
                                         <td>{{ $cal->owner_name }}</td>
                                         <td>{{ $cal->owner_phone }}</td>
                                         <td>{{ $cal->phone }}</td>
                                         <td>{{ $cal->address }}</td>
+                                        <td colspan="4">{{ $cal->info }}</td>
                                     </tr>
                                     </tbody>
                                     <!--/==/ End of Second Table -->
@@ -162,6 +155,7 @@
                             </div>
                             <!--/==/ End of Personal Information -->
                             <p>{{ $cal->info }}</p>
+                            <p><a href="{{ route('admin.asycuda.coal.reg_form', $cal->id) }}" target="_blank" class="btn btn-outline-success">Registration Form</a></p>
                         </div>
                         <!--/==/ End of User Information Details -->
                     </div>
