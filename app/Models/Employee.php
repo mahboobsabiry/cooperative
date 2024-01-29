@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Asycuda\AsycudaUser;
 use App\Traits\HasCustomCard;
 use App\Traits\HasPhoto;
 use App\Traits\HasTazkira;

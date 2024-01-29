@@ -4,8 +4,8 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdministrationsController;
 use App\Http\Controllers\Admin\AgentColleagueController;
 use App\Http\Controllers\Admin\AgentController;
-use App\Http\Controllers\Admin\AsycudaController;
-use App\Http\Controllers\Admin\AsycudaUserController;
+use App\Http\Controllers\Admin\Asycuda\AsycudaUserController;
+use App\Http\Controllers\Admin\Asycuda\COALController;
 use App\Http\Controllers\Admin\BranchesController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\DepartmentController;
@@ -18,12 +18,11 @@ use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ExitDoorController;
 use App\Http\Controllers\Admin\HostelController;
 use App\Http\Controllers\Admin\ManagementController;
-use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -134,8 +133,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('inactive-companies', [CompanyController::class, 'inactive'])->name('companies.inactive');
 
     // =============================== Asycuda Routes ===================================
-    Route::get('asycuda', [AsycudaController::class, 'index'])->name('asycuda.index');
-    Route::resource('asycuda-users', AsycudaUserController::class);
+    Route::group(['prefix' => 'asycuda', 'as' => 'asycuda.', 'middleware' => ['auth']], function () {
+        Route::resource('users', AsycudaUserController::class);
+        Route::resource('coal', COALController::class);
+    });
 
     // Settings
     Route::resource('settings', SettingController::class);

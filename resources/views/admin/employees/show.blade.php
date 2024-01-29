@@ -307,7 +307,7 @@
                                         <tr>
                                             <td colspan="6" class="font-weight-bold">
                                                 <span class="badge badge-primary badge-pill">3</span>
-                                                معلومات یوزر
+                                                معلومات یوزر اسیکودا
                                             </td>
                                         </tr>
 

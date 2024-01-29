@@ -1,5 +1,5 @@
 <!-- Delete -->
-<div class="modal" id="delete_record{{ $asycuda_user->id }}">
+<div class="modal" id="delete_record{{ $cal->id }}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo">
             <!-- Modal Header -->
@@ -9,7 +9,7 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.asycuda.users.destroy', $asycuda_user->id) }}" data-parsley-validate="">
+            <form method="post" action="{{ route('admin.asycuda.coal.destroy', $cal->id) }}" data-parsley-validate="">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">

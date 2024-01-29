@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Asycuda;
 
 use App\Http\Controllers\Controller;
-use App\Models\AsycudaUser;
+use App\Models\Asycuda\AsycudaUser;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -34,7 +34,7 @@ class AsycudaUserController extends Controller
 
         $user = AsycudaUser::create($request->all());
 
-        return redirect()->route('admin.asycuda-users.show', $user->id)->with([
+        return redirect()->route('admin.asycuda.users.show', $user->id)->with([
             'message'   => 'یوزر اسیکودا ثبت شد',
             'alertType' => 'success'
         ]);
@@ -68,7 +68,7 @@ class AsycudaUserController extends Controller
 
         $user->update($request->all());
 
-        return redirect()->route('admin.asycuda-users.show', $user->id)->with([
+        return redirect()->route('admin.asycuda.users.show', $user->id)->with([
             'message'   => 'یوزر اسیکودا بروزرسانی شد',
             'alertType' => 'success'
         ]);
@@ -81,7 +81,7 @@ class AsycudaUserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('admin.asycuda-users.index')->with([
+        return redirect()->route('admin.asycuda.users.index')->with([
             'message'   => 'یوزر اسیکودا حذف گردید',
             'alertType' => 'success'
         ]);

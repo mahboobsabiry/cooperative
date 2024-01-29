@@ -27,7 +27,7 @@
                         <a href="{{ route('admin.employees.index') }}">@lang('admin.sidebar.employees')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.asycuda-users.index') }}">یوزر کارمندان</a>
+                        <a href="{{ route('admin.asycuda.users.index') }}">یوزر کارمندان</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('global.details')</li>
                 </ol>
@@ -52,7 +52,7 @@
                         <div class="mr-2">
                             <!-- Edit -->
                             <a class="btn ripple bg-dark btn-sm tx-white"
-                               href="{{ route('admin.asycuda-users.edit', $asycuda_user->id) }}">
+                               href="{{ route('admin.asycuda.users.edit', $asycuda_user->id) }}">
                                 <i class="fe fe-edit"></i>
                                 @lang('global.edit')
                             </a>
@@ -61,7 +61,7 @@
                         <div class="mr-2">
                             <!-- Add -->
                             <a class="btn ripple bg-primary btn-sm tx-white"
-                               href="{{ route('admin.asycuda-users.create') }}">
+                               href="{{ route('admin.asycuda.users.create') }}">
                                 <i class="fe fe-plus-circle"></i>
                                 @lang('global.add')
                             </a>
@@ -204,6 +204,7 @@
                                 </table>
                             </div>
                             <!--/==/ End of Personal Information -->
+                            <p>{{ $asycuda_user->info }}</p>
                         </div>
                         <!--/==/ End of User Information Details -->
                     </div>

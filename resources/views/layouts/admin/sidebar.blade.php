@@ -4,7 +4,8 @@
             <span class="text-capitalize">BCHS</span>
             <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img desktop-logo" alt="logo">
             <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img icon-logo" alt="logo">
-            <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img desktop-logo theme-logo" alt="logo">
+            <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img desktop-logo theme-logo"
+                 alt="logo">
             <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
         </a>
     </div>
@@ -24,8 +25,10 @@
 
             <!-- Asycuda -->
             @can('asycuda_mgmt')
-                <li class="nav-item {{ request()->is('admin/asycuda-users') ||
-                    request()->is('admin/asycuda-users/*') ? 'active show' : '' }}">
+                <li class="nav-item {{ request()->is('admin/asycuda/users') ||
+                    request()->is('admin/asycuda/users/*') ||
+                    request()->is('admin/asycuda/coal') ||
+                    request()->is('admin/asycuda/coal/*') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="ion ion-ios-desktop"></i>
@@ -35,10 +38,19 @@
 
                     <ul class="nav-sub">
                         <!-- Employees Users -->
-                        <li class="nav-sub-item {{ request()->is('admin/asycuda-users') || request()->is('admin/asycuda-users/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.asycuda-users.index') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/asycuda/users') || request()->is('admin/asycuda/users/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.asycuda.users.index') }}">
                                 یوزر ها
-                                ({{ count(\App\Models\AsycudaUser::all()) }})
+                                ({{ count(\App\Models\Asycuda\AsycudaUser::all()) }})
+                            </a>
+                        </li>
+
+                        <!-- Companies Activity License -->
+                        <li class="nav-sub-item {{ request()->is('admin/asycuda/coal') || request()->is('admin/asycuda/coal/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link"
+                               href="{{ route('admin.asycuda.coal.index') }}">
+                                جواز فعالیت شرکت ها
+                                ({{ count(\App\Models\Asycuda\COAL::all()) }})
                             </a>
                         </li>
                     </ul>
@@ -84,7 +96,8 @@
                         <li class="nav-sub-item {{ request()->is('admin/empty-positions') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.positions.empty') }}">
                                 @lang('pages.positions.emptyPositions')
-                                ({{ \App\Models\Position::all()->sum('num_of_pos') - \App\Models\Employee::all()->where('status', 1)->count() }})
+                                ({{ \App\Models\Position::all()->sum('num_of_pos') - \App\Models\Employee::all()->where('status', 1)->count() }}
+                                )
                             </a>
                         </li>
 
@@ -124,7 +137,8 @@
                             <a class="nav-sub-link" href="{{ route('admin.employees.index') }}">
                                 {<span class="small text-sm-center tx-danger">M</span>}
                                 همه کارمندان
-                                ({{ count(\App\Models\Employee::all()->whereNotNull('position_id')->where('status', 1)) }})
+                                ({{ count(\App\Models\Employee::all()->whereNotNull('position_id')->where('status', 1)) }}
+                                )
                             </a>
                         </li>
 
@@ -132,7 +146,8 @@
                         <li class="nav-sub-item {{ request()->is('admin/main-employees') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.employees.main') }}">
                                 @lang('pages.employees.mainPosition')
-                                ({{ \App\Models\Employee::all()->whereNotNull('position_id')->where('status', 1)->where('on_duty', 0)->count() }})
+                                ({{ \App\Models\Employee::all()->whereNotNull('position_id')->where('status', 1)->where('on_duty', 0)->count() }}
+                                )
                             </a>
                         </li>
 
@@ -140,7 +155,8 @@
                         <li class="nav-sub-item {{ request()->is('admin/on-duty-employees') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.employees.on_duty') }}">
                                 @lang('pages.employees.onDuty')
-                                ({{ \App\Models\Employee::all()->whereNotNull('position_id')->where('status', 1)->where('on_duty', 1)->count() }})
+                                ({{ \App\Models\Employee::all()->whereNotNull('position_id')->where('status', 1)->where('on_duty', 1)->count() }}
+                                )
                             </a>
                         </li>
 
@@ -156,7 +172,8 @@
                         <li class="nav-sub-item {{ request()->is('admin/employee/fired-employees') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.employees.fired_employees') }}">
                                 منفکی
-                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 2)->count() }})
+                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 2)->count() }}
+                                )
                             </a>
                         </li>
 
@@ -164,7 +181,8 @@
                         <li class="nav-sub-item {{ request()->is('admin/employee/retired-employees') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.employees.retired_employees') }}">
                                 متقاعدین
-                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 4)->count() }})
+                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 4)->count() }}
+                                )
                             </a>
                         </li>
 
@@ -172,7 +190,8 @@
                         <li class="nav-sub-item {{ request()->is('admin/employee/suspended-employees') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.employees.suspended_employees') }}">
                                 <span class="text-secondary">معلق </span>&nbsp;
-                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 3)->count() }})
+                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 3)->count() }}
+                                )
                             </a>
                         </li>
                     </ul>
@@ -304,13 +323,15 @@
                         <!-- Permissions -->
                         <li class="nav-sub-item {{ request()->is('admin/permissions') ||
                             request()->is('admin/permissions/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.permissions.index') }}">@lang('admin.sidebar.permissions')</a>
+                            <a class="nav-sub-link"
+                               href="{{ route('admin.permissions.index') }}">@lang('admin.sidebar.permissions')</a>
                         </li>
 
                         <!-- Roles -->
                         <li class="nav-sub-item {{ request()->is('admin/roles') ||
                             request()->is('admin/roles/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.roles.index') }}">@lang('admin.sidebar.roles')</a>
+                            <a class="nav-sub-link"
+                               href="{{ route('admin.roles.index') }}">@lang('admin.sidebar.roles')</a>
                         </li>
 
                         <!-- Users -->
@@ -318,7 +339,8 @@
                             request()->is('admin/users/*') ||
                             request()->is('admin/active-users') ||
                             request()->is('admin/inactive-users') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.users.index') }}">@lang('admin.sidebar.users')</a>
+                            <a class="nav-sub-link"
+                               href="{{ route('admin.users.index') }}">@lang('admin.sidebar.users')</a>
                         </li>
                     </ul>
                 </li>
@@ -329,7 +351,8 @@
             @can('setting_mgmt')
                 <li class="nav-item {{ request()->url() == route('admin.settings.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.settings.index') }}">
-                        <i class="fe fe-settings"></i><span class="sidemenu-label">@lang('admin.sidebar.settings')</span>
+                        <i class="fe fe-settings"></i><span
+                            class="sidemenu-label">@lang('admin.sidebar.settings')</span>
                     </a>
                 </li>
             @endcan

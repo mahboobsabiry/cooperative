@@ -18,8 +18,8 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.employees.index') }}">@lang('admin.sidebar.employees')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda-users.index') }}">یوزر کارمندان</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda-users.show', $asycuda_user->id) }}">@lang('global.details')</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda.users.index') }}">یوزر کارمندان</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda.users.show', $asycuda_user->id) }}">@lang('global.details')</a></li>
                     <li class="breadcrumb-item active" aria-current="page">ویرایش یوزر کارمند</li>
                 </ol>
             </div>
@@ -51,7 +51,7 @@
                         </div>
 
                         <!-- Form -->
-                        <form method="post" action="{{ route('admin.asycuda-users.update', $asycuda_user->id) }}">
+                        <form method="post" action="{{ route('admin.asycuda.users.update', $asycuda_user->id) }}">
                             @csrf
                             @method('PUT')
                             <div class="row">

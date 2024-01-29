@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Asycuda;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
-use Illuminate\Http\Request;
 
 class AsycudaController extends Controller
 {

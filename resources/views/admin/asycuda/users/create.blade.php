@@ -18,7 +18,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.employees.index') }}">@lang('admin.sidebar.employees')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda-users.index') }}">یوزر کارمندان</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda.users.index') }}">یوزر کارمندان</a></li>
                     <li class="breadcrumb-item active" aria-current="page">ثبت یوزر کارمند</li>
                 </ol>
             </div>
@@ -51,7 +51,7 @@
                         </div>
 
                         <!-- Form -->
-                        <form method="post" action="{{ route('admin.asycuda-users.store') }}">
+                        <form method="post" action="{{ route('admin.asycuda.users.store') }}">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">

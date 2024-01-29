@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ کارمندان دارنده یوزر اسیکودا')
+@section('title', config('app.name') . ' جواز شرکت های فعالیت کننده')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -32,14 +32,14 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a
                             href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">کارمندان دارنده یوزر اسیکودا</li>
+                    <li class="breadcrumb-item active" aria-current="page">جواز شرکت های فعالیت کننده</li>
                 </ol>
             </div>
 
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                <a class="btn ripple btn-primary" href="{{ route('admin.asycuda.users.create') }}">
+                <a class="btn ripple btn-primary" href="{{ route('admin.asycuda.coal.create') }}">
                     <i class="fe fe-plus-circle"></i> @lang('global.new')
                 </a>
             </div>
@@ -59,7 +59,7 @@
                         <!-- Employees -->
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
-                                @lang('admin.sidebar.employees') ({{ count($asycuda_users) }})
+                                شرکت های دارنده جواز فعالیت ({{ count($coal) }})
                             </div>
 
                             <!-- Table -->
@@ -68,27 +68,35 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>نام کارمند</th>
-                                        <th>یوزر</th>
-                                        <th>رمز عبور</th>
-                                        <th>صلاحیت ها</th>
-                                        <th>@lang('form.status')</th>
+                                        <th>نام شرکت</th>
+                                        <th>نمبر تشخیصیه</th>
+                                        <th>جواز</th>
+                                        <th>تاریخ صدور</th>
+                                        <th>تاریخ ختم</th>
+                                        <th>نام مالک/رئیس</th>
+                                        <th>شماره تماس مالک/رئیس</th>
+                                        <th>شماره تماس</th>
+                                        <th>@lang('global.address')</th>
                                         <th>ملاحظات</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
-                                    @foreach($asycuda_users as $asycuda_user)
+                                    @foreach($coal as $cal)
                                         <tr>
-                                            <td>{{ $asycuda_user->id }}</td>
+                                            <td>{{ $cal->id }}</td>
                                             <td>
-                                                <a href="{{ route('admin.asycuda.users.show', $asycuda_user->id) }}">{{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }}</a>
+                                                <a href="{{ route('admin.asycuda.coal.show', $cal->id) }}">{{ $cal->company_name }}</a>
                                             </td>
-                                            <td>{{ $asycuda_user->user ?? '' }}</td>
-                                            <td>{{ $asycuda_user->password ?? '' }}</td>
-                                            <td>{{ $asycuda_user->roles ?? '' }}</td>
-                                            <td>{{ $asycuda_user->status == 1 ? trans('global.active') : trans('global.inactive') }}</td>
-                                            <td>{{ $asycuda_user->info ?? '' }}</td>
+                                            <td>{{ $cal->company_tin }}</td>
+                                            <td>{{ $cal->license_number }}</td>
+                                            <td>{{ $cal->export_date }}</td>
+                                            <td>{{ $cal->expire_date }}</td>
+                                            <td>{{ $cal->owner_name }}</td>
+                                            <td>{{ $cal->owner_phone }}</td>
+                                            <td>{{ $cal->phone }}</td>
+                                            <td>{{ $cal->address }}</td>
+                                            <td>{{ $cal->info }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
