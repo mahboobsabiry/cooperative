@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('user');
             $table->integer('password');
             $table->string('roles');
+            $table->date('end_date')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->text('info')->nullable();
             $table->timestamps();

@@ -26,8 +26,8 @@ class AsycudaUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'employee_id'   => 'required',
-            'user'          => 'required',
+            'employee_id'   => 'required|unique:asycuda_users,employee_id',
+            'user'          => 'required|unique:asycuda_users,user',
             'password'      => 'required',
             'roles'         => 'required'
         ]);
@@ -51,7 +51,8 @@ class AsycudaUserController extends Controller
     public function edit($id)
     {
         $asycuda_user = AsycudaUser::find($id);
-        return view('admin.asycuda.users.edit', compact('asycuda_user'));
+        $employees = Employee::all();
+        return view('admin.asycuda.users.edit', compact('asycuda_user', 'employees'));
     }
     // Store
     public function update(Request $request, $id)

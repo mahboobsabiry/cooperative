@@ -300,12 +300,44 @@
                                     </tbody>
                                     <!--/==/ End of Third Table -->
 
+                                    <!-- User Table -->
+                                    @if($employee->asycuda_user)
+                                        <tbody class="p-0">
+                                        <!-- Details -->
+                                        <tr>
+                                            <td colspan="6" class="font-weight-bold">
+                                                <span class="badge badge-primary badge-pill">3</span>
+                                                معلومات یوزر
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <th><strong>@lang('admin.sidebar.roles')</strong></th>
+                                            <th><strong>یوزر</strong></th>
+                                            <th><strong>@lang('form.password')</strong></th>
+                                            <th><strong>@lang('form.status')</strong></th>
+                                            <th><strong>@lang('global.date')</strong></th>
+                                            <th><strong>@lang('global.extraInfo')</strong></th>
+                                        </tr>
+
+                                        <tr>
+                                            <td>{{ $employee->asycuda_user->roles }}</td>
+                                            <td>{{ $employee->asycuda_user->user }}</td>
+                                            <td>{{ $employee->asycuda_user->password }}</td>
+                                            <td>{{ $employee->asycuda_user->status == 1 ? trans('global.active') : trans('global.inactive') }}</td>
+                                            <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($employee->asycuda_user->created_at)) }}</td>
+                                            <td>{{ $employee->asycuda_user->info }}</td>
+                                        </tr>
+                                        </tbody>
+                                    @endif
+                                    <!--/==/ End of User Table -->
+
                                     <!-- Fourth Table -->
                                     <tbody>
                                     <!-- Details -->
                                     <tr>
                                         <td colspan="6" class="font-weight-bold">
-                                            <span class="badge badge-primary badge-pill">3</span>
+                                            <span class="badge badge-primary badge-pill">{{ $employee->asycuda_user ? '4' : '3' }}</span>
                                             @lang('pages.employees.otherInfo')
                                         </td>
                                     </tr>

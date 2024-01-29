@@ -72,21 +72,23 @@
                                         <th>یوزر</th>
                                         <th>رمز عبور</th>
                                         <th>صلاحیت ها</th>
+                                        <th>@lang('form.status')</th>
                                         <th>ملاحظات</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
-                                    @foreach($asycuda_users as $user)
+                                    @foreach($asycuda_users as $asycuda_user)
                                         <tr>
-                                            <td>{{ $user->id }}</td>
+                                            <td>{{ $asycuda_user->id }}</td>
                                             <td>
-                                                <a href="{{ route('admin.asycuda-users.show', $user->id) }}">{{ $user->employee->name }} {{ $user->employee->last_name }}</a>
+                                                <a href="{{ route('admin.asycuda-users.show', $asycuda_user->id) }}">{{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }}</a>
                                             </td>
-                                            <td>{{ $user->user ?? '' }}</td>
-                                            <td>{{ $user->password ?? '' }}</td>
-                                            <td>{{ $user->roles ?? '' }}</td>
-                                            <td>{{ $user->info ?? '' }}</td>
+                                            <td>{{ $asycuda_user->user ?? '' }}</td>
+                                            <td>{{ $asycuda_user->password ?? '' }}</td>
+                                            <td>{{ $asycuda_user->roles ?? '' }}</td>
+                                            <td>{{ $asycuda_user->status == 1 ? trans('global.active') : trans('global.inactive') }}</td>
+                                            <td>{{ $asycuda_user->info ?? '' }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
