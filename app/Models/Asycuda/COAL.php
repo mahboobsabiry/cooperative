@@ -16,6 +16,6 @@ class COAL extends Model
         'company_name', 'company_tin', 'license_number',
         'owner_name', 'owner_phone',
         'export_date', 'expire_date',
-        'phone', 'address', 'status', 'info'
+        'phone', 'email', 'address', 'status', 'info'
     ];
 }

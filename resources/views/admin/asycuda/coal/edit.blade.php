@@ -137,6 +137,16 @@
                                         @enderror
                                     </div>
 
+                                    <!-- Email Address -->
+                                    <div class="form-group @error('email') has-danger @enderror">
+                                        <p class="mb-2">@lang('form.email'): <span class="tx-danger">*</span></p>
+                                        <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $cal->email ?? old('email') }}" required>
+
+                                        @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
                                     <!-- Address -->
                                     <div class="form-group @error('address') has-danger @enderror">
                                         <p class="mb-2">@lang('global.address'): <span class="tx-danger">*</span></p>

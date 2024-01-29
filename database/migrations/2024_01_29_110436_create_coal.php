@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('owner_phone');
             $table->date('export_date');
             $table->date('expire_date');
-            $table->string('phone')->nullable();
+            $table->string('phone')->nullable()->unique();
+            $table->string('email')->nullable()->unique();
             $table->string('address');
             $table->tinyInteger('status')->default(1);
             $table->text('info')->nullable();

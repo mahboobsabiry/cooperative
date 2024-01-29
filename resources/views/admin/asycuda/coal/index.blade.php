@@ -75,7 +75,8 @@
                                         <th>تاریخ ختم</th>
                                         <th>نام مالک/رئیس</th>
                                         <th>شماره تماس مالک/رئیس</th>
-                                        <th>شماره تماس</th>
+                                        <th>@lang('form.phone')</th>
+                                        <th>@lang('form.email')</th>
                                         <th>@lang('global.address')</th>
                                         <th>ملاحظات</th>
                                     </tr>
@@ -95,6 +96,7 @@
                                             <td>{{ $cal->owner_name }}</td>
                                             <td>{{ $cal->owner_phone }}</td>
                                             <td>{{ $cal->phone }}</td>
+                                            <td>{{ $cal->email }}</td>
                                             <td>{{ $cal->address }}</td>
                                             <td>{{ $cal->info }}</td>
                                         </tr>

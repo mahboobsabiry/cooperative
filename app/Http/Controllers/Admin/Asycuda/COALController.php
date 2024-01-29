@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Asycuda;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\COALRequest;
 use App\Models\Asycuda\COAL;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Morilog\Jalali\Jalalian;
 
@@ -41,6 +42,7 @@ class COALController extends Controller
         $cal->owner_name    = $request->owner_name;
         $cal->owner_phone   = $request->owner_phone;
         $cal->phone         = $request->phone;
+        $cal->email         = $request->email;
         $cal->address       = $request->address;
         $cal->info          = $request->info;
         $cal->save();
@@ -76,6 +78,20 @@ class COALController extends Controller
     public function update(Request $request, $id)
     {
         $cal = COAL::find($id);
+
+        $request->validate([
+            'company_name'  => 'required|unique:coal,company_name,' . $cal->id,
+            'company_tin'   => 'required|unique:coal,company_tin,' . $cal->id,
+            'license_number'=> 'required|unique:coal,license_number,' . $cal->id,
+            'export_date'   => 'required',
+            'expire_date'   => 'required',
+            'owner_name'    => 'required|min:3|max:128',
+            'owner_phone'   => 'required|min:8|max:15|unique:coal,owner_phone,' . $cal->id,
+            'phone'         => 'nullable|min:8|max:15|unique:coal,phone,' . $cal->id,
+            'email'         => 'nullable|min:8|max:15|unique:coal,email,' . $cal->id,
+            'address'       => 'required|min:3|max:255',
+            'info'          => 'nullable'
+        ]);
         $cal->company_name      = $request->company_name;
         $cal->company_tin       = $request->company_tin;
         $cal->license_number    = $request->license_number;
@@ -89,6 +105,7 @@ class COALController extends Controller
         $cal->owner_name    = $request->owner_name;
         $cal->owner_phone   = $request->owner_phone;
         $cal->phone         = $request->phone;
+        $cal->email         = $request->email;
         $cal->address       = $request->address;
         $cal->info          = $request->info;
         $cal->save();

@@ -92,6 +92,19 @@
                 margin-right: auto;
                 background-color: #cccccc;
             }
+            .grid-container {
+                display: grid;
+                grid-template-columns: auto auto auto;
+                /*background-color: #2196F3;*/
+                /*padding: 10px;*/
+            }
+            .grid-item {
+                /*background-color: rgba(255, 255, 255, 0.8);*/
+                /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+                padding: 20px;
+                /*font-size: 30px;*/
+                text-align: center;
+            }
         </style>
     </head>
 
@@ -99,8 +112,8 @@
         <!-- Page -->
         <div class="app" style="height: 11.693in; width: 8.268in; padding: 20px; background-color: white;">
             <!-- Header -->
-            <div class="row" style="position:relative; font-size: 16px; line-height: 5px; font-weight: bolder;">
-                <div class="col-md-4 text-center align-content-center justify-content-center">
+            <div class="grid-container" style="position:relative; font-size: 16px; line-height: 5px; font-weight: bolder;">
+                <div class="grid-item text-center align-content-center justify-content-center">
                     <img src="{{ asset('assets/images/emirate-logo.jpg') }}" width="90">
                     <div style="font-family: Calibri; margin-top: 20px;">
                         <p>د افغانستان اسلامی امارت</p>
@@ -109,7 +122,7 @@
                         <p>د گمرکونو لوی ریاست</p>
                     </div>
                 </div>
-                <div class="col-md-4 text-center align-content-center justify-content-center">
+                <div class="grid-item text-center align-content-center justify-content-center">
                     <div style="margin-top: 100px;">
                         <p style="font-family: 'Times New Roman';">Islamic Emirate of Afghanistan</p>
                         <p style="font-family: 'Times New Roman';">Ministry of Finance</p>
@@ -117,7 +130,7 @@
                         <p style="font-family: Calibri;">د گمرکونو عملیاتی ریاست</p>
                     </div>
                 </div>
-                <div class="col-md-4 text-center align-content-center justify-content-center">
+                <div class="grid-item text-center align-content-center justify-content-center">
                     <img src="{{ asset('assets/images/logo.jpg') }}" width="90">
                     <div style="font-family: Calibri; margin-top: 20px;">
                         <p>امارت اسلامی افغانستان</p>
@@ -171,7 +184,7 @@
                     </tr>
                     <!-- Company Phone -->
                     <tr>
-                        <th colspan="3" class="font-weight-bold">بریشنالیک:</th>
+                        <th colspan="3"><strong>بریښنالیک</strong> {{ $cal->email }}</th>
                     </tr>
                     </tbody>
                 </table>

@@ -138,16 +138,18 @@
                                         <th><strong>نام مالک/رئیس</strong></th>
                                         <th><strong>شماره تماس مالک/رئیس</strong></th>
                                         <th><strong>شماره تماس</strong></th>
+                                        <th><strong>ایمیل</strong></th>
                                         <th><strong>آدرس</strong></th>
-                                        <th colspan="4"><strong>@lang('global.extraInfo')</strong></th>
+                                        <th colspan="3"><strong>@lang('global.extraInfo')</strong></th>
                                     </tr>
 
                                     <tr>
                                         <td>{{ $cal->owner_name }}</td>
                                         <td>{{ $cal->owner_phone }}</td>
                                         <td>{{ $cal->phone }}</td>
+                                        <td>{{ $cal->email }}</td>
                                         <td>{{ $cal->address }}</td>
-                                        <td colspan="4">{{ $cal->info }}</td>
+                                        <td colspan="3">{{ $cal->info }}</td>
                                     </tr>
                                     </tbody>
                                     <!--/==/ End of Second Table -->
