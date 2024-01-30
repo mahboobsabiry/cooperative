@@ -3,17 +3,17 @@
 namespace App\Models;
 
 use App\Models\Asycuda\AsycudaUser;
-use App\Traits\HasCustomCard;
+use App\Traits\HasDocument;
 use App\Traits\HasPhoto;
-use App\Traits\HasTazkira;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Employee extends Model
 {
-    use HasFactory, HasPhoto, HasTazkira, HasCustomCard;
+    use HasFactory, HasPhoto, HasDocument;
 
     protected $fillable = [
         'position_id', 'hostel_id', 'start_job', 'position_code', 'name', 'last_name', 'father_name', 'gender',
@@ -31,16 +31,10 @@ class Employee extends Model
         return $this->morphOne(Photo::class, 'transaction');
     }
 
-    // Morph Card
-    public function custom_card(): MorphOne
+    // Morph Document
+    public function documents(): MorphMany
     {
-        return $this->morphOne(Card::class, 'transaction');
-    }
-
-    // Morph Photo
-    public function tazkira(): MorphOne
-    {
-        return $this->morphOne(Tazkira::class, 'transaction');
+        return $this->morphMany(Document::class, 'transaction');
     }
 
     // Position

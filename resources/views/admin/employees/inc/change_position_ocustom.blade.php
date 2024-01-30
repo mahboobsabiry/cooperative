@@ -5,7 +5,7 @@
     </div>
 
     <!-- Form -->
-    <form method="post" action="{{ route('admin.employees.change_position_ocustom', $employee->id) }}" class="background_form">
+    <form method="post" action="{{ route('admin.employees.change_position_ocustom', $employee->id) }}" class="background_form" enctype="multipart/form-data">
         @csrf
         <div class="">
             <!-- Document Number -->

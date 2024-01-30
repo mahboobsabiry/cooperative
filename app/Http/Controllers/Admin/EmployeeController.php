@@ -97,18 +97,12 @@ class EmployeeController extends Controller
             $employee->storeImage($avatar->storeAs('employees', $fileName, 'public'));
         }
 
-        //  Has File && Save Card Image
-        if ($request->hasFile('card')) {
-            $card = $request->file('card');
-            $fileName = 'customIdCard-' . time() . '.' . $card->getClientOriginalExtension();
-            $employee->storeCard($card->storeAs('employees/custom-cards', $fileName, 'public'));
-        }
-
-        //  Has File && Save Tazkira Image
-        if ($request->hasFile('tazkira')) {
-            $tazkira = $request->file('tazkira');
-            $fileName = 'employeeIdCard-' . time() . '.' . $tazkira->getClientOriginalExtension();
-            $employee->storeTaz($tazkira->storeAs('employees/tazkiras', $fileName, 'public'));
+        //  Has Files && Save Document Images
+        if ($request->hasFile('document')) {
+            foreach ($request->file('document') as $item) {
+                $fileName = 'employee_document-' . time() . '.' . $item->getClientOriginalExtension();
+                $employee->storeDocument($item->storeAs('employees', $fileName, 'public'));
+            }
         }
 
         activity('added')
@@ -117,7 +111,7 @@ class EmployeeController extends Controller
             ->log(trans('messages.employees.addNewEmployeeMsg'));
 
         $message = trans('messages.employees.addNewEmployeeMsg');
-        return redirect()->route('admin.employees.index')->with([
+        return redirect()->route('admin.employees.show', $employee->id)->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);
@@ -150,11 +144,9 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'photo'         => 'nullable|image|mimes:jpg,png,jfif',
-            'card'          => 'nullable|image|mimes:jpg,png,jfif',
-            'tazkira'       => 'nullable|image|mimes:jpg,png,jfif',
+            // 'document'      => 'nullable|mimes:jpg,png,jfif',
             'start_job'     => 'required',
             'name'          => 'required|min:3|max:64',
-            'position_code' => 'nullable|min:3|max:4|unique:employees,position_code,' . $employee->id,
             'last_name'     => 'nullable|min:3|max:64',
             'father_name'   => 'required|min:3|max:64',
             'emp_number'    => 'nullable|unique:employees,emp_number,' . $employee->id,
@@ -194,10 +186,8 @@ class EmployeeController extends Controller
 
         $pos_id = $employee->position_id;
 
-        $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
         $employee->start_job    = $request->start_job;
-        $employee->position_code = $request->position_code;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
         $employee->father_name  = $request->father_name;
@@ -240,18 +230,12 @@ class EmployeeController extends Controller
             $employee->updateImage($avatar->storeAs('employees', $fileName, 'public'));
         }
 
-        //  Has Card
-        if ($request->hasFile('card')) {
-            $card = $request->file('card');
-            $fileName = 'customIdCard-' . time() . '.' . $card->getClientOriginalExtension();
-            $employee->updateCard($card->storeAs('employees/cards', $fileName, 'public'));
-        }
-
-        //  Has Tazkira
-        if ($request->hasFile('tazkira')) {
-            $tazkira = $request->file('tazkira');
-            $fileName = 'employeeIdCard-' . time() . '.' . $tazkira->getClientOriginalExtension();
-            $employee->updateTaz($tazkira->storeAs('employees/tazkiras', $fileName, 'public'));
+        //  Has Files && Save Document Images
+        if ($request->hasFile('document')) {
+            foreach ($request->file('document') as $item) {
+                $fileName = 'employee_document-' . time() . '.' . $item->getClientOriginalExtension();
+                $employee->storeDocument($item->storeAs('employees', $fileName, 'public'));
+            }
         }
 
         activity('updated')
@@ -260,7 +244,7 @@ class EmployeeController extends Controller
 
         $message = trans('messages.employees.updateEmployeeMsg');
 
-        return redirect()->route('admin.employees.index')->with([
+        return redirect()->route('admin.employees.show', $employee->id)->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);
@@ -364,6 +348,13 @@ class EmployeeController extends Controller
             'duty_position'     => $request->duty_position,
             'background'        => $employee->background . ' از تاریخ ' . $request->start_duty . ' نظر به مکتوب نمبر ' . $request->duty_doc_number . ' در بست ' . $request->duty_position .  " طور خدمتی ایفای وظیفه نمود.<br>"
         ]);
+
+        //  Has Files && Save Document Images
+        if ($request->hasFile('document')) {
+            $item = $request->file('document');
+            $fileName = 'employee_document-' . time() . '.' . $item->getClientOriginalExtension();
+            $employee->storeDocument($item->storeAs('employees', $fileName, 'public'));
+        }
 
         // Redirect back with success message
         return back()->with([

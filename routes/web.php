@@ -139,6 +139,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::resource('coal', COALController::class);
         Route::get('expired-coal', [COALController::class, 'expired'])->name('coal.expired');
         Route::get('registration-form/{id}', [COALController::class, 'reg_form'])->name('coal.reg_form');
+        Route::get('refresh/{id}', [COALController::class, 'refresh'])->name('coal.refresh');
     });
 
     // Settings

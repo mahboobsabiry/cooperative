@@ -152,30 +152,8 @@
                 </div>
                 <!--/==/ End of Contact Information -->
 
-                <!-- National ID Card -->
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <h6 class="font-weight-bold">
-                            @lang('form.idCard')
-                        </h6>
+                <!-- Documents -->
 
-                        <a href="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}" target="_blank">
-                            <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
-                                 class="img-thumbnail"
-                                 alt="@lang('form.idCard')">
-                        </a>
-                        <hr>
-                        <h6 class="font-weight-bold">
-                            @lang('form.customCard')
-                        </h6>
-
-                        <a href="{{ $employee->card ?? asset('assets/images/id-card-default.png') }}" target="_blank">
-                            <img src="{{ $employee->card ?? asset('assets/images/id-card-default.png') }}"
-                                 class="img-thumbnail"
-                                 alt="@lang('form.customCard')">
-                        </a>
-                    </div>
-                </div>
                 <!--/==/ End of Contact Information -->
             </div>
             <div class="col-lg-8 col-md-12">
@@ -535,6 +513,15 @@
                             <!--/==/ End of Personal Information -->
                         </div>
                         <!--/==/ End of User Information Details -->
+                        <div class="p-2">
+                            <h5>اسناد:</h5>
+
+                            @foreach($employee->documents as $document)
+                                <a href="{{ asset('storage/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" target="_blank">
+                                    <img src="{{ asset('storage/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail" alt="اسناد" width="150">
+                                </a>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

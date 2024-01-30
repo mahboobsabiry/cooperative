@@ -75,10 +75,8 @@
                                         <th>تاریخ ختم</th>
                                         <th>نام مالک/رئیس</th>
                                         <th>شماره تماس مالک/رئیس</th>
-                                        <th>@lang('form.phone')</th>
-                                        <th>@lang('form.email')</th>
-                                        <th>@lang('global.address')</th>
-                                        <th>ملاحظات</th>
+                                        <th><strong>مدت اعتبار</strong></th>
+                                        <th><strong>زمان باقیمانده</strong></th>
                                     </tr>
                                     </thead>
 
@@ -95,10 +93,19 @@
                                             <td>{{ $cal->expire_date }}</td>
                                             <td>{{ $cal->owner_name }}</td>
                                             <td>{{ $cal->owner_phone }}</td>
-                                            <td>{{ $cal->phone }}</td>
-                                            <td>{{ $cal->email }}</td>
-                                            <td>{{ $cal->address }}</td>
-                                            <td>{{ $cal->info }}</td>
+                                            <td>
+                                                {{ now()->diffInDays($cal->export_date) + now()->diffInDays($cal->expire_date) + 1 }}
+                                            </td>
+                                            <td>
+                                                @php
+                                                    $v_date = now()->diffInDays($cal->expire_date);
+                                                    if (today() < $cal->expire_date) {
+                                                        echo $v_date . " روز باقیمانده";
+                                                    } else {
+                                                        echo "تاریخ ختم شده";
+                                                    }
+                                                @endphp
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

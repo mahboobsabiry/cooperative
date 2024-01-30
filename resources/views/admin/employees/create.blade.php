@@ -15,6 +15,12 @@
     <link href="{{ asset('backend/assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/assets/plugins/pickerjs/picker.min.css') }}" rel="stylesheet">
 
+    <style>
+        .imgPreview img {
+            padding: 8px;
+            max-width: 100px;
+        }
+    </style>
 @endsection
 <!--/==/ End of Extra Styles -->
 
@@ -499,8 +505,13 @@
                                             </p>
 
                                             <div class="bd p-2">
-                                                <input type="file" class="form-control-file" name="document[]" accept="image/*" data-height="200" multiple />
+                                                <input type="file" id="document" class="form-control-file" name="document[]" accept="image/*" data-height="200" multiple />
                                             </div>
+
+                                            <div class="user-image mb-3 text-center">
+                                                <div class="imgPreview"> </div>
+                                            </div>
+
                                             @error('document')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -575,6 +586,25 @@
                 }
             })
         }
+        $(function() {
+            // Multiple images preview with JavaScript
+            var multiImgPreview = function(input, imgPreviewPlaceholder) {
+                if (input.files) {
+                    var filesAmount = input.files.length;
+                        for (i = 0; i < filesAmount; i++) {
+                            var reader = new FileReader();
+                            reader.onload = function(event) {
+                                $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
+                            }
+                            reader.readAsDataURL(input.files[i]);
+                        }
+                }
+            };
+            $('#document').on('change', function() {
+                $(".imgPreview").html("");
+                multiImgPreview(this, 'div.imgPreview');
+            });
+        });
     </script>
 @endsection
 <!--/==/ End of Extra Scripts -->

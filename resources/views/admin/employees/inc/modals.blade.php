@@ -9,7 +9,7 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.employees.duty_position', $employee->id) }}" class="background_form">
+            <form method="post" action="{{ route('admin.employees.duty_position', $employee->id) }}" class="background_form" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <!-- Start Duty -->
@@ -40,6 +40,12 @@
                         @error('duty_position')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
+
+                    <!-- File -->
+                    <div class="form-group @error('document') has-danger @enderror">
+                        <p class="mb-2">اسناد: <span class="tx-danger">*</span></p>
+                        <input type="file" id="document" class="form-control @error('document') form-control-danger @enderror" name="document">
                     </div>
                 </div>
                 <div class="modal-footer">

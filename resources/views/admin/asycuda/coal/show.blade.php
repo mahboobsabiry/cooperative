@@ -140,7 +140,8 @@
                                         <th><strong>شماره تماس</strong></th>
                                         <th><strong>ایمیل</strong></th>
                                         <th><strong>آدرس</strong></th>
-                                        <th colspan="3"><strong>@lang('global.extraInfo')</strong></th>
+                                        <th><strong>@lang('form.status')</strong></th>
+                                        <th colspan="2"><strong>@lang('global.extraInfo')</strong></th>
                                     </tr>
 
                                     <tr>
@@ -149,15 +150,26 @@
                                         <td>{{ $cal->phone }}</td>
                                         <td>{{ $cal->email }}</td>
                                         <td>{{ $cal->address }}</td>
-                                        <td colspan="3">{{ $cal->info }}</td>
+                                        <td>
+                                            @if($cal->status == 1)
+                                                <span class="text-success">@lang('global.active')</span>
+                                            @else
+                                                <span class="text-danger">@lang('global.inactive') - ختم جواز فعالیت</span>
+                                            @endif
+                                        </td>
+                                        <td colspan="2">{{ $cal->info }}</td>
                                     </tr>
                                     </tbody>
                                     <!--/==/ End of Second Table -->
                                 </table>
                             </div>
                             <!--/==/ End of Personal Information -->
-                            <p>{{ $cal->info }}</p>
-                            <p><a href="{{ route('admin.asycuda.coal.reg_form', $cal->id) }}" target="_blank" class="btn btn-outline-success">فورمه ثبت جواز شرکت</a></p>
+
+                            <div class="row">
+                                <p class="m-2"><a href="{{ route('admin.asycuda.coal.reg_form', $cal->id) }}" target="_blank" class="btn btn-outline-success">فورمه ثبت جواز شرکت</a></p>
+
+                                <p class="m-2"><a href="{{ route('admin.asycuda.coal.refresh', $cal->id) }}" class="btn btn-outline-danger">تازه سازی</a></p>
+                            </div>
                         </div>
                         <!--/==/ End of User Information Details -->
                     </div>

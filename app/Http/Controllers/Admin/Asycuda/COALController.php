@@ -133,4 +133,22 @@ class COALController extends Controller
             'alertType' => 'danger'
         ]);
     }
+
+    // Refresh Company Activity License
+    public function refresh($id)
+    {
+        $cal = COAL::find($id);
+
+        if ($cal->expire_date < today()) {
+            $cal->update([
+                'status'    => 0,
+                'info'      => 'تاریخ جواز ختم گردیده است.'
+            ]);
+        }
+
+        return redirect()->back()->with([
+            'message'   => 'تازه سازی انجام شد.',
+            'alertType' => 'success'
+        ]);
+    }
 }
