@@ -28,11 +28,11 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">جواز فعالیت شرکت ها</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">جواز فعالیت ختم شده</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a
                             href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">جواز شرکت های فعالیت کننده</li>
+                    <li class="breadcrumb-item active" aria-current="page">جواز فعالیت ختم شده</li>
                 </ol>
             </div>
 

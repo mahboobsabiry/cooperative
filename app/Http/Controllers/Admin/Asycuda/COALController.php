@@ -15,8 +15,14 @@ class COALController extends Controller
     // Index
     public function index()
     {
-        $coal = COAL::all();
+        $coal = COAL::all()->where('status', 1);
         return view('admin.asycuda.coal.index', compact('coal'));
+    }
+
+    public function expired()
+    {
+        $coal = COAL::all()->where('status', 0);
+        return view('admin.asycuda.coal.expired', compact('coal'));
     }
 
     // Create

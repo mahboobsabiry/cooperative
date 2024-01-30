@@ -112,7 +112,7 @@
 
     <body style="font-family: Calibri !important;">
         <!-- Page -->
-        <div style="width: 998px; height: 1254px; padding: 40px; background-color: white;">
+        <div style="width: 998px; height: 1350px; padding: 40px; background-color: white;">
             <!-- Header -->
             <div class="grid-container" style="position:relative; font-size: 16px; line-height: 5px; font-weight: bolder;">
                 <div class="grid-item">
@@ -145,11 +145,11 @@
             <!--/==/ End of Header -->
 
             <!-- Title -->
-            <p class="text-center mt-2" style="font-size: 20px;">د اسیکودا په سیستم کی د جواز ثبتولو فورمه (<span class="ff-times">C1</span>)</p>
+            <p class="text-center mt-2" style="font-size: 22px;">د اسیکودا په سیستم کی د جواز ثبتولو فورمه (<span class="ff-times">C1</span>)</p>
 
             <!-- Table -->
             <div>
-                <table class="table table-bordered p-0" style="border: 1px solid black !important; font-size: 15px;">
+                <table class="table table-bordered p-0" style="border: 1px solid black !important; font-size: 16px;">
                     <tbody>
                     <!-- Company Name -->
                     <tr>
@@ -195,13 +195,13 @@
 
             <!-- Verification -->
             <div>
-                <p style="font-size: 16px;">د پورتنی معلوماتو تصدیق او د غوښتونکی لاسلیک او د شرکت ټاپه: -------------------------------------------------- نیته: <span class="ff-times">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->created_at)) }}</span></p>
+                <p style="font-size: 18px;">د پورتنی معلوماتو تصدیق او د غوښتونکی لاسلیک او د شرکت ټاپه: -------------------------------------------------- نیته: <span class="ff-times">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->created_at)) }}</span></p>
             </div>
 
             <!-- Terms -->
             <div>
-                <h5 class="font-weight-bold" style="text-decoration: underline;">نوټ:</h5>
-                <ul style="font-size: 15px">
+                <h4 class="font-weight-bold" style="text-decoration: underline;">نوټ:</h4>
+                <ul style="font-size: 18px">
                     <li>مهربانی وکړی خپل جوازدمحمول د رسیدو نه لږترلږه یوه اونی مخکی ثبت لپاره اړونده ګمرک یا ګمرکونولوی ریاست
                         د اسیکوډا څانګی ته راوړی.</li>
                     <li>که غواړی چی جواز مو ژر یا په دقیقه توګه سیستم که ثبت شی بهتره ده چی خپل جواز دګمرکاتو لوی ریاست د اسیکوډا
@@ -222,7 +222,7 @@
             <!--/==/ End of Terms -->
 
             <!-- Table 2 -->
-            <div class="pl-5 pr-5" style="font-size: 15px;">
+            <div class="pl-5 pr-5" style="font-size: 18px;">
                 <table class="table table-bordered">
                     <tbody>
                     <tr>
@@ -242,11 +242,11 @@
             </div>
             <!--/==/ End of Table 2 -->
 
-            <div style="font-size: 15px;">
+            <div style="font-size: 18px;">
                 <p>د ثبت کوونکی یا ایمیل کوونکی مامور لاسلیک: ---------------------------------------- نیټه: <span class="ff-times">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime(now())) }}</span></p>
             </div>
 
-            <div class="text-center" style="font-size: 15px;">
+            <div class="text-center pt-5" style="font-size: 18px;">
                 <p>د گمرک مهر</p>
             </div>
         </div>

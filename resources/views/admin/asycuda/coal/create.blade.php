@@ -138,8 +138,8 @@
 
                                     <!-- Email Address -->
                                     <div class="form-group @error('email') has-danger @enderror">
-                                        <p class="mb-2">@lang('form.email'): <span class="tx-danger">*</span></p>
-                                        <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ old('email') }}" required>
+                                        <p class="mb-2">@lang('form.email'):</p>
+                                        <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ old('email') }}">
 
                                         @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>

@@ -11,8 +11,14 @@ class AsycudaUserController extends Controller
 {
     public function index()
     {
-        $asycuda_users = AsycudaUser::all();
+        $asycuda_users = AsycudaUser::all()->where('status', 1);
         return view('admin.asycuda.users.index', compact('asycuda_users'));
+    }
+
+    public function inactive()
+    {
+        $asycuda_users = AsycudaUser::all()->where('status', 0);
+        return view('admin.asycuda.users.inactive', compact('asycuda_users'));
     }
 
     // Create

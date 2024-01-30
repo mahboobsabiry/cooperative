@@ -157,7 +157,7 @@
                             </div>
                             <!--/==/ End of Personal Information -->
                             <p>{{ $cal->info }}</p>
-                            <p><a href="{{ route('admin.asycuda.coal.reg_form', $cal->id) }}" target="_blank" class="btn btn-outline-success">Registration Form</a></p>
+                            <p><a href="{{ route('admin.asycuda.coal.reg_form', $cal->id) }}" target="_blank" class="btn btn-outline-success">فورمه ثبت جواز شرکت</a></p>
                         </div>
                         <!--/==/ End of User Information Details -->
                     </div>

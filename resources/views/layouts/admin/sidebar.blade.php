@@ -27,8 +27,10 @@
             @can('asycuda_mgmt')
                 <li class="nav-item {{ request()->is('admin/asycuda/users') ||
                     request()->is('admin/asycuda/users/*') ||
+                    request()->is('admin/asycuda/inactive-users') ||
                     request()->is('admin/asycuda/coal') ||
-                    request()->is('admin/asycuda/coal/*') ? 'active show' : '' }}">
+                    request()->is('admin/asycuda/coal/*') ||
+                    request()->is('admin/asycuda/expired-coal') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="ion ion-ios-desktop"></i>
@@ -41,7 +43,15 @@
                         <li class="nav-sub-item {{ request()->is('admin/asycuda/users') || request()->is('admin/asycuda/users/*') ? 'active' : '' }}">
                             <a class="nav-sub-link" href="{{ route('admin.asycuda.users.index') }}">
                                 یوزر ها
-                                ({{ count(\App\Models\Asycuda\AsycudaUser::all()) }})
+                                ({{ count(\App\Models\Asycuda\AsycudaUser::all()->where('status', 1)) }})
+                            </a>
+                        </li>
+
+                        <!-- Employees Inactive Users -->
+                        <li class="nav-sub-item {{ request()->is('admin/asycuda/inactive-users') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.asycuda.users.inactive') }}">
+                                یوزر های غیرفعال
+                                ({{ count(\App\Models\Asycuda\AsycudaUser::all()->where('status', 0)) }})
                             </a>
                         </li>
 
@@ -50,7 +60,16 @@
                             <a class="nav-sub-link"
                                href="{{ route('admin.asycuda.coal.index') }}">
                                 جواز فعالیت شرکت ها
-                                ({{ count(\App\Models\Asycuda\COAL::all()) }})
+                                ({{ count(\App\Models\Asycuda\COAL::all()->where('status', 1)) }})
+                            </a>
+                        </li>
+
+                        <!-- Expired Companies Activity License -->
+                        <li class="nav-sub-item {{ request()->is('admin/asycuda/expired-coal') ? 'active' : '' }}">
+                            <a class="nav-sub-link"
+                               href="{{ route('admin.asycuda.coal.expired') }}">
+                                جواز فعالیت ختم شده
+                                ({{ count(\App\Models\Asycuda\COAL::all()->where('status', 0)) }})
                             </a>
                         </li>
                     </ul>
