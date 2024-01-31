@@ -15,7 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasPhoto, HasTazkira;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasPhoto;
 
     /**
      * The attributes that are mass assignable.
@@ -57,12 +57,6 @@ class User extends Authenticatable
     public function photo(): MorphOne
     {
         return $this->morphOne(Photo::class, 'transaction');
-    }
-
-    // Morph Tazkira
-    public function tazkira(): MorphOne
-    {
-        return $this->morphOne(Tazkira::class, 'transaction');
     }
 
     // Activities
