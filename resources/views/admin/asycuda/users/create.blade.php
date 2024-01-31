@@ -104,7 +104,7 @@
 
                                     <!-- Info -->
                                     <div class="form-group @error('info') has-danger @enderror">
-                                        <p class="mb-2">@lang('global.extraInfo'): <span class="tx-danger">*</span></p>
+                                        <p class="mb-2">@lang('global.extraInfo'):</p>
                                         <textarea class="form-control" name="info">{{ old('info') }}</textarea>
 
                                         @error('info')

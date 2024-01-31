@@ -94,7 +94,7 @@ class COALController extends Controller
             'owner_name'    => 'required|min:3|max:128',
             'owner_phone'   => 'required|min:8|max:15|unique:coal,owner_phone,' . $cal->id,
             'phone'         => 'nullable|min:8|max:15|unique:coal,phone,' . $cal->id,
-            'email'         => 'nullable|min:8|max:15|unique:coal,email,' . $cal->id,
+            'email'         => 'nullable|min:5|max:128|unique:coal,email,' . $cal->id,
             'address'       => 'required|min:3|max:255',
             'info'          => 'nullable'
         ]);

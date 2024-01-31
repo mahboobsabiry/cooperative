@@ -33,7 +33,7 @@ class COALRequest extends FormRequest
             'owner_name'    => 'required|min:3|max:128',
             'owner_phone'   => 'required|min:8|max:15|unique:coal,owner_phone',
             'phone'         => 'nullable|min:8|max:15|unique:coal,phone',
-            'email'         => 'nullable|min:8|max:15|unique:coal,email',
+            'email'         => 'nullable|min:5|max:128|unique:coal,email',
             'address'       => 'required|min:3|max:255',
             'info'          => 'nullable'
         ];
