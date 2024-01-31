@@ -24,7 +24,7 @@
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.employees.index') }}">@lang('admin.sidebar.employees')</a>
+                        <a href="{{ route('admin.office.employees.index') }}">@lang('admin.sidebar.employees')</a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.asycuda.users.index') }}">یوزر کارمندان</a>
@@ -192,7 +192,11 @@
 
                                     <tr>
                                         <td>{{ $asycuda_user->id }}</td>
-                                        <td>{{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.office.employees.show', $asycuda_user->employee->id) }}">
+                                                {{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }}
+                                            </a>
+                                        </td>
                                         <td>{{ $asycuda_user->roles }}</td>
                                         <td>{{ $asycuda_user->user }}</td>
                                         <td>{{ $asycuda_user->password }}</td>

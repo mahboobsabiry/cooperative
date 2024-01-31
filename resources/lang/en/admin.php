@@ -57,6 +57,7 @@ return [
         'members'           => 'Members',
         'movies'            => 'Movies',
         'news'              => 'News',
+        'officeManagement'  => 'Office Management',
         'organization'      => 'Organization',
         'pages'             => 'Pages',
         'permissions'       => 'Permissions',

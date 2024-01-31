@@ -77,13 +77,16 @@
             @endcan
             <!--/==/ End of Asycuda -->
 
+            <!-- Applications -->
+            <li class="nav-label">@lang('admin.sidebar.officeManagement')</li>
+
             <!-- Positions -->
             @can('organization_mgmt')
-                <li class="nav-item {{ request()->is('admin/positions') ||
-                    request()->is('admin/positions/*') ||
-                    request()->is('admin/appointment-positions') ||
-                    request()->is('admin/empty-positions') ||
-                    request()->is('admin/inactive-positions') ? 'active show' : '' }}">
+                <li class="nav-item {{ request()->is('admin/office/positions') ||
+                    request()->is('admin/office/positions/*') ||
+                    request()->is('admin/office/appointment-positions') ||
+                    request()->is('admin/office/empty-positions') ||
+                    request()->is('admin/office/inactive-positions') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fe fe-life-buoy"></i>
@@ -93,38 +96,38 @@
 
                     <ul class="nav-sub">
                         <!-- Positions -->
-                        <li class="nav-sub-item {{ request()->is('admin/positions') ||
-                        request()->is('admin/positions/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.positions.index') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/positions') ||
+                        request()->is('admin/office/positions/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.positions.index') }}">
                                 {<span class="small text-sm-center tx-danger">M</span>}
                                 @lang('pages.positions.allPositions')
-                                ({{ count(\App\Models\Position::all()) }})
+                                ({{ count(\App\Models\Office\Position::all()) }})
                             </a>
                         </li>
 
                         <!-- Appointment Positions -->
-                        <li class="nav-sub-item {{ request()->is('admin/appointment-positions') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.positions.appointment') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/appointment-positions') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.positions.appointment') }}">
                                 @lang('pages.positions.appointmentPositions')
-                                    <?php $appointment = \App\Models\Position::all()->sum('num_of_pos') - \App\Models\Employee::all()->where('status', 1)->count(); ?>
-                                ({{ \App\Models\Position::all()->sum('num_of_pos') - $appointment }})
+                                    <?php $appointment = \App\Models\Office\Position::all()->sum('num_of_pos') - \App\Models\Office\Employee::all()->where('status', 1)->count(); ?>
+                                ({{ \App\Models\Office\Position::all()->sum('num_of_pos') - $appointment }})
                             </a>
                         </li>
 
                         <!-- Empty Positions -->
-                        <li class="nav-sub-item {{ request()->is('admin/empty-positions') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.positions.empty') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/empty-positions') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.positions.empty') }}">
                                 @lang('pages.positions.emptyPositions')
-                                ({{ \App\Models\Position::all()->sum('num_of_pos') - \App\Models\Employee::all()->where('status', 1)->count() }}
+                                ({{ \App\Models\Office\Position::all()->sum('num_of_pos') - \App\Models\Office\Employee::all()->where('status', 1)->count() }}
                                 )
                             </a>
                         </li>
 
                         <!-- Inactive Positions -->
-                        <li class="nav-sub-item {{ request()->is('admin/inactive-positions') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.positions.inactive') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/inactive-positions') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.positions.inactive') }}">
                                 @lang('pages.positions.inactivePositions')
-                                ({{ \App\Models\Position::all()->where('status', 0)->count() }})
+                                ({{ \App\Models\Office\Position::all()->where('status', 0)->count() }})
                             </a>
                         </li>
                     </ul>
@@ -134,14 +137,14 @@
 
             <!-- Employees -->
             @can('employee_mgmt')
-                <li class="nav-item {{ request()->is('admin/employees') ||
-                    request()->is('admin/employees/*') ||
-                    request()->is('admin/main-employees') ||
-                    request()->is('admin/on-duty-employees') ||
-                    request()->is('admin/employee/change-position-employees') ||
-                    request()->is('admin/employee/fired-employees') ||
-                    request()->is('admin/employee/suspended-employees') ||
-                    request()->is('admin/employee/retired-employees') ? 'active show' : '' }}">
+                <li class="nav-item {{ request()->is('admin/office/employees') ||
+                    request()->is('admin/office/employees/*') ||
+                    request()->is('admin/office/main-employees') ||
+                    request()->is('admin/office/on-duty-employees') ||
+                    request()->is('admin/office/employee/change-position-employees') ||
+                    request()->is('admin/office/employee/fired-employees') ||
+                    request()->is('admin/office/employee/suspended-employees') ||
+                    request()->is('admin/office/employee/retired-employees') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fa fa-user-tie"></i>
@@ -151,65 +154,66 @@
 
                     <ul class="nav-sub">
                         <!-- All Employees -->
-                        <li class="nav-sub-item {{ request()->is('admin/employees') ||
-                        request()->is('admin/employees/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.employees.index') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/employees') ||
+                        request()->is('admin/office/employees/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.employees.index') }}">
                                 {<span class="small text-sm-center tx-danger">M</span>}
                                 همه کارمندان
-                                ({{ count(\App\Models\Employee::all()->whereNotNull('position_id')->where('status', 1)) }}
+                                ({{ count(\App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 1)) }}
                                 )
                             </a>
                         </li>
 
                         <!-- Main Position Employees -->
-                        <li class="nav-sub-item {{ request()->is('admin/main-employees') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.employees.main') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/main-employees') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.employees.main') }}">
                                 @lang('pages.employees.mainPosition')
-                                ({{ \App\Models\Employee::all()->whereNotNull('position_id')->where('status', 1)->where('on_duty', 0)->count() }}
+                                ({{ \App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 1)->where('on_duty', 0)->count() }}
                                 )
                             </a>
                         </li>
 
                         <!-- On Duty Employees -->
-                        <li class="nav-sub-item {{ request()->is('admin/on-duty-employees') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.employees.on_duty') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/on-duty-employees') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.employees.on_duty') }}">
                                 @lang('pages.employees.onDuty')
-                                ({{ \App\Models\Employee::all()->whereNotNull('position_id')->where('status', 1)->where('on_duty', 1)->count() }}
+                                ({{ \App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 1)->where('on_duty', 1)->count() }}
                                 )
                             </a>
                         </li>
 
                         <!-- Change Position Employees -->
-                        <li class="nav-sub-item {{ request()->is('admin/employee/change-position-employees') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.employees.change_position_employees') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/employee/change-position-employees') ? 'active' : '' }}">
+                            <a class="nav-sub-link"
+                               href="{{ route('admin.office.employees.change_position_employees') }}">
                                 تبدیل شده
-                                ({{ \App\Models\Employee::all()->where('status', 0)->count() }})
+                                ({{ \App\Models\Office\Employee::all()->where('status', 0)->count() }})
                             </a>
                         </li>
 
                         <!-- Fired Employees -->
-                        <li class="nav-sub-item {{ request()->is('admin/employee/fired-employees') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.employees.fired_employees') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/employee/fired-employees') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.employees.fired_employees') }}">
                                 منفکی
-                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 2)->count() }}
+                                ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 2)->count() }}
                                 )
                             </a>
                         </li>
 
                         <!-- Retired Employees -->
-                        <li class="nav-sub-item {{ request()->is('admin/employee/retired-employees') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.employees.retired_employees') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/employee/retired-employees') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.employees.retired_employees') }}">
                                 متقاعدین
-                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 4)->count() }}
+                                ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 4)->count() }}
                                 )
                             </a>
                         </li>
 
                         <!-- Suspended Employees -->
-                        <li class="nav-sub-item {{ request()->is('admin/employee/suspended-employees') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.employees.suspended_employees') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/employee/suspended-employees') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.employees.suspended_employees') }}">
                                 <span class="text-secondary">معلق </span>&nbsp;
-                                ({{ \App\Models\Employee::all()->whereNull('position_id')->where('status', 3)->count() }}
+                                ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 3)->count() }}
                                 )
                             </a>
                         </li>
@@ -220,14 +224,14 @@
 
             <!-- Agents -->
             @can('agent_mgmt')
-                <li class="nav-item {{ request()->is('admin/agents') ||
-                    request()->is('admin/agents/*') ||
-                    request()->is('admin/agent/add-company/*') ||
-                    request()->is('admin/agent/add-colleague/*') ||
-                    request()->is('admin/inactive-agents') ||
-                    request()->is('admin/agent-colleagues') ||
-                    request()->is('admin/agent-colleagues/*') ||
-                    request()->is('admin/inactive-agent-colleagues') ? 'active show' : '' }}">
+                <li class="nav-item {{ request()->is('admin/office/agents') ||
+                    request()->is('admin/office/agents/*') ||
+                    request()->is('admin/office/agent/add-company/*') ||
+                    request()->is('admin/office/agent/add-colleague/*') ||
+                    request()->is('admin/office/inactive-agents') ||
+                    request()->is('admin/office/agent-colleagues') ||
+                    request()->is('admin/office/agent-colleagues/*') ||
+                    request()->is('admin/office/inactive-agent-colleagues') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fa fa-user-tie"></i>
@@ -237,38 +241,38 @@
 
                     <ul class="nav-sub">
                         <!-- Agents -->
-                        <li class="nav-sub-item {{ request()->is('admin/agents') ||
-                            request()->is('admin/agents/*') ||
-                            request()->is('admin/agent/add-company/*') ||
-                            request()->is('admin/agent/add-colleague/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.agents.index') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/agents') ||
+                            request()->is('admin/office/agents/*') ||
+                            request()->is('admin/office/agent/add-company/*') ||
+                            request()->is('admin/office/agent/add-colleague/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.agents.index') }}">
                                 @lang('pages.companies.agents')
-                                ({{ \App\Models\Agent::all()->where('status', 1)->count() }})
+                                ({{ \App\Models\Office\Agent::all()->where('status', 1)->count() }})
                             </a>
                         </li>
 
                         <!-- Inactive Agents -->
-                        <li class="nav-sub-item {{ request()->is('admin/inactive-agents') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.agents.inactive') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/inactive-agents') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.agents.inactive') }}">
                                 نماینده های غیرفعال
-                                ({{ count(\App\Models\Agent::all()->where('status', 0)) }})
+                                ({{ count(\App\Models\Office\Agent::all()->where('status', 0)) }})
                             </a>
                         </li>
 
                         <!-- Agent Colleagues -->
-                        <li class="nav-sub-item {{ request()->is('admin/agent-colleagues') ||
-                            request()->is('admin/agent-colleagues/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.agent-colleagues.index') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/agent-colleagues') ||
+                            request()->is('admin/office/agent-colleagues/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.agent-colleagues.index') }}">
                                 همکاران نماینده ها
-                                ({{ count(\App\Models\AgentColleague::all()->where('status', 1)) }})
+                                ({{ count(\App\Models\Office\AgentColleague::all()->where('status', 1)) }})
                             </a>
                         </li>
 
                         <!-- Agent Inactive Colleagues -->
-                        <li class="nav-sub-item {{ request()->is('admin/inactive-agent-colleagues') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.agent-colleagues.inactive') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/inactive-agent-colleagues') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.agent-colleagues.inactive') }}">
                                 همکاران نماینده ها (غیرفعال)
-                                ({{ count(\App\Models\AgentColleague::all()->where('status', 0)) }})
+                                ({{ count(\App\Models\Office\AgentColleague::all()->where('status', 0)) }})
                             </a>
                         </li>
                     </ul>
@@ -278,9 +282,9 @@
 
             <!-- Companies -->
             @can('company_mgmt')
-                <li class="nav-item {{ request()->is('admin/companies') ||
-                    request()->is('admin/companies/*') ||
-                    request()->is('admin/inactive-companies') ? 'active show' : '' }}">
+                <li class="nav-item {{ request()->is('admin/office/companies') ||
+                    request()->is('admin/office/companies/*') ||
+                    request()->is('admin/office/inactive-companies') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="fa fa-shopping-bag"></i>
@@ -290,19 +294,19 @@
 
                     <ul class="nav-sub">
                         <!-- Active Companies -->
-                        <li class="nav-sub-item {{ request()->is('admin/companies') ||
-                        request()->is('admin/companies/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.companies.index') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/companies') ||
+                        request()->is('admin/office/companies/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.companies.index') }}">
                                 @lang('admin.sidebar.companies')
-                                ({{ count(\App\Models\Company::all()->where('status', 1)) }})
+                                ({{ count(\App\Models\Office\Company::all()->where('status', 1)) }})
                             </a>
                         </li>
 
                         <!-- Inactive Companies -->
-                        <li class="nav-sub-item {{ request()->is('admin/inactive-companies') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.companies.inactive') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/office/inactive-companies') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.office.companies.inactive') }}">
                                 شرکت های غیرفعال
-                                ({{ count(\App\Models\Company::all()->where('status', 0)) }})
+                                ({{ count(\App\Models\Office\Company::all()->where('status', 0)) }})
                             </a>
                         </li>
                     </ul>
@@ -312,8 +316,8 @@
 
             <!-- Hostel -->
             @can('hostel_mgmt')
-                <li class="nav-item {{ request()->url() == route('admin.hostel.index') || request()->is('admin/hostel/*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('admin.hostel.index') }}">
+                <li class="nav-item {{ request()->url() == route('admin.office.hostel.index') || request()->is('admin/office/hostel/*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.office.hostel.index') }}">
                         <i class="fa fa-building"></i><span class="sidemenu-label">@lang('pages.hostel.hostel')</span>
                     </a>
                 </li>

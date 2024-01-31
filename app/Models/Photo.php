@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 //Relation::morphMap([
 //    'User'      => 'App\Models\User',
-//    'Employee'  => 'App\Models\Employee',
+//    'Employee'  => 'App\Models\Office\Employee',
 //]);
 
 class Photo extends Model

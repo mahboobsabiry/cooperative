@@ -43,6 +43,7 @@ return [
         'applications'      => 'Applications',
         'companies'         => 'شرکتونه',
         'employees'         => 'کارمندان',
+        'officeManagement'  => 'د اداری مدیریت',
         'organization'      => 'Organization',
         'pages'             => 'پانی',
         'permissions'       => 'اجازی',

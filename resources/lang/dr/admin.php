@@ -56,6 +56,7 @@ return [
         'members'           => 'اعضاء',
         'movies'            => 'فیلم‌ها',
         'news'              => 'خبرها',
+        'officeManagement'  => 'مدیریت اداری',
         'organization'      => 'تشکیلات',
         'pages'             => 'صفحات',
         'permissions'       => 'مجوز ها',

@@ -60,7 +60,7 @@
         });
         $.ajax({
             type: 'post',
-            url: '{{ route('admin.updatePositionStatus') }}',
+            url: '{{ route('admin.office.updatePositionStatus') }}',
             data: {status: status, position_id: position_id},
             success: function (resp) {
                 $("#position_status").show();
@@ -107,7 +107,7 @@
         });
         $.ajax({
             type: 'post',
-            url: '/admin/update-employee-status',
+            url: '/admin/office/update-employee-status',
             data: {status: status, employee_id: employee_id},
             success: function (resp) {
                 $("#employee_status").show();

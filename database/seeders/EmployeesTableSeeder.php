@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Employee;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Office\Employee;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Morilog\Jalali\Jalalian;
 
 class EmployeesTableSeeder extends Seeder
 {

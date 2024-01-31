@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Asycuda;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
+use App\Models\Office\Employee;
 
 class AsycudaController extends Controller
 {

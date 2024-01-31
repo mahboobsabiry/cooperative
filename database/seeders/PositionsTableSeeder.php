@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Position;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Office\Position;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

@@ -43,6 +43,7 @@ return [
         'applications'      => 'Applications',
         'companies'         => 'شرکت لر',
         'employees'         => 'کارمندلر',
+        'officeManagement'  => 'اداری مدیریت',
         'organization'      => 'تشکیلات',
         'pages'             => 'صحیفه لر',
         'permissions'       => 'رخصت لر',
