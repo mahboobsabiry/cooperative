@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\Asycuda\COALController;
 use App\Http\Controllers\Admin\Office\AgentColleagueController;
 use App\Http\Controllers\Admin\Office\AgentController;
 use App\Http\Controllers\Admin\Office\CompanyController;
-use App\Http\Controllers\Admin\Office\EmpController;
+use App\Http\Controllers\Admin\Office\EmployeeHelperController;
 use App\Http\Controllers\Admin\Office\EmployeeController;
 use App\Http\Controllers\Admin\Office\HostelController;
 use App\Http\Controllers\Admin\Office\PositionController;
@@ -76,35 +76,38 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('inactive-positions', [PositionController::class, 'inactive'])->name('positions.inactive');
         // Hostel
         Route::resource('hostel', HostelController::class);
-        // Employees
+
+        // ========== EmployeeController ==========
         Route::resource('employees', EmployeeController::class);
-        Route::post('update-employee-status', [EmployeeController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');
         Route::get('main-employees', [EmployeeController::class, 'main_employees'])->name('employees.main');
         Route::get('on-duty-employees', [EmployeeController::class, 'on_duty_employees'])->name('employees.on_duty');
+        // Change Position Employees
+        Route::get('employee/change-position-employees', [EmployeeController::class, 'change_position_employees'])->name('employees.change_position_employees');
+        // Suspended Employees
+        Route::get('employee/suspended-employees', [EmployeeController::class, 'suspended_employees'])->name('employees.suspended_employees');
+        // Retired Employees
+        Route::get('employee/retired-employees', [EmployeeController::class, 'retired_employees'])->name('employees.retired_employees');
+
+        // ======== EmployeeHelperController ==========
+        Route::post('update-employee-status', [EmployeeHelperController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');
         // Add Background
-        Route::post('employee/add-background/{id}', [EmployeeController::class, 'add_background'])->name('employees.add_background');
+        Route::post('employee/add-background/{id}', [EmployeeHelperController::class, 'add_background'])->name('employees.add_background');
         // Add Duty Position
-        Route::post('employee/duty-position/{id}', [EmployeeController::class, 'duty_position'])->name('employees.duty_position');
+        Route::post('employee/duty-position/{id}', [EmployeeHelperController::class, 'duty_position'])->name('employees.duty_position');
         // Reset to Main Position
-        Route::get('employee/reset-position/{id}', [EmployeeController::class, 'reset_position'])->name('employees.reset_position');
+        Route::get('employee/reset-position/{id}', [EmployeeHelperController::class, 'reset_position'])->name('employees.reset_position');
+        // Fired Employees
+        Route::get('employee/fired-employees', [EmployeeHelperController::class, 'fired_employees'])->name('employees.fired_employees');
 
         // Employee Change Position to other customs
-        Route::post('employee/change-position-ocustom/{id}', [EmpController::class, 'change_position_ocustom'])->name('employees.change_position_ocustom');
-        // Change Position Employees
-        Route::get('employee/change-position-employees', [EmpController::class, 'change_position_employees'])->name('employees.change_position_employees');
+        Route::post('employee/change-position-ocustom/{id}', [EmployeeHelperController::class, 'change_position_ocustom'])->name('employees.change_position_ocustom');
         // Employee Change Position In Return
-        Route::post('employee/change-position-in-return/{id}', [EmpController::class, 'in_return'])->name('employees.in_return');
+        Route::post('employee/change-position-in-return/{id}', [EmployeeHelperController::class, 'in_return'])->name('employees.in_return');
         // Employee Discount/Update/Change Position
-        Route::post('employee/duc-position/{id}', [EmpController::class, 'duc_position'])->name('employees.duc_position');
-        // Fired Employees
-        Route::get('employee/fired-employees', [EmpController::class, 'fired_employees'])->name('employees.fired_employees');
+        Route::post('employee/duc-position/{id}', [EmployeeHelperController::class, 'duc_position'])->name('employees.duc_position');
         // Fire Employee
-        Route::post('employee/fire-employee/{id}', [EmpController::class, 'fire_employee'])->name('employees.fire_employee');
-        // Suspended Employees
-        Route::get('employee/suspended-employees', [EmpController::class, 'suspended_employees'])->name('employees.suspended_employees');
-        // Retired Employees
-        Route::get('employee/retired-employees', [EmpController::class, 'retired_employees'])->name('employees.retired_employees');
-        Route::get('employee/retire-employee/{id}', [EmpController::class, 'retire_employee'])->name('employees.retire_employee');
+        Route::post('employee/fire-employee/{id}', [EmployeeHelperController::class, 'fire_employee'])->name('employees.fire_employee');
+        Route::get('employee/retire-employee/{id}', [EmployeeHelperController::class, 'retire_employee'])->name('employees.retire_employee');
 
         // Agents & Companies
         Route::resource('agents', AgentController::class);

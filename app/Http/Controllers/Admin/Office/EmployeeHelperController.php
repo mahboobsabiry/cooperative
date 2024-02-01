@@ -9,12 +9,108 @@ use Illuminate\Http\Request;
 use Morilog\Jalali\CalendarUtils;
 use Morilog\Jalali\Jalalian;
 
-class EmpController extends Controller
+class EmployeeHelperController extends Controller
 {
     public function __construct()
     {
         $this->middleware('permission:employee_mgmt', [
             'only' => ['change_position_ocustom', 'change_position_employees']
+        ]);
+    }
+
+    // Update Status
+    public function updateEmployeeStatus(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+            if ($data['status'] == 'Active') {
+                $status = 0;
+            } else {
+                $status = 1;
+            }
+            Employee::where('id', $data['employee_id'])->update(['status' => $status]);
+            return response()->json(['status' => $status, 'employee_id' => $data['employee_id']]);
+        }
+    }
+
+    // Add Employee Background
+    public function add_background(Request $request, $id)
+    {
+        $request->validate([
+            'from_date'     => 'required',
+            'to_date'       => 'required',
+            'doc_number'    => 'required',
+            'doc_date'      => 'required',
+            'bg_position'   => 'required',
+        ]);
+
+        $employee = Employee::find($id);
+
+        if (!empty($employee->background)) {
+            $employee->update([
+                'background' => $employee->background . 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
+            ]);
+        } else {
+            $employee->update([
+                'background' => 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
+            ]);
+        }
+
+        return back()->with([
+            'message'   => 'موفقانه ثبت شد!',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Add Duty Position
+    public function duty_position(Request $request, $id)
+    {
+        // Validate Form
+        $request->validate([
+            'start_duty'    => 'required',
+            'duty_doc_number' => 'required',
+            'duty_position' => 'required',
+        ]);
+
+        // Get the employee
+        $employee = Employee::find($id);
+        // Update duty position
+        $employee->update([
+            'on_duty'   => 1,
+            'start_duty'        => $request->start_duty,
+            'duty_doc_number'   => $request->duty_doc_number,
+            'duty_position'     => $request->duty_position,
+            'background'        => $employee->background . ' از تاریخ ' . $request->start_duty . ' نظر به مکتوب نمبر ' . $request->duty_doc_number . ' در بست ' . $request->duty_position .  " طور خدمتی ایفای وظیفه نمود.<br>"
+        ]);
+
+        //  Has Files && Save Document Images
+        if ($request->hasFile('document')) {
+            $item = $request->file('document');
+            $fileName = 'employee_document-' . time() . '.' . $item->getClientOriginalExtension();
+            $employee->storeDocument($item->storeAs('employees', $fileName, 'public'));
+        }
+
+        // Redirect back with success message
+        return back()->with([
+            'message'   => 'ثبت شد',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Reset Position
+    public function reset_position($id)
+    {
+        $employee = Employee::find($id);
+        $employee->update([
+            'background'        => $employee->background . 'از تاریخ ' . $employee->start_duty . ' الی تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $employee->duty_doc_number . ' مورخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' در بست ' . $employee->duty_position . " استحصال وظیفه گردید.<br>",
+            'on_duty'           => 0,
+            'start_duty'        => null,
+            'duty_doc_number'   => null,
+            'duty_position'     => null
+        ]);
+        return back()->with([
+            'message'   => 'کارمند به اصل بست تبدیل گردید.',
+            'alertType' => 'success'
         ]);
     }
 
@@ -44,13 +140,6 @@ class EmpController extends Controller
             'message'   => 'بست کارمند متذکره به گمرک و یا ارگان دیگر تغییر کرد.',
             'alertType' => 'warning'
         ]);
-    }
-
-    // Changed Position Employees List
-    public function change_position_employees()
-    {
-        $employees = Employee::where('status', 0)->get();
-        return view('admin.office.employees.change_position', compact('employees'));
     }
 
     // Change Position In Return
@@ -185,13 +274,6 @@ class EmpController extends Controller
         ]);
     }
 
-    // Fired Employees
-    public function fired_employees()
-    {
-        $fired_employees = Employee::where('status', 2)->get();
-        return view('admin.office.employees.fired_employees', compact('fired_employees'));
-    }
-
     // Fire Employee
     public function fire_employee(Request $request, $id)
     {
@@ -210,20 +292,6 @@ class EmpController extends Controller
             'message'   => 'کارمند منفک گردید!',
             'alertType' => 'danger'
         ]);
-    }
-
-    // Suspended Employees
-    public function suspended_employees()
-    {
-        $suspended_employees = Employee::where('status', 3)->get();
-        return view('admin.office.employees.suspended_employees', compact('suspended_employees'));
-    }
-
-    // Retired Employees
-    public function retired_employees()
-    {
-        $retired_employees = Employee::where('status', 4)->get();
-        return view('admin.office.employees.retired_employees', compact('retired_employees'));
     }
 
     // Retire Employee
