@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class AsycudaUserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:asy_user_view', ['only' => ['index', 'inactive', 'show']]);
+        $this->middleware('permission:asy_user_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:asy_user_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:asy_user_delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $asycuda_users = AsycudaUser::all()->where('status', 1);
@@ -24,7 +32,7 @@ class AsycudaUserController extends Controller
     // Create
     public function create()
     {
-        $employees = Employee::all();
+        $employees = Employee::doesntHave('asycuda_user')->get();
         return view('admin.asycuda.users.create', compact('employees'));
     }
 
@@ -57,7 +65,7 @@ class AsycudaUserController extends Controller
     public function edit($id)
     {
         $asycuda_user = AsycudaUser::find($id);
-        $employees = Employee::all();
+        $employees = Employee::get();
         return view('admin.asycuda.users.edit', compact('asycuda_user', 'employees'));
     }
     // Store

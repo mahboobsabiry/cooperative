@@ -30,33 +30,41 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <div class="d-flex">
-                    <div class="mr-2">
-                        <!-- Delete -->
-                        <a class="modal-effect btn btn-sm ripple btn-danger text-white"
-                           data-effect="effect-sign" data-toggle="modal"
-                           href="#delete_record{{ $agent->id }}"
-                           title="@lang('global.delete')">
-                            @lang('global.delete')
-                            <i class="fe fe-trash"></i>
-                        </a>
+                    @can('office_agent_delete')
+                        <div class="mr-2">
+                            <!-- Delete -->
+                            <a class="modal-effect btn btn-sm ripple btn-danger text-white"
+                               data-effect="effect-sign" data-toggle="modal"
+                               href="#delete_record{{ $agent->id }}"
+                               title="@lang('global.delete')">
+                                @lang('global.delete')
+                                <i class="fe fe-trash"></i>
+                            </a>
 
-                        @include('admin.office.agents.delete')
-                    </div>
-                    <div class="mr-2">
-                        <!-- Edit -->
-                        <a class="btn ripple bg-dark btn-sm text-white"
-                           href="{{ route('admin.office.agents.edit', $agent->id) }}">
-                            @lang('global.edit')
-                            <i class="fe fe-edit"></i>
-                        </a>
-                    </div>
-                    <div class="mr-2">
-                        <!-- Add -->
-                        <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.office.agents.create') }}">
-                            @lang('global.new')
-                            <i class="fe fe-plus-circle"></i>
-                        </a>
-                    </div>
+                            @include('admin.office.agents.delete')
+                        </div>
+                    @endcan
+
+                    @can('office_agent_edit')
+                        <div class="mr-2">
+                            <!-- Edit -->
+                            <a class="btn ripple bg-dark btn-sm text-white"
+                               href="{{ route('admin.office.agents.edit', $agent->id) }}">
+                                @lang('global.edit')
+                                <i class="fe fe-edit"></i>
+                            </a>
+                        </div>
+                    @endcan
+
+                    @can('office_agent_create')
+                        <div class="mr-2">
+                            <!-- Add -->
+                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.office.agents.create') }}">
+                                @lang('global.new')
+                                <i class="fe fe-plus-circle"></i>
+                            </a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -150,19 +158,23 @@
                                     </div>
                                     <div class="col-md-6">
                                         @if($agent->companies->count() != 3)
-                                            <a class="btn btn-primary btn-sm ripple float-left mr-2"
-                                               href="{{ route('admin.office.agents.add_company', $agent->id) }}">
-                                                @lang('global.new')
-                                            </a>
+                                            @can('office_agent_create')
+                                                <a class="btn btn-primary btn-sm ripple float-left mr-2"
+                                                   href="{{ route('admin.office.agents.add_company', $agent->id) }}">
+                                                    @lang('global.new')
+                                                </a>
+                                            @endcan
                                         @endif
                                         <!-- Refresh Company -->
-                                        <a class="modal-effect btn btn-sm ripple btn-info float-left"
-                                           data-effect="effect-sign" data-toggle="modal"
-                                           href="#refresh_agent{{ $agent->id }}">
-                                            تازه سازی
-                                        </a>
+                                        @can('office_agent_edit')
+                                            <a class="modal-effect btn btn-sm ripple btn-info float-left"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#refresh_agent{{ $agent->id }}">
+                                                تازه سازی
+                                            </a>
 
-                                        @include('admin.office.agents.refresh_agent')
+                                            @include('admin.office.agents.refresh_agent')
+                                        @endcan
                                     </div>
                                 </div>
 
@@ -315,19 +327,23 @@
                                         <h5 class="font-weight-bold"> همکاران ({{ $agent->colleagues->count() }})</h5>
                                     </div>
                                     <div class="col-md-6">
-                                        <a class="btn btn-primary btn-sm ripple float-left mr-2"
-                                           href="{{ route('admin.office.agents.add_colleague', $agent->id) }}">
-                                            @lang('global.new')
-                                        </a>
+                                        @can('office_agent_create')
+                                            <a class="btn btn-primary btn-sm ripple float-left mr-2"
+                                               href="{{ route('admin.office.agents.add_colleague', $agent->id) }}">
+                                                @lang('global.new')
+                                            </a>
+                                        @endcan
 
                                         <!-- Refresh Agent Colleague -->
-                                        <a class="modal-effect btn btn-sm ripple btn-info float-left"
-                                           data-effect="effect-sign" data-toggle="modal"
-                                           href="#refresh_colleague{{ $agent->id }}">
-                                            تازه سازی
-                                        </a>
+                                        @can('office_agent_edit')
+                                            <a class="modal-effect btn btn-sm ripple btn-info float-left"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#refresh_colleague{{ $agent->id }}">
+                                                تازه سازی
+                                            </a>
 
-                                        @include('admin.office.agents.refresh_colleague')
+                                            @include('admin.office.agents.refresh_colleague')
+                                        @endcan
                                     </div>
                                 </div>
 

@@ -46,9 +46,11 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                <a class="btn ripple btn-primary" href="{{ route('admin.office.hostel.create') }}">
-                    <i class="fe fe-plus-circle"></i> @lang('global.new')
-                </a>
+                @can('office_hostel_create')
+                    <a class="btn ripple btn-primary" href="{{ route('admin.office.hostel.create') }}">
+                        <i class="fe fe-plus-circle"></i> @lang('global.new')
+                    </a>
+                @endcan
             </div>
         </div>
         <!--/==/ End of Page Header -->

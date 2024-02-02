@@ -14,7 +14,10 @@ class AgentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:agent_mgmt', ['only' => ['index', 'create','store', 'show', 'edit', 'update', 'destroy']]);
+        $this->middleware('permission:office_agent_view', ['only' => ['index', 'show', 'inactive']]);
+        $this->middleware('permission:office_agent_create', ['only' => ['create','store', 'add_company', 'add_agent_company', 'add_colleague', 'add_agent_colleague']]);
+        $this->middleware('permission:office_agent_edit', ['only' => ['edit','update', 'refresh_agent', 'refresh_colleague']]);
+        $this->middleware('permission:office_agent_delete', ['only' => ['destroy']]);
     }
 
     // Fetch All Data

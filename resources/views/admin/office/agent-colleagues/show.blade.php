@@ -33,30 +33,31 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <div class="d-flex">
-                    <div class="mr-2">
-                        <!-- Delete -->
-                        <a class="modal-effect btn btn-sm ripple btn-danger text-white"
-                           data-effect="effect-sign" data-toggle="modal"
-                           href="#delete_record{{ $colleague->id }}"
-                           title="@lang('global.delete')">
-                            @lang('global.delete')
-                            <i class="fe fe-trash"></i>
-                        </a>
+                    @can('office_agent_delete')
+                        <div class="mr-2">
+                            <!-- Delete -->
+                            <a class="modal-effect btn btn-sm ripple btn-danger text-white"
+                               data-effect="effect-sign" data-toggle="modal"
+                               href="#delete_record{{ $colleague->id }}"
+                               title="@lang('global.delete')">
+                                @lang('global.delete')
+                                <i class="fe fe-trash"></i>
+                            </a>
 
-                        @include('admin.office.agent-colleagues.delete')
-                    </div>
-                    <div class="mr-2">
-                        <!-- Edit -->
-                        <a class="btn ripple bg-dark btn-sm text-white"
-                           href="{{ route('admin.office.agent-colleagues.edit', $colleague->id) }}">
-                            @lang('global.edit')
-                            <i class="fe fe-edit"></i>
-                        </a>
-                    </div>
-                    <div class="mr-2">
-                        <!-- Add -->
+                            @include('admin.office.agent-colleagues.delete')
+                        </div>
+                    @endcan
 
-                    </div>
+                    @can('office_agent_edit')
+                        <div class="mr-2">
+                            <!-- Edit -->
+                            <a class="btn ripple bg-dark btn-sm text-white"
+                               href="{{ route('admin.office.agent-colleagues.edit', $colleague->id) }}">
+                                @lang('global.edit')
+                                <i class="fe fe-edit"></i>
+                            </a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>

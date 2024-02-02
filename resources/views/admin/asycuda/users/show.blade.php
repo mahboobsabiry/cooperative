@@ -37,35 +37,41 @@
             <div class="btn btn-list">
                 @if($asycuda_user->status == 1)
                     <div class="d-flex">
-                        <div class="mr-2">
-                            <!-- Delete -->
-                            <a class="modal-effect btn btn-sm ripple btn-danger"
-                               data-effect="effect-sign" data-toggle="modal"
-                               href="#delete_record{{ $asycuda_user->id }}">
-                                <i class="fe fe-trash"></i>
-                                @lang('global.delete')
-                            </a>
+                        @can('asy_user_delete')
+                            <div class="mr-2">
+                                <!-- Delete -->
+                                <a class="modal-effect btn btn-sm ripple btn-danger"
+                                   data-effect="effect-sign" data-toggle="modal"
+                                   href="#delete_record{{ $asycuda_user->id }}">
+                                    <i class="fe fe-trash"></i>
+                                    @lang('global.delete')
+                                </a>
 
-                            @include('admin.asycuda.users.delete')
-                        </div>
+                                @include('admin.asycuda.users.delete')
+                            </div>
+                        @endcan
 
-                        <div class="mr-2">
-                            <!-- Edit -->
-                            <a class="btn ripple bg-dark btn-sm tx-white"
-                               href="{{ route('admin.asycuda.users.edit', $asycuda_user->id) }}">
-                                <i class="fe fe-edit"></i>
-                                @lang('global.edit')
-                            </a>
-                        </div>
+                        @can('asy_user_edit')
+                            <div class="mr-2">
+                                <!-- Edit -->
+                                <a class="btn ripple bg-dark btn-sm tx-white"
+                                   href="{{ route('admin.asycuda.users.edit', $asycuda_user->id) }}">
+                                    <i class="fe fe-edit"></i>
+                                    @lang('global.edit')
+                                </a>
+                            </div>
+                        @endcan
 
-                        <div class="mr-2">
-                            <!-- Add -->
-                            <a class="btn ripple bg-primary btn-sm tx-white"
-                               href="{{ route('admin.asycuda.users.create') }}">
-                                <i class="fe fe-plus-circle"></i>
-                                @lang('global.add')
-                            </a>
-                        </div>
+                        @can('asy_user_create')
+                            <div class="mr-2">
+                                <!-- Add -->
+                                <a class="btn ripple bg-primary btn-sm tx-white"
+                                   href="{{ route('admin.asycuda.users.create') }}">
+                                    <i class="fe fe-plus-circle"></i>
+                                    @lang('global.add')
+                                </a>
+                            </div>
+                        @endcan
                     </div>
                 @endif
             </div>
@@ -193,9 +199,13 @@
                                     <tr>
                                         <td>{{ $asycuda_user->id }}</td>
                                         <td>
-                                            <a href="{{ route('admin.office.employees.show', $asycuda_user->employee->id) }}">
+                                            @can('employee_view')
+                                                <a href="{{ route('admin.office.employees.show', $asycuda_user->employee->id) }}">
+                                                    {{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }}
+                                                </a>
+                                            @else
                                                 {{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }}
-                                            </a>
+                                            @endcan
                                         </td>
                                         <td>{{ $asycuda_user->roles }}</td>
                                         <td>{{ $asycuda_user->user }}</td>

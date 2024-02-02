@@ -33,33 +33,41 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <div class="d-flex">
-                    <div class="mr-2">
-                        <!-- Delete -->
-                        <a class="modal-effect btn btn-sm ripple btn-danger text-white"
-                           data-effect="effect-sign" data-toggle="modal"
-                           href="#delete_record{{ $hostel->id }}"
-                           title="@lang('global.delete')">
-                            @lang('global.delete')
-                            <i class="fe fe-trash"></i>
-                        </a>
+                    @can('office_hostel_delete')
+                        <div class="mr-2">
+                            <!-- Delete -->
+                            <a class="modal-effect btn btn-sm ripple btn-danger text-white"
+                               data-effect="effect-sign" data-toggle="modal"
+                               href="#delete_record{{ $hostel->id }}"
+                               title="@lang('global.delete')">
+                                @lang('global.delete')
+                                <i class="fe fe-trash"></i>
+                            </a>
 
-                        @include('admin.office.hostel.delete')
-                    </div>
-                    <div class="mr-2">
-                        <!-- Edit -->
-                        <a class="btn ripple bg-dark btn-sm text-white"
-                           href="{{ route('admin.office.hostel.edit', $hostel->id) }}">
-                            @lang('global.edit')
-                            <i class="fe fe-edit"></i>
-                        </a>
-                    </div>
-                    <div class="mr-2">
-                        <!-- Add -->
-                        <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.office.hostel.create') }}">
-                            @lang('global.new')
-                            <i class="fe fe-plus-circle"></i>
-                        </a>
-                    </div>
+                            @include('admin.office.hostel.delete')
+                        </div>
+                    @endcan
+
+                    @can('office_hostel_edit')
+                        <div class="mr-2">
+                            <!-- Edit -->
+                            <a class="btn ripple bg-dark btn-sm text-white"
+                               href="{{ route('admin.office.hostel.edit', $hostel->id) }}">
+                                @lang('global.edit')
+                                <i class="fe fe-edit"></i>
+                            </a>
+                        </div>
+                    @endcan
+
+                    @can('office_hostel_create')
+                        <div class="mr-2">
+                            <!-- Add -->
+                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.office.hostel.create') }}">
+                                @lang('global.new')
+                                <i class="fe fe-plus-circle"></i>
+                            </a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -191,7 +199,11 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
+                                        @can('office_employee_view')
+                                            <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
+                                        @else
+                                            {{ $employee->name }} {{ $employee->last_name }}
+                                        @endcan
                                     </td>
                                     <td>{{ $employee->father_name ?? '' }}</td>
                                     <td>{{ $employee->position->title ?? '' }}

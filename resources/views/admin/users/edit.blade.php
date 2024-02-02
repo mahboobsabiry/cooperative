@@ -156,6 +156,16 @@
                                             </div>
                                         </div>
                                         <!--/==/ End of Roles -->
+
+                                        <!-- Permissions -->
+                                        <div class="form-group mb-lg-0">
+                                            <label class="">@lang('admin.sidebar.permissions') :</label>
+                                            <select multiple="multiple" class="form-control select2" name="permissions[]">
+                                                @foreach($permissions as $permission)
+                                                    <option value="{{ $permission->id }}" {{ $user->permissions->contains($permission->id) ? 'selected' : '' }}>{{ $permission->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">

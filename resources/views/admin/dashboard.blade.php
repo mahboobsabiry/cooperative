@@ -27,7 +27,7 @@
         <!-- First Cards Row -->
         <div class="row row-sm">
             <!-- Users Card -->
-            @can('user_mgmt')
+            @can('user_view')
                 <div class="col-sm-6 col-xl-3 col-lg-6">
                     <div class="card custom-card">
                         <div class="card-body dash1">
@@ -61,7 +61,7 @@
             <!--/==/ End of Users Card -->
 
             <!-- Positions -->
-            @can('organization_mgmt')
+            @can('office_position_view')
                 <div class="col-sm-6 col-xl-3 col-lg-6">
                     <div class="card custom-card">
                         <div class="card-body dash1">
@@ -97,7 +97,7 @@
             <!--/==/ End of Positions -->
 
             <!-- Employees -->
-            @can('employee_mgmt')
+            @can('office_employee_view')
                 <div class="col-sm-6 col-xl-3 col-lg-6">
                     <div class="card custom-card">
                         <div class="card-body dash1">
@@ -133,7 +133,7 @@
             <!--/==/ End of Employees -->
 
             <!-- Companies -->
-            @can('company_mgmt')
+            @can('office_company_view')
                 <div class="col-sm-6 col-xl-3 col-lg-6">
                     <div class="card custom-card">
                         <div class="card-body dash1">
@@ -173,7 +173,7 @@
         <!-- Second Cards Row -->
         <div class="row row-sm">
             <!-- Positions Card -->
-            @can('organization_mgmt')
+            @can('office_position_view')
                 <div class="col-sm-6 col-xl-3 col-lg-6">
                     <div class="card custom-card">
                         <div class="card-body dash1">
@@ -207,7 +207,7 @@
             <!--/==/ End of Positions Card -->
 
             <!-- Employees Change Position/Main Position -->
-            @can('employee_mgmt')
+            @can('office_employee_view')
                 <div class="col-sm-6 col-xl-3 col-lg-6">
                     <div class="card custom-card">
                         <div class="card-body dash1">
@@ -243,7 +243,7 @@
             <!--/==/ End of Employees Change Position/Main Position -->
 
             <!-- Employees Have Home/Hostel -->
-            @can('employee_mgmt')
+            @can('office_hostel_view')
                 <div class="col-sm-6 col-xl-3 col-lg-6">
                     <div class="card custom-card">
                         <div class="card-body dash1">
@@ -279,7 +279,7 @@
             <!--/==/ End of Employees Have Home/Hostel -->
 
             <!-- Companies Have Agents Or Not -->
-            @can('company_mgmt')
+            @can('office_company_view')
                 <div class="col-sm-6 col-xl-3 col-lg-6">
                     <div class="card custom-card">
                         <div class="card-body dash1">
@@ -399,7 +399,7 @@
                                                     <a href="{{ route('admin.users.show', $user->id) }}" class="ctd"
                                                        target="_blank">{{ $user->name }}</a>
                                                 </h6>
-                                                <small class="tx-11 tx-gray-500">{{ $user->roles->first()->name }}</small>
+                                                <small class="tx-11 tx-gray-500">{{ $user->roles->first()->name ?? '' }}</small>
                                             </td>
                                             <td class="bd-t-0">
                                                 <h6 class="mg-b-0 font-weight-bold">

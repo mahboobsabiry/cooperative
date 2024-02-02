@@ -15,9 +15,10 @@ class EmployeeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:employee_mgmt', [
-            'only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']
-        ]);
+        $this->middleware('permission:office_employee_view', ['only' => ['index', 'show', 'main_employees', 'on_duty_employees', 'change_position_employees', 'fired_employees', 'suspended_employees', 'retired_employees']]);
+        $this->middleware('permission:office_employee_create', ['only' => ['create','store']]);
+        $this->middleware('permission:office_employee_edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:office_employee_delete', ['only' => ['destroy']]);
     }
 
     // Index
@@ -111,9 +112,8 @@ class EmployeeController extends Controller
     // Show Info
     public function show(Employee $employee)
     {
-        $admin = Auth::user()->roles->first()->name == 'Admin';
         $active_employees = Employee::where('status', 1)->whereNotNull('position_id')->where('position_id', '!=', $employee->position_id)->get();
-        return view('admin.office.employees.show', compact('employee', 'admin', 'active_employees'));
+        return view('admin.office.employees.show', compact('employee', 'active_employees'));
     }
 
     // Edit Info

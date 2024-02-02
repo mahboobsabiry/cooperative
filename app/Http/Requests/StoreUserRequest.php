@@ -33,7 +33,9 @@ class StoreUserRequest extends FormRequest
             'email'     => 'nullable|min:8|max:64|unique:users,email',
             'password'  => 'required|min:3|max:64',
             'roles.*'   => 'integer',
-            'roles'     => 'required|array',
+            'roles'     => 'nullable|array',
+            'permissions.*'   => 'integer',
+            'permissions'     => 'nullable|array',
             'info'      => 'nullable'
         ];
     }

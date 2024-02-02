@@ -13,9 +13,10 @@ class PositionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:organization_mgmt', [
-            'only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'updatePositionStatus']
-        ]);
+        $this->middleware('permission:office_position_view', ['only' => ['index', 'show', 'appointment', 'empty', 'inactive']]);
+        $this->middleware('permission:office_position_create', ['only' => ['create','store']]);
+        $this->middleware('permission:office_position_edit', ['only' => ['edit','update', 'updatePositionStatus']]);
+        $this->middleware('permission:office_position_delete', ['only' => ['destroy']]);
     }
 
     // Fetch All Data

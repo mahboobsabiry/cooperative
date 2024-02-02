@@ -34,35 +34,41 @@
             <div class="btn btn-list">
                 @if($cal->status == 1)
                     <div class="d-flex">
-                        <div class="mr-2">
-                            <!-- Delete -->
-                            <a class="modal-effect btn btn-sm ripple btn-danger"
-                               data-effect="effect-sign" data-toggle="modal"
-                               href="#delete_record{{ $cal->id }}">
-                                <i class="fe fe-trash"></i>
-                                @lang('global.delete')
-                            </a>
+                        @can('asy_coal_delete')
+                            <div class="mr-2">
+                                <!-- Delete -->
+                                <a class="modal-effect btn btn-sm ripple btn-danger"
+                                   data-effect="effect-sign" data-toggle="modal"
+                                   href="#delete_record{{ $cal->id }}">
+                                    <i class="fe fe-trash"></i>
+                                    @lang('global.delete')
+                                </a>
 
-                            @include('admin.asycuda.coal.delete')
-                        </div>
+                                @include('admin.asycuda.coal.delete')
+                            </div>
+                        @endcan
 
-                        <div class="mr-2">
-                            <!-- Edit -->
-                            <a class="btn ripple bg-dark btn-sm tx-white"
-                               href="{{ route('admin.asycuda.coal.edit', $cal->id) }}">
-                                <i class="fe fe-edit"></i>
-                                @lang('global.edit')
-                            </a>
-                        </div>
+                        @can('asy_coal_edit')
+                            <div class="mr-2">
+                                <!-- Edit -->
+                                <a class="btn ripple bg-dark btn-sm tx-white"
+                                   href="{{ route('admin.asycuda.coal.edit', $cal->id) }}">
+                                    <i class="fe fe-edit"></i>
+                                    @lang('global.edit')
+                                </a>
+                            </div>
+                        @endcan
 
-                        <div class="mr-2">
-                            <!-- Add -->
-                            <a class="btn ripple bg-primary btn-sm tx-white"
-                               href="{{ route('admin.asycuda.coal.create') }}">
-                                <i class="fe fe-plus-circle"></i>
-                                @lang('global.add')
-                            </a>
-                        </div>
+                        @can('asy_coal_create')
+                            <div class="mr-2">
+                                <!-- Add -->
+                                <a class="btn ripple bg-primary btn-sm tx-white"
+                                   href="{{ route('admin.asycuda.coal.create') }}">
+                                    <i class="fe fe-plus-circle"></i>
+                                    @lang('global.add')
+                                </a>
+                            </div>
+                        @endcan
                     </div>
                 @endif
             </div>
@@ -165,11 +171,13 @@
                             </div>
                             <!--/==/ End of Personal Information -->
 
-                            <div class="row">
-                                <p class="m-2"><a href="{{ route('admin.asycuda.coal.reg_form', $cal->id) }}" target="_blank" class="btn btn-outline-success">فورمه ثبت جواز شرکت</a></p>
+                            @can('asy_coal_create')
+                                <div class="row">
+                                    <p class="m-2"><a href="{{ route('admin.asycuda.coal.reg_form', $cal->id) }}" target="_blank" class="btn btn-outline-success">فورمه ثبت جواز شرکت</a></p>
 
-                                <p class="m-2"><a href="{{ route('admin.asycuda.coal.refresh', $cal->id) }}" class="btn btn-outline-danger">تازه سازی</a></p>
-                            </div>
+                                    <p class="m-2"><a href="{{ route('admin.asycuda.coal.refresh', $cal->id) }}" class="btn btn-outline-danger">تازه سازی</a></p>
+                                </div>
+                            @endcan
                         </div>
                         <!--/==/ End of User Information Details -->
                     </div>

@@ -46,9 +46,11 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                <a class="btn ripple btn-primary" href="{{ route('admin.office.positions.create') }}">
-                    <i class="fe fe-plus-circle"></i> @lang('pages.positions.addPosition')
-                </a>
+                @can('office_position_view')
+                    <a class="btn ripple btn-primary" href="{{ route('admin.office.positions.create') }}">
+                        <i class="fe fe-plus-circle"></i> @lang('pages.positions.addPosition')
+                    </a>
+                @endcan
             </div>
         </div>
         <!--/==/ End of Page Header -->

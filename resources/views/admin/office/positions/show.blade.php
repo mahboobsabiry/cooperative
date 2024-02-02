@@ -38,33 +38,42 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <div class="d-flex">
-                    <div class="mr-2">
-                        <!-- Delete -->
-                        <a class="modal-effect btn btn-sm ripple btn-danger text-white"
-                           data-effect="effect-sign" data-toggle="modal"
-                           href="#delete_record{{ $position->id }}"
-                           title="@lang('global.delete')">
-                            @lang('global.delete')
-                            <i class="fe fe-trash"></i>
-                        </a>
+                    <!-- Delete -->
+                    @can('office_position_delete')
+                        <div class="mr-2">
+                            <!-- Delete -->
+                            <a class="modal-effect btn btn-sm ripple btn-danger text-white"
+                               data-effect="effect-sign" data-toggle="modal"
+                               href="#delete_record{{ $position->id }}"
+                               title="@lang('global.delete')">
+                                @lang('global.delete')
+                                <i class="fe fe-trash"></i>
+                            </a>
 
-                        @include('admin.office.positions.delete')
-                    </div>
-                    <div class="mr-2">
-                        <!-- Edit -->
-                        <a class="btn ripple bg-dark btn-sm text-white"
-                           href="{{ route('admin.office.positions.edit', $position->id) }}">
-                            @lang('global.edit')
-                            <i class="fe fe-edit"></i>
-                        </a>
-                    </div>
-                    <div class="mr-2">
-                        <!-- Add -->
-                        <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.office.positions.create') }}">
-                            @lang('global.new')
-                            <i class="fe fe-plus-circle"></i>
-                        </a>
-                    </div>
+                            @include('admin.office.positions.delete')
+                        </div>
+                    @endcan
+
+                    @can('office_position_edit')
+                        <div class="mr-2">
+                            <!-- Edit -->
+                            <a class="btn ripple bg-dark btn-sm text-white"
+                               href="{{ route('admin.office.positions.edit', $position->id) }}">
+                                @lang('global.edit')
+                                <i class="fe fe-edit"></i>
+                            </a>
+                        </div>
+                    @endcan
+
+                    @can('office_position_create')
+                        <div class="mr-2">
+                            <!-- Add -->
+                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.office.positions.create') }}">
+                                @lang('global.new')
+                                <i class="fe fe-plus-circle"></i>
+                            </a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -194,10 +203,15 @@
                                         <td>
                                             {{ $position->employees()->count() == 0 ? trans('global.empty') : '' }}
                                             @foreach($position->employees as $employee)
-                                                <a href="{{ route('admin.office.employees.show', $employee->id) }}" class="">
+                                                @can('office_employee_view')
+                                                    <a href="{{ route('admin.office.employees.show', $employee->id) }}" class="">
+                                                        {{ $employee->name }} {{ $employee->last_name }}
+                                                        {{ $position->num_of_pos > 1 ? ', ' : '' }}
+                                                    </a>
+                                                @else
                                                     {{ $employee->name }} {{ $employee->last_name }}
                                                     {{ $position->num_of_pos > 1 ? ', ' : '' }}
-                                                </a>
+                                                @endcan
                                             @endforeach
                                         </td>
                                     </tr>
@@ -209,34 +223,36 @@
                                     </tr>
 
                                     <!-- Status -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('form.status'):</th>
-                                        <td>
+                                    @can('office_position_edit')
+                                        <tr>
+                                            <th class="font-weight-bold">@lang('form.status'):</th>
+                                            <td>
                                             <span class="acInText">
                                                 <span id="acInText"
                                                       class="{{ $position->status == 1 ? 'text-success' : 'text-danger' }}">
                                                     {{ $position->status == 1 ? trans('global.active') : trans('global.inactive') }}
                                                 </span>
                                             </span>
-                                            ----
-                                            @if($position->status == 1)
-                                                <a class="updatePositionStatus" id="position_status"
-                                                   position_id="{{ $position->id }}" href="javascript:void(0)">
-                                                    <i class="fa fa-toggle-on text-success" aria-hidden="true"
-                                                       status="Active"></i>
-                                                </a>
-                                            @else
-                                                <a class="updatePositionStatus" id="position_status"
-                                                   position_id="{{ $position->id }}" href="javascript:void(0)">
-                                                    <i class="fa fa-toggle-off text-danger" aria-hidden="true"
-                                                       status="Inactive"></i>
-                                                </a>
-                                            @endif
-                                            <span id="update_status" style="display: none;">
+                                                ----
+                                                @if($position->status == 1)
+                                                    <a class="updatePositionStatus" id="position_status"
+                                                       position_id="{{ $position->id }}" href="javascript:void(0)">
+                                                        <i class="fa fa-toggle-on text-success" aria-hidden="true"
+                                                           status="Active"></i>
+                                                    </a>
+                                                @else
+                                                    <a class="updatePositionStatus" id="position_status"
+                                                       position_id="{{ $position->id }}" href="javascript:void(0)">
+                                                        <i class="fa fa-toggle-off text-danger" aria-hidden="true"
+                                                           status="Inactive"></i>
+                                                    </a>
+                                                @endif
+                                                <span id="update_status" style="display: none;">
                                                 <i class="fa fa-toggle-on" aria-hidden="true"></i>
                                             </span>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    @endcan
 
                                     </tbody>
 
@@ -319,7 +335,11 @@
                                 <tr>
                                     <td>{{ $employee->id }}</td>
                                     <td>
-                                        <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
+                                        @can('office_employee_view')
+                                            <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
+                                        @else
+                                            {{ $employee->name }} {{ $employee->last_name }}
+                                        @endcan
                                     </td>
                                     <td>{{ $employee->father_name ?? '' }}</td>
                                     <td>{{ $employee->position->title ?? '' }} {{ $employee->position->position_number ?? '' }}</td>

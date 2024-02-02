@@ -46,9 +46,11 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                <a class="btn ripple btn-primary" href="{{ route('admin.office.positions.create') }}">
-                    <i class="fe fe-plus-circle"></i> @lang('pages.positions.addPosition')
-                </a>
+                @can('office_position_create')
+                    <a class="btn ripple btn-primary" href="{{ route('admin.office.positions.create') }}">
+                        <i class="fe fe-plus-circle"></i> @lang('pages.positions.addPosition')
+                    </a>
+                @endcan
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -95,13 +97,21 @@
                                                     <td>
                                                         @if($position->employees)
                                                             @foreach($position->employees as $emp)
-                                                            <a href="{{ route('admin.office.employees.show', $emp->id) }}">
-                                                                {{ $emp->name }}
-                                                                {{ $emp->last_name }}
-                                                                (<span class="text-danger text-sm-center">
-                                                                    {{ $emp->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
-                                                                </span>)
-                                                            </a>{{ $position->num_of_pos > 1 ? ', ' : '' }}
+                                                                @can('office_employee_view')
+                                                                    <a href="{{ route('admin.office.employees.show', $emp->id) }}">
+                                                                        {{ $emp->name }}
+                                                                        {{ $emp->last_name }}
+                                                                        (<span class="text-danger text-sm-center">
+                                                                        {{ $emp->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
+                                                                    </span>)
+                                                                    </a>{{ $position->num_of_pos > 1 ? ', ' : '' }}
+                                                                @else
+                                                                    <a href="javascript:void(0);">{{ $emp->name }} {{ $emp->last_name }}
+                                                                        (<span class="text-danger text-sm-center">
+                                                                        {{ $emp->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
+                                                                    </span>)
+                                                                    </a>{{ $position->num_of_pos > 1 ? ', ' : '' }}
+                                                                @endcan
                                                             @endforeach
                                                         @else
                                                             @lang('global.empty')

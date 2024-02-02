@@ -11,7 +11,10 @@ class HostelController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:hostel_mgmt', ['only' => ['index', 'create','store', 'show', 'edit', 'update', 'destroy']]);
+        $this->middleware('permission:office_hostel_view', ['only' => ['index', 'show']]);
+        $this->middleware('permission:office_hostel_create', ['only' => ['create','store']]);
+        $this->middleware('permission:office_hostel_edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:office_hostel_delete', ['only' => ['destroy']]);
     }
 
     // Fetch All Data

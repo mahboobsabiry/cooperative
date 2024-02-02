@@ -12,6 +12,14 @@ use Morilog\Jalali\Jalalian;
 // Companies Activity License Controller
 class COALController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:asy_coal_view', ['only' => ['index', 'expired', 'show']]);
+        $this->middleware('permission:asy_coal_create', ['only' => ['create','store', 'reg_form', 'refresh']]);
+        $this->middleware('permission:asy_coal_edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:asy_coal_delete', ['only' => ['destroy']]);
+    }
+
     // Index
     public function index()
     {

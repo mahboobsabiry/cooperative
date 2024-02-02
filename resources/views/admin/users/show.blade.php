@@ -29,35 +29,37 @@
             <!-- Btn List -->
             <div class="btn btn-list">
 
-                <div class="d-flex">
-                    <div class="mr-2">
-                        <!-- Delete -->
-                        <a class="modal-effect btn btn-sm ripple btn-danger text-white"
-                           data-effect="effect-sign" data-toggle="modal"
-                           href="#delete_record{{ $user->id }}"
-                           title="@lang('global.delete')">
-                            @lang('global.delete')
-                            <i class="fe fe-trash"></i>
-                        </a>
+                @can('user_mgmt')
+                    <div class="d-flex">
+                        <div class="mr-2">
+                            <!-- Delete -->
+                            <a class="modal-effect btn btn-sm ripple btn-danger text-white"
+                               data-effect="effect-sign" data-toggle="modal"
+                               href="#delete_record{{ $user->id }}"
+                               title="@lang('global.delete')">
+                                @lang('global.delete')
+                                <i class="fe fe-trash"></i>
+                            </a>
 
-                        @include('admin.users.delete')
+                            @include('admin.users.delete')
+                        </div>
+                        <div class="mr-2">
+                            <!-- Edit -->
+                            <a class="btn ripple bg-dark btn-sm text-white"
+                               href="{{ route('admin.users.edit', $user->id) }}">
+                                @lang('global.edit')
+                                <i class="fe fe-edit"></i>
+                            </a>
+                        </div>
+                        <div class="mr-2">
+                            <!-- Add -->
+                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.users.create') }}" target="_blank">
+                                @lang('global.new')
+                                <i class="fe fe-plus-circle"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="mr-2">
-                        <!-- Edit -->
-                        <a class="btn ripple bg-dark btn-sm text-white"
-                           href="{{ route('admin.users.edit', $user->id) }}">
-                            @lang('global.edit')
-                            <i class="fe fe-edit"></i>
-                        </a>
-                    </div>
-                    <div class="mr-2">
-                        <!-- Add -->
-                        <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.users.create') }}" target="_blank">
-                            @lang('global.new')
-                            <i class="fe fe-plus-circle"></i>
-                        </a>
-                    </div>
-                </div>
+                @endcan
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -169,39 +171,50 @@
                                     <tr>
                                         <td><strong>@lang('admin.sidebar.roles'): </strong>
                                             @foreach($user->roles as $role)
-                                                <span class="tag tag-primary tag-pill">{{ $role->name }}</span>
+                                                <span class="tag tag-primary tag-pill m-1">{{ $role->name }}</span>
+                                            @endforeach
+                                        </td>
+                                    </tr>
+
+                                    <!-- Permissions -->
+                                    <tr>
+                                        <td><strong>@lang('admin.sidebar.permissions'): </strong>
+                                            @foreach($user->permissions as $permission)
+                                                <span class="tag tag-primary tag-pill m-1">{{ $permission->name }}</span>
                                             @endforeach
                                         </td>
                                     </tr>
 
                                     <!-- Status -->
-                                    <tr>
-                                        <td><strong>@lang('form.status'): </strong>
-                                            <span class="acInText">
+                                    @can('user_mgmt')
+                                        <tr>
+                                            <td><strong>@lang('form.status'): </strong>
+                                                <span class="acInText">
                                                 <span id="acInText"
                                                       class="{{ $user->status == 1 ? 'text-success' : 'text-danger' }}">
                                                     {{ $user->status == 1 ? trans('global.active') : trans('global.inactive') }}
                                                 </span>
                                             </span>
-                                            ----
-                                            @if($user->status == 1)
-                                                <a class="updateUserStatus" id="user-{{ $user->id }}"
-                                                   user_id="{{ $user->id }}" href="javascript:void(0)">
-                                                    <i class="fa fa-toggle-on text-success" aria-hidden="true"
-                                                       status="Active"></i>
-                                                </a>
-                                            @else
-                                                <a class="updateUserStatus" id="user-{{ $user->id }}"
-                                                   user_id="{{ $user->id }}" href="javascript:void(0)">
-                                                    <i class="fa fa-toggle-off text-danger" aria-hidden="true"
-                                                       status="Inactive"></i>
-                                                </a>
-                                            @endif
-                                            <span id="update_status-{{ $user->id }}" style="display: none;">
+                                                ----
+                                                @if($user->status == 1)
+                                                    <a class="updateUserStatus" id="user-{{ $user->id }}"
+                                                       user_id="{{ $user->id }}" href="javascript:void(0)">
+                                                        <i class="fa fa-toggle-on text-success" aria-hidden="true"
+                                                           status="Active"></i>
+                                                    </a>
+                                                @else
+                                                    <a class="updateUserStatus" id="user-{{ $user->id }}"
+                                                       user_id="{{ $user->id }}" href="javascript:void(0)">
+                                                        <i class="fa fa-toggle-off text-danger" aria-hidden="true"
+                                                           status="Inactive"></i>
+                                                    </a>
+                                                @endif
+                                                <span id="update_status-{{ $user->id }}" style="display: none;">
                                                 <i class="fa fa-toggle-on" aria-hidden="true"></i>
                                             </span>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    @endcan
 
                                     <!-- Left Column -->
                                     </tbody>
@@ -247,60 +260,61 @@
                         <br>
 
                         <!-- Activities -->
-                        <div>
-                            <h6 class="card-title mb-1">@lang('global.activities')</h6>
-                            <p class="text-muted card-sub-title">Add borders on all sides of the table and cells.</p>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered mg-b-0">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>@lang('global.details')</th>
-                                    <th>@lang('form.created_date')</th>
-                                    <th>@lang('global.action')</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @if(count(\Spatie\Activitylog\Models\Activity::where('causer_id', $user->id)->get()) >= 1)
-                                    @foreach(\Spatie\Activitylog\Models\Activity::all()->where('causer_id', $user->id) as $activity)
-                                        <tr>
-                                            <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $activity->description }}</td>
-                                            <td>
-                                                @if(app()->getLocale() == 'en')
-                                                    {{ date_format($activity->created_at, 'Y-M-d') }}
-                                                @else
-                                                    @php
-                                                        $date = \Morilog\Jalali\CalendarUtils::strftime('Y-M-d', strtotime($activity->created_at)); // 1395-02-19
-                                                        echo \Morilog\Jalali\CalendarUtils::convertNumbers($date);
-                                                    @endphp
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a class="modal-effect btn btn-sm ripple btn-danger"
-                                                   data-effect="effect-sign" data-toggle="modal"
-                                                   href="#delete_record{{ $activity->id }}"
-                                                   title="@lang('pages.users.deleteActivity')">
-                                                    <i class="fe fe-delete"></i>
-                                                </a>
-
-                                                @include('admin.inc.delete_activity')
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @else
+                        @can('user_mgmt')
+                            <div>
+                                <h6 class="card-title mb-1">@lang('global.activities')</h6>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered mg-b-0">
+                                    <thead>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>@lang('global.notFound')</td>
-                                        <td></td>
-                                        <td></td>
+                                        <th>#</th>
+                                        <th>@lang('global.details')</th>
+                                        <th>@lang('form.created_date')</th>
+                                        <th>@lang('global.action')</th>
                                     </tr>
-                                @endif
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                    @if(count(\Spatie\Activitylog\Models\Activity::where('causer_id', $user->id)->get()) >= 1)
+                                        @foreach(\Spatie\Activitylog\Models\Activity::all()->where('causer_id', $user->id) as $activity)
+                                            <tr>
+                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                <td>{{ $activity->description }}</td>
+                                                <td>
+                                                    @if(app()->getLocale() == 'en')
+                                                        {{ date_format($activity->created_at, 'Y-M-d') }}
+                                                    @else
+                                                        @php
+                                                            $date = \Morilog\Jalali\CalendarUtils::strftime('Y-M-d', strtotime($activity->created_at)); // 1395-02-19
+                                                            echo \Morilog\Jalali\CalendarUtils::convertNumbers($date);
+                                                        @endphp
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a class="modal-effect btn btn-sm ripple btn-danger"
+                                                       data-effect="effect-sign" data-toggle="modal"
+                                                       href="#delete_record{{ $activity->id }}"
+                                                       title="@lang('pages.users.deleteActivity')">
+                                                        <i class="fe fe-delete"></i>
+                                                    </a>
+
+                                                    @include('admin.inc.delete_activity')
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>@lang('global.notFound')</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endcan
                         <!--/==/ End of Activities -->
                     </div>
                 </div>

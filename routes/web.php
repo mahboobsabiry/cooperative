@@ -87,6 +87,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('employee/suspended-employees', [EmployeeController::class, 'suspended_employees'])->name('employees.suspended_employees');
         // Retired Employees
         Route::get('employee/retired-employees', [EmployeeController::class, 'retired_employees'])->name('employees.retired_employees');
+        // Fired Employees
+        Route::get('employee/fired-employees', [EmployeeController::class, 'fired_employees'])->name('employees.fired_employees');
 
         // ======== EmployeeHelperController ==========
         Route::post('update-employee-status', [EmployeeHelperController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');
@@ -96,8 +98,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::post('employee/duty-position/{id}', [EmployeeHelperController::class, 'duty_position'])->name('employees.duty_position');
         // Reset to Main Position
         Route::get('employee/reset-position/{id}', [EmployeeHelperController::class, 'reset_position'])->name('employees.reset_position');
-        // Fired Employees
-        Route::get('employee/fired-employees', [EmployeeHelperController::class, 'fired_employees'])->name('employees.fired_employees');
 
         // Employee Change Position to other customs
         Route::post('employee/change-position-ocustom/{id}', [EmployeeHelperController::class, 'change_position_ocustom'])->name('employees.change_position_ocustom');

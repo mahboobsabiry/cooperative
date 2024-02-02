@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
 use function PHPUnit\Framework\fileExists;
@@ -19,8 +20,9 @@ class UserController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('permission:user_view', ['only' => ['activeUsers', 'inactiveUsers', 'index', 'show']]);
         $this->middleware('permission:user_mgmt', [
-            'only' => ['activeUsers', 'inactiveUsers', 'activities', 'index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'updateUserStatus']
+            'only' => ['activities', 'create', 'store', 'edit', 'update', 'destroy', 'updateUserStatus']
         ]);
     }
 
@@ -51,13 +53,15 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('admin.users.create', compact('roles'));
+        $permissions = Permission::all();
+        return view('admin.users.create', compact('roles', 'permissions'));
     }
 
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
+        $user->permissions()->sync($request->input('permissions', []));
 
         //  Has File && Save Avatar Image
         if ($request->hasFile('avatar')) {
@@ -72,7 +76,7 @@ class UserController extends Controller
             ->log(trans('messages.users.addNewUserMsg'));
 
         $message = trans('messages.users.addNewUserMsg');
-        return redirect()->route('admin.users.index')->with([
+        return redirect()->route('admin.users.show', $user->id)->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);
@@ -87,8 +91,9 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
+        $permissions = Permission::all();
         $user->load('roles');
-        return view('admin.users.edit', compact('roles', 'user'));
+        return view('admin.users.edit', compact('roles', 'permissions', 'user'));
     }
 
     public function update(Request $request, User $user)
@@ -100,11 +105,14 @@ class UserController extends Controller
             'phone'     => 'nullable|min:8|max:15|unique:users,phone,' . $user->id,
             'email'     => 'nullable|min:8|max:64|unique:users,email,' . $user->id,
             'roles.*'   => 'integer',
-            'roles'     => 'required|array',
+            'roles'     => 'nullable|array',
+            'permissions.*'   => 'integer',
+            'permissions'     => 'nullable|array',
             'info'      => 'nullable'
         ]);
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
+        $user->permissions()->sync($request->input('permissions', []));
         //  Has File
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
@@ -119,7 +127,7 @@ class UserController extends Controller
 
         $message = trans('messages.users.updateUserMsg');
 
-        return redirect()->route('admin.users.index')->with([
+        return redirect()->route('admin.users.show', $user->id)->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);

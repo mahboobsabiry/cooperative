@@ -10,7 +10,9 @@ class AgentColleagueController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:agent_mgmt', ['only' => ['index', 'create','store', 'show', 'edit', 'update', 'destroy']]);
+        $this->middleware('permission:office_agent_view', ['only' => ['index', 'inactive', 'show']]);
+        $this->middleware('permission:office_agent_edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:office_agent_delete', ['only' => ['destroy']]);
     }
 
     // Index

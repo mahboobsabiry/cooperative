@@ -153,6 +153,15 @@
                                         </td>
                                     </tr>
 
+                                    <!-- Permissions -->
+                                    <tr>
+                                        <td><strong>@lang('admin.sidebar.permissions'): </strong>
+                                            @foreach($user->permissions as $permission)
+                                                <span class="tag tag-primary tag-pill">{{ $permission->name }}</span>
+                                            @endforeach
+                                        </td>
+                                    </tr>
+
                                     <!-- Left Column -->
                                     </tbody>
                                     <tbody class="col-lg-12 col-xl-6 p-0">

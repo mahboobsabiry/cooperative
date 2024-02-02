@@ -13,9 +13,8 @@ class EmployeeHelperController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:employee_mgmt', [
-            'only' => ['change_position_ocustom', 'change_position_employees']
-        ]);
+        $this->middleware('permission:office_employee_create', ['only' => ['add_background']]);
+        $this->middleware('permission:office_employee_edit', ['only' => ['updateEmployeeStatus','duty_position', 'reset_position', 'change_position_ocustom', 'in_return', 'duc_position', 'fire_employee', 'retire_employee']]);
     }
 
     // Update Status
