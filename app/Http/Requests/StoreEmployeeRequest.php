@@ -13,7 +13,7 @@ class StoreEmployeeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        abort_if(Gate::denies('employee_mgmt'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('office_employee_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }

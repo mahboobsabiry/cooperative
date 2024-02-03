@@ -13,7 +13,7 @@ class StorePositionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        abort_if(Gate::denies('organization_mgmt'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('office_position_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }

@@ -200,7 +200,7 @@
                                                 <th scope="row">{{ $company->id }}</th>
                                                 <td>{{ $company->name }}</td>
                                                 <td>{{ $company->tin }}</td>
-                                                <td>{{ $company->type == 0 ? trans('pages.companies.import') : trans('pages.companies.export') }}</td>
+                                                <td>@foreach(explode(',', $company->type) as $t) {{ $t }} - @endforeach</td>
                                                 <td>
                                                     @if($company->name == $agent->company_name)
                                                         {{ $company->agent->from_date }}

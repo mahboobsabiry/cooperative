@@ -115,9 +115,11 @@
                                         <div class="form-group @error('type') has-danger @enderror">
                                             <p class="mb-2">@lang('global.type'): <span class="tx-danger">*</span></p>
 
-                                            <select class="form-control" name="type">
-                                                <option value="0">@lang('pages.companies.import')</option>
-                                                <option value="1">@lang('pages.companies.export')</option>
+                                            <select class="form-control select2" name="type[]" multiple>
+                                                <option value="وارداتی" selected>@lang('pages.companies.import')</option>
+                                                <option value="صادراتی">@lang('pages.companies.export')</option>
+                                                <option value="بارچالانی">بارچالانی</option>
+                                                <option value="TIR">TIR</option>
                                             </select>
 
                                             @error('type')

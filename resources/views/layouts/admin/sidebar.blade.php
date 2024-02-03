@@ -328,6 +328,42 @@
                 @endcan
             @endcan
 
+            <!-- General Management Of Warehouses -->
+            @can('warehouse_view')
+                <li class="nav-label">مدیریت عمومی گدام ها</li>
+                @can('warehouse_assurance_view')
+                    <li class="nav-item {{ request()->is('admin/warehouse/assurances') ||
+                        request()->is('admin/warehouse/assurances/*') ||
+                        request()->is('admin/warehouse/returned-assurances') ||
+                        request()->is('admin/warehouse/absolute-assurances') ? 'active show' : '' }}">
+                        <a class="nav-link with-sub" href="javascript:void(0)">
+                            <i class="fe fe-dollar-sign"></i>
+                            <span class="sidemenu-label">تضمین</span>
+                            <i class="angle fe fe-chevron-right"></i>
+                        </a>
+
+                        <ul class="nav-sub">
+                            <!-- Current Assurance -->
+                            <li class="nav-sub-item {{ request()->is('admin/warehouse/assurances') || request()->is('admin/warehouse/assurances/*') ? 'active' : '' }}">
+                                <a class="nav-sub-link"
+                                   href="{{ route('admin.warehouse.assurances.index') }}">جاری</a>
+                            </li>
+                            <!-- Returned Assurance -->
+                            <li class="nav-sub-item {{ request()->is('admin/warehouse/returned-assurances') ? 'active' : '' }}">
+                                <a class="nav-sub-link"
+                                   href="{{ route('admin.warehouse.assurances.returned') }}">مسترد شده</a>
+                            </li>
+                            <!-- Absolute Assurance -->
+                            <li class="nav-sub-item {{ request()->is('admin/warehouse/absolute-assurances') ? 'active' : '' }}">
+                                <a class="nav-sub-link"
+                                   href="{{ route('admin.warehouse.assurances.absolute') }}">قطعی</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+            @endcan
+            <!--/==/ End of General Management Of Warehouses -->
+
             <!-- Applications -->
             <li class="nav-label">@lang('admin.sidebar.applications')</li>
 

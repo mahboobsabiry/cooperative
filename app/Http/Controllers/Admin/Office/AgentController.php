@@ -128,6 +128,7 @@ class AgentController extends Controller
             'from_date'     => 'required',
             'to_date'       => 'required',
             'doc_number'    => 'required',
+            'type'          => 'required',
             'company_name'  => 'required',
             'tin'           => 'required'
         ]);
@@ -164,14 +165,16 @@ class AgentController extends Controller
             $company->agent_id  = $agent->id;
             $company->name      = $saved_company->name;
             $company->tin       = $saved_company->tin;
-            $company->type      = $saved_company->type;
+            $type = implode(',', $request->input('type'));
+            $company->type      = $type;
             $company->status    = 1;
         } else {
             $company = new Company();
             $company->agent_id  = $agent->id;
             $company->name      = $request->company_name;
             $company->tin       = $request->tin;
-            $company->type      = $request->type;
+            $type = implode(',', $request->input('type'));
+            $company->type      = $type;
         }
 
         $company->save();

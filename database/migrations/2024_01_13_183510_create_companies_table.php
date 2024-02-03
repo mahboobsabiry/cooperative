@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('agent_id')->unsigned()->index()->nullable();
             $table->string('name')->unique();
             $table->bigInteger('tin')->unique();
-            $table->tinyInteger('type')->default(0);
+            $table->string('type');
             $table->text('background')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

@@ -117,6 +117,23 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'name'      => 'office_hostel_delete'
+            ],
+            // ========== Warehouse ==========
+            [
+                'name'      => 'warehouse_view'
+            ],
+            // Assurance
+            [
+                'name'      => 'warehouse_assurance_view'
+            ],
+            [
+                'name'      => 'warehouse_assurance_create'
+            ],
+            [
+                'name'      => 'warehouse_assurance_edit'
+            ],
+            [
+                'name'      => 'warehouse_assurance_delete'
             ]
         ];
 

@@ -13,7 +13,7 @@ class StoreAgentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        abort_if(Gate::denies('agent_mgmt'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('office_agent_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return true;
     }
 

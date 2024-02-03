@@ -63,7 +63,7 @@
                                         <td>{{ $company->id }}</td>
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->tin }}</td>
-                                        <td>{{ $company->type == 0 ? trans('pages.companies.import') : trans('pages.companies.export') }}</td>
+                                        <td>@foreach(explode(',', $company->type) as $t) {{ $t }} - @endforeach</td>
                                         <td>{{ $company->agent->name ?? 'ندارد' }}</td>
                                         <td>{!! $company->background !!}</td>
                                     </tr>

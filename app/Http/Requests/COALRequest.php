@@ -13,7 +13,7 @@ class COALRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        abort_if(Gate::denies('asycuda_mgmt'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('asy_coal_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return true;
     }
 

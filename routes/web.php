@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\Warehouse\AssuranceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::post('update-user-status', [UserController::class, 'updateUserStatus'])->name('updateUserStatus');
     Route::get('active-users', [UserController::class, 'activeUsers'])->name('users.active');
     Route::get('inactive-users', [UserController::class, 'inactiveUsers'])->name('users.inactive');
+
+    // =============================== Asycuda Routes ===================================
+    Route::group(['prefix' => 'asycuda', 'as' => 'asycuda.'], function () {
+        Route::resource('users', AsycudaUserController::class);
+        Route::get('inactive-users', [AsycudaUserController::class, 'inactive'])->name('users.inactive');
+        Route::resource('coal', COALController::class);
+        Route::get('expired-coal', [COALController::class, 'expired'])->name('coal.expired');
+        Route::get('registration-form/{id}', [COALController::class, 'reg_form'])->name('coal.reg_form');
+        Route::get('refresh/{id}', [COALController::class, 'refresh'])->name('coal.refresh');
+    });
 
     // ====== Office Routes ======
     Route::group(['prefix' => 'office', 'as' => 'office.'], function () {
@@ -131,14 +142,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('inactive-companies', [CompanyController::class, 'inactive'])->name('companies.inactive');
     });
 
-    // =============================== Asycuda Routes ===================================
-    Route::group(['prefix' => 'asycuda', 'as' => 'asycuda.'], function () {
-        Route::resource('users', AsycudaUserController::class);
-        Route::get('inactive-users', [AsycudaUserController::class, 'inactive'])->name('users.inactive');
-        Route::resource('coal', COALController::class);
-        Route::get('expired-coal', [COALController::class, 'expired'])->name('coal.expired');
-        Route::get('registration-form/{id}', [COALController::class, 'reg_form'])->name('coal.reg_form');
-        Route::get('refresh/{id}', [COALController::class, 'refresh'])->name('coal.refresh');
+    // =============================== Warehouse General Management Routes ===================================
+    Route::group(['prefix' => 'warehouse', 'as' => 'warehouse.'], function () {
+        Route::resource('assurances', AssuranceController::class);
+        Route::get('returned-assurances', [AssuranceController::class, 'returned'])->name('assurances.returned');
+        Route::get('absolute-assurances', [AssuranceController::class, 'absolute'])->name('assurances.absolute');
     });
 
     // Settings
