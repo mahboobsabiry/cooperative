@@ -56,7 +56,7 @@
                                 <span>{{ $user->name }}</span>
                             </h4>
 
-                            <p class="pro-user-desc text-muted mb-1">{{ $user->roles->first()->name }}</p>
+                            <p class="pro-user-desc text-muted mb-1">{{ $user->username }}</p>
                             <!-- User Star -->
                             <p class="user-info-rating">
                                 <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
@@ -146,7 +146,7 @@
 
                                     <!-- Roles -->
                                     <tr>
-                                        <td><strong>@lang('admin.sidebar.roles'): </strong>
+                                        <td><strong>@lang('admin.sidebar.roles') ({{ count($user->roles) }}): </strong>
                                             @foreach($user->roles as $role)
                                                 <span class="tag tag-primary tag-pill">{{ $role->name }}</span>
                                             @endforeach
@@ -155,7 +155,7 @@
 
                                     <!-- Permissions -->
                                     <tr>
-                                        <td><strong>@lang('admin.sidebar.permissions'): </strong>
+                                        <td><strong>@lang('admin.sidebar.permissions') ({{ count($user->permissions) }}): </strong>
                                             @foreach($user->permissions as $permission)
                                                 <span class="tag tag-primary tag-pill">{{ $permission->name }}</span>
                                             @endforeach
@@ -199,6 +199,58 @@
                                 @lang('global.extraInfo')
                             </div>
                             <p>{{ $user->info ?? '--' }}</p>
+                        </div>
+                        <br>
+                        <br>
+
+                        <div>
+                            <h6 class="card-title mb-1">@lang('global.activities')</h6>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered mg-b-0">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@lang('global.details')</th>
+                                    <th>@lang('form.created_date')</th>
+                                    <th>@lang('global.action')</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @if(count(\Spatie\Activitylog\Models\Activity::where('causer_id', $user->id)->get()) >= 1)
+                                    @foreach(\Spatie\Activitylog\Models\Activity::all()->where('causer_id', $user->id) as $activity)
+                                        <tr>
+                                            <th scope="row">{{ $activity->id }}</th>
+                                            <td>{{ $activity->description }}</td>
+                                            <td>
+                                                @if(app()->getLocale() == 'en')
+                                                    {{ date_format($activity->created_at, 'Y-m-d') }}
+                                                @else
+                                                    @php
+                                                        $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($activity->created_at)); // 1395-02-19
+                                                        echo \Morilog\Jalali\CalendarUtils::convertNumbers($date);
+                                                    @endphp
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a class="modal-effect btn btn-sm ripple btn-danger"
+                                                   data-effect="effect-sign" data-toggle="modal"
+                                                   href="#delete_record{{ $activity->id }}"
+                                                   title="@lang('pages.users.deleteActivity')">
+                                                    <i class="fe fe-delete"></i>
+                                                </a>
+
+                                                @include('admin.inc.delete_activity')
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="4" class="bg-black-1 text-center">@lang('global.notFound')</td>
+                                    </tr>
+                                @endif
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

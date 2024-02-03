@@ -33,7 +33,7 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                <a class="btn ripple btn-primary" href="{{ route('admin.roles.create') }}" target="_blank">
+                <a class="btn ripple btn-primary" href="{{ route('admin.roles.create') }}">
                     <i class="fe fe-plus-circle"></i> @lang('global.new')
                 </a>
             </div>
@@ -53,9 +53,7 @@
                         <!-- Table Title -->
                         <div>
                             <h6 class="card-title mb-1">@lang('admin.sidebar.roles')</h6>
-                            <p class="text-muted card-sub-title">Exporting data from a table can often be a key part of
-                                a complex application. The Buttons extension for DataTables provides three plug-ins that
-                                provide overlapping functionality for data export:</p>
+                            <p class="text-muted card-sub-title">در این قسمت صلاحیت های مرتبط با سیستم با مجوز های آن لیست می‌شود.</p>
                         </div>
 
                         <!-- Table -->
@@ -77,20 +75,10 @@
                                     <tr>
                                         @include('admin.roles.sd')
 
-                                        <td>
-                                            @if(app()->getLocale() == 'en')
-                                                {{ $loop->iteration }}
-                                            @else
-                                                <span class="tx-bold">{{ \Morilog\Jalali\CalendarUtils::convertNumbers($loop->iteration) }}</span>
-                                            @endif
-                                        </td>
+                                        <td>{{ $role->id }}</td>
                                         <td>{{ $role->name }}</td>
                                         <td>{{ $role->guard_name }}</td>
-                                        <td>
-                                            {{-- <a class="modal-effect tx-orange text-decoration-underline"
-                                               data-effect="effect-sign" data-toggle="modal"
-                                               href="#show_record{{ $role->id }}">@lang('global.show') <i
-                                                    class="fa fa-eye-dropper"></i></a> --}}
+                                        <td class="text-wrap">
                                             @foreach($role->permissions as $permission)
                                                 <div class="tag tag-success tag-pill mt-1 mb-1 pr-0">
                                                     <span class="tag tag-dark tag-pill ml-1 mr-0">{{ $loop->iteration }}</span>

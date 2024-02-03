@@ -75,11 +75,7 @@
                             <table class="table table-bordered export-table border-top key-buttons display text-nowrap w-100">
                                 <thead>
                                 <tr>
-                                    <th rowspan="2" class="text-center tblBorder">#</th>
-                                    <th colspan="5" class="text-center tblBorder">@lang('global.personalInfo')</th>
-                                    <th colspan="2" class="text-center tblBorder">@lang('global.details')</th>
-                                </tr>
-                                <tr>
+                                    <th class="text-center">#</th>
                                     <th class="text-center">@lang('form.avatar')</th>
                                     <th class="text-center">@lang('form.name')</th>
                                     <th class="text-center">@lang('form.username')</th>
@@ -121,7 +117,7 @@
                                         <!-- Email Address -->
                                         <td><a href="mailto:{{ $user->email }}" class="tx-sm-12-f ctd">{{ $user->email }}</a></td>
                                         <!-- Roles -->
-                                        <td>
+                                        <td class="text-wrap">
                                             @if(!empty($user->roles))
                                                 @foreach($user->roles as $role)
                                                     <a class="modal-effect"
@@ -139,17 +135,15 @@
                                         </td>
 
                                         <!-- Permissions -->
-                                        <td>
-                                            @if(!empty($user->permissions))
-                                                @foreach($user->permissions as $permission)
-                                                    <a class="modal-effect"href="javascript:void(0);">
-                                                        <span class="tag tag-success tag-pill mt-1 mb-1 pr-0" style="cursor:pointer;">
-                                                            <span class="tag tag-dark tag-pill ml-1 mr-0">{{ $loop->iteration }}</span>
-                                                            {{ $permission->name }}
-                                                        </span>
-                                                    </a>
-                                                @endforeach
-                                            @endif
+                                        <td class="text-wrap">
+                                            @foreach($user->permissions as $permission)
+                                                <a class="modal-effect" href="javascript:void(0);">
+                                                    <span class="tag tag-success tag-pill mt-1 mb-1 pr-0" style="cursor:pointer;">
+                                                        <span class="tag tag-dark tag-pill ml-1 mr-0">{{ $loop->iteration }}</span>
+                                                        {{ $permission->name }}
+                                                    </span>
+                                                </a>
+                                            @endforeach
                                         </td>
                                     </tr>
                                 @endforeach

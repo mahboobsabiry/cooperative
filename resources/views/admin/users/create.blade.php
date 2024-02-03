@@ -138,6 +138,17 @@
                                         </div>
                                         <!--/==/ End of Avatar -->
 
+                                        <!-- Permissions -->
+                                        <div class="form-group mb-lg-0">
+                                            <label class="">@lang('admin.sidebar.permissions') :</label>
+                                            <select multiple="multiple" class="group-filter" name="permissions[]">
+                                                @foreach($permissions as $permission)
+                                                    <option value="{{ $permission->id }}">{{ $permission->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <br>
+
                                         <!-- Roles -->
                                         <div class="form-group @error('roles') has-danger @enderror">
                                             <p class="mb-2">
@@ -158,17 +169,6 @@
                                             </div>
                                         </div>
                                         <!--/==/ End of Roles -->
-
-                                        <!-- Permissions -->
-                                        <div class="form-group mb-lg-0">
-                                            <label class="">@lang('admin.sidebar.permissions') :</label>
-                                            <select multiple="multiple" class="group-filter" name="permissions[]">
-                                                @foreach($permissions as $permission)
-                                                    <option value="{{ $permission->id }}">{{ $permission->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <br>
                                     </div>
                                 </div>
                                 <div class="modal-footer">

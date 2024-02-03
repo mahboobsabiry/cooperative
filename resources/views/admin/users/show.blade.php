@@ -53,7 +53,7 @@
                         </div>
                         <div class="mr-2">
                             <!-- Add -->
-                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.users.create') }}" target="_blank">
+                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.users.create') }}">
                                 @lang('global.new')
                                 <i class="fe fe-plus-circle"></i>
                             </a>
@@ -169,7 +169,7 @@
 
                                     <!-- Roles -->
                                     <tr>
-                                        <td><strong>@lang('admin.sidebar.roles'): </strong>
+                                        <td><strong>@lang('admin.sidebar.roles') ({{ count($user->roles) }}): </strong>
                                             @foreach($user->roles as $role)
                                                 <span class="tag tag-primary tag-pill m-1">{{ $role->name }}</span>
                                             @endforeach
@@ -178,7 +178,7 @@
 
                                     <!-- Permissions -->
                                     <tr>
-                                        <td><strong>@lang('admin.sidebar.permissions'): </strong>
+                                        <td><strong>@lang('admin.sidebar.permissions') ({{ count($user->permissions) }}): </strong>
                                             @foreach($user->permissions as $permission)
                                                 <span class="tag tag-primary tag-pill m-1">{{ $permission->name }}</span>
                                             @endforeach
@@ -278,14 +278,14 @@
                                     @if(count(\Spatie\Activitylog\Models\Activity::where('causer_id', $user->id)->get()) >= 1)
                                         @foreach(\Spatie\Activitylog\Models\Activity::all()->where('causer_id', $user->id) as $activity)
                                             <tr>
-                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                <th scope="row">{{ $activity->id }}</th>
                                                 <td>{{ $activity->description }}</td>
                                                 <td>
                                                     @if(app()->getLocale() == 'en')
-                                                        {{ date_format($activity->created_at, 'Y-M-d') }}
+                                                        {{ date_format($activity->created_at, 'Y-m-d') }}
                                                     @else
                                                         @php
-                                                            $date = \Morilog\Jalali\CalendarUtils::strftime('Y-M-d', strtotime($activity->created_at)); // 1395-02-19
+                                                            $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($activity->created_at)); // 1395-02-19
                                                             echo \Morilog\Jalali\CalendarUtils::convertNumbers($date);
                                                         @endphp
                                                     @endif
@@ -304,11 +304,7 @@
                                         @endforeach
                                     @else
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>@lang('global.notFound')</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td colspan="4" class="bg-black-1 text-center">@lang('global.notFound')</td>
                                         </tr>
                                     @endif
                                     </tbody>

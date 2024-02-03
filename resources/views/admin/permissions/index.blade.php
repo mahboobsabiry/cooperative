@@ -65,13 +65,7 @@
                                 @foreach($permissions as $permission)
                                     <tr>
                                         @include('admin.permissions.ed')
-                                        <td>
-                                            @if(app()->getLocale() == 'en')
-                                                {{ $loop->iteration }}
-                                            @else
-                                                <span class="tx-bold">{{ \Morilog\Jalali\CalendarUtils::convertNumbers($loop->iteration) }}</span>
-                                            @endif
-                                        </td>
+                                        <td>{{ $permission->id }}</td>
                                         <td>{{ $permission->name }}</td>
                                         <td>{{ $permission->guard_name }}</td>
                                         <td>

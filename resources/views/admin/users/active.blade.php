@@ -74,26 +74,23 @@
                             <table class="table table-bordered export-table border-top key-buttons display text-nowrap w-100">
                                 <thead>
                                 <tr>
-                                    <th rowspan="2" class="text-center tblBorder">#</th>
-                                    <th colspan="5" class="text-center tblBorder">@lang('global.personalInfo')</th>
-                                    <th colspan="3" class="text-center tblBorder">@lang('global.details')</th>
-                                </tr>
-                                <tr>
+                                    <th class="text-center">#</th>
                                     <th class="text-center">@lang('form.avatar')</th>
                                     <th class="text-center">@lang('form.name')</th>
                                     <th class="text-center">@lang('form.username')</th>
                                     <th class="text-center">@lang('form.phone')</th>
                                     <th class="text-center">@lang('form.email')</th>
                                     <th class="text-center">@lang('admin.sidebar.roles')</th>
-                                    <th class="text-center">@lang('global.extraInfo')</th>
-                                    <th class="text-center">@lang('global.createdDate')</th>
+                                    <th class="text-center">@lang('admin.sidebar.permissions')</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
                                 @foreach($users as $user)
                                     <tr>
-                                        <td>{{ $user->id }}</td>
+                                        <td>
+                                            {{ $user->id }}
+                                        </td>
                                         <td>
                                             <img src="{{ $user->image ?? asset('assets/images/avatar-default.jpeg') }}" width="50" class="rounded-circle">
                                         </td>
@@ -119,7 +116,7 @@
                                         <!-- Email Address -->
                                         <td><a href="mailto:{{ $user->email }}" class="tx-sm-12-f ctd">{{ $user->email }}</a></td>
                                         <!-- Roles -->
-                                        <td>
+                                        <td class="text-wrap">
                                             @if(!empty($user->roles))
                                                 @foreach($user->roles as $role)
                                                     <a class="modal-effect"
@@ -135,20 +132,17 @@
                                                 @endforeach
                                             @endif
                                         </td>
-                                        <!-- Information -->
-                                        <td class="text-nowrap tx-sm-12">{{ \Illuminate\Support\Str::limit($user->info, 30, '...') }}</td>
-                                        <!-- Created Date -->
-                                        <td>
-                                            @if(app()->getLocale() == 'en')
-                                                {{ date_format($user->created_at, 'Y-F-d') }}
-                                            @else
-                                                <span class="">
-                                                @php
-                                                     $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($user->created_at)); // 1395-02-19
-                                                     echo \Morilog\Jalali\CalendarUtils::convertNumbers($date);
-                                                @endphp
-                                                </span>
-                                            @endif
+
+                                        <!-- Permissions -->
+                                        <td class="text-wrap">
+                                            @foreach($user->permissions as $permission)
+                                                <a class="modal-effect" href="javascript:void(0);">
+                                                    <span class="tag tag-success tag-pill mt-1 mb-1 pr-0" style="cursor:pointer;">
+                                                        <span class="tag tag-dark tag-pill ml-1 mr-0">{{ $loop->iteration }}</span>
+                                                        {{ $permission->name }}
+                                                    </span>
+                                                </a>
+                                            @endforeach
                                         </td>
                                     </tr>
                                 @endforeach

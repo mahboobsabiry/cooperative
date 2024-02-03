@@ -24,6 +24,18 @@
         </div>
         <!-- End Page Header -->
 
+        <!-- Date -->
+        <div class="card custom-card">
+            <div class="card-body bg-primary-transparent font-weight-bold" style="border: 1px solid #0f0373;">
+                تقویم امروز: {{ date_format(now(), 'Y-M-d') }} مصادف با {{ \Morilog\Jalali\CalendarUtils::strftime('Y-M-d', strtotime(now())) }}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                روز: {{ \Morilog\Jalali\CalendarUtils::strftime('%A', strtotime(now())) }}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                ساعت: {{ \Morilog\Jalali\CalendarUtils::strftime('h:i A', strtotime(now())) }}
+            </div>
+        </div>
+        <!--/==/ End of Date -->
+
         <!-- First Cards Row -->
         <div class="row row-sm">
             <!-- Users Card -->
