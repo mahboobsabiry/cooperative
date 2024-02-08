@@ -52,7 +52,7 @@ class AssuranceController extends Controller
      */
     public function create()
     {
-        $companies = Company::where('status', 1)->get();
+        $companies = Company::all();
         return view('admin.warehouse.assurances.create', compact('companies'));
     }
 
