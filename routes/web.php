@@ -149,6 +149,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('absolute-assurances', [AssuranceController::class, 'absolute'])->name('assurances.absolute');
     });
 
+    // Test
+    Route::get('test', function (){
+        $date = now()->format('Y-m-d');
+        $new_date = now()->addYear()->format('Y-m-d');
+        echo $date . "<br>" . $new_date;
+    });
+
     // Settings
     Route::resource('settings', SettingController::class);
 });

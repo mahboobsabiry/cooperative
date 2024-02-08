@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('inquiry_date');
             $table->bigInteger('bank_tt_number')->nullable(); // نمبر آویز بانکی
             $table->date('bank_tt_date')->nullable(); // تاریخ آویز بانکی
-            $table->date('assurance_expire_date')->nullable(); // تاریخ ختم تضمین
+            $table->date('expire_date')->nullable(); // تاریخ ختم تضمین
             $table->tinyInteger('status')->default(0);
             $table->text('reason')->nullable();
             $table->timestamps();

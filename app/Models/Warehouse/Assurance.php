@@ -15,7 +15,7 @@ class Assurance extends Model
         'company_id', 'good_name', 'assurance_total',
         'inquiry_number', 'inquiry_date',
         'bank_tt_number', 'bank_tt_date',
-        'assurance_expire_date',
+        'expire_date',
         'status', 'reason',
         'created_at', 'updated_at'
     ];
