@@ -76,9 +76,13 @@
                                         <th>#</th>
                                         <th>نام شرکت</th>
                                         <th>نام جنس</th>
+                                        <th>مقدار تضمین</th>
                                         <th>نمبر استعلام</th>
                                         <th>تاریخ استعلام</th>
+                                        <th>نمبر آویز بانکی</th>
+                                        <th>تاریخ آویز بانکی</th>
                                         <th>تاریخ ختم</th>
+                                        <th>مدت اعتبار</th>
                                     </tr>
                                     </thead>
 
@@ -90,9 +94,25 @@
                                             <td>
                                                 <a href="{{ route('admin.warehouse.assurances.show', $assurance->id ) }}">{{ $assurance->good_name }}</a>
                                             </td>
+                                            <td>{{ $assurance->assurance_total }}</td>
                                             <td>{{ $assurance->inquiry_number }}</td>
                                             <td>{{ $assurance->inquiry_date }}</td>
+                                            <td>{{ $assurance->bank_tt_number }}</td>
+                                            <td>{{ $assurance->bank_tt_date }}</td>
                                             <td>{{ $assurance->expire_date }}</td>
+                                            <td>
+                                                @php
+                                                $exp_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->expire_date)->toCarbon();
+                                                $valid_days = now()->diffInDays($exp_date);
+                                                @endphp
+                                                @if($valid_days > 10)
+                                                    {{ $valid_days }} روز
+                                                @else
+                                                    <span class="text-danger">{{ $valid_days }} روز</span>
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    <span class="fas fa-dollar-sign fa-pulse text-danger"></span>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
