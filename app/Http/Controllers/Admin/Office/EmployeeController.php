@@ -278,28 +278,28 @@ class EmployeeController extends Controller
     // Changed Position Employees List
     public function change_position_employees()
     {
-        $employees = Employee::where('status', 0)->get();
+        $employees = Employee::whereNull('position_id')->where('status', 0)->get();
         return view('admin.office.employees.change_position', compact('employees'));
     }
 
     // Fired Employees
     public function fired_employees()
     {
-        $fired_employees = Employee::where('status', 2)->get();
+        $fired_employees = Employee::whereNull('position_id')->where('status', 2)->get();
         return view('admin.office.employees.fired_employees', compact('fired_employees'));
     }
 
     // Suspended Employees
     public function suspended_employees()
     {
-        $suspended_employees = Employee::where('status', 3)->get();
+        $suspended_employees = Employee::whereNull('position_id')->where('status', 3)->get();
         return view('admin.office.employees.suspended_employees', compact('suspended_employees'));
     }
 
     // Retired Employees
     public function retired_employees()
     {
-        $retired_employees = Employee::where('status', 4)->get();
+        $retired_employees = Employee::whereNull('position_id')->where('status', 4)->get();
         return view('admin.office.employees.retired_employees', compact('retired_employees'));
     }
 }

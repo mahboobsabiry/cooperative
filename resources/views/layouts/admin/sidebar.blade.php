@@ -33,6 +33,9 @@
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="ion ion-ios-desktop"></i>
+                        @if(count(\App\Models\Asycuda\COAL::all()->where('expire_date', "<=", today())->where('status', 1)) >= 1)
+                            <span class="pulse"></span>
+                        @endif
                         <span class="sidemenu-label">اسیکودا</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
@@ -63,6 +66,9 @@
                                    href="{{ route('admin.asycuda.coal.index') }}">
                                     جواز فعالیت شرکت ها
                                     ({{ count(\App\Models\Asycuda\COAL::all()->where('status', 1)) }})
+                                    @if(count(\App\Models\Asycuda\COAL::all()->where('expire_date', "<=", today())->where('status', 1)) >= 1)
+                                        &nbsp;<span class="fas fa-building fa-pulse text-danger"></span>
+                                    @endif
                                 </a>
                             </li>
 
@@ -152,6 +158,9 @@
 
                         <a class="nav-link with-sub" href="javascript:void(0)">
                             <i class="fa fa-user-tie"></i>
+                            @if(count(\App\Models\Office\Employee::all()->where('status', 3)) >= 1)
+                                <span class="pulse"></span>
+                            @endif
                             <span class="sidemenu-label">@lang('admin.sidebar.employees')</span>
                             <i class="angle fe fe-chevron-right"></i>
                         </a>
@@ -219,6 +228,9 @@
                                     <span class="text-secondary">معلق </span>&nbsp;
                                     ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 3)->count() }}
                                     )
+                                    @if(count(\App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 3)) >= 1)
+                                        &nbsp;<span class="fas fa-user-tie fa-pulse text-danger"></span>
+                                    @endif
                                 </a>
                             </li>
                         </ul>
