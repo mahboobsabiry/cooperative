@@ -25,7 +25,7 @@ class AssuranceController extends Controller
      */
     public function index()
     {
-        $assurances = Assurance::all();
+        $assurances = Assurance::all()->where('status', 1);
         return view('admin.warehouse.assurances.index', compact('assurances'));
     }
 
@@ -34,7 +34,7 @@ class AssuranceController extends Controller
      */
     public function returned()
     {
-        $assurances = Assurance::all();
+        $assurances = Assurance::all()->where('status', 2);
         return view('admin.warehouse.assurances.returned', compact('assurances'));
     }
 
@@ -43,7 +43,7 @@ class AssuranceController extends Controller
      */
     public function absolute()
     {
-        $assurances = Assurance::all();
+        $assurances = Assurance::all()->where('status', 3);
         return view('admin.warehouse.assurances.absolute', compact('assurances'));
     }
 
@@ -93,7 +93,8 @@ class AssuranceController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $assurance = Assurance::find($id);
+        return view('admin.warehouse.assurances.show', compact('assurance'));
     }
 
     /**

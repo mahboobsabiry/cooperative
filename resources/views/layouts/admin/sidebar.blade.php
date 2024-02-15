@@ -358,17 +358,17 @@
                             <!-- Current Assurance -->
                             <li class="nav-sub-item {{ request()->is('admin/warehouse/assurances') || request()->is('admin/warehouse/assurances/*') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
-                                   href="{{ route('admin.warehouse.assurances.index') }}">جاری</a>
+                                   href="{{ route('admin.warehouse.assurances.index') }}">جاری ({{ count(\App\Models\Warehouse\Assurance::all()->where('status', 1)) }})</a>
                             </li>
                             <!-- Returned Assurance -->
                             <li class="nav-sub-item {{ request()->is('admin/warehouse/returned-assurances') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
-                                   href="{{ route('admin.warehouse.assurances.returned') }}">مسترد شده</a>
+                                   href="{{ route('admin.warehouse.assurances.returned') }}">مسترد شده ({{ count(\App\Models\Warehouse\Assurance::all()->where('status', 2)) }})</a>
                             </li>
                             <!-- Absolute Assurance -->
                             <li class="nav-sub-item {{ request()->is('admin/warehouse/absolute-assurances') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
-                                   href="{{ route('admin.warehouse.assurances.absolute') }}">قطعی</a>
+                                   href="{{ route('admin.warehouse.assurances.absolute') }}">قطعی ({{ count(\App\Models\Warehouse\Assurance::all()->where('status', 3)) }})</a>
                             </li>
                         </ul>
                     </li>

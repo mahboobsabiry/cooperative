@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', trans('pages.hostel.hostel') . ' - ' . $hostel->number)
+@section('title', 'تضمین - ' . $assurance->good_name)
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -23,7 +23,7 @@
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.office.hostel.index') }}">@lang('pages.hostel.hostel')</a>
+                        <a href="{{ route('admin.warehouse.assurances.index') }}">تضمین ها</a>
                     </li>
                     <li class="breadcrumb-item active"
                         aria-current="page">@lang('global.details')</li>
@@ -33,36 +33,36 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <div class="d-flex">
-                    @can('office_hostel_delete')
+                    @can('warehouse_assurance_delete')
                         <div class="mr-2">
                             <!-- Delete -->
                             <a class="modal-effect btn btn-sm ripple btn-danger text-white"
                                data-effect="effect-sign" data-toggle="modal"
-                               href="#delete_record{{ $hostel->id }}"
+                               href="#delete_record{{ $assurance->id }}"
                                title="@lang('global.delete')">
                                 @lang('global.delete')
                                 <i class="fe fe-trash"></i>
                             </a>
 
-                            @include('admin.office.hostel.delete')
+                            @include('admin.warehouse.assurances.delete')
                         </div>
                     @endcan
 
-                    @can('office_hostel_edit')
+                    @can('warehouse_assurance_edit')
                         <div class="mr-2">
                             <!-- Edit -->
                             <a class="btn ripple bg-dark btn-sm text-white"
-                               href="{{ route('admin.office.hostel.edit', $hostel->id) }}">
+                               href="{{ route('admin.warehouse.assurances.edit', $assurance->id) }}">
                                 @lang('global.edit')
                                 <i class="fe fe-edit"></i>
                             </a>
                         </div>
                     @endcan
 
-                    @can('office_hostel_create')
+                    @can('warehouse_assurance_create')
                         <div class="mr-2">
                             <!-- Add -->
-                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.office.hostel.create') }}">
+                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.warehouse.assurances.create') }}">
                                 @lang('global.new')
                                 <i class="fe fe-plus-circle"></i>
                             </a>
@@ -91,51 +91,69 @@
                             <!-- Personal Information Table -->
                             <div class="table-responsive ">
                                 <table class="table table-bordered">
-                                    <!-- Table -->
+                                    <!-- Table 1 -->
                                     <tbody class="p-0">
                                     <!-- Header -->
                                     <tr>
-                                        <th><strong>#: </strong></th>
-                                        <th><strong>@lang('pages.hostel.roomNumber'): </strong></th>
-                                        <th><strong>@lang('pages.hostel.roomSection'): </strong></th>
-                                        <th><strong>@lang('pages.hostel.numOfMembers'): </strong></th>
-                                        <th><strong>@lang('global.extraInfo'): </strong></th>
+                                        <th><strong># </strong></th>
+                                        <th><strong>نام شرکت </strong></th>
+                                        <th><strong>نوع جنس </strong></th>
+                                        <th><strong>مقدار تضمین </strong></th>
+                                        <th><strong>نمبر استعلام </strong></th>
+                                        <th><strong>تاریخ استعلام </strong></th>
                                     </tr>
 
                                     <!-- Body -->
                                     <tr>
-                                        <td>{{ $hostel->id }}</td>
-                                        <td>{{ $hostel->number }}</td>
-                                        <td>{{ $hostel->section }}</td>
-                                        <td>
-                                            @php
-                                                if (!$hostel->employees || $hostel->employees->count() == 0) {
-                                                    $count_number = 0;
-                                                } elseif ($hostel->employees->count() == 1) {
-                                                    $count_number = 20;
-                                                } elseif ($hostel->employees->count() == 2) {
-                                                    $count_number = 40;
-                                                } elseif ($hostel->employees->count() == 3) {
-                                                    $count_number = 60;
-                                                } elseif ($hostel->employees->count() == 4) {
-                                                    $count_number = 80;
-                                                } elseif ($hostel->employees->count() == 5) {
-                                                    $count_number = 100;
-                                                } else {
-                                                    $count_number = 0;
-                                                }
-                                            @endphp
-                                            <div class="progress mb-1">
-                                                <div aria-valuemax="100" aria-valuemin="0"
-                                                     aria-valuenow="{{ $count_number }}"
-                                                     class="progress-bar progress-bar-lg wd-{{ $count_number }}p bg-info"
-                                                     role="progressbar">{{ count($hostel->employees) }}</div>
-                                            </div>
-                                        </td>
-                                        <td>{{ $hostel->info }}</td>
+                                        <td>{{ $assurance->id }}</td>
+                                        <td>{{ $assurance->company->name }}</td>
+                                        <td>{{ $assurance->good_name }}</td>
+                                        <td>{{ $assurance->assurance_total }}</td>
+                                        <td>{{ $assurance->inquiry_number }}</td>
+                                        <td>{{ $assurance->inquiry_date }}</td>
                                     </tr>
                                     </tbody>
-                                    <!--/==/ End of Table -->
+                                    <!--/==/ End of Table 1 -->
+
+                                    <!-- Table 2 -->
+                                    <tbody class="p-0">
+                                    <!-- Header -->
+                                    <tr>
+                                        <th><strong>نمبر آویز بانکی </strong></th>
+                                        <th><strong>تاریخ آویز بانکی </strong></th>
+                                        <th><strong>تاریخ ختم </strong></th>
+                                        <th><strong>تعداد روز </strong></th>
+                                        <th><strong>تعداد روز های باقیمانده </strong></th>
+                                        <th><strong>علت </strong></th>
+                                    </tr>
+
+                                    <!-- Body -->
+                                    <tr>
+                                        <td>{{ $assurance->bank_tt_number }}</td>
+                                        <td>{{ $assurance->bank_tt_date }}</td>
+                                        <td>{{ $assurance->expire_date }}</td>
+                                        <td>
+                                            @php
+                                                $convert_inq_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->inquiry_date)->toCarbon();
+                                                $convert_exp_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->expire_date)->toCarbon();
+                                                echo $convert_inq_date->diffInDays($convert_exp_date) . ' روز';
+                                            @endphp
+                                        </td>
+                                        <td>
+                                            @php
+                                                $convert_exp_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->expire_date)->toCarbon();
+                                                $diffInDays = today()->diffInDays($convert_exp_date);
+                                                if ($diffInDays <= 10) {
+                                                    echo "<span class='text-danger'>" . $diffInDays . " روز </span>";
+                                                } else {
+                                                    echo $diffInDays . " روز ";
+                                                }
+                                            @endphp
+                                        </td>
+                                        <td>{{ $assurance->reason }}</td>
+                                    </tr>
+                                    </tbody>
+                                    <!--/==/ End of Table 2 -->
                                 </table>
                             </div>
                         </div>
@@ -144,95 +162,6 @@
             </div>
         </div>
         <!--/==/ End of Row Content -->
-
-        <!-- Employees -->
-        <div class="card custom-card main-content-body-profile">
-            <!-- Table Title -->
-            <div class="nav main-nav-line mb-2">
-                <a class="nav-link active" data-toggle="tab" href="javascript:void(0);">
-                    @lang('admin.sidebar.employees')
-                </a>
-            </div>
-
-            <div class="card-body tab-content h-100">
-                <!-- Main Position Employees -->
-                <div class="tab-pane active">
-                    <!-- Table -->
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100"
-                               style="width: 100%;">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>@lang('form.photo')</th>
-                                <th>@lang('form.idCard')</th>
-                                <th>@lang('form.name')</th>
-                                <th>@lang('form.fatherName')</th>
-                                <th>@lang('form.position')</th>
-                                <th>@lang('pages.positions.positionCode')</th>
-                                <th>@lang('form.empNumber')</th>
-                                <th>@lang('form.birthYear')</th>
-                                <th>@lang('form.education')</th>
-                                <th>@lang('form.phone')</th>
-                                <th>@lang('form.mainProvince')</th>
-                                <th>@lang('form.currentProvince')</th>
-                                <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            @foreach($hostel->employees as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>
-                                        <a href="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}"
-                                           target="_blank">
-                                            <img src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}"
-                                                 width="50" class="rounded-50">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
-                                           target="_blank">
-                                            <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
-                                                 width="50" class="rounded-50">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        @can('office_employee_view')
-                                            <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
-                                        @else
-                                            {{ $employee->name }} {{ $employee->last_name }}
-                                        @endcan
-                                    </td>
-                                    <td>{{ $employee->father_name ?? '' }}</td>
-                                    <td>{{ $employee->position->title ?? '' }}
-                                        - {{ $employee->position->position_number ?? '' }}</td>
-                                    <td>{{ $employee->position->code ?? '' }}</td>
-                                    <td>{{ $employee->emp_number ?? '' }}</td>
-                                    <td>{{ $employee->birth_year ?? '' }}</td>
-                                    <td>{{ $employee->education ?? '' }}</td>
-                                    <!-- Phone Number -->
-                                    <td class="tx-sm-12-f">
-                                        <a href="callto:{{ $employee->phone ?? '' }}"
-                                           class="ctd">{{ $employee->phone ?? '' }}</a>
-                                        <a href="callto:{{ $employee->phone2 ?? '' }}"
-                                           class="ctd">{{ $employee->phone2 ?? '' }}</a>
-                                    </td>
-                                    <td>{{ $employee->main_province ?? '' }}</td>
-                                    <td>{{ $employee->current_province ?? '' }}</td>
-                                    <td>{{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }} {{ $employee->duty_position ? ' - ' : '' }} {{ $employee->duty_position ?? '' }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--/==/ End of Table -->
-                </div>
-                <!--/==/ End of Main Position Employees -->
-            </div>
-        </div>
-        <!--/==/ End of Employees -->
     </div>
 @endsection
 <!--/==/ End of Page Content -->

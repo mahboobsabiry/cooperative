@@ -21,7 +21,7 @@ return new class extends Migration
             $table->bigInteger('bank_tt_number')->nullable(); // نمبر آویز بانکی
             $table->date('bank_tt_date')->nullable(); // تاریخ آویز بانکی
             $table->date('expire_date')->nullable(); // تاریخ ختم تضمین
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(1);
             $table->text('reason')->nullable();
             $table->timestamps();
         });
