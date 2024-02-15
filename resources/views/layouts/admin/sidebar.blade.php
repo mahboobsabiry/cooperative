@@ -22,7 +22,7 @@
 
             <!-- Asycuda -->
             @can('asycuda_view')
-                <li class="nav-label">اسیکودا</li>
+                <li class="nav-label">مدیریت عمومی سیسستم</li>
 
                 <li class="nav-item {{ request()->is('admin/asycuda/users') ||
                     request()->is('admin/asycuda/users/*') ||
@@ -36,7 +36,7 @@
                         @if(count(\App\Models\Asycuda\COAL::all()->where('expire_date', "<=", today())->where('status', 1)) >= 1)
                             <span class="pulse"></span>
                         @endif
-                        <span class="sidemenu-label">اسیکودا</span>
+                        <span class="sidemenu-label">مدیریت عمومی سیستم</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
 
