@@ -156,9 +156,20 @@
                 </div>
                 <!--/==/ End of Contact Information -->
 
-                <!-- Documents -->
-
-                <!--/==/ End of Contact Information -->
+                <!-- Custom ID Card -->
+                <div class="card custom-card">
+                    <div class="overflow-auto">
+                        <div>
+                            <div style="position:absolute;">
+                                <img src="{{ $employee->image }}" alt="{{ $employee->name }}" width="200" height="200" style="margin-top: 90px; margin-right: 90px; border-top-left-radius: 60%; border-top-right-radius: 60%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%; -webkit-border-bottom-left-radius: 120px;">
+                            </div>
+                            <img src="{{ asset('assets/images/emp-id-card.jpg') }}" alt="">
+                            <hr>
+                            <img src="{{ asset('assets/images/emp-id-card-back.jpg') }}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <!--/==/ End of Contact Custom ID Card -->
             </div>
             <div class="col-lg-8 col-md-12">
                 <div class="card custom-card main-content-body-profile">
