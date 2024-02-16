@@ -8,6 +8,90 @@
     @else
         <link href="{{ asset('assets/css/treeview.css') }}" rel="stylesheet">
     @endif
+    <style>
+        .emp-profile-img {
+            width: 190px;
+            height: 190px;
+            position: absolute;
+            z-index: 1;
+            margin-top: 80px;
+            margin-right: 80px;
+            border-top-left-radius: 70%;
+            border-top-right-radius: 70%;
+            border-bottom-left-radius: 70%;
+            border-bottom-right-radius: 70%;
+            padding-left: 8px;
+            padding-bottom: 0px;
+            padding-right: 8px;
+        }
+        .id-card-img {
+            width: 360px; height: 590px;
+            -webkit-border-bottom-left-radius: 10px;
+            -webkit-border-bottom-right-radius: 10px;
+            -webkit-border-top-left-radius: 10px;
+            -webkit-border-top-right-radius: 10px;
+            -webkit-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
+            -moz-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
+            -ms-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
+            -o-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
+            filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
+        }
+        .id-card-back-img {
+            -webkit-border-bottom-left-radius: 10px;
+            -webkit-border-bottom-right-radius: 10px;
+            -webkit-border-top-left-radius: 10px;
+            -webkit-border-top-right-radius: 10px;
+            -webkit-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
+            -moz-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
+            -ms-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
+            -o-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
+            filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
+        }
+        .emp-name {
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 1;
+            margin-top: 386px;
+            font-size: xx-large;
+            color: blue;
+            font-weight: bold;
+        }
+        .emp-pos-title {
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 1;
+            margin-top: 437px;
+            font-size: large;
+            color: black;
+            font-weight: bolder;
+        }
+        .emp-id {
+            position: absolute;
+            z-index: 1;
+            margin-top: 468px;
+            margin-right: 108px;
+            font-family: "Times New Roman";
+            font-size: 23px;
+            color: black;
+            font-weight: 500;
+        }
+        .emp-phone {
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 1;
+            margin-top: 494px;
+            font-family: "Times New Roman";
+            font-size: 23px;
+            color: black;
+            font-weight: bolder;
+        }
+    </style>
 @endsection
 <!--/==/ End of Extra Styles -->
 
@@ -158,14 +242,43 @@
 
                 <!-- Custom ID Card -->
                 <div class="card custom-card">
-                    <div class="overflow-auto">
-                        <div>
-                            <div style="position:absolute;">
-                                <img src="{{ $employee->image }}" alt="{{ $employee->name }}" width="200" height="200" style="margin-top: 90px; margin-right: 90px; border-top-left-radius: 60%; border-top-right-radius: 60%; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%; -webkit-border-bottom-left-radius: 120px;">
+                    <div class="overflow-auto row justify-content-center p-2">
+                        <div class="m-2">
+                            <button type="button" class="btn btn-outline-primary" onclick="$.print('#printIdCard');">چاپ</button>
+                        </div>
+
+                        <div style="width: 350px;">
+                            <div class="print-id-card" id="printIdCard">
+                                <!-- Employee Profile Picture -->
+                                <div class="emp-profile">
+                                    <img class="emp-profile-img pos-absolute" src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}" alt="{{ $employee->name }}">
+                                </div>
+
+                                <!-- Employee Name & Last Name -->
+                                <div class="emp-name">{{ $employee->name }} {{ $employee->last_name }}</div>
+                                <!-- Employee Position -->
+                                <div class="emp-pos-title">{{ $employee->position->title }}</div>
+                                <!-- Employee ID -->
+                                <div class="emp-id">
+                                    @if($employee->id <= 9)
+                                        00{{ $employee->id }}
+                                    @elseif($employee->id <= 99)
+                                        0{{ $employee->id }}
+                                    @else
+                                        {{ $employee->id }}
+                                    @endif
+                                </div>
+                                <!-- Employee Phone Number -->
+                                <div class="emp-phone">{{ $employee->phone }}</div>
+
+                                <!-- ID Card -->
+                                <img class="id-card-img" src="{{ asset('assets/images/emp-id-card.jpg') }}" alt="">
                             </div>
-                            <img src="{{ asset('assets/images/emp-id-card.jpg') }}" alt="">
                             <hr>
-                            <img src="{{ asset('assets/images/emp-id-card-back.jpg') }}" alt="">
+                            <!-- ID Card Back -->
+                            <div id="printIdCardBack">
+                                <img class="id-card-back-img" src="{{ asset('assets/images/emp-id-card-back.jpg') }}" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -567,6 +680,24 @@
 <!-- Extra Scripts -->
 @section('extra_js')
     <script src="{{ asset('backend/assets/js/pages/user-scripts.js') }}"></script>
+    <script>
+        function printDiv()
+        {
+
+            var divToPrint=document.getElementById('printIdCardBack');
+
+            var newWin=window.open('','Print-Window');
+
+            newWin.document.open();
+
+            newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+
+            newWin.document.close();
+
+            setTimeout(function(){newWin.close();},10);
+
+        }
+    </script>
 
     @include('admin.inc.status_scripts')
 @endsection
