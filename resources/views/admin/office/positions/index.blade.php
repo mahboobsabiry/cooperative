@@ -89,6 +89,7 @@
                                         <th>@lang('pages.positions.underHand')</th>
                                         <th>@lang('pages.positions.positionNumber')</th>
                                         <th>@lang('form.num_of_pos')</th>
+                                        <th>موقعیت</th>
                                         <th>@lang('form.extraInfo')</th>
                                     </tr>
                                     </thead>
@@ -141,6 +142,7 @@
                                                     {<span class="text-danger small">{{ $position->employees->count() - $position->num_of_pos }} @lang('global.empty')</span>}
                                                 @endif
                                             </td>
+                                            <td>{{ $position->type }}</td>
                                             <td>{{ $position->desc }}</td>
                                         </tr>
                                     @endforeach

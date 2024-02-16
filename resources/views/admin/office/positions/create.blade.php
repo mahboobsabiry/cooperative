@@ -66,7 +66,7 @@
                                                     @foreach($position->children as $admin)
                                                         <option value="{{ $admin->id }}" class="text-secondary">- {{ $admin->title }}</option>
                                                         @foreach($admin->children as $mgmt)
-                                                            <option value="{{ $mgmt->id }}">-- {{ $mgmt->title }}</option>
+                                                            <option value="{{ $mgmt->id }}">-- {{ $mgmt->title }} <span class="small">({{ $mgmt->type }})</span></option>
                                                         @endforeach
                                                     @endforeach
                                                 @endforeach
@@ -112,6 +112,23 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Position Number -->
+
+                                        <!-- Type -->
+                                        <div class="form-group @error('type') has-danger @enderror">
+                                            <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
+
+                                            <select id="type" name="type" class="form-control select2 @error('type') form-control-danger @enderror">
+                                                <option value="محصولی">محصولی</option>
+                                                <option value="سرحدی">سرحدی</option>
+                                                <option value="نایب آباد">نایب آباد</option>
+                                                <option value="میدان هوایی">میدان هوایی</option>
+                                            </select>
+
+                                            @error('type')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Type -->
 
                                         <!-- Description -->
                                         <div class="form-group @error('desc') has-danger @enderror">

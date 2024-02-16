@@ -91,11 +91,11 @@
                                                         @foreach($positions as $position)
                                                             <option value="{{ $position->id }}">{{ $position->title }}</option>
                                                             @foreach($position->children as $admin)
-                                                                <option value="{{ $admin->id }}" class="text-secondary">- {{ $admin->title }}</option>
+                                                                <option value="{{ $admin->id }}" class="text-secondary">- {{ $admin->title }} ({{ $admin->type }})</option>
                                                                 @foreach($admin->children as $mgmt)
-                                                                    <option value="{{ $mgmt->id }}">-- {{ $mgmt->title }}</option>
+                                                                    <option value="{{ $mgmt->id }}">-- {{ $mgmt->title }} ({{ $mgmt->type }})</option>
                                                                     @foreach($mgmt->children as $mgr)
-                                                                        <option value="{{ $mgr->id }}">--- {{ $mgr->title }}</option>
+                                                                        <option value="{{ $mgr->id }}">--- {{ $mgr->title }} ({{ $mgr->type }})</option>
                                                                     @endforeach
                                                                 @endforeach
                                                             @endforeach

@@ -42,6 +42,7 @@ class PositionController extends Controller
         $position->title        = $request->title;
         $position->position_number = $request->position_number;
         $position->num_of_pos   = $request->num_of_pos;
+        $position->type         = $request->type;
         $position->desc         = $request->desc;
         $position->status       = 1;
         $position->save();
@@ -87,6 +88,7 @@ class PositionController extends Controller
         $position->title        = $request->title;
         $position->position_number = $request->position_number;
         $position->num_of_pos   = $request->num_of_pos;
+        $position->type         = $request->type;
         $position->desc         = $request->desc;
         $position->save();
 

@@ -8,6 +8,7 @@ use App\Models\Asycuda\COAL;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Morilog\Jalali\Jalalian;
+use Spatie\Browsershot\Browsershot;
 
 // Companies Activity License Controller
 class COALController extends Controller
@@ -156,6 +157,20 @@ class COALController extends Controller
 
         return redirect()->back()->with([
             'message'   => 'تازه سازی انجام شد.',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // COAL Print Form
+    public function coal_print_form($id)
+    {
+        $cal = COAL::find($id);
+        $path = public_path('/assets/files/coal/');
+
+        Browsershot::url('https://www.google.com')->save('google.pdf');
+        // Browsershot::url(route('admin.asycuda.coal.print.form', $cal->id))->save($path . 'فورمه جواز شرکت ' . $cal->company_name . '.pdf');
+        return back()->with([
+            'success'   => 'ذخیره شد',
             'alertType' => 'success'
         ]);
     }

@@ -94,11 +94,11 @@
                                                             @foreach($positions as $position)
                                                                 <option value="{{ $position->id }}" {{ $employee->position_id == $position->id ? 'selected' : '' }}>{{ $position->title }}</option>
                                                                 @foreach($position->children as $admin)
-                                                                    <option value="{{ $admin->id }}" {{ $employee->position_id == $admin->id ? 'selected' : '' }}>- {{ $admin->title }}</option>
+                                                                    <option value="{{ $admin->id }}" {{ $employee->position_id == $admin->id ? 'selected' : '' }}>- {{ $admin->title }} ({{ $admin->type }})</option>
                                                                     @foreach($admin->children as $mgmt)
-                                                                        <option value="{{ $mgmt->id }}" {{ $employee->position_id == $mgmt->id ? 'selected' : '' }}>-- {{ $mgmt->title }}</option>
+                                                                        <option value="{{ $mgmt->id }}" {{ $employee->position_id == $mgmt->id ? 'selected' : '' }}>-- {{ $mgmt->title }} ({{ $mgmt->type }})</option>
                                                                         @foreach($mgmt->children as $mgr)
-                                                                            <option value="{{ $mgr->id }}" {{ $employee->position_id == $mgr->id ? 'selected' : '' }}>--- {{ $mgr->title }}</option>
+                                                                            <option value="{{ $mgr->id }}" {{ $employee->position_id == $mgr->id ? 'selected' : '' }}>--- {{ $mgr->title }} ({{ $mgr->type }})</option>
                                                                         @endforeach
                                                                     @endforeach
                                                                 @endforeach

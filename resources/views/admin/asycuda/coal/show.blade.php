@@ -173,6 +173,9 @@
 
                             @can('asy_coal_create')
                                 <div class="row">
+                                    <!-- Print PDF -->
+                                    <p class="m-2"><a href="{{ route('admin.asycuda.coal.print.form', $cal->id) }}" class="btn btn-outline-info">PDF</a></p>
+
                                     <p class="m-2"><a href="{{ route('admin.asycuda.coal.reg_form', $cal->id) }}" target="_blank" class="btn btn-outline-success">فورمه ثبت جواز شرکت</a></p>
 
                                     <p class="m-2"><a href="{{ route('admin.asycuda.coal.refresh', $cal->id) }}" class="btn btn-outline-danger">تازه سازی</a></p>

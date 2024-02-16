@@ -16,20 +16,14 @@
             z-index: 1;
             margin-top: 80px;
             margin-right: 80px;
-            border-top-left-radius: 70%;
-            border-top-right-radius: 70%;
-            border-bottom-left-radius: 70%;
-            border-bottom-right-radius: 70%;
+            border-radius: 70%;
             padding-left: 8px;
-            padding-bottom: 0px;
+            padding-bottom: 0;
             padding-right: 8px;
         }
         .id-card-img {
             width: 360px; height: 590px;
-            -webkit-border-bottom-left-radius: 10px;
-            -webkit-border-bottom-right-radius: 10px;
-            -webkit-border-top-left-radius: 10px;
-            -webkit-border-top-right-radius: 10px;
+            -webkit-border-radius: 10px;
             -webkit-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
             -moz-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
             -ms-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
@@ -37,10 +31,7 @@
             filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
         }
         .id-card-back-img {
-            -webkit-border-bottom-left-radius: 10px;
-            -webkit-border-bottom-right-radius: 10px;
-            -webkit-border-top-left-radius: 10px;
-            -webkit-border-top-right-radius: 10px;
+            -webkit-border-radius: 10px;
             -webkit-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
             -moz-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
             -ms-filter: drop-shadow(0px 16px 10px rgba(0,0,225,0.6));
@@ -179,6 +170,10 @@
                             </h4>
 
                             <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
+                            @if($employee->position->position_number == 2 || $employee->position->position_number == 3)
+                            @else
+                                <p class="pro-user-desc text-primary mb-1">({{ $employee->position->type ?? '' }})</p>
+                            @endif
                             <!-- Employee Star -->
                             @if($employee->position)
                                 <p class="user-info-rating">
@@ -243,8 +238,9 @@
                 <!-- Custom ID Card -->
                 <div class="card custom-card">
                     <div class="overflow-auto row justify-content-center p-2">
-                        <div class="m-2">
-                            <button type="button" class="btn btn-outline-primary" onclick="$.print('#printIdCard');">چاپ</button>
+                        <div class="row m-2">
+                            <a href="javascript:void(0);" class="btn btn-outline-primary" onclick="$.print('#printIdCard');">چاپ</a>
+                            <a href="{{ route('admin.office.employees.custom_card', $employee->id) }}" class="btn btn-outline-info">کارت هویت گمرکی</a>
                         </div>
 
                         <div style="width: 350px;">

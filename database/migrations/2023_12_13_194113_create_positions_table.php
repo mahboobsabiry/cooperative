@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('position_number');
             $table->bigInteger('num_of_pos')->default(1);
             $table->text('desc')->nullable();
+            $table->string('type')->default('محصولی');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

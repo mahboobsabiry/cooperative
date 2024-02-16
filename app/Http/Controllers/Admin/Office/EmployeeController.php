@@ -302,4 +302,11 @@ class EmployeeController extends Controller
         $retired_employees = Employee::whereNull('position_id')->where('status', 4)->get();
         return view('admin.office.employees.retired_employees', compact('retired_employees'));
     }
+
+    // Custom ID Card
+    public function custom_card($id)
+    {
+        $employee = Employee::find($id);
+        return view('admin.office.employees.custom_card', compact('employee'));
+    }
 }

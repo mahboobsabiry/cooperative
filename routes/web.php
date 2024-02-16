@@ -75,6 +75,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('expired-coal', [COALController::class, 'expired'])->name('coal.expired');
         Route::get('registration-form/{id}', [COALController::class, 'reg_form'])->name('coal.reg_form');
         Route::get('refresh/{id}', [COALController::class, 'refresh'])->name('coal.refresh');
+        Route::get('coal-print-form/{id}', [COALController::class, 'coal_print_form'])->name('coal.print.form');
     });
 
     // ====== Office Routes ======
@@ -100,6 +101,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('employee/retired-employees', [EmployeeController::class, 'retired_employees'])->name('employees.retired_employees');
         // Fired Employees
         Route::get('employee/fired-employees', [EmployeeController::class, 'fired_employees'])->name('employees.fired_employees');
+        // Employee Custom ID Card
+        Route::get('employee/custom-id-card/{id}', [EmployeeController::class, 'custom_card'])->name('employees.custom_card');
 
         // ======== EmployeeHelperController ==========
         Route::post('update-employee-status', [EmployeeHelperController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');
