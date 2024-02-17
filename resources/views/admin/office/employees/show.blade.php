@@ -169,7 +169,16 @@
                                 <span>{{ $employee->name }} {{ $employee->last_name }}</span>
                             </h4>
 
-                            <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
+                            <!-- Position -->
+                            @can('office_position_view')
+                                <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title ?? '' }}</a>
+                            @else
+                                <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
+                            @endcan
+                            @if($employee->on_duty == 1)
+                                <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
+                            @endif
+
                             @if($employee->position->position_number == 2 || $employee->position->position_number == 3)
                             @else
                                 <p class="pro-user-desc text-primary mb-1">({{ $employee->position->type ?? '' }})</p>
@@ -237,12 +246,46 @@
 
                 <!-- Custom ID Card -->
                 <div class="card custom-card">
-                    <div class="overflow-auto row justify-content-center p-2">
+                    <div class="overflow-auto justify-content-center p-2">
+                        <!-- Action Buttons -->
+                        <h5>دکمه های کاربردی</h5>
                         <div class="row m-2">
-                            <a href="javascript:void(0);" class="btn btn-outline-primary" onclick="$.print('#printIdCard');">چاپ</a>
-                            <a href="{{ route('admin.office.employees.custom_card', $employee->id) }}" class="btn btn-outline-info">کارت هویت گمرکی</a>
-                        </div>
+                            <a href="javascript:void(0);" class="btn btn-outline-secondary m-1">سابقه کاری</a>
 
+                            <!-- Duty Position -->
+                            @if($employee->position)
+                                <!-- Change to main/duty position -->
+                                @can('office_employee_edit')
+                                    @if($employee->on_duty == 0)
+                                        <a class="modal-effect btn btn-outline-info m-1" data-effect="effect-sign" data-toggle="modal"
+                                           href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty')</a>
+                                    @else
+                                        <a class="modal-effect btn btn-outline-info m-1" data-effect="effect-sign" data-toggle="modal"
+                                           href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
+                                    @endif
+
+                                    <!-- Retire Employee -->
+                                    <a class="modal-effect btn btn-outline-success m-1" data-effect="effect-sign" data-toggle="modal"
+                                       href="#retire_employee{{ $employee->id }}">تقاعد</a>
+
+                                    <!-- Change Position Employee -->
+                                    <a class="modal-effect btn btn-outline-dark m-1" data-effect="effect-sign" data-toggle="modal"
+                                       href="#change_pos_employee{{ $employee->id }}">تبدیل</a>
+
+                                    <!-- Fire Employee -->
+                                    <a class="modal-effect btn btn-outline-danger m-1" data-effect="effect-sign" data-toggle="modal"
+                                       href="#fire_employee{{ $employee->id }}">منفک</a>
+                                @endcan
+
+                                @include('admin.office.employees.inc.modals')
+                            @else
+                            @endif
+                            <!-- End of Duty Position -->
+                            <a href="{{ route('admin.office.employees.custom_card', $employee->id) }}" class="btn btn-outline-info m-1">کارت هویت گمرکی</a>
+                        </div>
+                        <!--/==/ End of Action Buttons -->
+
+                        <!-- Custom Card -->
                         <div style="width: 350px;">
                             <div class="print-id-card" id="printIdCard">
                                 <!-- Employee Profile Picture -->
@@ -493,66 +536,25 @@
                                             <div>
                                                 شروع وظیفه از تاریخ {{ $employee->start_job }}
                                                 <br> {!! $employee->background ?? '--' !!}
-
-                                                @if($employee->position)
-                                                    @can('office_employee_create')
-                                                        <a aria-controls="collapseAddBackground" aria-expanded="false"
-                                                           class="text-danger" data-toggle="collapse"
-                                                           href="#collapseAddBackground">@lang('global.add')</a>
-
-                                                        @include('admin.office.employees.inc.add_background')
-                                                    @endcan
-                                                @endif
                                             </div>
                                         </td>
                                         <td colspan="3">
                                             @if($employee->position)
+                                                <strong>اصل بست: </strong>
                                                 {{ $employee->position->position_number }} -
                                                 @can('office_position_view')
                                                     <a href="{{ route('admin.office.positions.show', $employee->position->id) }}">
                                                         {{ $employee->position->title }}
                                                     </a> (کد - {{ $employee->position_code }})
                                                 @else
-                                                        {{ $employee->position->title }} (کد - {{ $employee->position_code }})
+                                                    {{ $employee->position->title }} (کد - {{ $employee->position_code }})
                                                 @endcan
+                                                <br>
 
-                                                <!-- Change to main/duty position -->
-                                                @can('office_employee_edit')
-                                                    <br>
-                                                    @if($employee->on_duty == 0)
-                                                        -- <a class="modal-effect text-danger"
-                                                              data-effect="effect-sign" data-toggle="modal"
-                                                              href="#duty_position{{ $employee->id }}">@lang('pages.employees.onDuty'){{ app()->getLocale() == 'en' ? '?' : '؟' }}</a>
-                                                    @else
-                                                        -- @lang('pages.employees.onDuty') - {{ $employee->duty_position }}
-                                                        <a class="modal-effect text-danger"
-                                                           data-effect="effect-sign" data-toggle="modal"
-                                                           href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
-                                                    @endif
-
-                                                    <!-- Fire Employee -->
-                                                    <br>
-                                                    -- <a class="modal-effect text-danger"
-                                                          data-effect="effect-sign" data-toggle="modal"
-                                                          href="#fire_employee{{ $employee->id }}">منفک؟</a>
-
-                                                    <!-- Retire Employee -->
-                                                    <br>
-                                                    -- <a class="modal-effect text-danger"
-                                                          data-effect="effect-sign" data-toggle="modal"
-                                                          href="#retire_employee{{ $employee->id }}">تقاعد؟</a>
-
-                                                    <!-- Change position to other organ -->
-                                                    <br>
-                                                    -- <a aria-controls="collapseChangePosition" aria-expanded="false"
-                                                          class="text-danger" data-toggle="collapse"
-                                                          href="#collapseChangePosition">تبدیل به اداره/ارگان دیگر؟</a>
-                                                @endcan
-
-                                                @include('admin.office.employees.inc.modals')
-
-                                                @include('admin.office.employees.inc.change_position_ocustom')
-                                            @else
+                                                @if($employee->on_duty == 1)
+                                                    <strong>خدمتی: </strong>
+                                                    {{ $employee->duty_position }}
+                                                @endif
                                             @endif
                                         </td>
                                     </tr>

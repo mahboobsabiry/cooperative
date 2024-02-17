@@ -10,6 +10,7 @@ use App\Traits\HasDocument;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -38,6 +39,12 @@ class Employee extends Model
     public function documents(): MorphMany
     {
         return $this->morphMany(Document::class, 'transaction');
+    }
+
+    // Morph Document
+    public function experiences(): HasMany
+    {
+        return $this->hasMany(Experience::class);
     }
 
     // Position
