@@ -10,7 +10,7 @@ class Position extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['parent_id', 'title', 'position_number', 'num_of_pos', 'desc', 'type', 'status'];
+    protected $fillable = ['parent_id', 'title', 'position_number', 'num_of_pos', 'desc', 'type', 'custom_code', 'status'];
 
     public static function tree()
     {

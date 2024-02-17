@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Office\Employee;
 use App\Traits\HasPhoto;
 use App\Traits\HasTazkira;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,6 +24,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'employee_id',
         'name',
         'username',
         'phone',
@@ -63,5 +65,11 @@ class User extends Authenticatable
     public function activities()
     {
         return Activity::all()->where('causer_id', $this->id);
+    }
+
+    // Employee
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
     }
 }

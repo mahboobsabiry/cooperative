@@ -64,7 +64,7 @@
                                                 @foreach($positions as $position)
                                                     <option value="{{ $position->id }}">{{ $position->title }}</option>
                                                     @foreach($position->children as $admin)
-                                                        <option value="{{ $admin->id }}" class="text-secondary">- {{ $admin->title }}</option>
+                                                        <option value="{{ $admin->id }}" class="text-secondary">- {{ $admin->title }} <span class="small">({{ $admin->type }})</span></option>
                                                         @foreach($admin->children as $mgmt)
                                                             <option value="{{ $mgmt->id }}">-- {{ $mgmt->title }} <span class="small">({{ $mgmt->type }})</span></option>
                                                         @endforeach
@@ -122,6 +122,7 @@
                                                 <option value="سرحدی">سرحدی</option>
                                                 <option value="نایب آباد">نایب آباد</option>
                                                 <option value="میدان هوایی">میدان هوایی</option>
+                                                <option value="مراقبت سیار">مراقبت سیار</option>
                                             </select>
 
                                             @error('type')

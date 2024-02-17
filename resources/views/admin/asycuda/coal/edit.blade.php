@@ -129,8 +129,8 @@
 
                                     <!-- Phone -->
                                     <div class="form-group @error('phone') has-danger @enderror">
-                                        <p class="mb-2">@lang('form.phone'): <span class="tx-danger">*</span></p>
-                                        <input type="tel" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ $cal->phone ?? old('phone') }}" required>
+                                        <p class="mb-2">@lang('form.phone'):</p>
+                                        <input type="tel" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ $cal->phone ?? old('phone') }}">
 
                                         @error('phone')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -139,8 +139,8 @@
 
                                     <!-- Email Address -->
                                     <div class="form-group @error('email') has-danger @enderror">
-                                        <p class="mb-2">@lang('form.email'): <span class="tx-danger">*</span></p>
-                                        <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $cal->email ?? old('email') }}" required>
+                                        <p class="mb-2">@lang('form.email'):</p>
+                                        <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $cal->email ?? old('email') }}">
 
                                         @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>

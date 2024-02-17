@@ -7,6 +7,7 @@ use App\Http\Requests\COALRequest;
 use App\Models\Asycuda\COAL;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Morilog\Jalali\Jalalian;
 use Spatie\Browsershot\Browsershot;
 
@@ -44,6 +45,7 @@ class COALController extends Controller
     public function store(COALRequest $request)
     {
         $cal = new COAL();
+        $cal->user_id           = Auth::user()->id;
         $cal->company_name      = $request->company_name;
         $cal->company_tin       = $request->company_tin;
         $cal->license_number    = $request->license_number;
@@ -101,12 +103,14 @@ class COALController extends Controller
             'export_date'   => 'required',
             'expire_date'   => 'required',
             'owner_name'    => 'required|min:3|max:128',
-            'owner_phone'   => 'required|min:8|max:15|unique:coal,owner_phone,' . $cal->id,
+            'owner_phone'   => 'nullable|min:8|max:15|unique:coal,owner_phone,' . $cal->id,
             'phone'         => 'nullable|min:8|max:15|unique:coal,phone,' . $cal->id,
             'email'         => 'nullable|min:5|max:128|unique:coal,email,' . $cal->id,
             'address'       => 'required|min:3|max:255',
             'info'          => 'nullable'
         ]);
+
+        $cal->user_id           = Auth::user()->id;
         $cal->company_name      = $request->company_name;
         $cal->company_tin       = $request->company_tin;
         $cal->license_number    = $request->license_number;

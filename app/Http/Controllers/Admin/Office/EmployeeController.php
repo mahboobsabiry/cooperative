@@ -222,11 +222,9 @@ class EmployeeController extends Controller
         }
 
         //  Has Files && Save Document Images
-        if ($request->hasFile('document')) {
-            foreach ($request->file('document') as $item) {
-                $fileName = 'employee_document-' . time() . '.' . $item->getClientOriginalExtension();
-                $employee->storeDocument($item->storeAs('employees', $fileName, 'public'));
-            }
+        foreach ($request->file('document') as $item) {
+            $fileName = 'employee_document-' . time() . '.' . $item->getClientOriginalExtension();
+            $employee->storeDocument($item->storeAs('employees', $fileName, 'public'));
         }
 
         activity('updated')

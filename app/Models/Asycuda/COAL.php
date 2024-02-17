@@ -13,7 +13,7 @@ class COAL extends Model
     public $table = 'coal';
 
     protected $fillable = [
-        'company_name', 'company_tin', 'license_number',
+        'user_id', 'company_name', 'company_tin', 'license_number',
         'owner_name', 'owner_phone',
         'export_date', 'expire_date',
         'phone', 'email', 'address', 'status', 'info'

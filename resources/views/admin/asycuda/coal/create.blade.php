@@ -128,7 +128,7 @@
 
                                     <!-- Phone -->
                                     <div class="form-group @error('phone') has-danger @enderror">
-                                        <p class="mb-2">@lang('form.phone'): <span class="tx-danger">*</span></p>
+                                        <p class="mb-2">@lang('form.phone'):</p>
                                         <input type="tel" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ old('phone') }}">
 
                                         @error('phone')

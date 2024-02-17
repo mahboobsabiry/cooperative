@@ -50,6 +50,7 @@ class PositionsTableSeeder extends Seeder
                 'position_number' => 3,
                 'num_of_pos' => 1,
                 'type'          => 'سرحدی',
+                'custom_code'   => 'AF152',
                 'desc'          => 'آمریت گمرک سرحدی حیرتان واقع لب مرز با کشور اوزبیکستان'
             ],
             [
@@ -72,6 +73,7 @@ class PositionsTableSeeder extends Seeder
                 'position_number' => 4,
                 'num_of_pos'    => 1,
                 'type'          => 'سرحدی',
+                'custom_code'   => 'AF152',
                 'desc'          => ' آمریت گمرک سرحدی حیرتان'
             ],
         ];

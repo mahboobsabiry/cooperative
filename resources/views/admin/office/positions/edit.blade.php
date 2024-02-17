@@ -70,7 +70,7 @@
                                                 @endif
 
                                                 @foreach($positions as $pos)
-                                                        <option value="{{ $pos->id ?? '0' }}" {{ $position->parent_id == $pos->id ? 'selected' : '' }}>{{ $pos->title }}</option>
+                                                    <option value="{{ $pos->id ?? '0' }}" {{ $position->parent_id == $pos->id ? 'selected' : '' }}>{{ $pos->title }} {{ $pos->type }}</option>
                                                 @endforeach
 
                                             </select>
@@ -125,6 +125,7 @@
                                                 <option value="سرحدی" {{ $position->type == 'سرحدی' ? 'selected' : '' }}>سرحدی</option>
                                                 <option value="نایب آباد" {{ $position->type == 'نایب آباد' ? 'selected' : '' }}>نایب آباد</option>
                                                 <option value="میدان هوایی" {{ $position->type == 'میدان هوایی' ? 'selected' : '' }}>میدان هوایی</option>
+                                                <option value="مراقبت سیار" {{ $position->type == 'مراقبت سیار' ? 'selected' : '' }}>مراقبت سیار</option>
                                             </select>
 
                                             @error('type')

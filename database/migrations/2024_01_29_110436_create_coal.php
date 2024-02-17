@@ -18,11 +18,11 @@ return new class extends Migration
             $table->bigInteger('company_tin')->unique();
             $table->bigInteger('license_number')->unique();
             $table->string('owner_name');
-            $table->string('owner_phone');
+            $table->string('owner_phone')->nullable();
             $table->date('export_date');
             $table->date('expire_date');
-            $table->string('phone')->nullable()->unique();
-            $table->string('email')->nullable()->unique();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->string('address');
             $table->tinyInteger('status')->default(1);
             $table->text('info')->nullable();

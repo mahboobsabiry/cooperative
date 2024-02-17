@@ -5,6 +5,7 @@ namespace App\Models\Office;
 use App\Models\Asycuda\AsycudaUser;
 use App\Models\Document;
 use App\Models\Photo;
+use App\Models\User;
 use App\Traits\HasDocument;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -55,5 +56,11 @@ class Employee extends Model
     public function asycuda_user()
     {
         return $this->hasOne(AsycudaUser::class);
+    }
+
+    // Has One User
+    public function user()
+    {
+        return $this->hasOne(User::class);
     }
 }
