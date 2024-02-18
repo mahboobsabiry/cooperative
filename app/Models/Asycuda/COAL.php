@@ -2,8 +2,10 @@
 
 namespace App\Models\Asycuda;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 // Companies Activity License Model
 class COAL extends Model
@@ -18,4 +20,9 @@ class COAL extends Model
         'export_date', 'expire_date',
         'phone', 'email', 'address', 'status', 'info'
     ];
+
+    public function user(): Relation
+    {
+        return $this->belongsTo(User::class);
+    }
 }

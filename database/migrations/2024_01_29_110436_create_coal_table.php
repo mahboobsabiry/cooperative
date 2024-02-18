@@ -14,6 +14,7 @@ return new class extends Migration
         // Companies Activity License
         Schema::create('coal', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('company_name')->unique();
             $table->bigInteger('company_tin')->unique();
             $table->bigInteger('license_number')->unique();
@@ -27,6 +28,8 @@ return new class extends Migration
             $table->tinyInteger('status')->default(1);
             $table->text('info')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

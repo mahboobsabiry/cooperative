@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Asycuda\COAL;
 use App\Models\Office\Employee;
 use App\Traits\HasPhoto;
 use App\Traits\HasTazkira;
@@ -71,5 +72,11 @@ class User extends Authenticatable
     public function employee()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    // Has Companies Activity License
+    public function coal()
+    {
+        return $this->hasMany(COAL::class);
     }
 }
