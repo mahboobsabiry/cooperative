@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Office\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,23 +53,51 @@ class UserController extends Controller
 
     public function create()
     {
+        $employees = Employee::all();
         $roles = Role::all();
         $permissions = Permission::all();
-        return view('admin.users.create', compact('roles', 'permissions'));
+        return view('admin.users.create', compact('employees', 'roles', 'permissions'));
     }
 
+    // Select Employee
+    public function select_employee(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+
+            // Query the database to get the relevant data
+            $employee = Employee::find($data['employee_id']);
+
+            if ($employee) {
+                // Assuming 'employee_name' is the field you want to retrieve
+                $employee_name = $employee->name . ' ' . $employee->last_name;
+                $employee_username = $employee->username;
+                $employee_emp_number = $employee->emp_number;
+                $employee_phone = $employee->phone;
+                $employee_email = $employee->email;
+
+                // Return the data as a JSON response
+                return response()->json([
+                    'employee_name' => $employee_name,
+                    'employee_username' => $employee_username,
+                    'employee_emp_number' => $employee_emp_number,
+                    'employee_phone' => $employee_phone,
+                    'employee_email' => $employee_email
+                ]);
+            } else {
+                // Handle the case when the aircraft ID is not found
+                return response()->json(['error' => 'Aircraft not found'], 404);
+            }
+        }
+    }
+
+    // Store User Information
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
+
         $user->roles()->sync($request->input('roles', []));
         $user->permissions()->sync($request->input('permissions', []));
-
-        //  Has File && Save Avatar Image
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $fileName = 'user-' . time() . '.' . $avatar->getClientOriginalExtension();
-            $user->storeImage($avatar->storeAs('users', $fileName, 'public'));
-        }
 
         activity('added')
             ->causedBy(Auth::user())
@@ -98,18 +127,29 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $request->validate([
-            'avatar'    => 'image|mimes:jpg,png',
-            'name'      => 'required',
-            'username'  => 'required|unique:users,username,' . $user->id,
-            'phone'     => 'nullable|min:8|max:15|unique:users,phone,' . $user->id,
-            'email'     => 'nullable|min:8|max:64|unique:users,email,' . $user->id,
-            'roles.*'   => 'integer',
-            'roles'     => 'nullable|array',
-            'permissions.*'   => 'integer',
-            'permissions'     => 'nullable|array',
-            'info'      => 'nullable'
-        ]);
+        if ($user->employee_id == null) {
+            $request->validate([
+                'avatar'    => 'image|mimes:jpg,png',
+                'name'      => 'required',
+                'username'  => 'required|unique:users,username,' . $user->id,
+                'phone'     => 'nullable|min:8|max:15|unique:users,phone,' . $user->id,
+                'email'     => 'nullable|min:8|max:64|unique:users,email,' . $user->id,
+                'roles.*'   => 'integer',
+                'roles'     => 'nullable|array',
+                'permissions.*'   => 'integer',
+                'permissions'     => 'nullable|array',
+                'info'      => 'nullable'
+            ]);
+        } else {
+            $request->validate([
+                'roles.*'   => 'integer',
+                'roles'     => 'nullable|array',
+                'permissions.*'   => 'integer',
+                'permissions'     => 'nullable|array',
+                'info'      => 'nullable'
+            ]);
+        }
+
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
         $user->permissions()->sync($request->input('permissions', []));

@@ -60,8 +60,25 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <!-- Employee -->
+                                        <div class="form-group @error('employee_id') has-danger @enderror">
+                                            <p class="mb-2"> کارمند: </p>
+
+                                            <select id="employee_id" name="employee_id" class="form-control select2 @error('employee_id') form-control-danger @enderror">
+                                                <option value="">@lang('form.chooseOne')</option>
+                                                @foreach($employees as $employee)
+                                                    <option value="{{ $employee->id }}">{{ $employee->name }} {{ $employee->last_name }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('employee_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                            <span class="text-danger errorMsg"></span>
+                                        </div>
+
                                         <!-- Name -->
-                                        <div class="form-group @error('name') has-danger @enderror">
+                                        <div class="form-group @error('name') has-danger @enderror" id="name_div">
                                             <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
                                             <input type="text" id="name" class="form-control @error('name') form-control-danger @enderror" name="name" value="{{ old('name') }}" placeholder="@lang('form.name')" required>
 
@@ -72,7 +89,7 @@
                                         <!--/==/ End of Name -->
 
                                         <!-- Username -->
-                                        <div class="form-group @error('username') has-danger @enderror">
+                                        <div class="form-group @error('username') has-danger @enderror" id="username_div">
                                             <p class="mb-2">@lang('form.username'): <span class="tx-danger">*</span></p>
                                             <input type="text" id="username" class="form-control @error('username') form-control-danger @enderror" name="username" value="{{ old('username') }}" placeholder="@lang('form.username')" required>
 
@@ -83,7 +100,7 @@
                                         <!--/==/ End of Username -->
 
                                         <!-- Phone Number -->
-                                        <div class="form-group @error('phone') has-danger @enderror">
+                                        <div class="form-group @error('phone') has-danger @enderror" id="phone_div">
                                             <p class="mb-2">@lang('form.phone'):</p>
                                             <input type="text" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ old('phone') }}" placeholder="@lang('form.phone')">
 
@@ -94,9 +111,9 @@
                                         <!--/==/ End of Phone Number -->
 
                                         <!-- Email -->
-                                        <div class="form-group @error('email') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.email'): <span class="tx-danger">*</span></p>
-                                            <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ old('email') }}" placeholder="@lang('form.email')" required>
+                                        <div class="form-group @error('email') has-danger @enderror" id="email_div">
+                                            <p class="mb-2">@lang('form.email'):</p>
+                                            <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ old('email') }}" placeholder="@lang('form.email')">
 
                                             @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -129,7 +146,7 @@
 
                                     <div class="col-md-6">
                                         <!-- Avatar -->
-                                        <div class="form-group @error('avatar') has-danger @enderror">
+                                        <div class="form-group @error('avatar') has-danger @enderror" id="avatar_div">
                                             <p class="mb-2">@lang('form.avatar'):</p>
                                             <input type="file" class="dropify" name="avatar" accept="image/*" data-height="200" />
                                             @error('avatar')
@@ -218,6 +235,43 @@
             if($('input[type="checkbox"]').parents('.checkboxes')){
                 $('input[type="checkbox"]').prop('checked', '')
             }
+        });
+
+        // Select Employee
+        $(document).ready(function() {
+            $(document).on('change', '#employee_id', function () {
+                var employee_id = $(this).val();
+                var a = $("#name").parent();
+                var b = $("#username").parent();
+                var c = $("#phone").parent();
+                var d = $("#email").parent();
+
+                if (!employee_id == '') {
+                    $("#avatar_div").hide();
+                    $.ajax({
+                        type: 'get',
+                        url: '{{ route('admin.users.select.employee') }}',
+                        data: { 'employee_id': employee_id },
+                        dataType: 'json',
+                        success: function (data) {
+                            a.find('#name').val(data.employee_name);
+                            b.find('#username').val(data.employee_emp_number);
+                            c.find('#phone').val(data.employee_phone);
+                            d.find('#email').val(data.employee_email);
+                        },
+                        error: function () {
+                            alert("ERROR");
+                            $(".errorMsg").html(data.error);
+                        }
+                    });
+                } else {
+                    a.find('#name').val("");
+                    b.find('#username').val("");
+                    c.find('#phone').val("");
+                    d.find('#email').val("");
+                    $("#avatar_div").show();
+                }
+            });
         });
     </script>
 @endsection

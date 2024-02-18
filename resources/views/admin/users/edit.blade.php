@@ -62,49 +62,51 @@
                                 @method('PUT')
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <!-- Name -->
-                                        <div class="form-group @error('name') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="name" class="form-control @error('name') form-control-danger @enderror" name="name" value="{{ $user->name ?? old('name') }}" placeholder="@lang('form.name')" required>
+                                        @if($user->employee_id == null)
+                                            <!-- Name -->
+                                            <div class="form-group @error('name') has-danger @enderror">
+                                                <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
+                                                <input type="text" id="name" class="form-control @error('name') form-control-danger @enderror" name="name" value="{{ $user->name ?? old('name') }}" placeholder="@lang('form.name')" required>
 
-                                            @error('name')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Name -->
+                                                @error('name')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <!--/==/ End of Name -->
 
-                                        <!-- Username -->
-                                        <div class="form-group @error('username') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.username'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="username" class="form-control @error('username') form-control-danger @enderror" name="username" value="{{ $user->username ?? old('username') }}" placeholder="@lang('form.username')" required>
+                                            <!-- Username -->
+                                            <div class="form-group @error('username') has-danger @enderror">
+                                                <p class="mb-2">@lang('form.username'): <span class="tx-danger">*</span></p>
+                                                <input type="text" id="username" class="form-control @error('username') form-control-danger @enderror" name="username" value="{{ $user->username ?? old('username') }}" placeholder="@lang('form.username')" required>
 
-                                            @error('username')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Username -->
+                                                @error('username')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <!--/==/ End of Username -->
 
-                                        <!-- Phone Number -->
-                                        <div class="form-group @error('phone') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.phone'):</p>
-                                            <input type="text" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ $user->phone ?? old('phone') }}" placeholder="@lang('form.phone')">
+                                            <!-- Phone Number -->
+                                            <div class="form-group @error('phone') has-danger @enderror">
+                                                <p class="mb-2">@lang('form.phone'):</p>
+                                                <input type="text" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ $user->phone ?? old('phone') }}" placeholder="@lang('form.phone')">
 
-                                            @error('phone')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Phone Number -->
+                                                @error('phone')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <!--/==/ End of Phone Number -->
 
-                                        <!-- Email -->
-                                        <div class="form-group @error('email') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.email'): <span class="tx-danger">*</span></p>
-                                            <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $user->email ?? old('email') }}" placeholder="@lang('form.email')" required>
+                                            <!-- Email -->
+                                            <div class="form-group @error('email') has-danger @enderror">
+                                                <p class="mb-2">@lang('form.email'): <span class="tx-danger">*</span></p>
+                                                <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $user->email ?? old('email') }}" placeholder="@lang('form.email')" required>
 
-                                            @error('email')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Email -->
+                                                @error('email')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <!--/==/ End of Email -->
+                                        @endif
 
                                         <!-- Information -->
                                         <div class="form-group @error('info') has-danger @enderror">
@@ -119,22 +121,24 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <!-- Avatar -->
-                                        <div class="form-group @error('avatar') has-danger @enderror">
-                                            <p class="mb-2">
-                                                <!-- Delete Avatar -->
-                                                <span class="caption">
+                                        @if($user->employee_id == null)
+                                            <!-- Avatar -->
+                                            <div class="form-group @error('avatar') has-danger @enderror">
+                                                <p class="mb-2">
+                                                    <!-- Delete Avatar -->
+                                                    <span class="caption">
                                                     <img src="{{ $user->image }}" class="img-fluid float-left" style="height: 30px;">
                                                 </span>
-                                                @lang('form.avatar'):
-                                            </p>
-                                            <p></p>
-                                            <input type="file" class="dropify" name="avatar" accept="image/*" data-height="200" data-max-file="4M" data-show-errors="true" />
-                                            @error('avatar')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Avatar -->
+                                                    @lang('form.avatar'):
+                                                </p>
+                                                <p></p>
+                                                <input type="file" class="dropify" name="avatar" accept="image/*" data-height="200" data-max-file="4M" data-show-errors="true" />
+                                                @error('avatar')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <!--/==/ End of Avatar -->
+                                        @endif
 
                                         <!-- Permissions -->
                                         <div class="form-group mb-lg-0">
