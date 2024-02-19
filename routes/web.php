@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Office\AgentController;
 use App\Http\Controllers\Admin\Office\CompanyController;
 use App\Http\Controllers\Admin\Office\EmployeeHelperController;
 use App\Http\Controllers\Admin\Office\EmployeeController;
+use App\Http\Controllers\Admin\Office\ExperienceController;
 use App\Http\Controllers\Admin\Office\HostelController;
 use App\Http\Controllers\Admin\Office\PositionController;
 // Admin Role Controllers
@@ -126,6 +127,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::post('employee/fire-employee/{id}', [EmployeeHelperController::class, 'fire_employee'])->name('employees.fire_employee');
         Route::get('employee/retire-employee/{id}', [EmployeeHelperController::class, 'retire_employee'])->name('employees.retire_employee');
 
+        // ========================== Employee Experiences ======================
+        Route::get('employee/{id}/experiences', [ExperienceController::class, 'index'])->name('employees.experiences');
+        Route::get('employee/{id}/add-duty-position', [ExperienceController::class, 'add_duty_position'])->name('employees.add_duty_position');
+        Route::post('employee/{id}/add-duty-pos', [ExperienceController::class, 'add_duty_pos'])->name('employees.add_duty_pos');
+
+        // ================= Agents and Companies ===========================
         // Agents & Companies
         Route::resource('agents', AgentController::class);
         // Agent Add Company Page

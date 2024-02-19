@@ -154,7 +154,8 @@
                     request()->is('admin/office/employee/change-position-employees') ||
                     request()->is('admin/office/employee/fired-employees') ||
                     request()->is('admin/office/employee/suspended-employees') ||
-                    request()->is('admin/office/employee/retired-employees') ? 'active show' : '' }}">
+                    request()->is('admin/office/employee/retired-employees') ||
+                    request()->is('admin/office/employee/*/experiences') ? 'active show' : '' }}">
 
                         <a class="nav-link with-sub" href="javascript:void(0)">
                             <i class="fa fa-user-tie"></i>
@@ -168,7 +169,8 @@
                         <ul class="nav-sub">
                             <!-- All Employees -->
                             <li class="nav-sub-item {{ request()->is('admin/office/employees') ||
-                        request()->is('admin/office/employees/*') ? 'active' : '' }}">
+                                request()->is('admin/office/employees/*') ||
+                                request()->is('admin/office/employee/*/experiences') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.index') }}">
                                     {<span class="small text-sm-center tx-danger">M</span>}
                                     همه کارمندان

@@ -7,12 +7,6 @@
     <link href="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/assets/plugins/datatable/responsivebootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.css') }}" rel="stylesheet">
-
-    @if(app()->getLocale() == 'en')
-        <link href="{{ asset('assets/css/treeview.css') }}" rel="stylesheet">
-    @else
-        <link href="{{ asset('assets/css/treeview.css') }}" rel="stylesheet">
-    @endif
 @endsection
 <!--/==/ End of Extra Styles -->
 
@@ -285,6 +279,9 @@
                         </div>
                         <!--/==/ End of User Information Details -->
 
+                        <h4>سابقه کاری کارمند</h4>
+                        <br>
+
                         <!-- Experiences Table -->
                         <div class="table-responsive mt-2">
                             <table class="table table-bordered export-table border-top key-buttons display text-nowrap w-100">
@@ -344,7 +341,6 @@
 
     <!-- Custom Scripts -->
     <script src="{{ asset('assets/js/datatable.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/pages/user-scripts.js') }}"></script>
 
     @include('admin.inc.status_scripts')
 @endsection

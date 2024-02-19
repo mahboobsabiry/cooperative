@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('position');
             $table->boolean('position_type')->default(0);
             $table->string('start_date');
-            $table->string('end_date');
+            $table->string('end_date')->nullable();
             $table->string('doc_number');
-            $table->string('document');
+            $table->string('document')->nullable();
+            $table->text('info')->nullable();
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');

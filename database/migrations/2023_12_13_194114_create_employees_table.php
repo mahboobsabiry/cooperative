@@ -45,7 +45,6 @@ return new class extends Migration
             $table->date('start_duty')->nullable();
             $table->string('duty_doc_number')->nullable();
             $table->string('duty_position')->nullable();
-            $table->longText('background')->nullable();
             $table->timestamps();
 
             $table->foreign('position_id')->references('id')->on('positions')->onUpdate('cascade')->onDelete('cascade');
