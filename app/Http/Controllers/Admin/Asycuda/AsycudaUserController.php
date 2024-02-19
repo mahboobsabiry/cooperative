@@ -36,6 +36,29 @@ class AsycudaUserController extends Controller
         return view('admin.asycuda.users.create', compact('employees'));
     }
 
+    // Select Employee
+    public function select_employee(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+
+            // Query the database to get the relevant data
+            $employee = Employee::find($data['employee_id']);
+
+            if ($employee) {
+                $employee_emp_number = $employee->emp_number;
+
+                // Return the data as a JSON response
+                return response()->json([
+                    'employee_emp_number' => $employee_emp_number
+                ]);
+            } else {
+                // Handle the case when the aircraft ID is not found
+                return response()->json(['error' => 'Aircraft not found'], 404);
+            }
+        }
+    }
+
     // Store
     public function store(Request $request)
     {

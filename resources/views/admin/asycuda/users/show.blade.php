@@ -3,6 +3,11 @@
 @section('title', 'یوزر ' . $asycuda_user->employee->name . ' ' . $asycuda_user->employee->last_name)
 <!-- Extra Styles -->
 @section('extra_css')
+    <!---DataTables css-->
+    <link href="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/assets/plugins/datatable/responsivebootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+
     @if(app()->getLocale() == 'en')
         <link href="{{ asset('assets/css/treeview.css') }}" rel="stylesheet">
     @else
@@ -116,13 +121,31 @@
                     <div class="card-header custom-card-header">
                         <div>
                             <h6 class="card-title mb-0">
-                                @lang('pages.users.contactInfo')
+                                اطلاعات
                             </h6>
                         </div>
                     </div>
 
                     <div class="card-body">
                         <div class="main-profile-contact-list main-profile-work-list">
+                            <!-- Status -->
+                            <div class="media">
+                                <div class="media-logo bg-light text-dark">
+                                    <i class="fe fe-smartphone"></i>
+                                </div>
+                                <div class="media-body">
+                                    <span>@lang('form.phone')</span>
+                                    <div>
+                                        <a href="callto:{{ $asycuda_user->employee->phone }}" class="ctd">{{ $asycuda_user->employee->phone }}</a>
+                                        @if(!empty($employee->phone2))
+                                            , <a href="callto:{{ $asycuda_user->employee->phone2 }}"
+                                                 class="ctd">{{ $asycuda_user->employee->phone2 }}</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/==/ End of Status -->
+
                             <!-- Phone Number -->
                             <div class="media">
                                 <div class="media-logo bg-light text-dark">
@@ -180,47 +203,121 @@
                                     <tbody class="p-0">
                                     <!-- Details -->
                                     <tr>
-                                        <td colspan="7" class="font-weight-bold">
+                                        <td colspan="5" class="font-weight-bold">
                                             <span class="badge badge-primary badge-pill">1</span>
                                             @lang('pages.employees.personalInfo')
                                         </td>
                                     </tr>
 
+                                    <!-- First Row -->
                                     <tr>
                                         <th><strong>#</strong></th>
                                         <th><strong>@lang('form.name')</strong></th>
-                                        <th><strong>@lang('admin.sidebar.roles')</strong></th>
-                                        <th><strong>یوزر</strong></th>
-                                        <th><strong>@lang('form.password')</strong></th>
-                                        <th><strong>@lang('form.status')</strong></th>
-                                        <th><strong>@lang('global.date')</strong></th>
+                                        <th><strong>تخلص</strong></th>
+                                        <th><strong>نام پدر</strong></th>
+                                        <th><strong>نمبر سوانح</strong></th>
                                     </tr>
-
                                     <tr>
                                         <td>{{ $asycuda_user->id }}</td>
                                         <td>
                                             @can('employee_view')
                                                 <a href="{{ route('admin.office.employees.show', $asycuda_user->employee->id) }}">
-                                                    {{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }}
+                                                    {{ $asycuda_user->employee->name }}
                                                 </a>
                                             @else
-                                                {{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }}
+                                                {{ $asycuda_user->employee->name }}
                                             @endcan
                                         </td>
-                                        <td>{{ $asycuda_user->roles }}</td>
-                                        <td>{{ $asycuda_user->user }}</td>
-                                        <td>{{ $asycuda_user->password }}</td>
-                                        <td>{{ $asycuda_user->status == 1 ? trans('global.active') : trans('global.inactive') }}</td>
-                                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($asycuda_user->created_at)) }}</td>
+                                        <td>{{ $asycuda_user->employee->last_name }}</td>
+                                        <td>{{ $asycuda_user->employee->father_name }}</td>
+                                        <td>{{ $asycuda_user->employee->emp_number }}</td>
+                                    </tr>
+
+                                    <!-- Second Row -->
+                                    <tr>
+                                        <th><strong>@lang('form.phone')</strong></th>
+                                        <th><strong>اصل بست</strong></th>
+                                        <th><strong>بست خدمتی</strong></th>
+                                        <th><strong>کد گمرک</strong></th>
+                                        <th><strong>موقعیت</strong></th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ $asycuda_user->employee->phone }}</td>
+                                        <td>{{ $asycuda_user->employee->position->title }}</td>
+                                        <td>{{ $asycuda_user->employee->duty_position }}</td>
+                                        <td>{{ $asycuda_user->employee->position->custom_code }}</td>
+                                        <td>{{ $asycuda_user->employee->position->type }}</td>
                                     </tr>
                                     </tbody>
                                     <!--/==/ End of First Table -->
+
+                                    <!-- Second Table -->
+                                    <tbody class="p-0">
+                                    <!-- Details -->
+                                    <tr>
+                                        <td colspan="5" class="font-weight-bold">
+                                            <span class="badge badge-primary badge-pill">2</span>
+                                            معلومات یوزر
+                                        </td>
+                                    </tr>
+
+                                    <!-- First Row -->
+                                    <tr>
+                                        <th><strong>تاریخ ایجاد</strong></th>
+                                        <th><strong>یوزر</strong></th>
+                                        <th><strong>رمز عبور</strong></th>
+                                        <th><strong>صلاحیت ها</strong></th>
+                                        <th><strong>وضعیت</strong></th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($asycuda_user->created_at)) }}</td>
+                                        <td>{{ $asycuda_user->user }}</td>
+                                        <td>{{ $asycuda_user->password }}</td>
+                                        <td>{{ $asycuda_user->roles }}</td>
+                                        <td>{{ $asycuda_user->status == 1 ? trans('global.active') : trans('global.inactive') }}</td>
+                                    </tr>
+                                    </tbody>
+                                    <!--/==/ End of Second Table -->
                                 </table>
                             </div>
                             <!--/==/ End of Personal Information -->
                             <p>{{ $asycuda_user->info }}</p>
                         </div>
                         <!--/==/ End of User Information Details -->
+
+                        <!-- Experiences Table -->
+                        <div class="table-responsive mt-2">
+                            <table class="table table-bordered export-table border-top key-buttons display text-nowrap w-100">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">@lang('form.name')</th>
+                                    <th class="text-center">بست</th>
+                                    <th class="text-center">نوع بست</th>
+                                    <th class="text-center">تاریخ شروع</th>
+                                    <th class="text-center">تاریخ ختم</th>
+                                    <th class="text-center">نمبر مکتوب</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach($asycuda_user->employee->experiences as $exp)
+                                    <tr>
+                                        <td>{{ $exp->id }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.office.employees.show', $exp->employee->id) }}">{{ $exp->employee->name }}</a>
+                                        </td>
+                                        <td>{{ $exp->position }}</td>
+                                        <td>{{ $exp->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
+                                        <td>{{ $exp->start_date }}</td>
+                                        <td>{{ $exp->end_date }}</td>
+                                        <td>{{ $exp->doc_number }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--/==/ End of Experiences Table -->
                     </div>
                 </div>
             </div>
@@ -232,6 +329,21 @@
 
 <!-- Extra Scripts -->
 @section('extra_js')
+    <!-- Data Table js -->
+    <script src="{{ asset('backend/assets/plugins/datatable/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/jszip.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.colVis.min.js') }}"></script>
+
+    <!-- Custom Scripts -->
+    <script src="{{ asset('assets/js/datatable.js') }}"></script>
     <script src="{{ asset('backend/assets/js/pages/user-scripts.js') }}"></script>
 
     @include('admin.inc.status_scripts')

@@ -72,6 +72,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // =============================== Asycuda Routes ===================================
     Route::group(['prefix' => 'asycuda', 'as' => 'asycuda.'], function () {
         Route::resource('users', AsycudaUserController::class);
+        Route::get('user/select-employee', [AsycudaUserController::class, 'select_employee'])->name('users.select.employee');
         Route::get('inactive-users', [AsycudaUserController::class, 'inactive'])->name('users.inactive');
         Route::resource('coal', COALController::class);
         Route::get('expired-coal', [COALController::class, 'expired'])->name('coal.expired');

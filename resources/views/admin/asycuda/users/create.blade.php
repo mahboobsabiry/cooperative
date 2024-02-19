@@ -56,10 +56,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <!-- Employee -->
-                                    <div class="form-group @error('employee_id') has-danger @enderror">
+                                    <div class="form-group @error('employee_id') has-danger @enderror" id="empDiv">
                                         <p class="mb-2">کارمند: <span class="tx-danger">*</span></p>
 
-                                        <select class="form-control @error('employee_id') form-control-danger @enderror select2" name="employee_id">
+                                        <select class="form-control @error('employee_id') form-control-danger @enderror select2" id="employee_id" name="employee_id">
+                                            <option value="">@lang('form.chooseOne')</option>
                                             @foreach($employees as $employee)
                                                 <option value="{{ $employee->id }}">{{ $employee->name }} {{ $employee->last_name }}</option>
                                             @endforeach
@@ -71,7 +72,7 @@
                                     </div>
 
                                     <!-- User -->
-                                    <div class="form-group @error('user') has-danger @enderror">
+                                    <div class="form-group @error('user') has-danger @enderror" id="userDiv">
                                         <p class="mb-2">یوزر: <span class="tx-danger">*</span></p>
                                         <input type="number" id="user" class="form-control @error('user') form-control-danger @enderror" name="user" value="{{ old('user') }}" required>
 
@@ -83,7 +84,7 @@
                                     <!-- Password -->
                                     <div class="form-group @error('password') has-danger @enderror">
                                         <p class="mb-2">@lang('form.password'): <span class="tx-danger">*</span></p>
-                                        <input type="number" id="password" class="form-control @error('password') form-control-danger @enderror" name="password" value="200" required>
+                                        <input type="number" id="password" class="form-control @error('password') form-control-danger @enderror" name="password" value="1000" required>
 
                                         @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -134,5 +135,33 @@
 @section('extra_js')
     <!-- Form-elements js-->
     <script src="{{ asset('backend/assets/js/form-elements.js') }}"></script>
+
+    <script>
+        // Select Employee
+        $(document).ready(function() {
+            $(document).on('change', '#employee_id', function () {
+                var employee_id = $(this).val();
+                var a = $("#user").parent();
+
+                if (!employee_id == '') {
+                    $.ajax({
+                        type: 'get',
+                        url: '{{ route('admin.asycuda.users.select.employee') }}',
+                        data: { 'employee_id': employee_id },
+                        dataType: 'json',
+                        success: function (data) {
+                            a.find('#user').val(data.employee_emp_number);
+                        },
+                        error: function () {
+                            alert("ERROR");
+                            $(".errorMsg").html(data.error);
+                        }
+                    });
+                } else {
+                    a.find('#user').val("");
+                }
+            });
+        });
+    </script>
 @endsection
 <!--/==/ End of Extra Scripts -->

@@ -164,6 +164,7 @@
                             </div>
                         </div>
 
+                        <!-- Main Info -->
                         <div class="item-user pro-user">
                             <h4 class="pro-user-username text-dark mt-2 mb-0">
                                 <span>{{ $employee->name }} {{ $employee->last_name }}</span>
@@ -202,12 +203,40 @@
                     <div class="card-header custom-card-header">
                         <div>
                             <h6 class="card-title mb-0">
-                                @lang('pages.users.contactInfo')
+                                اطلاعات لازم
                             </h6>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="main-profile-contact-list main-profile-work-list">
+                            <!-- Status -->
+                            <div class="media">
+                                <div class="media-logo bg-light text-dark">
+                                    <i class="fe fe-message-square"></i>
+                                </div>
+                                <div class="media-body">
+                                    <span>@lang('form.status')</span>
+                                    <div>
+                                        @if($employee->user)
+                                            @can('user_mgmt')
+                                                <a href="{{ route('admin.users.show', $employee->user->id) }}" target="_blank">حساب کاربری BCD-MIS دارد</a>
+                                            @else
+                                                حساب کاربری BCD-MIS دارد
+                                            @endcan
+                                        @else
+                                            حساب کاربری BCD-MIS ندارد
+                                        @endif
+                                        |
+                                        @if($employee->asycuda_user)
+                                            <a href="{{ route('admin.asycuda.users.show', $employee->user->id) }}" target="_blank">حساب کاربری Asycuda دارد</a>
+                                        @else
+                                            حساب کاربری Asycuda ندارد
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/==/ End of Status -->
+
                             <!-- Phone Number -->
                             <div class="media">
                                 <div class="media-logo bg-light text-dark">
@@ -449,12 +478,42 @@
                                     <!--/==/ End of Third Table -->
 
                                     <!-- User Table -->
-                                    @if($employee->asycuda_user)
+                                    @if($employee->user)
                                         <tbody class="p-0">
                                         <!-- Details -->
                                         <tr>
                                             <td colspan="6" class="font-weight-bold">
                                                 <span class="badge badge-primary badge-pill">3</span>
+                                                معلومات یوزر BCD-MIS
+                                            </td>
+                                        </tr>
+
+                                        <!-- User Info -->
+                                        <tr>
+                                            <th><strong>ID</strong></th>
+                                            <th><strong>یوزر</strong></th>
+                                            <th><strong>@lang('form.status')</strong></th>
+                                            <th><strong>@lang('global.createdDate')</strong></th>
+                                            <th colspan="2"><strong>@lang('global.extraInfo')</strong></th>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ $employee->user->id }}</td>
+                                            <td>{{ $employee->user->username }}</td>
+                                            <td>{{ $employee->user->status == 1 ? trans('global.active') : trans('global.inactive') }}</td>
+                                            <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($employee->user->created_at)) }}</td>
+                                            <td colspan="2">{{ $employee->user->info }}</td>
+                                        </tr>
+                                        </tbody>
+                                    @endif
+                                    <!--/==/ End of User Table -->
+
+                                    <!-- User Table -->
+                                    @if($employee->asycuda_user)
+                                        <tbody class="p-0">
+                                        <!-- Details -->
+                                        <tr>
+                                            <td colspan="6" class="font-weight-bold">
+                                                <span class="badge badge-primary badge-pill">{{ $employee->user ? '4' : '3' }}</span>
                                                 معلومات یوزر اسیکودا
                                             </td>
                                         </tr>
@@ -486,7 +545,7 @@
                                     <tr>
                                         <td colspan="6" class="font-weight-bold">
                                             <span
-                                                class="badge badge-primary badge-pill">{{ $employee->asycuda_user ? '4' : '3' }}</span>
+                                                class="badge badge-primary badge-pill">@if($employee->user && $employee->asycuda_user) 5 @elseif($employee->user || $employee->asycuda_user) 4 @else 3 @endif</span>
                                             @lang('pages.employees.otherInfo')
                                         </td>
                                     </tr>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->string('position');
-            $table->boolean('position_type')->default(1);
+            $table->boolean('position_type')->default(0);
             $table->string('start_date');
             $table->string('end_date');
             $table->string('doc_number');
