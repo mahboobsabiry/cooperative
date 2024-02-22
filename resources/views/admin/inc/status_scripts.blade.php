@@ -46,6 +46,53 @@
     });
     // |/==/ End of Change User Status
 
+    // Change Asycuda User Status
+    $(".updateAsyUserStatus").click(function () {
+        var status = $(this).children("i").attr("status");
+        var asy_user_id = $(this).attr("asy_user_id");
+        $("#asy_user_status").hide();
+        $("#update_status").show();
+        // alert("test"); return false;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'post',
+            url: '{{ route('admin.asycuda.users.updateAsyUserStatus') }}',
+            data: {status: status, asy_user_id: asy_user_id},
+            success: function (resp) {
+                $("#asy_user_status").show();
+                $("#update_status").hide();
+
+                if (resp['status'] == 0) {
+                    $("#asy_user_status").html('<i class="fa fa-toggle-off text-danger" aria-hidden="true" status="Inactive"></i>');
+                    // Change the inactivity
+                    $(".acInText").html('<span id="acInText" class="text-danger">@lang('global.inactive')</span>');
+                    toastr.options = {
+                        positionClass: 'toast-top-right'
+                    };
+                    toastr.warning('کاربر غیرفعال شد');
+                } else if (resp['status'] == 1) {
+                    $("#asy_user_status").html('<i class="fa fa-toggle-on text-success" aria-hidden="true" status="Active"></i>');
+                    // Change the activity
+                    $(".acInText").html('<span id="acInText" class="text-success">@lang('global.active')</span>');
+                    toastr.options = {
+                        positionClass: 'toast-top-right'
+                    };
+                    toastr.success('کاربر فعال شد');
+                }
+            }, error: function (resp) {
+                toastr.options = {
+                    positionClass: 'toast-top-right'
+                };
+                toastr.error('متاسفیم! مشکلی پیش آمده است.');
+            }
+        });
+    });
+    // |/==/ End of Change Asycuda User Status
+
     // Change Position Status
     $(".updatePositionStatus").click(function () {
         var status = $(this).children("i").attr("status");

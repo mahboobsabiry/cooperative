@@ -56,43 +56,6 @@
                             @method('PUT')
                             <div class="row">
                                 <div class="col-md-6">
-                                    <!-- Employee -->
-                                    <div class="form-group @error('employee_id') has-danger @enderror">
-                                        <p class="mb-2">کارمند: <span class="tx-danger">*</span></p>
-
-                                        <select class="form-control @error('employee_id') form-control-danger @enderror select2" name="employee_id">
-                                            @foreach($employees as $employee)
-                                                <option value="{{ $employee->id }}" {{ $asycuda_user->employee->id == $employee->id ? 'selected' : '' }}>{{ $employee->name }} {{ $employee->last_name }}</option>
-                                            @endforeach
-                                        </select>
-
-                                        @error('employee_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <!-- User -->
-                                    <div class="form-group @error('user') has-danger @enderror">
-                                        <p class="mb-2">یوزر: <span class="tx-danger">*</span></p>
-                                        <input type="number" id="user" class="form-control @error('user') form-control-danger @enderror" name="user" value="{{ $asycuda_user->user ?? old('user') }}" required>
-
-                                        @error('user')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Password -->
-                                    <div class="form-group @error('password') has-danger @enderror">
-                                        <p class="mb-2">@lang('form.password'): <span class="tx-danger">*</span></p>
-                                        <input type="number" id="password" class="form-control @error('password') form-control-danger @enderror" name="password" value="{{ $asycuda_user->password ?? '200' }}" required>
-
-                                        @error('password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
                                     <!-- Roles -->
                                     <div class="form-group @error('roles') has-danger @enderror">
                                         <p class="mb-2">@lang('admin.sidebar.roles'): <span class="tx-danger">*</span></p>
@@ -102,7 +65,9 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                </div>
 
+                                <div class="col-md-6">
                                     <!-- Info -->
                                     <div class="form-group @error('info') has-danger @enderror">
                                         <p class="mb-2">@lang('global.extraInfo'):</p>
@@ -112,11 +77,11 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-
-                                    <div class="form-group float-left">
-                                        <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
-                                    </div>
                                 </div>
+                            </div>
+
+                            <div class="form-group float-left">
+                                <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
                             </div>
                         </form>
                         <!--/==/ End of Form -->

@@ -1,7 +1,7 @@
 <div class="main-sidebar main-sidebar-sticky side-menu">
     <div class="sidemenu-logo">
         <a class="main-logo" href="{{ route('index') }}" target="_blank">
-            <span class="text-capitalize">BCHS</span>
+            <span class="text-capitalize">BCD-MIS</span>
             <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img desktop-logo" alt="logo">
             <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img icon-logo" alt="logo">
             <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img desktop-logo theme-logo"
@@ -88,7 +88,7 @@
 
             <!-- Office Routes -->
             @can('office_view')
-                <li class="nav-label">@lang('admin.sidebar.officeManagement')</li>
+                <li class="nav-label">مدیریت عمومی اداری</li>
 
                 <!-- Positions -->
                 @can('office_position_view')
@@ -119,7 +119,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/appointment-positions') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.positions.appointment') }}">
                                     @lang('pages.positions.appointmentPositions')
-                                        <?php $appointment = \App\Models\Office\Position::all()->sum('num_of_pos') - \App\Models\Office\Employee::all()->where('status', 1)->count(); ?>
+                                        <?php $appointment = \App\Models\Office\Position::all()->sum('num_of_pos') - \App\Models\Office\Employee::all()->whereBetween('status', [0,1])->count(); ?>
                                     ({{ \App\Models\Office\Position::all()->sum('num_of_pos') - $appointment }})
                                 </a>
                             </li>
@@ -128,7 +128,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/empty-positions') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.positions.empty') }}">
                                     @lang('pages.positions.emptyPositions')
-                                    ({{ \App\Models\Office\Position::all()->sum('num_of_pos') - \App\Models\Office\Employee::all()->where('status', 1)->count() }}
+                                    ({{ \App\Models\Office\Position::all()->sum('num_of_pos') - \App\Models\Office\Employee::all()->whereBetween('status', [0,1])->count() }}
                                     )
                                 </a>
                             </li>
@@ -174,7 +174,7 @@
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.index') }}">
                                     {<span class="small text-sm-center tx-danger">M</span>}
                                     همه کارمندان
-                                    ({{ count(\App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 1)) }}
+                                    ({{ count(\App\Models\Office\Employee::all()->whereNotNull('position_id')) }}
                                     )
                                 </a>
                             </li>
@@ -183,7 +183,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/main-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.main') }}">
                                     @lang('pages.employees.mainPosition')
-                                    ({{ \App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 1)->where('on_duty', 0)->count() }}
+                                    ({{ \App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 0)->where('on_duty', 0)->count() }}
                                     )
                                 </a>
                             </li>
@@ -197,12 +197,12 @@
                                 </a>
                             </li>
 
-                            <!-- Change Position Employees -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/employee/change-position-employees') ? 'active' : '' }}">
-                                <a class="nav-sub-link"
-                                   href="{{ route('admin.office.employees.change_position_employees') }}">
-                                    تبدیل شده
-                                    ({{ \App\Models\Office\Employee::all()->where('status', 0)->count() }})
+                            <!-- Retired Employees -->
+                            <li class="nav-sub-item {{ request()->is('admin/office/employee/retired-employees') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.office.employees.retired_employees') }}">
+                                    متقاعدین
+                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 2)->count() }}
+                                    )
                                 </a>
                             </li>
 
@@ -210,17 +210,17 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/employee/fired-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.fired_employees') }}">
                                     منفکی
-                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 2)->count() }}
+                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 3)->count() }}
                                     )
                                 </a>
                             </li>
 
-                            <!-- Retired Employees -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/employee/retired-employees') ? 'active' : '' }}">
-                                <a class="nav-sub-link" href="{{ route('admin.office.employees.retired_employees') }}">
-                                    متقاعدین
-                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 4)->count() }}
-                                    )
+                            <!-- Change Position Employees -->
+                            <li class="nav-sub-item {{ request()->is('admin/office/employee/change-position-employees') ? 'active' : '' }}">
+                                <a class="nav-sub-link"
+                                   href="{{ route('admin.office.employees.change_position_employees') }}">
+                                    تبدیل شده
+                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 4)->count() }})
                                 </a>
                             </li>
 
@@ -228,9 +228,9 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/employee/suspended-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.suspended_employees') }}">
                                     <span class="text-secondary">معلق </span>&nbsp;
-                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 3)->count() }}
+                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 5)->count() }}
                                     )
-                                    @if(count(\App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 3)) >= 1)
+                                    @if(count(\App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 5)) >= 1)
                                         &nbsp;<span class="fas fa-user-tie fa-pulse text-danger"></span>
                                     @endif
                                 </a>

@@ -144,11 +144,22 @@
                                 <div class="media-body">
                                     <span>@lang('form.status')</span>
                                     <div>
-                                        <a href="callto:{{ $asycuda_user->employee->phone }}" class="ctd">{{ $asycuda_user->employee->phone }}</a>
-                                        @if(!empty($employee->phone2))
-                                            , <a href="callto:{{ $asycuda_user->employee->phone2 }}"
-                                                 class="ctd">{{ $asycuda_user->employee->phone2 }}</a>
+                                        @if($asycuda_user->status == 1)
+                                            <a class="updateAsyUserStatus" id="asy_user_status"
+                                               asy_user_id="{{ $asycuda_user->id }}" href="javascript:void(0)">
+                                                <i class="fa fa-toggle-on text-success" aria-hidden="true"
+                                                   status="Active"></i>
+                                            </a>
+                                        @else
+                                            <a class="updateAsyUserStatus" id="asy_user_status"
+                                               asy_user_id="{{ $asycuda_user->id }}" href="javascript:void(0)">
+                                                <i class="fa fa-toggle-off text-danger" aria-hidden="true"
+                                                   status="Inactive"></i>
+                                            </a>
                                         @endif
+                                        <span id="update_status" style="display: none;">
+                                            <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

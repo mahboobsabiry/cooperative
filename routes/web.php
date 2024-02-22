@@ -73,6 +73,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // =============================== Asycuda Routes ===================================
     Route::group(['prefix' => 'asycuda', 'as' => 'asycuda.'], function () {
         Route::resource('users', AsycudaUserController::class);
+        Route::post('update-asy-user-status', [AsycudaUserController::class, 'updateAsyUserStatus'])->name('users.updateAsyUserStatus');
         Route::get('user/select-employee', [AsycudaUserController::class, 'select_employee'])->name('users.select.employee');
         Route::get('inactive-users', [AsycudaUserController::class, 'inactive'])->name('users.inactive');
         Route::resource('coal', COALController::class);
@@ -129,8 +130,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
         // ========================== Employee Experiences ======================
         Route::get('employee/{id}/experiences', [ExperienceController::class, 'index'])->name('employees.experiences');
+        // Add Duty Position
         Route::get('employee/{id}/add-duty-position', [ExperienceController::class, 'add_duty_position'])->name('employees.add_duty_position');
         Route::post('employee/{id}/add-duty-pos', [ExperienceController::class, 'add_duty_pos'])->name('employees.add_duty_pos');
+        // Change to main position
+        Route::get('employee/{id}/change-to-main-position', [ExperienceController::class, 'change_to_main_position'])->name('employees.change_to_main_position');
+        Route::post('employee/{id}/change-to-main-pos', [ExperienceController::class, 'change_to_main_pos'])->name('employees.change_to_main_pos');
 
         // ================= Agents and Companies ===========================
         // Agents & Companies
@@ -164,9 +169,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // Test
     Route::get('test', function (){
-        $date = now()->format('Y-m-d');
-        $new_date = now()->addYear()->format('Y-m-d');
-        echo $date . "<br>" . $new_date;
+        // $date = now()->format('Y-m-d');
+        // $new_date = now()->addYear()->format('Y-m-d');
+        // echo $date . "<br>" . $new_date;
+        $date = now()->subDays(1);
+        echo $date->format('Y-m-d');
     });
 
     // Settings

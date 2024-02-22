@@ -204,24 +204,28 @@
                 @endif
                 <span class="acInText">
                     @if($employee->status == 0)
-                        <span class="text-secondary italic font-italic">
-                            در اداره/ارگان دیگر تبدیل شده است
+                        <span class="text-success italic font-italic">
+                            در اصل بست در حال انجام وظیفه می باشد
                         </span>
                     @elseif($employee->status == 1)
                         <span class="text-success italic font-italic">
-                            کارمند برحال این ریاست میباشد
+                            در بست خدمتی در حال انجام وظیفه می باشد
                         </span>
                     @elseif($employee->status == 2)
+                        <span class="text-info italic font-italic">
+                            تقاعد نموده است
+                        </span>
+                    @elseif($employee->status == 3)
                         <span class="text-danger italic font-italic">
                             منفک گردیده است
                         </span>
-                    @elseif($employee->status == 3)
-                        <span class="text-warning italic font-italic">
-                            در حالت تعلیق میباشد
-                        </span>
                     @elseif($employee->status == 4)
+                        <span class="text-secondary italic font-italic">
+                            در اداره/ارگان دیگر تبدیل شده است
+                        </span>
+                    @elseif($employee->status == 5)
                         <span class="text-warning italic font-italic">
-                            تقاعد نموده است.
+                            معلق می باشد
                         </span>
                     @endif
                 </span>

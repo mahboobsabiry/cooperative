@@ -95,10 +95,8 @@ class AsycudaUserController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'employee_id'   => 'required',
-            'user'          => 'required',
-            'password'      => 'required',
-            'roles'         => 'required'
+            'roles' => 'required',
+            'info'  => 'nullable'
         ]);
 
         $user = AsycudaUser::find($id);
@@ -122,5 +120,20 @@ class AsycudaUserController extends Controller
             'message'   => 'یوزر اسیکودا حذف گردید',
             'alertType' => 'success'
         ]);
+    }
+
+    // Update Status
+    public function updateAsyUserStatus(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+            if ($data['status'] == 'Active') {
+                $status = 0;
+            } else {
+                $status = 1;
+            }
+            AsycudaUser::where('id', $data['asy_user_id'])->update(['status' => $status]);
+            return response()->json(['status' => $status, 'asy_user_id' => $data['asy_user_id']]);
+        }
     }
 }

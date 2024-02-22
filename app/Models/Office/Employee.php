@@ -70,4 +70,40 @@ class Employee extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    // Main Position Employees
+    public function main_position()
+    {
+        return Employee::where('status', 0)->get();
+    }
+
+    // Duty Position Employees
+    public function duty_position()
+    {
+        return Employee::where('status', 1)->get();
+    }
+
+    // Retired Employees
+    public function retired()
+    {
+        return Employee::where('status', 2)->get();
+    }
+
+    // Fired Employees
+    public function fired()
+    {
+        return Employee::where('status', 3)->get();
+    }
+
+    // Changed Employees
+    public function changed()
+    {
+        return Employee::where('status', 4)->get();
+    }
+
+    // Suspended Employees
+    public function suspended()
+    {
+        return Employee::where('status', 5)->get();
+    }
 }

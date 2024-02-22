@@ -293,8 +293,7 @@
                                         <a class="btn btn-outline-info m-1"
                                            href="{{ route('admin.office.employees.add_duty_position', $employee->id) }}">@lang('pages.employees.onDuty')</a>
                                     @else
-                                        <a class="modal-effect btn btn-outline-info m-1" data-effect="effect-sign" data-toggle="modal"
-                                           href="#reset_position{{ $employee->id }}">تبدیل به اصل بست</a>
+                                        <a class="btn btn-outline-info m-1" href="{{ route('admin.office.employees.change_to_main_position', $employee->id) }}">تبدیل به اصل بست</a>
                                     @endif
 
                                     <!-- Retire Employee -->

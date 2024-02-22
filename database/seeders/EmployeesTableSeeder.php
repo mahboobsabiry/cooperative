@@ -43,7 +43,7 @@ class EmployeesTableSeeder extends Seeder
                 'introducer'        => null,
                 'info'          => '',
                 'on_duty'       => 0,
-                'status'        => 1
+                'status'        => 0
             ],
             [
                 'position_id'   => 3,
@@ -72,7 +72,7 @@ class EmployeesTableSeeder extends Seeder
                 'introducer'        => null,
                 'info'          => '',
                 'on_duty'       => 0,
-                'status'        => 1
+                'status'        => 0
             ],
             [
                 'position_id'   => 5,
@@ -101,7 +101,7 @@ class EmployeesTableSeeder extends Seeder
                 'introducer'        => null,
                 'info'          => '',
                 'on_duty'       => 0,
-                'status'        => 1
+                'status'        => 0
             ],
         ];
 
