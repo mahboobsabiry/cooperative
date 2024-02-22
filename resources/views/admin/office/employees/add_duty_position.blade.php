@@ -159,7 +159,7 @@
                                             <p class="mb-2">@lang('form.dutyPosition'): <span class="tx-danger">*</span></p>
                                             <select class="form-control select2" name="position" id="position">
                                                 <option value="">@lang('form.chooseOne')</option>
-                                                @foreach(\App\Models\Office\Position::all() as $position)
+                                                @foreach(\App\Models\Office\Position::all()->except($employee->position->id) as $position)
                                                     <option value="{{ $position->title }}">{{ $position->title }}</option>
                                                 @endforeach
                                             </select>

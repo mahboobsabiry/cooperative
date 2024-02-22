@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Office;
 use App\Http\Controllers\Controller;
 use App\Models\Office\Employee;
 use App\Models\Office\Experience;
+use App\Models\Office\Position;
 use Illuminate\Http\Request;
 
 class ExperienceController extends Controller
@@ -29,6 +30,7 @@ class ExperienceController extends Controller
     public function add_duty_pos(Request $request, $id)
     {
         $employee = Employee::find($id);
+
         $request->validate([
             'position'  => 'required',
             'start_date'    => 'required',
@@ -46,8 +48,8 @@ class ExperienceController extends Controller
             $document = $request->file('document');
             $fileName = 'duty-document-' . time() . '.' . $document->getClientOriginalExtension();
             $document->storeAs('employees/documents', $fileName, 'public');
+            $experience->document   = $fileName;
         }
-        $experience->document   = $fileName;
         $experience->info       = $request->info;
         $experience->save();
 

@@ -90,12 +90,26 @@
                             </div>
                         </div>
 
+                        <!-- Main Info -->
                         <div class="item-user pro-user">
                             <h4 class="pro-user-username text-dark mt-2 mb-0">
                                 <span>{{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }}</span>
                             </h4>
 
-                            <p class="pro-user-desc text-muted mb-1">{{ $asycuda_user->employee->position->title ?? '' }}</p>
+                            <!-- Position -->
+                            @can('office_position_view')
+                                <a href="{{ route('admin.office.positions.show', $asycuda_user->employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $asycuda_user->employee->position->title ?? '' }}</a>
+                            @else
+                                <p class="pro-user-desc text-muted mb-1">{{ $asycuda_user->employee->position->title ?? '' }}</p>
+                            @endcan
+                            @if($asycuda_user->employee->on_duty == 1)
+                                <p class="pro-user-desc text-muted mb-1">{{ $asycuda_user->employee->duty_position ?? '' }}</p>
+                            @endif
+
+                            @if($asycuda_user->employee->position->position_number == 2 || $asycuda_user->employee->position->position_number == 3)
+                            @else
+                                <p class="pro-user-desc text-primary mb-1">({{ $asycuda_user->employee->position->type ?? '' }})</p>
+                            @endif
                             <!-- Employee Star -->
                             @if($asycuda_user->employee->position)
                                 <p class="user-info-rating">
@@ -125,10 +139,10 @@
                             <!-- Status -->
                             <div class="media">
                                 <div class="media-logo bg-light text-dark">
-                                    <i class="fe fe-smartphone"></i>
+                                    <i class="fe fe-message-square"></i>
                                 </div>
                                 <div class="media-body">
-                                    <span>@lang('form.phone')</span>
+                                    <span>@lang('form.status')</span>
                                     <div>
                                         <a href="callto:{{ $asycuda_user->employee->phone }}" class="ctd">{{ $asycuda_user->employee->phone }}</a>
                                         @if(!empty($employee->phone2))
@@ -294,6 +308,8 @@
                                     <th class="text-center">تاریخ شروع</th>
                                     <th class="text-center">تاریخ ختم</th>
                                     <th class="text-center">نمبر مکتوب</th>
+                                    <th class="text-center">مکتوب</th>
+                                    <th class="text-center">@lang('global.extraInfo')</th>
                                 </tr>
                                 </thead>
 
@@ -307,8 +323,14 @@
                                         <td>{{ $exp->position }}</td>
                                         <td>{{ $exp->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
                                         <td>{{ $exp->start_date }}</td>
-                                        <td>{{ $exp->end_date }}</td>
+                                        <td>{{ $exp->end_date ?? 'در حال انجام وظیفه' }}</td>
                                         <td>{{ $exp->doc_number }}</td>
+                                        <td>
+                                            <a href="{{ asset('storage/employees/documents/' . $exp->document) }}" target="_blank">
+                                                <img src="{{ asset('storage/employees/documents/' . $exp->document) }}" alt="{{ $exp->employee->name }}" width="80">
+                                            </a>
+                                        </td>
+                                        <td>{{ $exp->info }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
