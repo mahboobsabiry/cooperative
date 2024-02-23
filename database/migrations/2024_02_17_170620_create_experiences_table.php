@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('doc_number');
             $table->string('document')->nullable();
             $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('user_status')->nullable();
             $table->text('info')->nullable();
             $table->timestamps();
 

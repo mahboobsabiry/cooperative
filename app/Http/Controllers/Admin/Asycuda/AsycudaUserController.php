@@ -132,7 +132,8 @@ class AsycudaUserController extends Controller
             } else {
                 $status = 1;
             }
-            AsycudaUser::where('id', $data['asy_user_id'])->update(['status' => $status]);
+            $asycuda_user = AsycudaUser::where('id', $data['asy_user_id'])->first();
+            $asycuda_user->update(['status' => $status]);
             return response()->json(['status' => $status, 'asy_user_id' => $data['asy_user_id']]);
         }
     }

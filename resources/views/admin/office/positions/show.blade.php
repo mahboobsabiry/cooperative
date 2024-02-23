@@ -225,6 +225,14 @@
                                         <td>{{ $position->parent->title ?? trans('pages.positions.afCustomsDep') }}</td>
                                     </tr>
 
+                                    <!-- Custom Code -->
+                                    <tr>
+                                        <th class="font-weight-bold">کد گمرکی:</th>
+                                        <td>
+                                            {{ $position->custom_code }}
+                                        </td>
+                                    </tr>
+
                                     <!-- Status -->
                                     @can('office_position_edit')
                                         <tr>
@@ -278,6 +286,14 @@
                                         <th class="font-weight-bold">@lang('pages.positions.num_of_empty_pos'):</th>
                                         <td>
                                             {{ $position->num_of_pos - $position->employees()->count() }}
+                                        </td>
+                                    </tr>
+
+                                    <!-- Type -->
+                                    <tr>
+                                        <th class="font-weight-bold">موقعیت:</th>
+                                        <td>
+                                            {{ $position->type }}
                                         </td>
                                     </tr>
 

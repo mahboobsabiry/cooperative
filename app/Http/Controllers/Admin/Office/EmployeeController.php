@@ -24,7 +24,7 @@ class EmployeeController extends Controller
     // Index
     public function index()
     {
-        $employees = Employee::whereNotNull('position_id')->where('status', 1)->orderBy('created_at', 'ASC')->get();
+        $employees = Employee::whereNotNull('position_id')->whereBetween('status', [0,1])->orderBy('created_at', 'ASC')->get();
 
         return view('admin.office.employees.index', compact('employees'));
     }
@@ -112,7 +112,7 @@ class EmployeeController extends Controller
     // Show Info
     public function show(Employee $employee)
     {
-        $active_employees = Employee::where('status', 1)->whereNotNull('position_id')->where('position_id', '!=', $employee->position_id)->get();
+        $active_employees = Employee::whereBetween('status', [0,1])->whereNotNull('position_id')->where('position_id', '!=', $employee->position_id)->get();
         return view('admin.office.employees.show', compact('employee', 'active_employees'));
     }
 
@@ -260,7 +260,7 @@ class EmployeeController extends Controller
     // Main Position Employees
     public function main_employees()
     {
-        $employees = Employee::where('status', 1)->whereNotNull('position_id')->where('on_duty', 0)->orderBy('created_at', 'desc')->get();
+        $employees = Employee::where('status', 0)->whereNotNull('position_id')->where('on_duty', 0)->orderBy('created_at', 'desc')->get();
 
         return view('admin.office.employees.main', compact('employees'));
     }
@@ -273,32 +273,32 @@ class EmployeeController extends Controller
         return view('admin.office.employees.on_duty', compact('employees'));
     }
 
-    // Changed Position Employees List
-    public function change_position_employees()
+    // Retired Employees
+    public function retired_employees()
     {
-        $employees = Employee::whereNull('position_id')->where('status', 0)->get();
-        return view('admin.office.employees.change_position', compact('employees'));
+        $retired_employees = Employee::whereNull('position_id')->where('status', 2)->get();
+        return view('admin.office.employees.retired_employees', compact('retired_employees'));
     }
 
     // Fired Employees
     public function fired_employees()
     {
-        $fired_employees = Employee::whereNull('position_id')->where('status', 2)->get();
+        $fired_employees = Employee::whereNull('position_id')->where('status', 3)->get();
         return view('admin.office.employees.fired_employees', compact('fired_employees'));
+    }
+
+    // Changed Position Employees List
+    public function change_position_employees()
+    {
+        $employees = Employee::whereNull('position_id')->where('status', 4)->get();
+        return view('admin.office.employees.change_position', compact('employees'));
     }
 
     // Suspended Employees
     public function suspended_employees()
     {
-        $suspended_employees = Employee::whereNull('position_id')->where('status', 3)->get();
+        $suspended_employees = Employee::whereNull('position_id')->where('status', 5)->get();
         return view('admin.office.employees.suspended_employees', compact('suspended_employees'));
-    }
-
-    // Retired Employees
-    public function retired_employees()
-    {
-        $retired_employees = Employee::whereNull('position_id')->where('status', 4)->get();
-        return view('admin.office.employees.retired_employees', compact('retired_employees'));
     }
 
     // Custom ID Card
