@@ -108,6 +108,52 @@
         </tbody>
         <!--/==/ End of Third Table -->
 
+        <!-- Fourth Table -->
+        <tbody class="p-0">
+        <!-- Education, Last Name & Father Name -->
+        <tr>
+            <th colspan="2"><strong>وضعیت :</strong></th>
+            <th colspan="2"><strong>کد گمرکی :</strong></th>
+            <th colspan="2"><strong>موقعیت :</strong></th>
+        </tr>
+
+        <!-- Gender, Birth Year & Employee Number -->
+        <tr>
+            <td colspan="2">
+                <span class="acInText">
+                    @if($employee->status == 0)
+                        <span class="text-success italic font-italic">
+                            در اصل بست در حال انجام وظیفه می باشد
+                        </span>
+                    @elseif($employee->status == 1)
+                        <span class="text-success italic font-italic">
+                            در بست خدمتی در حال انجام وظیفه می باشد
+                        </span>
+                    @elseif($employee->status == 2)
+                        <span class="text-info italic font-italic">
+                            تقاعد نموده است
+                        </span>
+                    @elseif($employee->status == 3)
+                        <span class="text-danger italic font-italic">
+                            منفک گردیده است
+                        </span>
+                    @elseif($employee->status == 4)
+                        <span class="text-secondary italic font-italic">
+                            در اداره/ارگان دیگر تبدیل شده است
+                        </span>
+                    @elseif($employee->status == 5)
+                        <span class="text-warning italic font-italic">
+                            معلق می باشد
+                        </span>
+                    @endif
+                </span>
+            </td>
+            <td colspan="2">{{ $employee->position->custom_code }}</td>
+            <td colspan="2">{{ $employee->position->type }}</td>
+        </tr>
+        </tbody>
+        <!--/==/ End of Fourth Table -->
+
         <!-- User Table -->
         @if($employee->user)
             <tbody class="p-0">
@@ -138,7 +184,7 @@
         @endif
         <!--/==/ End of User Table -->
 
-        <!-- User Table -->
+        <!-- Asycuda User Table -->
         @if($employee->asycuda_user)
             <tbody class="p-0">
             <!-- Details -->
@@ -202,33 +248,6 @@
                         {{ $employee->duty_position }}
                     @endif
                 @endif
-                <span class="acInText">
-                    @if($employee->status == 0)
-                        <span class="text-success italic font-italic">
-                            در اصل بست در حال انجام وظیفه می باشد
-                        </span>
-                    @elseif($employee->status == 1)
-                        <span class="text-success italic font-italic">
-                            در بست خدمتی در حال انجام وظیفه می باشد
-                        </span>
-                    @elseif($employee->status == 2)
-                        <span class="text-info italic font-italic">
-                            تقاعد نموده است
-                        </span>
-                    @elseif($employee->status == 3)
-                        <span class="text-danger italic font-italic">
-                            منفک گردیده است
-                        </span>
-                    @elseif($employee->status == 4)
-                        <span class="text-secondary italic font-italic">
-                            در اداره/ارگان دیگر تبدیل شده است
-                        </span>
-                    @elseif($employee->status == 5)
-                        <span class="text-warning italic font-italic">
-                            معلق می باشد
-                        </span>
-                    @endif
-                </span>
             </td>
             <td colspan="3">{{ $employee->info }}</td>
         </tr>

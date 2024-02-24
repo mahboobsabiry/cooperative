@@ -132,7 +132,46 @@
                     </div>
                 </div>
                 <!--/==/ End of Contact Information -->
+
+                <!-- Custom ID Card -->
+                <div class="card custom-card">
+                    <div class="overflow-auto justify-content-center p-2">
+                        <!-- Action Buttons -->
+                        <h5>دکمه های کاربردی</h5>
+                        <div class="row m-2">
+                            <a href="{{ route('admin.office.employees.experiences', $employee->id) }}" class="btn btn-outline-secondary m-1">سابقه کاری</a>
+
+                            <!-- Duty Position -->
+                            @if($employee->position)
+                                <!-- Change to main/duty position -->
+                                @can('office_employee_edit')
+                                    @if($employee->on_duty == 0)
+                                        <a class="btn btn-outline-info m-1"
+                                           href="{{ route('admin.office.employees.add_duty_position', $employee->id) }}">@lang('pages.employees.onDuty')</a>
+                                    @else
+                                        <a class="btn btn-outline-info m-1" href="{{ route('admin.office.employees.change_to_main_position', $employee->id) }}">تبدیل به اصل بست</a>
+                                    @endif
+
+                                    <!-- Retire Employee -->
+                                    <a class="modal-effect btn btn-outline-success m-1" data-effect="effect-sign" data-toggle="modal"
+                                       href="#retire_employee{{ $employee->id }}">تقاعد</a>
+
+                                    <!-- Change Position Employee -->
+                                    <a class="modal-effect btn btn-outline-dark m-1" data-effect="effect-sign" data-toggle="modal"
+                                       href="#change_pos_employee{{ $employee->id }}">تبدیل</a>
+
+                                    <!-- Fire Employee -->
+                                    <a class="modal-effect btn btn-outline-danger m-1" data-effect="effect-sign" data-toggle="modal"
+                                       href="#fire_employee{{ $employee->id }}">منفک</a>
+                                @endcan
+                            @endif
+                        </div>
+                        <!--/==/ End of Action Buttons -->
+                    </div>
+                </div>
+                <!--/==/ End of Contact Custom ID Card -->
             </div>
+
             <div class="col-lg-9 col-md-12">
                 <div class="card custom-card main-content-body-profile">
                     <!-- Card Body -->
@@ -158,6 +197,8 @@
                                     <th class="text-center">@lang('form.name')</th>
                                     <th class="text-center">بست</th>
                                     <th class="text-center">نوع بست</th>
+                                    <th class="text-center">فعالیت یوزر سیستم</th>
+                                    <th class="text-center">فعالیت یوزر اسیکودا</th>
                                     <th class="text-center">تاریخ شروع</th>
                                     <th class="text-center">تاریخ ختم</th>
                                     <th class="text-center">نمبر مکتوب</th>
@@ -175,6 +216,22 @@
                                         </td>
                                         <td>{{ $exp->position }}</td>
                                         <td>{{ $exp->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
+                                        <!-- System USER -->
+                                        <td>
+                                            @if($exp->employee->user)
+                                                {{ $exp->employee->user->status == 1 ? 'فعال' : 'غیرفعال' }}
+                                            @else
+                                                یوزر ندارد
+                                            @endif
+                                        </td>
+                                        <!-- Asycuda User -->
+                                        <td>
+                                            @if($exp->employee->asycuda_user)
+                                                {{ $exp->employee->asycuda_user->status == 1 ? 'فعال' : 'غیرفعال' }}
+                                            @else
+                                                یوزر ندارد
+                                            @endif
+                                        </td>
                                         <td>{{ $exp->start_date }}</td>
                                         <td>{{ $exp->end_date ?? 'در حال انجام وظیفه' }}</td>
                                         <td>{{ $exp->doc_number }}</td>

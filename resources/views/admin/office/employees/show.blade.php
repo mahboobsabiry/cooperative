@@ -215,7 +215,7 @@
                                     <i class="fe fe-message-square"></i>
                                 </div>
                                 <div class="media-body">
-                                    <span>@lang('form.status')</span>
+                                    <span>وضعیت یوزر</span>
                                     <div>
                                         @if($employee->user)
                                             @can('user_mgmt')

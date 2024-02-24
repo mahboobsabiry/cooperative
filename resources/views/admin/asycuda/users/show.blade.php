@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'یوزر ' . $asycuda_user->employee->name . ' ' . $asycuda_user->employee->last_name)
+@section('title', 'یوزر اسیکودا کارمند - ' . $asycuda_user->employee->name . ' ' . $asycuda_user->employee->last_name)
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -17,7 +17,7 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">یوزر کارمند</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">یوزر کارمند در سیستم اسیکودا</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
@@ -26,7 +26,7 @@
                         <a href="{{ route('admin.office.employees.index') }}">@lang('admin.sidebar.employees')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.asycuda.users.index') }}">یوزر کارمندان</a>
+                        <a href="{{ route('admin.asycuda.users.index') }}">یوزر کارمندان در سیستم اسیکودا</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('global.details')</li>
                 </ol>
@@ -316,6 +316,7 @@
                                     <th class="text-center">@lang('form.name')</th>
                                     <th class="text-center">بست</th>
                                     <th class="text-center">نوع بست</th>
+                                    <th class="text-center">فعالیت یوزر اسیکودا</th>
                                     <th class="text-center">تاریخ شروع</th>
                                     <th class="text-center">تاریخ ختم</th>
                                     <th class="text-center">نمبر مکتوب</th>
@@ -333,6 +334,14 @@
                                         </td>
                                         <td>{{ $exp->position }}</td>
                                         <td>{{ $exp->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
+                                        <!-- Asycuda User -->
+                                        <td>
+                                            @if($exp->employee->asycuda_user)
+                                                {{ $exp->employee->asycuda_user->status == 1 ? 'فعال' : 'غیرفعال' }}
+                                            @else
+                                                یوزر ندارد
+                                            @endif
+                                        </td>
                                         <td>{{ $exp->start_date }}</td>
                                         <td>{{ $exp->end_date ?? 'در حال انجام وظیفه' }}</td>
                                         <td>{{ $exp->doc_number }}</td>

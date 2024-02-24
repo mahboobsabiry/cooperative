@@ -32,7 +32,7 @@ class AsycudaUserController extends Controller
     // Create
     public function create()
     {
-        $employees = Employee::doesntHave('asycuda_user')->where('status', 1)->get();
+        $employees = Employee::doesntHave('asycuda_user')->whereBetween('status', [0,1])->get();
         return view('admin.asycuda.users.create', compact('employees'));
     }
 
@@ -88,7 +88,7 @@ class AsycudaUserController extends Controller
     public function edit($id)
     {
         $asycuda_user = AsycudaUser::find($id);
-        $employees = Employee::where('status', 1)->get();
+        $employees = Employee::whereBetween('status', [0,1])->get();
         return view('admin.asycuda.users.edit', compact('asycuda_user', 'employees'));
     }
     // Store
