@@ -4,6 +4,7 @@ namespace App\Models\Office;
 
 use App\Models\Asycuda\AsycudaUser;
 use App\Models\Document;
+use App\Models\Leave;
 use App\Models\Photo;
 use App\Models\User;
 use App\Traits\HasDocument;
@@ -105,5 +106,11 @@ class Employee extends Model
     public function suspended()
     {
         return Employee::where('status', 5)->get();
+    }
+
+    // Employee Leaves
+    public function leaves() : HasMany
+    {
+        return $this->hasMany(Leave::class);
     }
 }
