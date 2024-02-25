@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('leaves', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employee_id');
+            $table->string('year');
             $table->string('leave_type')->default('ضروری');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('reason');
+            $table->bigInteger('days');
+            $table->string('reason')->nullable();
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');

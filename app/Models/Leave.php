@@ -11,7 +11,7 @@ class Leave extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['employee_id', 'leave_type', 'start_date', 'end_date', 'reason', 'created_at', 'updated_at'];
+    protected $fillable = ['employee_id', 'year', 'leave_type', 'start_date', 'end_date', 'days', 'reason', 'created_at', 'updated_at'];
 
     public function employee() : Relation
     {

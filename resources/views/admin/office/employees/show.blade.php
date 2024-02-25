@@ -285,6 +285,8 @@
                         <div class="row m-2">
                             <a href="{{ route('admin.office.employees.experiences', $employee->id) }}" class="btn btn-outline-secondary m-1">سابقه کاری</a>
 
+                            <a href="{{ route('admin.office.employees.leaves.index', $employee->id) }}" class="btn btn-outline-secondary m-1">رخصتی ها</a>
+
                             <!-- Duty Position -->
                             @if($employee->position)
                                 <!-- Change to main/duty position -->

@@ -134,6 +134,18 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'name'      => 'warehouse_assurance_delete'
+            ],
+            [
+                'name'      => 'office_employee_leave_view'
+            ],
+            [
+                'name'      => 'office_employee_leave_create'
+            ],
+            [
+                'name'      => 'office_employee_leave_edit'
+            ],
+            [
+                'name'      => 'office_employee_leave_delete'
             ]
         ];
 

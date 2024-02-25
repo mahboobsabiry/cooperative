@@ -12,12 +12,12 @@
 
         <!-- Name, Last Name & Father Name -->
         <tr>
-            <th><strong>@lang('form.name') :</strong></th>
-            <th><strong>@lang('form.lastName') :</strong></th>
-            <th><strong>@lang('form.fatherName') :</strong></th>
-            <th><strong>@lang('form.gender') :</strong></th>
-            <th><strong>@lang('form.birthYear') :</strong></th>
-            <th><strong>@lang('form.empNumber') :</strong></th>
+            <th><strong>@lang('form.name')</strong></th>
+            <th><strong>@lang('form.lastName')</strong></th>
+            <th><strong>@lang('form.fatherName')</strong></th>
+            <th><strong>@lang('form.gender')</strong></th>
+            <th><strong>@lang('form.birthYear')</strong></th>
+            <th><strong>@lang('form.empNumber')</strong></th>
         </tr>
 
         <!-- Gender, Birth Year & Employee Number -->
@@ -38,12 +38,12 @@
         <!-- Second Table -->
         <tbody>
         <tr>
-            <th><strong>@lang('form.email'): </strong></th>
-            <th><strong>@lang('form.phone'): </strong></th>
-            <th><strong>@lang('form.appointmentNumber'): </strong></th>
-            <th><strong>@lang('form.appointmentDate'): </strong></th>
-            <th><strong>@lang('form.lastDuty'): </strong></th>
-            <th><strong>@lang('pages.hostel.hostel')/@lang('global.home'): </strong></th>
+            <th><strong>@lang('form.email')</strong></th>
+            <th><strong>@lang('form.phone')</strong></th>
+            <th><strong>@lang('form.appointmentNumber')</strong></th>
+            <th><strong>@lang('form.appointmentDate')</strong></th>
+            <th><strong>@lang('form.lastDuty')</strong></th>
+            <th><strong>@lang('pages.hostel.hostel')/@lang('global.home')</strong></th>
         </tr>
         <tr>
             <td>
@@ -88,12 +88,12 @@
 
         <!-- Education, Last Name & Father Name -->
         <tr>
-            <th><strong>@lang('form.education') :</strong></th>
-            <th><strong>PRR/NPR :</strong></th>
-            <th><strong>PRR Date :</strong></th>
-            <th><strong>@lang('form.mainAddress') :</strong></th>
-            <th><strong>@lang('form.curAddress') :</strong></th>
-            <th><strong>@lang('form.introducer') :</strong></th>
+            <th><strong>@lang('form.education')</strong></th>
+            <th><strong>PRR/NPR</strong></th>
+            <th><strong>PRR Date</strong></th>
+            <th><strong>@lang('form.mainAddress')</strong></th>
+            <th><strong>@lang('form.curAddress')</strong></th>
+            <th><strong>@lang('form.introducer')</strong></th>
         </tr>
 
         <!-- Gender, Birth Year & Employee Number -->
@@ -112,9 +112,11 @@
         <tbody class="p-0">
         <!-- Education, Last Name & Father Name -->
         <tr>
-            <th colspan="2"><strong>وضعیت :</strong></th>
-            <th colspan="2"><strong>کد گمرکی :</strong></th>
-            <th colspan="2"><strong>موقعیت :</strong></th>
+            <th colspan="2"><strong>وضعیت</strong></th>
+            <th><strong>کد گمرکی</strong></th>
+            <th><strong>موقعیت</strong></th>
+            <th><strong>مجموع روز های رخصتی</strong></th>
+            <th><strong>تعداد دفعات رخصتی</strong></th>
         </tr>
 
         <!-- Gender, Birth Year & Employee Number -->
@@ -148,8 +150,10 @@
                     @endif
                 </span>
             </td>
-            <td colspan="2">{{ $employee->position->custom_code }}</td>
-            <td colspan="2">{{ $employee->position->type }}</td>
+            <td>{{ $employee->position->custom_code }}</td>
+            <td>{{ $employee->position->type }}</td>
+            <td>{{ $employee->leaves->sum('days') ?? '0' }}</td>
+            <td>{{ $employee->leaves->count() ?? '0' }}</td>
         </tr>
         </tbody>
         <!--/==/ End of Fourth Table -->
@@ -226,8 +230,8 @@
             </td>
         </tr>
         <tr>
-            <th colspan="3"><strong>بست/@lang('form.status'): </strong></th>
-            <th colspan="3"><strong>@lang('global.extraInfo'): </strong></th>
+            <th colspan="3"><strong>بست/@lang('form.status')</strong></th>
+            <th colspan="3"><strong>@lang('global.extraInfo')</strong></th>
         </tr>
         <tr>
             <td colspan="3">

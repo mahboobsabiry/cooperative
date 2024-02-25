@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Office\EmployeeHelperController;
 use App\Http\Controllers\Admin\Office\EmployeeController;
 use App\Http\Controllers\Admin\Office\ExperienceController;
 use App\Http\Controllers\Admin\Office\HostelController;
+use App\Http\Controllers\Admin\Office\LeaveController;
 use App\Http\Controllers\Admin\Office\PositionController;
 // Admin Role Controllers
 use App\Http\Controllers\Admin\PermissionController;
@@ -94,6 +95,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         // Hostel
         Route::resource('hostel', HostelController::class);
 
+        // Employees =====================================================================|
         // ========== EmployeeController ==========
         Route::resource('employees', EmployeeController::class);
         Route::get('main-employees', [EmployeeController::class, 'main_employees'])->name('employees.main');
@@ -136,6 +138,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         // Change to main position
         Route::get('employee/{id}/change-to-main-position', [ExperienceController::class, 'change_to_main_position'])->name('employees.change_to_main_position');
         Route::post('employee/{id}/change-to-main-pos', [ExperienceController::class, 'change_to_main_pos'])->name('employees.change_to_main_pos');
+
+        // ========================== Employee Leaves ======================
+        Route::get('employee/{id}/leaves', [LeaveController::class, 'index'])->name('employees.leaves.index');
+        Route::get('employee/{id}/leaves/create', [LeaveController::class, 'create'])->name('employees.leaves.create');
+        Route::post('employee/{id}/leaves/store', [LeaveController::class, 'store'])->name('employees.leaves.store');
+        //==/ End of Employees =====================================================================|
 
         // ================= Agents and Companies ===========================
         // Agents & Companies
