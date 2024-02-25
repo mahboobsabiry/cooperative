@@ -143,24 +143,32 @@
                                 </div>
                                 <div class="media-body">
                                     <span>@lang('form.status')</span>
-                                    <div>
-                                        @if($asycuda_user->status == 1)
-                                            <a class="updateAsyUserStatus" id="asy_user_status"
-                                               asy_user_id="{{ $asycuda_user->id }}" href="javascript:void(0)">
-                                                <i class="fa fa-toggle-on text-success" aria-hidden="true"
-                                                   status="Active"></i>
-                                            </a>
-                                        @else
-                                            <a class="updateAsyUserStatus" id="asy_user_status"
-                                               asy_user_id="{{ $asycuda_user->id }}" href="javascript:void(0)">
-                                                <i class="fa fa-toggle-off text-danger" aria-hidden="true"
-                                                   status="Inactive"></i>
-                                            </a>
-                                        @endif
-                                        <span id="update_status" style="display: none;">
-                                            <i class="fa fa-toggle-on" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
+                                    @if($asycuda_user->employee->experiences->count() >= 1)
+                                        <div>
+                                            @if($asycuda_user->status == 1)
+                                                <a class="updateAsyUserStatus" id="asy_user_status"
+                                                   asy_user_id="{{ $asycuda_user->id }}" href="javascript:void(0)">
+                                                    <i class="fa fa-toggle-on text-success" aria-hidden="true"
+                                                       status="Active"></i>
+                                                </a>
+                                            @else
+                                                <a class="updateAsyUserStatus" id="asy_user_status"
+                                                   asy_user_id="{{ $asycuda_user->id }}" href="javascript:void(0)">
+                                                    <i class="fa fa-toggle-off text-danger" aria-hidden="true"
+                                                       status="Inactive"></i>
+                                                </a>
+                                            @endif
+                                            <span id="update_status" style="display: none;">
+                                                <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                    @endif
+
+                                    @if($asycuda_user->status == 1)
+                                        <span class="text-info">فعال</span>
+                                    @else
+                                        <span class="text-danger">غیرفعال</span>
+                                    @endif
                                 </div>
                             </div>
                             <!--/==/ End of Status -->
@@ -313,7 +321,7 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-center">@lang('form.name')</th>
+                                    <th class="text-center">وضعیت یوزر</th>
                                     <th class="text-center">بست</th>
                                     <th class="text-center">نوع بست</th>
                                     <th class="text-center">فعالیت یوزر اسیکودا</th>
@@ -329,9 +337,7 @@
                                 @foreach($asycuda_user->employee->experiences as $exp)
                                     <tr>
                                         <td>{{ $exp->id }}</td>
-                                        <td>
-                                            <a href="{{ route('admin.office.employees.show', $exp->employee->id) }}">{{ $exp->employee->name }}</a>
-                                        </td>
+                                        <td>{{ $exp->asy_user_status == 1 ? 'فعال' : 'غیرفعال' }}</td>
                                         <td>{{ $exp->position }}</td>
                                         <td>{{ $exp->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
                                         <!-- Asycuda User -->

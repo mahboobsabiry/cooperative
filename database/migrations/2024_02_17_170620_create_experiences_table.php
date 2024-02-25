@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('end_date')->nullable();
             $table->string('doc_number');
             $table->string('document')->nullable();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('user_status')->default(0);
+            $table->tinyInteger('asy_user_status')->default(0);
             $table->text('info')->nullable();
             $table->timestamps();
 

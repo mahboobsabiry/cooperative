@@ -80,14 +80,14 @@ class AsycudaUserController extends Controller
     // Show
     public function show($id)
     {
-        $asycuda_user = AsycudaUser::find($id);
+        $asycuda_user = AsycudaUser::findOrFail($id);
         return view('admin.asycuda.users.show', compact('asycuda_user'));
     }
 
     // Edit
     public function edit($id)
     {
-        $asycuda_user = AsycudaUser::find($id);
+        $asycuda_user = AsycudaUser::findOrFail($id);
         $employees = Employee::whereBetween('status', [0,1])->get();
         return view('admin.asycuda.users.edit', compact('asycuda_user', 'employees'));
     }
@@ -134,6 +134,10 @@ class AsycudaUserController extends Controller
             }
             $asycuda_user = AsycudaUser::where('id', $data['asy_user_id'])->first();
             $asycuda_user->update(['status' => $status]);
+            $exp = $asycuda_user->employee->experiences()->latest()->first();
+            if ($exp) {
+                $exp->update(['asy_user_status' => $status]);
+            }
             return response()->json(['status' => $status, 'asy_user_id' => $data['asy_user_id']]);
         }
     }
