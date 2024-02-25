@@ -529,8 +529,8 @@
                                             <div class="user-image mb-3 text-center">
                                                 <div class="imgPreview mt-2">
                                                     @foreach($employee->documents as $document)
-                                                        <a href="{{ asset('storage/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" target="_blank">
-                                                            <img src="{{ asset('storage/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail" alt="اسناد" width="100">
+                                                        <a href="{{ asset('storage/employees/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" target="_blank">
+                                                            <img src="{{ asset('storage/employees/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail" alt="اسناد" width="100">
                                                         </a>
                                                     @endforeach
                                                 </div>

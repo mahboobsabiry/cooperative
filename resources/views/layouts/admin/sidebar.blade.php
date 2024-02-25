@@ -45,7 +45,7 @@
                         @can('asy_user_view')
                             <li class="nav-sub-item {{ request()->is('admin/asycuda/users') || request()->is('admin/asycuda/users/*') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.asycuda.users.index') }}">
-                                    یوزر ها
+                                    حساب های کاربری اسیکودا
                                     ({{ count(\App\Models\Asycuda\AsycudaUser::all()->where('status', 1)) }})
                                 </a>
                             </li>
@@ -53,7 +53,7 @@
                             <!-- Employees Inactive Users -->
                             <li class="nav-sub-item {{ request()->is('admin/asycuda/inactive-users') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.asycuda.users.inactive') }}">
-                                    یوزر های غیرفعال
+                                    حساب های کاربری غیرفعال اسیکودا
                                     ({{ count(\App\Models\Asycuda\AsycudaUser::all()->where('status', 0)) }})
                                 </a>
                             </li>
@@ -155,7 +155,11 @@
                     request()->is('admin/office/employee/fired-employees') ||
                     request()->is('admin/office/employee/suspended-employees') ||
                     request()->is('admin/office/employee/retired-employees') ||
-                    request()->is('admin/office/employee/*/experiences') ? 'active show' : '' }}">
+                    request()->is('admin/office/employee/*/experiences') ||
+                    request()->is('admin/office/employee/*/add-duty-position') ||
+                    request()->is('admin/office/employee/*/change-to-main-position') ||
+                    request()->is('admin/office/employee/*/leaves') ||
+                    request()->is('admin/office/employee/*/leaves/create') ? 'active show' : '' }}">
 
                         <a class="nav-link with-sub" href="javascript:void(0)">
                             <i class="fa fa-user-tie"></i>
@@ -170,7 +174,11 @@
                             <!-- All Employees -->
                             <li class="nav-sub-item {{ request()->is('admin/office/employees') ||
                                 request()->is('admin/office/employees/*') ||
-                                request()->is('admin/office/employee/*/experiences') ? 'active' : '' }}">
+                                request()->is('admin/office/employee/*/experiences') ||
+                                request()->is('admin/office/employee/*/add-duty-position') ||
+                                request()->is('admin/office/employee/*/change-to-main-position') ||
+                                request()->is('admin/office/employee/*/leaves') ||
+                                request()->is('admin/office/employee/*/leaves/create') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.index') }}">
                                     {<span class="small text-sm-center tx-danger">M</span>}
                                     همه کارمندان
@@ -183,8 +191,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/main-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.main') }}">
                                     @lang('pages.employees.mainPosition')
-                                    ({{ \App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 0)->where('on_duty', 0)->count() }}
-                                    )
+                                    ({{ \App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 0)->where('on_duty', 0)->count() }})
                                 </a>
                             </li>
 

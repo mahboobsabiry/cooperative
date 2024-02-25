@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Office;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEmployeeRequest;
+use App\Models\Document;
 use App\Models\Office\Employee;
 use App\Models\Office\Hostel;
 use App\Models\Office\Position;
@@ -92,8 +93,11 @@ class EmployeeController extends Controller
         //  Has Files && Save Document Images
         if ($request->hasFile('document')) {
             foreach ($request->file('document') as $item) {
-                $fileName = 'employee_document-' . time() . '.' . $item->getClientOriginalExtension();
-                $employee->storeDocument($item->storeAs('employees', $fileName, 'public'));
+                $document = new Document();
+                $fileName = 'emp-document-' . time() . '.' . $item->getClientOriginalExtension();
+                $item->storeAs('employees/docs', $fileName, 'public');
+                $document->path   = $fileName;
+                $employee->documents()->save($document);
             }
         }
 
@@ -119,13 +123,13 @@ class EmployeeController extends Controller
     // Edit Info
     public function edit(Employee $employee)
     {
-        if ($employee->status == 1 || $employee->status == 3) {
+        if ($employee->status == 0 || $employee->status == 5) {
             $positions = Position::tree();
             $hostels = Hostel::all();
             return view('admin.office.employees.edit', compact('employee', 'positions', 'hostels'));
         } else {
             return  redirect()->back()->with([
-                'message'   => 'شما اجازه ویرایش این کاربر را ندارید.',
+                'message'   => 'شما اجازه ویرایش معلومات این کاربر را ندارید.',
                 'alertType' => 'danger'
             ]);
         }
@@ -175,8 +179,6 @@ class EmployeeController extends Controller
             ]);
         }
 
-        $pos_id = $employee->position_id;
-
         $employee->hostel_id    = $request->hostel_id;
         $employee->start_job    = $request->start_job;
         $employee->name         = $request->name;
@@ -208,10 +210,7 @@ class EmployeeController extends Controller
             $status = $employee->status;
         }
         $employee->status = $status;
-        // If the position is empty, update the background
-        if ($pos_id == null && $request->position_id != '') {
-            $employee->background = $employee->background . ' از تاریخ ' . CalendarUtils::strftime('Y-m-d', strtotime(now())) . ' نظر به مکتوب نمبر ' . $request->doc_number . ' در بست ' . $position->title . "<br> ایفای وظیفه نمود.";
-        }
+
         $employee->save();
 
         //  Has Photo
@@ -222,9 +221,14 @@ class EmployeeController extends Controller
         }
 
         //  Has Files && Save Document Images
-        foreach ($request->file('document') as $item) {
-            $fileName = 'employee_document-' . time() . '.' . $item->getClientOriginalExtension();
-            $employee->storeDocument($item->storeAs('employees', $fileName, 'public'));
+        if ($request->hasFile('document')) {
+            foreach ($request->file('document') as $item) {
+                $document = new Document();
+                $fileName = 'emp-document-' . time() . '.' . $item->getClientOriginalExtension();
+                $item->storeAs('employees/docs', $fileName, 'public');
+                $document->path   = $fileName;
+                $employee->documents()->save($document);
+            }
         }
 
         activity('updated')

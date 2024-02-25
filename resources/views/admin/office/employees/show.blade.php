@@ -379,14 +379,18 @@
                         <div class="p-2">
                             <h5>اسناد:</h5>
 
-                            @foreach($employee->documents as $document)
-                                <a href="{{ asset('storage/' . $document->path) ?? asset('assets/images/id-card-default.png') }}"
-                                   target="_blank">
-                                    <img
-                                        src="{{ asset('storage/' . $document->path) ?? asset('assets/images/id-card-default.png') }}"
-                                        class="img-thumbnail" alt="اسناد" width="150">
-                                </a>
-                            @endforeach
+                            <div class="row">
+                                @foreach($employee->documents as $document)
+                                    <div class="bd m-1 p-1">
+                                        <a href="javascript:void(0);"><i class="fe fe-trash text-danger"></i></a>
+                                        <a href="{{ asset('storage/employees/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}"
+                                           target="_blank">
+                                            <img
+                                                src="{{ asset('storage/employees/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" alt="اسناد" width="150">
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
