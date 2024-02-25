@@ -119,6 +119,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::post('employee/duty-position/{id}', [EmployeeHelperController::class, 'duty_position'])->name('employees.duty_position');
         // Reset to Main Position
         Route::get('employee/reset-position/{id}', [EmployeeHelperController::class, 'reset_position'])->name('employees.reset_position');
+        // New Document
+        Route::post('employee/new-document/{id}', [EmployeeHelperController::class, 'new_doc'])->name('employees.new_doc');
+        // Delete Document
+        Route::post('employee/delete-document/{id}', [EmployeeHelperController::class, 'delete_doc'])->name('employees.delete_doc');
 
         // Employee Change Position to other customs
         Route::post('employee/change-position-ocustom/{id}', [EmployeeHelperController::class, 'change_position_ocustom'])->name('employees.change_position_ocustom');

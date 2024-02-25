@@ -377,12 +377,37 @@
                         </div>
                         <!--/==/ End of User Information Details -->
                         <div class="p-2">
-                            <h5>اسناد:</h5>
-
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="font-weight-bold tx-16 m-2">اسناد و مدارک</div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="float-left ml-5">
+                                        <!-- New -->
+                                        <a class="pos-absolute modal-effect btn btn-sm btn-outline-primary font-weight-bold"
+                                           data-effect="effect-sign" data-toggle="modal"
+                                           href="#new_doc{{ $employee->id }}">
+                                            ثبت
+                                        </a>
+
+                                        @include('admin.office.employees.inc.new_doc')
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row bd">
                                 @foreach($employee->documents as $document)
                                     <div class="bd m-1 p-1">
-                                        <a href="javascript:void(0);"><i class="fe fe-trash text-danger"></i></a>
+                                        <!-- Delete -->
+                                        <a class="pos-absolute modal-effect btn btn-sm btn-danger"
+                                           data-effect="effect-sign" data-toggle="modal"
+                                           href="#delete_doc{{ $document->id }}">
+                                            <i class="fe fe-trash"></i>
+                                        </a>
+
+                                        @include('admin.office.employees.inc.delete_doc')
+
                                         <a href="{{ asset('storage/employees/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}"
                                            target="_blank">
                                             <img

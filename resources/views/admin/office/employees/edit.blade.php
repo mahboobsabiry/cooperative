@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('pages.employees.editTitle'))
+@section('title', trans('pages.employees.editTitle') . ' - ' . $employee->name . ' ' . $employee->last_name)
 <!-- Extra Styles -->
 @section('extra_css')
     <!---Fileupload css-->
@@ -513,34 +513,6 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Photo -->
-
-                                        <!-- Documents -->
-                                        <div class="form-group @error('document') has-danger @enderror">
-                                            <p class="mb-2">
-                                                <!-- Documents -->
-                                                27) اسناد: <br>
-                                                <span class="caption bg-gray-300">نوت: اگر تذکره الکترونیکی دارید، آن را در یک فایل قرار داده و آپلود نمایید. فایل آپلود شده باید از نوع تصویر باشد.</span>
-                                            </p>
-
-                                            <div class="bd p-2">
-                                                <input type="file" id="document" class="form-control-file" name="document[]" accept="image/*" data-height="200" multiple />
-                                            </div>
-
-                                            <div class="user-image mb-3 text-center">
-                                                <div class="imgPreview mt-2">
-                                                    @foreach($employee->documents as $document)
-                                                        <a href="{{ asset('storage/employees/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" target="_blank">
-                                                            <img src="{{ asset('storage/employees/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" class="img-thumbnail" alt="اسناد" width="100">
-                                                        </a>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-
-                                            @error('document')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Documents -->
 
                                         <div class="form-group float-left">
                                             <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>

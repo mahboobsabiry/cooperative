@@ -90,17 +90,6 @@ class EmployeeController extends Controller
             $employee->storeImage($avatar->storeAs('employees', $fileName, 'public'));
         }
 
-        //  Has Files && Save Document Images
-        if ($request->hasFile('document')) {
-            foreach ($request->file('document') as $item) {
-                $document = new Document();
-                $fileName = 'emp-document-' . time() . '.' . $item->getClientOriginalExtension();
-                $item->storeAs('employees/docs', $fileName, 'public');
-                $document->path   = $fileName;
-                $employee->documents()->save($document);
-            }
-        }
-
         activity('added')
             ->causedBy(Auth::user())
             ->performedOn($employee)
@@ -218,17 +207,6 @@ class EmployeeController extends Controller
             $avatar = $request->file('photo');
             $fileName = 'employee-' . time() . '.' . $avatar->getClientOriginalExtension();
             $employee->updateImage($avatar->storeAs('employees', $fileName, 'public'));
-        }
-
-        //  Has Files && Save Document Images
-        if ($request->hasFile('document')) {
-            foreach ($request->file('document') as $item) {
-                $document = new Document();
-                $fileName = 'emp-document-' . time() . '.' . $item->getClientOriginalExtension();
-                $item->storeAs('employees/docs', $fileName, 'public');
-                $document->path   = $fileName;
-                $employee->documents()->save($document);
-            }
         }
 
         activity('updated')

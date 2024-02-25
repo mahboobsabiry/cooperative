@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Office;
 
 use App\Http\Controllers\Controller;
+use App\Models\Document;
 use App\Models\Office\Employee;
 use App\Models\Office\Position;
 use Illuminate\Http\Request;
@@ -30,70 +31,6 @@ class EmployeeHelperController extends Controller
             Employee::where('id', $data['employee_id'])->update(['status' => $status]);
             return response()->json(['status' => $status, 'employee_id' => $data['employee_id']]);
         }
-    }
-
-    // Add Employee Background
-    public function add_background(Request $request, $id)
-    {
-        $request->validate([
-            'from_date'     => 'required',
-            'to_date'       => 'required',
-            'doc_number'    => 'required',
-            'doc_date'      => 'required',
-            'bg_position'   => 'required',
-        ]);
-
-        $employee = Employee::find($id);
-
-        if (!empty($employee->background)) {
-            $employee->update([
-                'background' => $employee->background . 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
-            ]);
-        } else {
-            $employee->update([
-                'background' => 'از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' قرار مکتوب نمبر ' . $request->doc_number . ' مورخ ' . $request->doc_date . ' در بست ' . $request->bg_position . " استحصال وظیفه گردید.<br>"
-            ]);
-        }
-
-        return back()->with([
-            'message'   => 'موفقانه ثبت شد!',
-            'alertType' => 'success'
-        ]);
-    }
-
-    // Add Duty Position
-    public function duty_position(Request $request, $id)
-    {
-        // Validate Form
-        $request->validate([
-            'start_duty'    => 'required',
-            'duty_doc_number' => 'required',
-            'duty_position' => 'required',
-        ]);
-
-        // Get the employee
-        $employee = Employee::find($id);
-        // Update duty position
-        $employee->update([
-            'on_duty'   => 1,
-            'start_duty'        => $request->start_duty,
-            'duty_doc_number'   => $request->duty_doc_number,
-            'duty_position'     => $request->duty_position,
-            'background'        => $employee->background . ' از تاریخ ' . $request->start_duty . ' نظر به مکتوب نمبر ' . $request->duty_doc_number . ' در بست ' . $request->duty_position .  " طور خدمتی ایفای وظیفه نمود.<br>"
-        ]);
-
-        //  Has Files && Save Document Images
-        if ($request->hasFile('document')) {
-            $item = $request->file('document');
-            $fileName = 'employee_document-' . time() . '.' . $item->getClientOriginalExtension();
-            $employee->storeDocument($item->storeAs('employees', $fileName, 'public'));
-        }
-
-        // Redirect back with success message
-        return back()->with([
-            'message'   => 'ثبت شد',
-            'alertType' => 'success'
-        ]);
     }
 
     // Reset Position
@@ -319,5 +256,43 @@ class EmployeeHelperController extends Controller
                 'alertType' => 'danger'
             ]);
         }
+    }
+
+    // New Document
+    public function new_doc(Request $request, $id)
+    {
+        // Employee
+        $employee = Employee::find($id);
+
+        if ($request->hasFile('document')) {
+            // File
+            $file = $request->file('document');
+            // New Document
+            $document = new Document();
+            $fileName = 'emp-document-' . time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('employees/docs', $fileName, 'public');
+            $document->path   = $fileName;
+            $employee->documents()->save($document);
+        }
+
+        return redirect()->back()->with([
+            'message'   => 'سند موفقانه حذف گردید.',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Delete Document
+    public function delete_doc($id)
+    {
+        $document = Document::find($id);
+        // dd(storage_path('app/public/employees/docs/' . $document->path));
+        if (file_exists(storage_path('app/public/employees/docs/' . $document->path))) {
+            unlink(storage_path('app/public/employees/docs/' . $document->path));
+        }
+        $document->delete();
+        return redirect()->back()->with([
+            'message'   => 'سند موفقانه حذف گردید.',
+            'alertType' => 'success'
+        ]);
     }
 }
