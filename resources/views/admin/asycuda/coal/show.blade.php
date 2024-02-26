@@ -18,7 +18,7 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">یوزر کارمند</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">جواز فعالیت شرکت</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
@@ -26,7 +26,7 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.asycuda.coal.index') }}">جواز فعالیت شرکت ها</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">@lang('global.details')</li>
+                    <li class="breadcrumb-item active" aria-current="page">جزئیات جواز فعالیت شرکت {{ $cal->company_name }}</li>
                 </ol>
             </div>
 

@@ -11,6 +11,7 @@ use App\Models\Office\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Morilog\Jalali\CalendarUtils;
+use Morilog\Jalali\Jalalian;
 
 class EmployeeController extends Controller
 {
@@ -105,8 +106,9 @@ class EmployeeController extends Controller
     // Show Info
     public function show(Employee $employee)
     {
+        $age = Jalalian::now()->getYear() - $employee->birth_year;
         $active_employees = Employee::whereBetween('status', [0,1])->whereNotNull('position_id')->where('position_id', '!=', $employee->position_id)->get();
-        return view('admin.office.employees.show', compact('employee', 'active_employees'));
+        return view('admin.office.employees.show', compact('employee', 'active_employees', 'age'));
     }
 
     // Edit Info

@@ -13,7 +13,7 @@
         <link rel="icon" href="{{ asset('assets/images/logo.jpg') }}" type="image/x-icon"/>
 
         <!-- Title -->
-        <title>@yield('title', config('app.name'))</title>
+        <title>فورمه ثبت جواز فعالیت</title>
 
         <!---Fontawesome css-->
         <link href="{{ asset('backend/assets/plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">

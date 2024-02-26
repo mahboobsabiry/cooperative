@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ کارمندان دارنده یوزر اسیکودا')
+@section('title', 'حسابات کاربری سیستم اسیکودا')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -28,11 +28,15 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">یوزر ها</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">حسابات کاربری سیستم اسیکودا</h2>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a
-                            href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">کارمندان دارنده یوزر اسیکودا</li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
+                    @can('office_employee_view')
+                        <li class="breadcrumb-item"><a href="{{ route('admin.office.employees.index') }}">@lang('admin.sidebar.employees')</a></li>
+                    @else
+                        <li class="breadcrumb-item">@lang('admin.sidebar.employees')</li>
+                    @endcan
+                    <li class="breadcrumb-item active" aria-current="page">حسابات کاربری سیستم اسیکودا</li>
                 </ol>
             </div>
 
@@ -61,7 +65,7 @@
                         <!-- Employees -->
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
-                                @lang('admin.sidebar.employees') ({{ count($asycuda_users) }})
+                                مجموع حسابات کاربری فعال سیستم اسیکودا ({{ count($asycuda_users) }})
                             </div>
 
                             <!-- Table -->

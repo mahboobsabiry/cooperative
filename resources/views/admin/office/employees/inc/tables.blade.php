@@ -150,8 +150,8 @@
                     @endif
                 </span>
             </td>
-            <td>{{ $employee->position->custom_code }}</td>
-            <td>{{ $employee->position->type }}</td>
+            <td>{{ $employee->position->custom_code ?? '' }}</td>
+            <td>{{ $employee->position->type ?? '' }}</td>
             <td>{{ $employee->leaves->sum('days') ?? '0' }}</td>
             <td>{{ $employee->leaves->count() ?? '0' }}</td>
         </tr>

@@ -50,7 +50,6 @@ class ExperienceController extends Controller
             $document->storeAs('employees/documents', $fileName, 'public');
             $experience->document   = $fileName;
         }
-        $experience->status     = 1;
         $experience->info       = $request->info;
         $experience->save();
 

@@ -170,29 +170,39 @@
                                 <span>{{ $employee->name }} {{ $employee->last_name }}</span>
                             </h4>
 
-                            <!-- Position -->
-                            @can('office_position_view')
-                                <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title ?? '' }}</a>
-                            @else
-                                <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
-                            @endcan
-                            @if($employee->on_duty == 1)
-                                <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
-                            @endif
-
-                            @if($employee->position->position_number == 2 || $employee->position->position_number == 3)
-                            @else
-                                <p class="pro-user-desc text-primary mb-1">({{ $employee->position->type ?? '' }})</p>
-                            @endif
-                            <!-- Employee Star -->
                             @if($employee->position)
+                                <!-- Position -->
+                                @can('office_position_view')
+                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }}</a>
+                                @else
+                                    <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
+                                @endcan
+                                @if($employee->on_duty == 1)
+                                    <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
+                                @endif
+
+                                @if($employee->position->position_number == 2 || $employee->position->position_number == 3)
+                                @else
+                                    <p class="pro-user-desc text-primary mb-1">({{ $employee->position->type ?? '' }})</p>
+                                @endif
+                                <!-- Employee Star -->
                                 <p class="user-info-rating">
                                     @for($i=1; $i<=$employee->position->position_number; $i++)
                                         <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
                                     @endfor
                                 </p>
+                                <!--/==/ End of Employee Star -->
+                            @else
+                                <span class="text-danger">
+                                    @if($employee->status == 2)
+                                        تقاعد نموده است
+                                    @elseif($employee->status == 3)
+                                        منفک گردیده است
+                                    @elseif($employee->status == 4)
+                                        تبدیل گردیده است
+                                    @endif
+                                </span>
                             @endif
-                            <!--/==/ End of Employee Star -->
                         </div>
                     </div>
                 </div>
@@ -283,7 +293,7 @@
                         <!-- Action Buttons -->
                         <h5>دکمه های کاربردی</h5>
                         <div class="row m-2">
-                            <a href="{{ route('admin.office.employees.experiences', $employee->id) }}" class="btn btn-outline-secondary m-1">سابقه کاری</a>
+                            <a href="{{ route('admin.office.employees.experiences', $employee->id) }}" class="btn btn-outline-success m-1">سابقه کاری</a>
 
                             <a href="{{ route('admin.office.employees.leaves.index', $employee->id) }}" class="btn btn-outline-secondary m-1">رخصتی ها</a>
 
@@ -299,16 +309,18 @@
                                     @endif
 
                                     <!-- Retire Employee -->
-                                    <a class="modal-effect btn btn-outline-success m-1" data-effect="effect-sign" data-toggle="modal"
-                                       href="#retire_employee{{ $employee->id }}">تقاعد</a>
-
-                                    <!-- Change Position Employee -->
-                                    <a class="modal-effect btn btn-outline-dark m-1" data-effect="effect-sign" data-toggle="modal"
-                                       href="#change_pos_employee{{ $employee->id }}">تبدیل</a>
+                                    @if($age >= 65)
+                                        <a class="modal-effect btn btn-outline-success m-1" data-effect="effect-sign" data-toggle="modal"
+                                           href="#retire_employee{{ $employee->id }}">تقاعد</a>
+                                    @endif
 
                                     <!-- Fire Employee -->
                                     <a class="modal-effect btn btn-outline-danger m-1" data-effect="effect-sign" data-toggle="modal"
                                        href="#fire_employee{{ $employee->id }}">منفک</a>
+
+                                    <!-- Change Position Employee -->
+                                    <a class="modal-effect btn btn-outline-dark m-1" data-effect="effect-sign" data-toggle="modal"
+                                       href="#change_pos_employee{{ $employee->id }}">تبدیل</a>
                                 @endcan
 
                                 @include('admin.office.employees.inc.modals')
@@ -320,39 +332,41 @@
                         <!--/==/ End of Action Buttons -->
 
                         <!-- Custom Card -->
-                        <div style="width: 350px;">
-                            <div class="print-id-card" id="printIdCard">
-                                <!-- Employee Profile Picture -->
-                                <div class="emp-profile">
-                                    <img class="emp-profile-img pos-absolute" src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}" alt="{{ $employee->name }}">
-                                </div>
+                        @if($employee->position)
+                            <div style="width: 350px;">
+                                <div class="print-id-card" id="printIdCard">
+                                    <!-- Employee Profile Picture -->
+                                    <div class="emp-profile">
+                                        <img class="emp-profile-img pos-absolute" src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}" alt="{{ $employee->name }}">
+                                    </div>
 
-                                <!-- Employee Name & Last Name -->
-                                <div class="emp-name">{{ $employee->name }} {{ $employee->last_name }}</div>
-                                <!-- Employee Position -->
-                                <div class="emp-pos-title">{{ $employee->position->title }}</div>
-                                <!-- Employee ID -->
-                                <div class="emp-id">
-                                    @if($employee->id <= 9)
-                                        00{{ $employee->id }}
-                                    @elseif($employee->id <= 99)
-                                        0{{ $employee->id }}
-                                    @else
-                                        {{ $employee->id }}
-                                    @endif
-                                </div>
-                                <!-- Employee Phone Number -->
-                                <div class="emp-phone">{{ $employee->phone }}</div>
+                                    <!-- Employee Name & Last Name -->
+                                    <div class="emp-name">{{ $employee->name }} {{ $employee->last_name }}</div>
+                                    <!-- Employee Position -->
+                                    <div class="emp-pos-title">{{ $employee->position->title }}</div>
+                                    <!-- Employee ID -->
+                                    <div class="emp-id">
+                                        @if($employee->id <= 9)
+                                            00{{ $employee->id }}
+                                        @elseif($employee->id <= 99)
+                                            0{{ $employee->id }}
+                                        @else
+                                            {{ $employee->id }}
+                                        @endif
+                                    </div>
+                                    <!-- Employee Phone Number -->
+                                    <div class="emp-phone">{{ $employee->phone }}</div>
 
-                                <!-- ID Card -->
-                                <img class="id-card-img" src="{{ asset('assets/images/emp-id-card.jpg') }}" alt="">
+                                    <!-- ID Card -->
+                                    <img class="id-card-img" src="{{ asset('assets/images/emp-id-card.jpg') }}" alt="">
+                                </div>
+                                <hr>
+                                <!-- ID Card Back -->
+                                <div id="printIdCardBack">
+                                    <img class="id-card-back-img" src="{{ asset('assets/images/emp-id-card-back.jpg') }}" alt="">
+                                </div>
                             </div>
-                            <hr>
-                            <!-- ID Card Back -->
-                            <div id="printIdCardBack">
-                                <img class="id-card-back-img" src="{{ asset('assets/images/emp-id-card-back.jpg') }}" alt="">
-                            </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
                 <!--/==/ End of Contact Custom ID Card -->
@@ -383,16 +397,18 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="float-left ml-5">
-                                        <!-- New -->
-                                        <a class="pos-absolute modal-effect btn btn-sm btn-outline-primary font-weight-bold"
-                                           data-effect="effect-sign" data-toggle="modal"
-                                           href="#new_doc{{ $employee->id }}">
-                                            ثبت
-                                        </a>
+                                    @if($employee->position)
+                                        <div class="float-left ml-5">
+                                            <!-- New -->
+                                            <a class="pos-absolute modal-effect btn btn-sm btn-outline-primary font-weight-bold"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#new_doc{{ $employee->id }}">
+                                                ثبت
+                                            </a>
 
-                                        @include('admin.office.employees.inc.new_doc')
-                                    </div>
+                                            @include('admin.office.employees.inc.new_doc')
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
 

@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'یوزر اسیکودا کارمند - ' . $asycuda_user->employee->name . ' ' . $asycuda_user->employee->last_name)
+@section('title', 'حساب کاربری سیستم اسیکودا - ' . $asycuda_user->employee->name . ' ' . $asycuda_user->employee->last_name)
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -17,16 +17,18 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">یوزر کارمند در سیستم اسیکودا</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">حساب کاربری سیستم اسیکودا</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
                     </li>
+                    @can('office_employee_view')
+                        <li class="breadcrumb-item"><a href="{{ route('admin.office.employees.index') }}">@lang('admin.sidebar.employees')</a></li>
+                    @else
+                        <li class="breadcrumb-item">@lang('admin.sidebar.employees')</li>
+                    @endcan
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.office.employees.index') }}">@lang('admin.sidebar.employees')</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('admin.asycuda.users.index') }}">یوزر کارمندان در سیستم اسیکودا</a>
+                        <a href="{{ route('admin.asycuda.users.index') }}">حسابات کاربری سیستم اسیکودا</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('global.details')</li>
                 </ol>

@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'ویرایش همکار نماینده')
+@section('title', 'ویرایش معلومات همکار نماینده')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---Fileupload css-->
@@ -19,12 +19,12 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">@lang('global.new')</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">ویرایش معلومات همکار نماینده</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.office.agents.index') }}">@lang('pages.companies.agents')</a></li>
                     <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.office.agent-colleagues.show', $colleague->id) }}">@lang('global.details')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">ویرایش همکار نماینده</li>
+                    <li class="breadcrumb-item active" aria-current="page">ویرایش معلومات همکار نماینده</li>
                 </ol>
             </div>
 
@@ -48,7 +48,7 @@
 
                             <!-- Form Title -->
                             <div>
-                                <h6 class="card-title mb-1">ویرایش همکار نماینده ({{ $colleague->name }})</h6>
+                                <h6 class="card-title mb-1">ویرایش معلومات ({{ $colleague->name }})</h6>
                             </div>
 
                             <!-- Form -->

@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' جواز شرکت های فعالیت کننده')
+@section('title', ' جواز فعالیت ختم شده شرکت ها')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -28,11 +28,13 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">جواز فعالیت ختم شده</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">جواز فعالیت ختم شده شرکت ها</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a
                             href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">جواز فعالیت ختم شده</li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('admin.asycuda.coal.index') }}">جواز فعالیت شرکت ها</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">جواز فعالیت ختم شده شرکت ها</li>
                 </ol>
             </div>
 
@@ -61,7 +63,7 @@
                         <!-- Employees -->
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
-                                شرکت های دارنده جواز فعالیت ({{ count($coal) }})
+                                جواز فعالیت ختم شده شرکت ها ({{ count($coal) }})
                             </div>
 
                             <!-- Table -->

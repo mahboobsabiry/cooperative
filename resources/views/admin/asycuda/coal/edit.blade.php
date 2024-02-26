@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . ' ویرایش جواز شرکت')
+@section('title', ' ویرایش جواز فعالیت شرکت')
 <!-- Extra Styles -->
 @section('extra_css')
 

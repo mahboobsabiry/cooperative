@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . 'ویرایش یوزر کارمند')
+@section('title', 'ویرایش حساب کاربری سیستم اسیکودا')
 <!-- Extra Styles -->
 @section('extra_css')
 
@@ -14,13 +14,17 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">ویرایش یوزر کارمند</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">ویرایش حساب کاربری سیستم اسیکودا</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.office.employees.index') }}">@lang('admin.sidebar.employees')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda.users.index') }}">یوزر کارمندان</a></li>
+                    @can('office_employee_view')
+                        <li class="breadcrumb-item"><a href="{{ route('admin.office.employees.index') }}">@lang('admin.sidebar.employees')</a></li>
+                    @else
+                        <li class="breadcrumb-item">@lang('admin.sidebar.employees')</li>
+                    @endcan
+                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda.users.index') }}">حسابات کاربری سیستم اسیکودا</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.asycuda.users.show', $asycuda_user->id) }}">@lang('global.details')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">ویرایش یوزر کارمند</li>
+                    <li class="breadcrumb-item active" aria-current="page">ویرایش حساب کاربری اسیکودا</li>
                 </ol>
             </div>
 
@@ -47,7 +51,7 @@
 
                         <!-- Form Title -->
                         <div>
-                            <h6 class="card-title mb-1">ویرایش یوزر کارمند</h6>
+                            <h6 class="card-title mb-1">ویرایش حساب کاربری سیستم اسیکودا مربوط ({{ $asycuda_user->employee->name }})</h6>
                         </div>
 
                         <!-- Form -->

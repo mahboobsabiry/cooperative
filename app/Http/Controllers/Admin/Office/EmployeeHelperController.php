@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Office;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\Office\Employee;
+use App\Models\Office\Experience;
 use App\Models\Office\Position;
 use Illuminate\Http\Request;
 use Morilog\Jalali\CalendarUtils;
@@ -28,9 +29,103 @@ class EmployeeHelperController extends Controller
             } else {
                 $status = 1;
             }
-            Employee::where('id', $data['employee_id'])->update(['status' => $status]);
+            $employee = Employee::where('id', $data['employee_id'])->first();
+            $employee->update(['status' => $status]);
+            if ($employee->asycuda_user) {
+                $employee->user->update(['status' => $status]);
+            }
+            if ($employee->asycuda_user) {
+                $employee->asycuda_user->update(['status' => $status]);
+            }
             return response()->json(['status' => $status, 'employee_id' => $data['employee_id']]);
         }
+    }
+
+    // Retire Employee
+    public function retire_employee($id)
+    {
+        $employee = Employee::find($id);
+
+        $get_year = Jalalian::now()->getYear() - $employee->birth_year;
+
+        if ($get_year >= 65) {
+            // Add To HIS/HER background - experiences
+            $last_exp = $employee->experiences()->latest()->first();
+            $last_exp->update(['end_date' => CalendarUtils::strftime('Y-m-d', strtotime(now()))]);
+
+            // Update Employee Information/Deactivate his/her activity
+            $employee->update([
+                'position_id'   => null,
+                'hostel_id'     => null,
+                'position_code' => null,
+                'status'        => 2,
+                'on_duty'       => 0,
+                'duty_position' => null,
+                'duty_doc_number'   => null,
+                'start_duty'    => null,
+                'info'          => 'بعد از خدمات بی نظیر و قابل ستایش، بازنشسته شد.'
+            ]);
+
+            // Deactivate BCD-MIS User Status
+            if ($employee->user) {
+                $employee->user->update(['status' => 0]);
+            }
+
+            // Deactivate Asycuda User Status
+            if ($employee->asycuda_user) {
+                $employee->asycuda_user->update(['status' => 0]);
+            }
+
+            return redirect()->back()->with([
+                'message'   => 'کارمند متذکره تقاعد نمود.',
+                'alertType' => 'success'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'message'   => 'کارمند واجد شرایط تقاعدی نمی باشد.',
+                'alertType' => 'danger'
+            ]);
+        }
+    }
+
+    // Fire Employee
+    public function fire_employee(Request $request, $id)
+    {
+        $request->validate([
+            'info'  => 'required'
+        ]);
+        $employee = Employee::find($id);
+
+        // Deactivate BCD-MIS user
+        if ($employee->user) {
+            $employee->user->update(['status', 0]);
+        }
+
+        // Deactivate Asycuda user
+        if ($employee->asycuda_user) {
+            $employee->asycuda_user->update(['status', 0]);
+        }
+
+        // Update Experiences
+        $last_exp = $employee->experiences()->latest()->first();
+        $last_exp->update(['end_date' => CalendarUtils::strftime('Y-m-d', strtotime(now()))]);
+
+        // Fire Employee
+        $employee->update([
+            'position_id'   => null,
+            'hostel_id'     => null,
+            'position_code' => null,
+            'status'        => 3,
+            'info'          => $request->info,
+            'on_duty'       => 0,
+            'duty_position' => null,
+            'start_duty'    => null,
+            'duty_doc_number'   => null
+        ]);
+        return redirect()->back()->with([
+            'message'   => 'کارمند منفک گردید!',
+            'alertType' => 'danger'
+        ]);
     }
 
     // Reset Position
@@ -208,54 +303,6 @@ class EmployeeHelperController extends Controller
             'message'   => $message,
             'alertType' => 'success'
         ]);
-    }
-
-    // Fire Employee
-    public function fire_employee(Request $request, $id)
-    {
-        $request->validate([
-            'info'  => 'required'
-        ]);
-        $fire_employee = Employee::find($id);
-        $fire_employee->update([
-            'position_id'   => null,
-            'hostel_id'     => null,
-            'position_code' => null,
-            'status'        => 2,
-            'info'          => $request->info
-        ]);
-        return redirect()->back()->with([
-            'message'   => 'کارمند منفک گردید!',
-            'alertType' => 'danger'
-        ]);
-    }
-
-    // Retire Employee
-    public function retire_employee($id)
-    {
-        $employee = Employee::find($id);
-
-        $get_year = Jalalian::now()->getYear() - $employee->birth_year;
-
-        if ($get_year > 65) {
-            $employee->update([
-                'position_id'   => null,
-                'hostel_id'     => null,
-                'position_code' => null,
-                'status'        => 4,
-                'background'    => $employee->background . 'به تاریخ ' . CalendarUtils::date('Y-m-d', now()) . ' تقاعد نمود.'
-            ]);
-
-            return redirect()->back()->with([
-                'message'   => 'کارمند متذکره تقاعد نمود.',
-                'alertType' => 'success'
-            ]);
-        } else {
-            return redirect()->back()->with([
-                'message'   => 'کارمند واجد شرایط تقاعدی نمی باشد.',
-                'alertType' => 'danger'
-            ]);
-        }
     }
 
     // New Document

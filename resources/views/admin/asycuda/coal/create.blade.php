@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . 'ثبت جواز شرکت')
+@section('title', 'ثبت جواز فعالیت شرکت')
 <!-- Extra Styles -->
 @section('extra_css')
 
@@ -14,11 +14,11 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">ثبت جواز شرکت</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">ثبت جواز فعالیت شرکت</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda.coal.index') }}">جواز شرکت ها</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">ثبت جواز شرکت</li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda.coal.index') }}">جواز فعالیت شرکت ها</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">ثبت جواز فعالیت شرکت</li>
                 </ol>
             </div>
 
@@ -45,7 +45,7 @@
 
                         <!-- Form Title -->
                         <div>
-                            <h6 class="card-title mb-1">ثبت جواز شرکت</h6>
+                            <h6 class="card-title mb-1">ثبت جواز فعالیت شرکت</h6>
                             <p class="text-muted card-sub-title">You can add new record here.</p>
                         </div>
 

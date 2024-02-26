@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ همکاران نمایندگان')
+@section('title', 'همکاران نماینده ها')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -34,7 +34,7 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">@lang('pages.companies.agents')</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">همکاران نماینده ها</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
@@ -42,7 +42,7 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.office.agents.index') }}">@lang('pages.companies.agents')</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">همکاران نمایندگان</li>
+                    <li class="breadcrumb-item active" aria-current="page">همکاران نماینده ها</li>
                 </ol>
             </div>
 
@@ -65,7 +65,7 @@
                         <!-- All Positions -->
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
-                                همکاران نمایندگان ({{ count($colleagues) }})
+                                همکاران نماینده ها ({{ count($colleagues) }})
                             </div>
                             <!-- Table -->
                             <div class="table-responsive mt-2">

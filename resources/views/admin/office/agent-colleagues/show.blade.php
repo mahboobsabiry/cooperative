@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', $colleague->name)
+@section('title', $colleague->name . ' -  همکار نماینده')
 <!-- Extra Styles -->
 @section('extra_css')
 
@@ -23,7 +23,7 @@
                         <a href="{{ route('admin.office.agents.index') }}">@lang('pages.companies.agents')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.office.agent-colleagues.index') }}">همکاران نمایندگان</a>
+                        <a href="{{ route('admin.office.agent-colleagues.index') }}">همکاران نماینده ها</a>
                     </li>
                     <li class="breadcrumb-item active"
                         aria-current="page">@lang('global.details')</li>

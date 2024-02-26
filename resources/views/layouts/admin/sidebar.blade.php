@@ -163,7 +163,7 @@
 
                         <a class="nav-link with-sub" href="javascript:void(0)">
                             <i class="fa fa-user-tie"></i>
-                            @if(count(\App\Models\Office\Employee::all()->where('status', 3)) >= 1)
+                            @if(count(\App\Models\Office\Employee::all()->where('status', 5)) >= 1)
                                 <span class="pulse"></span>
                             @endif
                             <span class="sidemenu-label">@lang('admin.sidebar.employees')</span>
@@ -181,7 +181,7 @@
                                 request()->is('admin/office/employee/*/leaves/create') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.index') }}">
                                     {<span class="small text-sm-center tx-danger">M</span>}
-                                    همه کارمندان
+                                    همه کارمندان برحال
                                     ({{ count(\App\Models\Office\Employee::all()->whereNotNull('position_id')) }}
                                     )
                                 </a>

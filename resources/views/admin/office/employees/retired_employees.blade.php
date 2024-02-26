@@ -67,7 +67,7 @@
                                         <th>#</th>
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.fatherName')</th>
-                                        <th>@lang('form.background')</th>
+                                        <th>معلومات اضافی</th>
                                         <th>@lang('form.phone')</th>
                                         <th>@lang('form.empNumber')</th>
                                         <th>@lang('form.birthYear')</th>
@@ -83,7 +83,7 @@
                                                 <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
                                             </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
-                                            <td>{!! $employee->background !!}</td>
+                                            <td>{!! $employee->info !!}</td>
                                             <td class="tx-sm-12-f">
                                                 <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
                                             </td>

@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . 'ثبت یوزر کارمند')
+@section('title', 'ثبت حساب کاربری سیستم اسیکودا')
 <!-- Extra Styles -->
 @section('extra_css')
 
@@ -14,12 +14,16 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">ثبت یوزر کارمند</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">ثبت حساب کاربری سیستم اسیکودا</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.office.employees.index') }}">@lang('admin.sidebar.employees')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda.users.index') }}">یوزر کارمندان</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">ثبت یوزر کارمند</li>
+                    @can('office_employee_view')
+                        <li class="breadcrumb-item"><a href="{{ route('admin.office.employees.index') }}">@lang('admin.sidebar.employees')</a></li>
+                    @else
+                        <li class="breadcrumb-item">@lang('admin.sidebar.employees')</li>
+                    @endcan
+                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda.users.index') }}">حسابات کاربری سیستم اسیکودا</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">ثبت حساب کاربری جدید</li>
                 </ol>
             </div>
 
@@ -46,8 +50,8 @@
 
                         <!-- Form Title -->
                         <div>
-                            <h6 class="card-title mb-1">ثبت یوزر کارمند</h6>
-                            <p class="text-muted card-sub-title">You can add new record here.</p>
+                            <h6 class="card-title mb-1">ثبت حساب کاربری سیستم اسیکودا</h6>
+                            <p class="text-muted card-sub-title">ثبت حساب کاربری جدید برای کارمندان گمرک که به اسیکودا دسترسی دارند.</p>
                         </div>
 
                         <!-- Form -->

@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' جواز شرکت های فعالیت کننده')
+@section('title', 'جواز فعالیت شرکت ها')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -32,7 +32,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a
                             href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">جواز شرکت های فعالیت کننده</li>
+                    <li class="breadcrumb-item active" aria-current="page">جواز فعالیت شرکت ها</li>
                 </ol>
             </div>
 
