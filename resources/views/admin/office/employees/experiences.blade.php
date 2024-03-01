@@ -227,7 +227,7 @@
                                         <!-- System USER -->
                                         <td>
                                             @if($exp->employee->user)
-                                                {{ $exp->employee->user->status == 1 ? 'فعال' : 'غیرفعال' }}
+                                                {{ $exp->user_status == 1 ? 'فعال' : 'غیرفعال' }}
                                             @else
                                                 یوزر ندارد
                                             @endif
@@ -235,7 +235,7 @@
                                         <!-- Asycuda User -->
                                         <td>
                                             @if($exp->employee->asycuda_user)
-                                                {{ $exp->employee->asycuda_user->status == 1 ? 'فعال' : 'غیرفعال' }}
+                                                {{ $exp->asy_user_status == 1 ? 'فعال' : 'غیرفعال' }}
                                             @else
                                                 یوزر ندارد
                                             @endif

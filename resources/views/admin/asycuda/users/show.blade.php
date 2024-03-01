@@ -326,7 +326,6 @@
                                     <th class="text-center">وضعیت یوزر</th>
                                     <th class="text-center">بست</th>
                                     <th class="text-center">نوع بست</th>
-                                    <th class="text-center">فعالیت یوزر اسیکودا</th>
                                     <th class="text-center">تاریخ شروع</th>
                                     <th class="text-center">تاریخ ختم</th>
                                     <th class="text-center">نمبر مکتوب</th>
@@ -339,17 +338,9 @@
                                 @foreach($asycuda_user->employee->experiences as $exp)
                                     <tr>
                                         <td>{{ $exp->id }}</td>
-                                        <td>{{ $exp->asy_user_status == 1 ? 'فعال' : 'غیرفعال' }}</td>
+                                        <td>{{ $exp->employee->asycuda_user->status == 1 ? 'فعال' : 'غیرفعال' }}</td>
                                         <td>{{ $exp->position }}</td>
                                         <td>{{ $exp->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
-                                        <!-- Asycuda User -->
-                                        <td>
-                                            @if($exp->employee->asycuda_user)
-                                                {{ $exp->employee->asycuda_user->status == 1 ? 'فعال' : 'غیرفعال' }}
-                                            @else
-                                                یوزر ندارد
-                                            @endif
-                                        </td>
                                         <td>{{ $exp->start_date }}</td>
                                         <td>{{ $exp->end_date ?? 'در حال انجام وظیفه' }}</td>
                                         <td>{{ $exp->doc_number }}</td>
