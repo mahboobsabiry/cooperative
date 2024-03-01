@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Asycuda;
 use App\Http\Controllers\Controller;
 use App\Models\Asycuda\AsycudaUser;
 use App\Models\Office\Employee;
+use App\Models\Office\Experience;
 use Illuminate\Http\Request;
 
 class AsycudaUserController extends Controller
@@ -81,7 +82,9 @@ class AsycudaUserController extends Controller
     public function show($id)
     {
         $asycuda_user = AsycudaUser::findOrFail($id);
-        return view('admin.asycuda.users.show', compact('asycuda_user'));
+        // $employee = Employee::all();
+        $experiences = Experience::all()->where('employee_id', $asycuda_user->employee->id);
+        return view('admin.asycuda.users.show', compact('asycuda_user', 'experiences'));
     }
 
     // Edit
@@ -134,9 +137,11 @@ class AsycudaUserController extends Controller
             }
             $asycuda_user = AsycudaUser::where('id', $data['asy_user_id'])->first();
             $asycuda_user->update(['status' => $status]);
-            $exp = $asycuda_user->employee->experiences()->latest()->first();
-            if ($exp) {
-                $exp->update(['asy_user_status' => $status]);
+            $exp = Experience::where('employee_id', $asycuda_user->employee->id)->latest()->first();
+            if ($exp && $data['status'] == 'Active') {
+                $exp->update(['asy_user_status' => $status, 'asy_user_roles' => null]);
+            } else {
+                $exp->update(['asy_user_status' => $status, 'asy_user_roles' => $asycuda_user->roles]);
             }
             return response()->json(['status' => $status, 'asy_user_id' => $data['asy_user_id']]);
         }

@@ -74,6 +74,7 @@
                         positionClass: 'toast-top-right'
                     };
                     toastr.warning('کاربر غیرفعال شد');
+                    window.location.reload();
                 } else if (resp['status'] == 1) {
                     $("#asy_user_status").html('<i class="fa fa-toggle-on text-success" aria-hidden="true" status="Active"></i>');
                     // Change the activity
@@ -82,6 +83,7 @@
                         positionClass: 'toast-top-right'
                     };
                     toastr.success('کاربر فعال شد');
+                    window.location.reload();
                 }
             }, error: function (resp) {
                 toastr.options = {

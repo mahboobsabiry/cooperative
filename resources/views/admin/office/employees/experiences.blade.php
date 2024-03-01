@@ -205,8 +205,8 @@
                                     <th class="text-center">@lang('form.name')</th>
                                     <th class="text-center">بست</th>
                                     <th class="text-center">نوع بست</th>
-                                    <th class="text-center">فعالیت یوزر سیستم</th>
-                                    <th class="text-center">فعالیت یوزر اسیکودا</th>
+                                    <th class="text-center">فعالیت حساب کاربری سیستم</th>
+                                    <th class="text-center">فعالیت حساب کاربری سیستم اسیکودا</th>
                                     <th class="text-center">تاریخ شروع</th>
                                     <th class="text-center">تاریخ ختم</th>
                                     <th class="text-center">نمبر مکتوب</th>

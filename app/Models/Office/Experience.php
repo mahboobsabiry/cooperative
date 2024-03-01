@@ -10,7 +10,7 @@ class Experience extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['employee_id', 'position', 'position_type', 'start_date', 'end_date', 'doc_number', 'document', 'user_status', 'asy_user_status', 'info'];
+    protected $fillable = ['employee_id', 'position', 'position_type', 'start_date', 'end_date', 'doc_number', 'document', 'user_status', 'asy_user_status', 'user_roles', 'asy_user_roles', 'info'];
 
     public function employee() : Relation
     {
