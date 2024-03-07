@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('document')->nullable();
             $table->tinyInteger('user_status')->default(0);
             $table->tinyInteger('asy_user_status')->default(0);
-            $table->longText('user_status')->nullable();
-            $table->longText('asy_user_roles')->nullable();
+            $table->text('user_roles')->nullable();
+            $table->text('asy_user_roles')->nullable();
             $table->text('info')->nullable();
             $table->timestamps();
 

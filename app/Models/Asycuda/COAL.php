@@ -2,15 +2,18 @@
 
 namespace App\Models\Asycuda;
 
+use App\Models\Photo;
 use App\Models\User;
+use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 // Companies Activity License Model
 class COAL extends Model
 {
-    use HasFactory;
+    use HasFactory, HasPhoto;
 
     public $table = 'coal';
 
@@ -24,5 +27,11 @@ class COAL extends Model
     public function user(): Relation
     {
         return $this->belongsTo(User::class);
+    }
+
+    // Morph Photo
+    public function photo(): MorphOne
+    {
+        return $this->morphOne(Photo::class, 'transaction');
     }
 }

@@ -80,6 +80,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::resource('coal', COALController::class);
         Route::get('expired-coal', [COALController::class, 'expired'])->name('coal.expired');
         Route::get('registration-form/{id}', [COALController::class, 'reg_form'])->name('coal.reg_form');
+        Route::post('coal/upload-cal-form/{id}', [COALController::class, 'upload_cal'])->name('coal.upload_cal');
         Route::get('refresh/{id}', [COALController::class, 'refresh'])->name('coal.refresh');
         Route::get('coal-print-form/{id}', [COALController::class, 'coal_print_form'])->name('coal.print.form');
     });

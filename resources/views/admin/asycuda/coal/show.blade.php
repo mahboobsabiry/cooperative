@@ -171,6 +171,7 @@
                             </div>
                             <!--/==/ End of Personal Information -->
 
+                            <!-- Buttons -->
                             @can('asy_coal_create')
                                 <div class="row">
                                     <!-- Print PDF -->
@@ -181,6 +182,34 @@
                                     <p class="m-2"><a href="{{ route('admin.asycuda.coal.refresh', $cal->id) }}" class="btn btn-outline-danger">تازه سازی</a></p>
                                 </div>
                             @endcan
+
+                            <!-- File -->
+                            <div class="col-md-8 bd m-2">
+                                <div class="m-2">
+                                    <h5 class="font-weight-bold">فورم جواز فعالیت شرکت</h5>
+                                    <p class="text-muted">فورم جواز فعالیت شرکت پس از تایید مراجع ذیربط و تصدیق مقامات ذیصلاح اینجا نمایش داده می‌شود.</p>
+                                </div>
+
+                                <!-- Form -->
+                                <form method="post" action="{{ route('admin.asycuda.coal.upload_cal', $cal->id) }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group row m-2">
+                                        <div class="{{ app()->getLocale() == 'en' ? 'mr-1' : 'ml-1' }}">
+                                            <input type="file" accept="image/*" class="form-control" name="cal">
+                                        </div>
+                                        <div>
+                                            <input type="submit" class="btn btn-outline-primary" value="آپلود">
+                                        </div>
+                                    </div>
+                                </form>
+                                <hr>
+
+                                @if($cal->photo)
+                                    <a href="{{ $cal->image }}" target="_blank">
+                                        <img src="{{ $cal->image }}" alt="{{ $cal->company_name }}" class="card-img">
+                                    </a>
+                                @endif
+                            </div>
                         </div>
                         <!--/==/ End of User Information Details -->
                     </div>

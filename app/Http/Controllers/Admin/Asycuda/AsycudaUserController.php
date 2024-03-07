@@ -138,12 +138,16 @@ class AsycudaUserController extends Controller
             $asycuda_user = AsycudaUser::where('id', $data['asy_user_id'])->first();
             $asycuda_user->update(['status' => $status]);
             $exp = Experience::where('employee_id', $asycuda_user->employee->id)->latest()->first();
-            if ($exp && $data['status'] == 'Active') {
-                $exp->update(['asy_user_status' => $status, 'asy_user_roles' => null]);
-            } else {
-                $exp->update(['asy_user_status' => $status, 'asy_user_roles' => $asycuda_user->roles]);
+
+            if ($exp) {
+                if ($data['status'] == 'Active') {
+                    $exp->update(['asy_user_status' => $status, 'asy_user_roles' => null]);
+                } else {
+                    $exp->update(['asy_user_status' => $status, 'asy_user_roles' => $asycuda_user->roles]);
+                }
             }
-            return response()->json(['status' => $status, 'asy_user_id' => $data['asy_user_id']]);
+            
+            return response()->json(['status' => $status]);
         }
     }
 }

@@ -178,4 +178,30 @@ class COALController extends Controller
             'alertType' => 'success'
         ]);
     }
+
+    // Upload Cal Form
+    public function upload_cal(Request $request, $id)
+    {
+        $cal = COAL::findOrFail($id);
+
+        $request->validate([
+            'cal'   => 'required'
+        ]);
+
+        //  Has Photo
+        if ($request->hasFile('cal')) {
+            $avatar = $request->file('cal');
+            $fileName = 'cal-' . time() . '.' . $avatar->getClientOriginalExtension();
+            if ($cal->photo) {
+                $cal->updateImage($avatar->storeAs('coal', $fileName, 'public'));
+            } else {
+                $cal->storeImage($avatar->storeAs('coal', $fileName, 'public'));
+            }
+        }
+
+        return redirect()->back()->with([
+            'message'   => 'جواز فعالیت شرکت آپلود شد.',
+            'alertType' => 'success'
+        ]);
+    }
 }
