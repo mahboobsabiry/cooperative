@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('pages.positions.emptyPositions'))
+@section('title', trans('pages.positions.emptyPositions'))
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -38,6 +38,9 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.office.positions.index') }}">@lang('pages.positions.positions')</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('pages.positions.emptyPositions')</li>
                 </ol>

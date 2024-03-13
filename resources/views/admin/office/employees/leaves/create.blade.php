@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', trans('global.new') . ' ~ ثبت رخصتی کارمند ' . $employee->name . $employee->last_name)
+@section('title', 'ثبت رخصتی کارمند ' . $employee->name . $employee->last_name)
 <!-- Extra Styles -->
 @section('extra_css')
 

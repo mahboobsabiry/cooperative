@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'حساب کاربری سیستم اسیکودا - ' . $asycuda_user->employee->name . ' ' . $asycuda_user->employee->last_name)
+@section('title', 'حساب کاربری ' . $asycuda_user->employee->name . ' ' . $asycuda_user->employee->last_name . ' - اسیکودا')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->

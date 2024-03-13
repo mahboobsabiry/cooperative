@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . 'کارمندان تبدیل شده')
+@section('title', 'کارمندان تبدیل شده')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->

@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('admin.sidebar.employees'))
+@section('title', trans('admin.sidebar.employees'))
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -30,8 +30,9 @@
             <div>
                 <h2 class="main-content-title tx-24 mg-b-5">@lang('admin.sidebar.employees')</h2>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a
-                            href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
+                    </li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('admin.sidebar.employees')</li>
                 </ol>
             </div>
