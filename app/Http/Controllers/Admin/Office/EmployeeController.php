@@ -120,7 +120,7 @@ class EmployeeController extends Controller
             return view('admin.office.employees.edit', compact('employee', 'positions', 'hostels'));
         } else {
             return  redirect()->back()->with([
-                'message'   => 'شما اجازه ویرایش معلومات این کاربر را ندارید.',
+                'message'   => 'ویرایش معلومات این کاربر درست نیست.',
                 'alertType' => 'danger'
             ]);
         }

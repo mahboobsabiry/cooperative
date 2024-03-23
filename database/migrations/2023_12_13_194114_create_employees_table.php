@@ -38,7 +38,7 @@ return new class extends Migration
             $table->string('current_district');
             $table->string('introducer')->nullable();
             $table->string('info')->nullable();
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(0);
 
             // Duty
             $table->tinyInteger('on_duty')->default(0);
