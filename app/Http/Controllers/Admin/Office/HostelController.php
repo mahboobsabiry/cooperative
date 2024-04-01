@@ -60,7 +60,7 @@ class HostelController extends Controller
         // Validate
         $request->validate([
             'number'    => 'required',
-            'section'   => 'required'
+            'section'   => 'nullable'
         ]);
 
         // Save Record

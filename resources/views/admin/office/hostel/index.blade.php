@@ -66,8 +66,14 @@
                         <!-- All Positions -->
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.hostel.hostel') دارای
-                                ({{ \App\Models\Office\Hostel::select('number')->distinct('number')->count() }}) اتاق
+                                @lang('pages.hostel.hostel') محصولی دارای
+                                ({{ \App\Models\Office\Hostel::where('place', 'محصولی')->select('number')->distinct('number')->count() }}) اتاق
+                                <br>
+                                @lang('pages.hostel.hostel')  سرحدی دارای
+                                ({{ \App\Models\Office\Hostel::where('place', 'سرحدی')->select('number')->distinct('number')->count() }}) اتاق
+                                <br>
+                                @lang('pages.hostel.hostel') پورت یکم دارای
+                                ({{ \App\Models\Office\Hostel::where('place', 'پورت یکم')->select('number')->distinct('number')->count() }}) اتاق
                             </div>
                             <!-- Table -->
                             <div class="table-responsive mt-2">
@@ -75,6 +81,7 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>موقعیت</th>
                                         <th>@lang('pages.hostel.roomNumber')</th>
                                         <th>@lang('pages.hostel.section')</th>
                                         <th>@lang('pages.hostel.numOfMembers')</th>
@@ -86,6 +93,7 @@
                                     @foreach($hostels as $hostel)
                                         <tr>
                                             <td>{{ $hostel->id }}</td>
+                                            <td>{{ $hostel->place }}</td>
                                             <td>
                                                 <a href="{{ route('admin.office.hostel.show', $hostel->id ) }}">{{ $hostel->number }}</a>
                                             </td>

@@ -47,7 +47,7 @@
 
                             <!-- Form Title -->
                             <div>
-                                <h6 class="card-title mb-1">@lang('pages.hostel.hostel')</h6>
+                                <h6 class="card-title mb-1">ویرایش اتاق</h6>
                                 <p class="text-muted card-sub-title">You can add new record here.</p>
                             </div>
 
@@ -55,6 +55,26 @@
                             <form method="post" action="{{ route('admin.office.hostel.update', $hostel->id) }}">
                                 @csrf
                                 @method('PUT')
+                                <!-- Place -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!-- Place -->
+                                        <div class="form-group @error('place') has-danger @enderror">
+                                            <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
+                                            <select name="place" id="place" class="form-control">
+                                                <option value="محصولی" {{ $hostel->place == 'محصولی' ? 'selected' : '' }}>محصولی</option>
+                                                <option value="سرحدی" {{ $hostel->place == 'سرحدی' ? 'selected' : '' }}>سرحدی</option>
+                                                <option value="پورت یکم" {{ $hostel->place == 'پورت یکم' ? 'selected' : '' }}>پورت یکم</option>
+                                            </select>
+
+                                            @error('place')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Place -->
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <!-- Number -->
@@ -72,9 +92,10 @@
                                     <div class="col-md-6">
                                         <!-- Section -->
                                         <div class="form-group @error('section') has-danger @enderror">
-                                            <p class="mb-2">@lang('pages.hostel.roomSection'): <span class="tx-danger">*</span></p>
+                                            <p class="mb-2">@lang('pages.hostel.roomSection'): </p>
 
                                             <select name="section" id="section" class="form-control">
+                                                <option value="" selected>@lang('form.chooseOne')</option>
                                                 <option value="A" {{ $hostel->section == 'A' ? 'selected' : '' }}>A</option>
                                                 <option value="B" {{ $hostel->section == 'B' ? 'selected' : '' }}>B</option>
                                             </select>

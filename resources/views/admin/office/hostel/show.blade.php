@@ -96,6 +96,7 @@
                                     <!-- Header -->
                                     <tr>
                                         <th><strong>#: </strong></th>
+                                        <th><strong>موقعیت: </strong></th>
                                         <th><strong>@lang('pages.hostel.roomNumber'): </strong></th>
                                         <th><strong>@lang('pages.hostel.roomSection'): </strong></th>
                                         <th><strong>@lang('pages.hostel.numOfMembers'): </strong></th>
@@ -105,6 +106,7 @@
                                     <!-- Body -->
                                     <tr>
                                         <td>{{ $hostel->id }}</td>
+                                        <td>{{ $hostel->place }}</td>
                                         <td>{{ $hostel->number }}</td>
                                         <td>{{ $hostel->section }}</td>
                                         <td>
