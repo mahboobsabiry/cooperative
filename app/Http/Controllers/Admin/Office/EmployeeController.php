@@ -114,13 +114,13 @@ class EmployeeController extends Controller
     // Edit Info
     public function edit(Employee $employee)
     {
-        if ($employee->status == 0 || $employee->status == 5) {
+        if ($employee->status == 0 || $employee->status == 1 || $employee->status == 5) {
             $positions = Position::tree();
             $hostels = Hostel::all();
             return view('admin.office.employees.edit', compact('employee', 'positions', 'hostels'));
         } else {
             return  redirect()->back()->with([
-                'message'   => 'ویرایش معلومات این کاربر درست نیست.',
+                'message'   => 'ویرایش معلومات این کاربر مجاز نمی باشد.',
                 'alertType' => 'danger'
             ]);
         }
