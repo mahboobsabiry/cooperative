@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Asycuda;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\COALRequest;
 use App\Models\Asycuda\COAL;
+use App\Models\Document;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -180,27 +181,37 @@ class COALController extends Controller
     }
 
     // Upload Cal Form
-    public function upload_cal(Request $request, $id)
+    public function upload_doc(Request $request, $id)
     {
-        $cal = COAL::findOrFail($id);
+        // Employee
+        $cal = COAL::find($id);
 
-        $request->validate([
-            'cal'   => 'required'
-        ]);
-
-        //  Has Photo
-        if ($request->hasFile('cal')) {
-            $avatar = $request->file('cal');
-            $fileName = 'cal-' . time() . '.' . $avatar->getClientOriginalExtension();
-            if ($cal->photo) {
-                $cal->updateImage($avatar->storeAs('coal', $fileName, 'public'));
-            } else {
-                $cal->storeImage($avatar->storeAs('coal', $fileName, 'public'));
-            }
+        foreach ($request->file('document') as $item) {
+            // New Document
+            $document = new Document();
+            $fileName = 'cal-document-' . time() . '.' . $item->getClientOriginalExtension();
+            $item->storeAs('coal/docs', $fileName, 'public');
+            $document->path   = $fileName;
+            $cal->documents()->save($document);
         }
 
         return redirect()->back()->with([
-            'message'   => 'جواز فعالیت شرکت آپلود شد.',
+            'message'   => 'موفقانه ثبت گردید.',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Delete Document
+    public function delete_doc($id)
+    {
+        $document = Document::find($id);
+        // dd(storage_path('app/public/employees/docs/' . $document->path));
+        if (file_exists(storage_path('app/public/employees/docs/' . $document->path))) {
+            unlink(storage_path('app/public/employees/docs/' . $document->path));
+        }
+        $document->delete();
+        return redirect()->back()->with([
+            'message'   => 'سند موفقانه حذف گردید.',
             'alertType' => 'success'
         ]);
     }

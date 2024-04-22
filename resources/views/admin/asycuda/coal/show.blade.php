@@ -187,28 +187,44 @@
                             <div class="col-md-8 bd m-2">
                                 <div class="m-2">
                                     <h5 class="font-weight-bold">فورم جواز فعالیت شرکت</h5>
-                                    <p class="text-muted">فورم جواز فعالیت شرکت پس از تایید مراجع ذیربط و تصدیق مقامات ذیصلاح اینجا نمایش داده می‌شود.</p>
+                                    <p class="text-muted">فورم جواز فعالیت شرکت پس از تایید مراجع ذیربط و تصدیق مقامات ذیصلاح و سایر اسناد مرتبط اینجا نمایش داده می‌شود.</p>
                                 </div>
 
                                 <!-- Form -->
-                                <form method="post" action="{{ route('admin.asycuda.coal.upload_cal', $cal->id) }}" enctype="multipart/form-data">
+                                <form method="post" action="{{ route('admin.asycuda.coal.upload_doc', $cal->id) }}" enctype="multipart/form-data">
                                     @csrf
+                                    <p class="mb-2">
+                                        <span class="caption bg-gray-300">نوت: فایل آپلود شده باید از نوع عکس بوده باشد، فرمن های (.jpg .png .jpeg) مجاز می باشد.</span>
+                                    </p>
                                     <div class="form-group row m-2">
                                         <div class="{{ app()->getLocale() == 'en' ? 'mr-1' : 'ml-1' }}">
-                                            <input type="file" accept="image/*" class="form-control" name="cal">
+                                            <input type="file" accept="image/*" class="form-control" name="document[]" multiple>
                                         </div>
                                         <div>
                                             <input type="submit" class="btn btn-outline-primary" value="آپلود">
                                         </div>
                                     </div>
                                 </form>
-                                <hr>
 
-                                @if($cal->photo)
-                                    <a href="{{ $cal->image }}" target="_blank">
-                                        <img src="{{ $cal->image }}" alt="{{ $cal->company_name }}" class="card-img">
-                                    </a>
-                                @endif
+                                <div class="row bd">
+                                    @foreach($cal->documents as $document)
+                                        <div class="bd m-1 p-1">
+                                            <!-- Delete -->
+                                            <a class="pos-absolute modal-effect btn btn-sm btn-danger"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#delete_doc{{ $document->id }}">
+                                                <i class="fe fe-trash"></i>
+                                            </a>
+
+                                            @include('admin.asycuda.coal.delete_doc')
+
+                                            <a href="{{ asset('storage/coal/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}"
+                                               target="_blank">
+                                                <img src="{{ asset('storage/coal/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" alt="اسناد" width="150">
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                         <!--/==/ End of User Information Details -->

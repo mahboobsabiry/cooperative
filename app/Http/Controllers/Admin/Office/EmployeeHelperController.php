@@ -323,7 +323,7 @@ class EmployeeHelperController extends Controller
         }
 
         return redirect()->back()->with([
-            'message'   => 'سند موفقانه حذف گردید.',
+            'message'   => 'سند موفقانه ثبت گردید.',
             'alertType' => 'success'
         ]);
     }
