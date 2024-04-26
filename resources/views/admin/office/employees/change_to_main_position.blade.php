@@ -57,26 +57,19 @@
 
                             <!-- Position -->
                             @can('office_position_view')
-                                <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title ?? '' }}</a>
+                                <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->type }})</a>
                             @else
-                                <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
+                                <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }} ({{ $employee->position->type }})</p>
                             @endcan
                             @if($employee->on_duty == 1)
                                 <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
                             @endif
-
-                            @if($employee->position->position_number == 2 || $employee->position->position_number == 3)
-                            @else
-                                <p class="pro-user-desc text-primary mb-1">({{ $employee->position->type ?? '' }})</p>
-                            @endif
                             <!-- Employee Star -->
-                            @if($employee->position)
-                                <p class="user-info-rating">
-                                    @for($i=1; $i<=$employee->position->position_number; $i++)
-                                        <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                    @endfor
-                                </p>
-                            @endif
+                            <p class="user-info-rating">
+                                @for($i=1; $i<=$employee->position->position_number; $i++)
+                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                @endfor
+                            </p>
                             <!--/==/ End of Employee Star -->
                         </div>
                     </div>
@@ -150,62 +143,74 @@
                         <!-- Form -->
                         <form method="post" action="{{ route('admin.office.employees.change_to_main_pos', $employee->id) }}" class="background_form" enctype="multipart/form-data">
                             @csrf
-                            <div class="">
-                                <!-- Employee && Document Number -->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <!-- Start Duty Date -->
-                                        <div class="form-group @error('start_date') has-danger @enderror">
-                                            <p class="mb-2">تاریخ شروع: <span class="tx-danger">*</span></p>
-                                            <input data-jdp data-jdp-max-date="today" type="text" id="start_date" class="form-control @error('start_date') form-control-danger @enderror" name="start_date" value="{{ old('start_date') }}" required>
-
-                                            @error('start_date')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
+                            <!-- Employee && Document Number -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- Duty Position -->
+                                    <div class="form-group @error('position') has-danger @enderror">
+                                        <p class="mb-2">بست:</p>
+                                        <input type="text" class="form-control" value="{{ $employee->position->title }}" disabled>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <!-- Duty Document Number -->
-                                        <div class="form-group @error('doc_number') has-danger @enderror">
-                                            <p class="mb-2">نمبر مکتوب: <span class="tx-danger">*</span></p>
-                                            <input type="text" id="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" name="doc_number" value="{{ old('doc_number') }}" required>
+                                    <!-- Start Duty Date -->
+                                    <div class="form-group @error('start_date') has-danger @enderror">
+                                        <p class="mb-2">@lang('form.startDuty'): <span class="tx-danger">*</span></p>
+                                        <input data-jdp data-jdp-max-date="today" type="text" id="start_date" class="form-control @error('start_date') form-control-danger @enderror" name="start_date" value="{{ old('start_date') }}" required>
 
-                                            @error('doc_number')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
+                                        @error('start_date')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
-                                <!--/==/ End of Employee && Document Number -->
 
-                                <!-- Start Duty && Duty Document Number -->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <!-- Info -->
-                                        <div class="form-group @error('info') has-danger @enderror">
-                                            <p class="mb-2">@lang('global.extraInfo'):</p>
-                                            <textarea class="form-control" name="info" id="info">{{ old('info') }}</textarea>
+                                <div class="col-md-6">
+                                    <!-- Duty Document Number -->
+                                    <div class="form-group @error('doc_number') has-danger @enderror">
+                                        <p class="mb-2">@lang('form.dutyDocNumber'): <span class="tx-danger">*</span></p>
+                                        <input type="text" id="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" name="doc_number" value="{{ old('doc_number') }}" required>
 
-                                            @error('info')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
+                                        @error('doc_number')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <!-- File -->
-                                        <div class="form-group @error('document') has-danger @enderror">
-                                            <p class="mb-2">اسکن مکتوب: </p>
-                                            <input type="file" id="document" class="form-control @error('document') form-control-danger @enderror" name="document">
-                                        </div>
+                                    <!-- Duty Document Date -->
+                                    <div class="form-group @error('doc_date') has-danger @enderror">
+                                        <p class="mb-2">تاریخ مکتوب: <span class="tx-danger">*</span></p>
+                                        <input type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
+
+                                        @error('doc_date')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
-                                <!--/==/ End of Info -->
                             </div>
-                            <div class="modal-footer">
-                                <button class="btn ripple btn-primary" type="submit">@lang('global.save')</button>
+                            <!--/==/ End of Employee && Document Number -->
+
+                            <!-- Start Duty && Duty Document Number -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- File -->
+                                    <div class="form-group @error('photo') has-danger @enderror">
+                                        <p class="mb-2">اسکن مکتوب: </p>
+                                        <input type="file" id="photo" class="form-control @error('photo') form-control-danger @enderror" name="photo">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <!-- Info -->
+                                    <div class="form-group @error('info') has-danger @enderror">
+                                        <p class="mb-2">@lang('global.extraInfo'):</p>
+                                        <textarea class="form-control" name="info" id="info">{{ old('info') }}</textarea>
+
+                                        @error('info')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
+                            <!--/==/ End of Info -->
+                            <button class="btn ripple btn-primary" type="submit">@lang('global.save')</button>
                         </form>
                         <!--/==/ End of Form -->
                     </div>

@@ -18,8 +18,10 @@ return new class extends Migration
             $table->boolean('position_type')->default(0);
             $table->string('doc_number');
             $table->string('doc_date')->nullable();
+            $table->string('username');
+            $table->string('password');
             $table->tinyInteger('user_status')->default(0);
-            $table->text('user_roles')->nullable();
+            $table->string('user_roles')->nullable();
             $table->text('info')->nullable();
             $table->timestamps();
 

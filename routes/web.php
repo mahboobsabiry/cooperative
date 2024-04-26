@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\Office\AgentController;
 use App\Http\Controllers\Admin\Office\CompanyController;
 use App\Http\Controllers\Admin\Office\EmployeeHelperController;
 use App\Http\Controllers\Admin\Office\EmployeeController;
-use App\Http\Controllers\Admin\Office\ExperienceController;
+use App\Http\Controllers\Admin\Office\ResumeController;
 use App\Http\Controllers\Admin\Office\HostelController;
 use App\Http\Controllers\Admin\Office\LeaveController;
 use App\Http\Controllers\Admin\Office\PositionController;
@@ -145,13 +145,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('employee/retire-employee/{id}', [EmployeeHelperController::class, 'retire_employee'])->name('employees.retire_employee');
 
         // ========================== Employee Experiences ======================
-        Route::get('employee/{id}/experiences', [ExperienceController::class, 'index'])->name('employees.experiences');
+        Route::get('employee/{id}/resumes', [ResumeController::class, 'index'])->name('employees.resumes');
         // Add Duty Position
-        Route::get('employee/{id}/add-duty-position', [ExperienceController::class, 'add_duty_position'])->name('employees.add_duty_position');
-        Route::post('employee/{id}/add-duty-pos', [ExperienceController::class, 'add_duty_pos'])->name('employees.add_duty_pos');
+        Route::get('employee/{id}/add-duty-position', [ResumeController::class, 'add_duty_position'])->name('employees.add_duty_position');
+        Route::post('employee/{id}/add-duty-pos', [ResumeController::class, 'add_duty_pos'])->name('employees.add_duty_pos');
         // Change to main position
-        Route::get('employee/{id}/change-to-main-position', [ExperienceController::class, 'change_to_main_position'])->name('employees.change_to_main_position');
-        Route::post('employee/{id}/change-to-main-pos', [ExperienceController::class, 'change_to_main_pos'])->name('employees.change_to_main_pos');
+        Route::get('employee/{id}/change-to-main-position', [ResumeController::class, 'change_to_main_position'])->name('employees.change_to_main_position');
+        Route::post('employee/{id}/change-to-main-pos', [ResumeController::class, 'change_to_main_pos'])->name('employees.change_to_main_pos');
 
         // ========================== Employee Leaves ======================
         Route::get('employee/{id}/leaves', [LeaveController::class, 'index'])->name('employees.leaves.index');

@@ -170,10 +170,10 @@
                                 <span>{{ $employee->name }} {{ $employee->last_name }}</span>
                             </h4>
 
-                            @if($employee->position)
+                            @if($employee->status == 0)
                                 <!-- Position -->
                                 @can('office_position_view')
-                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }}</a>
+                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->type ?? '' }})</a>
                                 @else
                                     <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
                                 @endcan
@@ -181,10 +181,6 @@
                                     <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
                                 @endif
 
-                                @if($employee->position->position_number == 2 || $employee->position->position_number == 3)
-                                @else
-                                    <p class="pro-user-desc text-primary mb-1">({{ $employee->position->type ?? '' }})</p>
-                                @endif
                                 <!-- Employee Star -->
                                 <p class="user-info-rating">
                                     @for($i=1; $i<=$employee->position->position_number; $i++)
@@ -194,12 +190,14 @@
                                 <!--/==/ End of Employee Star -->
                             @else
                                 <span class="text-danger">
-                                    @if($employee->status == 2)
+                                    @if($employee->status == 1)
                                         تقاعد نموده است
-                                    @elseif($employee->status == 3)
+                                    @elseif($employee->status == 2)
                                         منفک گردیده است
-                                    @elseif($employee->status == 4)
+                                    @elseif($employee->status == 3)
                                         تبدیل گردیده است
+                                    @elseif($employee->status == 4)
+                                        معلق
                                     @endif
                                 </span>
                             @endif
@@ -229,7 +227,7 @@
                                     <div>
                                         @if($employee->user)
                                             @can('user_mgmt')
-                                                <a href="{{ route('admin.users.show', $employee->user->id) }}" target="_blank">حساب کاربری BCD-MIS دارد</a>
+                                                <a href="{{ route('admin.users.show', $employee->user->id) }}" target="_blank">حساب کاربری BCD-MIS دارد ({{ $employee->user->status == '1' ? 'فعال' : 'غیرفعال' }})</a>
                                             @else
                                                 حساب کاربری BCD-MIS دارد
                                             @endcan
@@ -239,7 +237,7 @@
                                         |
                                         @if($employee->asycuda_user)
                                             @can('asycuda_view')
-                                                <a href="{{ route('admin.asycuda.users.show', $employee->asycuda_user->id) }}" target="_blank">حساب کاربری Asycuda دارد</a>
+                                                <a href="{{ route('admin.asycuda.users.show', $employee->asycuda_user->id) }}" target="_blank">حساب کاربری Asycuda دارد ({{ $employee->asycuda_user->status == '1' ? 'فعال' : 'غیرفعال' }})</a>
                                             @else
                                                 حساب کاربری Asycuda دارد
                                             @endcan
@@ -293,41 +291,9 @@
                         <!-- Action Buttons -->
                         <h5>دکمه های کاربردی</h5>
                         <div class="row m-2">
-                            <a href="{{ route('admin.office.employees.experiences', $employee->id) }}" class="btn btn-outline-success m-1">سابقه کاری</a>
+                            <a href="{{ route('admin.office.employees.resumes', $employee->id) }}" class="btn btn-outline-success m-1">سابقه کاری</a>
 
                             <a href="{{ route('admin.office.employees.leaves.index', $employee->id) }}" class="btn btn-outline-secondary m-1">رخصتی ها</a>
-
-                            <!-- Duty Position -->
-                            @if($employee->position)
-                                <!-- Change to main/duty position -->
-                                @can('office_employee_edit')
-                                    @if($employee->on_duty == 0)
-                                        <a class="btn btn-outline-info m-1"
-                                           href="{{ route('admin.office.employees.add_duty_position', $employee->id) }}">@lang('pages.employees.onDuty')</a>
-                                    @else
-                                        <a class="btn btn-outline-info m-1" href="{{ route('admin.office.employees.change_to_main_position', $employee->id) }}">تبدیل به اصل بست</a>
-                                    @endif
-
-                                    <!-- Retire Employee -->
-                                    @if($age >= 65)
-                                        <a class="modal-effect btn btn-outline-success m-1" data-effect="effect-sign" data-toggle="modal"
-                                           href="#retire_employee{{ $employee->id }}">تقاعد</a>
-                                    @endif
-
-                                    <!-- Fire Employee -->
-                                    <a class="modal-effect btn btn-outline-danger m-1" data-effect="effect-sign" data-toggle="modal"
-                                       href="#fire_employee{{ $employee->id }}">منفک</a>
-
-                                    <!-- Change Position Employee -->
-                                    <a class="modal-effect btn btn-outline-dark m-1" data-effect="effect-sign" data-toggle="modal"
-                                       href="#change_pos_employee{{ $employee->id }}">تبدیل</a>
-                                @endcan
-
-                                @include('admin.office.employees.inc.modals')
-                            @else
-                            @endif
-                            <!-- End of Duty Position -->
-                            <a href="{{ route('admin.office.employees.custom_card', $employee->id) }}" class="btn btn-outline-info m-1">کارت هویت گمرکی</a>
                         </div>
                         <!--/==/ End of Action Buttons -->
 

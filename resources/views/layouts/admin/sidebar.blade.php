@@ -119,7 +119,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/appointment-positions') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.positions.appointment') }}">
                                     @lang('pages.positions.appointmentPositions')
-                                        <?php $appointment = \App\Models\Office\Position::all()->sum('num_of_pos') - \App\Models\Office\Employee::all()->whereBetween('status', [0,1])->count(); ?>
+                                        <?php $appointment = \App\Models\Office\Position::all()->sum('num_of_pos') - \App\Models\Office\Employee::all()->where('status', 0)->count(); ?>
                                     ({{ \App\Models\Office\Position::all()->sum('num_of_pos') - $appointment }})
                                 </a>
                             </li>
@@ -128,7 +128,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/empty-positions') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.positions.empty') }}">
                                     @lang('pages.positions.emptyPositions')
-                                    ({{ \App\Models\Office\Position::all()->sum('num_of_pos') - \App\Models\Office\Employee::all()->whereBetween('status', [0,1])->count() }}
+                                    ({{ \App\Models\Office\Position::all()->sum('num_of_pos') - \App\Models\Office\Employee::all()->where('status', 0)->count() }}
                                     )
                                 </a>
                             </li>
@@ -199,7 +199,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/on-duty-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.on_duty') }}">
                                     @lang('pages.employees.onDuty')
-                                    ({{ \App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 1)->where('on_duty', 1)->count() }}
+                                    ({{ \App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 0)->where('on_duty', 1)->count() }}
                                     )
                                 </a>
                             </li>
@@ -208,7 +208,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/employee/retired-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.retired_employees') }}">
                                     متقاعدین
-                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 2)->count() }}
+                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 1)->count() }}
                                     )
                                 </a>
                             </li>
@@ -217,7 +217,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/employee/fired-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.fired_employees') }}">
                                     منفکی
-                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 3)->count() }}
+                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 2)->count() }}
                                     )
                                 </a>
                             </li>
@@ -227,7 +227,7 @@
                                 <a class="nav-sub-link"
                                    href="{{ route('admin.office.employees.change_position_employees') }}">
                                     تبدیل شده
-                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 4)->count() }})
+                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 3)->count() }})
                                 </a>
                             </li>
 
@@ -235,9 +235,9 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/employee/suspended-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.suspended_employees') }}">
                                     <span class="text-secondary">معلق </span>&nbsp;
-                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 5)->count() }}
+                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 4)->count() }}
                                     )
-                                    @if(count(\App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 5)) >= 1)
+                                    @if(count(\App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 4)) >= 1)
                                         &nbsp;<span class="fas fa-user-tie fa-pulse text-danger"></span>
                                     @endif
                                 </a>

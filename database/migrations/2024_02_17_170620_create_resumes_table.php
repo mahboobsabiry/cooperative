@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('experiences', function (Blueprint $table) {
+        Schema::create('resumes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->string('position');
@@ -19,11 +19,6 @@ return new class extends Migration
             $table->string('start_date');
             $table->string('end_date')->nullable();
             $table->string('doc_number');
-            $table->string('document')->nullable();
-            $table->tinyInteger('user_status')->default(0);
-            $table->tinyInteger('asy_user_status')->default(0);
-            $table->text('user_roles')->nullable();
-            $table->text('asy_user_roles')->nullable();
             $table->text('info')->nullable();
             $table->timestamps();
 
@@ -36,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('experiences');
+        Schema::dropIfExists('resumes');
     }
 };

@@ -58,20 +58,15 @@
                                 <span>{{ $employee->name }} {{ $employee->last_name }}</span>
                             </h4>
 
-                            @if($employee->position)
+                            @if($employee->status == 0)
                                 <!-- Position -->
                                 @can('office_position_view')
-                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }}</a>
+                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->type }})</a>
                                 @else
-                                    <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
+                                    <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }} ({{ $employee->position->type }})</p>
                                 @endcan
                                 @if($employee->on_duty == 1)
                                     <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
-                                @endif
-
-                                @if($employee->position->position_number == 2 || $employee->position->position_number == 3)
-                                @else
-                                    <p class="pro-user-desc text-primary mb-1">({{ $employee->position->type ?? '' }})</p>
                                 @endif
                                 <!-- Employee Star -->
                                 <p class="user-info-rating">
@@ -82,11 +77,11 @@
                                 <!--/==/ End of Employee Star -->
                             @else
                                 <span class="text-danger">
-                                    @if($employee->status == 2)
+                                    @if($employee->status == 1)
                                         تقاعد نموده است
-                                    @elseif($employee->status == 3)
+                                    @elseif($employee->status == 2)
                                         منفک گردیده است
-                                    @elseif($employee->status == 4)
+                                    @elseif($employee->status == 3)
                                         تبدیل گردیده است
                                     @endif
                                 </span>
@@ -143,41 +138,45 @@
                 </div>
                 <!--/==/ End of Contact Information -->
 
-                <!-- Custom ID Card -->
-                @if($employee->position)
+                <!-- BUTTONS -->
                 <div class="card custom-card">
                     <div class="overflow-auto justify-content-center p-2">
                         <!-- Action Buttons -->
                         <h5>دکمه های کاربردی</h5>
                         <div class="row m-2">
                             <!-- Duty Position -->
-                            <!-- Change to main/duty position -->
-                            @can('office_employee_edit')
-                                @if($employee->on_duty == 0)
+                            @if($employee->status == 0)
+                                <!-- Change to main/duty position -->
+                                @can('office_employee_edit')
                                     <a class="btn btn-outline-info m-1"
                                        href="{{ route('admin.office.employees.add_duty_position', $employee->id) }}">@lang('pages.employees.onDuty')</a>
-                                @else
-                                    <a class="btn btn-outline-info m-1" href="{{ route('admin.office.employees.change_to_main_position', $employee->id) }}">تبدیل به اصل بست</a>
-                                @endif
+                                    @if($employee->on_duty == 1)
+                                        <a class="btn btn-outline-success m-1" href="{{ route('admin.office.employees.change_to_main_position', $employee->id) }}">تبدیل به اصل بست</a>
+                                    @endif
 
-                                <!-- Retire Employee -->
-                                <a class="modal-effect btn btn-outline-success m-1" data-effect="effect-sign" data-toggle="modal"
-                                   href="#retire_employee{{ $employee->id }}">تقاعد</a>
+                                    <!-- Retire Employee -->
+                                    @if($age >= 65)
+                                        <a class="modal-effect btn btn-outline-success m-1" data-effect="effect-sign" data-toggle="modal"
+                                           href="#retire_employee{{ $employee->id }}">تقاعد</a>
+                                    @endif
 
-                                <!-- Fire Employee -->
-                                <a class="modal-effect btn btn-outline-danger m-1" data-effect="effect-sign" data-toggle="modal"
-                                   href="#fire_employee{{ $employee->id }}">منفک</a>
+                                    <!-- Fire Employee -->
+                                    <a class="modal-effect btn btn-outline-danger m-1" data-effect="effect-sign" data-toggle="modal"
+                                       href="#fire_employee{{ $employee->id }}">منفک</a>
 
-                                <!-- Change Position Employee -->
-                                <a class="modal-effect btn btn-outline-dark m-1" data-effect="effect-sign" data-toggle="modal"
-                                   href="#change_pos_employee{{ $employee->id }}">تبدیل</a>
-                            @endcan
+                                    <!-- Change Position Employee -->
+                                    <a class="modal-effect btn btn-outline-dark m-1" data-effect="effect-sign" data-toggle="modal"
+                                       href="#change_pos_employee{{ $employee->id }}">تبدیل</a>
+                                @endcan
+
+                                @include('admin.office.employees.inc.modals')
+                            @else
+                            @endif
                         </div>
                         <!--/==/ End of Action Buttons -->
                     </div>
                 </div>
-                @endif
-                <!--/==/ End of Contact Custom ID Card -->
+                <!--/==/ End of BUTTONS -->
             </div>
 
             <div class="col-lg-9 col-md-12">
@@ -202,11 +201,10 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-center">@lang('form.name')</th>
                                     <th class="text-center">بست</th>
                                     <th class="text-center">نوع بست</th>
-                                    <th class="text-center">فعالیت حساب کاربری سیستم</th>
-                                    <th class="text-center">فعالیت حساب کاربری سیستم اسیکودا</th>
+                                    <th class="text-center">حساب کاربری سیستم</th>
+                                    <th class="text-center">حساب کاربری سیستم اسیکودا</th>
                                     <th class="text-center">تاریخ شروع</th>
                                     <th class="text-center">تاریخ ختم</th>
                                     <th class="text-center">نمبر مکتوب</th>
@@ -216,39 +214,36 @@
                                 </thead>
 
                                 <tbody>
-                                @foreach($employee->experiences as $exp)
+                                @foreach($employee->resumes as $resume)
                                     <tr>
-                                        <td>{{ $exp->id }}</td>
-                                        <td>
-                                            <a href="{{ route('admin.office.employees.show', $exp->employee->id) }}">{{ $exp->employee->name }}</a>
-                                        </td>
-                                        <td>{{ $exp->position }}</td>
-                                        <td>{{ $exp->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
+                                        <td>{{ $resume->id }}</td>
+                                        <td>{{ $resume->position }}</td>
+                                        <td>{{ $resume->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
                                         <!-- System USER -->
                                         <td>
-                                            @if($exp->employee->user)
-                                                {{ $exp->user_status == 1 ? 'فعال' : 'غیرفعال' }}
+                                            @if($resume->employee->user)
+                                                {{ $resume->user_status == 1 ? 'فعال' : 'غیرفعال' }}
                                             @else
-                                                یوزر ندارد
+                                                ندارد
                                             @endif
                                         </td>
                                         <!-- Asycuda User -->
                                         <td>
-                                            @if($exp->employee->asycuda_user)
-                                                {{ $exp->asy_user_status == 1 ? 'فعال' : 'غیرفعال' }}
+                                            @if($resume->employee->asycuda_user)
+                                                {{ $resume->asy_user_status == 1 ? 'فعال' : 'غیرفعال' }}
                                             @else
-                                                یوزر ندارد
+                                                ندارد
                                             @endif
                                         </td>
-                                        <td>{{ $exp->start_date }}</td>
-                                        <td>{{ $exp->end_date ?? 'در حال انجام وظیفه' }}</td>
-                                        <td>{{ $exp->doc_number }}</td>
+                                        <td>{{ $resume->start_date }}</td>
+                                        <td>{{ $resume->end_date ?? 'در حال انجام وظیفه' }}</td>
+                                        <td>{{ $resume->doc_number }}</td>
                                         <td>
-                                            <a href="{{ asset('storage/employees/documents/' . $exp->document) }}" target="_blank">
-                                                <img src="{{ asset('storage/employees/documents/' . $exp->document) }}" alt="{{ $exp->employee->name }}" width="80">
+                                            <a href="{{ $resume->image ?? asset('assets/images/id-card-default.png') }}" target="_blank">
+                                                <img src="{{ $resume->image ?? asset('assets/images/id-card-default.png') }}" alt="{{ $resume->employee->name }}" width="80">
                                             </a>
                                         </td>
-                                        <td>{{ $exp->info }}</td>
+                                        <td>{{ $resume->info }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

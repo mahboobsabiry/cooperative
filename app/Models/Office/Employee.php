@@ -27,7 +27,7 @@ class Employee extends Model
         'phone', 'phone2', 'email',
         'main_province', 'main_district', 'current_province', 'current_district',
         'introducer', 'info','status',
-        'on_duty', 'start_duty', 'duty_doc_number', 'duty_position',
+        'on_duty', 'start_duty', 'duty_doc_number', 'duty_doc_date', 'duty_position',
     ];
 
     // Morph Photo
@@ -43,9 +43,9 @@ class Employee extends Model
     }
 
     // Morph Document
-    public function experiences(): HasMany
+    public function resumes(): HasMany
     {
-        return $this->hasMany(Experience::class);
+        return $this->hasMany(Resume::class);
     }
 
     // Position

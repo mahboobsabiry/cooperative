@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Office;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\Office\Employee;
-use App\Models\Office\Experience;
+use App\Models\Office\Resume;
 use App\Models\Office\Position;
 use Illuminate\Http\Request;
 use Morilog\Jalali\CalendarUtils;

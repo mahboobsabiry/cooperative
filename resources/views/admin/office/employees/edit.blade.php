@@ -82,7 +82,7 @@
                                         </p>
 
                                         <!-- Position && Position Code -->
-                                        @if($employee->position_id == null || $employee->status == 3)
+                                        @if($employee->position_id == null || $employee->status == 4)
                                             <div class="row">
                                                 <!-- Position -->
                                                 <div class="col-md-6">

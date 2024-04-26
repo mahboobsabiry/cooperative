@@ -14,7 +14,7 @@ class AsyUserExp extends Model
 
     protected $table = 'asy_users_exp';
 
-    protected $fillable = ['asy_user_id', 'position', 'position_type', 'doc_number', 'doc_date', 'user_status', 'user_roles', 'info'];
+    protected $fillable = ['asy_user_id', 'position', 'position_type', 'doc_number', 'doc_date', 'username', 'password', 'user_status', 'user_roles', 'info'];
 
     public function asy_user()
     {

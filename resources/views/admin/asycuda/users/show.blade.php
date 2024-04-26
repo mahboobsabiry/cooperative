@@ -325,7 +325,7 @@
                                 <tbody>
                                 @foreach($asycuda_user->experiences as $exp)
                                     <tr>
-                                        <td>{{ $exp->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $exp->position }}</td>
                                         <td>{{ $exp->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
                                         <td>{{ $exp->doc_number }}</td>

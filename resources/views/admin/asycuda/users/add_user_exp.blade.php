@@ -52,7 +52,7 @@
         <!-- Main Row -->
         <div class="row">
             <!-- Short Part -->
-            <div class="col-lg-4 col-md-12">
+            <div class="col-lg-3 col-md-12">
                 <!-- Profile Main Info -->
                 <div class="card custom-card">
                     <div class="card-body text-center">
@@ -163,7 +163,7 @@
             </div>
 
             <!-- Large Part -->
-            <div class="col-lg-8 col-md-12">
+            <div class="col-lg-9 col-md-12">
                 <!-- Card -->
                 <div class="card custom-card overflow-hidden">
                     <!-- Card Body -->
@@ -205,6 +205,26 @@
                                         @enderror
                                     </div>
 
+                                    <!-- User -->
+                                    <div class="form-group @error('username') has-danger @enderror">
+                                        <p class="mb-2">نام کاربری: <span class="tx-danger">*</span></p>
+                                        <input type="text" id="username" class="form-control @error('username') form-control-danger @enderror" name="username" value="{{ $asycuda_user->user ?? old('username') }}" required>
+
+                                        @error('username')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="form-group @error('password') has-danger @enderror">
+                                        <p class="mb-2">رمز عبور: <span class="tx-danger">*</span></p>
+                                        <input type="text" id="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" name="doc_number" value="{{ $asycuda_user->password ?? old('password') }}" required>
+
+                                        @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
                                     <!-- User Roles -->
                                     <div class="form-group @error('user_roles') has-danger @enderror">
                                         <p class="mb-2">صلاحیت های حساب کاربری: <span class="tx-danger">*</span></p>
@@ -227,7 +247,8 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-
+                                </div>
+                                <div class="col-md-6">
                                     <!-- Document Number -->
                                     <div class="form-group @error('doc_number') has-danger @enderror">
                                         <p class="mb-2">نمبر مکتوب: <span class="tx-danger">*</span></p>
@@ -237,8 +258,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-6">
+
                                     <!-- Document Date -->
                                     <div class="form-group @error('doc_date') has-danger @enderror">
                                         <p class="mb-2">تاریخ مکتوب: <span class="tx-danger">*</span></p>

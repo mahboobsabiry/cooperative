@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Asycuda\AsycudaUser;
 use App\Models\AsyUserExp;
 use App\Models\Office\Employee;
-use App\Models\Office\Experience;
+use App\Models\Office\Resume;
 use Illuminate\Http\Request;
 
 class AsycudaUserController extends Controller
@@ -136,7 +136,7 @@ class AsycudaUserController extends Controller
             }
             $asycuda_user = AsycudaUser::where('id', $data['asy_user_id'])->first();
             $asycuda_user->update(['status' => $status]);
-            $exp = Experience::where('employee_id', $asycuda_user->employee->id)->latest()->first();
+            $exp = Resume::where('employee_id', $asycuda_user->employee->id)->latest()->first();
 
             if ($exp) {
                 if ($data['status'] == 'Active') {
@@ -167,6 +167,8 @@ class AsycudaUserController extends Controller
             'user_status'   => 'required',
             'doc_number'    => 'required',
             'doc_date'      => 'required',
+            'username'      => 'required',
+            'password'      => 'required',
             'info'          => 'nullable'
         ]);
 
@@ -178,12 +180,14 @@ class AsycudaUserController extends Controller
         $exp->position_type = $request->position_type;
         $exp->doc_number    = $request->doc_number;
         $exp->doc_date      = $request->doc_date;
+        $exp->username      = $request->username;
+        $exp->password      = $request->password;
         $exp->user_status   = $request->user_status;
         $exp->user_roles    = $request->user_roles;
         $exp->info          = $request->info;
         $exp->save();
 
-        $asycuda_user->update(['status' => $request->user_status]);
+        $asycuda_user->update(['user' => $request->username, 'password' => $request->password, 'roles' => $request->user_roles, 'status' => $request->user_status]);
 
         //  Has File && Save Avatar Image
         if ($request->hasFile('photo')) {

@@ -114,7 +114,7 @@ class EmployeeController extends Controller
     // Edit Info
     public function edit(Employee $employee)
     {
-        if ($employee->status == 0 || $employee->status == 1 || $employee->status == 5) {
+        if ($employee->status == 0 || $employee->status == 4) {
             $positions = Position::tree();
             $hostels = Hostel::all();
             return view('admin.office.employees.edit', compact('employee', 'positions', 'hostels'));
@@ -195,7 +195,7 @@ class EmployeeController extends Controller
         $employee->introducer       = $request->introducer;
         $employee->info             = $request->info;
         // If the employee is suspended
-        if ($request->position_id != '' && $employee->status == 3) {
+        if ($request->position_id != '' && $employee->status == 4) {
             $status = 1;
         } else {
             $status = $employee->status;
