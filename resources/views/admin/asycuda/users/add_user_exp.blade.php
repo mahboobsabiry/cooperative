@@ -51,7 +51,119 @@
 
         <!-- Main Row -->
         <div class="row">
-            <div class="col-lg-12">
+            <!-- Short Part -->
+            <div class="col-lg-4 col-md-12">
+                <!-- Profile Main Info -->
+                <div class="card custom-card">
+                    <div class="card-body text-center">
+                        <div class="main-profile-overview widget-user-image text-center">
+                            <div class="main-img-user">
+                                <img alt="avatar"
+                                     src="{{ $asycuda_user->employee->image ?? asset('assets/images/avatar-default.jpeg') }}">
+                            </div>
+                        </div>
+
+                        <!-- Main Info -->
+                        <div class="item-user pro-user">
+                            <h4 class="pro-user-username text-dark mt-2 mb-0">
+                                <span>{{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }}</span>
+                            </h4>
+
+                            <!-- Position -->
+                            @can('office_position_view')
+                                <a href="{{ route('admin.office.positions.show', $asycuda_user->employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $asycuda_user->employee->position->title ?? '' }}</a>
+                            @else
+                                <p class="pro-user-desc text-muted mb-1">{{ $asycuda_user->employee->position->title ?? '' }}</p>
+                            @endcan
+                            @if($asycuda_user->employee->on_duty == 1)
+                                <p class="pro-user-desc text-muted mb-1">{{ $asycuda_user->employee->duty_position ?? '' }}</p>
+                            @endif
+
+                            @if($asycuda_user->employee->position->position_number == 2 || $asycuda_user->employee->position->position_number == 3)
+                            @else
+                                <p class="pro-user-desc text-primary mb-1">({{ $asycuda_user->employee->position->type ?? '' }})</p>
+                            @endif
+                            <!-- Employee Star -->
+                            @if($asycuda_user->employee->position)
+                                <p class="user-info-rating">
+                                    @for($i=1; $i<=$asycuda_user->employee->position->position_number; $i++)
+                                        <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                    @endfor
+                                </p>
+                            @endif
+                            <!--/==/ End of Employee Star -->
+                        </div>
+                    </div>
+                </div>
+                <!--/==/ End of Profile Main Info -->
+
+                <!-- Contact Information -->
+                <div class="card custom-card">
+                    <div class="card-header custom-card-header">
+                        <div>
+                            <h6 class="card-title mb-0">
+                                اطلاعات
+                            </h6>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="main-profile-contact-list main-profile-work-list">
+                            <!-- Status -->
+                            <div class="media">
+                                <div class="media-logo bg-light text-dark">
+                                    <i class="fe fe-message-square"></i>
+                                </div>
+                                <div class="media-body">
+                                    <span>@lang('form.status')</span>
+                                    @if($asycuda_user->status == 1)
+                                        <span class="text-success">فعال</span>
+                                    @else
+                                        <span class="text-danger">غیرفعال</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <!--/==/ End of Status -->
+
+                            <!-- Phone Number -->
+                            <div class="media">
+                                <div class="media-logo bg-light text-dark">
+                                    <i class="fe fe-smartphone"></i>
+                                </div>
+                                <div class="media-body">
+                                    <span>@lang('form.phone')</span>
+                                    <div>
+                                        <a href="callto:{{ $asycuda_user->employee->phone }}" class="ctd">{{ $asycuda_user->employee->phone }}</a>
+                                        @if(!empty($employee->phone2))
+                                            , <a href="callto:{{ $asycuda_user->employee->phone2 }}"
+                                                 class="ctd">{{ $asycuda_user->employee->phone2 }}</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/==/ End of Phone Number -->
+
+                            <!-- Email Address -->
+                            <div class="media">
+                                <div class="media-logo bg-light text-dark">
+                                    <i class="fe fe-mail"></i>
+                                </div>
+                                <div class="media-body">
+                                    <span>@lang('form.email')</span>
+                                    <div>
+                                        <a href="mailto:{{ $asycuda_user->employee->email }}" class="ctd">{{ $asycuda_user->employee->email }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/==/ End of Email Address -->
+                        </div>
+                    </div>
+                </div>
+                <!--/==/ End of Contact Information -->
+            </div>
+
+            <!-- Large Part -->
+            <div class="col-lg-8 col-md-12">
                 <!-- Card -->
                 <div class="card custom-card overflow-hidden">
                     <!-- Card Body -->
