@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Asycuda;
 
 use App\Http\Controllers\Controller;
 use App\Models\Asycuda\AsycudaUser;
+use App\Models\AsyUserExp;
 use App\Models\Office\Employee;
 use App\Models\Office\Experience;
 use Illuminate\Http\Request;
@@ -82,9 +83,7 @@ class AsycudaUserController extends Controller
     public function show($id)
     {
         $asycuda_user = AsycudaUser::findOrFail($id);
-        // $employee = Employee::all();
-        $experiences = Experience::all()->where('employee_id', $asycuda_user->employee->id);
-        return view('admin.asycuda.users.show', compact('asycuda_user', 'experiences'));
+        return view('admin.asycuda.users.show', compact('asycuda_user'));
     }
 
     // Edit
@@ -146,8 +145,56 @@ class AsycudaUserController extends Controller
                     $exp->update(['asy_user_status' => $status, 'asy_user_roles' => $asycuda_user->roles]);
                 }
             }
-            
+
             return response()->json(['status' => $status]);
         }
+    }
+
+    // Add Asycuda User Experience
+    public function add_user_exp($id)
+    {
+        $asycuda_user = AsycudaUser::find($id);
+        return view('admin.asycuda.users.add_user_exp', compact('asycuda_user'));
+    }
+
+    // Store Asycuda User Experience
+    public function store_user_exp(Request $request, $id)
+    {
+        $request->validate([
+            'position'  => 'required',
+            'position_type' => 'required',
+            'user_roles'    => 'required',
+            'user_status'   => 'required',
+            'doc_number'    => 'required',
+            'doc_date'      => 'required',
+            'info'          => 'nullable'
+        ]);
+
+        $asycuda_user = AsycudaUser::find($id);
+
+        $exp = new AsyUserExp();
+        $exp->asy_user_id   = $asycuda_user->id;
+        $exp->position      = $request->position;
+        $exp->position_type = $request->position_type;
+        $exp->doc_number    = $request->doc_number;
+        $exp->doc_date      = $request->doc_date;
+        $exp->user_status   = $request->user_status;
+        $exp->user_roles    = $request->user_roles;
+        $exp->info          = $request->info;
+        $exp->save();
+
+        $asycuda_user->update(['status' => $request->user_status]);
+
+        //  Has File && Save Avatar Image
+        if ($request->hasFile('photo')) {
+            $avatar = $request->file('photo');
+            $fileName = 'asy-user-doc-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $exp->storeImage($avatar->storeAs('asycuda/users/docs', $fileName, 'public'));
+        }
+
+        return redirect()->route('admin.asycuda.users.show', $asycuda_user->id)->with([
+            'message'   => 'موفقانه ثبت گردید!',
+            'alertType' => 'success'
+        ]);
     }
 }

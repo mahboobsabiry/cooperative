@@ -145,27 +145,8 @@
                                 </div>
                                 <div class="media-body">
                                     <span>@lang('form.status')</span>
-                                    <div>
-                                        @if($asycuda_user->status == 1)
-                                            <a class="updateAsyUserStatus" id="asy_user_status"
-                                               asy_user_id="{{ $asycuda_user->id }}" href="javascript:void(0)">
-                                                <i class="fa fa-toggle-on text-success" aria-hidden="true"
-                                                   status="Active"></i>
-                                            </a>
-                                        @else
-                                            <a class="updateAsyUserStatus" id="asy_user_status"
-                                               asy_user_id="{{ $asycuda_user->id }}" href="javascript:void(0)">
-                                                <i class="fa fa-toggle-off text-danger" aria-hidden="true"
-                                                   status="Inactive"></i>
-                                            </a>
-                                        @endif
-                                        <span id="update_status" style="display: none;">
-                                            <i class="fa fa-toggle-on" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-
                                     @if($asycuda_user->status == 1)
-                                        <span class="text-info">فعال</span>
+                                        <span class="text-success">فعال</span>
                                     @else
                                         <span class="text-danger">غیرفعال</span>
                                     @endif
@@ -312,8 +293,16 @@
                         </div>
                         <!--/==/ End of User Information Details -->
 
-                        <h4>سابقه کاری کارمند</h4>
-                        <br>
+                        <!-- Table TITLE -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="font-weight-bold">سابقه فعالیت حساب کاربری اسیکودا</h5>
+                            </div>
+
+                            <div class="col-md-6 text-left">
+                                <a href="{{ route('admin.asycuda.users.add_user_exp', $asycuda_user->id) }}" class="btn btn-outline-primary">ثبت</a>
+                            </div>
+                        </div>
 
                         <!-- Experiences Table -->
                         <div class="table-responsive mt-2">
@@ -321,35 +310,35 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-center">وضعیت حساب کاربری</th>
-                                    <th class="text-center">صلاحیت های حساب کاربری</th>
                                     <th class="text-center">بست</th>
                                     <th class="text-center">نوع بست</th>
-                                    <th class="text-center">تاریخ شروع</th>
-                                    <th class="text-center">تاریخ ختم</th>
                                     <th class="text-center">نمبر مکتوب</th>
+                                    <th class="text-center">تاریخ مکتوب</th>
+                                    <th class="text-center">وضعیت حساب کاربری</th>
+                                    <th class="text-center">صلاحیت های حساب کاربری</th>
                                     <th class="text-center">مکتوب</th>
+                                    <th class="text-center">تاریخ</th>
                                     <th class="text-center">@lang('global.extraInfo')</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @foreach($experiences as $exp)
+                                @foreach($asycuda_user->experiences as $exp)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $exp->asy_user_status == 1 ? 'فعال' : 'غیرفعال' }}</td>
-                                        <td>{{ $exp->asy_user_roles }}</td>
+                                        <td>{{ $exp->id }}</td>
                                         <td>{{ $exp->position }}</td>
                                         <td>{{ $exp->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
-                                        <td>{{ $exp->start_date }}</td>
-                                        <td>{{ $exp->end_date ?? 'در حال انجام وظیفه' }}</td>
                                         <td>{{ $exp->doc_number }}</td>
+                                        <td>{{ $exp->doc_date }}</td>
+                                        <td>{{ $exp->user_status == 1 ? 'فعال' : 'غیرفعال' }}</td>
+                                        <td>{{ $exp->user_roles }}</td>
                                         <td>
-                                            <a href="{{ asset('storage/employees/documents/' . $exp->document) }}" target="_blank">
-                                                <img src="{{ asset('storage/employees/documents/' . $exp->document) }}" alt="{{ $exp->employee->name }}" width="80">
+                                            <a href="{{ $exp->image ?? asset('assets/images/id-card-default.png') }}" target="_blank">
+                                                <img src="{{ $exp->image ?? asset('assets/images/id-card-default.png') }}" alt="{{ $exp->asy_user->employee->name }}" width="80">
                                             </a>
                                         </td>
                                         <td>{{ $exp->info }}</td>
+                                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($exp->created_at)) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

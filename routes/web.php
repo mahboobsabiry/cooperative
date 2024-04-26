@@ -73,10 +73,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // =============================== Asycuda Routes ===================================
     Route::group(['prefix' => 'asycuda', 'as' => 'asycuda.'], function () {
+        // USERS
         Route::resource('users', AsycudaUserController::class);
         Route::post('update-asy-user-status', [AsycudaUserController::class, 'updateAsyUserStatus'])->name('users.updateAsyUserStatus');
         Route::get('user/select-employee', [AsycudaUserController::class, 'select_employee'])->name('users.select.employee');
         Route::get('inactive-users', [AsycudaUserController::class, 'inactive'])->name('users.inactive');
+        Route::get('add-user-exp/{id}', [AsycudaUserController::class, 'add_user_exp'])->name('users.add_user_exp');
+        Route::post('store-user-exp/{id}', [AsycudaUserController::class, 'store_user_exp'])->name('users.store_user_exp');
+
+        // COAL
         Route::resource('coal', COALController::class);
         Route::get('expired-coal', [COALController::class, 'expired'])->name('coal.expired');
         Route::get('registration-form/{id}', [COALController::class, 'reg_form'])->name('coal.reg_form');

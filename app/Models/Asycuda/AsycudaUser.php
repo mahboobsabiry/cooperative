@@ -2,6 +2,7 @@
 
 namespace App\Models\Asycuda;
 
+use App\Models\AsyUserExp;
 use App\Models\Office\Employee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,5 +16,11 @@ class AsycudaUser extends Model
     public function employee()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    // Have Many Experiences
+    public function experiences()
+    {
+        return $this->hasMany(AsyUserExp::class, 'asy_user_id', 'id');
     }
 }
