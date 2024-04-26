@@ -81,7 +81,7 @@
 
         <!-- Row Content -->
         <div class="row">
-            <div class="col-lg-4 col-md-12">
+            <div class="col-lg-3 col-md-12">
                 <!-- Profile Main Info -->
                 <div class="card custom-card">
                     <div class="card-body text-center">
@@ -190,7 +190,7 @@
                 </div>
                 <!--/==/ End of Contact Information -->
             </div>
-            <div class="col-lg-8 col-md-12">
+            <div class="col-lg-9 col-md-12">
                 <div class="card custom-card main-content-body-profile">
 
                     <!-- Card Body -->

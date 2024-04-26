@@ -86,6 +86,7 @@
                                         <th>تاریخ شروع</th>
                                         <th>تاریخ ختم</th>
                                         <th>تعداد روز ها</th>
+                                        <th>تعداد روز های باقیمانده</th>
                                         <th>نوع رخصتی</th>
                                         <th>علت رخصتی</th>
                                     </tr>
@@ -99,6 +100,13 @@
                                             <td>{{ $leave->start_date }}</td>
                                             <td>{{ $leave->end_date }}</td>
                                             <td>{{ $leave->days }}</td>
+                                            <td>
+                                                @if(now()->diffInDays(\Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $leave->end_date)->toCarbon()) >= 1)
+                                                    {{ now()->diffInDays(\Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $leave->end_date)->toCarbon()) }}
+                                                @else
+                                                    <span class="text-muted">ختم شده</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $leave->leave_type }}</td>
                                             <td>{{ $leave->reason }}</td>
                                         </tr>

@@ -155,7 +155,7 @@
                     request()->is('admin/office/employee/fired-employees') ||
                     request()->is('admin/office/employee/suspended-employees') ||
                     request()->is('admin/office/employee/retired-employees') ||
-                    request()->is('admin/office/employee/*/experiences') ||
+                    request()->is('admin/office/employee/*/resumes') ||
                     request()->is('admin/office/employee/*/add-duty-position') ||
                     request()->is('admin/office/employee/*/change-to-main-position') ||
                     request()->is('admin/office/employee/*/leaves') ||
@@ -174,7 +174,7 @@
                             <!-- All Employees -->
                             <li class="nav-sub-item {{ request()->is('admin/office/employees') ||
                                 request()->is('admin/office/employees/*') ||
-                                request()->is('admin/office/employee/*/experiences') ||
+                                request()->is('admin/office/employee/*/resumes') ||
                                 request()->is('admin/office/employee/*/add-duty-position') ||
                                 request()->is('admin/office/employee/*/change-to-main-position') ||
                                 request()->is('admin/office/employee/*/leaves') ||
