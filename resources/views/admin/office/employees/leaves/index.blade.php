@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'رخصتی های ' . $employee->name . $employee->last_name)
+@section('title', 'رخصتی های ' . $employee->name. ' ' . $employee->last_name)
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
