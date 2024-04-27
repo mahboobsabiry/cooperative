@@ -42,6 +42,9 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.office.employees.index') }}">@lang('admin.sidebar.employees')</a>
                     </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.office.employees.show', $employee->id) }}">معلومات کاربر</a>
+                    </li>
                     <li class="breadcrumb-item active" aria-current="page">رخصتی های {{ $employee->name }} {{ $employee->last_name }}</li>
                 </ol>
             </div>
@@ -60,7 +63,105 @@
 
         <!-- Data Table -->
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-3 col-md-12">
+                <!-- Profile Main Info -->
+                <div class="card custom-card">
+                    <div class="card-body text-center">
+                        <div class="main-profile-overview widget-user-image text-center">
+                            <div class="main-img-user">
+                                <img alt="avatar"
+                                     src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}">
+                            </div>
+                        </div>
+
+                        <!-- Main Info -->
+                        <div class="item-user pro-user">
+                            <h4 class="pro-user-username text-dark mt-2 mb-0">
+                                <span>{{ $employee->name }} {{ $employee->last_name }}</span>
+                            </h4>
+
+                            @if($employee->status == 0)
+                                <!-- Position -->
+                                @can('office_position_view')
+                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->type }})</a>
+                                @else
+                                    <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }} ({{ $employee->position->type }})</p>
+                                @endcan
+                                @if($employee->on_duty == 1)
+                                    <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
+                                @endif
+                                <!-- Employee Star -->
+                                <p class="user-info-rating">
+                                    @for($i=1; $i<=$employee->position->position_number; $i++)
+                                        <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                    @endfor
+                                </p>
+                                <!--/==/ End of Employee Star -->
+                            @else
+                                <span class="text-danger">
+                                    @if($employee->status == 1)
+                                        تقاعد نموده است
+                                    @elseif($employee->status == 2)
+                                        منفک گردیده است
+                                    @elseif($employee->status == 3)
+                                        تبدیل گردیده است
+                                    @endif
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <!--/==/ End of Profile Main Info -->
+
+                <!-- Contact Information -->
+                <div class="card custom-card">
+                    <div class="card-header custom-card-header">
+                        <div>
+                            <h6 class="card-title mb-0">
+                                اطلاعات لازم
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="main-profile-contact-list main-profile-work-list">
+                            <!-- Phone Number -->
+                            <div class="media">
+                                <div class="media-logo bg-light text-dark">
+                                    <i class="fe fe-smartphone"></i>
+                                </div>
+                                <div class="media-body">
+                                    <span>@lang('form.phone')</span>
+                                    <div>
+                                        <a href="callto:{{ $employee->phone }}" class="ctd">{{ $employee->phone }}</a>
+                                        @if(!empty($employee->phone2))
+                                            , <a href="callto:{{ $employee->phone2 }}"
+                                                 class="ctd">{{ $employee->phone2 }}</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/==/ End of Phone Number -->
+
+                            <!-- Email Address -->
+                            <div class="media">
+                                <div class="media-logo bg-light text-dark">
+                                    <i class="fe fe-mail"></i>
+                                </div>
+                                <div class="media-body">
+                                    <span>@lang('form.email')</span>
+                                    <div>
+                                        <a href="mailto:{{ $employee->email }}" class="ctd">{{ $employee->email }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/==/ End of Email Address -->
+                        </div>
+                    </div>
+                </div>
+                <!--/==/ End of Contact Information -->
+            </div>
+
+            <div class="col-lg-9 col-md-12">
                 <!-- Table Card -->
                 <div class="card custom-card main-content-body-profile">
                     <div class="card-body tab-content h-100">
