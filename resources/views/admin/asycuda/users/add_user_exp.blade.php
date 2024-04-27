@@ -218,7 +218,7 @@
                                     <!-- Password -->
                                     <div class="form-group @error('password') has-danger @enderror">
                                         <p class="mb-2">رمز عبور: <span class="tx-danger">*</span></p>
-                                        <input type="text" id="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" name="doc_number" value="{{ $asycuda_user->password ?? old('password') }}" required>
+                                        <input type="text" id="password" class="form-control @error('password') form-control-danger @enderror" name="password" value="{{ $asycuda_user->password ?? old('password') }}" required>
 
                                         @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>

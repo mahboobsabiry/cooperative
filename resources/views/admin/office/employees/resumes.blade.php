@@ -203,8 +203,6 @@
                                     <th class="text-center">#</th>
                                     <th class="text-center">بست</th>
                                     <th class="text-center">نوع بست</th>
-                                    <th class="text-center">حساب کاربری سیستم</th>
-                                    <th class="text-center">حساب کاربری سیستم اسیکودا</th>
                                     <th class="text-center">تاریخ شروع</th>
                                     <th class="text-center">تاریخ ختم</th>
                                     <th class="text-center">نمبر مکتوب</th>
@@ -219,22 +217,6 @@
                                         <td>{{ $resume->id }}</td>
                                         <td>{{ $resume->position }}</td>
                                         <td>{{ $resume->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
-                                        <!-- System USER -->
-                                        <td>
-                                            @if($resume->employee->user)
-                                                {{ $resume->user_status == 1 ? 'فعال' : 'غیرفعال' }}
-                                            @else
-                                                ندارد
-                                            @endif
-                                        </td>
-                                        <!-- Asycuda User -->
-                                        <td>
-                                            @if($resume->employee->asycuda_user)
-                                                {{ $resume->asy_user_status == 1 ? 'فعال' : 'غیرفعال' }}
-                                            @else
-                                                ندارد
-                                            @endif
-                                        </td>
                                         <td>{{ $resume->start_date }}</td>
                                         <td>{{ $resume->end_date ?? 'در حال انجام وظیفه' }}</td>
                                         <td>{{ $resume->doc_number }}</td>

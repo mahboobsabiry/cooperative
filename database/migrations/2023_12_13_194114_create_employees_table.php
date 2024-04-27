@@ -44,6 +44,7 @@ return new class extends Migration
             $table->tinyInteger('on_duty')->default(0);
             $table->date('start_duty')->nullable();
             $table->string('duty_doc_number')->nullable();
+            $table->string('duty_doc_date')->nullable();
             $table->string('duty_position')->nullable();
             $table->timestamps();
 

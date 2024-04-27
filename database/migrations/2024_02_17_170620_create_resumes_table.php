@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('start_date');
             $table->string('end_date')->nullable();
             $table->string('doc_number');
+            $table->string('doc_date');
             $table->text('info')->nullable();
             $table->timestamps();
 

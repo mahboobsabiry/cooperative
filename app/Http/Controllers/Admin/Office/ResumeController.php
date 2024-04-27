@@ -43,7 +43,9 @@ class ResumeController extends Controller
         ]);
 
         $emp_resume = Resume::where('employee_id', $employee->id)->latest()->first();
-        $emp_resume->update(['end_date' => CalendarUtils::strftime('Y-m-d', strtotime(now()))]);
+        if ($emp_resume) {
+            $emp_resume->update(['end_date' => CalendarUtils::strftime('Y-m-d', strtotime(now()))]);
+        }
 
         // Save Record to Experiences Table
         $resume = new Resume();
@@ -94,6 +96,13 @@ class ResumeController extends Controller
     {
         $employee = Employee::find($id);
 
+        if ($employee->on_duty == 0) {
+            return back()->with([
+                'message'   => 'کارمند در اصل بست میباشد.',
+                'alertType' => 'warning'
+            ]);
+        }
+
         return view('admin.office.employees.change_to_main_position', compact('employee'));
     }
 
@@ -109,7 +118,9 @@ class ResumeController extends Controller
         ]);
 
         $emp_resume = Resume::where('employee_id', $employee->id)->latest()->first();
-        $emp_resume->update(['end_date' => CalendarUtils::strftime('Y-m-d', strtotime(now()))]);
+        if ($emp_resume) {
+            $emp_resume->update(['end_date' => CalendarUtils::strftime('Y-m-d', strtotime(now()))]);
+        }
 
         // Save Record to Experiences Table
         $resume = new Resume();
