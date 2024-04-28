@@ -110,15 +110,9 @@
                                                             <a href="{{ route('admin.office.employees.show', $emp->id) }}">
                                                                 {{ $emp->name }}
                                                                 {{ $emp->last_name }}
-                                                                (<span class="text-danger text-sm-center">
-                                                                        {{ $emp->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
-                                                                    </span>)
                                                             </a>{{ $position->num_of_pos > 1 ? ', ' : '' }}
                                                         @else
                                                             <a href="javascript:void(0);">{{ $emp->name }} {{ $emp->last_name }}
-                                                                (<span class="text-danger text-sm-center">
-                                                                        {{ $emp->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
-                                                                    </span>)
                                                             </a>{{ $position->num_of_pos > 1 ? ', ' : '' }}
                                                         @endcan
                                                     @endforeach
