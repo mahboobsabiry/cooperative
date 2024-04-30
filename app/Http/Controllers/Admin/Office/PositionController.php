@@ -30,7 +30,7 @@ class PositionController extends Controller
     // Create
     public function create()
     {
-        $positions = Position::tree();
+        $positions = Position::all();
         return view('admin.office.positions.create', compact('positions'));
     }
 

@@ -76,7 +76,7 @@
                         <!-- All Positions -->
                         <div class="tab-pane active" id="allPositions">
                             <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.positions.allPositions') ({{ count($positions) }})
+                                @lang('pages.positions.allPositions') ({{ count($positions) }}) - تعداد بست ها ({{ \App\Models\Office\Position::all()->sum('num_of_pos') }})
                             </div>
                             <!-- Table -->
                             <div class="table-responsive mt-2">

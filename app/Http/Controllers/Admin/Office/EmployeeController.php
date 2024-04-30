@@ -33,9 +33,8 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        $positions = Position::tree();
         $hostels = Hostel::all();
-        return view('admin.office.employees.create', compact('positions', 'hostels'));
+        return view('admin.office.employees.create', compact('hostels'));
     }
 
     // Store Record
