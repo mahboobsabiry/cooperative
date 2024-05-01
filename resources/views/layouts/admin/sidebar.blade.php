@@ -111,7 +111,7 @@
                                 <a class="nav-sub-link" href="{{ route('admin.office.positions.index') }}">
                                     {<span class="small text-sm-center tx-danger">M</span>}
                                     @lang('pages.positions.allPositions')
-                                    ({{ count(\App\Models\Office\Position::all()) }})
+                                    ({{ \App\Models\Office\Position::all()->sum('num_of_pos') }})
                                 </a>
                             </li>
 
