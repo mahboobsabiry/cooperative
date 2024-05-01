@@ -107,8 +107,8 @@
 
             <!-- Btn List -->
             <div class="btn btn-list">
-                @if($employee->status != 0 || $employee->status != 2)
-                    <div class="d-flex">
+                <div class="d-flex">
+                    @if($employee->status == 0 || $employee->status == 4)
                         @can('office_employee_delete')
                             <div class="mr-2">
                                 <!-- Delete -->
@@ -134,19 +134,19 @@
                                 </a>
                             </div>
                         @endcan
+                    @endif
 
-                        @can('office_employee_create')
-                            <div class="mr-2">
-                                <!-- Add -->
-                                <a class="btn ripple bg-primary btn-sm tx-white"
-                                   href="{{ route('admin.office.employees.create') }}">
-                                    <i class="fe fe-plus-circle"></i>
-                                    @lang('global.add')
-                                </a>
-                            </div>
-                        @endcan
-                    </div>
-                @endif
+                    @can('office_employee_create')
+                        <div class="mr-2">
+                            <!-- Add -->
+                            <a class="btn ripple bg-primary btn-sm tx-white"
+                               href="{{ route('admin.office.employees.create') }}">
+                                <i class="fe fe-plus-circle"></i>
+                                @lang('global.add')
+                            </a>
+                        </div>
+                    @endcan
+                </div>
             </div>
         </div>
         <!--/==/ End of Page Header -->

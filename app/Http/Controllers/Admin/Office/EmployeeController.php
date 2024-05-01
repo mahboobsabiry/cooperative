@@ -115,7 +115,7 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         if ($employee->status == 0 || $employee->status == 4) {
-            $positions = Position::tree();
+            $positions = Position::all();
             $hostels = Hostel::all();
             return view('admin.office.employees.edit', compact('employee', 'positions', 'hostels'));
         } else {
@@ -132,6 +132,7 @@ class EmployeeController extends Controller
             'photo'         => 'nullable|image|mimes:jpg,png,jfif',
             // 'document'      => 'nullable|mimes:jpg,png,jfif',
             'start_job'     => 'required',
+            'position_code' => 'required|min:3|max:4|unique:employees,position_code,' . $employee,
             'name'          => 'required|min:3|max:64',
             'last_name'     => 'nullable|min:3|max:64',
             'father_name'   => 'required|min:3|max:64',
@@ -154,7 +155,7 @@ class EmployeeController extends Controller
             'info'              => 'nullable',
         ]);
 
-        $position = Position::where('id', $request->position_id)->first();
+        $position = Position::where('id', $request->input('position_id'))->first();
         if (!empty($position->employees) && $position->employees()->count() > $position->num_of_pos) {
             return back()->with([
                 'alertType' => 'danger',
@@ -162,7 +163,7 @@ class EmployeeController extends Controller
             ]);
         }
 
-        $hostel = Hostel::where('id', $request->hostel_id)->first();
+        $hostel = Hostel::where('id', $request->input('hostel_id'))->first();
         if (!empty($hostel->employees) && $hostel->employees()->count() > 5) {
             return back()->with([
                 'alertType' => 'danger',
@@ -170,6 +171,7 @@ class EmployeeController extends Controller
             ]);
         }
 
+        $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
         $employee->start_job    = $request->start_job;
         $employee->name         = $request->name;
@@ -194,14 +196,6 @@ class EmployeeController extends Controller
         $employee->current_district = $request->current_district;
         $employee->introducer       = $request->introducer;
         $employee->info             = $request->info;
-        // If the employee is suspended
-        if ($request->position_id != '' && $employee->status == 4) {
-            $status = 1;
-        } else {
-            $status = $employee->status;
-        }
-        $employee->status = $status;
-
         $employee->save();
 
         //  Has Photo

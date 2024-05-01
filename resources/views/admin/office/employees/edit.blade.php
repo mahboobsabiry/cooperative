@@ -82,60 +82,38 @@
                                         </p>
 
                                         <!-- Position && Position Code -->
-                                        @if($employee->position_id == null || $employee->status == 4)
-                                            <div class="row">
-                                                <!-- Position -->
-                                                <div class="col-md-6">
-                                                    <div class="form-group @error('position_id') has-danger @enderror">
-                                                        <p class="mb-2">1) @lang('form.position'): <span class="tx-danger">*</span></p>
+                                        <div class="row">
+                                            <!-- Position -->
+                                            <div class="col-md-6">
+                                                <div class="form-group @error('position_id') has-danger @enderror">
+                                                    <p class="mb-2">1) @lang('form.position'): <span class="tx-danger">*</span></p>
 
-                                                        <select id="position_id" name="position_id" class="form-control select2 @error('position_id') form-control-danger @enderror">
-                                                            <option value="">@lang('form.chooseOne')</option>
-                                                            @foreach($positions as $position)
-                                                                <option value="{{ $position->id }}" {{ $employee->position_id == $position->id ? 'selected' : '' }}>{{ $position->title }}</option>
-                                                                @foreach($position->children as $admin)
-                                                                    <option value="{{ $admin->id }}" {{ $employee->position_id == $admin->id ? 'selected' : '' }}>- {{ $admin->title }} ({{ $admin->type }})</option>
-                                                                    @foreach($admin->children as $mgmt)
-                                                                        <option value="{{ $mgmt->id }}" {{ $employee->position_id == $mgmt->id ? 'selected' : '' }}>-- {{ $mgmt->title }} ({{ $mgmt->type }})</option>
-                                                                        @foreach($mgmt->children as $mgr)
-                                                                            <option value="{{ $mgr->id }}" {{ $employee->position_id == $mgr->id ? 'selected' : '' }}>--- {{ $mgr->title }} ({{ $mgr->type }})</option>
-                                                                        @endforeach
-                                                                    @endforeach
-                                                                @endforeach
-                                                            @endforeach
-                                                        </select>
+                                                    <select id="position_id" name="position_id" class="form-control select2 @error('position_id') form-control-danger @enderror">
+                                                        <option value="">@lang('form.chooseOne')</option>
+                                                        @foreach($positions as $position)
+                                                            <option value="{{ $position->id }}" {{ $employee->position_id == $position->id ? 'selected' : '' }}>{{ $position->title }} ({{ $position->type }})</option>
+                                                        @endforeach
+                                                    </select>
 
-                                                        @error('position_id')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
+                                                    @error('position_id')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
+                                            </div>
 
+                                            <!-- Position Code -->
+                                            <div class="col-md-6">
                                                 <!-- Position Code -->
-                                                <div class="col-md-6">
-                                                    <!-- Position Code -->
-                                                    <div class="form-group @error('position_code') has-danger @enderror">
-                                                        <p class="mb-2">2) @lang('form.positionCode'): <span class="tx-danger">*</span></p>
-                                                        <input type="text" id="position_code" class="form-control @error('position_code') form-control-danger @enderror" name="position_code" value="{{ $employee->position_code ?? old('position_code') }}">
+                                                <div class="form-group @error('position_code') has-danger @enderror">
+                                                    <p class="mb-2">2) @lang('form.positionCode'): <span class="tx-danger">*</span></p>
+                                                    <input type="text" id="position_code" class="form-control @error('position_code') form-control-danger @enderror" name="position_code" value="{{ $employee->position_code ?? old('position_code') }}">
 
-                                                        @error('position_code')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
+                                                    @error('position_code')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div>
-
-                                            <!-- Document Number -->
-                                            <div class="form-group @error('doc_number') has-danger @enderror">
-                                                <p class="mb-2"> نمبر مکتوب:</p>
-                                                <input type="text" id="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" name="doc_number" value="{{ old('doc_number') }}">
-
-                                                @error('doc_number')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        @endif
-                                        <!--/==/ End of Position && Position Code -->
+                                        </div>
 
                                         <!-- Start Duty and Education -->
                                         <div class="row">
@@ -459,7 +437,7 @@
                                                     <select class="form-control select2" name="hostel_id" id="hostel_id">
                                                         <option selected disabled>@lang('global.home')</option>
                                                         @foreach($hostels as $hostel)
-                                                            <option value="{{ $hostel->id }}" {{ $employee->hostel_id == $hostel->id ? 'selected' : '' }}>@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }}</option>
+                                                            <option value="{{ $hostel->id }}" {{ $employee->hostel_id == $hostel->id ? 'selected' : '' }}>@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }} ({{ $hostel->place }})</option>
                                                         @endforeach
                                                     </select>
 
