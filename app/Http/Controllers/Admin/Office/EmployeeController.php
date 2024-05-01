@@ -33,9 +33,8 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        $positions = Position::tree();
         $hostels = Hostel::all();
-        return view('admin.office.employees.create', compact('positions', 'hostels'));
+        return view('admin.office.employees.create', compact('hostels'));
     }
 
     // Store Record
@@ -55,6 +54,7 @@ class EmployeeController extends Controller
                 'message'   => 'اتاق مورد نظر گنجایش ندارد.'
             ]);
         }
+
         $employee = new Employee();
         $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
@@ -81,6 +81,7 @@ class EmployeeController extends Controller
         $employee->current_province = $request->current_province;
         $employee->current_district = $request->current_district;
         $employee->introducer       = $request->introducer;
+        $employee->status           = 0;
         $employee->info             = $request->info;
         $employee->save();
 

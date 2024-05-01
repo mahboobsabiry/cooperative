@@ -88,17 +88,8 @@
 
                                                     <select id="position_id" name="position_id" class="form-control select2 @error('position_id') form-control-danger @enderror">
                                                         <option value="">@lang('form.chooseOne')</option>
-                                                        @foreach($positions as $position)
-                                                            <option value="{{ $position->id }}">{{ $position->title }}</option>
-                                                            @foreach($position->children as $admin)
-                                                                <option value="{{ $admin->id }}" class="text-secondary">- {{ $admin->title }} ({{ $admin->type }})</option>
-                                                                @foreach($admin->children as $mgmt)
-                                                                    <option value="{{ $mgmt->id }}">-- {{ $mgmt->title }} ({{ $mgmt->type }})</option>
-                                                                    @foreach($mgmt->children as $mgr)
-                                                                        <option value="{{ $mgr->id }}">--- {{ $mgr->title }} ({{ $mgr->type }})</option>
-                                                                    @endforeach
-                                                                @endforeach
-                                                            @endforeach
+                                                        @foreach(\App\Models\Office\Position::all() as $position)
+                                                            <option value="{{ $position->id }}">{{ $position->title }} ({{ $position->type }})</option>
                                                         @endforeach
                                                     </select>
 
