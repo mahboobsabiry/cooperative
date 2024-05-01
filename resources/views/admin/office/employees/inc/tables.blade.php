@@ -66,8 +66,11 @@
                     @lang('pages.hostel.hostel') -
                     @lang('pages.hostel.roomNumber')
                     {{ $employee->hostel->number }}
-                    @lang('pages.hostel.section')
-                    {{ $employee->hostel->section }}
+                    @if($employee->hostel->place == 'محصولی')
+                        @lang('pages.hostel.section')
+                        {{ $employee->hostel->section }}
+                    @endif
+                    ({{ $employee->hostel->place }})
                 @else
                     @lang('global.home')
                 @endif
