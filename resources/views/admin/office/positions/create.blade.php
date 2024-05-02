@@ -62,13 +62,7 @@
                                             <select id="parent_id" name="parent_id" class="form-control select2 @error('parent_id') form-control-danger @enderror">
                                                 <option selected>Choose one</option>
                                                 @foreach($positions as $position)
-                                                    <option value="{{ $position->id }}">{{ $position->title }}</option>
-                                                    @foreach($position->children as $admin)
-                                                        <option value="{{ $admin->id }}" class="text-secondary">- {{ $admin->title }} <span class="small">({{ $admin->type }})</span></option>
-                                                        @foreach($admin->children as $mgmt)
-                                                            <option value="{{ $mgmt->id }}">-- {{ $mgmt->title }} <span class="small">({{ $mgmt->type }})</span></option>
-                                                        @endforeach
-                                                    @endforeach
+                                                    <option value="{{ $position->id }}">{{ $position->title }} ({{ $position->type }})</option>
                                                 @endforeach
                                             </select>
 
