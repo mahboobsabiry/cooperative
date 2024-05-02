@@ -176,6 +176,30 @@ class HostelSeeder extends Seeder
                 'number'    => 20,
                 'section'   => 'B'
             ],
+            [
+                'number'    => 1,
+                'section'   => '',
+                'place'     => 'سرحدی',
+                'capacity'  => 5
+            ],
+            [
+                'number'    => 2,
+                'section'   => '',
+                'place'     => 'سرحدی',
+                'capacity'  => 5
+            ],
+            [
+                'number'    => 3,
+                'section'   => '',
+                'place'     => 'سرحدی',
+                'capacity'  => 5
+            ],
+            [
+                'number'    => 4,
+                'section'   => '',
+                'place'     => 'سرحدی',
+                'capacity'  => 3
+            ]
         ];
 
         foreach ($hostels as $hostel) {

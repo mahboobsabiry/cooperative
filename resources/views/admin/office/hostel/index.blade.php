@@ -84,7 +84,7 @@
                                         <th>موقعیت</th>
                                         <th>@lang('pages.hostel.roomNumber')</th>
                                         <th>@lang('pages.hostel.section')</th>
-                                        <th>@lang('pages.hostel.numOfMembers')</th>
+                                        <th>گنجایش و تعداد اعضا</th>
                                         <th>@lang('admin.sidebar.employees')</th>
                                     </tr>
                                     </thead>
@@ -100,27 +100,16 @@
                                             <td>{{ $hostel->section }}</td>
                                             <td>
                                                 @php
-                                                    if (!$hostel->employees || $hostel->employees->count() == 0) {
-                                                        $count_number = 0;
-                                                    } elseif ($hostel->employees->count() == 1) {
-                                                        $count_number = 20;
-                                                    } elseif ($hostel->employees->count() == 2) {
-                                                        $count_number = 40;
-                                                    } elseif ($hostel->employees->count() == 3) {
-                                                        $count_number = 60;
-                                                    } elseif ($hostel->employees->count() == 4) {
-                                                        $count_number = 80;
-                                                    } elseif ($hostel->employees->count() == 5) {
-                                                        $count_number = 100;
-                                                    } else {
-                                                        $count_number = 0;
-                                                    }
+                                                    $capacity = $hostel->capacity;
+                                                    $each = 100 / $hostel->capacity;
+                                                    $total = $each * $hostel->employees->count();
+                                                    echo $hostel->capacity . '/' . $hostel->employees->count();
                                                 @endphp
                                                 <div class="progress mb-1">
                                                     <div aria-valuemax="100" aria-valuemin="0"
-                                                         aria-valuenow="{{ $count_number }}"
-                                                         class="progress-bar progress-bar-lg wd-{{ $count_number }}p bg-info"
-                                                         role="progressbar">{{ count($hostel->employees) }}</div>
+                                                         aria-valuenow="{{ round($total) }}"
+                                                         class="progress-bar progress-bar-lg @if($total == 100) bg-danger @else bg-info @endif"
+                                                         role="progressbar" style="width: {{ round($total) }}%;">{{ count($hostel->employees) }}</div>
                                                 </div>
                                             </td>
                                             <td>

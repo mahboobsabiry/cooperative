@@ -71,6 +71,18 @@
                                         </div>
                                         <!--/==/ End of Place -->
                                     </div>
+                                    <div class="col-md-6">
+                                        <!-- Capacity -->
+                                        <div class="form-group @error('capacity') has-danger @enderror">
+                                            <p class="mb-2">گنجایش تعداد نفر: <span class="tx-danger">*</span></p>
+                                            <input type="number" id="capacity" class="form-control @error('capacity') form-control-danger @enderror" name="capacity" value="{{ '5' ?? old('capacity') }}" required>
+
+                                            @error('capacity')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Capacity -->
+                                    </div>
                                 </div>
 
                                 <div class="row">

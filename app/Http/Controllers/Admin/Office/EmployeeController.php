@@ -48,7 +48,7 @@ class EmployeeController extends Controller
             ]);
         }
         $hostel = Hostel::where('id', $request->hostel_id)->first();
-        if (!empty($hostel->employees) && $hostel->employees()->count() > 5) {
+        if (!empty($hostel->employees) && $hostel->employees()->count() > $hostel->capacity) {
             return back()->with([
                 'alertType' => 'danger',
                 'message'   => 'اتاق مورد نظر گنجایش ندارد.'
@@ -164,7 +164,7 @@ class EmployeeController extends Controller
         }
 
         $hostel = Hostel::where('id', $request->input('hostel_id'))->first();
-        if (!empty($hostel->employees) && $hostel->employees()->count() > 5) {
+        if (!empty($hostel->employees) && $hostel->employees()->count() > $hostel->capacity) {
             return back()->with([
                 'alertType' => 'danger',
                 'message'   => 'اتاق مورد نظر گنجایش ندارد.'

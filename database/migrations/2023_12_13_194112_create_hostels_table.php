@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('number');
             $table->char('section')->nullable();
             $table->string('place')->default('محصولی');
+            $table->integer('capacity')->default(5);
             $table->timestamps();
         });
     }

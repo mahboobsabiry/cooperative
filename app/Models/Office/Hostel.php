@@ -10,7 +10,7 @@ class Hostel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['number', 'section', 'place'];
+    protected $fillable = ['number', 'section', 'place', 'capacity'];
 
     public function employees(): HasMany
     {
