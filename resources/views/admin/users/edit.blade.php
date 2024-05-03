@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('pages.users.editUser'))
+@section('title', trans('pages.users.editUser'))
 <!-- Extra Styles -->
 @section('extra_css')
     <!---Fileupload css-->

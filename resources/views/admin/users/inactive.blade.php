@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('pages.users.inactiveUsers'))
+@section('title', trans('pages.users.inactiveUsers'))
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->

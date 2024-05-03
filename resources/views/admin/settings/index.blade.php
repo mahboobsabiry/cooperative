@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-@section('title', config('app.name') . ' ~ ' . trans('admin.sidebar.settings'))
+@section('title', trans('admin.sidebar.settings'))
 @section('extra_css')
     <!---DataTables css-->
     <link href="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">

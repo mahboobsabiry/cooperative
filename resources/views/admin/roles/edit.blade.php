@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('pages.roles.editRole'))
+@section('title', trans('pages.roles.editRole'))
 <!-- Extra Styles -->
 @section('extra_css')
 

@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('admin.sidebar.roles'))
+@section('title', trans('admin.sidebar.roles'))
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
