@@ -148,7 +148,8 @@
                                     <tr>
                                         <td><strong>@lang('admin.sidebar.roles') ({{ count($user->roles) }}): </strong>
                                             @foreach($user->roles as $role)
-                                                <span class="tag tag-primary tag-pill">{{ $role->name }}</span>
+                                                <code class="text-danger" style="text-decoration: underline;">{{ $loop->iteration }}</code>
+                                                <code class="text-primary">{{ $role->name }}</code>
                                             @endforeach
                                         </td>
                                     </tr>
@@ -157,7 +158,8 @@
                                     <tr>
                                         <td><strong>@lang('admin.sidebar.permissions') ({{ count($user->permissions) }}): </strong>
                                             @foreach($user->permissions as $permission)
-                                                <span class="tag tag-primary tag-pill">{{ $permission->name }}</span>
+                                                <code class="text-danger" style="text-decoration: underline;">{{ $loop->iteration }}</code>
+                                                <code class="text-primary">{{ $permission->name }}</code>
                                             @endforeach
                                         </td>
                                     </tr>

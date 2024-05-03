@@ -283,12 +283,8 @@
                                     <tr>
                                         <td colspan="3" class="text-wrap">
                                             @foreach($user->permissions as $permission)
-                                                <a class="modal-effect" href="javascript:void(0);">
-                                                    <span class="tag tag-success tag-pill mt-1 mb-1 pr-0" style="cursor:pointer;">
-                                                        <span class="tag tag-dark tag-pill ml-1 mr-0">{{ $loop->iteration }}</span>
-                                                        {{ $permission->name }}
-                                                    </span>
-                                                </a>
+                                                <code class="text-danger" style="text-decoration: underline;">{{ $loop->iteration }}</code>
+                                                <code class="text-primary">{{ $permission->name }}</code>
                                             @endforeach
                                         </td>
                                         <td colspan="1" class="text-wrap">
@@ -297,10 +293,8 @@
                                                     <a class="modal-effect"
                                                        data-effect="effect-sign" data-toggle="modal"
                                                        href="#role_details{{ $role->id }}">
-                                                        <span class="tag tag-success tag-pill mt-1 mb-1 pr-0" style="cursor:pointer;">
-                                                            <span class="tag tag-dark tag-pill ml-1 mr-0">{{ $loop->iteration }}</span>
-                                                            {{ $role->name }}
-                                                        </span>
+                                                        <code class="text-danger" style="text-decoration: underline;">{{ $loop->iteration }}</code>
+                                                        <code class="text-primary">{{ $role->name }}</code>
                                                     </a>
 
                                                     @include('admin.users.role_details')

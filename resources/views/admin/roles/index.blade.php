@@ -80,10 +80,8 @@
                                         <td>{{ $role->guard_name }}</td>
                                         <td class="text-wrap">
                                             @foreach($role->permissions as $permission)
-                                                <div class="tag tag-success tag-pill mt-1 mb-1 pr-0">
-                                                    <span class="tag tag-dark tag-pill ml-1 mr-0">{{ $loop->iteration }}</span>
-                                                    {{ $permission->name }}
-                                                </div>
+                                                <code class="text-danger" style="text-decoration: underline;">{{ $loop->iteration }}</code>
+                                                <code class="text-primary">{{ $permission->name }}</code>
                                             @endforeach
                                         </td>
                                         <td>
