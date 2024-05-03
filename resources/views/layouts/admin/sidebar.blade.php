@@ -151,7 +151,7 @@
                     request()->is('admin/office/employees/*') ||
                     request()->is('admin/office/main-employees') ||
                     request()->is('admin/office/on-duty-employees') ||
-                    request()->is('admin/office/employee/change-position-employees') ||
+                    request()->is('admin/office/employee/position-conversion-employees') ||
                     request()->is('admin/office/employee/fired-employees') ||
                     request()->is('admin/office/employee/suspended-employees') ||
                     request()->is('admin/office/employee/retired-employees') ||
@@ -222,10 +222,10 @@
                                 </a>
                             </li>
 
-                            <!-- Change Position Employees -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/employee/change-position-employees') ? 'active' : '' }}">
+                            <!-- Position Conversion Employees -->
+                            <li class="nav-sub-item {{ request()->is('admin/office/employee/position-conversion-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
-                                   href="{{ route('admin.office.employees.change_position_employees') }}">
+                                   href="{{ route('admin.office.employees.position_conversion_employees') }}">
                                     تبدیل شده
                                     ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 3)->count() }})
                                 </a>

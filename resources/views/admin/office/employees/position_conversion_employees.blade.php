@@ -67,11 +67,12 @@
                                         <th>#</th>
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.fatherName')</th>
-                                        <th>@lang('form.background')</th>
                                         <th>@lang('form.phone')</th>
                                         <th>@lang('form.empNumber')</th>
-                                        <th>@lang('form.birthYear')</th>
-                                        <th>@lang('form.introducer')</th>
+                                        <th>نمبر مکتوب تبدیلی</th>
+                                        <th>تاریخ مکتوب تبدیلی</th>
+                                        <th>مکتوب</th>
+                                        <th>علت تبدیلی - اداره/ارگان</th>
                                     </tr>
                                     </thead>
 
@@ -83,13 +84,18 @@
                                                 <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
                                             </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
-                                            <td>{!! $employee->background !!}</td>
                                             <td class="tx-sm-12-f">
                                                 <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
                                             </td>
                                             <td>{{ $employee->emp_number ?? '' }}</td>
-                                            <td>{{ $employee->birth_year }} ({{ \Morilog\Jalali\Jalalian::now()->getYear() - $employee->birth_year }} ساله)</td>
-                                            <td>{{ $employee->introducer ?? '' }}</td>
+                                            <td>{{ $employee->resumes->last()->doc_number ?? '' }}</td>
+                                            <td>{{ $employee->resumes->last()->doc_date ?? '' }}</td>
+                                            <td>
+                                                <a href="{{ $employee->resumes->last()->image }}" target="_blank">
+                                                    <img src="{{ $employee->resumes->last()->image }}" alt="{{ $employee->name }}" style="width: 50px;">
+                                                </a>
+                                            </td>
+                                            <td>{{ $employee->resumes->last()->info ?? '' }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

@@ -113,7 +113,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('main-employees', [EmployeeController::class, 'main_employees'])->name('employees.main');
         Route::get('on-duty-employees', [EmployeeController::class, 'on_duty_employees'])->name('employees.on_duty');
         // Change Position Employees
-        Route::get('employee/change-position-employees', [EmployeeController::class, 'change_position_employees'])->name('employees.change_position_employees');
+        Route::get('employee/position-conversion-employees', [EmployeeController::class, 'position_conversion_employees'])->name('employees.position_conversion_employees');
         // Suspended Employees
         Route::get('employee/suspended-employees', [EmployeeController::class, 'suspended_employees'])->name('employees.suspended_employees');
         // Retired Employees
