@@ -317,61 +317,6 @@
                         </div>
                         <!--/==/ End of User Information Details -->
 
-                        @if($user->employee)
-                            <h4>سابقه کاری کارمند</h4>
-                            <br>
-
-                            <!-- Experiences Table -->
-                            <div class="table-responsive mt-2">
-                                <table class="table table-bordered export-table border-top key-buttons display text-nowrap w-100">
-                                    <thead>
-                                    <tr>
-                                        <th class="text-center">#</th>
-                                        <th class="text-center">وضعیت حساب کاربری</th>
-                                        <th class="text-center">بست</th>
-                                        <th class="text-center">نوع بست</th>
-                                        <th class="text-center">فعالیت یوزر سیستم</th>
-                                        <th class="text-center">تاریخ شروع</th>
-                                        <th class="text-center">تاریخ ختم</th>
-                                        <th class="text-center">نمبر مکتوب</th>
-                                        <th class="text-center">مکتوب</th>
-                                        <th class="text-center">@lang('global.extraInfo')</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody>
-                                    @foreach($user->employee->experiences as $exp)
-                                        <tr>
-                                            <td>{{ $exp->id }}</td>
-                                            <td>{{ $exp->user_status == 1 ? 'فعال' : 'غیرفعال' }}</td>
-                                            <td>{{ $exp->position }}</td>
-                                            <td>{{ $exp->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
-                                            <!-- Asycuda User -->
-                                            <td>
-                                                @if($exp->employee->user)
-                                                    {{ $exp->employee->user->status == 1 ? 'فعال' : 'غیرفعال' }}
-                                                @else
-                                                    یوزر ندارد
-                                                @endif
-                                            </td>
-                                            <td>{{ $exp->start_date }}</td>
-                                            <td>{{ $exp->end_date ?? 'در حال انجام وظیفه' }}</td>
-                                            <td>{{ $exp->doc_number }}</td>
-                                            <td>
-                                                <a href="{{ asset('storage/employees/documents/' . $exp->document) }}" target="_blank">
-                                                    <img src="{{ asset('storage/employees/documents/' . $exp->document) }}" alt="{{ $exp->employee->name }}" width="80">
-                                                </a>
-                                            </td>
-                                            <td>{{ $exp->info }}</td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!--/==/ End of Experiences Table -->
-                        @endif
-
-                        <br>
                         <br>
 
                         <!-- Activities -->

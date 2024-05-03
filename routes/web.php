@@ -146,7 +146,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::post('employee/fire-employee/{id}', [EmployeeHelperController::class, 'fire_employee'])->name('employees.fire_employee');
         Route::get('employee/retire-employee/{id}', [EmployeeHelperController::class, 'retire_employee'])->name('employees.retire_employee');
 
-        // ========================== Employee Experiences ======================
+        // ========================== Employee Resumes ======================
         Route::get('employee/{id}/resumes', [ResumeController::class, 'index'])->name('employees.resumes');
         // Add Duty Position
         Route::get('employee/{id}/add-duty-position', [ResumeController::class, 'add_duty_position'])->name('employees.add_duty_position');
@@ -154,6 +154,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         // Change to main position
         Route::get('employee/{id}/change-to-main-position', [ResumeController::class, 'change_to_main_position'])->name('employees.change_to_main_position');
         Route::post('employee/{id}/change-to-main-pos', [ResumeController::class, 'change_to_main_pos'])->name('employees.change_to_main_pos');
+        // Position Conversion
+        Route::get('employee/{id}/position-conversion', [ResumeController::class, 'position_conversion'])->name('employees.position_conversion');
+        Route::post('employee/{id}/position-convert', [ResumeController::class, 'position_convert'])->name('employees.position_convert');
 
         // ========================== Employee Leaves ======================
         Route::get('employee/{id}/leaves', [LeaveController::class, 'index'])->name('employees.leaves.index');

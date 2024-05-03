@@ -381,12 +381,14 @@
                             <div class="row bd">
                                 @foreach($employee->documents as $document)
                                     <div class="bd m-1 p-1">
-                                        <!-- Delete -->
-                                        <a class="pos-absolute modal-effect btn btn-sm btn-danger"
-                                           data-effect="effect-sign" data-toggle="modal"
-                                           href="#delete_doc{{ $document->id }}">
-                                            <i class="fe fe-trash"></i>
-                                        </a>
+                                        @if($employee->status == 0)
+                                            <!-- Delete -->
+                                            <a class="pos-absolute modal-effect btn btn-sm btn-danger"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#delete_doc{{ $document->id }}">
+                                                <i class="fe fe-trash"></i>
+                                            </a>
+                                        @endif
 
                                         @include('admin.office.employees.inc.delete_doc')
 

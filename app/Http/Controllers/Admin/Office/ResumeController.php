@@ -91,7 +91,7 @@ class ResumeController extends Controller
         ]);
     }
 
-    // Add Duty Position
+    // Change to Main Position
     public function change_to_main_position($id)
     {
         $employee = Employee::find($id);
@@ -162,6 +162,79 @@ class ResumeController extends Controller
 
         return redirect()->route('admin.office.employees.resumes', $employee->id)->with([
             'message'   => 'کارمند هذا به اصل بست مقرر گردید.',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Position Conversion
+    public function position_conversion($id)
+    {
+        $employee = Employee::find($id);
+
+        return view('admin.office.employees.position_conversion', compact('employee'));
+    }
+
+    // Position Conversion POST Method
+    public function position_convert(Request $request, $id)
+    {
+        $employee = Employee::find($id);
+
+        $request->validate([
+            'start_date'    => 'required',
+            'doc_number'    => 'required',
+            'doc_date'      => 'required'
+        ]);
+
+        $emp_resume = Resume::where('employee_id', $employee->id)->latest()->first();
+        if ($emp_resume) {
+            $emp_resume->update(['end_date' => CalendarUtils::strftime('Y-m-d', strtotime(now()))]);
+        }
+
+        // Save Record to Experiences Table
+        $resume = new Resume();
+        $resume->employee_id    = $employee->id;
+        $resume->position       = $request->position;
+        $resume->position_type  = 0;
+        $resume->start_date     = $request->start_date;
+        // $resume->end_date       = $request->start_date;
+        $resume->doc_number     = $request->doc_number;
+        $resume->doc_date       = $request->doc_date;
+        $resume->info           = $request->info;
+        $resume->save();
+
+        //  Has File && Save Avatar Image
+        if ($request->hasFile('photo')) {
+            $avatar = $request->file('photo');
+            $fileName = 'emp-resume-doc-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $resume->storeImage($avatar->storeAs('employees/resumes', $fileName, 'public'));
+        }
+
+        // Update Duty Position Table
+        $employee->update([
+            'position_id'       => null,
+            'hostel_id'         => null,
+            'position_code'     => null,
+            'on_duty'           => 0,
+            'start_duty'        => null,
+            'duty_doc_number'   => null,
+            'duty_doc_date'     => null,
+            'duty_position'     => null,
+            'status'            => 3
+        ]);
+
+        if ($request->hasFile('photo')) {
+            // File
+            $file = $request->file('photo');
+            // New Document
+            $document = new Document();
+            $fileName = 'emp-document-' . time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('employees/docs', $fileName, 'public');
+            $document->path   = $fileName;
+            $employee->documents()->save($document);
+        }
+
+        return redirect()->route('admin.office.employees.resumes', $employee->id)->with([
+            'message'   => 'کارمند هذا به اداره/ارگان دیگر تبدیل گردید.',
             'alertType' => 'success'
         ]);
     }

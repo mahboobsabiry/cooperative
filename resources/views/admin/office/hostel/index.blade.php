@@ -67,13 +67,13 @@
                         <div class="tab-pane active">
                             <div class="main-content-label tx-13 mg-b-20">
                                 @lang('pages.hostel.hostel') محصولی دارای
-                                ({{ \App\Models\Office\Hostel::where('place', 'محصولی')->select('number')->distinct('number')->count() }}) اتاق
+                                ({{ \App\Models\Office\Hostel::where('place', 'محصولی')->select('id')->distinct('id')->count() }}) اتاق
                                 <br>
                                 @lang('pages.hostel.hostel')  سرحدی دارای
-                                ({{ \App\Models\Office\Hostel::where('place', 'سرحدی')->select('number')->distinct('number')->count() }}) اتاق
+                                ({{ \App\Models\Office\Hostel::where('place', 'سرحدی')->select('id')->distinct('id')->count() }}) اتاق
                                 <br>
                                 @lang('pages.hostel.hostel') پورت یکم دارای
-                                ({{ \App\Models\Office\Hostel::where('place', 'پورت یکم')->select('number')->distinct('number')->count() }}) اتاق
+                                ({{ \App\Models\Office\Hostel::where('place', 'پورت یکم')->select('id')->distinct('id')->count() }}) اتاق
                             </div>
                             <!-- Table -->
                             <div class="table-responsive mt-2">

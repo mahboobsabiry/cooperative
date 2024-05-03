@@ -165,8 +165,7 @@
                                        href="#fire_employee{{ $employee->id }}">منفک</a>
 
                                     <!-- Change Position Employee -->
-                                    <a class="modal-effect btn btn-outline-dark m-1" data-effect="effect-sign" data-toggle="modal"
-                                       href="#change_pos_employee{{ $employee->id }}">تبدیل</a>
+                                    <a class="btn btn-outline-dark m-1" href="{{ route('admin.office.employees.position_conversion', $employee->id) }}">تبدیل بست</a>
                                 @endcan
 
                                 @include('admin.office.employees.inc.modals')
