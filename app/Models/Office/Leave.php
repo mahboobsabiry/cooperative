@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Office;
 
-use App\Models\Office\Employee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;

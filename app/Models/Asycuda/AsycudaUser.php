@@ -2,7 +2,6 @@
 
 namespace App\Models\Asycuda;
 
-use App\Models\AsyUserExp;
 use App\Models\Office\Employee;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

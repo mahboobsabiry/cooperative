@@ -191,7 +191,7 @@
                                 </div>
 
                                 <!-- Form -->
-                                <form method="post" action="{{ route('admin.asycuda.coal.upload_doc', $cal->id) }}" enctype="multipart/form-data">
+                                <form method="post" action="{{ route('admin.asycuda.coal.upload_file', $cal->id) }}" enctype="multipart/form-data">
                                     @csrf
                                     <p class="mb-2">
                                         <span class="caption bg-gray-300">نوت: فایل آپلود شده باید از نوع عکس بوده باشد، فرمن های (.jpg .png .jpeg) مجاز می باشد.</span>
@@ -207,27 +207,27 @@
                                 </form>
 
                                 <div class="row bd">
-                                    @foreach($cal->documents as $document)
+                                    @foreach($cal->files as $file)
                                         <div class="bd m-1 p-1">
                                             <!-- Delete -->
                                             <a class="pos-absolute modal-effect btn btn-sm btn-danger"
                                                data-effect="effect-sign" data-toggle="modal"
-                                               href="#delete_doc{{ $document->id }}">
+                                               href="#delete_file{{ $file->id }}">
                                                 <i class="fe fe-trash"></i>
                                             </a>
 
-                                            @include('admin.asycuda.coal.delete_doc')
+                                            @include('admin.asycuda.coal.delete_file')
 
-                                            <a href="{{ asset('storage/coal/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}"
+                                            <a href="{{ asset('storage/coal/files/' . $file->path) ?? asset('assets/images/id-card-default.png') }}"
                                                target="_blank">
-                                                <img src="{{ asset('storage/coal/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" alt="اسناد" width="150">
+                                                <img src="{{ asset('storage/coal/files/' . $file->path) ?? asset('assets/images/id-card-default.png') }}" alt="اسناد" width="150">
                                             </a>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
                         </div>
-                        <!--/==/ End of User Information Details -->
+                        <!--/==/ End of Information Details -->
                     </div>
                 </div>
             </div>

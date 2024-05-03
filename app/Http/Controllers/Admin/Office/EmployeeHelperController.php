@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Office;
 
 use App\Http\Controllers\Controller;
-use App\Models\Document;
+use App\Models\File;
 use App\Models\Office\Employee;
 use App\Models\Office\Resume;
 use App\Models\Office\Position;
@@ -268,7 +268,7 @@ class EmployeeHelperController extends Controller
             // File
             $file = $request->file('document');
             // New Document
-            $document = new Document();
+            $document = new File();
             $fileName = 'emp-document-' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('employees/docs', $fileName, 'public');
             $document->path   = $fileName;
@@ -284,7 +284,7 @@ class EmployeeHelperController extends Controller
     // Delete Document
     public function delete_doc($id)
     {
-        $document = Document::find($id);
+        $document = File::find($id);
         // dd(storage_path('app/public/employees/docs/' . $document->path));
         if (file_exists(storage_path('app/public/employees/docs/' . $document->path))) {
             unlink(storage_path('app/public/employees/docs/' . $document->path));

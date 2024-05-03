@@ -91,9 +91,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('refresh/{id}', [COALController::class, 'refresh'])->name('coal.refresh');
         Route::get('coal-print-form/{id}', [COALController::class, 'coal_print_form'])->name('coal.print.form');
         // New Document
-        Route::post('cal/upload-document/{id}', [COALController::class, 'upload_doc'])->name('coal.upload_doc');
+        Route::post('cal/upload-file/{id}', [COALController::class, 'upload_file'])->name('coal.upload_file');
         // Delete Document
-        Route::post('cal/delete-document/{id}', [COALController::class, 'delete_doc'])->name('coal.delete_doc');
+        Route::post('cal/delete-file/{id}', [COALController::class, 'delete_file'])->name('coal.delete_file');
     });
 
     // ====== Office Routes ======

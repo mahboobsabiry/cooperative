@@ -3,11 +3,9 @@
 namespace App\Models\Office;
 
 use App\Models\Asycuda\AsycudaUser;
-use App\Models\Document;
-use App\Models\Leave;
+use App\Models\File;
 use App\Models\Photo;
 use App\Models\User;
-use App\Traits\HasDocument;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,9 +35,9 @@ class Employee extends Model
     }
 
     // Morph Document
-    public function documents(): MorphMany
+    public function files(): MorphMany
     {
-        return $this->morphMany(Document::class, 'transaction');
+        return $this->morphMany(File::class, 'transaction');
     }
 
     // Morph Document

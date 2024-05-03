@@ -2,7 +2,7 @@
 
 namespace App\Models\Asycuda;
 
-use App\Models\Document;
+use App\Models\File;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,8 +29,8 @@ class COAL extends Model
     }
 
     // Morph Document
-    public function documents(): MorphMany
+    public function files(): MorphMany
     {
-        return $this->morphMany(Document::class, 'transaction');
+        return $this->morphMany(File::class, 'transaction');
     }
 }

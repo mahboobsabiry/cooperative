@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Office;
 
 use App\Http\Controllers\Controller;
-use App\Models\Document;
+use App\Models\File;
 use App\Models\Office\Employee;
 use App\Models\Office\Resume;
 use Illuminate\Http\Request;
@@ -78,7 +78,7 @@ class ResumeController extends Controller
             // File
             $file = $request->file('photo');
             // New Document
-            $document = new Document();
+            $document = new File();
             $fileName = 'emp-document-' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('employees/docs', $fileName, 'public');
             $document->path   = $fileName;
@@ -153,7 +153,7 @@ class ResumeController extends Controller
             // File
             $file = $request->file('photo');
             // New Document
-            $document = new Document();
+            $document = new File();
             $fileName = 'emp-document-' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('employees/docs', $fileName, 'public');
             $document->path   = $fileName;
@@ -233,7 +233,7 @@ class ResumeController extends Controller
             // File
             $file = $request->file('photo');
             // New Document
-            $document = new Document();
+            $document = new File();
             $fileName = 'emp-document-' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('employees/docs', $fileName, 'public');
             $document->path   = $fileName;
@@ -306,7 +306,7 @@ class ResumeController extends Controller
             // File
             $file = $request->file('photo');
             // New Document
-            $document = new Document();
+            $document = new File();
             $fileName = 'emp-document-' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('employees/docs', $fileName, 'public');
             $document->path   = $fileName;

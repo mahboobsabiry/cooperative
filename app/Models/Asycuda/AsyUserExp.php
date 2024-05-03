@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Asycuda;
 
-use App\Models\Asycuda\AsycudaUser;
+use App\Models\Photo;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

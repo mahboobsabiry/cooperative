@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Office;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEmployeeRequest;
-use App\Models\Document;
+use App\Models\File;
 use App\Models\Office\Employee;
 use App\Models\Office\Hostel;
 use App\Models\Office\Position;

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Asycuda;
 
 use App\Http\Controllers\Controller;
 use App\Models\Asycuda\AsycudaUser;
-use App\Models\AsyUserExp;
+use App\Models\Asycuda\AsyUserExp;
 use App\Models\Office\Employee;
 use App\Models\Office\Resume;
 use Illuminate\Http\Request;

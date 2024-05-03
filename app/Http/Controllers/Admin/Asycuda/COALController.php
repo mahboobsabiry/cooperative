@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin\Asycuda;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\COALRequest;
 use App\Models\Asycuda\COAL;
-use App\Models\Document;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Morilog\Jalali\Jalalian;
@@ -181,18 +180,18 @@ class COALController extends Controller
     }
 
     // Upload Cal Form
-    public function upload_doc(Request $request, $id)
+    public function upload_file(Request $request, $id)
     {
         // Employee
         $cal = COAL::find($id);
 
         foreach ($request->file('document') as $item) {
-            // New Document
-            $document = new Document();
-            $fileName = 'cal-document-' . time() . '.' . $item->getClientOriginalExtension();
-            $item->storeAs('coal/docs', $fileName, 'public');
-            $document->path   = $fileName;
-            $cal->documents()->save($document);
+            // New File
+            $file = new File();
+            $fileName = 'cal-file-' . time() . '.' . $item->getClientOriginalExtension();
+            $item->storeAs('coal/files', $fileName, 'public');
+            $file->path   = $fileName;
+            $cal->files()->save($file);
         }
 
         return redirect()->back()->with([
@@ -201,15 +200,14 @@ class COALController extends Controller
         ]);
     }
 
-    // Delete Document
-    public function delete_doc($id)
+    // Delete File
+    public function delete_file($id)
     {
-        $document = Document::find($id);
-        // dd(storage_path('app/public/employees/docs/' . $document->path));
-        if (file_exists(storage_path('app/public/employees/docs/' . $document->path))) {
-            unlink(storage_path('app/public/employees/docs/' . $document->path));
+        $file = File::find($id);
+        if (file_exists(storage_path('app/public/coal/files/' . $file->path))) {
+            unlink(storage_path('app/public/coal/files/' . $file->path));
         }
-        $document->delete();
+        $file->delete();
         return redirect()->back()->with([
             'message'   => 'سند موفقانه حذف گردید.',
             'alertType' => 'success'
