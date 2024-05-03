@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', trans('global.edit') . ' ~ ' . trans('pages.hostel.hostel'))
+@section('title', 'ویرایش اتاق نمبر ' . $hostel->number . ' بخش ' . $hostel->place)
 <!-- Extra Styles -->
 @section('extra_css')
 

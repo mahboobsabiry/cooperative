@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'تضمین ها')
+@section('title', 'تضمین های قطعی')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->

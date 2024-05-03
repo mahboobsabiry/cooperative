@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', trans('global.new') . ' ~ ' . trans('pages.hostel.hostel'))
+@section('title', 'ثبت اتاق جدید')
 <!-- Extra Styles -->
 @section('extra_css')
 
@@ -14,7 +14,7 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">@lang('global.new')</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">ثبت اتاق جدید</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.office.hostel.index') }}">@lang('pages.hostel.hostel')</a></li>

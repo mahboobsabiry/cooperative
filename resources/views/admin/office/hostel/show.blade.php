@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', trans('pages.hostel.hostel') . ' - ' . $hostel->number)
+@section('title', 'اتاق نمبر ' . $hostel->number . ' بخش ' . $hostel->place)
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->

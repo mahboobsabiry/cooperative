@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', trans('global.new') . ' ~ ثبت تضمین')
+@section('title', 'ثبت تضمین')
 <!-- Extra Styles -->
 @section('extra_css')
 
