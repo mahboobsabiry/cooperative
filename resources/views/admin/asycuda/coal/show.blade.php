@@ -198,7 +198,7 @@
                                     </p>
                                     <div class="form-group row m-2">
                                         <div class="{{ app()->getLocale() == 'en' ? 'mr-1' : 'ml-1' }}">
-                                            <input type="file" accept="image/*" class="form-control" name="document[]" multiple>
+                                            <input type="file" accept="image/*" class="form-control" name="file[]" multiple>
                                         </div>
                                         <div>
                                             <input type="submit" class="btn btn-outline-primary" value="آپلود">

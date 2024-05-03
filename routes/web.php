@@ -125,10 +125,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
         // ======== EmployeeHelperController ==========
         Route::post('update-employee-status', [EmployeeHelperController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');
-        // New Document
-        Route::post('employee/new-document/{id}', [EmployeeHelperController::class, 'new_doc'])->name('employees.new_doc');
-        // Delete Document
-        Route::post('employee/delete-document/{id}', [EmployeeHelperController::class, 'delete_doc'])->name('employees.delete_doc');
+        // New File
+        Route::post('employee/new-file/{id}', [EmployeeHelperController::class, 'new_file'])->name('employees.new_file');
+        // Delete File
+        Route::post('employee/delete-file/{id}', [EmployeeHelperController::class, 'delete_file'])->name('employees.delete_file');
         // Employee Change Position In Return
         Route::post('employee/change-position-in-return/{id}', [EmployeeHelperController::class, 'in_return'])->name('employees.in_return');
         // Employee Discount/Update/Change Position

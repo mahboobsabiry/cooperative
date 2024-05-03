@@ -368,34 +368,34 @@
                                             <!-- New -->
                                             <a class="pos-absolute modal-effect btn btn-sm btn-outline-primary font-weight-bold"
                                                data-effect="effect-sign" data-toggle="modal"
-                                               href="#new_doc{{ $employee->id }}">
+                                               href="#new_file{{ $employee->id }}">
                                                 ثبت
                                             </a>
 
-                                            @include('admin.office.employees.inc.new_doc')
+                                            @include('admin.office.employees.inc.new_file')
                                         </div>
                                     @endif
                                 </div>
                             </div>
 
                             <div class="row bd">
-                                @foreach($employee->documents as $document)
+                                @foreach($employee->files as $file)
                                     <div class="bd m-1 p-1">
                                         @if($employee->status == 0)
                                             <!-- Delete -->
                                             <a class="pos-absolute modal-effect btn btn-sm btn-danger"
                                                data-effect="effect-sign" data-toggle="modal"
-                                               href="#delete_doc{{ $document->id }}">
+                                               href="#delete_file{{ $file->id }}">
                                                 <i class="fe fe-trash"></i>
                                             </a>
                                         @endif
 
-                                        @include('admin.office.employees.inc.delete_doc')
+                                        @include('admin.office.employees.inc.delete_file')
 
-                                        <a href="{{ asset('storage/employees/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}"
+                                        <a href="{{ asset('storage/employees/files/' . $file->path) ?? asset('assets/images/id-card-default.png') }}"
                                            target="_blank">
                                             <img
-                                                src="{{ asset('storage/employees/docs/' . $document->path) ?? asset('assets/images/id-card-default.png') }}" alt="اسناد" width="150">
+                                                src="{{ asset('storage/employees/files/' . $file->path) ?? asset('assets/images/id-card-default.png') }}" alt="اسناد" width="150">
                                         </a>
                                     </div>
                                 @endforeach

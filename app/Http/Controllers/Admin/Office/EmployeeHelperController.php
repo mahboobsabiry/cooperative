@@ -258,21 +258,21 @@ class EmployeeHelperController extends Controller
         ]);
     }
 
-    // New Document
-    public function new_doc(Request $request, $id)
+    // New File
+    public function new_file(Request $request, $id)
     {
         // Employee
         $employee = Employee::find($id);
 
-        if ($request->hasFile('document')) {
+        if ($request->hasFile('file')) {
             // File
-            $file = $request->file('document');
+            $item = $request->file('file');
             // New Document
-            $document = new File();
-            $fileName = 'emp-document-' . time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('employees/docs', $fileName, 'public');
-            $document->path   = $fileName;
-            $employee->documents()->save($document);
+            $file = new File();
+            $fileName = 'emp-file-' . time() . '.' . $item->getClientOriginalExtension();
+            $item->storeAs('employees/files', $fileName, 'public');
+            $file->path   = $fileName;
+            $employee->files()->save($file);
         }
 
         return redirect()->back()->with([
@@ -281,15 +281,14 @@ class EmployeeHelperController extends Controller
         ]);
     }
 
-    // Delete Document
-    public function delete_doc($id)
+    // Delete File
+    public function delete_file($id)
     {
-        $document = File::find($id);
-        // dd(storage_path('app/public/employees/docs/' . $document->path));
-        if (file_exists(storage_path('app/public/employees/docs/' . $document->path))) {
-            unlink(storage_path('app/public/employees/docs/' . $document->path));
+        $file = File::find($id);
+        if (file_exists(storage_path('app/public/employees/files/' . $file->path))) {
+            unlink(storage_path('app/public/employees/files/' . $file->path));
         }
-        $document->delete();
+        $file->delete();
         return redirect()->back()->with([
             'message'   => 'سند موفقانه حذف گردید.',
             'alertType' => 'success'

@@ -1,5 +1,5 @@
 <!-- Delete -->
-<div class="modal" id="new_doc{{ $employee->id }}">
+<div class="modal" id="new_file{{ $employee->id }}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo">
             <!-- Modal Header -->
@@ -9,7 +9,7 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.office.employees.new_doc', $employee->id) }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('admin.office.employees.new_file', $employee->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <p class="mb-2">
@@ -17,7 +17,7 @@
                     </p>
 
                     <div class="bd p-2">
-                        <input type="file" id="document" class="form-control-file" name="document" accept="image/*" data-height="200" />
+                        <input type="file" id="file" class="form-control-file" name="file" accept="image/*" data-height="200" />
                     </div>
                 </div>
                 <div class="modal-footer">

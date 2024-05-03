@@ -185,7 +185,7 @@ class COALController extends Controller
         // Employee
         $cal = COAL::find($id);
 
-        foreach ($request->file('document') as $item) {
+        foreach ($request->file('file') as $item) {
             // New File
             $file = new File();
             $fileName = 'cal-file-' . time() . '.' . $item->getClientOriginalExtension();
