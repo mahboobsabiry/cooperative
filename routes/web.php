@@ -125,26 +125,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
         // ======== EmployeeHelperController ==========
         Route::post('update-employee-status', [EmployeeHelperController::class, 'updateEmployeeStatus'])->name('updateEmployeeStatus');
-        // Add Background
-        Route::post('employee/add-background/{id}', [EmployeeHelperController::class, 'add_background'])->name('employees.add_background');
-        // Add Duty Position
-        Route::post('employee/duty-position/{id}', [EmployeeHelperController::class, 'duty_position'])->name('employees.duty_position');
-        // Reset to Main Position
-        Route::get('employee/reset-position/{id}', [EmployeeHelperController::class, 'reset_position'])->name('employees.reset_position');
         // New Document
         Route::post('employee/new-document/{id}', [EmployeeHelperController::class, 'new_doc'])->name('employees.new_doc');
         // Delete Document
         Route::post('employee/delete-document/{id}', [EmployeeHelperController::class, 'delete_doc'])->name('employees.delete_doc');
-
-        // Employee Change Position to other customs
-        Route::post('employee/change-position-ocustom/{id}', [EmployeeHelperController::class, 'change_position_ocustom'])->name('employees.change_position_ocustom');
         // Employee Change Position In Return
         Route::post('employee/change-position-in-return/{id}', [EmployeeHelperController::class, 'in_return'])->name('employees.in_return');
         // Employee Discount/Update/Change Position
         Route::post('employee/duc-position/{id}', [EmployeeHelperController::class, 'duc_position'])->name('employees.duc_position');
         // Fire Employee
         Route::post('employee/fire-employee/{id}', [EmployeeHelperController::class, 'fire_employee'])->name('employees.fire_employee');
-        Route::get('employee/retire-employee/{id}', [EmployeeHelperController::class, 'retire_employee'])->name('employees.retire_employee');
 
         // ========================== Employee Resumes ======================
         Route::get('employee/{id}/resumes', [ResumeController::class, 'index'])->name('employees.resumes');
@@ -154,6 +144,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         // Change to main position
         Route::get('employee/{id}/change-to-main-position', [ResumeController::class, 'change_to_main_position'])->name('employees.change_to_main_position');
         Route::post('employee/{id}/change-to-main-pos', [ResumeController::class, 'change_to_main_pos'])->name('employees.change_to_main_pos');
+        // Retire Position
+        Route::get('employee/{id}/retire-position', [ResumeController::class, 'retire_position'])->name('employees.retire_position');
+        Route::post('employee/{id}/retire-employee', [ResumeController::class, 'retire_employee'])->name('employees.retire_employee');
         // Position Conversion
         Route::get('employee/{id}/position-conversion', [ResumeController::class, 'position_conversion'])->name('employees.position_conversion');
         Route::post('employee/{id}/position-convert', [ResumeController::class, 'position_convert'])->name('employees.position_convert');

@@ -163,7 +163,7 @@
 
                         <a class="nav-link with-sub" href="javascript:void(0)">
                             <i class="fa fa-user-tie"></i>
-                            @if(count(\App\Models\Office\Employee::all()->where('status', 5)) >= 1)
+                            @if(count(\App\Models\Office\Employee::all()->where('status', 4)) >= 1)
                                 <span class="pulse"></span>
                             @endif
                             <span class="sidemenu-label">@lang('admin.sidebar.employees')</span>
@@ -191,7 +191,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/main-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.main') }}">
                                     @lang('pages.employees.mainPosition')
-                                    ({{ \App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 0)->where('on_duty', 0)->count() }})
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 0)->count() }})
                                 </a>
                             </li>
 
@@ -199,7 +199,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/on-duty-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.on_duty') }}">
                                     @lang('pages.employees.onDuty')
-                                    ({{ \App\Models\Office\Employee::all()->whereNotNull('position_id')->where('status', 0)->where('on_duty', 1)->count() }}
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 1)->count() }}
                                     )
                                 </a>
                             </li>
@@ -208,7 +208,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/employee/retired-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.retired_employees') }}">
                                     متقاعدین
-                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 1)->count() }}
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 1)->count() }}
                                     )
                                 </a>
                             </li>
@@ -217,7 +217,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/employee/fired-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.fired_employees') }}">
                                     منفکی
-                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 2)->count() }}
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 2)->count() }}
                                     )
                                 </a>
                             </li>
@@ -227,7 +227,7 @@
                                 <a class="nav-sub-link"
                                    href="{{ route('admin.office.employees.position_conversion_employees') }}">
                                     تبدیل شده
-                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 3)->count() }})
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 3)->count() }})
                                 </a>
                             </li>
 
@@ -235,9 +235,9 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/employee/suspended-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.suspended_employees') }}">
                                     <span class="text-secondary">معلق </span>&nbsp;
-                                    ({{ \App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 4)->count() }}
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 4)->count() }}
                                     )
-                                    @if(count(\App\Models\Office\Employee::all()->whereNull('position_id')->where('status', 4)) >= 1)
+                                    @if(count(\App\Models\Office\Employee::all()->where('status', 4)) >= 1)
                                         &nbsp;<span class="fas fa-user-tie fa-pulse text-danger"></span>
                                     @endif
                                 </a>

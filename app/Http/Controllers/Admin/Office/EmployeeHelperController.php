@@ -41,53 +41,6 @@ class EmployeeHelperController extends Controller
         }
     }
 
-    // Retire Employee
-    public function retire_employee($id)
-    {
-        $employee = Employee::find($id);
-
-        $get_year = Jalalian::now()->getYear() - $employee->birth_year;
-
-        if ($get_year >= 65) {
-            // Add To HIS/HER background - experiences
-            $last_exp = $employee->experiences()->latest()->first();
-            $last_exp->update(['end_date' => CalendarUtils::strftime('Y-m-d', strtotime(now()))]);
-
-            // Update Employee Information/Deactivate his/her activity
-            $employee->update([
-                'position_id'   => null,
-                'hostel_id'     => null,
-                'position_code' => null,
-                'status'        => 2,
-                'on_duty'       => 0,
-                'duty_position' => null,
-                'duty_doc_number'   => null,
-                'start_duty'    => null,
-                'info'          => 'بعد از خدمات بی نظیر و قابل ستایش، بازنشسته شد.'
-            ]);
-
-            // Deactivate BCD-MIS User Status
-            if ($employee->user) {
-                $employee->user->update(['status' => 0]);
-            }
-
-            // Deactivate Asycuda User Status
-            if ($employee->asycuda_user) {
-                $employee->asycuda_user->update(['status' => 0]);
-            }
-
-            return redirect()->back()->with([
-                'message'   => 'کارمند متذکره تقاعد نمود.',
-                'alertType' => 'success'
-            ]);
-        } else {
-            return redirect()->back()->with([
-                'message'   => 'کارمند واجد شرایط تقاعدی نمی باشد.',
-                'alertType' => 'danger'
-            ]);
-        }
-    }
-
     // Fire Employee
     public function fire_employee(Request $request, $id)
     {

@@ -156,8 +156,7 @@
 
                                     <!-- Retire Employee -->
                                     @if($age >= 65)
-                                        <a class="modal-effect btn btn-outline-success m-1" data-effect="effect-sign" data-toggle="modal"
-                                           href="#retire_employee{{ $employee->id }}">تقاعد</a>
+                                        <a class="btn btn-outline-success m-1" href="{{ route('admin.office.employees.retire_position', $employee->id) }}">تقاعد</a>
                                     @endif
 
                                     <!-- Fire Employee -->

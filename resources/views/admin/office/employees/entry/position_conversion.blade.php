@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'ثبت بست خدمتی کارمند')
+@section('title', 'تبدیل بست کارمند')
 <!-- Extra Styles -->
 @section('extra_css')
 
@@ -14,7 +14,7 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">@lang('pages.employees.employeeInfo')</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">تبدیل بست کارمند به اداره/ارگان دیگر</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
@@ -25,7 +25,10 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.office.employees.show', $employee->id) }}">@lang('pages.employees.employeeInfo')</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">ثبت بست خدمتی</li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.office.employees.resumes', $employee->id) }}">سوابق کارمند</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">تبدیل بست کارمند</li>
                 </ol>
             </div>
 
@@ -132,7 +135,7 @@
                         <!-- Header -->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="font-weight-bold">ثبت بست خدمتی کارمند</div>
+                                <div class="font-weight-bold">تبدیل بست کارمند به اداره/ارگان دیگر</div>
                             </div>
                             <div class="col-md-6 text-left">
 
@@ -140,20 +143,15 @@
                         </div>
 
                         <!-- Form -->
-                        <form method="post" action="{{ route('admin.office.employees.add_duty_pos', $employee->id) }}" class="background_form" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.office.employees.position_convert', $employee->id) }}" class="background_form" enctype="multipart/form-data">
                             @csrf
                             <!-- Employee && Document Number -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <!-- Duty Position -->
                                     <div class="form-group @error('position') has-danger @enderror">
-                                        <p class="mb-2">@lang('form.dutyPosition'): <span class="tx-danger">*</span></p>
-                                        <select class="form-control select2" name="position" id="position">
-                                            <option value="">@lang('form.chooseOne')</option>
-                                            @foreach(\App\Models\Office\Position::all()->except($employee->position->id) as $position)
-                                                <option value="{{ $position->title }} ({{ $position->type }})">{{ $position->title }} ({{ $position->type }})</option>
-                                            @endforeach
-                                        </select>
+                                        <p class="mb-2">بست: <span class="tx-danger">*</span></p>
+                                        <input type="text" id="position" class="form-control @error('position') form-control-danger @enderror" name="position" value="{{ old('position') }}" required>
 
                                         @error('position')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -172,9 +170,9 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <!-- Duty Document Number -->
+                                    <!-- Document Number -->
                                     <div class="form-group @error('doc_number') has-danger @enderror">
-                                        <p class="mb-2">@lang('form.dutyDocNumber'): <span class="tx-danger">*</span></p>
+                                        <p class="mb-2">نمبر مکتوب: <span class="tx-danger">*</span></p>
                                         <input type="text" id="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" name="doc_number" value="{{ old('doc_number') }}" required>
 
                                         @error('doc_number')
@@ -185,7 +183,7 @@
                                     <!-- Duty Document Date -->
                                     <div class="form-group @error('doc_date') has-danger @enderror">
                                         <p class="mb-2">تاریخ مکتوب: <span class="tx-danger">*</span></p>
-                                        <input type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
+                                        <input data-jdp data-jdp-max-date="today" type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
 
                                         @error('doc_date')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -195,7 +193,7 @@
                             </div>
                             <!--/==/ End of Employee && Document Number -->
 
-                            <!-- Start Duty && Duty Document Number -->
+                            <!-- File Scan && Info -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <!-- File -->
@@ -208,7 +206,7 @@
                                 <div class="col-md-6">
                                     <!-- Info -->
                                     <div class="form-group @error('info') has-danger @enderror">
-                                        <p class="mb-2">@lang('global.extraInfo'):</p>
+                                        <p class="mb-2">علت تبدیلی و ارگان/ریاست:</p>
                                         <textarea class="form-control" name="info" id="info">{{ old('info') }}</textarea>
 
                                         @error('info')

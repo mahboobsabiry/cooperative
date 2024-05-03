@@ -27,7 +27,7 @@ class ResumeController extends Controller
     {
         $employee = Employee::find($id);
 
-        return view('admin.office.employees.add_duty_position', compact('employee'));
+        return view('admin.office.employees.entry.add_duty_position', compact('employee'));
     }
 
     // Add Duty Position POST Method
@@ -103,7 +103,7 @@ class ResumeController extends Controller
             ]);
         }
 
-        return view('admin.office.employees.change_to_main_position', compact('employee'));
+        return view('admin.office.employees.entry.change_to_main_position', compact('employee'));
     }
 
     // Change to Main Position POST Method
@@ -166,12 +166,92 @@ class ResumeController extends Controller
         ]);
     }
 
+    // Retire Position Page/Blade
+    public function retire_position($id)
+    {
+        $employee = Employee::find($id);
+        $age = Jalalian::now()->getYear() - $employee->birth_year;
+
+        if ($age <= 64) {
+            return redirect()->route('admin.office.employees.resumes', $employee->id)->with([
+                'message'   => 'کارمند مورد نظر واجد شرایط تقاعدی نمی باشد.',
+                'alertType' => 'secondary'
+            ]);
+        }
+
+        return view('admin.office.employees.entry.retire_position', compact('employee'));
+    }
+
+    // Retire Employee POST Method
+    public function retire_employee(Request $request, $id)
+    {
+        $employee = Employee::find($id);
+
+        $request->validate([
+            'doc_number'    => 'required',
+            'doc_date'      => 'required'
+        ]);
+
+        $emp_resume = Resume::where('employee_id', $employee->id)->latest()->first();
+        if ($emp_resume) {
+            $emp_resume->update(['end_date' => CalendarUtils::strftime('Y-m-d', strtotime(now()))]);
+        }
+
+        // Save Record to Experiences Table
+        $resume = new Resume();
+        $resume->employee_id    = $employee->id;
+        $resume->position       = $employee->position->title;
+        $resume->position_type  = 0;
+        $resume->start_date     = $request->doc_date;
+        // $resume->end_date       = $request->start_date;
+        $resume->doc_number     = $request->doc_number;
+        $resume->doc_date       = $request->doc_date;
+        $resume->info           = $request->info;
+        $resume->save();
+
+        //  Has File && Save Avatar Image
+        if ($request->hasFile('photo')) {
+            $avatar = $request->file('photo');
+            $fileName = 'emp-resume-doc-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $resume->storeImage($avatar->storeAs('employees/resumes', $fileName, 'public'));
+        }
+
+        // Update Duty Position Table
+        $employee->update([
+            'position_id'       => null,
+            'hostel_id'         => null,
+            'position_code'     => null,
+            'on_duty'           => 0,
+            'start_duty'        => null,
+            'duty_doc_number'   => null,
+            'duty_doc_date'     => null,
+            'duty_position'     => null,
+            'status'            => 1
+        ]);
+
+        if ($request->hasFile('photo')) {
+            // File
+            $file = $request->file('photo');
+            // New Document
+            $document = new Document();
+            $fileName = 'emp-document-' . time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('employees/docs', $fileName, 'public');
+            $document->path   = $fileName;
+            $employee->documents()->save($document);
+        }
+
+        return redirect()->route('admin.office.employees.resumes', $employee->id)->with([
+            'message'   => 'کارمند هذا تقاعد نمود.',
+            'alertType' => 'success'
+        ]);
+    }
+
     // Position Conversion
     public function position_conversion($id)
     {
         $employee = Employee::find($id);
 
-        return view('admin.office.employees.position_conversion', compact('employee'));
+        return view('admin.office.employees.entry.position_conversion', compact('employee'));
     }
 
     // Position Conversion POST Method

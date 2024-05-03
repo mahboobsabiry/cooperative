@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'تبدیل کارمند به اصل بست')
+@section('title', 'تقاعد کارمند')
 <!-- Extra Styles -->
 @section('extra_css')
 
@@ -14,7 +14,7 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">@lang('pages.employees.employeeInfo')</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">تقاعد کارمند</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
@@ -25,7 +25,10 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.office.employees.show', $employee->id) }}">@lang('pages.employees.employeeInfo')</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">تبدیل کارمند به اصل بست</li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.office.employees.resumes', $employee->id) }}">سوابق کارمند</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">تقاعد کارمند</li>
                 </ol>
             </div>
 
@@ -54,7 +57,6 @@
                             <h4 class="pro-user-username text-dark mt-2 mb-0">
                                 <span>{{ $employee->name }} {{ $employee->last_name }}</span>
                             </h4>
-
                             <!-- Position -->
                             @can('office_position_view')
                                 <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->type }})</a>
@@ -133,7 +135,7 @@
                         <!-- Header -->
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="font-weight-bold">تبدیل کارمند به اصل بست</div>
+                                <div class="font-weight-bold">تقاعد کارمند</div>
                             </div>
                             <div class="col-md-6 text-left">
 
@@ -141,43 +143,27 @@
                         </div>
 
                         <!-- Form -->
-                        <form method="post" action="{{ route('admin.office.employees.change_to_main_pos', $employee->id) }}" class="background_form" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.office.employees.retire_employee', $employee->id) }}" class="background_form" enctype="multipart/form-data">
                             @csrf
-                            <!-- Employee && Document Number -->
+                            <!-- Retire Date -->
                             <div class="row">
                                 <div class="col-md-6">
-                                    <!-- Duty Position -->
-                                    <div class="form-group @error('position') has-danger @enderror">
-                                        <p class="mb-2">بست:</p>
-                                        <input type="text" class="form-control" value="{{ $employee->position->title }}" disabled>
-                                    </div>
-
-                                    <!-- Start Duty Date -->
-                                    <div class="form-group @error('start_date') has-danger @enderror">
-                                        <p class="mb-2">@lang('form.startDuty'): <span class="tx-danger">*</span></p>
-                                        <input data-jdp data-jdp-max-date="today" type="text" id="start_date" class="form-control @error('start_date') form-control-danger @enderror" name="start_date" value="{{ old('start_date') }}" required>
-
-                                        @error('start_date')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <!-- Duty Document Number -->
+                                    <!-- Document Number -->
                                     <div class="form-group @error('doc_number') has-danger @enderror">
-                                        <p class="mb-2">@lang('form.dutyDocNumber'): <span class="tx-danger">*</span></p>
+                                        <p class="mb-2">نمبر مکتوب: <span class="tx-danger">*</span></p>
                                         <input type="text" id="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" name="doc_number" value="{{ old('doc_number') }}" required>
 
                                         @error('doc_number')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                </div>
 
-                                    <!-- Duty Document Date -->
+                                <div class="col-md-6">
+                                    <!-- Document Date -->
                                     <div class="form-group @error('doc_date') has-danger @enderror">
                                         <p class="mb-2">تاریخ مکتوب: <span class="tx-danger">*</span></p>
-                                        <input type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
+                                        <input data-jdp data-jdp-max-date="today" type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
 
                                         @error('doc_date')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -187,7 +173,7 @@
                             </div>
                             <!--/==/ End of Employee && Document Number -->
 
-                            <!-- Start Duty && Duty Document Number -->
+                            <!-- File Scan && Info -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <!-- File -->
@@ -200,7 +186,7 @@
                                 <div class="col-md-6">
                                     <!-- Info -->
                                     <div class="form-group @error('info') has-danger @enderror">
-                                        <p class="mb-2">@lang('global.extraInfo'):</p>
+                                        <p class="mb-2">@lang('global.extraInfo'): </p>
                                         <textarea class="form-control" name="info" id="info">{{ old('info') }}</textarea>
 
                                         @error('info')
