@@ -30,8 +30,13 @@
 
             <!-- Btn List -->
             <div class="btn btn-list">
+                <!-- Reset Password -->
+                <a class="btn btn-secondary text-white btn-sm" href="{{ route('admin.users.reset_pswd', $user->id) }}" onclick="return confirm('آیا مطمئن هستید؟ رمز عبور به طور خودکار به 14021403 تغییر خواهد کرد.');">
+                    بازیابی رمز عبور
+                    <i class="fe fe-arrow-left"></i>
+                </a>
                 <!-- Back -->
-                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ route('admin.users.show', $user->id) }}">
+                <a class="btn btn-dark btn-sm" href="{{ route('admin.users.show', $user->id) }}">
                     @lang('global.back')
                     <i class="fe fe-arrow-left"></i>
                 </a>

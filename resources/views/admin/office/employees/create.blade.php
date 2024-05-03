@@ -73,14 +73,8 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <!-- Personal Information -->
-                                        <p class="bd-b mb-2 tx-bold pb-2">
-                                            <span class="badge badge-primary badge-pill">1</span>
-                                            @lang('pages.employees.personalInfo')
-                                        </p>
-
                                         <!-- Position && Position Code -->
-                                        <div class="row">
+                                        <div class="row" style="background-color: #EFF1F9;">
                                             <!-- Position -->
                                             <div class="col-md-6">
                                                 <div class="form-group @error('position_id') has-danger @enderror">
@@ -114,7 +108,7 @@
                                         <!--/==/ End of Position && Position Code -->
 
                                         <!-- Start Job and Education -->
-                                        <div class="row">
+                                        <div class="row" style="background-color: #EFF1F9;">
                                             <!-- Start Job -->
                                             <div class="col-md-6">
                                                 <div class="form-group @error('start_job') has-danger @enderror">
@@ -140,6 +134,12 @@
                                             </div>
                                         </div>
                                         <!--/==/ End of Start Job and Education-->
+
+                                        <!-- Personal Information -->
+                                        <p class="bd-b mb-2 tx-bold pb-2">
+                                            <span class="badge badge-primary badge-pill">1</span>
+                                            @lang('pages.employees.personalInfo')
+                                        </p>
 
                                         <!-- Name & Last Name -->
                                         <div class="row">
@@ -427,7 +427,7 @@
                                         <!--/==/ End of PRR/NPR -->
 
                                         <!-- Education & Hostel -->
-                                        <div class="row">
+                                        <div class="row" style="background-color: #EFF1F9;">
                                             <div class="col-md-6">
                                                 <!-- Hostel -->
                                                 <div class="form-group @error('hostel_id') has-danger @enderror">

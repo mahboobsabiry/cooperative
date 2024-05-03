@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Spatie\Permission\Models\Permission;
@@ -208,5 +209,16 @@ class UserController extends Controller
             }
             return response()->json(['status' => $status, 'user_id' => $data['user_id']]);
         }
+    }
+
+    // Reset Password
+    public function reset_pswd($id)
+    {
+        $user = User::find($id);
+        $user->update(['password' => Hash::make('14021403')]);
+        return back()->with([
+            'message'   => 'رمز عبور موفقانه بازیابی شد.',
+            'alertType' => 'success'
+        ]);
     }
 }

@@ -66,8 +66,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // Users
     Route::resource('users', UserController::class);
     Route::get('user/select-employee', [UserController::class, 'select_employee'])->name('users.select.employee');
-
+    // Update User Status
     Route::post('update-user-status', [UserController::class, 'updateUserStatus'])->name('updateUserStatus');
+    // Reset Password
+    Route::get('reset-user-password/{id}', [UserController::class, 'reset_pswd'])->name('users.reset_pswd');
     Route::get('active-users', [UserController::class, 'activeUsers'])->name('users.active');
     Route::get('inactive-users', [UserController::class, 'inactiveUsers'])->name('users.inactive');
 
