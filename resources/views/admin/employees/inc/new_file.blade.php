@@ -9,7 +9,7 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.office.employees.new_file', $employee->id) }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('admin.employees.new_file', $employee->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <p class="mb-2">

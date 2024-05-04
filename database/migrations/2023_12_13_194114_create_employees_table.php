@@ -13,37 +13,20 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->date('start_job');
-            $table->string('position_code')->nullable()->unique();
+            $table->string('position');
             $table->string('name');
-            $table->string('last_name')->nullable();
+            $table->string('username');
             $table->string('father_name');
             $table->boolean('gender')->default(1);
-            $table->string('emp_number')->nullable()->unique();
-            $table->string('appointment_number');
-            $table->string('appointment_date');
-            $table->string('last_duty')->default('جدیدالشمول');
             $table->integer('birth_year');
             $table->string('education')->nullable();
-            $table->enum('prr_npr', ['PRR', 'NPR'])->default('NPR');
-            $table->string('prr_date')->nullable();
             $table->string('phone')->nullable();
             $table->string('phone2')->nullable();
             $table->string('email')->unique()->nullable();
-            $table->string('main_province');
-            $table->string('main_district');
-            $table->string('current_province');
-            $table->string('current_district');
-            $table->string('introducer')->nullable();
+            $table->string('main_address');
+            $table->string('current_address');
             $table->string('info')->nullable();
-            $table->tinyInteger('status')->default(0);
-
-            // Duty
-            $table->tinyInteger('on_duty')->default(0);
-            $table->date('start_duty')->nullable();
-            $table->string('duty_doc_number')->nullable();
-            $table->string('duty_doc_date')->nullable();
-            $table->string('duty_position')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

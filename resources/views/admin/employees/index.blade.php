@@ -41,7 +41,7 @@
             <div class="btn btn-list">
                 <!-- Add New -->
                 @can('office_employee_create')
-                    <a class="btn ripple btn-primary" href="{{ route('admin.office.employees.create') }}">
+                    <a class="btn ripple btn-primary" href="{{ route('admin.employees.create') }}">
                         <i class="fe fe-plus-circle"></i> @lang('global.new')
                     </a>
                 @endcan
@@ -71,15 +71,15 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>تصویر</th>
                                         <th>@lang('form.name')</th>
+                                        <th>نام کاربری</th>
                                         <th>@lang('form.fatherName')</th>
                                         <th>@lang('form.position')</th>
-                                        <th>@lang('form.positionCode')</th>
+                                        <th>تاریخ تولد</th>
                                         <th>@lang('form.phone')</th>
-                                        <th>@lang('form.currentProvince')</th>
-                                        <th>@lang('form.currentDistrict')</th>
-                                        <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
-                                        <th>@lang('form.introducer')</th>
+                                        <th>آدرس اصلی</th>
+                                        <th>آدرس فعلی</th>
                                     </tr>
                                     </thead>
 
@@ -88,22 +88,22 @@
                                         <tr>
                                             <td>{{ $employee->id }}</td>
                                             <td>
-                                                <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
+                                                <a href="{{ $employee->image }}" target="_blank">
+                                                    <img src="{{ $employee->image }}" style="width: 50px;" alt="{{ $employee->name }}">
+                                                </a>
                                             </td>
+                                            <td>
+                                                <a href="{{ route('admin.employees.show', $employee->id) }}">{{ $employee->name }}</a>
+                                            </td>
+                                            <td>{{ $employee->username ?? '' }}</td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
-                                            <td>{{ $employee->position->title ?? '' }} - {{ $employee->position->position_number ?? '' }}</td>
-                                            <td>{{ $employee->position_code ?? '' }}</td>
+                                            <td>{{ $employee->position ?? '' }}</td>
+                                            <td>{{ $employee->birth_year ?? '' }} ({{ \Morilog\Jalali\Jalalian::now()->getYear() - $employee->birth_year }})</td>
                                             <td class="tx-sm-12-f">
                                                 <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
                                             </td>
-                                            <td>{{ $employee->current_province ?? '' }}</td>
-                                            <td>{{ $employee->current_district ?? '' }}</td>
-                                            <td>
-                                                {{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
-                                                {{ $employee->duty_position ? ' - ' : '' }}
-                                                {{ $employee->duty_position ?? '' }}
-                                            </td>
-                                            <td>{{ $employee->introducer ?? '' }}</td>
+                                            <td>{{ $employee->main_address ?? '' }}</td>
+                                            <td>{{ $employee->current_address ?? '' }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

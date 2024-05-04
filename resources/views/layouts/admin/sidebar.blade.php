@@ -2,11 +2,11 @@
     <div class="sidemenu-logo">
         <a class="main-logo" href="{{ route('index') }}" target="_blank">
             <span class="text-capitalize">TOP-UP</span>
-            <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img desktop-logo" alt="logo">
-            <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img icon-logo" alt="logo">
-            <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img desktop-logo theme-logo"
+            <img src="{{ asset('assets/images/topup.png') }}" class="header-brand-img desktop-logo" alt="logo">
+            <img src="{{ asset('assets/images/topup.png') }}" class="header-brand-img icon-logo" alt="logo">
+            <img src="{{ asset('assets/images/topup.png') }}" class="header-brand-img desktop-logo theme-logo"
                  alt="logo">
-            <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
+            <img src="{{ asset('assets/images/topup.png') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
         </a>
     </div>
 
@@ -36,9 +36,9 @@
 
                     <ul class="nav-sub">
                         <!-- All Employees -->
-                        <li class="nav-sub-item {{ request()->is('admin/office/employees') ||
-                            request()->is('admin/office/employees/*') ? 'active' : '' }}">
-                            <a class="nav-sub-link" href="{{ route('admin.office.employees.index') }}">
+                        <li class="nav-sub-item {{ request()->is('admin/employees') ||
+                            request()->is('admin/employees/*') ? 'active' : '' }}">
+                            <a class="nav-sub-link" href="{{ route('admin.employees.index') }}">
                                 همه کارمندان برحال
                                 ({{ count(\App\Models\Employee::all()) }}
                                 )

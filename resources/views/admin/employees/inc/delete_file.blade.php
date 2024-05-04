@@ -9,7 +9,7 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.office.employees.delete_file', $file->id) }}" data-parsley-validate="">
+            <form method="post" action="{{ route('admin.employees.delete_file', $file->id) }}" data-parsley-validate="">
                 @csrf
                 <div class="modal-body">
                     <p>@lang('global.areYouSure')</p>

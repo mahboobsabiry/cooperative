@@ -9,7 +9,7 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.office.employees.destroy', $employee->id) }}" data-parsley-validate="">
+            <form method="post" action="{{ route('admin.employees.destroy', $employee->id) }}" data-parsley-validate="">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">
