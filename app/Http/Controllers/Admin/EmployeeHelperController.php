@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Office;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use App\Models\File;
-use App\Models\Office\Employee;
-use App\Models\Office\Resume;
 use App\Models\Office\Position;
 use Illuminate\Http\Request;
 use Morilog\Jalali\CalendarUtils;
-use Morilog\Jalali\Jalalian;
 
 class EmployeeHelperController extends Controller
 {

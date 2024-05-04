@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Office;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEmployeeRequest;
-use App\Models\File;
-use App\Models\Office\Employee;
+use App\Models\Employee;
 use App\Models\Office\Hostel;
 use App\Models\Office\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Morilog\Jalali\CalendarUtils;
-use Morilog\Jalali\Jalalian;
 
 class EmployeeController extends Controller
 {

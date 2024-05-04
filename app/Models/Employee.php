@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Models\Office;
+namespace App\Models;
 
 use App\Models\Asycuda\AsycudaUser;
-use App\Models\File;
-use App\Models\Photo;
-use App\Models\User;
+use App\Models\Office\Hostel;
+use App\Models\Office\Leave;
+use App\Models\Office\Position;
+use App\Models\Office\Resume;
 use App\Traits\HasPhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
