@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('position_id')->unsigned()->index()->nullable();
-            $table->bigInteger('hostel_id')->unsigned()->index()->nullable();
             $table->date('start_job');
             $table->string('position_code')->nullable()->unique();
             $table->string('name');
@@ -47,9 +45,6 @@ return new class extends Migration
             $table->string('duty_doc_date')->nullable();
             $table->string('duty_position')->nullable();
             $table->timestamps();
-
-            $table->foreign('position_id')->references('id')->on('positions')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('hostel_id')->references('id')->on('hostels')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
