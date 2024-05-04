@@ -26,7 +26,7 @@
 
         <!-- Date -->
         <div class="card custom-card">
-            <div class="card-body bg-primary text-white font-weight-bold" style="border: 1px solid #0fc373;">
+            <div class="card-body font-weight-bold" style="background-color: #EDC095; border: 1px solid #0fc373;">
                 تقویم امروز: {{ date_format(now(), 'Y-M-d') }} مصادف
                 با {{ \Morilog\Jalali\CalendarUtils::strftime('Y-M-d', strtotime(now())) }}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
