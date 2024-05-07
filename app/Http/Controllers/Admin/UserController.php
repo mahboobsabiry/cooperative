@@ -68,7 +68,6 @@ class UserController extends Controller
                 // Assuming 'employee_name' is the field you want to retrieve
                 $employee_name = $employee->name . ' ' . $employee->last_name;
                 $employee_username = $employee->username;
-                $employee_emp_number = $employee->emp_number;
                 $employee_phone = $employee->phone;
                 $employee_email = $employee->email;
 
@@ -76,7 +75,6 @@ class UserController extends Controller
                 return response()->json([
                     'employee_name' => $employee_name,
                     'employee_username' => $employee_username,
-                    'employee_emp_number' => $employee_emp_number,
                     'employee_phone' => $employee_phone,
                     'employee_email' => $employee_email
                 ]);
