@@ -416,7 +416,7 @@
                                             <td class="bd-t-0">
                                                 <h6 class="mg-b-0 font-weight-bold">
                                                     @if(count($user->activities()) > 0)
-                                                        {{ (count($user->activities()) / count(\Spatie\Activitylog\Models\Activity::all())) * 100 }}
+                                                        {{ round((count($user->activities()) / count(\Spatie\Activitylog\Models\Activity::all())) * 100) }}
                                                         %
                                                     @else
                                                         0%

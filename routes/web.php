@@ -189,11 +189,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // Test
     Route::get('test', function (){
-        // $date = now()->format('Y-m-d');
-        // $new_date = now()->addYear()->format('Y-m-d');
-        // echo $date . "<br>" . $new_date;
-        $date = now()->subDays(1);
-        echo $date->format('Y-m-d');
+        $p1 = 15;
+        $p2 = 12;
+        $p3 = 2;
+
+        echo ($p1/29)*100;
     });
 
     // Settings
