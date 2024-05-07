@@ -103,16 +103,27 @@
 
                             @if($user->employee)
                                 <!-- Position -->
-                                @can('office_employee_view')
-                                    <a href="{{ route('admin.employees.show', $user->employee->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $user->employee->username ?? '' }}</a>
+                                @can('office_position_view')
+                                    <a href="{{ route('admin.office.positions.show', $user->employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $user->employee->position->title ?? '' }}</a>
+                                @else
+                                    <p class="pro-user-desc text-muted mb-1">{{ $user->employee->position->title ?? '' }}</p>
                                 @endcan
+                                @if($user->employee->on_duty == 1)
+                                    <p class="pro-user-desc text-muted mb-1">{{ $user->employee->duty_position ?? '' }}</p>
+                                @endif
+
+                                @if($user->employee->position->position_number == 2 || $user->employee->position->position_number == 3)
+                                @else
+                                    <p class="pro-user-desc text-primary mb-1">({{ $user->employee->position->type ?? '' }})</p>
+                                @endif
                                 <!-- Employee Star -->
-                                <p class="user-info-rating">
-                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                </p>
+                                @if($user->employee->position)
+                                    <p class="user-info-rating">
+                                        @for($i=1; $i<=$user->employee->position->position_number; $i++)
+                                            <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                        @endfor
+                                    </p>
+                                @endif
                                 <!--/==/ End of Employee Star -->
                             @else
                                 {{ $user->username }}
@@ -218,7 +229,7 @@
                                     <tbody class="p-0">
                                     <!-- Details -->
                                     <tr>
-                                        <td colspan="3" class="font-weight-bold">
+                                        <td colspan="4" class="font-weight-bold">
                                             <span class="badge badge-primary badge-pill">1</span>
                                             @lang('pages.employees.personalInfo')
                                         </td>
@@ -229,23 +240,27 @@
                                         <th><strong>#</strong></th>
                                         <th><strong>@lang('form.name')</strong></th>
                                         <th><strong>نام پدر</strong></th>
+                                        <th><strong>نام کاربری</strong></th>
                                     </tr>
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->employee->father_name ?? '' }}</td>
+                                        <td>{{ $user->username }}</td>
                                     </tr>
 
                                     <!-- Second Row -->
                                     <tr>
-                                        <th><strong>نام کاربری</strong></th>
                                         <th><strong>@lang('form.phone')</strong></th>
                                         <th><strong>@lang('form.email')</strong></th>
+                                        <th><strong>کد گمرک</strong></th>
+                                        <th><strong>موقعیت</strong></th>
                                     </tr>
                                     <tr>
-                                        <td>{{ $user->username }}</td>
                                         <td>{{ $user->phone ?? '' }}</td>
                                         <td>{{ $user->email ?? '' }}</td>
+                                        <td>{{ $user->employee->position->custom_code ?? 'AF151' }}</td>
+                                        <td>{{ $user->employee->position->type ?? 'ریاست' }}</td>
                                     </tr>
                                     </tbody>
                                     <!--/==/ End of First Table -->
@@ -254,7 +269,7 @@
                                     <tbody class="p-0">
                                     <!-- Details -->
                                     <tr>
-                                        <td colspan="3" class="font-weight-bold">
+                                        <td colspan="4" class="font-weight-bold">
                                             <span class="badge badge-primary badge-pill">2</span>
                                             معلومات یوزر
                                         </td>
@@ -262,11 +277,11 @@
 
                                     <!-- First Row -->
                                     <tr>
-                                        <th colspan="2"><strong>مجوز ها</strong></th>
+                                        <th colspan="3"><strong>مجوز ها</strong></th>
                                         <th colspan="1"><strong>صلاحیت ها</strong></th>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" class="text-wrap">
+                                        <td colspan="3" class="text-wrap">
                                             @foreach($user->permissions as $permission)
                                                 <code class="text-danger" style="text-decoration: underline;">{{ $loop->iteration }}</code>
                                                 <code class="text-primary">{{ $permission->name }}</code>

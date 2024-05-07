@@ -27,17 +27,29 @@ class StoreEmployeeRequest extends FormRequest
     {
         return [
             'photo'         => 'nullable|image|mimes:jpg,png,jfif',
+            // 'document'      => 'nullable|image|mimes:jpg,png,jfif',
+            'start_job'     => 'required',
+            'position_code' => 'required|min:3|max:4|unique:employees,position_code',
             'name'          => 'required|min:3|max:64',
-            'username'      => 'nullable|min:3|max:64',
+            'last_name'     => 'nullable|min:3|max:64',
             'father_name'   => 'required|min:3|max:64',
+            'emp_number'    => 'nullable|unique:employees,emp_number',
+            'appointment_number'    => 'required',
+            'appointment_date'      => 'nullable',
+            'last_duty'     => 'nullable',
             'birth_year'    => 'required',
             'education'     => 'nullable',
+            'prr_npr'       => 'required',
+            'prr_date'      => 'nullable',
             'phone'         => 'nullable|unique:employees,phone',
             'phone2'        => 'nullable',
             'email'         => 'nullable|unique:employees,email',
-            'main_address'      => 'required|min:3|max:64',
-            'current_address'   => 'required|min:3|max:64',
-            'info'              => 'nullable'
+            'main_province'     => 'required|min:3|max:64',
+            'main_district'     => 'required|min:3|max:64',
+            'current_province'  => 'required|min:3|max:64',
+            'current_district'  => 'required|min:3|max:64',
+            'introducer'        => 'nullable|min:3|max:64',
+            'info'              => 'nullable',
         ];
     }
 }

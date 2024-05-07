@@ -255,7 +255,7 @@
                         dataType: 'json',
                         success: function (data) {
                             a.find('#name').val(data.employee_name);
-                            b.find('#username').val(data.employee_username);
+                            b.find('#username').val(data.employee_emp_number);
                             c.find('#phone').val(data.employee_phone);
                             d.find('#email').val(data.employee_email);
                         },

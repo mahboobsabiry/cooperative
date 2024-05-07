@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Asycuda\COAL;
+use App\Models\Office\Employee;
 use App\Traits\HasPhoto;
 use App\Traits\HasTazkira;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

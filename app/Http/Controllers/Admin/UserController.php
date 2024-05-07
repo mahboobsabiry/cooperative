@@ -5,13 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\Employee;
+use App\Models\Office\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Symfony\Component\HttpFoundation\Response;
+use function PHPUnit\Framework\fileExists;
 
 class UserController extends Controller
 {
@@ -68,6 +73,7 @@ class UserController extends Controller
                 // Assuming 'employee_name' is the field you want to retrieve
                 $employee_name = $employee->name . ' ' . $employee->last_name;
                 $employee_username = $employee->username;
+                $employee_emp_number = $employee->emp_number;
                 $employee_phone = $employee->phone;
                 $employee_email = $employee->email;
 
@@ -75,6 +81,7 @@ class UserController extends Controller
                 return response()->json([
                     'employee_name' => $employee_name,
                     'employee_username' => $employee_username,
+                    'employee_emp_number' => $employee_emp_number,
                     'employee_phone' => $employee_phone,
                     'employee_email' => $employee_email
                 ]);
@@ -196,6 +203,10 @@ class UserController extends Controller
             }
             $user = User::where('id', $data['user_id'])->first();
             $user->update(['status' => $status]);
+            $exp = $user->employee->experiences()->latest()->first();
+            if ($exp) {
+                $exp->update(['user_status' => $status]);
+            }
             return response()->json(['status' => $status, 'user_id' => $data['user_id']]);
         }
     }

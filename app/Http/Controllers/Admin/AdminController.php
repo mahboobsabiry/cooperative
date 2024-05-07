@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Employee;
+use App\Models\Office\Employee;
 use App\Models\Office\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,9 +25,17 @@ class AdminController extends Controller
          $top_users = User::all()->take(6);
          $logActivities = Activity::orderBy('created_at', 'desc')->take(6)->get();
 
+         // Send appointment and empty positions count to dashboard
+         // Sum number of positions
+         $sum_appointment = Position::all()->sum('num_of_pos');
          // Count all employees
          $employees_count = Employee::all()->count();
-         return view('admin.dashboard', compact('logActivities', 'top_users'));
+         // Count all empty positions
+         $empty_positions = $sum_appointment - $employees_count;
+         // Count all appointment positions
+         $appointment_positions = $sum_appointment - $empty_positions;
+
+         return view('admin.dashboard', compact('logActivities', 'top_users', 'appointment_positions', 'empty_positions'));
     }
 
     public function activities()

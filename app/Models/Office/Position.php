@@ -2,12 +2,9 @@
 
 namespace App\Models\Office;
 
-use App\Models\Document;
-use App\Models\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Position extends Model
 {
@@ -52,11 +49,5 @@ class Position extends Model
     public function employees(): HasMany
     {
         return $this->hasMany(Employee::class, 'position_id');
-    }
-
-    // Morph Documents
-    public function documents(): MorphMany
-    {
-        return $this->morphMany(Document::class, 'transaction');
     }
 }

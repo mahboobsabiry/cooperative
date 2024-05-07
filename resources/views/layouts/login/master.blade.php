@@ -8,7 +8,7 @@
     <meta name="author" content="Spruko Technologies Private Limited">
     <meta name="keywords" content="sales dashboard, admin dashboard, bootstrap 4 admin template, html admin template, admin panel design, admin panel design, bootstrap 4 dashboard, admin panel template, html dashboard template, bootstrap admin panel, sales dashboard design, best sales dashboards, sales performance dashboard, html5 template, dashboard template">
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('assets/images/topup.png') }}" type="image/x-icon"/>
+    <link rel="icon" href="{{ asset('assets/images/logo.png') }}" type="image/x-icon"/>
 
     <!-- Title -->
     <title>@yield('title', config('app.name') . ' | ' . trans('global.login'))</title>
@@ -50,13 +50,14 @@
     <div class="row text-center pl-0 pr-0 ml-0 mr-0">
         <div class="col-lg-3 d-block mx-auto">
             <div class="text-center mb-2">
-                <img src="{{ asset('assets/images/topup.jpg') }}" class="header-brand-img" alt="logo">
-                <img src="{{ asset('assets/images/topup.jpg') }}" class="header-brand-img theme-logos" alt="logo">
+                <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img" alt="logo">
+                <img src="{{ asset('assets/images/logo.jpg') }}" class="header-brand-img theme-logos" alt="logo">
             </div>
             @yield('content')
         </div>
     </div>
     <!-- End Row -->
+
 </div>
 <!-- End Page -->
 

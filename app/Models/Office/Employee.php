@@ -34,13 +34,13 @@ class Employee extends Model
         return $this->morphOne(Photo::class, 'transaction');
     }
 
-    // Morph Files
+    // Morph Document
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'transaction');
     }
 
-    // Has Many Resumes
+    // Morph Document
     public function resumes(): HasMany
     {
         return $this->hasMany(Resume::class);
