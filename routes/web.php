@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Asycuda\AsycudaUserController;
 use App\Http\Controllers\Admin\Asycuda\COALController;
 // Office Controllers
+use App\Http\Controllers\Admin\Asycuda\DocumentController;
 use App\Http\Controllers\Admin\Office\AgentColleagueController;
 use App\Http\Controllers\Admin\Office\AgentController;
 use App\Http\Controllers\Admin\Office\CompanyController;
@@ -75,6 +76,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // =============================== Asycuda Routes ===================================
     Route::group(['prefix' => 'asycuda', 'as' => 'asycuda.'], function () {
+        // Documents
+        Route::resource('documents', DocumentController::class);
+
         // USERS
         Route::resource('users', AsycudaUserController::class);
         Route::post('update-asy-user-status', [AsycudaUserController::class, 'updateAsyUserStatus'])->name('users.updateAsyUserStatus');
@@ -90,14 +94,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::post('coal/upload-cal-form/{id}', [COALController::class, 'upload_cal'])->name('coal.upload_cal');
         Route::get('refresh/{id}', [COALController::class, 'refresh'])->name('coal.refresh');
         Route::get('coal-print-form/{id}', [COALController::class, 'coal_print_form'])->name('coal.print.form');
-        // New Document
+        // New File
         Route::post('cal/upload-file/{id}', [COALController::class, 'upload_file'])->name('coal.upload_file');
-        // Delete Document
+        // Delete File
         Route::post('cal/delete-file/{id}', [COALController::class, 'delete_file'])->name('coal.delete_file');
     });
 
     // ====== Office Routes ======
     Route::group(['prefix' => 'office', 'as' => 'office.'], function () {
+        // Documents
+        Route::resource('documents', \App\Http\Controllers\Admin\Office\DocumentController::class);
+
         // Positions
         Route::resource('positions', PositionController::class);
         Route::post('update-position-status', [PositionController::class, 'updatePositionStatus'])->name('updatePositionStatus');

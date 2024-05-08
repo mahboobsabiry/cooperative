@@ -11,14 +11,14 @@ class Document extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type', 'subject', 'doc_type', 'doc_number', 'doc_date', 'appendices', 'transaction_type', 'transaction_id'];
+    protected $fillable = ['type', 'subject', 'doc_type', 'doc_number', 'doc_date', 'appendices', 'status', 'info', 'transaction_type', 'transaction_id'];
 
     public function transaction(): MorphTo
     {
         return $this->morphTo();
     }
 
-    // Morph Files
+    // Morph Document
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'transaction');
