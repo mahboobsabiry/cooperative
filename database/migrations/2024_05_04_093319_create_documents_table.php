@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->string('type')->default('normal');
-            $table->string('subject');
-            $table->string('doc_type')->default('document');
+            $table->string('type')->default('normal'); // عاجل - محرم - عادی
+            $table->string('subject'); // موضوع
+            $table->string('doc_type')->default('document'); // نوع مکتوب - پیشنهاد - درخواستی - مکتوب
             $table->string('doc_number');
             $table->string('doc_date');
             $table->integer('appendices')->default(0);
