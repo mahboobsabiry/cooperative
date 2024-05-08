@@ -57,10 +57,36 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name'      => 'asy_coal_delete'
             ],
+            // Asycuda Documents
+            [
+                'name'      => 'asy_docs_view'
+            ],
+            [
+                'name'      => 'asy_docs_create'
+            ],
+            [
+                'name'      => 'asy_cdocs_edit'
+            ],
+            [
+                'name'      => 'asy_docs_delete'
+            ],
 
             // ========== Office ==========
             [
                 'name'      => 'office_view'
+            ],
+            // Asycuda Documents
+            [
+                'name'      => 'office_docs_view'
+            ],
+            [
+                'name'      => 'office_docs_create'
+            ],
+            [
+                'name'      => 'office_cdocs_edit'
+            ],
+            [
+                'name'      => 'office_docs_delete'
             ],
             // Positions
             [
