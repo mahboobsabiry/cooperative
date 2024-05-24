@@ -135,7 +135,7 @@ body{
     color:#334151;
 }
 .page-header .breadcrumb-item.active {
-    color: #8760fb;
+    color: #EDC095;
 }
 .page-header{
 	display: flex;
@@ -478,7 +478,7 @@ body{
     width: 30px;
     background-repeat: no-repeat;
 	 border: 2px solid transparent;
-	 background: #8760fb;
+	 background: #EDC095;
     background-position: center;
     transition: background-color 0.1s linear;
     -moz-transition: background-color 0.1s linear;
@@ -491,8 +491,8 @@ body{
 	line-height: 1.8rem;
 }
 #back-to-top:hover {
-    color: #8760fb !important;
-    border: 2px solid #8760fb;
+    color: #EDC095 !important;
+    border: 2px solid #EDC095;
 	background: #fff !important;
 }
 .contact-icon{
@@ -509,16 +509,16 @@ body{
 	background:#e1e6f1;
 }
 .accordion-color .card-header a, .accordion-color .card-header a:hover, .accordion-color .card-header a:focus {
-	color: #8760fb;
+	color: #EDC095;
 }
 .accordion-color .card-header a.collapsed {
-	background-color: #8760fb;
+	background-color: #EDC095;
 	color: rgba(255, 255, 255, 0.8);
 	font-weight: 500;
 	letter-spacing: -.1px;
 }
 .accordion-color .card-header a.collapsed:hover, .accordion-color .card-header a.collapsed:focus {
-	background-color: #8760fb;
+	background-color: #EDC095;
 	color: #fff;
 }
 .custom-leftnav .main-content-left-components{
@@ -803,10 +803,10 @@ body{
     left: auto;
 }
 .timeline-wrapper-primary .timeline-panel:before {
-  background: #8760fb;
+  background: #EDC095;
 }
 .timeline-wrapper-primary .timeline-badge {
-  background: #8760fb;
+  background: #EDC095;
 }
 .timeline-wrapper-secondary .timeline-panel:before {
   background: #eb6f33;
@@ -949,7 +949,7 @@ body{
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #8760fb;
+  background-color: #EDC095;
   position: absolute;
   top: 0;
   right: 0;
@@ -1027,26 +1027,26 @@ body{
 }
 .br-theme-bars-horizontal .br-widget a.br-active,
 .br-theme-bars-horizontal .br-widget a.br-selected {
-	background-color: #8760fb;
+	background-color: #EDC095;
 }
 .br-theme-bars-horizontal .br-widget .br-current-rating {
-	color: #8760fb;
+	color: #EDC095;
 }
 .br-theme-bars-pill .br-widget a {
 	background-color: #e1e6f1;
 }
 .br-theme-bars-pill .br-widget a.br-active,
 .br-theme-bars-pill .br-widget a.br-selected {
-  background-color: #8760fb;
+  background-color: #EDC095;
   color: white;
 }
 .br-theme-bars-pill .br-widget a {
-	color: #8760fb;
+	color: #EDC095;
 }
 .br-theme-bars-square .br-widget a.br-active,
 .br-theme-bars-square .br-widget a.br-selected {
   border: 2px solid #e1e6f1 ;
-  color: #8760fb  ;
+  color: #EDC095  ;
 }
 .br-theme-bars-square .br-widget a {
   border: 2px solid #e1e6f1;
@@ -1055,29 +1055,29 @@ body{
 }
 .br-theme-bars-movie .br-widget a.br-active,
 .br-theme-bars-movie .br-widget a.br-selected {
-  background-color: #8760fb;
+  background-color: #EDC095;
 }
 .br-theme-bars-movie .br-widget a {
   background-color:  #e1e6f1;
 }
 .br-theme-bars-movie .br-widget .br-current-rating {
-  color:#8760fb;
+  color:#EDC095;
 }
 .br-theme-bars-1to10 .br-widget a {
   background-color: #e1e6f1;
 }
 .br-theme-bars-1to10 .br-widget a.br-active,
 .br-theme-bars-1to10 .br-widget a.br-selected {
-  background-color: #8760fb;
+  background-color: #EDC095;
 }
 .br-theme-bars-1to10 .br-widget .br-current-rating {
-  color: #8760fb;
+  color: #EDC095;
 }
 .br-theme-fontawesome-stars .br-widget a.br-active:after {
-  color: #8760fb;
+  color: #EDC095;
 }
 .br-theme-fontawesome-stars .br-widget a.br-selected:after {
-  color: #8760fb;
+  color: #EDC095;
 }
 /*-----Br Themes-----*/
 .rating-stars input{
@@ -1436,14 +1436,14 @@ select.form-control.select-sm {
 	box-shadow: none;
 }
 .custom-switch-input:checked~.custom-switch-indicator {
-	background: #8760fb ;
+	background: #EDC095 ;
 }
 .custom-switch-input:checked~.custom-switch-indicator:before {
 	left: calc(1rem + 1px);
 }
 .custom-switch-input:focus~.custom-switch-indicator {
 	box-shadow: none;
-	border-color:#8760fb  ;
+	border-color:#EDC095  ;
 }
 .custom-switch-description {
 	margin-right: .5rem;
@@ -1501,15 +1501,15 @@ select.form-control.select-sm {
 	font-size: 1rem;
 }
 .selectgroup-input:checked+.selectgroup-button {
-	border-color: #8760fb  ;
+	border-color: #EDC095  ;
 	z-index: 1;
-	color: #8760fb  ;
+	color: #EDC095  ;
 	background: #e5e9f3;
 }
 .selectgroup-input:focus+.selectgroup-button {
-	border-color: #8760fb  ;
+	border-color: #EDC095  ;
 	z-index: 2;
-	color: #8760fb  ;
+	color: #EDC095  ;
 	box-shadow: none;
 }
 .selectgroup-pills {
@@ -1609,7 +1609,7 @@ select.form-control.select-sm {
     background-color:#334151;
 }
 .tag-primary {
-    background-color: #8760fb;
+    background-color: #EDC095;
 }
 .tag-secondary {
     background-color:#eb6f33;
@@ -1691,7 +1691,7 @@ select.form-control.select-sm {
 	margin: 6px;
 	border-radius: 50%;
 	animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-	background:#8760fb;
+	background:#EDC095;
 }
 @keyframes lds-circle {
 	0%, 100% {
@@ -1722,8 +1722,8 @@ select.form-control.select-sm {
 	margin: 1px;
 	border-radius: 50%;
 	animation: lds-dual-ring 1.2s linear infinite;
-	border: 5px solid #8760fb;
-    border-color: #8760fb transparent #8760fb transparent;
+	border: 5px solid #EDC095;
+    border-color: #EDC095 transparent #EDC095 transparent;
 }
 @keyframes lds-dual-ring {
 	0% {
@@ -1746,7 +1746,7 @@ select.form-control.select-sm {
 	left: 6px;
 	width: 13px;
 	animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-	background:#8760fb;
+	background:#EDC095;
 }
 .lds-facebook div:nth-child(1) {
 	left: 6px;
@@ -1786,7 +1786,7 @@ select.form-control.select-sm {
 	width: 26px;
 	height: 26px;
 	animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
-	background:#8760fb;
+	background:#EDC095;
 }
 .lds-heart div:after, .lds-heart div:before {
 	content: " ";
@@ -1794,7 +1794,7 @@ select.form-control.select-sm {
 	display: block;
 	width: 26px;
 	height: 26px;
-	background:#8760fb;
+	background:#EDC095;
 }
 .lds-heart div:before {
 	left: -17px;
@@ -1836,7 +1836,7 @@ select.form-control.select-sm {
 	opacity: 1;
 	border-radius: 50%;
 	animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-	border: 4px solid #8760fb;
+	border: 4px solid #EDC095;
 }
 .lds-ripple div:nth-child(2) {
 	animation-delay: -0.5s;
@@ -1878,7 +1878,7 @@ select.form-control.select-sm {
 	width: 5px;
 	height: 14px;
 	border-radius: 20%;
-	background: #8760fb;
+	background: #EDC095;
 }
 .lds-spinner div:nth-child(1) {
 	transform: rotate(0deg);

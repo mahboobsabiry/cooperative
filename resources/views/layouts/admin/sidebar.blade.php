@@ -48,7 +48,11 @@
                             <li class="nav-sub-item {{ request()->is('admin/asycuda/documents') || request()->is('admin/asycuda/documents/*') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.asycuda.documents.index') }}">
                                     مکتوب ها
-                                    ({{ count(\App\Models\Office\Position::where('title', 'مدیر عمومی اسیکودا و سیستم های گمرکی')->firstOrFail()->documents) }})
+                                    @if(\App\Models\Office\Position::where('title', 'مدیر عمومی اسیکودا و سیستم های گمرکی')->first() != null)
+                                        ({{ count(\App\Models\Office\Position::where('title', 'مدیر عمومی اسیکودا و سیستم های گمرکی')->firstOrFail()->documents) }})
+                                    @else
+                                    (0)
+                                    @endif
                                 </a>
                             </li>
                         @endcan
@@ -109,7 +113,11 @@
                             <i class="fe fe-file-text"></i>
                             <span class="sidemenu-label">
                             مکتوب ها
-                            ({{ count(\App\Models\Office\Position::where('title', 'مدیر عمومی مالی و اداری')->firstOrFail()->documents) }})
+                                @if(\App\Models\Office\Position::where('title', 'مدیر عمومی مالی و اداری')->first() != null)
+                                    ({{ count(\App\Models\Office\Position::where('title', 'مدیر عمومی مالی و اداری')->firstOrFail()->documents) }})
+                                @else
+                                (0)
+                               @endif
                             </span>
                         </a>
                     </li>

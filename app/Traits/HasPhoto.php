@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\Photo;
-
 trait HasPhoto {
     public static function bootHasPhoto()
     {

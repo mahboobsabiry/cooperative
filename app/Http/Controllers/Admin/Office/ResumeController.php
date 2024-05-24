@@ -82,7 +82,7 @@ class ResumeController extends Controller
             $fileName = 'emp-document-' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('employees/docs', $fileName, 'public');
             $document->path   = $fileName;
-            $employee->documents()->save($document);
+            $employee->files()->save($document);
         }
 
         return redirect()->route('admin.office.employees.resumes', $employee->id)->with([
@@ -157,7 +157,7 @@ class ResumeController extends Controller
             $fileName = 'emp-document-' . time() . '.' . $file->getClientOriginalExtension();
             $file->storeAs('employees/docs', $fileName, 'public');
             $document->path   = $fileName;
-            $employee->documents()->save($document);
+            $employee->files()->save($document);
         }
 
         return redirect()->route('admin.office.employees.resumes', $employee->id)->with([
