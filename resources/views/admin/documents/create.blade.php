@@ -18,7 +18,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.office.positions.show', $position->id) }}">مدیر عمومی سیستم</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.asycuda.documents.index') }}">مکاتیب مدیریت عمومی سیستم</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.documents.index') }}">مکاتیب مدیریت عمومی سیستم</a></li>
                     <li class="breadcrumb-item active" aria-current="page">ثبت مکتوب جدید</li>
                 </ol>
             </div>
@@ -145,7 +145,7 @@
                         </div>
 
                         <!-- Form -->
-                        <form method="post" action="{{ route('admin.asycuda.documents.store') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.documents.store') }}" enctype="multipart/form-data">
                             @csrf
                             @include('admin.inc.create_docs_form')
 

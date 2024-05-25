@@ -173,7 +173,7 @@
                             @if($employee->status == 0)
                                 <!-- Position -->
                                 @can('office_position_view')
-                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->type ?? '' }})</a>
+                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} (@if($employee->position->place == 0) محصولی  @elseif($employee->position->place == 1) سرحدی @elseif($employee->position->place == 2) نایب آباد@elseif($employee->position->place == 3)  میدان هوایی  @elseif($employee->position->place == 4) مراقبت سیار@endif)</a>
                                 @else
                                     <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
                                 @endcan
@@ -338,71 +338,74 @@
                 <!--/==/ End of Contact Custom ID Card -->
             </div>
             <div class="col-lg-8 col-md-12">
-                <div class="card custom-card main-content-body-profile">
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
 
+                <!-- Details Card -->
+                <div class="card mb-2">
+                    <!-- Personal Information -->
+                    <div class="card-header">
+                        <h4 class="card-title font-weight-bold">@lang('global.details')</h4>
+                    </div>
                     <!-- Card Body -->
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                    <div class="card-body" style="background-color: #F7F9FCFF">
+                        <!-- Personal Information Table -->
+                        @include('admin.office.employees.inc.tables')
+                        <!--/==/ End of Personal Information -->
+                    </div>
+                </div>
+                <!--/==/ End of Details Card -->
 
-                        <!-- User Information Details -->
-                        <div class="p-2">
-                            <!-- Personal Information -->
-                            <div class="main-content-label tx-13 mg-b-20 bd-b tx-bold pb-2">
-                                @lang('global.details')
-                            </div>
-                            <!-- Personal Information Table -->
-                            @include('admin.office.employees.inc.tables')
-                            <!--/==/ End of Personal Information -->
-                        </div>
-                        <!--/==/ End of User Information Details -->
-                        <div class="p-2">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="font-weight-bold tx-16 m-2">اسناد و مدارک</div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    @if($employee->position)
-                                        <div class="float-left ml-5">
-                                            <!-- New -->
-                                            <a class="pos-absolute modal-effect btn btn-sm btn-outline-primary font-weight-bold"
-                                               data-effect="effect-sign" data-toggle="modal"
-                                               href="#new_file{{ $employee->id }}">
-                                                ثبت
-                                            </a>
-
-                                            @include('admin.office.employees.inc.new_file')
-                                        </div>
-                                    @endif
-                                </div>
+                <!-- Files Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="font-weight-bold tx-16 m-2">اسناد و مدارک</div>
                             </div>
 
-                            <div class="row bd">
-                                @foreach($employee->files as $file)
-                                    <div class="bd m-1 p-1">
-                                        @if($employee->status == 0)
-                                            <!-- Delete -->
-                                            <a class="pos-absolute modal-effect btn btn-sm btn-danger"
-                                               data-effect="effect-sign" data-toggle="modal"
-                                               href="#delete_file{{ $file->id }}">
-                                                <i class="fe fe-trash"></i>
-                                            </a>
-                                        @endif
-
-                                        @include('admin.office.employees.inc.delete_file')
-
-                                        <a href="{{ asset('storage/employees/files/' . $file->path) ?? asset('assets/images/id-card-default.png') }}"
-                                           target="_blank">
-                                            <img
-                                                src="{{ asset('storage/employees/files/' . $file->path) ?? asset('assets/images/id-card-default.png') }}" alt="اسناد" width="150">
+                            <div class="col-md-6">
+                                @if($employee->position)
+                                    <div class="float-left ml-5">
+                                        <!-- New -->
+                                        <a class="pos-absolute modal-effect btn btn-sm btn-outline-primary font-weight-bold"
+                                           data-effect="effect-sign" data-toggle="modal"
+                                           href="#new_file{{ $employee->id }}">
+                                            ثبت
                                         </a>
+
+                                        @include('admin.office.employees.inc.new_file')
                                     </div>
-                                @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach($employee->files as $file)
+                                <div class="bd m-1 p-1">
+                                    @if($employee->status == 0)
+                                        <!-- Delete -->
+                                        <a class="pos-absolute modal-effect btn btn-sm btn-danger"
+                                           data-effect="effect-sign" data-toggle="modal"
+                                           href="#delete_file{{ $file->id }}">
+                                            <i class="fe fe-trash"></i>
+                                        </a>
+                                    @endif
+
+                                    @include('admin.office.employees.inc.delete_file')
+
+                                    <a href="{{ asset('storage/employees/files/' . $file->path) ?? asset('assets/images/id-card-default.png') }}"
+                                       target="_blank">
+                                        <img
+                                            src="{{ asset('storage/employees/files/' . $file->path) ?? asset('assets/images/id-card-default.png') }}" alt="اسناد" width="150">
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
+                <!--/==/ End of Files Card -->
             </div>
         </div>
         <!--/==/ End of Row Content -->

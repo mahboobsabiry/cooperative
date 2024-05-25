@@ -267,12 +267,14 @@ class EmployeeHelperController extends Controller
         if ($request->hasFile('file')) {
             // File
             $item = $request->file('file');
-            // New Document
-            $file = new File();
-            $fileName = 'emp-file-' . time() . '.' . $item->getClientOriginalExtension();
-            $item->storeAs('employees/files', $fileName, 'public');
-            $file->path   = $fileName;
-            $employee->files()->save($file);
+            foreach ($item as $i) {
+                // New Document
+                $file = new File();
+                $fileName = 'emp-file-' . time() . rand(111, 99999) . '.' . $i->getClientOriginalExtension();
+                $i->storeAs('employees/files', $fileName, 'public');
+                $file->path   = $fileName;
+                $employee->files()->save($file);
+            }
         }
 
         return redirect()->back()->with([

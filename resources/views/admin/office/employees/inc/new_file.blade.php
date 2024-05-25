@@ -17,7 +17,7 @@
                     </p>
 
                     <div class="bd p-2">
-                        <input type="file" id="file" class="form-control-file" name="file" accept="image/*" data-height="200" />
+                        <input type="file" id="file" class="form-control-file" name="file[]" accept="image/*" data-height="200" multiple />
                     </div>
                 </div>
                 <div class="modal-footer">

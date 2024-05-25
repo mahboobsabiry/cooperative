@@ -69,7 +69,7 @@ class DocumentController extends Controller
             foreach ($request->file('document') as $item) {
                 // New Document
                 $f = new File();
-                $fileName = 'doc-file-' . time() . '.' . $item->getClientOriginalExtension();
+                $fileName = 'doc-file-' . time() . rand(111, 99999) . '.' . $item->getClientOriginalExtension();
                 $item->storeAs('documents/files', $fileName, 'public');
                 $f->path   = $fileName;
                 $document->files()->save($f);

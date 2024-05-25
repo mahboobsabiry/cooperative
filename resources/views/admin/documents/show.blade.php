@@ -21,7 +21,7 @@
                         <a href="{{ route('admin.office.positions.show', $document->position->id) }}">مدیر عمومی سیستم</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.asycuda.documents.index') }}">مکاتیب مدیریت عمومی سیستم</a>
+                        <a href="{{ route('admin.documents.index') }}">مکاتیب مدیریت عمومی سیستم</a>
                     </li>
                     <li class="breadcrumb-item active"
                         aria-current="page">{{ $document->position->title }}</li>
@@ -32,7 +32,7 @@
             <div class="btn btn-list">
                 <div class="d-flex">
                     <!-- Delete -->
-                    @can('asy_docs_delete')
+                    @can('docs_delete')
                         <div class="mr-2">
                             <!-- Delete -->
                             <a class="modal-effect btn btn-sm ripple btn-danger text-white"
@@ -43,25 +43,25 @@
                                 <i class="fe fe-trash"></i>
                             </a>
 
-                            @include('admin.asycuda.documents.delete')
+                            @include('admin.documents.delete')
                         </div>
                     @endcan
 
-                    @can('asy_docs_edit')
+                    @can('docs_edit')
                         <div class="mr-2">
                             <!-- Edit -->
                             <a class="btn ripple bg-dark btn-sm text-white"
-                               href="{{ route('admin.asycuda.documents.edit', $document->id) }}">
+                               href="{{ route('admin.documents.edit', $document->id) }}">
                                 @lang('global.edit')
                                 <i class="fe fe-edit"></i>
                             </a>
                         </div>
                     @endcan
 
-                    @can('asy_docs_create')
+                    @can('docs_create')
                         <div class="mr-2">
                             <!-- Add -->
-                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.asycuda.documents.create') }}">
+                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.documents.create') }}">
                                 @lang('global.new')
                                 <i class="fe fe-plus-circle"></i>
                             </a>
@@ -245,6 +245,24 @@
                                         <p class="fw-semi-bold mb-1">تاریخ مکتوب:</p>
                                     </div>
                                     <div class="col">{{ $document->doc_date }}</div>
+                                </div>
+
+                                <!-- Files -->
+                                <div class="row">
+                                    <div class="col-4 col-sm-3">
+                                        <p class="fw-semi-bold mb-1">اسناد:</p>
+                                    </div>
+                                    <div class="col bd m-2 p-2 row">
+                                        @foreach($document->files as $file)
+                                            <div class="bg-white p-2 bd">
+                                                <div class="img-thumbnail">
+                                                    <a href="{{ asset('storage/documents/files/' . $file->path) }}" target="_blank">
+                                                        <img src="{{ asset('storage/documents/files/' . $file->path) }}" alt="{{ $document->subject }}" style="width: 60px;">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                             <!--/==/ End of General Information -->

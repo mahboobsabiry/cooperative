@@ -83,7 +83,7 @@
                                                     <select id="position_id" name="position_id" class="form-control select2 @error('position_id') form-control-danger @enderror">
                                                         <option value="">@lang('form.chooseOne')</option>
                                                         @foreach(\App\Models\Office\Position::all() as $position)
-                                                            <option value="{{ $position->id }}">{{ $position->title }} ({{ $position->type }})</option>
+                                                            <option value="{{ $position->id }}">{{ $position->title }} (@if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif)</option>
                                                         @endforeach
                                                     </select>
 

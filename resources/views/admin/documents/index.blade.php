@@ -44,7 +44,7 @@
             <div class="btn btn-list">
                 <!-- Add New -->
                 @can('docs_create')
-                    <a class="btn ripple btn-primary" href="{{ route('admin.documents.store') }}">
+                    <a class="btn ripple btn-primary" href="{{ route('admin.documents.create') }}">
                         <i class="fe fe-plus-circle"></i> @lang('global.new')
                     </a>
                 @endcan

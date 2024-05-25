@@ -9,7 +9,7 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.asycuda.documents.destroy', $document->id) }}" data-parsley-validate="">
+            <form method="post" action="{{ route('admin.documents.destroy', $document->id) }}" data-parsley-validate="">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">

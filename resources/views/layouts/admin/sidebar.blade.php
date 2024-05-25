@@ -31,7 +31,7 @@
                                 {{ \App\Models\Document::all()->count() }}
                             @else
                                 @if(auth()->user()->employee->position)
-                                    ({{ count(auth()->user()->employee->position) }})
+                                    ({{ count(auth()->user()->employee->position->documents) }})
                                 @endif
                             @endif
                         </span>
