@@ -12,7 +12,15 @@ class Position extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['parent_id', 'title', 'position_number', 'num_of_pos', 'desc', 'type', 'custom_code', 'status'];
+    protected $fillable = [
+        'parent_id', 'title',
+        'position_number', // Position Number for ex: 2 is Head of Custom
+        'num_of_pos', // Number of Position
+        'desc',
+        'place', // Place -> [0 => 'Balkh Custom'],[1 => 'Hairatan Border'], [2 => 'Nayeb Abad'], [3 => 'Airport'], [4 => 'Muraqebat Sayar']
+        'custom_code', // For Ex: AF151
+        'status'
+    ];
 
     public static function tree()
     {
@@ -54,8 +62,8 @@ class Position extends Model
     }
 
     // Morph Document
-    public function documents(): MorphMany
+    public function documents(): HasMany
     {
-        return $this->morphMany(Document::class, 'transaction');
+        return $this->hasMany(Document::class);
     }
 }

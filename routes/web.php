@@ -2,15 +2,16 @@
 
 use App\Http\Controllers\Admin\AdminController;
 // Asycuda Controllers
+use App\Http\Controllers\Admin\Asycuda\AsycudaController;
 use App\Http\Controllers\Admin\Asycuda\AsycudaUserController;
 use App\Http\Controllers\Admin\Asycuda\COALController;
 // Office Controllers
-use App\Http\Controllers\Admin\Asycuda\DocumentController;
 use App\Http\Controllers\Admin\Office\AgentColleagueController;
 use App\Http\Controllers\Admin\Office\AgentController;
 use App\Http\Controllers\Admin\Office\CompanyController;
 use App\Http\Controllers\Admin\Office\EmployeeHelperController;
 use App\Http\Controllers\Admin\Office\EmployeeController;
+use App\Http\Controllers\Admin\Office\OfficeController;
 use App\Http\Controllers\Admin\Office\ResumeController;
 use App\Http\Controllers\Admin\Office\HostelController;
 use App\Http\Controllers\Admin\Office\LeaveController;
@@ -77,7 +78,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // =============================== Asycuda Routes ===================================
     Route::group(['prefix' => 'asycuda', 'as' => 'asycuda.'], function () {
         // Documents
-        Route::resource('documents', DocumentController::class);
+        Route::resource('documents', \App\Http\Controllers\Admin\Asycuda\DocumentController::class);
 
         // USERS
         Route::resource('users', AsycudaUserController::class);
@@ -101,10 +102,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     });
 
     // ====== Office Routes ======
-    Route::group(['prefix' => 'office', 'as' => 'office.'], function () {
-        // Documents
-        Route::resource('documents', \App\Http\Controllers\Admin\Office\DocumentController::class);
-
+    Route::group(['prefix' => 'office', 'as' => 'office.'], function () {// Documents
+        Route::get('documents', [OfficeController::class, 'documents'])->name('documents.index');
+        Route::match(['get', 'post'], 'documents/store', [OfficeController::class, 'store_document'])->name('documents.store');
         // Positions
         Route::resource('positions', PositionController::class);
         Route::post('update-position-status', [PositionController::class, 'updatePositionStatus'])->name('updatePositionStatus');

@@ -23,18 +23,21 @@ class DocumentController extends Controller
     {
         $position = Position::where('title', 'مدیر عمومی اسیکودا و سیستم های گمرکی')->firstOrFail();
         $documents = $position->documents;
-        return view('admin.asycuda.documents.index', compact('documents'));
+
+        return view('admin.asycuda.documents.index', compact('position', 'documents'));
     }
 
     // Create
     public function create()
     {
-        return view('admin.asycuda.documents.create');
+        $position = Position::where('title', 'مدیر عمومی اسیکودا و سیستم های گمرکی')->firstOrFail();
+        return view('admin.asycuda.documents.create', compact('position'));
     }
 
     // Store
     public function store(Request $request)
     {
+        $position = Position::where('title', 'مدیر عمومی اسیکودا و سیستم های گمرکی')->firstOrFail();
         $request->validate([
             'subject'       => 'required',
             'doc_number'    => 'required',
@@ -43,8 +46,8 @@ class DocumentController extends Controller
             'document'      => 'required'
         ]);
 
-        $position = Position::where('title', 'مدیر عمومی اسیکودا و سیستم های گمرکی')->firstOrFail();
         $document           = new Document();
+        $document->position_id = $position->id;
         $document->type     = $request->type;
         $document->doc_type = $request->doc_type;
         $document->subject  = $request->subject;
@@ -53,7 +56,7 @@ class DocumentController extends Controller
         $document->appendices   = $request->appendices;
         $document->status   = 1;
         $document->info     = $request->info;
-        $position->documents()->save($document);
+        $document->save();
 
         if ($request->hasFile('document')) {
             // File
@@ -79,7 +82,8 @@ class DocumentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $document = Document::find($id);
+        return view('admin.asycuda.documents.show', compact('document'));
     }
 
     /**
@@ -87,7 +91,8 @@ class DocumentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $document = Document::find($id);
+        return view('admin.asycuda.documents.show', compact('document'));
     }
 
     /**
@@ -103,6 +108,12 @@ class DocumentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $document = Document::find($id);
+        $document->delete();
+
+        return redirect()->route('admin.asycuda.documents.index')->with([
+            'message'   => 'مکتوب حذف گردید',
+            'alertType' => 'secondary'
+        ]);
     }
 }

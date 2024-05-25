@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('position_id');
             $table->string('type')->default('normal'); // عاجل - محرم - عادی
             $table->string('subject'); // موضوع
             $table->string('doc_type')->default('document'); // نوع مکتوب - پیشنهاد - درخواستی - مکتوب
@@ -21,9 +22,9 @@ return new class extends Migration
             $table->integer('appendices')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->text('info')->nullable();
-            $table->string('transaction_type');
-            $table->unsignedBigInteger('transaction_id');
             $table->timestamps();
+
+            $table->foreign('position_id')->references('id')->on('positions')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

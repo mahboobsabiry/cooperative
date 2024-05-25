@@ -30,8 +30,8 @@
                     request()->is('admin/asycuda/coal') ||
                     request()->is('admin/asycuda/coal/*') ||
                     request()->is('admin/asycuda/expired-coal') ||
-                    request()->is('admin/asycuda/documents') ||
-                    request()->is('admin/asycuda/documents/*') ? 'active show' : '' }}">
+                    request()->is('admin/asycuda/asycuda-documents') ||
+                    request()->is('admin/asycuda/store-document') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="ion ion-ios-desktop"></i>
@@ -45,7 +45,7 @@
                     <ul class="nav-sub">
                         <!-- Documents -->
                         @can('asy_docs_view')
-                            <li class="nav-sub-item {{ request()->is('admin/asycuda/documents') || request()->is('admin/asycuda/documents/*') ? 'active' : '' }}">
+                            <li class="nav-sub-item {{ request()->is('admin/asycuda/documents') || request()->is('admin/asycuda/documents/store') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.asycuda.documents.index') }}">
                                     مکتوب ها
                                     @if(\App\Models\Office\Position::where('title', 'مدیر عمومی اسیکودا و سیستم های گمرکی')->first() != null)
@@ -108,7 +108,7 @@
 
                 <!-- Documents -->
                 @can('office_docs_view')
-                    <li class="nav-item {{ request()->is('admin/office/documents') || request()->is('admin/office/documents/*') ? 'active' : '' }}">
+                    <li class="nav-item {{ request()->is('admin/office/documents') || request()->is('admin/office/documents/store') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('admin.office.documents.index') }}">
                             <i class="fe fe-file-text"></i>
                             <span class="sidemenu-label">

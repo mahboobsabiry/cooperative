@@ -22,6 +22,9 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.office.positions.index') }}">@lang('admin.sidebar.positions')</a>
                     </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.office.positions.show', $position->id) }}">@lang('global.details')</a>
+                    </li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('pages.positions.editPosition')</li>
                 </ol>
             </div>
@@ -40,20 +43,20 @@
         <!-- Main Row -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Errors Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Card -->
-                <div class="card custom-card overflow-hidden">
+                <div class="card">
+                    <!-- Form Title -->
+                    <div class="card-header">
+                        <h6 class="card-title font-weight-bold mb-1">@lang('pages.positions.editPosition')</h6>
+                        <p class="text-muted card-sub-title">You can add new record here.</p>
+                    </div>
+
                     <!-- Card Body -->
                     <div class="card-body">
                         <div class="">
-                            <!-- Errors Message -->
-                            @include('admin.inc.alerts')
-
-                            <!-- Form Title -->
-                            <div>
-                                <h6 class="card-title mb-1">@lang('pages.positions.editPosition')</h6>
-                                <p class="text-muted card-sub-title">You can add new record here.</p>
-                            </div>
-
                             <!-- Form -->
                             <form method="post" action="{{ route('admin.office.positions.update', $position->id) }}" data-parsley-validate="">
                                 @csrf
@@ -65,12 +68,12 @@
                                             <p class="mb-2">@lang('pages.positions.underHand'): <span class="tx-danger">*</span></p>
 
                                             <select id="parent_id" name="parent_id" class="form-control select2 @error('parent_id') form-control-danger @enderror">
-                                                @if($position->parent_id == 0)
-                                                    <option value="0" selected>@lang('pages.positions.afCustomsDep')</option>
+                                                @if($position->parent_id == null)
+                                                    <option value="" selected>@lang('pages.positions.afCustomsDep')</option>
                                                 @endif
 
                                                 @foreach($positions as $pos)
-                                                    <option value="{{ $pos->id ?? '0' }}" {{ $position->parent_id == $pos->id ? 'selected' : '' }}>{{ $pos->title }} {{ $pos->type }}</option>
+                                                    <option value="{{ $pos->id ?? '' }}" {{ $position->parent_id == $pos->id ? 'selected' : '' }}>{{ $pos->title }} (@if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif)</option>
                                                 @endforeach
 
                                             </select>
@@ -116,23 +119,23 @@
                                         </div>
                                         <!--/==/ End of Position Number -->
 
-                                        <!-- Type -->
-                                        <div class="form-group @error('type') has-danger @enderror">
+                                        <!-- Place -->
+                                        <div class="form-group @error('place') has-danger @enderror">
                                             <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
 
-                                            <select id="type" name="type" class="form-control select2 @error('type') form-control-danger @enderror">
-                                                <option value="محصولی" {{ $position->type == 'محصولی' ? 'selected' : '' }}>محصولی</option>
-                                                <option value="سرحدی" {{ $position->type == 'سرحدی' ? 'selected' : '' }}>سرحدی</option>
-                                                <option value="نایب آباد" {{ $position->type == 'نایب آباد' ? 'selected' : '' }}>نایب آباد</option>
-                                                <option value="میدان هوایی" {{ $position->type == 'میدان هوایی' ? 'selected' : '' }}>میدان هوایی</option>
-                                                <option value="مراقبت سیار" {{ $position->type == 'مراقبت سیار' ? 'selected' : '' }}>مراقبت سیار</option>
+                                            <select id="place" name="place" class="form-control select2 @error('place') form-control-danger @enderror">
+                                                <option value="0" {{ $position->place == '0' ? 'selected' : '' }}>محصولی</option>
+                                                <option value="1" {{ $position->place == '1' ? 'selected' : '' }}>سرحدی</option>
+                                                <option value="2" {{ $position->place == '2' ? 'selected' : '' }}>نایب آباد</option>
+                                                <option value="3" {{ $position->place == '3' ? 'selected' : '' }}>میدان هوایی</option>
+                                                <option value="4" {{ $position->place == '4' ? 'selected' : '' }}>مراقبت سیار</option>
                                             </select>
 
-                                            @error('type')
+                                            @error('place')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Type -->
+                                        <!--/==/ End of Place -->
 
                                         <!-- Description -->
                                         <div class="form-group @error('desc') has-danger @enderror">

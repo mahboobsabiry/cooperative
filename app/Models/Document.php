@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Office\Position;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -11,13 +12,13 @@ class Document extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type', 'subject', 'doc_type', 'doc_number', 'doc_date', 'appendices', 'status', 'info', 'transaction_type', 'transaction_id'];
+    protected $fillable = ['position_id', 'type', 'subject', 'doc_type', 'doc_number', 'doc_date', 'appendices', 'status', 'info'];
 
-    public function transaction(): MorphTo
+    // Belongs to
+    public function position()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Position::class);
     }
-
     // Morph Document
     public function files(): MorphMany
     {

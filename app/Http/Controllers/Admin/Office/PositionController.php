@@ -42,16 +42,17 @@ class PositionController extends Controller
         $position->title        = $request->title;
         $position->position_number = $request->position_number;
         $position->num_of_pos   = $request->num_of_pos;
-        $position->type         = $request->type;
+        $position->place        = $request->place;
 
         // Select Custom Code
-        if ($position->type == 'محصولی' || $position->type == 'نایب آباد' || $position->type == 'مراقبت سیار') {
+        if ($position->place == 0 || $position->place == 2 || $position->place == 4) {
             $custom_code = 'AF151';
-        } elseif ($position->type == 'سرحدی') {
+        } elseif ($position->type == 1) { // Border Custom
             $custom_code = 'AF152';
-        } elseif ($position->type == 'میدان هوایی') {
+        } elseif ($position->type == 3) { // Airport
             $custom_code = 'AF153';
         }
+
         $position->custom_code  = $custom_code;
         $position->desc         = $request->desc;
         $position->status       = 1;
@@ -98,16 +99,17 @@ class PositionController extends Controller
         $position->title        = $request->title;
         $position->position_number = $request->position_number;
         $position->num_of_pos   = $request->num_of_pos;
-        $position->type         = $request->type;
+        $position->place        = $request->place;
 
         // Select Custom Code
-        if ($position->type == 'محصولی' || $position->type == 'نایب آباد' || $position->type == 'مراقبت سیار') {
+        if ($position->place == 0 || $position->place == 2 || $position->place == 4) {
             $custom_code = 'AF151';
-        } elseif ($position->type == 'سرحدی') {
+        } elseif ($position->type == 1) { // Border Custom
             $custom_code = 'AF152';
-        } elseif ($position->type == 'میدان هوایی') {
+        } elseif ($position->type == 3) { // Airport
             $custom_code = 'AF153';
         }
+
         $position->custom_code  = $custom_code;
         $position->desc         = $request->desc;
         $position->save();

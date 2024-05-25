@@ -65,7 +65,7 @@ class PermissionsTableSeeder extends Seeder
                 'name'      => 'asy_docs_create'
             ],
             [
-                'name'      => 'asy_cdocs_edit'
+                'name'      => 'asy_docs_edit'
             ],
             [
                 'name'      => 'asy_docs_delete'
@@ -75,7 +75,7 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name'      => 'office_view'
             ],
-            // Asycuda Documents
+            // Office Documents
             [
                 'name'      => 'office_docs_view'
             ],
@@ -83,7 +83,7 @@ class PermissionsTableSeeder extends Seeder
                 'name'      => 'office_docs_create'
             ],
             [
-                'name'      => 'office_cdocs_edit'
+                'name'      => 'office_docs_edit'
             ],
             [
                 'name'      => 'office_docs_delete'

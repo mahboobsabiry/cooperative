@@ -81,7 +81,7 @@
 
         <!-- Row Content -->
         <div class="row">
-            <div class="col-lg-4 col-md-12">
+            <div class="col-lg-3 col-md-12">
                 <!-- Profile Main Info -->
                 <div class="card custom-card">
                     <div class="card-body text-center">
@@ -112,7 +112,7 @@
                             <p class="pro-user-desc text-muted mb-1">{{ $position->title }}</p>
                             @if($position->position_number == 2 || $position->position_number == 3)
                             @else
-                                <p class="pro-user-desc text-primary mb-1">({{ $position->type ?? '' }})</p>
+                                <p class="pro-user-desc text-primary mb-1">(@if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif)</p>
                             @endif
                             <!-- Position Star -->
                             <p class="user-info-rating">
@@ -175,229 +175,212 @@
                 @endif
                 <!--/==/ End of Contact Information -->
             </div>
-            <div class="col-lg-8 col-md-12">
-                <div class="card custom-card main-content-body-profile">
+            <div class="col-lg-9 col-md-12">
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
+
+                <!-- Details Card -->
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <h4 class="card-title font-weight-bold">@lang('global.details')</h4>
+                    </div>
 
                     <!-- Card Body -->
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                    <div class="card-body" style="background-color: #F7F9FCFF">
+                        <div class="row">
+                            <!-- Account Information -->
+                            <div class="col-lg col-xxl-5">
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات بست</h6>
+                                <!-- ID -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">ID:</p>
+                                    </div>
+                                    <div class="col">ID-{{ $position->id }}</div>
+                                </div>
 
-                        <!-- User Information Details -->
-                        <div class="p-2 bd">
-                            <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.employees.generalInfo')
+                                <!-- Parent -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">زیر دستٍ:</p>
+                                    </div>
+                                    <div class="col">{{ $position->parent->title ?? 'ریاست عمومی گمرکات' }}</div>
+                                </div>
+
+                                <!-- Position Title -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">عنوان بست:</p>
+                                    </div>
+                                    <div class="col">{{ $position->title }}</div>
+                                </div>
+
+                                <!-- Position Number -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">نمبر بست:</p>
+                                    </div>
+                                    <div class="col">{{ $position->position_number }}</div>
+                                </div>
+
+                                <!-- Number of Positions -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">تعداد بست:</p>
+                                    </div>
+                                    <div class="col">{{ $position->num_of_pos }}</div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">معلومات اضافی:</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="fst-italic text-400 mb-1">{{ $position->info ?? '--' }}</p>
+                                    </div>
+                                </div>
                             </div>
+                            <!--/==/ End of Position Information -->
 
-                            <!-- Personal Information Table -->
-                            <div class="table-responsive ">
-                                <table class="table row table-borderless">
-                                    <!-- Right Column -->
-                                    <tbody class="col-lg-12 col-xl-6 p-0">
-                                    <!-- Title -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('form.title'):</th>
-                                        <td>{{ $position->title }}</td>
-                                    </tr>
+                            <!-- General Information -->
+                            <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات عمومی</h6>
+                                <!-- Place -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">موقعیت:</p>
+                                    </div>
+                                    <div class="col">
+                                        @if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif
+                                    </div>
+                                </div>
 
-                                    <!-- Manager -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('pages.positions.officials_emps'):</th>
-                                        <td>
-                                            {{ $position->employees()->count() == 0 ? trans('global.empty') : '' }}
-                                            @foreach($position->employees as $employee)
-                                                @can('office_employee_view')
-                                                    <a href="{{ route('admin.office.employees.show', $employee->id) }}" class="">
-                                                        {{ $employee->name }} {{ $employee->last_name }}
-                                                        {{ $position->num_of_pos > 1 ? ', ' : '' }}
-                                                    </a>
-                                                @else
-                                                    {{ $employee->name }} {{ $employee->last_name }}
-                                                    {{ $position->num_of_pos > 1 ? ', ' : '' }}
-                                                @endcan
-                                            @endforeach
-                                        </td>
-                                    </tr>
+                                <!-- Custom Code -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">کد گمرکی:</p>
+                                    </div>
+                                    <div class="col">{{ $position->custom_code }}</div>
+                                </div>
 
-                                    <!-- Under Hand -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('pages.positions.underHand'):</th>
-                                        <td>{{ $position->parent->title ?? trans('pages.positions.afCustomsDep') }}</td>
-                                    </tr>
+                                <!-- Number of Underhand Positions -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">تعداد بست های زیردست:</p>
+                                    </div>
+                                    <div class="col">{{ $position->children->count() }}</div>
+                                </div>
 
-                                    <!-- Custom Code -->
-                                    <tr>
-                                        <th class="font-weight-bold">کد گمرکی:</th>
-                                        <td>
-                                            {{ $position->custom_code }}
-                                        </td>
-                                    </tr>
+                                <!-- Number of Employees -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">تعداد کارمندان این بست:</p>
+                                    </div>
+                                    <div class="col">{{ $position->employees->count() }}</div>
+                                </div>
 
-                                    <!-- Status -->
-                                    @can('office_position_edit')
-                                        <tr>
-                                            <th class="font-weight-bold">@lang('form.status'):</th>
-                                            <td>
-                                            <span class="acInText">
-                                                <span id="acInText"
-                                                      class="{{ $position->status == 1 ? 'text-success' : 'text-danger' }}">
-                                                    {{ $position->status == 1 ? trans('global.active') : trans('global.inactive') }}
-                                                </span>
-                                            </span>
-                                                ----
-                                                @if($position->status == 1)
-                                                    <a class="updatePositionStatus" id="position_status"
-                                                       position_id="{{ $position->id }}" href="javascript:void(0)">
-                                                        <i class="fa fa-toggle-on text-success" aria-hidden="true"
-                                                           status="Active"></i>
-                                                    </a>
-                                                @else
-                                                    <a class="updatePositionStatus" id="position_status"
-                                                       position_id="{{ $position->id }}" href="javascript:void(0)">
-                                                        <i class="fa fa-toggle-off text-danger" aria-hidden="true"
-                                                           status="Inactive"></i>
-                                                    </a>
-                                                @endif
-                                                <span id="update_status" style="display: none;">
-                                                    <i class="fa fa-toggle-on" aria-hidden="true"></i>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    @endcan
+                                <!-- Number of Empty Positions -->
+                                @if($position->position_number > 4)
+                                    <div class="row">
+                                        <div class="col-6 col-sm-5">
+                                            <p class="fw-semi-bold mb-1">تعداد بست خالی:</p>
+                                        </div>
+                                        <div class="col">
+                                            {{ $position->num_of_pos }}
+                                            @if($position->employees->count() < $position->num_of_pos)
+                                                {<span class="text-danger small">@lang('global.empty')</span>}
+                                            @elseif($position->employees->count() == $position->num_of_pos)
 
-                                    </tbody>
-
-                                    <!-- Left Column -->
-                                    <tbody class="col-lg-12 col-xl-6 p-0">
-                                    <!-- Number of Positions -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('form.num_of_pos'):</th>
-                                        <td>{{ $position->num_of_pos }}</td>
-                                    </tr>
-
-                                    <!-- Position Number -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('pages.positions.positionNumber'):</th>
-                                        <td>{{ $position->position_number }}</td>
-                                    </tr>
-
-                                    <!-- Number of empty positions -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('pages.positions.num_of_empty_pos'):</th>
-                                        <td>
-                                            {{ $position->num_of_pos - $position->employees()->count() }}
-                                        </td>
-                                    </tr>
-
-                                    <!-- Type -->
-                                    <tr>
-                                        <th class="font-weight-bold">موقعیت:</th>
-                                        <td>
-                                            {{ $position->type }}
-                                        </td>
-                                    </tr>
-
-                                    <!-- Date of creation -->
-                                    <tr>
-                                        <th class="font-weight-bold">@lang('global.date'):</th>
-                                        <td>{{ $position->created_at->diffForHumans() }}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                            @elseif($position->employees->count() > $position->num_of_pos)
+                                                {<span class="text-danger small">{{ $position->employees->count() - $position->num_of_pos }} @lang('global.empty')</span>}
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
-                            <!--/==/ End of Personal Information Table -->
-
-                            <div class="main-content-label tx-13 mg-b-20 pt-2" style="border-top: 1px solid #ddd;">
-                                @lang('global.extraInfo')
-                            </div>
-                            <p>{{ $position->desc ?? '--' }}</p>
+                            <!--/==/ End of General Information -->
                         </div>
-                        <!--/==/ End of User Information Details -->
                     </div>
                 </div>
+                <!--/==/ End of Details Card -->
+
+                <!-- Employees Card -->
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <h4 class="card-title font-weight-bold">@lang('admin.sidebar.employees')</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Table -->
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100" style="width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@lang('form.name')</th>
+                                    <th>@lang('form.fatherName')</th>
+                                    <th>@lang('form.position')</th>
+                                    <th>@lang('form.positionCode')</th>
+                                    <th>@lang('form.phone')</th>
+                                    <th>@lang('form.currentProvince')</th>
+                                    <th>@lang('form.currentDistrict')</th>
+                                    <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
+                                    <th>@lang('form.introducer')</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach($position->employees as $employee)
+                                    <tr>
+                                        <td>{{ $employee->id }}</td>
+                                        <td>
+                                            @can('office_employee_view')
+                                                <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
+                                            @else
+                                                {{ $employee->name }} {{ $employee->last_name }}
+                                            @endcan
+                                        </td>
+                                        <td>{{ $employee->father_name ?? '' }}</td>
+                                        <td>{{ $employee->position->title ?? '' }} {{ $employee->position->position_number ?? '' }}</td>
+                                        <td>{{ $employee->position_code ?? '' }}</td>
+                                        <td class="tx-sm-12-f">
+                                            <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
+                                        </td>
+                                        <td>{{ $employee->current_province ?? '' }}</td>
+                                        <td>{{ $employee->current_district ?? '' }}</td>
+                                        <td>
+                                            {{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
+                                            {{ $employee->duty_position ? ' - ' : '' }}
+                                            {{ $employee->duty_position ?? '' }}
+                                        </td>
+                                        <td>{{ $employee->introducer ?? '' }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--/==/ End of Table -->
+                    </div>
+                </div>
+                <!--/==/ End of Employees Card -->
             </div>
         </div>
         <!--/==/ End of Row Content -->
 
-        <!-- Employees -->
-        <div class="card custom-card main-content-body-profile">
-            <!-- Table Title -->
-            <div class="nav main-nav-line mb-2">
-                <a class="nav-link active" data-toggle="tab" href="javascript:void(0);">
-                    @lang('admin.sidebar.employees')
-                </a>
-            </div>
-
-            <div class="card-body tab-content h-100">
-                <!-- Main Position Employees -->
-                <div class="tab-pane active">
-                    <!-- Table -->
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100" style="width: 100%;">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>@lang('form.name')</th>
-                                <th>@lang('form.fatherName')</th>
-                                <th>@lang('form.position')</th>
-                                <th>@lang('form.positionCode')</th>
-                                <th>@lang('form.phone')</th>
-                                <th>@lang('form.currentProvince')</th>
-                                <th>@lang('form.currentDistrict')</th>
-                                <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
-                                <th>@lang('form.introducer')</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            @foreach($position->employees as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>
-                                        @can('office_employee_view')
-                                            <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
-                                        @else
-                                            {{ $employee->name }} {{ $employee->last_name }}
-                                        @endcan
-                                    </td>
-                                    <td>{{ $employee->father_name ?? '' }}</td>
-                                    <td>{{ $employee->position->title ?? '' }} {{ $employee->position->position_number ?? '' }}</td>
-                                    <td>{{ $employee->position_code ?? '' }}</td>
-                                    <td class="tx-sm-12-f">
-                                        <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
-                                    </td>
-                                    <td>{{ $employee->current_province ?? '' }}</td>
-                                    <td>{{ $employee->current_district ?? '' }}</td>
-                                    <td>
-                                        {{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
-                                        {{ $employee->duty_position ? ' - ' : '' }}
-                                        {{ $employee->duty_position ?? '' }}
-                                    </td>
-                                    <td>{{ $employee->introducer ?? '' }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--/==/ End of Table -->
-                </div>
-                <!--/==/ End of Main Position Employees -->
-            </div>
-        </div>
-        <!--/==/ End of Employees -->
-
         <!-- Organization -->
-        <div class="card custom-card">
+        <div class="card mb-2">
+            <div class="card-header">
+                <h4 class="card-title font-weight-bold">
+                    @if(app()->getLocale() == 'en')
+                        {{ $position->title }} @lang('pages.positions.organization')
+                    @else
+                        @lang('pages.positions.organization') {{ $position->title }}
+                    @endif
+                </h4>
+            </div>
             <div class="card-body">
                 <div class="p-2 bd">
-                    <div class="main-content-label tx-13 mg-b-20">
-                        @if(app()->getLocale() == 'en')
-                            {{ $position->title }} @lang('pages.positions.organization')
-                        @else
-                            @lang('pages.positions.organization') {{ $position->title }}
-                        @endif
-                    </div>
-
                     <div class="container">
                         <div class="row">
                             <div class="tree m-2">
