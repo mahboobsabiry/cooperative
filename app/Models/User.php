@@ -31,9 +31,10 @@ class User extends Authenticatable
         'phone',
         'email',
         'password',
-        'info',
+        'signature',
+        'is_admin',
         'status',
-        'signature'
+        'info'
     ];
 
     /**
@@ -78,5 +79,11 @@ class User extends Authenticatable
     public function coal()
     {
         return $this->hasMany(COAL::class);
+    }
+
+    // Admin
+    public function isAdmin()
+    {
+        return $this->is_admin == 0;
     }
 }

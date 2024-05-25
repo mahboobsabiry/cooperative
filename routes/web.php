@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Asycuda\AsycudaController;
 use App\Http\Controllers\Admin\Asycuda\AsycudaUserController;
 use App\Http\Controllers\Admin\Asycuda\COALController;
 // Office Controllers
+use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\Office\AgentColleagueController;
 use App\Http\Controllers\Admin\Office\AgentController;
 use App\Http\Controllers\Admin\Office\CompanyController;
@@ -75,11 +76,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('active-users', [UserController::class, 'activeUsers'])->name('users.active');
     Route::get('inactive-users', [UserController::class, 'inactiveUsers'])->name('users.inactive');
 
+    // Documents
+    Route::resource('documents', DocumentController::class);
+
     // =============================== Asycuda Routes ===================================
     Route::group(['prefix' => 'asycuda', 'as' => 'asycuda.'], function () {
-        // Documents
-        Route::resource('documents', \App\Http\Controllers\Admin\Asycuda\DocumentController::class);
-
         // USERS
         Route::resource('users', AsycudaUserController::class);
         Route::post('update-asy-user-status', [AsycudaUserController::class, 'updateAsyUserStatus'])->name('users.updateAsyUserStatus');
@@ -102,9 +103,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     });
 
     // ====== Office Routes ======
-    Route::group(['prefix' => 'office', 'as' => 'office.'], function () {// Documents
-        Route::get('documents', [OfficeController::class, 'documents'])->name('documents.index');
-        Route::match(['get', 'post'], 'documents/store', [OfficeController::class, 'store_document'])->name('documents.store');
+    Route::group(['prefix' => 'office', 'as' => 'office.'], function () {
         // Positions
         Route::resource('positions', PositionController::class);
         Route::post('update-position-status', [PositionController::class, 'updatePositionStatus'])->name('updatePositionStatus');

@@ -63,6 +63,26 @@ class PositionsTableSeeder extends Seeder
                 'place'             => 0,
                 'custom_code'       => 'AF151',
                 'status'            => 1
+            ],
+            [
+                'parent_id' => 3,
+                'title'     => 'مدیر عمومی اسیکودا و سیستم های گمرکی',
+                'position_number'   => 4,
+                'num_of_pos'        => 1,
+                'desc'              => '',
+                'place'             => 0,
+                'custom_code'       => 'AF151',
+                'status'            => 1
+            ],
+            [
+                'parent_id' => 1,
+                'title'     => 'مدیر عمومی مالی و اداری',
+                'position_number'   => 4,
+                'num_of_pos'        => 1,
+                'desc'              => '',
+                'place'             => 0,
+                'custom_code'       => 'AF151',
+                'status'            => 1
             ]
         ];
 

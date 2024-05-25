@@ -20,6 +20,25 @@
                 </a>
             </li>
 
+            <!-- Documents -->
+            @can('docs_view')
+                <li class="nav-item {{ request()->is('admin/documents') || request()->is('admin/documents/*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.documents.index') }}">
+                        <i class="fe fe-file-text"></i>
+                        <span class="sidemenu-label">
+                            مکتوب ها
+                            @if(auth()->user()->isAdmin())
+                                {{ \App\Models\Document::all()->count() }}
+                            @else
+                                @if(auth()->user()->employee->position)
+                                    ({{ count(auth()->user()->employee->position) }})
+                                @endif
+                            @endif
+                        </span>
+                    </a>
+                </li>
+            @endcan
+
             <!-- Asycuda -->
             @can('asycuda_view')
                 <li class="nav-label">مدیریت عمومی سیسستم</li>
@@ -29,9 +48,7 @@
                     request()->is('admin/asycuda/inactive-users') ||
                     request()->is('admin/asycuda/coal') ||
                     request()->is('admin/asycuda/coal/*') ||
-                    request()->is('admin/asycuda/expired-coal') ||
-                    request()->is('admin/asycuda/asycuda-documents') ||
-                    request()->is('admin/asycuda/store-document') ? 'active show' : '' }}">
+                    request()->is('admin/asycuda/expired-coal') ? 'active show' : '' }}">
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="ion ion-ios-desktop"></i>
@@ -43,20 +60,6 @@
                     </a>
 
                     <ul class="nav-sub">
-                        <!-- Documents -->
-                        @can('asy_docs_view')
-                            <li class="nav-sub-item {{ request()->is('admin/asycuda/documents') || request()->is('admin/asycuda/documents/store') ? 'active' : '' }}">
-                                <a class="nav-sub-link" href="{{ route('admin.asycuda.documents.index') }}">
-                                    مکتوب ها
-                                    @if(\App\Models\Office\Position::where('title', 'مدیر عمومی اسیکودا و سیستم های گمرکی')->first() != null)
-                                        ({{ count(\App\Models\Office\Position::where('title', 'مدیر عمومی اسیکودا و سیستم های گمرکی')->firstOrFail()->documents) }})
-                                    @else
-                                    (0)
-                                    @endif
-                                </a>
-                            </li>
-                        @endcan
-
                         <!-- Employees Users -->
                         @can('asy_user_view')
                             <li class="nav-sub-item {{ request()->is('admin/asycuda/users') || request()->is('admin/asycuda/users/*') ? 'active' : '' }}">
@@ -105,23 +108,6 @@
             <!-- Office Routes -->
             @can('office_view')
                 <li class="nav-label">مدیریت عمومی اداری</li>
-
-                <!-- Documents -->
-                @can('office_docs_view')
-                    <li class="nav-item {{ request()->is('admin/office/documents') || request()->is('admin/office/documents/store') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.office.documents.index') }}">
-                            <i class="fe fe-file-text"></i>
-                            <span class="sidemenu-label">
-                            مکتوب ها
-                                @if(\App\Models\Office\Position::where('title', 'مدیر عمومی مالی و اداری')->first() != null)
-                                    ({{ count(\App\Models\Office\Position::where('title', 'مدیر عمومی مالی و اداری')->firstOrFail()->documents) }})
-                                @else
-                                (0)
-                               @endif
-                            </span>
-                        </a>
-                    </li>
-                @endcan
 
                 <!-- Positions -->
                 @can('office_position_view')
