@@ -12,7 +12,7 @@ class Document extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['position_id', 'type', 'subject', 'doc_type', 'doc_number', 'doc_date', 'appendices', 'status', 'info'];
+    protected $fillable = ['position_id', 'receiver', 'cc', 'type', 'subject', 'doc_type', 'doc_number', 'doc_date', 'appendices', 'status', 'info'];
 
     // Belongs to
     public function position()

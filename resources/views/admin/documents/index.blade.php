@@ -173,6 +173,8 @@
                                         @if(auth()->user()->isAdmin())
                                             <th>مرجع</th>
                                         @endif
+                                        <th>گیرنده</th>
+                                        <th>کاپی ها به</th>
                                         <th>موضوع</th>
                                         <th>نوع</th>
                                         <th>نوع فعالیت</th>
@@ -193,6 +195,8 @@
                                                     <a href="{{ route('admin.office.positions.show', $document->position->id) }}">{{ $document->position->title }}</a>
                                                 </td>
                                             @endif
+                                            <td>{{ $document->receiver ?? '' }}</td>
+                                            <td>{{ $document->cc ?? '' }}</td>
                                             <td>
                                                 <a href="{{ route('admin.documents.show', $document->id) }}">{{ $document->subject }}</a>
                                             </td>

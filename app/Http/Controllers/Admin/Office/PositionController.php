@@ -47,9 +47,9 @@ class PositionController extends Controller
         // Select Custom Code
         if ($position->place == 0 || $position->place == 2 || $position->place == 4) {
             $custom_code = 'AF151';
-        } elseif ($position->type == 1) { // Border Custom
+        } elseif ($position->place == 1) { // Border Custom
             $custom_code = 'AF152';
-        } elseif ($position->type == 3) { // Airport
+        } elseif ($position->place == 3) { // Airport
             $custom_code = 'AF153';
         }
 
@@ -104,9 +104,9 @@ class PositionController extends Controller
         // Select Custom Code
         if ($position->place == 0 || $position->place == 2 || $position->place == 4) {
             $custom_code = 'AF151';
-        } elseif ($position->type == 1) { // Border Custom
+        } elseif ($position->place == 1) { // Border Custom
             $custom_code = 'AF152';
-        } elseif ($position->type == 3) { // Airport
+        } elseif ($position->place == 3) { // Airport
             $custom_code = 'AF153';
         }
 

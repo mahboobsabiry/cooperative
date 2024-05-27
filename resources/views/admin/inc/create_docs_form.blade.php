@@ -1,5 +1,37 @@
 <div class="row">
     <div class="col-md-4">
+        <!-- Receiver -->
+        <div class="form-group @error('receiver') has-danger @enderror">
+            <p class="mb-2">1) دریافت کننده: <span class="tx-danger">*</span></p>
+
+            <select id="receiver" name="receiver" class="form-control select2 @error('receiver') form-control-danger @enderror">
+                <option value="">@lang('form.chooseOne')</option>
+                @foreach(\App\Models\Office\Position::all() as $position)
+                    <option value="{{ $position->title }}">{{ $position->title }} (@if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif)</option>
+                @endforeach
+            </select>
+
+            @error('receiver')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- CC -->
+        <div class="form-group @error('cc') has-danger @enderror">
+            <p class="mb-2">1) کاپی به: <span class="tx-danger">*</span></p>
+
+            <select id="cc" name="cc[]" class="form-control select2 @error('cc') form-control-danger @enderror" multiple>
+                <option value="">@lang('form.chooseOne')</option>
+                @foreach(\App\Models\Office\Position::all() as $position)
+                    <option value="{{ $position->title }}">{{ $position->title }} (@if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif)</option>
+                @endforeach
+            </select>
+
+            @error('cc')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
         <!-- Type -->
         <div class="form-group @error('type') has-danger @enderror">
             <p class="mb-2">نوعیت: <span class="tx-danger">*</span></p>
@@ -62,7 +94,7 @@
         <!-- Appendices -->
         <div class="form-group @error('appendices') has-danger @enderror">
             <p class="mb-2">ضمایم: <span class="tx-danger">*</span></p>
-            <input type="number" id="appendices" class="form-control @error('appendices') form-control-danger @enderror" name="appendices" value="{{ old('appendices') }}" required>
+            <input type="number" id="appendices" class="form-control @error('appendices') form-control-danger @enderror" name="appendices" value="{{ '0' ?? old('appendices') }}" required>
 
             @error('appendices')
             <div class="invalid-feedback">{{ $message }}</div>

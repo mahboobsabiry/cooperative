@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:docs_view', ['only' => ['index', 'show']]);
+        $this->middleware('permission:docs_create', ['only' => ['create','store']]);
+        $this->middleware('permission:docs_edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:docs_delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -42,6 +50,8 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'receiver'      => 'required',
+            'cc'            => 'nullable',
             'subject'       => 'required',
             'doc_number'    => 'required',
             'doc_date'      => 'required',
@@ -54,6 +64,8 @@ class DocumentController extends Controller
         $document           = new Document();
         $document->position_id = $position->id;
         $document->type     = $request->type;
+        $document->receiver = $request->receiver;
+        $document->cc       = implode(', ', $request->cc);
         $document->doc_type = $request->doc_type;
         $document->subject  = $request->subject;
         $document->doc_number   = $request->doc_number;
@@ -63,6 +75,7 @@ class DocumentController extends Controller
         $document->info     = $request->info;
         $document->save();
 
+        // Document
         if ($request->hasFile('document')) {
             // File
             // $file = $request->file('document');
@@ -76,7 +89,7 @@ class DocumentController extends Controller
             }
         }
 
-        return redirect()->route('admin.documents.index')->with([
+        return redirect()->route('admin.documents.show', $document->id)->with([
             'message'   => 'مکتوب موفقانه ذخیره گردید.',
             'alertType' => 'success'
         ]);

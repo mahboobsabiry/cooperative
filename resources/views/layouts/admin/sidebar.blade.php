@@ -28,7 +28,7 @@
                         <span class="sidemenu-label">
                             مکتوب ها
                             @if(auth()->user()->isAdmin())
-                                {{ \App\Models\Document::all()->count() }}
+                                ({{ \App\Models\Document::all()->count() }})
                             @else
                                 @if(auth()->user()->employee->position)
                                     ({{ count(auth()->user()->employee->position->documents) }})

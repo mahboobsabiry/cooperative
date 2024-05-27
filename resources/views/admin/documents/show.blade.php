@@ -239,6 +239,22 @@
                             <!-- General Information -->
                             <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
                                 <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات عمومی</h6>
+                                <!-- Receiver -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"> گیرنده:</p>
+                                    </div>
+                                    <div class="col">{{ $document->receiver }}</div>
+                                </div>
+
+                                <!-- CC -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"> کاپی ها به:</p>
+                                    </div>
+                                    <div class="col">{{ $document->cc }}</div>
+                                </div>
+
                                 <!-- Place -->
                                 <div class="row">
                                     <div class="col-6 col-sm-5">

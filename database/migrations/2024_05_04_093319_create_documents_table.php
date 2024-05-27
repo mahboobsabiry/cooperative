@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('position_id');
+            $table->string('receiver');
+            $table->string('cc')->nullable();
             $table->string('type')->default('normal'); // عاجل - محرم - عادی
             $table->string('subject'); // موضوع
             $table->string('doc_type')->default('document'); // نوع مکتوب - پیشنهاد - درخواستی - مکتوب
