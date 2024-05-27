@@ -60,9 +60,9 @@
 
                             <!-- Position -->
                             @can('office_position_view')
-                                <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->type }})</a>
+                                <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->place }})</a>
                             @else
-                                <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }} ({{ $employee->position->type }})</p>
+                                <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }} ({{ $employee->position->place }})</p>
                             @endcan
                             @if($employee->on_duty == 1)
                                 <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>

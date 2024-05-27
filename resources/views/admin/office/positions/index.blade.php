@@ -136,7 +136,7 @@
                                                     {<span class="text-danger small">{{ $position->employees->count() - $position->num_of_pos }} @lang('global.empty')</span>}
                                                 @endif
                                             </td>
-                                            <td>@if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif</td>
+                                            <td>{{ $position->place }}</td>
                                             <td>{{ $position->desc }}</td>
                                         </tr>
                                     @endforeach

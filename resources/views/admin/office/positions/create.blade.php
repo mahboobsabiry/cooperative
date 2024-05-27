@@ -62,7 +62,7 @@
                                             <select id="parent_id" name="parent_id" class="form-control select2 @error('parent_id') form-control-danger @enderror">
                                                 <option value="" selected>@lang('form.chooseOne')</option>
                                                 @foreach($positions as $position)
-                                                    <option value="{{ $position->id }}">{{ $position->title }} (@if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif)</option>
+                                                    <option value="{{ $position->id }}">{{ $position->title }} ({{ $position->place }})</option>
                                                 @endforeach
                                             </select>
 
@@ -112,11 +112,11 @@
                                             <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
 
                                             <select id="place" name="place" class="form-control select2 @error('place') form-control-danger @enderror">
-                                                <option value="0">محصولی</option>
-                                                <option value="1">سرحدی</option>
-                                                <option value="2">نایب آباد</option>
-                                                <option value="3">میدان هوایی</option>
-                                                <option value="4">مراقبت سیار</option>
+                                                <option value="محصولی">محصولی</option>
+                                                <option value="سرحدی">سرحدی</option>
+                                                <option value="نایب آباد">نایب آباد</option>
+                                                <option value="میدان هوایی">میدان هوایی</option>
+                                                <option value="مراقبت سیار">مراقبت سیار</option>
                                             </select>
 
                                             @error('place')

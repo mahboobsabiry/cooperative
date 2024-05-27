@@ -99,18 +99,22 @@
                                             </td>
                                             <td>{{ $hostel->section }}</td>
                                             <td>
-                                                @php
-                                                    $capacity = $hostel->capacity;
-                                                    $each = 100 / $hostel->capacity;
-                                                    $total = $each * $hostel->employees->count();
-                                                    echo $hostel->capacity . '/' . $hostel->employees->count();
-                                                @endphp
-                                                <div class="progress mb-1">
-                                                    <div aria-valuemax="100" aria-valuemin="0"
-                                                         aria-valuenow="{{ round($total) }}"
-                                                         class="progress-bar progress-bar-lg @if($total == 100) bg-danger @else bg-info @endif"
-                                                         role="progressbar" style="width: {{ round($total) }}%;">{{ count($hostel->employees) }}</div>
-                                                </div>
+                                                @if($hostel->capacity >=1)
+                                                    @php
+                                                        $capacity = $hostel->capacity;
+                                                        $each = 100 / $hostel->capacity;
+                                                        $total = $each * $hostel->employees->count();
+                                                        echo $hostel->capacity . '/' . $hostel->employees->count();
+                                                    @endphp
+                                                    <div class="progress mb-1">
+                                                        <div aria-valuemax="100" aria-valuemin="0"
+                                                             aria-valuenow="{{ round($total) }}"
+                                                             class="progress-bar progress-bar-lg @if($total == 100) bg-danger @else bg-info @endif"
+                                                             role="progressbar" style="width: {{ round($total) }}%;">{{ count($hostel->employees) }}</div>
+                                                    </div>
+                                                @else
+                                                    0
+                                                @endif
                                             </td>
                                             <td>
                                                 @foreach($hostel->employees as $employee)

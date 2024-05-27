@@ -59,9 +59,9 @@
                             </h4>
                             <!-- Position -->
                             @can('office_position_view')
-                                <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->type }})</a>
+                                <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->place }})</a>
                             @else
-                                <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }} ({{ $employee->position->type }})</p>
+                                <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }} ({{ $employee->position->place }})</p>
                             @endcan
                             @if($employee->on_duty == 1)
                                 <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
@@ -154,7 +154,7 @@
                                         <select class="form-control select2" name="position" id="position">
                                             <option value="">@lang('form.chooseOne')</option>
                                             @foreach(\App\Models\Office\Position::all()->except($employee->position->id) as $position)
-                                                <option value="{{ $position->title }} ({{ $position->type }})">{{ $position->title }} ({{ $position->type }})</option>
+                                                <option value="{{ $position->title }} ({{ $position->type }})">{{ $position->title }} ({{ $position->place }})</option>
                                             @endforeach
                                         </select>
 

@@ -112,7 +112,7 @@
                             <p class="pro-user-desc text-muted mb-1">{{ $position->title }}</p>
                             @if($position->position_number == 2 || $position->position_number == 3)
                             @else
-                                <p class="pro-user-desc text-primary mb-1">(@if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif)</p>
+                                <p class="pro-user-desc text-primary mb-1">({{ $position->place }})</p>
                             @endif
                             <!-- Position Star -->
                             <p class="user-info-rating">
@@ -251,9 +251,7 @@
                                     <div class="col-6 col-sm-5">
                                         <p class="fw-semi-bold mb-1">موقعیت:</p>
                                     </div>
-                                    <div class="col">
-                                        @if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif
-                                    </div>
+                                    <div class="col">{{ $position->place }}</div>
                                 </div>
 
                                 <!-- Custom Code -->

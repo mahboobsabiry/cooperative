@@ -165,7 +165,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>@lang('form.photo')</th>
-                                <th>@lang('form.idCard')</th>
                                 <th>@lang('form.name')</th>
                                 <th>@lang('form.fatherName')</th>
                                 <th>@lang('form.position')</th>
@@ -188,13 +187,6 @@
                                         <a href="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}"
                                            target="_blank">
                                             <img src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}"
-                                                 width="50" class="rounded-50">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
-                                           target="_blank">
-                                            <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
                                                  width="50" class="rounded-50">
                                         </a>
                                     </td>

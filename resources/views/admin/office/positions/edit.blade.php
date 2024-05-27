@@ -73,7 +73,7 @@
                                                 @endif
 
                                                 @foreach($positions as $pos)
-                                                    <option value="{{ $pos->id ?? '' }}" {{ $position->parent_id == $pos->id ? 'selected' : '' }}>{{ $pos->title }} (@if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif)</option>
+                                                    <option value="{{ $pos->id ?? '' }}" {{ $position->parent_id == $pos->id ? 'selected' : '' }}>{{ $pos->title }} ({{ $pos->place }})</option>
                                                 @endforeach
 
                                             </select>
@@ -124,11 +124,11 @@
                                             <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
 
                                             <select id="place" name="place" class="form-control select2 @error('place') form-control-danger @enderror">
-                                                <option value="0" {{ $position->place == '0' ? 'selected' : '' }}>محصولی</option>
-                                                <option value="1" {{ $position->place == '1' ? 'selected' : '' }}>سرحدی</option>
-                                                <option value="2" {{ $position->place == '2' ? 'selected' : '' }}>نایب آباد</option>
-                                                <option value="3" {{ $position->place == '3' ? 'selected' : '' }}>میدان هوایی</option>
-                                                <option value="4" {{ $position->place == '4' ? 'selected' : '' }}>مراقبت سیار</option>
+                                                <option value="محصولی" {{ $position->place == 'محصولی' ? 'selected' : '' }}>محصولی</option>
+                                                <option value="سرحدی" {{ $position->place == 'سرحدی' ? 'selected' : '' }}>سرحدی</option>
+                                                <option value="نایب آباد" {{ $position->place == 'نایب آباد' ? 'selected' : '' }}>نایب آباد</option>
+                                                <option value="میدان هوایی" {{ $position->place == 'میدان هوایی' ? 'selected' : '' }}>میدان هوایی</option>
+                                                <option value="مراقبت سیار" {{ $position->place == 'مراقبت سیار' ? 'selected' : '' }}>مراقبت سیار</option>
                                             </select>
 
                                             @error('place')

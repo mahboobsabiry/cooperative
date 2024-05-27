@@ -109,7 +109,7 @@
                 <p class="fw-semi-bold mb-1"><strong>@lang('form.lastDuty'):</strong></p>
             </div>
             <div class="col">
-                <p class="fst-italic text-400 mb-1">{{ $employee->appointment_date }}</p>
+                <p class="fst-italic text-400 mb-1">{{ $employee->last_duty }}</p>
             </div>
         </div>
 
@@ -242,7 +242,7 @@
             <div class="col-6 col-sm-5">
                 <p class="fw-semi-bold mb-1"><strong>موقعیت:</strong></p>
             </div>
-            <div class="col">@if($employee->position->place == 0) محصولی  @elseif($employee->position->place == 1) سرحدی @elseif($employee->position->place == 2) نایب آباد@elseif($employee->position->place == 3)  میدان هوایی  @elseif($employee->position->place == 4) مراقبت سیار@endif</div>
+            <div class="col">{{ $employee->position->place }}</div>
         </div>
 
         <!-- All Leave Days -->

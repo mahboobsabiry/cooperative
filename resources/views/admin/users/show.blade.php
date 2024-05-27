@@ -114,7 +114,7 @@
 
                                 @if($user->employee->position->position_number == 2 || $user->employee->position->position_number == 3)
                                 @else
-                                    <p class="pro-user-desc text-primary mb-1">({{ $user->employee->position->type ?? '' }})</p>
+                                    <p class="pro-user-desc text-primary mb-1">({{ $user->employee->position->place ?? '' }})</p>
                                 @endif
                                 <!-- Employee Star -->
                                 @if($user->employee->position)
@@ -260,7 +260,7 @@
                                         <td>{{ $user->phone ?? '' }}</td>
                                         <td>{{ $user->email ?? '' }}</td>
                                         <td>{{ $user->employee->position->custom_code ?? 'AF151' }}</td>
-                                        <td>{{ $user->employee->position->type ?? 'ریاست' }}</td>
+                                        <td>{{ $user->employee->position->place ?? 'ریاست' }}</td>
                                     </tr>
                                     </tbody>
                                     <!--/==/ End of First Table -->

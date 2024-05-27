@@ -173,7 +173,7 @@
                             @if($employee->status == 0)
                                 <!-- Position -->
                                 @can('office_position_view')
-                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} (@if($employee->position->place == 0) محصولی  @elseif($employee->position->place == 1) سرحدی @elseif($employee->position->place == 2) نایب آباد@elseif($employee->position->place == 3)  میدان هوایی  @elseif($employee->position->place == 4) مراقبت سیار@endif)</a>
+                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->positon->place }})</a>
                                 @else
                                     <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
                                 @endcan
