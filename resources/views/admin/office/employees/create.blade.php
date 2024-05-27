@@ -53,21 +53,21 @@
         <!-- Main Row -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Errors Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Card -->
-                <div class="card custom-card overflow-hidden">
+                <div class="card">
+                    <!-- Form Title -->
+                    <div class="card-header">
+                        <h6 class="card-title mb-1 tx-bold">
+                            @lang('pages.employees.addEmpInfo')
+                        </h6>
+                    </div>
+
                     <!-- Card Body -->
                     <div class="card-body">
                         <div class="">
-                            <!-- Errors Message -->
-                            @include('admin.inc.alerts')
-
-                            <!-- Form Title -->
-                            <div class="mb-3">
-                                <h6 class="card-title mb-1 tx-bold">
-                                    @lang('pages.employees.addEmpInfo')
-                                </h6>
-                            </div>
-
                             <!-- Form -->
                             <form method="post" action="{{ route('admin.office.employees.store') }}" data-parsley-validate="" enctype="multipart/form-data">
                                 @csrf
