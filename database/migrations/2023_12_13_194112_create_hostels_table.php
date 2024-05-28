@@ -17,6 +17,8 @@ return new class extends Migration
             $table->char('section')->nullable();
             $table->string('place')->default('محصولی');
             $table->integer('capacity')->default(5);
+            $table->tinyInteger('status')->default(1);
+            $table->text('info')->nullable();
             $table->timestamps();
         });
     }

@@ -22,21 +22,57 @@
 
             <!-- Documents -->
             @can('docs_view')
-                <li class="nav-item {{ request()->is('admin/documents') || request()->is('admin/documents/*') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('admin.documents.index') }}">
-                        <i class="fe fe-file-text"></i>
-                        <span class="sidemenu-label">
-                            مکتوب ها
-                            @if(auth()->user()->isAdmin())
+                @if(auth()->user()->isAdmin())
+                    <li class="nav-item {{ request()->is('admin/documents') || request()->is('admin/documents/*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.documents.index') }}">
+                            <i class="fe fe-file-text"></i>
+                            <span class="sidemenu-label">
+                                مکتوب ها
                                 ({{ \App\Models\Document::all()->count() }})
-                            @else
-                                @if(auth()->user()->employee->position)
-                                    ({{ count(auth()->user()->employee->position->documents) }})
-                                @endif
-                            @endif
-                        </span>
-                    </a>
-                </li>
+                            </span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item {{ request()->is('admin/documents') ||
+                    request()->is('admin/documents/*') ||
+                    request()->is('admin/received-documents') ? 'active show' : '' }}">
+
+                        <!-- Main T -->
+                        <a class="nav-link with-sub" href="javascript:void(0)">
+                            <i class="fe fe-file-text"></i>
+
+                            <span class="sidemenu-label">مکتوب ها</span>
+                            <i class="angle fe fe-chevron-right"></i>
+                        </a>
+
+                        <!-- PHP -->
+                        @php
+                        $auth_user_pos = auth()->user()->employee->position;
+                        @endphp
+
+                        <!-- Sub Items -->
+                        <ul class="nav-sub">
+                            <li class="nav-sub-item {{ request()->is('admin/documents') || request()->is('admin/documents/*') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.documents.index') }}">
+                                    مکتوب های ارسالی
+                                    @if($auth_user_pos)
+                                        ({{ count(\App\Models\Document::all()->where('position_id', $auth_user_pos->id)) }})
+                                    @endif
+                                </a>
+                            </li>
+
+                            <!-- Employees Inactive Users -->
+                            <li class="nav-sub-item {{ request()->is('admin/received-documents') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.documents.received') }}">
+                                    مکتوب های دریافتی
+                                    @if($auth_user_pos)
+                                        ({{ count(\App\Models\Document::all()->where('receiver', $auth_user_pos->title)) }})
+                                    @endif
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
             @endcan
 
             <!-- Asycuda -->

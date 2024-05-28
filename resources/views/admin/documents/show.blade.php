@@ -31,42 +31,45 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <div class="d-flex">
-                    <!-- Delete -->
-                    @can('docs_delete')
-                        <div class="mr-2">
-                            <!-- Delete -->
-                            <a class="modal-effect btn btn-sm ripple btn-danger text-white"
-                               data-effect="effect-sign" data-toggle="modal"
-                               href="#delete_record{{ $document->id }}"
-                               title="@lang('global.delete')">
-                                @lang('global.delete')
-                                <i class="fe fe-trash"></i>
-                            </a>
+                    @if(auth()->user()->isAdmin() || auth()->user()->employee->position->title == $document->receiver)
+                    @else
+                        <!-- Delete -->
+                        @can('docs_delete')
+                            <div class="mr-2">
+                                <!-- Delete -->
+                                <a class="modal-effect btn btn-sm ripple btn-danger text-white"
+                                   data-effect="effect-sign" data-toggle="modal"
+                                   href="#delete_record{{ $document->id }}"
+                                   title="@lang('global.delete')">
+                                    @lang('global.delete')
+                                    <i class="fe fe-trash"></i>
+                                </a>
 
-                            @include('admin.documents.delete')
-                        </div>
-                    @endcan
+                                @include('admin.documents.delete')
+                            </div>
+                        @endcan
 
-                    @can('docs_edit')
-                        <div class="mr-2">
-                            <!-- Edit -->
-                            <a class="btn ripple bg-dark btn-sm text-white"
-                               href="{{ route('admin.documents.edit', $document->id) }}">
-                                @lang('global.edit')
-                                <i class="fe fe-edit"></i>
-                            </a>
-                        </div>
-                    @endcan
+                        @can('docs_edit')
+                            <div class="mr-2">
+                                <!-- Edit -->
+                                <a class="btn ripple bg-dark btn-sm text-white"
+                                   href="{{ route('admin.documents.edit', $document->id) }}">
+                                    @lang('global.edit')
+                                    <i class="fe fe-edit"></i>
+                                </a>
+                            </div>
+                        @endcan
 
-                    @can('docs_create')
-                        <div class="mr-2">
-                            <!-- Add -->
-                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.documents.create') }}">
-                                @lang('global.new')
-                                <i class="fe fe-plus-circle"></i>
-                            </a>
-                        </div>
-                    @endcan
+                        @can('docs_create')
+                            <div class="mr-2">
+                                <!-- Add -->
+                                <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.documents.create') }}">
+                                    @lang('global.new')
+                                    <i class="fe fe-plus-circle"></i>
+                                </a>
+                            </div>
+                        @endcan
+                    @endif
                 </div>
             </div>
         </div>
@@ -105,7 +108,7 @@
                             <p class="pro-user-desc text-muted mb-1">{{ $document->position->title }}</p>
                             @if($document->position->position_number == 2 || $document->position->position_number == 3)
                             @else
-                                <p class="pro-user-desc text-primary mb-1">(@if($document->position->place == 0) محصولی  @elseif($document->position->place == 1) سرحدی @elseif($document->position->place == 2) نایب آباد@elseif($document->position->place == 3)  میدان هوایی  @elseif($document->position->place == 4) مراقبت سیار@endif)</p>
+                                <p class="pro-user-desc text-primary mb-1">({{ $document->position->place }})</p>
                             @endif
                             <!-- Position Star -->
                             <p class="user-info-rating">

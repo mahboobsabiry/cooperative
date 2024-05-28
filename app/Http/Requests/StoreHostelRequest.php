@@ -27,7 +27,8 @@ class StoreHostelRequest extends FormRequest
     {
         return [
             'number'    => 'required',
-            'section'   => 'nullable'
+            'section'   => 'nullable',
+            'info'      => 'nullable'
         ];
     }
 }

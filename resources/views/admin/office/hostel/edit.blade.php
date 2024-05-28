@@ -72,9 +72,7 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Place -->
-                                    </div>
 
-                                    <div class="col-md-6">
                                         <!-- Capacity -->
                                         <div class="form-group @error('capacity') has-danger @enderror">
                                             <p class="mb-2">گنجایش تعداد نفر: <span class="tx-danger">*</span></p>
@@ -85,11 +83,7 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Capacity -->
-                                    </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
                                         <!-- Number -->
                                         <div class="form-group @error('number') has-danger @enderror">
                                             <p class="mb-2">@lang('pages.hostel.roomNumber'): <span class="tx-danger">*</span></p>
@@ -101,7 +95,6 @@
                                         </div>
                                         <!--/==/ End of Number -->
                                     </div>
-
                                     <div class="col-md-6">
                                         <!-- Section -->
                                         <div class="form-group @error('section') has-danger @enderror">
@@ -118,10 +111,22 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Section -->
+
+                                        <!-- Info -->
+                                        <div class="form-group @error('info') has-danger @enderror">
+                                            <p class="mb-2">@lang('global.extraInfo'):</p>
+                                            <textarea name="info" id="info" class="form-control @error('info') form-control-danger @enderror" placeholder="@lang('global.extraInfo')">{{ $hostel->info ?? old('info') }}</textarea>
+
+                                            @error('info')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Info -->
+
+                                        <div class="form-group">
+                                            <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
                                 </div>
                             </form>
                             <!--/==/ End of Form -->

@@ -78,6 +78,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // Documents
     Route::resource('documents', DocumentController::class);
+    Route::get('received-documents', [DocumentController::class, 'received'])->name('documents.received');
 
     // =============================== Asycuda Routes ===================================
     Route::group(['prefix' => 'asycuda', 'as' => 'asycuda.'], function () {

@@ -45,11 +45,11 @@ class PositionController extends Controller
         $position->place        = $request->place;
 
         // Select Custom Code
-        if ($position->place == 0 || $position->place == 2 || $position->place == 4) {
+        if ($position->place == 'محصولی' || $position->place == 'نایب آباد' || $position->place == 'مراقبت سیار') {
             $custom_code = 'AF151';
-        } elseif ($position->place == 1) { // Border Custom
+        } elseif ($position->place == 'سرحدی') { // Border Custom
             $custom_code = 'AF152';
-        } elseif ($position->place == 3) { // Airport
+        } elseif ($position->place == 'میدان هوایی') { // Airport
             $custom_code = 'AF153';
         }
 
@@ -102,11 +102,11 @@ class PositionController extends Controller
         $position->place        = $request->place;
 
         // Select Custom Code
-        if ($position->place == 0 || $position->place == 2 || $position->place == 4) {
+        if ($position->place == 'محصولی' || $position->place == 'نایب آباد' || $position->place == 'مراقبت سیار') {
             $custom_code = 'AF151';
-        } elseif ($position->place == 1) { // Border Custom
+        } elseif ($position->place == 'سرحدی') { // Border Custom
             $custom_code = 'AF152';
-        } elseif ($position->place == 3) { // Airport
+        } elseif ($position->place == 'میدان هوایی') { // Airport
             $custom_code = 'AF153';
         }
 

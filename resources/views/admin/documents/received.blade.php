@@ -1,10 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@if(auth()->user()->isAdmin())
-    @section('title', 'مکتوب ها')
-@else
-    @section('title', 'مکتوب ها - ' . $position->title)
-@endif
+@section('title', 'مکتوب های دریافتی - ' . $position->title)
 
 <!-- Extra Styles -->
 @section('extra_css')
@@ -36,18 +32,13 @@
                 <h2 class="main-content-title tx-24 mg-b-5">مکاتیب</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">مکاتیب</li>
+                    <li class="breadcrumb-item active" aria-current="page">مکاتیب دریافتی</li>
                 </ol>
             </div>
 
             <!-- Btn List -->
             <div class="btn btn-list">
-                <!-- Add New -->
-                @can('docs_create')
-                    <a class="btn ripple btn-primary" href="{{ route('admin.documents.create') }}">
-                        <i class="fe fe-plus-circle"></i> @lang('global.new')
-                    </a>
-                @endcan
+
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -157,7 +148,7 @@
                 <!-- Table Card -->
                 <div class="card">
                     <div class="card-header font-weight-bold">
-                        مجموع مکاتیب ({{ count($documents) }})
+                        مجموع مکاتیب دریافتی ({{ count($documents) }})
                     </div>
 
                     <!-- Table Card Body -->
@@ -170,11 +161,8 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        @if(auth()->user()->isAdmin())
-                                            <th>مرجع</th>
-                                        @endif
+                                        <th>مرجع</th>
                                         <th>گیرنده</th>
-                                        <th>کاپی ها به</th>
                                         <th>موضوع</th>
                                         <th>نوع</th>
                                         <th>نوع فعالیت</th>
@@ -190,16 +178,13 @@
                                     @foreach($documents as $document)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            @if(auth()->user()->isAdmin())
-                                                <td>
-                                                    <a href="{{ route('admin.office.positions.show', $document->position->id) }}">{{ $document->position->title }}</a>
-                                                </td>
-                                            @endif
+                                            <td>
+                                                <a href="{{ route('admin.office.positions.show', $document->position->id) }}">{{ $document->position->title }}</a>
+                                            </td>
                                             <td>
                                                 @php $receiver_pos = \App\Models\Office\Position::where('title', $document->receiver)->first(); @endphp
                                                 <a href="{{ route('admin.office.positions.show', $receiver_pos->id) }}">{{ $document->receiver ?? '' }}</a>
                                             </td>
-                                            <td>{{ $document->cc ?? '' }}</td>
                                             <td>
                                                 <a href="{{ route('admin.documents.show', $document->id) }}">{{ $document->subject }}</a>
                                             </td>

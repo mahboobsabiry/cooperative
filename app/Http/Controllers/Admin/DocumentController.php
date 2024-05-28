@@ -175,4 +175,13 @@ class DocumentController extends Controller
             'alertType' => 'danger'
         ]);
     }
+
+    // Received Documents
+    public function received()
+    {
+        $position = Position::where('id', Auth::user()->employee->position_id)->firstOrFail();
+        $auth_user_pos = auth()->user()->employee->position;
+        $documents = Document::all()->where('receiver', $auth_user_pos->title);
+        return view('admin.documents.received', compact('position', 'documents'));
+    }
 }

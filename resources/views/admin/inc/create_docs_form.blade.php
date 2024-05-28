@@ -6,8 +6,8 @@
 
             <select id="receiver" name="receiver" class="form-control select2 @error('receiver') form-control-danger @enderror">
                 <option value="">@lang('form.chooseOne')</option>
-                @foreach(\App\Models\Office\Position::all() as $position)
-                    <option value="{{ $position->title }}">{{ $position->title }} (@if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif)</option>
+                @foreach(\App\Models\Office\Position::all()->except(auth()->user()->employee->position->id) as $position)
+                    <option value="{{ $position->title }}">{{ $position->title }} ({{ $position->place }})</option>
                 @endforeach
             </select>
 
@@ -22,8 +22,8 @@
 
             <select id="cc" name="cc[]" class="form-control select2 @error('cc') form-control-danger @enderror" multiple>
                 <option value="">@lang('form.chooseOne')</option>
-                @foreach(\App\Models\Office\Position::all() as $position)
-                    <option value="{{ $position->title }}">{{ $position->title }} (@if($position->place == 0) محصولی  @elseif($position->place == 1) سرحدی @elseif($position->place == 2) نایب آباد@elseif($position->place == 3)  میدان هوایی  @elseif($position->place == 4) مراقبت سیار@endif)</option>
+                @foreach(\App\Models\Office\Position::all()->except(auth()->user()->employee->position->id) as $position)
+                    <option value="{{ $position->title }}">{{ $position->title }} ({{ $position->place }})</option>
                 @endforeach
             </select>
 
@@ -84,7 +84,7 @@
         <!-- Doc Date -->
         <div class="form-group @error('doc_date') has-danger @enderror">
             <p class="mb-2">تاریخ صدور: <span class="tx-danger">*</span></p>
-            <input data-jdp data-jdp-max-date="today" type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
+            <input data-jdp data-jdp-max-date="today" type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ \Morilog\Jalali\Jalalian::now()->format('Y/m/d') ?? old('doc_date') }}" required>
 
             @error('doc_date')
             <div class="invalid-feedback">{{ $message }}</div>
