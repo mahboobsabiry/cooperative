@@ -243,39 +243,56 @@
                                         <!-- Appointment Number & Date -->
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <!-- Appointment Number -->
-                                                <div class="form-group @error('appointment_number') has-danger @enderror">
-                                                    <p class="mb-2">11) @lang('form.appointmentNumber'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="appointment_number" class="form-control @error('appointment_number') form-control-danger @enderror" name="appointment_number" value="{{ old('appointment_number') }}" required>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <!-- Appointment Number -->
+                                                        <div class="form-group @error('appointment_number') has-danger @enderror">
+                                                            <p class="mb-2">11) @lang('form.appointmentNumber'): <span class="tx-danger">*</span></p>
+                                                            <input type="text" id="appointment_number" class="form-control @error('appointment_number') form-control-danger @enderror" name="appointment_number" value="{{ old('appointment_number') }}" required>
 
-                                                    @error('appointment_number')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
+                                                            @error('appointment_number')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                        <!--/==/ End of Appointment Number -->
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <!-- Appointment Date -->
+                                                        <div class="form-group @error('appointment_date') has-danger @enderror">
+                                                            <p class="mb-2">12) @lang('form.appointmentDate'): <span class="tx-danger">*</span></p>
+                                                            <input data-jdp data-jdp-max-date="today" type="text" id="appointment_date" class="form-control @error('appointment_date') form-control-danger @enderror" name="appointment_date" value="{{ old('appointment_date') }}" required>
+
+                                                            @error('appointment_date')
+                                                            <div class="invalid-feedback">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                        <!--/==/ End of Appointment Date -->
+                                                    </div>
                                                 </div>
-                                                <!--/==/ End of Appointment Number -->
                                             </div>
 
                                             <div class="col-md-6">
-                                                <!-- Appointment Date -->
-                                                <div class="form-group @error('appointment_date') has-danger @enderror">
-                                                    <p class="mb-2">12) @lang('form.appointmentDate'): <span class="tx-danger">*</span></p>
-                                                    <input data-jdp data-jdp-max-date="today" type="text" id="appointment_date" class="form-control @error('appointment_date') form-control-danger @enderror" name="appointment_date" value="{{ old('appointment_date') }}" required>
+                                                <!-- NID-Number -->
+                                                <div class="form-group @error('nid_number') has-danger @enderror">
+                                                    <p class="mb-2">13) نمبر تذکره: <span class="tx-danger">*</span></p>
+                                                    <input type="text" id="nid_number" class="form-control @error('nid_number') form-control-danger @enderror" name="nid_number" value="{{ old('nid_number') }}" required>
 
-                                                    @error('appointment_date')
+                                                    @error('nid_number')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                <!--/==/ End of Appointment Date -->
+                                                <!--/==/ End of NID-Number -->
                                             </div>
                                         </div>
-                                        <!--/==/ End of Appointment Numebr and Date -->
+                                        <!--/==/ End of Appointment Number and Date -->
 
                                         <!-- Employee Number and Email -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <!-- Employee Number -->
                                                 <div class="form-group @error('emp_number') has-danger @enderror">
-                                                    <p class="mb-2">13) @lang('form.empNumber'): <span class="tx-danger">*</span></p>
+                                                    <p class="mb-2">14) @lang('form.empNumber'): <span class="tx-danger">*</span></p>
                                                     <input type="number" id="emp_number" class="form-control @error('emp_number') form-control-danger @enderror" name="emp_number" value="{{ old('emp_number') }}">
 
                                                     @error('emp_number')
@@ -288,7 +305,7 @@
                                             <div class="col-md-6">
                                                 <!-- Email Address -->
                                                 <div class="form-group @error('email') has-danger @enderror">
-                                                    <p class="mb-2">14) @lang('form.email'):</p>
+                                                    <p class="mb-2">15) @lang('form.email'):</p>
                                                     <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ old('email') }}">
 
                                                     @error('email')
@@ -305,7 +322,7 @@
                                             <div class="col-md-6">
                                                 <!-- Main Province -->
                                                 <div class="form-group @error('main_province') has-danger @enderror">
-                                                    <p class="mb-2">15) @lang('form.mainProvince'): <span class="tx-danger">*</span></p>
+                                                    <p class="mb-2">16) @lang('form.mainProvince'): <span class="tx-danger">*</span></p>
                                                     <input type="text" id="main_province" class="form-control @error('main_province') form-control-danger @enderror" name="main_province" value="{{ old('main_province') }}" required>
 
                                                     @error('main_province')
@@ -317,7 +334,7 @@
                                             <div class="col-md-6">
                                                 <!-- Main District -->
                                                 <div class="form-group @error('main_district') has-danger @enderror">
-                                                    <p class="mb-2">16) @lang('form.mainDistrict'): <span class="tx-danger">*</span></p>
+                                                    <p class="mb-2">17) @lang('form.mainDistrict'): <span class="tx-danger">*</span></p>
                                                     <input type="text" id="main_district" class="form-control @error('main_district') form-control-danger @enderror" name="main_district" value="{{ old('main_district') }}" required>
 
                                                     @error('main_district')
@@ -334,7 +351,7 @@
                                             <div class="col-md-6">
                                                 <!-- Current Province -->
                                                 <div class="form-group @error('current_province') has-danger @enderror">
-                                                    <p class="mb-2">17) @lang('form.currentProvince'): <span class="tx-danger">*</span></p>
+                                                    <p class="mb-2">18) @lang('form.currentProvince'): <span class="tx-danger">*</span></p>
                                                     <input type="text" id="current_province" class="form-control @error('current_province') form-control-danger @enderror" name="current_province" value="{{ old('current_province') }}" required>
 
                                                     @error('current_province')
@@ -346,7 +363,7 @@
                                             <div class="col-md-6">
                                                 <!-- Current District -->
                                                 <div class="form-group @error('current_district') has-danger @enderror">
-                                                    <p class="mb-2">18) @lang('form.currentDistrict'): <span class="tx-danger">*</span></p>
+                                                    <p class="mb-2">19) @lang('form.currentDistrict'): <span class="tx-danger">*</span></p>
                                                     <input type="text" id="current_district" class="form-control @error('current_district') form-control-danger @enderror" name="current_district" value="{{ old('current_district') }}" required>
 
                                                     @error('current_district')
@@ -358,16 +375,12 @@
                                         </div>
                                         <!--/==/ End of Current Address -->
 
-                                        <!--/==/ End of General Information -->
-                                    </div>
-
-                                    <div class="col-md-6">
                                         <!-- Phone Number -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <!-- Phone Number -->
                                                 <div class="form-group @error('phone') has-danger @enderror">
-                                                    <p class="mb-2">19) @lang('form.phone'):</p>
+                                                    <p class="mb-2">20) @lang('form.phone'):</p>
                                                     <input type="text" id="phone" class="form-control @error('phone') form-control-danger @enderror" name="phone" value="{{ old('phone') }}">
 
                                                     @error('phone')
@@ -380,7 +393,7 @@
                                             <div class="col-md-6">
                                                 <!-- Phone Number 2 -->
                                                 <div class="form-group @error('phone2') has-danger @enderror">
-                                                    <p class="mb-2">20) @lang('form.phone') @lang('global.alternative'): </p>
+                                                    <p class="mb-2">21) @lang('form.phone') @lang('global.alternative'): </p>
                                                     <input type="text" id="phone2" class="form-control @error('phone2') form-control-danger @enderror" name="phone2" value="{{ old('phone2') }}">
 
                                                     @error('phone2')
@@ -391,13 +404,16 @@
                                             </div>
                                         </div>
                                         <!--/==/ End of Phone Number -->
+                                        <!--/==/ End of General Information -->
+                                    </div>
 
+                                    <div class="col-md-6">
                                         <!-- PRR/NPR -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <!-- PRR/NPR -->
                                                 <div class="form-group @error('prr_npr') has-danger @enderror">
-                                                    <p class="mb-2">21) PRR/NPR: <span class="tx-danger">*</span></p>
+                                                    <p class="mb-2">22) PRR/NPR: <span class="tx-danger">*</span></p>
 
                                                     <select class="form-control" name="prr_npr" id="prr_npr">
                                                         <option value="NPR">NPR</option>
@@ -414,7 +430,7 @@
                                             <div class="col-md-6">
                                                 <!-- PRR Date -->
                                                 <div class="form-group @error('prr_date') has-danger @enderror">
-                                                    <p class="mb-2">22) PRR Date:</p>
+                                                    <p class="mb-2">23) PRR Date:</p>
                                                     <input data-jdp data-jdp-max-date="today" type="text" id="prr_date" class="form-control @error('prr_date') form-control-danger @enderror" name="prr_date" value="{{ old('prr_date') }}">
 
                                                     @error('prr_date')
@@ -431,7 +447,7 @@
                                             <div class="col-md-6">
                                                 <!-- Hostel -->
                                                 <div class="form-group @error('hostel_id') has-danger @enderror">
-                                                    <p class="mb-2">23) @lang('pages.hostel.hostel'):</p>
+                                                    <p class="mb-2">24) @lang('pages.hostel.hostel'):</p>
                                                     <select class="form-control select2" name="hostel_id" id="hostel_id">
                                                         <option selected disabled>@lang('global.home')</option>
                                                         @foreach($hostels as $hostel)
@@ -448,7 +464,7 @@
                                             <div class="col-md-6">
                                                 <!-- Introducer -->
                                                 <div class="form-group @error('info') has-danger @enderror">
-                                                    <p class="mb-2">24) @lang('form.introducer'):</p>
+                                                    <p class="mb-2">25) @lang('form.introducer'):</p>
                                                     <input type="text" id="introducer" class="form-control @error('introducer') form-control-danger @enderror" name="introducer" value="{{ old('introducer') }}">
 
                                                     @error('introducer')
@@ -468,7 +484,7 @@
 
                                         <!-- Information -->
                                         <div class="form-group @error('info') has-danger @enderror">
-                                            <p class="mb-2">25) @lang('global.extraInfo'):</p>
+                                            <p class="mb-2">26) @lang('global.extraInfo'):</p>
                                             <textarea name="info" class="form-control @error('info') form-control-danger @enderror">{{ old('info') }}</textarea>
 
                                             @error('info')
@@ -479,13 +495,23 @@
 
                                         <!-- Photo -->
                                         <div class="form-group @error('photo') has-danger @enderror">
-                                            <p class="mb-2">26) @lang('form.photo'):</p>
+                                            <p class="mb-2">27) @lang('form.photo'):</p>
                                             <input type="file" class="dropify" name="photo" accept="image/*" data-height="200" />
                                             @error('photo')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <!--/==/ End of Photo -->
+
+                                        <!-- Signature -->
+                                        <div class="form-group @error('signature') has-danger @enderror">
+                                            <p class="mb-2">28) نمونه امضاء:</p>
+                                            <input type="file" class="dropify" name="signature" accept="image/*" data-height="200" />
+                                            @error('signature')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Signature -->
 
                                         <div class="form-group float-left">
                                             <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>

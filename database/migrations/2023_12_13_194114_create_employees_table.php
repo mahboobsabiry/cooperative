@@ -22,8 +22,9 @@ return new class extends Migration
             $table->string('father_name');
             $table->boolean('gender')->default(1);
             $table->string('emp_number')->nullable()->unique();
+            $table->string('nid_number')->unique();
             $table->string('appointment_number');
-            $table->string('appointment_date');
+            $table->date('appointment_date');
             $table->string('last_duty')->default('جدیدالشمول');
             $table->integer('birth_year');
             $table->string('education')->nullable();
@@ -37,8 +38,9 @@ return new class extends Migration
             $table->string('current_province');
             $table->string('current_district');
             $table->string('introducer')->nullable();
-            $table->string('info')->nullable();
+            $table->string('signature')->nullable();
             $table->tinyInteger('status')->default(0);
+            $table->string('info')->nullable();
 
             // Duty
             $table->tinyInteger('on_duty')->default(0);

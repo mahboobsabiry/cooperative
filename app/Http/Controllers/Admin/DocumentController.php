@@ -40,6 +40,10 @@ class DocumentController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->isAdmin()) {
+            return redirect()->route('admin.documents.index')
+                ->with(['message' => 'شما اجازه ارسال مکتوب را ندارید.', 'alertType' => 'secondary']);
+        }
         $position = Position::where('id', Auth::user()->employee->position_id)->firstOrFail();
         return view('admin.documents.create', compact('position'));
     }
@@ -65,7 +69,9 @@ class DocumentController extends Controller
         $document->position_id = $position->id;
         $document->type     = $request->type;
         $document->receiver = $request->receiver;
-        $document->cc       = implode(', ', $request->cc);
+        if ($request->cc) {
+            $document->cc       = implode(', ', $request->cc);
+        }
         $document->doc_type = $request->doc_type;
         $document->subject  = $request->subject;
         $document->doc_number   = $request->doc_number;

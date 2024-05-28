@@ -38,9 +38,9 @@
 	font-size:0.9rem;
 	font-weight:500;
 }
-.full-width .container{  
+.full-width .container{
     max-width:inherit !important;
-	width:95% !important;	
+	width:95% !important;
 	transition:all 0.5s ease;
 }
 .switch_section span {
@@ -48,8 +48,8 @@
     font-size: 14px;
 	font-weight: 400;
 }
-.unbox {  
-   margin:0; 
+.unbox {
+   margin:0;
 }
 
 .switch_section li{
@@ -75,7 +75,7 @@
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select: none;
-    
+
 }
 .onoffswitch-checkbox {
     display: none;
@@ -96,16 +96,16 @@
     content: "";
 	height: 16px;
     display: block;
-	width: 17px; 
+	width: 17px;
 	margin: 0px;
     background: #FFFFFF;
     position: absolute; top: 0; bottom: 0;
     right: 13px;
     border: 1px solid  #c9d5ec; border-radius: 15px;
-    transition: all 0.3s ease-in 0s; 
+    transition: all 0.3s ease-in 0s;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label:before {
-    right: 0px; 
+    right: 0px;
 }
 
 /* //////////////////  switch-2  //////////////// */
@@ -115,7 +115,7 @@
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select: none;
-    
+
 }
 .onoffswitch2-checkbox {
     display: none;
@@ -136,16 +136,16 @@
     content: "";
 	height: 16px;
     display: block;
-	width: 17px; 
+	width: 17px;
 	margin: 0px;
     background: #FFFFFF;
     position: absolute; top: 0; bottom: 0;
     right: 13px;
     border: 1px solid  #c9d5ec; border-radius: 15px;
-    transition: all 0.3s ease-in 0s; 
+    transition: all 0.3s ease-in 0s;
 }
 .onoffswitch2-checkbox:checked + .onoffswitch2-label:before {
-    right: 0px; 
+    right: 0px;
 }
 
 /* //////////////////  switch-3  //////////////// */
@@ -155,7 +155,7 @@
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select: none;
-    
+
 }
 .onoffswitch3-checkbox {
     display: none;
@@ -176,13 +176,13 @@
     content: "";
 	height: 16px;
     display: block;
-	width: 17px; 
+	width: 17px;
 	margin: 0px;
     background: #FFFFFF;
     position: absolute; top: 0; bottom: 0;
     right: 13px;
     border: 1px solid  #c9d5ec; border-radius: 15px;
-    transition: all 0.3s ease-in 0s; 
+    transition: all 0.3s ease-in 0s;
 }
 .onoffswitch3-checkbox:checked + .onoffswitch3-label {
     background-color:#0052cc;
@@ -191,7 +191,7 @@
    border-color:#0052cc;
 }
 .onoffswitch3-checkbox:checked + .onoffswitch3-label:before {
-    right: 0px; 
+    right: 0px;
 }
 
 /*-- color-1 --*/
@@ -353,16 +353,16 @@
 }
 
 .onoffswitch-checkbox:checked + .onoffswitch-label {
-    background-color: #8760fb;
+    background-color: #3A71C9FF;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
-   border-color: #8760fb;
+   border-color: #3A71C9FF;
 }
 .onoffswitch2-checkbox:checked + .onoffswitch2-label {
-    background-color:#8760fb;
+    background-color:#3A71C9FF;
 }
 .onoffswitch2-checkbox:checked + .onoffswitch-label2, .onoffswitch2-checkbox:checked + .onoffswitch2-label:before {
-   border-color:#8760fb;
+   border-color:#3A71C9FF;
 }
 .dark-theme .dark-switch{
 	display:none !important;

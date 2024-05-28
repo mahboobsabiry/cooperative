@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('hostels', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('number');
+            $table->integer('number');
             $table->char('section')->nullable();
             $table->string('place')->default('محصولی');
             $table->integer('capacity')->default(5);

@@ -65,6 +65,7 @@ class EmployeeController extends Controller
         $employee->father_name  = $request->father_name;
         $employee->gender       = $request->gender;
         $employee->emp_number   = $request->emp_number;
+        $employee->nid_number   = $request->nid_number;
         $employee->appointment_number   = $request->appointment_number;
         $employee->appointment_date     = $request->appointment_date;
         $employee->last_duty        = $request->last_duty;
@@ -81,6 +82,14 @@ class EmployeeController extends Controller
         $employee->current_province = $request->current_province;
         $employee->current_district = $request->current_district;
         $employee->introducer       = $request->introducer;
+
+        //  Has File && Save Signature Scan
+        if ($request->hasFile('signature')) {
+            $avatar = $request->file('signature');
+            $fileName = 'employee-signature-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $avatar->storeAs('signatures', $fileName, 'public');
+            $employee->signature        = $fileName;
+        }
         $employee->status           = 0;
         $employee->info             = $request->info;
         $employee->save();
@@ -88,7 +97,7 @@ class EmployeeController extends Controller
         //  Has File && Save Avatar Image
         if ($request->hasFile('photo')) {
             $avatar = $request->file('photo');
-            $fileName = 'employee-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $fileName = 'employee-' . time() . rand(111, 99999) . '.' . $avatar->getClientOriginalExtension();
             $employee->storeImage($avatar->storeAs('employees', $fileName, 'public'));
         }
 
@@ -137,6 +146,7 @@ class EmployeeController extends Controller
             'last_name'     => 'nullable|min:3|max:64',
             'father_name'   => 'required|min:3|max:64',
             'emp_number'    => 'nullable|unique:employees,emp_number,' . $employee->id,
+            'nid_number'    => 'required|unique:employees,nid_number,' . $employee->id,
             'appointment_number'    => 'required',
             'appointment_date'      => 'nullable',
             'last_duty'     => 'nullable',
@@ -179,6 +189,7 @@ class EmployeeController extends Controller
         $employee->father_name  = $request->father_name;
         $employee->gender       = $request->gender;
         $employee->emp_number   = $request->emp_number;
+        $employee->nid_number   = $request->nid_number;
         $employee->appointment_number    = $request->appointment_number;
         $employee->appointment_date      = $request->appointment_date;
         $employee->last_duty        = $request->last_duty;
@@ -195,6 +206,17 @@ class EmployeeController extends Controller
         $employee->current_province = $request->current_province;
         $employee->current_district = $request->current_district;
         $employee->introducer       = $request->introducer;
+
+        //  Has File && Save Signature Scan
+        if ($request->hasFile('signature')) {
+            if (file_exists(asset('storage/signatures/' . $employee->signature))) {
+                unlink(asset('storage/signatures/' . $employee->signature));
+            }
+            $avatar = $request->file('signature');
+            $fileName = 'employee-signature-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $avatar->storeAs('signatures', $fileName, 'public');
+            $employee->signature        = $fileName;
+        }
         $employee->info             = $request->info;
         $employee->save();
 
@@ -220,6 +242,10 @@ class EmployeeController extends Controller
     // Delete Employee
     public function destroy(Employee $employee)
     {
+        if (file_exists(asset('storage/signatures/' . $employee->signature))) {
+            unlink(asset('storage/signatures/' . $employee->signature));
+        }
+
         $employee->delete();
 
         activity('deleted')

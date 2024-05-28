@@ -170,10 +170,8 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        @if(auth()->user()->isAdmin())
-                                            <th>مرجع</th>
-                                        @endif
-                                        <th>گیرنده</th>
+                                        <th>مرسل</th>
+                                        <th>مرسل الیه</th>
                                         <th>کاپی ها به</th>
                                         <th>موضوع</th>
                                         <th>نوع</th>
@@ -190,11 +188,9 @@
                                     @foreach($documents as $document)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            @if(auth()->user()->isAdmin())
-                                                <td>
-                                                    <a href="{{ route('admin.office.positions.show', $document->position->id) }}">{{ $document->position->title }}</a>
-                                                </td>
-                                            @endif
+                                            <td>
+                                                <a href="{{ route('admin.office.positions.show', $document->position->id) }}">{{ $document->position->title }}</a>
+                                            </td>
                                             <td>
                                                 @php $receiver_pos = \App\Models\Office\Position::where('title', $document->receiver)->first(); @endphp
                                                 <a href="{{ route('admin.office.positions.show', $receiver_pos->id) }}">{{ $document->receiver ?? '' }}</a>

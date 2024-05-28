@@ -421,7 +421,7 @@
         <!--/==/ End of Fourth Table -->
 
         <!-- Fifth Table -->
-        @if($employee->status == 1)
+        @if($employee->status == 0)
             @can('office_employee_edit')
                 <tbody>
                 <!-- Details -->

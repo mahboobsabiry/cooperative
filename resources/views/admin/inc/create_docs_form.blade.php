@@ -18,7 +18,7 @@
 
         <!-- CC -->
         <div class="form-group @error('cc') has-danger @enderror">
-            <p class="mb-2">1) کاپی به: <span class="tx-danger">*</span></p>
+            <p class="mb-2">1) کاپی به:</p>
 
             <select id="cc" name="cc[]" class="form-control select2 @error('cc') form-control-danger @enderror" multiple>
                 <option value="">@lang('form.chooseOne')</option>

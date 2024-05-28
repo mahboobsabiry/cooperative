@@ -34,6 +34,7 @@ class StoreEmployeeRequest extends FormRequest
             'last_name'     => 'nullable|min:3|max:64',
             'father_name'   => 'required|min:3|max:64',
             'emp_number'    => 'nullable|unique:employees,emp_number',
+            'nid_number'    => 'required|unique:employees,nid_number',
             'appointment_number'    => 'required',
             'appointment_date'      => 'nullable',
             'last_duty'     => 'nullable',

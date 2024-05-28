@@ -186,11 +186,11 @@
                         <div class="row">
                             <!-- Account Information -->
                             <div class="col-lg col-xxl-5">
-                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات مکتوب</h6>
+                                <h5 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات مکتوب</h5>
                                 <!-- ID -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">ID:</p>
+                                        <p class="fw-semi-bold mb-1"><strong>ID:</strong></p>
                                     </div>
                                     <div class="col">ID-{{ $document->id }}</div>
                                 </div>
@@ -198,7 +198,7 @@
                                 <!-- Type -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">نوع:</p>
+                                        <p class="fw-semi-bold mb-1"><strong>نوع:</strong></p>
                                     </div>
                                     <div class="col">{{ $document->type }}</div>
                                 </div>
@@ -206,7 +206,7 @@
                                 <!-- Subject -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">موضوع:</p>
+                                        <p class="fw-semi-bold mb-1"><strong>موضوع:</strong></p>
                                     </div>
                                     <div class="col">{{ $document->subject }}</div>
                                 </div>
@@ -214,7 +214,7 @@
                                 <!-- Document Type -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">نوع مکتوب:</p>
+                                        <p class="fw-semi-bold mb-1"><strong>نوع مکتوب:</strong></p>
                                     </div>
                                     <div class="col">{{ $document->doc_type }}</div>
                                 </div>
@@ -222,7 +222,7 @@
                                 <!-- Document Number -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1"> نمبر مکتوب:</p>
+                                        <p class="fw-semi-bold mb-1"><strong>نمبر مکتوب:</strong></p>
                                     </div>
                                     <div class="col">{{ $document->doc_number }}</div>
                                 </div>
@@ -230,7 +230,7 @@
                                 <!-- Description -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">معلومات اضافی:</p>
+                                        <p class="fw-semi-bold mb-1"><strong>معلومات اضافی:</strong></p>
                                     </div>
                                     <div class="col">
                                         <p class="fst-italic text-400 mb-1">{{ $document->info ?? '--' }}</p>
@@ -241,11 +241,19 @@
 
                             <!-- General Information -->
                             <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
-                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات عمومی</h6>
+                                <h5 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات عمومی</h5>
+                                <!-- Sender -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>مرسل:</strong></p>
+                                    </div>
+                                    <div class="col">{{ $document->position->title }}</div>
+                                </div>
+
                                 <!-- Receiver -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1"> گیرنده:</p>
+                                        <p class="fw-semi-bold mb-1"><strong>مرسل الیه:</strong></p>
                                     </div>
                                     <div class="col">{{ $document->receiver }}</div>
                                 </div>
@@ -253,7 +261,7 @@
                                 <!-- CC -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1"> کاپی ها به:</p>
+                                        <p class="fw-semi-bold mb-1"><strong> کاپی ها به:</strong></p>
                                     </div>
                                     <div class="col">{{ $document->cc }}</div>
                                 </div>
@@ -261,7 +269,7 @@
                                 <!-- Place -->
                                 <div class="row">
                                     <div class="col-6 col-sm-5">
-                                        <p class="fw-semi-bold mb-1">تاریخ مکتوب:</p>
+                                        <p class="fw-semi-bold mb-1"><strong>تاریخ مکتوب:</strong></p>
                                     </div>
                                     <div class="col">{{ $document->doc_date }}</div>
                                 </div>
@@ -269,7 +277,7 @@
                                 <!-- Files -->
                                 <div class="row">
                                     <div class="col-4 col-sm-3">
-                                        <p class="fw-semi-bold mb-1">اسناد:</p>
+                                        <p class="fw-semi-bold mb-1"><strong>اسناد:</strong></p>
                                     </div>
                                     <div class="col bd m-2 p-2 row">
                                         @foreach($document->files as $file)

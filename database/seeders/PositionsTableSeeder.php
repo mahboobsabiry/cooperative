@@ -20,7 +20,7 @@ class PositionsTableSeeder extends Seeder
                 'position_number'   => 2,
                 'num_of_pos'        => 1,
                 'desc'              => '',
-                'place'             => 0,
+                'place'             => 'محصولی',
                 'custom_code'       => 'AF151',
                 'status'            => 1
             ],
@@ -30,7 +30,7 @@ class PositionsTableSeeder extends Seeder
                 'position_number'   => 3,
                 'num_of_pos'        => 1,
                 'desc'              => '',
-                'place'             => 0,
+                'place'             => 'محصولی',
                 'custom_code'       => 'AF151',
                 'status'            => 1
             ],
@@ -40,7 +40,7 @@ class PositionsTableSeeder extends Seeder
                 'position_number'   => 3,
                 'num_of_pos'        => 1,
                 'desc'              => '',
-                'place'             => 0,
+                'place'             => 'محصولی',
                 'custom_code'       => 'AF151',
                 'status'            => 1
             ],
@@ -50,7 +50,7 @@ class PositionsTableSeeder extends Seeder
                 'position_number'   => 3,
                 'num_of_pos'        => 1,
                 'desc'              => '',
-                'place'             => 1,
+                'place'             => 'سرحدی',
                 'custom_code'       => 'AF152',
                 'status'            => 1
             ],
@@ -60,7 +60,7 @@ class PositionsTableSeeder extends Seeder
                 'position_number'   => 5,
                 'num_of_pos'        => 1,
                 'desc'              => '',
-                'place'             => 0,
+                'place'             => 'محصولی',
                 'custom_code'       => 'AF151',
                 'status'            => 1
             ],
@@ -70,7 +70,7 @@ class PositionsTableSeeder extends Seeder
                 'position_number'   => 4,
                 'num_of_pos'        => 1,
                 'desc'              => '',
-                'place'             => 0,
+                'place'             => 'محصولی',
                 'custom_code'       => 'AF151',
                 'status'            => 1
             ],
@@ -80,8 +80,58 @@ class PositionsTableSeeder extends Seeder
                 'position_number'   => 4,
                 'num_of_pos'        => 1,
                 'desc'              => '',
-                'place'             => 0,
+                'place'             => 'محصولی',
                 'custom_code'       => 'AF151',
+                'status'            => 1
+            ],
+            [
+                'parent_id' => 4,
+                'title'     => 'مدیر اداری',
+                'position_number'   => 5,
+                'num_of_pos'        => 1,
+                'desc'              => '',
+                'place'             => 'سرحدی',
+                'custom_code'       => 'AF152',
+                'status'            => 1
+            ],
+            [
+                'parent_id' => 4,
+                'title'     => 'مدیر عمومی تشریح اموال',
+                'position_number'   => 4,
+                'num_of_pos'        => 1,
+                'desc'              => '',
+                'place'             => 'سرحدی',
+                'custom_code'       => 'AF152',
+                'status'            => 1
+            ],
+            [
+                'parent_id' => 4,
+                'title'     => 'مدیر عمومی دروازه ها',
+                'position_number'   => 4,
+                'num_of_pos'        => 1,
+                'desc'              => '',
+                'place'             => 'سرحدی',
+                'custom_code'       => 'AF152',
+                'status'            => 1
+            ],
+            [
+                'parent_id' => 4,
+                'title'     => 'مدیر عمومی ترانزیت',
+                'position_number'   => 4,
+                'num_of_pos'        => 1,
+                'desc'              => '',
+                'place'             => 'سرحدی',
+                'custom_code'       => 'AF152',
+                'status'            => 1
+            ],
+            [
+                'parent_id' => 4,
+                'title'     => 'مدیر عمومی چیک محموله های مسافرین',
+                'position_number'   => 4,
+                'num_of_pos'        => 1,
+                'desc'              => '',
+                'place'             => 'سرحدی',
+                'custom_code'       => 'AF152',
                 'status'            => 1
             ]
         ];

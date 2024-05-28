@@ -2,7 +2,7 @@
 
 /*Color*/
 .color-header .main-header{
-	background:#8760fb;
+	background:#3A71C9FF;
 	border-bottom:1px solid transparent !important;
 }
 .color-header .hor-header .header-brand-img.desktop-logo{
@@ -48,7 +48,7 @@
 }
 
 .dark-theme.color-header .main-header{
-	background:#8760fb;
+	background:#3A71C9FF;
 	border-bottom:1px solid transparent !important;
 }
 .dark-theme.color-header .main-header-center .form-control {
@@ -125,14 +125,14 @@
 	color: #1c273c;
 }
 .dark-theme.light-horizontal .main-navbar .nav-item.active .nav-link, .dark-theme.light-horizontal .main-navbar .nav-item:hover .nav-link{
-	color: #8760fb;
+	color: #3A71C9FF;
 }
 /*Color-Horizontal*/
 .color-horizontal .main-header{
 	border-bottom:1px solid transparent
 }
 .color-horizontal .main-navbar{
-	background:#8760fb;
+	background:#3A71C9FF;
 }
 .color-horizontal .main-navbar .nav-link{
 	color:#fff;
@@ -158,7 +158,7 @@
 		border-bottom:1px solid rgba(255,255,255,0.1)
 	}
 	.color-horizontal .main-navbar-search .form-control{
-		background:#8760fb;
+		background:#3A71C9FF;
 	}
 	.color-horizontal .main-navbar .nav-item{
 		border-bottom:1px solid rgba(255,255,255,0.1)
@@ -181,7 +181,7 @@
 }
 
 .dark-theme.color-horizontal .main-navbar{
-	background:#8760fb;
+	background:#3A71C9FF;
 }
 .dark-theme.color-horizontal .main-navbar .nav-link.with-sub::after{
 	color:#fff;
@@ -205,16 +205,16 @@
 	opacity:0.6;
 }
 .dark-horizontal .main-navbar .nav-item.active .nav-link{
-	color:#ac92fb;
+	color:#2F5AA3FF;
 }
 .dark-horizontal .main-navbar .nav-item.active .nav-link.with-sub::after{
-	color: #ac92fb;
+	color: #2F5AA3FF;
 }
 .dark-horizontal .main-navbar .nav-item:hover .nav-link {
-	color: #ac92fb;
+	color: #2F5AA3FF;
 }
 .dark-horizontal .main-navbar .nav-item:hover .nav-link.with-sub::after{
-	color: #ac92fb;
+	color: #2F5AA3FF;
 }
 @media (max-width: 992px){
 	.dark-horizontal .main-navbar-search{
@@ -325,10 +325,10 @@
 	border-top: 1px solid #e1e6f1;
 }
 .dark-theme.light-leftmenu .main-sidebar-body .nav-item.active .nav-link {
-    color: #8760fb;
+    color: #3A71C9FF;
 }
 .dark-theme.light-leftmenu .main-sidebar-body .nav-item:hover .nav-link {
-    color: #8760fb;
+    color: #3A71C9FF;
 }
 .dark-theme.light-leftmenu .main-sidebar-body .nav-sub-link {
 	color:#000
@@ -337,7 +337,7 @@
 	color:#68798b
 }
 .dark-theme.light-leftmenu .main-sidebar-body .nav-sub-link:hover, .dark-theme.light-leftmenu .main-sidebar-body .nav-sub-link:focus{
-	color:#8760fb
+	color:#3A71C9FF
 }
 .dark-theme.light-leftmenu.main-sidebar-hide .side-menu .main-logo .icon-logo{
 	display:block !important;
@@ -358,7 +358,7 @@
 	display:none !important;
 }
 .dark-theme.light-leftmenu .main-sidebar-body .nav-sub-item.active>.nav-sub-link {
-    color: #8760fb;
+    color: #3A71C9FF;
 }
 
 .app.dark-theme.light-leftmenu .first-sidemenu {
@@ -380,7 +380,7 @@
 
 /*Color left-menu*/
 .color-leftmenu .main-sidebar-sticky{
-	background: #8760fb;
+	background: #3A71C9FF;
 	border-right: 1px solid transparent;
 }
 .color-leftmenu .side-menu .sidemenu-logo .header-brand-img.desktop-logo{
@@ -438,10 +438,10 @@
 	color:rgba(255,255,255,0.7);
 }
 .app.sidebar-mini.color-leftmenu .first-sidemenu {
-    background: #8760fb;
+    background: #3A71C9FF;
 }
 .app.sidebar-mini.color-leftmenu .resp-vtabs ul.resp-tabs-list {
-    background: #8760fb;
+    background: #3A71C9FF;
 	color:#fff;
 }
 .app.sidebar-mini.color-leftmenu .resp-vtabs .resp-tabs-list li {
@@ -461,7 +461,7 @@
 }
 
 .dark-theme.color-leftmenu .main-sidebar-sticky{
-	background: #8760fb;
+	background: #3A71C9FF;
 }
 .dark-theme.color-leftmenu .main-sidebar-body .nav-label{
 	color:rgba(255,255,255,0.2)
@@ -495,10 +495,10 @@
 	border-top: 1px solid rgba(255,255,255,0.1) !important;
 }
 .dark-leftmenu .main-sidebar-body .nav-item.active .nav-link {
-    color: #ac92fb;
+    color: #2F5AA3FF;
 }
 .dark-leftmenu .main-sidebar-body .nav-item:hover .nav-link {
-    color: #ac92fb;
+    color: #2F5AA3FF;
 }
 .dark-leftmenu .main-sidebar-body .nav-sub-link {
 	color:rgba(255,255,255,0.5)
@@ -507,7 +507,7 @@
 	color:rgba(255,255,255,0.2)
 }
 .dark-leftmenu .main-sidebar-body .nav-sub-link:hover, .dark-leftmenu .main-sidebar-body .nav-sub-link:focus{
-	color:#ac92fb
+	color:#2F5AA3FF
 }
 .dark-leftmenu.main-sidebar-hide .side-menu .main-logo .icon-logo{
 	display:none !important;

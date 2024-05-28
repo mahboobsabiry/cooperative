@@ -173,7 +173,7 @@
                             @if($employee->status == 0)
                                 <!-- Position -->
                                 @can('office_position_view')
-                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->positon->place }})</a>
+                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->place ?? '' }})</a>
                                 @else
                                     <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
                                 @endcan
@@ -357,7 +357,7 @@
                 <!--/==/ End of Details Card -->
 
                 <!-- Files Card -->
-                <div class="card">
+                <div class="card mb-2">
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">

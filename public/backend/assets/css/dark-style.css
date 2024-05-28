@@ -841,7 +841,7 @@ body.dark-theme {
 }
 .dark-theme .list-group-item.active {
 	color: #fff;
-	background-color: #EDC095;
+	background-color: #3A71C9FF;
 }
 .dark-theme .list-group-item-primary {
 	color: #1b3585;
@@ -1016,19 +1016,19 @@ body.dark-theme {
 	color:#6b6b84;
 }
 .dark-theme .popover-primary {
-	background-color: #EDC095;
+	background-color: #3A71C9FF;
 }
 .dark-theme .popover-primary.bs-popover-top .arrow::after, .dark-theme .popover-primary.bs-popover-auto[x-placement^="top"] .arrow::after, .dark-theme .popover-primary.bs-popover-auto[x-placement^="top"] .arrow::after {
-	border-top-color: #EDC095;
+	border-top-color: #3A71C9FF;
 }
 .dark-theme .popover-primary.bs-popover-bottom .arrow::after, .dark-theme .popover-primary.bs-popover-auto[x-placement^="bottom"] .arrow::after, .dark-theme .popover-primary.bs-popover-auto[x-placement^="bottom"] .arrow::after {
-	border-bottom-color: #EDC095;
+	border-bottom-color: #3A71C9FF;
 }
 .dark-theme .popover-primary.bs-popover-left .arrow::after, .dark-theme .popover-primary.bs-popover-auto[x-placement^="left"] .arrow::after, .dark-theme .popover-primary.bs-popover-auto[x-placement^="left"] .arrow::after {
-	border-left-color: #EDC095;
+	border-left-color: #3A71C9FF;
 }
 .dark-theme .popover-primary.bs-popover-right .arrow::after, .dark-theme .popover-primary.bs-popover-auto[x-placement^="right"] .arrow::after, .dark-theme .popover-primary.bs-popover-auto[x-placement^="right"] .arrow::after {
-	border-right-color: #EDC095;
+	border-right-color: #3A71C9FF;
 }
 .dark-theme .popover-secondary {
 	background-color:#eb6f33;
@@ -1362,7 +1362,7 @@ background-color: #24243e !important;
 	color: rgba(255, 255, 255, 0.75);
 }
 .dark-theme .popover-head-primary .popover-header{
-	background-color: #EDC095;
+	background-color: #3A71C9FF;
 }
 .dark-theme .popover-head-secondary .popover-header{
 	background-color: #eb6f33;
@@ -1459,7 +1459,7 @@ background-color: #24243e !important;
 }
 .dark-theme .ui-datepicker .ui-datepicker-calendar td a:hover {
 	background-color: rgba(255,255,255,0.05);
-	color: #EDC095;
+	color: #3A71C9FF;
 }
 .dark-theme .ui-datepicker .ui-datepicker-calendar .ui-datepicker-today a,
 .dark-theme .ui-datepicker .ui-datepicker-calendar .ui-datepicker-today a:hover,
@@ -1486,7 +1486,7 @@ background-color: #24243e !important;
 	background-color:rgba(255,255,255,0.05);
 }
 .dark-theme .wizard>.steps .current a .number, .dark-theme .wizard>.steps .current a:hover .number, .dark-theme .wizard>.steps .current a:active .number {
-    background-color: #EDC095;
+    background-color: #3A71C9FF;
     color: #fff;
 }
 .dark-theme .wizard>.steps .disabled a, .dark-theme .wizard>.steps .disabled a:hover, .dark-theme .wizard>.steps .disabled a:active {
@@ -2330,7 +2330,7 @@ background-color: #24243e !important;
 	color: #6b6b84;
 }
 .dark-theme .main-navbar .nav-sub-link:hover, .dark-theme .main-navbar .nav-sub-link:focus {
-    color: #EDC095;
+    color: #3A71C9FF;
 }
 .dark-theme .main-navbar .nav-sub-mega {
 	border-top: 1px dotted rgba(255,255,255,0.05);
@@ -2419,7 +2419,7 @@ background-color: #24243e !important;
 	border-top: 1px dotted rgba(255,255,255,0.05);
 }
 .dark-theme .main-sidebar-body .nav-sub-link:hover, .dark-theme .main-sidebar-body .nav-sub-link:focus {
-    color: #EDC095;
+    color: #3A71C9FF;
 }
 /*  ----- -----# TEMPLATE STYLES  ----- -----# */
 
@@ -3617,7 +3617,7 @@ background-color: #24243e !important;
 	background-color: rgba(255,255,255,0.05) !important;
 }
 .dark-theme .main-nav-line .nav-link.active::before{
-	background-color: #EDC095;
+	background-color: #3A71C9FF;
 }
 .dark-theme .nav-bg .nav-tabs{
 	border-bottom:0;
@@ -3917,7 +3917,7 @@ background-color: #24243e !important;
 	border:1px solid transparent;
 }
 .dark-theme.color-horizontal .main-navbar-search{
-    background: #EDC095;
+    background: #3A71C9FF;
 }
 .dark-theme.light-horizontal .main-navbar-search{
     background: #fff;
@@ -3953,13 +3953,13 @@ background-color: #24243e !important;
 	border-left-color: rgb(135, 96, 251,0.08);
 }
 .dark-theme .main-content-left-components .component-item .nav-link:hover {
-    color: #EDC095;
+    color: #3A71C9FF;
 }
 .dark-theme .dropify-wrapper:hover{
 	background-image: linear-gradient(-45deg, #181c3a 25%, transparent 25%, transparent 50%, #181c3a 50%, #181c3a 75%, transparent 75%, transparent);
 }
 .dark-theme .bd-primary {
-	border-color: #EDC095;
+	border-color: #3A71C9FF;
 }
 .dark-theme .bd-secondary {
 	border-color: #eb6f33;
