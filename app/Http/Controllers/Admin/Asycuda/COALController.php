@@ -47,7 +47,7 @@ class COALController extends Controller
     public function create()
     {
         if (Auth::user()->isAdmin()) {
-            return redirect()->route('admin.asycuda.users.index')->with([
+            return redirect()->route('admin.asycuda.coal.index')->with([
                 'message'   => 'شما اجازه ثبت جواز شرکت را ندارید.',
                 'alertType' => 'danger'
             ]);
@@ -59,7 +59,7 @@ class COALController extends Controller
     public function store(COALRequest $request)
     {
         if (Auth::user()->isAdmin()) {
-            return redirect()->route('admin.asycuda.users.index')->with([
+            return redirect()->route('admin.asycuda.coal.index')->with([
                 'message'   => 'شما اجازه ثبت جواز شرکت را ندارید.',
                 'alertType' => 'danger'
             ]);
@@ -108,7 +108,7 @@ class COALController extends Controller
     public function edit($id)
     {
         if (Auth::user()->isAdmin()) {
-            return redirect()->route('admin.asycuda.users.index')->with([
+            return redirect()->route('admin.asycuda.coal.index')->with([
                 'message'   => 'شما اجازه ویرایش جواز شرکت را ندارید.',
                 'alertType' => 'danger'
             ]);
@@ -121,7 +121,7 @@ class COALController extends Controller
     public function update(Request $request, $id)
     {
         if (Auth::user()->isAdmin()) {
-            return redirect()->route('admin.asycuda.users.index')->with([
+            return redirect()->route('admin.asycuda.coal.index')->with([
                 'message'   => 'شما اجازه ویرایش جواز شرکت را ندارید.',
                 'alertType' => 'danger'
             ]);

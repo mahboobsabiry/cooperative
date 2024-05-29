@@ -35,12 +35,6 @@ class AsycudaUserController extends Controller
     // Create
     public function create()
     {
-        if (Auth::user()->isAdmin()) {
-            return redirect()->route('admin.asycuda.users.index')->with([
-                'message'   => 'شما اجازه ثبت جواز شرکت را ندارید.',
-                'alertType' => 'danger'
-            ]);
-        }
         $employees = Employee::doesntHave('asycuda_user')->whereBetween('status', [0,1])->get();
         return view('admin.asycuda.users.create', compact('employees'));
     }
@@ -71,12 +65,6 @@ class AsycudaUserController extends Controller
     // Store
     public function store(Request $request)
     {
-        if (Auth::user()->isAdmin()) {
-            return redirect()->route('admin.asycuda.users.index')->with([
-                'message'   => 'شما اجازه ثبت جواز شرکت را ندارید.',
-                'alertType' => 'danger'
-            ]);
-        }
         $request->validate([
             'employee_id'   => 'required|unique:asycuda_users,employee_id',
             'user'          => 'required|unique:asycuda_users,user',
@@ -102,12 +90,6 @@ class AsycudaUserController extends Controller
     // Edit
     public function edit($id)
     {
-        if (Auth::user()->isAdmin()) {
-            return redirect()->route('admin.asycuda.users.index')->with([
-                'message'   => 'شما اجازه ویرایش جواز شرکت را ندارید.',
-                'alertType' => 'danger'
-            ]);
-        }
         $asycuda_user = AsycudaUser::findOrFail($id);
         $employees = Employee::whereBetween('status', [0,1])->get();
         return view('admin.asycuda.users.edit', compact('asycuda_user', 'employees'));
@@ -115,12 +97,6 @@ class AsycudaUserController extends Controller
     // Store
     public function update(Request $request, $id)
     {
-        if (Auth::user()->isAdmin()) {
-            return redirect()->route('admin.asycuda.users.index')->with([
-                'message'   => 'شما اجازه ویرایش جواز شرکت را ندارید.',
-                'alertType' => 'danger'
-            ]);
-        }
         $request->validate([
             'roles' => 'required',
             'info'  => 'nullable'
