@@ -85,4 +85,10 @@ class User extends Authenticatable
     {
         return $this->is_admin == 0;
     }
+
+    // Employee
+    public function isEmployee()
+    {
+        return $this->is_admin == 1;
+    }
 }

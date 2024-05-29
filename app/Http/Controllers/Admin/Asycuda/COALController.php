@@ -46,12 +46,24 @@ class COALController extends Controller
     // Create
     public function create()
     {
+        if (Auth::user()->isAdmin()) {
+            return redirect()->route('admin.asycuda.users.index')->with([
+                'message'   => 'شما اجازه ثبت جواز شرکت را ندارید.',
+                'alertType' => 'danger'
+            ]);
+        }
         return view('admin.asycuda.coal.create');
     }
 
     // Store
     public function store(COALRequest $request)
     {
+        if (Auth::user()->isAdmin()) {
+            return redirect()->route('admin.asycuda.users.index')->with([
+                'message'   => 'شما اجازه ثبت جواز شرکت را ندارید.',
+                'alertType' => 'danger'
+            ]);
+        }
         $cal = new COAL();
         $cal->user_id           = Auth::user()->id;
         $cal->company_name      = $request->company_name;
@@ -95,14 +107,26 @@ class COALController extends Controller
     // Edit
     public function edit($id)
     {
-        $cal = COAL::where(['id' => $id, 'user_id' => Auth::user()->id])->first();
+        if (Auth::user()->isAdmin()) {
+            return redirect()->route('admin.asycuda.users.index')->with([
+                'message'   => 'شما اجازه ویرایش جواز شرکت را ندارید.',
+                'alertType' => 'danger'
+            ]);
+        }
+        $cal = COAL::where(['id' => $id, 'user_id' => Auth::user()->id])->firstOrFail();
         return view('admin.asycuda.coal.edit', compact('cal'));
     }
 
     // Update
     public function update(Request $request, $id)
     {
-        $cal = COAL::where(['id' => $id, 'user_id' => Auth::user()->id])->first();
+        if (Auth::user()->isAdmin()) {
+            return redirect()->route('admin.asycuda.users.index')->with([
+                'message'   => 'شما اجازه ویرایش جواز شرکت را ندارید.',
+                'alertType' => 'danger'
+            ]);
+        }
+        $cal = COAL::where(['id' => $id, 'user_id' => Auth::user()->id])->firstOrFail();
 
         $request->validate([
             'company_name'  => 'required|unique:coal,company_name,' . $cal->id,
