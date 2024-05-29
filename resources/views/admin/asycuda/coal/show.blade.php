@@ -78,105 +78,183 @@
         <!-- Row Content -->
         <div class="row">
             <div class="col-md-12">
-                <div class="card custom-card main-content-body-profile">
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
+
+                <div class="card mb-2">
+                    <!-- Personal Information -->
+                    <div class="card-header tx-15 tx-bold">
+                        @lang('global.details')
+                    </div>
 
                     <!-- Card Body -->
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                    <div class="card-body" style="background-color: #F7F9FCFF">
+                        <div class="row">
+                            <!-- Company Information -->
+                            <div class="col-lg col-xxl-5">
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات شرکت</h6>
+                                <!-- ID -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>ID:</strong></p>
+                                    </div>
+                                    <div class="col">ID-{{ $cal->id }}</div>
+                                </div>
 
+                                <!-- Name -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.name'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ $cal->company_name }}</div>
+                                </div>
+
+                                <!-- TIN -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.tin'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ $cal->company_tin }}</div>
+                                </div>
+
+                                <!-- Owner Name -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>نام مالک/رئیس:</strong></p>
+                                    </div>
+                                    <div class="col">{{ $cal->owner_name }}</div>
+                                </div>
+
+                                <!-- Owner Phone -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>شماره تماس مالک/رئیس:</strong></p>
+                                    </div>
+                                    <div class="col"><a href="callto:{{ $cal->owner_phone }}">{{ $cal->owner_phone }}</a></div>
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.phone'):</strong></p>
+                                    </div>
+                                    <div class="col"><a href="callto:{{ $cal->phone }}">{{ $cal->phone }}</a></div>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.email'):</strong></p>
+                                    </div>
+                                    <div class="col"><a href="mailto:{{ $cal->email }}">{{ $cal->email }}</a></div>
+                                </div>
+
+                                <!-- Address -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('global.address'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ $cal->address }}</div>
+                                </div>
+
+                                <!-- Created Date -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('global.createdDate'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ \Morilog\Jalali\CalendarUtils::strftime('Y/m/d', strtotime($cal->created_at)) }}</div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('global.extraInfo'): </strong>:</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="fst-italic text-400 mb-1">{{ $cal->info ?? '--' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/==/ End of Company Information -->
+
+                            <!-- License Information -->
+                            <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات جواز</h6>
+                                <!-- License Number -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>نمبر جواز:</strong></p>
+                                    </div>
+                                    <div class="col">{{ $cal->license_number }}</div>
+                                </div>
+
+                                <!-- License Export Date -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>تاریخ صدور جواز:</strong></p>
+                                    </div>
+                                    <div class="col">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->export_date)) }}</div>
+                                </div>
+
+                                <!-- License Expire Date -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>تاریخ ختم جواز:</strong></p>
+                                    </div>
+                                    <div class="col">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->expire_date)) }}</div>
+                                </div>
+
+                                <!-- Valid Days -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>مدت اعتبار:</strong></p>
+                                    </div>
+                                    <div class="col">{{ now()->diffInDays($cal->export_date) + now()->diffInDays($cal->expire_date) + 1 }}</div>
+                                </div>
+
+                                <!-- Valid Time -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>زمان باقیمانده:</strong></p>
+                                    </div>
+                                    <div class="col">
+                                        @php
+                                            $v_date = now()->diffInDays($cal->expire_date);
+                                            if (today() < $cal->expire_date) {
+                                                echo $v_date . " روز باقیمانده";
+                                            } else {
+                                                echo "تاریخ ختم شده";
+                                            }
+                                        @endphp
+                                    </div>
+                                </div>
+
+                                <!-- Status -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.status')</strong></p>
+                                    </div>
+                                    <div class="col">
+                                        @if($cal->status == 1)
+                                            <span class="text-success">@lang('global.active')</span>
+                                        @else
+                                            <span class="text-danger">@lang('global.inactive') - ختم جواز فعالیت</span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/==/ End of License Information -->
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body">
                         <!-- User Information Details -->
                         <div class="p-2">
-                            <!-- Personal Information -->
-                            <div class="main-content-label tx-13 mg-b-20 bd-b tx-bold pb-2">
-                                @lang('global.details')
-                            </div>
-                            <!-- Personal Information Table -->
-                            <div class="table-responsive ">
-                                <table class="table table-bordered">
-                                    <!-- First Table -->
-                                    <tbody class="p-0">
-                                    <!-- Details -->
-                                    <tr>
-                                        <td colspan="8" class="font-weight-bold">
-                                            معلومات
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th><strong>نمبر مسلسل</strong></th>
-                                        <th><strong>نام شرکت</strong></th>
-                                        <th><strong>نمبر تشخیصیه</strong></th>
-                                        <th><strong>جواز فعالیت</strong></th>
-                                        <th><strong>تاریخ صدور جواز</strong></th>
-                                        <th><strong>تاریخ ختم جواز</strong></th>
-                                        <th><strong>مدت اعتبار</strong></th>
-                                        <th><strong>زمان باقیمانده</strong></th>
-                                    </tr>
-
-                                    <tr>
-                                        <td>{{ $cal->id }}</td>
-                                        <td>{{ $cal->company_name }}</td>
-                                        <td>{{ $cal->company_tin }}</td>
-                                        <td>{{ $cal->license_number }}</td>
-                                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->export_date)) }}</td>
-                                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->expire_date)) }}</td>
-                                        <td>
-                                            {{ now()->diffInDays($cal->export_date) + now()->diffInDays($cal->expire_date) + 1 }}
-                                        </td>
-                                        <td>
-                                            @php
-                                                $v_date = now()->diffInDays($cal->expire_date);
-                                                if (today() < $cal->expire_date) {
-                                                    echo $v_date . " روز باقیمانده";
-                                                } else {
-                                                    echo "تاریخ ختم شده";
-                                                }
-                                            @endphp
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                    <!--/==/ End of First Table -->
-
-                                    <!-- Second Table -->
-                                    <tbody class="p-0">
-                                    <tr>
-                                        <th><strong>نام مالک/رئیس</strong></th>
-                                        <th><strong>شماره تماس مالک/رئیس</strong></th>
-                                        <th><strong>شماره تماس</strong></th>
-                                        <th><strong>ایمیل</strong></th>
-                                        <th><strong>آدرس</strong></th>
-                                        <th><strong>@lang('form.status')</strong></th>
-                                        <th colspan="2"><strong>@lang('global.extraInfo')</strong></th>
-                                    </tr>
-
-                                    <tr>
-                                        <td>{{ $cal->owner_name }}</td>
-                                        <td>{{ $cal->owner_phone }}</td>
-                                        <td>{{ $cal->phone }}</td>
-                                        <td>{{ $cal->email }}</td>
-                                        <td>{{ $cal->address }}</td>
-                                        <td>
-                                            @if($cal->status == 1)
-                                                <span class="text-success">@lang('global.active')</span>
-                                            @else
-                                                <span class="text-danger">@lang('global.inactive') - ختم جواز فعالیت</span>
-                                            @endif
-                                        </td>
-                                        <td colspan="2">{{ $cal->info }}</td>
-                                    </tr>
-                                    </tbody>
-                                    <!--/==/ End of Second Table -->
-                                </table>
-                            </div>
-                            <!--/==/ End of Personal Information -->
 
                             <!-- Buttons -->
                             @can('asy_coal_create')
                                 <div class="row">
-                                    <!-- Print PDF -->
-                                    <p class="m-2"><a href="{{ route('admin.asycuda.coal.print.form', $cal->id) }}" class="btn btn-outline-info">PDF</a></p>
-
                                     <p class="m-2"><a href="{{ route('admin.asycuda.coal.reg_form', $cal->id) }}" target="_blank" class="btn btn-outline-success">فورمه ثبت جواز شرکت</a></p>
 
                                     <p class="m-2"><a href="{{ route('admin.asycuda.coal.refresh', $cal->id) }}" class="btn btn-outline-danger">تازه سازی</a></p>

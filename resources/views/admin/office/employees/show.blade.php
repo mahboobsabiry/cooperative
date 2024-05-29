@@ -382,6 +382,14 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            <div class="bd m-1 p-1">
+                                <a href="{{ asset('storage/signatures/' . $employee->signature) }}"
+                                   target="_blank">
+                                    <img
+                                        src="{{ asset('storage/signatures/' . $employee->signature) }}" alt="{{ $employee->name }}" width="150">
+                                </a>
+                            </div>
+
                             @foreach($employee->files as $file)
                                 <div class="bd m-1 p-1">
                                     @if($employee->status == 0)

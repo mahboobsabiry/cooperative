@@ -57,36 +57,10 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name'      => 'asy_coal_delete'
             ],
-            // Asycuda Documents
-            [
-                'name'      => 'asy_docs_view'
-            ],
-            [
-                'name'      => 'asy_docs_create'
-            ],
-            [
-                'name'      => 'asy_docs_edit'
-            ],
-            [
-                'name'      => 'asy_docs_delete'
-            ],
 
             // ========== Office ==========
             [
                 'name'      => 'office_view'
-            ],
-            // Office Documents
-            [
-                'name'      => 'office_docs_view'
-            ],
-            [
-                'name'      => 'office_docs_create'
-            ],
-            [
-                'name'      => 'office_docs_edit'
-            ],
-            [
-                'name'      => 'office_docs_delete'
             ],
             // Positions
             [
@@ -157,20 +131,6 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name'      => 'office_hostel_delete'
             ],
-            // ========== Warehouse ==========
-            [
-                'name'      => 'warehouse_view'
-            ],
-            // Assurance
-            [
-                'name'      => 'warehouse_assurance_view'
-            ],
-            [
-                'name'      => 'warehouse_assurance_create'
-            ],
-            [
-                'name'      => 'warehouse_assurance_edit'
-            ],
             [
                 'name'      => 'warehouse_assurance_delete'
             ],
@@ -185,6 +145,20 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'name'      => 'office_employee_leave_delete'
+            ],
+            // ========== Warehouse ==========
+            [
+                'name'      => 'warehouse_view'
+            ],
+            // Assurance
+            [
+                'name'      => 'warehouse_assurance_view'
+            ],
+            [
+                'name'      => 'warehouse_assurance_create'
+            ],
+            [
+                'name'      => 'warehouse_assurance_edit'
             ]
         ];
 

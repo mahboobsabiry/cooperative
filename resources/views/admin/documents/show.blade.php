@@ -102,7 +102,6 @@
                                 @else
                                     <span>{{ $document->position->title }}</span>
                                 @endif
-
                             </h4>
 
                             <p class="pro-user-desc text-muted mb-1">{{ $document->position->title }}</p>

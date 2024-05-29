@@ -86,6 +86,7 @@
                                         <th>@lang('pages.hostel.section')</th>
                                         <th>گنجایش و تعداد اعضا</th>
                                         <th>@lang('admin.sidebar.employees')</th>
+                                        <th>@lang('global.extraInfo')</th>
                                     </tr>
                                     </thead>
 
@@ -124,6 +125,7 @@
                                                     </a>
                                                 @endforeach
                                             </td>
+                                            <td>{{ $hostel->info }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

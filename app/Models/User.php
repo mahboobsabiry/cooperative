@@ -31,7 +31,6 @@ class User extends Authenticatable
         'phone',
         'email',
         'password',
-        'signature',
         'is_admin',
         'status',
         'info'

@@ -275,7 +275,16 @@
                                             </div>
 
                                             <div class="col-md-6">
+                                                <!-- NID-Number -->
+                                                <div class="form-group @error('nid_number') has-danger @enderror">
+                                                    <p class="mb-2">13) نمبر تذکره: <span class="tx-danger">*</span></p>
+                                                    <input type="text" id="nid_number" class="form-control @error('nid_number') form-control-danger @enderror" name="nid_number" value="{{ $employee->nid_number ?? old('nid_number') }}" required>
 
+                                                    @error('nid_number')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of NID-Number -->
                                             </div>
                                         </div>
                                         <!--/==/ End of Appointment Number and Date -->

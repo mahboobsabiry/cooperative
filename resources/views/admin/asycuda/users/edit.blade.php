@@ -42,18 +42,18 @@
         <!-- Main Row -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Errors Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Card -->
-                <div class="card custom-card overflow-hidden">
+                <div class="card mb-2">
+                    <!-- Form Title -->
+                    <div class="card-header">
+                        <h5 class="card-title font-weight-bold mb-1">ویرایش حساب کاربری سیستم اسیکودا مربوط ({{ $asycuda_user->employee->name }})</h5>
+                    </div>
+
                     <!-- Card Body -->
                     <div class="card-body">
-                        <!-- Errors Message -->
-                        @include('admin.inc.alerts')
-
-                        <!-- Form Title -->
-                        <div>
-                            <h6 class="card-title mb-1">ویرایش حساب کاربری سیستم اسیکودا مربوط ({{ $asycuda_user->employee->name }})</h6>
-                        </div>
-
                         <!-- Form -->
                         <form method="post" action="{{ route('admin.asycuda.users.update', $asycuda_user->id) }}">
                             @csrf

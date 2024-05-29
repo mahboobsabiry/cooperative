@@ -110,7 +110,7 @@
 
                             @if($asycuda_user->employee->position->position_number == 2 || $asycuda_user->employee->position->position_number == 3)
                             @else
-                                <p class="pro-user-desc text-primary mb-1">({{ $asycuda_user->employee->position->type ?? '' }})</p>
+                                <p class="pro-user-desc text-primary mb-1">({{ $asycuda_user->employee->position->place ?? '' }})</p>
                             @endif
                             <!-- Employee Star -->
                             @if($asycuda_user->employee->position)
@@ -191,119 +191,179 @@
                 <!--/==/ End of Contact Information -->
             </div>
             <div class="col-lg-9 col-md-12">
-                <div class="card custom-card main-content-body-profile">
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
+
+                <!-- Details -->
+                <div class="card mb-2">
+                    <!-- Personal Information -->
+                    <div class="card-header tx-15 tx-bold">
+                        @lang('global.details')
+                    </div>
 
                     <!-- Card Body -->
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
-
-                        <!-- User Information Details -->
-                        <div class="p-2">
-                            <!-- Personal Information -->
-                            <div class="main-content-label tx-13 mg-b-20 bd-b tx-bold pb-2">
-                                @lang('global.details')
-                            </div>
-                            <!-- Personal Information Table -->
-                            <div class="table-responsive ">
-                                <table class="table table-bordered">
-                                    <!-- First Table -->
-                                    <tbody class="p-0">
-                                    <!-- Details -->
-                                    <tr>
-                                        <td colspan="5" class="font-weight-bold">
-                                            <span class="badge badge-primary badge-pill">1</span>
-                                            @lang('pages.employees.personalInfo')
-                                        </td>
-                                    </tr>
-
-                                    <!-- First Row -->
-                                    <tr>
-                                        <th><strong>#</strong></th>
-                                        <th><strong>@lang('form.name')</strong></th>
-                                        <th><strong>تخلص</strong></th>
-                                        <th><strong>نام پدر</strong></th>
-                                        <th><strong>نمبر سوانح</strong></th>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ $asycuda_user->id }}</td>
-                                        <td>
-                                            @can('employee_view')
-                                                <a href="{{ route('admin.office.employees.show', $asycuda_user->employee->id) }}">
-                                                    {{ $asycuda_user->employee->name }}
-                                                </a>
-                                            @else
-                                                {{ $asycuda_user->employee->name }}
-                                            @endcan
-                                        </td>
-                                        <td>{{ $asycuda_user->employee->last_name }}</td>
-                                        <td>{{ $asycuda_user->employee->father_name }}</td>
-                                        <td>{{ $asycuda_user->employee->emp_number }}</td>
-                                    </tr>
-
-                                    <!-- Second Row -->
-                                    <tr>
-                                        <th><strong>@lang('form.phone')</strong></th>
-                                        <th><strong>اصل بست</strong></th>
-                                        <th><strong>بست خدمتی</strong></th>
-                                        <th><strong>کد گمرک</strong></th>
-                                        <th><strong>موقعیت</strong></th>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ $asycuda_user->employee->phone }}</td>
-                                        <td>{{ $asycuda_user->employee->position->title }}</td>
-                                        <td>{{ $asycuda_user->employee->duty_position }}</td>
-                                        <td>{{ $asycuda_user->employee->position->custom_code }}</td>
-                                        <td>{{ $asycuda_user->employee->position->type }}</td>
-                                    </tr>
-                                    </tbody>
-                                    <!--/==/ End of First Table -->
-
-                                    <!-- Second Table -->
-                                    <tbody class="p-0">
-                                    <!-- Details -->
-                                    <tr>
-                                        <td colspan="5" class="font-weight-bold">
-                                            <span class="badge badge-primary badge-pill">2</span>
-                                            معلومات یوزر
-                                        </td>
-                                    </tr>
-
-                                    <!-- First Row -->
-                                    <tr>
-                                        <th><strong>تاریخ ایجاد</strong></th>
-                                        <th><strong>یوزر</strong></th>
-                                        <th><strong>رمز عبور</strong></th>
-                                        <th><strong>صلاحیت ها</strong></th>
-                                        <th><strong>وضعیت</strong></th>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($asycuda_user->created_at)) }}</td>
-                                        <td>{{ $asycuda_user->user }}</td>
-                                        <td>{{ $asycuda_user->password }}</td>
-                                        <td>{{ $asycuda_user->roles }}</td>
-                                        <td>{{ $asycuda_user->status == 1 ? trans('global.active') : trans('global.inactive') }}</td>
-                                    </tr>
-                                    </tbody>
-                                    <!--/==/ End of Second Table -->
-                                </table>
-                            </div>
-                            <!--/==/ End of Personal Information -->
-                            <p>{{ $asycuda_user->info }}</p>
-                        </div>
-                        <!--/==/ End of User Information Details -->
-
-                        <!-- Table TITLE -->
+                    <div class="card-body" style="background-color: #F7F9FCFF">
                         <div class="row">
-                            <div class="col-md-6">
-                                <h5 class="font-weight-bold">سابقه فعالیت حساب کاربری اسیکودا</h5>
-                            </div>
+                            <!-- Personal Information -->
+                            <div class="col-lg col-xxl-5">
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">@lang('pages.employees.personalInfo')</h6>
+                                <!-- ID -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>ID:</strong></p>
+                                    </div>
+                                    <div class="col">ID-{{ $asycuda_user->id }}</div>
+                                </div>
 
-                            <div class="col-md-6 text-left">
-                                <a href="{{ route('admin.asycuda.users.add_user_exp', $asycuda_user->id) }}" class="btn btn-outline-primary">ثبت</a>
+                                <!-- Name -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.name'): </strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->employee->name }}</div>
+                                </div>
+
+                                <!-- Last Name -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.lastName'): </strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->employee->last_name }}</div>
+                                </div>
+
+                                <!-- Father Name -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.fatherName'): </strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->employee->father_name }}</div>
+                                </div>
+
+                                <!-- Employee Number -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.empNumber'): </strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->employee->emp_number }}</div>
+                                </div>
+
+                                <!-- Phone Number -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.phone'): </strong></p>
+                                    </div>
+                                    <div class="col"><a href="callto:{{ $asycuda_user->employee->phone }}">{{ $asycuda_user->employee->phone }}</a></div>
+                                </div>
+
+                                <!-- Position -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.position'): </strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->employee->position->title }}</div>
+                                </div>
+
+                                @if($asycuda_user->employee->on_duty == 1)
+                                    <!-- Duty Position -->
+                                    <div class="row">
+                                        <div class="col-5 col-sm-4">
+                                            <p class="fw-semi-bold mb-1"><strong>@lang('form.dutyPosition'): </strong></p>
+                                        </div>
+                                        <div class="col">{{ $asycuda_user->employee->duty_position }}</div>
+                                    </div>
+                                @endif
+
+                                <!-- Custom Code -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>کد گمرکی: </strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->employee->position->custom_code }}</div>
+                                </div>
+
+                                <!-- Place -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>موقعیت: </strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->employee->position->place }}</div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('global.extraInfo'): </strong>:</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="fst-italic text-400 mb-1">{{ $asycuda_user->info ?? '--' }}</p>
+                                    </div>
+                                </div>
                             </div>
+                            <!--/==/ End of Position Information -->
+
+                            <!-- User Information -->
+                            <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات حساب کاربری</h6>
+                                <!-- Created Date -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('global.createdDate'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ \Morilog\Jalali\CalendarUtils::strftime('Y/m/d', strtotime($asycuda_user->created_at)) }}</div>
+                                </div>
+
+                                <!-- User -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>نمبر حساب کاربری:</strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->user }}</div>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.password'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->password }}</div>
+                                </div>
+
+                                <!-- Roles -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('admin.sidebar.roles'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->roles }}</div>
+                                </div>
+
+                                <!-- Status -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.status'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->status == 1 ? trans('global.active') : trans('global.inactive') }}</div>
+                                </div>
+                            </div>
+                            <!--/==/ End of General Information -->
+                        </div>
+                    </div>
+                </div>
+                <!--/==/ End of Details -->
+
+                <!-- Asycuda Account Resumes -->
+                <div class="card mb-2">
+                    <!-- Table TITLE -->
+                    <div class="card-header row">
+                        <div class="col-md-6">
+                            <h5 class="font-weight-bold">سابقه فعالیت حساب کاربری اسیکودا</h5>
                         </div>
 
+                        <div class="col-md-6 text-left">
+                            <a href="{{ route('admin.asycuda.users.add_user_exp', $asycuda_user->id) }}" class="btn btn-outline-primary">ثبت</a>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
                         <!-- Experiences Table -->
                         <div class="table-responsive mt-2">
                             <table class="table table-bordered export-table border-top key-buttons display text-nowrap w-100">
@@ -347,6 +407,7 @@
                         <!--/==/ End of Experiences Table -->
                     </div>
                 </div>
+                <!--/==/ End of Asycuda Account Resumes -->
             </div>
         </div>
         <!--/==/ End of Row Content -->

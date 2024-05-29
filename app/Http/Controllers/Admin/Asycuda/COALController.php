@@ -25,13 +25,21 @@ class COALController extends Controller
     // Index
     public function index()
     {
-        $coal = COAL::all()->where('status', 1);
+        if (Auth::user()->isAdmin()) {
+            $coal = COAL::all()->where('status', 1);
+        } else {
+            $coal = Auth::user()->coal->where('status', 1);
+        }
         return view('admin.asycuda.coal.index', compact('coal'));
     }
 
     public function expired()
     {
-        $coal = COAL::all()->where('status', 0);
+        if (Auth::user()->isAdmin()) {
+            $coal = COAL::all()->where('status', 0);
+        } else {
+            $coal = Auth::user()->coal->where('status', 0);
+        }
         return view('admin.asycuda.coal.expired', compact('coal'));
     }
 
@@ -87,14 +95,14 @@ class COALController extends Controller
     // Edit
     public function edit($id)
     {
-        $cal = COAL::find($id);
+        $cal = COAL::where(['id' => $id, 'user_id' => Auth::user()->id])->first();
         return view('admin.asycuda.coal.edit', compact('cal'));
     }
 
     // Update
     public function update(Request $request, $id)
     {
-        $cal = COAL::find($id);
+        $cal = COAL::where(['id' => $id, 'user_id' => Auth::user()->id])->first();
 
         $request->validate([
             'company_name'  => 'required|unique:coal,company_name,' . $cal->id,
@@ -161,20 +169,6 @@ class COALController extends Controller
 
         return redirect()->back()->with([
             'message'   => 'تازه سازی انجام شد.',
-            'alertType' => 'success'
-        ]);
-    }
-
-    // COAL Print Form
-    public function coal_print_form($id)
-    {
-        $cal = COAL::find($id);
-        $path = public_path('/assets/files/coal/');
-
-        Browsershot::url('https://www.google.com')->save('google.pdf');
-        // Browsershot::url(route('admin.asycuda.coal.print.form', $cal->id))->save($path . 'فورمه جواز شرکت ' . $cal->company_name . '.pdf');
-        return back()->with([
-            'success'   => 'ذخیره شد',
             'alertType' => 'success'
         ]);
     }

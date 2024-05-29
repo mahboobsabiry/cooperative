@@ -243,7 +243,7 @@
             <!--/==/ End of Table 2 -->
 
             <div style="font-size: 20px;">
-                <p>د ثبت کوونکی یا ایمیل کوونکی مامور لاسلیک:  {{ auth()->user()->name }} --------------------------------- نیټه: <span class="ff-times">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime(now())) }}</span></p>
+                <p>د ثبت کوونکی یا ایمیل کوونکی مامور لاسلیک:  {{ $cal->user->name }} <img class="employee-signature pos-absolute" src="{{ asset('storage/signatures/' . $cal->user->employee->signature) ?? '' }}" alt="{{ $cal->user->name }}" width="100" style="margin-top: -40px; margin-right: 50px;"> --------------------------------- نیټه: <span class="ff-times">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime(now())) }}</span></p>
             </div>
 
             <div class="text-center pt-5" style="font-size: 20px;">
