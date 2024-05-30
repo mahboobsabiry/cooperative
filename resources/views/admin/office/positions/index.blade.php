@@ -156,34 +156,36 @@
                             <div class="container">
                                 <div class="row bd">
                                     <div class="tree m-2">
-                                        <ul>
-                                            @foreach($organization as $organ)
-                                                <li>
-                                                    <a href="{{ route('admin.office.positions.show', $organ->id) }}" style="background: #ba8b00; color: beige">{{ $organ->title }} ({{ $organ->num_of_pos }})</a>
-                                                    <ul>
-                                                        @foreach($organ->children as $admin)
-                                                            <li>
-                                                                <a href="{{ route('admin.office.positions.show', $admin->id) }}" style="background: burlywood;">{{ $admin->title }} ({{ $admin->num_of_pos }})</a>
-                                                                <ul>
-                                                                    @foreach($admin->children as $mgmt)
-                                                                        <li>
-                                                                            <a href="{{ route('admin.office.positions.show', $mgmt->id) }}" style="background: bisque;">{{ $mgmt->title }} ({{ $mgmt->num_of_pos }})</a>
-                                                                            <ul>
-                                                                                @foreach($mgmt->children as $mgr)
-                                                                                    <li>
-                                                                                        <a href="{{ route('admin.office.positions.show', $mgr->id) }}" style="background: beige;">{{ $mgr->title }}  ({{ $mgr->num_of_pos }})</a>
-                                                                                    </li>
-                                                                                @endforeach
-                                                                            </ul>
-                                                                        </li>
-                                                                    @endforeach
-                                                                </ul>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </li>
-                                            @endforeach
-                                        </ul>
+                                        @can('organization_view')
+                                            <ul>
+                                                @foreach($organization as $organ)
+                                                    <li>
+                                                        <a href="{{ route('admin.office.positions.show', $organ->id) }}" style="background: #ba8b00; color: beige">{{ $organ->title }} ({{ $organ->num_of_pos }})</a>
+                                                        <ul>
+                                                            @foreach($organ->children as $admin)
+                                                                <li>
+                                                                    <a href="{{ route('admin.office.positions.show', $admin->id) }}" style="background: burlywood;">{{ $admin->title }} ({{ $admin->num_of_pos }})</a>
+                                                                    <ul>
+                                                                        @foreach($admin->children as $mgmt)
+                                                                            <li>
+                                                                                <a href="{{ route('admin.office.positions.show', $mgmt->id) }}" style="background: bisque;">{{ $mgmt->title }} ({{ $mgmt->num_of_pos }})</a>
+                                                                                <ul>
+                                                                                    @foreach($mgmt->children as $mgr)
+                                                                                        <li>
+                                                                                            <a href="{{ route('admin.office.positions.show', $mgr->id) }}" style="background: beige;">{{ $mgr->title }}  ({{ $mgr->num_of_pos }})</a>
+                                                                                        </li>
+                                                                                    @endforeach
+                                                                                </ul>
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endcan
                                     </div>
                                 </div>
                             </div>

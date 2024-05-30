@@ -27,6 +27,20 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name'      => 'setting_mgmt' // Manage app settings
             ],
+
+            // Documents
+            [
+                'name'      => 'docs_view'
+            ],
+            [
+                'name'      => 'docs_create'
+            ],
+            [
+                'name'      => 'docs_edit'
+            ],
+            [
+                'name'      => 'docs_delete'
+            ],
             // ========== ASYCUDA ==========
             [
                 'name'      => 'asycuda_view' // Asycuda View Permission
@@ -60,6 +74,9 @@ class PermissionsTableSeeder extends Seeder
 
             // ========== Office ==========
             [
+                'name'      => 'organization_view'
+            ],
+            [
                 'name'      => 'office_view'
             ],
             // Positions
@@ -87,19 +104,6 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'name'      => 'office_employee_delete'
-            ],
-            // Documents
-            [
-                'name'      => 'docs_view'
-            ],
-            [
-                'name'      => 'docs_create'
-            ],
-            [
-                'name'      => 'docs_edit'
-            ],
-            [
-                'name'      => 'docs_delete'
             ],
             // Agents
             [
@@ -132,9 +136,6 @@ class PermissionsTableSeeder extends Seeder
                 'name'      => 'office_hostel_delete'
             ],
             [
-                'name'      => 'warehouse_assurance_delete'
-            ],
-            [
                 'name'      => 'office_employee_leave_view'
             ],
             [
@@ -159,6 +160,9 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'name'      => 'warehouse_assurance_edit'
+            ],
+            [
+                'name'      => 'warehouse_assurance_delete'
             ]
         ];
 

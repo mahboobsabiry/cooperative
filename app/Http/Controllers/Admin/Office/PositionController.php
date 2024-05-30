@@ -23,7 +23,7 @@ class PositionController extends Controller
     public function index()
     {
         $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
-        $organization = Position::tree();
+        $organization = Position::all();
         return view('admin.office.positions.index', compact('positions', 'organization'));
     }
 

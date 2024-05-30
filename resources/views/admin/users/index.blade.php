@@ -107,15 +107,15 @@
                                                        data-toggle="tooltip-primary" title="@lang('global.offline')"></i>
                                                 </span>
                                             @endif
-                                            <a href="{{ route('admin.users.show', encrypt($user->id)) }}" class="ctd">{{ $user->name }}</a>
+                                            <a href="{{ route('admin.users.show', encrypt($user->id)) }}">{{ $user->name }}</a>
                                         </td>
                                         <td>{{ $user->username }}</td>
                                         <!-- Phone Number -->
                                         <td class="tx-sm-12-f">
-                                            <a href="callto:{{ $user->phone }}" class="ctd">{{ $user->phone }}</a>
+                                            <a href="callto:{{ $user->phone }}">{{ $user->phone }}</a>
                                         </td>
                                         <!-- Email Address -->
-                                        <td><a href="mailto:{{ $user->email }}" class="tx-sm-12-f ctd">{{ $user->email }}</a></td>
+                                        <td><a href="mailto:{{ $user->email }}" class="tx-sm-12-f">{{ $user->email }}</a></td>
                                         <!-- Roles -->
                                         <td class="text-wrap">
                                             @if(!empty($user->roles))
