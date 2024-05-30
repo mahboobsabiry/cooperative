@@ -23,7 +23,7 @@ class PositionController extends Controller
     public function index()
     {
         $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
-        $organization = Position::all();
+        $organization = Position::tree();
         return view('admin.office.positions.index', compact('positions', 'organization'));
     }
 
@@ -120,7 +120,7 @@ class PositionController extends Controller
             ->log(trans('messages.positions.updatedPositionMsg'));
 
         $message = trans('messages.positions.updatedPositionMsg');
-        return redirect()->route('admin.office.positions.show', $position->id)->with([
+        return redirect()->route('admin.office.positions.show', encrypt($position->id))->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);

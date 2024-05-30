@@ -62,7 +62,7 @@
                             </div>
 
                             <!-- Form -->
-                            <form method="post" action="{{ route('admin.users.update', $user->id) }}" data-parsley-validate="" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('admin.users.update', encrypt($user->id)) }}" data-parsley-validate="" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
