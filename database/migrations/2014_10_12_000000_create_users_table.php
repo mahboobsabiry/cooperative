@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('is_admin')->default(1);
+            $table->tinyInteger('place')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->string('info')->nullable();
             $table->timestamp('last_seen')->nullable();

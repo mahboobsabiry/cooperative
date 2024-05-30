@@ -145,6 +145,18 @@
                                     </div>
 
                                     <div class="col-md-6">
+                                        <!-- Place -->
+                                        <div class="form-group @error('place') has-danger @enderror" id="place_div">
+                                            <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
+                                            <select id="place" name="place" class="form-control select2 @error('place') form-control-danger @enderror">
+                                                <option value="0">ریاست گمرک بلخ</option>
+                                                <option value="1">گمرک سرحدی حیرتان</option>
+                                                <option value="2">گمرک میدان هوایی</option>
+                                                <option value="3">گمرک نایب آباد</option>
+                                                <option value="4">گمرک مراقبت سیار</option>
+                                            </select>
+                                        </div>
+
                                         <!-- Avatar -->
                                         <div class="form-group @error('avatar') has-danger @enderror" id="avatar_div">
                                             <p class="mb-2">@lang('form.avatar'):</p>
@@ -247,6 +259,7 @@
                 var d = $("#email").parent();
 
                 if (!employee_id == '') {
+                    $("#place_div").hide();
                     $("#avatar_div").hide();
                     $.ajax({
                         type: 'get',
@@ -269,6 +282,7 @@
                     b.find('#username').val("");
                     c.find('#phone').val("");
                     d.find('#email').val("");
+                    $("#place_div").show();
                     $("#avatar_div").show();
                 }
             });

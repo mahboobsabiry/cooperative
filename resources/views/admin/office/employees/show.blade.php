@@ -227,7 +227,7 @@
                                     <div>
                                         @if($employee->user)
                                             @can('user_mgmt')
-                                                <a href="{{ route('admin.users.show', $employee->user->id) }}" target="_blank">حساب کاربری BCD-MIS دارد ({{ $employee->user->status == '1' ? 'فعال' : 'غیرفعال' }})</a>
+                                                <a href="{{ route('admin.users.show', encrypt($employee->user->id)) }}" target="_blank">حساب کاربری BCD-MIS دارد ({{ $employee->user->status == '1' ? 'فعال' : 'غیرفعال' }})</a>
                                             @else
                                                 حساب کاربری BCD-MIS دارد
                                             @endcan

@@ -48,7 +48,18 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        if (Auth::user()->place == 0) {
+            $users = User::all();
+        } elseif (Auth::user()->place == 1) {
+            $users = User::all()->where('place', 1);
+        } elseif (Auth::user()->place == 2) {
+            $users = User::all()->where('place', 2);
+        } elseif (Auth::user()->place == 3) {
+            $users = User::all()->where('place', 3);
+        } elseif (Auth::user()->place == 4) {
+            $users = User::all()->where('place', 4);
+        }
+
         return view('admin.users.index', compact('users'));
     }
 
@@ -95,7 +106,42 @@ class UserController extends Controller
     // Store User Information
     public function store(StoreUserRequest $request)
     {
-        $user = User::create($request->all());
+        // Get Employee
+        $employee = Employee::where('id', $request->employee_id)->first();
+        $head       = $employee->position->place == 'محصولی';
+        $border     = $employee->position->place == 'سرحدی';
+        $airport    = $employee->position->place == 'میدان هوایی';
+        $nAbad      = $employee->position->place == 'نایب آباد';
+        $mSayar     = $employee->position->place == 'مراقبت سیار';
+
+        // Store into users table
+        $user = new User();
+        $user->employee_id  = $request->employee_id;
+        $user->name         = $request->name;
+        $user->username     = $request->username;
+        $user->phone        = $request->phone;
+        $user->email        = $request->email;
+        $user->password     = $request->password;
+        if ($employee) {
+            $user->is_admin = 1;
+            if ($head) {
+                $user->place = 0;
+            } elseif ($border) {
+                $user->place = 1;
+            } elseif ($airport) {
+                $user->place = 2;
+            } elseif ($nAbad) {
+                $user->place = 3;
+            } elseif ($mSayar) {
+                $user->place = 4;
+            }
+        } else {
+            $user->is_admin = 0;
+            $user->place    = $request->place;
+        }
+        $user->info         = $request->info;
+        $user->save();
+        // $user = User::create($request->all());
 
         $user->roles()->sync($request->input('roles', []));
         $user->permissions()->sync($request->input('permissions', []));
@@ -112,22 +158,31 @@ class UserController extends Controller
         ]);
     }
 
-    public function show(User $user)
+    public function show($id)
     {
+        $ID = decrypt($id);
+        $user = User::find($ID);
+
         $user->load('roles');
         return view('admin.users.show', compact('user'));
     }
 
-    public function edit(User $user)
+    public function edit($id)
     {
+        $ID = decrypt($id);
+        $user = User::find($ID);
+
         $roles = Role::all();
         $permissions = Permission::all();
         $user->load('roles');
         return view('admin.users.edit', compact('roles', 'permissions', 'user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
+        $ID = decrypt($id);
+        $user = User::find($ID);
+
         if ($user->employee_id == null) {
             $request->validate([
                 'avatar'    => 'image|mimes:jpg,png',
@@ -151,7 +206,42 @@ class UserController extends Controller
             ]);
         }
 
-        $user->update($request->all());
+        // Get Employee
+        $employee   = $user->employee;
+        $head       = $employee->position->place == 'محصولی';
+        $border     = $employee->position->place == 'سرحدی';
+        $airport    = $employee->position->place == 'میدان هوایی';
+        $nAbad      = $employee->position->place == 'نایب آباد';
+        $mSayar     = $employee->position->place == 'مراقبت سیار';
+
+        // Store into users table
+        $user->employee_id  = $employee->id;
+        $user->name         = $employee->name;
+        $user->username     = $employee->emp_number;
+        $user->phone        = $employee->phone;
+        $user->email        = $employee->email;
+        if ($employee) {
+            $user->is_admin = 1;
+            if ($head) {
+                $user->place = 0;
+            } elseif ($border) {
+                $user->place = 1;
+            } elseif ($airport) {
+                $user->place = 2;
+            } elseif ($nAbad) {
+                $user->place = 3;
+            } elseif ($mSayar) {
+                $user->place = 4;
+            }
+        } else {
+            $user->is_admin = 0;
+            $user->place    = $request->place;
+        }
+        $user->info         = $request->info;
+        $user->save();
+
+        // $user->update($request->all());
+
         $user->roles()->sync($request->input('roles', []));
         $user->permissions()->sync($request->input('permissions', []));
         //  Has File
@@ -174,8 +264,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
+        $ID = decrypt($id);
+        $user = User::find($ID);
+
         $user->delete();
 
         activity('deleted')

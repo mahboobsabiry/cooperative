@@ -23,7 +23,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">@lang('admin.sidebar.users')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.users.show', $user->id) }}">@lang('global.details')</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.users.show', encrypt($user->id)) }}">@lang('global.details')</a></li>
                     <li class="breadcrumb-item active" aria-current="page">@lang('pages.users.editUser')</li>
                 </ol>
             </div>
@@ -126,6 +126,20 @@
                                     </div>
 
                                     <div class="col-md-6">
+                                        @if(auth()->user()->head())
+                                            <!-- Place -->
+                                            <div class="form-group @error('place') has-danger @enderror" id="place_div">
+                                                <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
+                                                <select id="place" name="place" class="form-control select2 @error('place') form-control-danger @enderror">
+                                                    <option value="0" {{ $user->place == 0 ? 'selected' : '' }}>ریاست گمرک بلخ</option>
+                                                    <option value="1" {{ $user->place == 1 ? 'selected' : '' }}>گمرک سرحدی حیرتان</option>
+                                                    <option value="2" {{ $user->place == 2 ? 'selected' : '' }}>گمرک میدان هوایی</option>
+                                                    <option value="3" {{ $user->place == 3 ? 'selected' : '' }}>گمرک نایب آباد</option>
+                                                    <option value="4" {{ $user->place == 4 ? 'selected' : '' }}>گمرک مراقبت سیار</option>
+                                                </select>
+                                            </div>
+                                        @endif
+
                                         @if($user->employee_id == null)
                                             <!-- Avatar -->
                                             <div class="form-group @error('avatar') has-danger @enderror">
