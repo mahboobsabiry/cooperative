@@ -187,7 +187,12 @@ class DocumentController extends Controller
     {
         $position = Position::where('id', Auth::user()->employee->position_id)->firstOrFail();
         $auth_user_pos = auth()->user()->employee->position;
-        $documents = Document::all()->where('receiver', $auth_user_pos->title);
+        if (Auth::user()->on_duty == 1) {
+            $documents = Document::all()->where('receiver', Auth::user()->employee->duty_position);
+        } else {
+            $documents = Document::all()->where('receiver', $auth_user_pos->title);
+        }
+
         return view('admin.documents.received', compact('position', 'documents'));
     }
 }
