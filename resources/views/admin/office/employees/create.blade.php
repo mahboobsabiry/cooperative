@@ -451,7 +451,7 @@
                                                     <select class="form-control select2" name="hostel_id" id="hostel_id">
                                                         <option selected disabled>@lang('global.home')</option>
                                                         @foreach($hostels as $hostel)
-                                                            <option value="{{ $hostel->id }}">@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }}</option>
+                                                            <option value="{{ $hostel->id }}">@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }} ({{ $hostel->place }})</option>
                                                         @endforeach
                                                     </select>
 
@@ -461,6 +461,7 @@
                                                 </div>
                                                 <!--/==/ End of Education -->
                                             </div>
+
                                             <div class="col-md-6">
                                                 <!-- Introducer -->
                                                 <div class="form-group @error('info') has-danger @enderror">
