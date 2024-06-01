@@ -8,6 +8,7 @@ use App\Models\File;
 use App\Models\Office\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class DocumentController extends Controller
 {
@@ -95,6 +96,8 @@ class DocumentController extends Controller
             }
         }
 
+        Session::put($document->subject, $document->id);
+
         return redirect()->route('admin.documents.show', $document->id)->with([
             'message'   => 'مکتوب موفقانه ذخیره گردید.',
             'alertType' => 'success'
@@ -107,6 +110,7 @@ class DocumentController extends Controller
     public function show(string $id)
     {
         $document = Document::find($id);
+        Session::forget($document->subject);
         $position = $document->position;
         return view('admin.documents.show', compact('document', 'position'));
     }
@@ -186,8 +190,22 @@ class DocumentController extends Controller
     public function received()
     {
         $position = Position::where('id', Auth::user()->employee->position_id)->firstOrFail();
-        $auth_user_pos = auth()->user()->employee->position;
-        $documents = Document::all()->where('receiver', $auth_user_pos->title);
+
+        // Check if Authenticated Employee is On Duty or not
+        if (Auth::user()->employee->on_duty == 1) {
+            // Get all documents where receiver is employee or not
+            $documents = Document::where(function ($query) {
+                $cc = Document::find('cc');
+                $query->where('receiver', Auth::user()->employee->duty_position)->orWhere('cc', strpos(Auth::user()->employee->duty_position, $cc));
+            })->get();
+        } else {
+            $documents = Document::where(function ($query) {
+                $cc = Document::find('cc');
+                $auth_user_pos = auth()->user()->employee->position;
+                $query->where('receiver', $auth_user_pos->title)->orWhere('cc', strpos($auth_user_pos->title, $cc));
+            })->get();
+        }
+
         return view('admin.documents.received', compact('position', 'documents'));
     }
 }

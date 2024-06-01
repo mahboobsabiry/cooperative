@@ -180,7 +180,7 @@
                                     <!-- Duty Document Date -->
                                     <div class="form-group @error('doc_date') has-danger @enderror">
                                         <p class="mb-2">تاریخ مکتوب: <span class="tx-danger">*</span></p>
-                                        <input type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
+                                        <input data-jdp type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
 
                                         @error('doc_date')
                                         <div class="invalid-feedback">{{ $message }}</div>

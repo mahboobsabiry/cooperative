@@ -152,7 +152,7 @@ class UserController extends Controller
             ->log(trans('messages.users.addNewUserMsg'));
 
         $message = trans('messages.users.addNewUserMsg');
-        return redirect()->route('admin.users.show', $user->id)->with([
+        return redirect()->route('admin.users.show', encrypt($user->id))->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);

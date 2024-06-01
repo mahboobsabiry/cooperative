@@ -154,7 +154,7 @@
                                         <select class="form-control select2" name="position" id="position">
                                             <option value="">@lang('form.chooseOne')</option>
                                             @foreach(\App\Models\Office\Position::all()->except($employee->position->id) as $position)
-                                                <option value="{{ $position->title }} ({{ $position->type }})">{{ $position->title }} ({{ $position->place }})</option>
+                                                <option value="{{ $position->title }}">{{ $position->title }} ({{ $position->place }})</option>
                                             @endforeach
                                         </select>
 
@@ -188,7 +188,7 @@
                                     <!-- Duty Document Date -->
                                     <div class="form-group @error('doc_date') has-danger @enderror">
                                         <p class="mb-2">تاریخ مکتوب: <span class="tx-danger">*</span></p>
-                                        <input type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
+                                        <input data-jdp type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
 
                                         @error('doc_date')
                                         <div class="invalid-feedback">{{ $message }}</div>
