@@ -65,9 +65,16 @@
                             <li class="nav-sub-item {{ request()->is('admin/received-documents') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.documents.received') }}">
                                     مکتوب های دریافتی
-                                    @if($auth_user_pos)
-                                        ({{ count(\App\Models\Document::all()->where('receiver', $auth_user_pos->title)) }})
-                                    @endif
+                                    (<?php
+                                         // Check if Authenticated Employee is On Duty or not
+                                         if (\Illuminate\Support\Facades\Auth::user()->employee->on_duty == 1) {
+                                             // Count all Received Documents
+                                             \App\Models\Document::all()->where('receiver', \Illuminate\Support\Facades\Auth::user()->employee->duty_position)->count(); + \App\Models\Document::all()->where('cc', strpos(\Illuminate\Support\Facades\Auth::user()->employee->duty_position, \App\Models\Document::find('cc')))->count();
+                                         } else {
+                                             // Count all Received Documents
+                                             \App\Models\Document::all()->where('receiver', auth()->user()->employee->position->title)->count(); + \App\Models\Document::all()->where('cc', strpos(\Illuminate\Support\Facades\Auth::user()->employee->position->title, \App\Models\Document::find('cc')))->count();
+                                         }
+                                    ?>)
                                 </a>
                             </li>
                         </ul>

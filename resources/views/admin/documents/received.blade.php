@@ -163,6 +163,7 @@
                                         <th>#</th>
                                         <th>مرسل</th>
                                         <th>مرسل الیه</th>
+                                        <th>کاپی به</th>
                                         <th>موضوع</th>
                                         <th>نوع</th>
                                         <th>نوع فعالیت</th>
@@ -177,14 +178,25 @@
                                     <tbody>
                                     @foreach($documents as $document)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <!-- ID -->
+                                            <td class="@if(\Illuminate\Support\Facades\Session::has($document->subject)) tx-bold tx-danger @endif">{{ $loop->iteration }}</td>
+                                            <!-- Sender -->
                                             <td>
-                                                <a href="{{ route('admin.office.positions.show', $document->position->id) }}">{{ $document->position->title }}</a>
+                                                <a class="@if(session()->has($document->subject)) tx-bold tx-danger @endif" href="{{ route('admin.office.positions.show', $document->position->id) }}">{{ $document->position->title }}</a>
                                             </td>
+                                            <!-- Receiver -->
                                             <td>
                                                 @php $receiver_pos = \App\Models\Office\Position::where('title', $document->receiver)->first(); @endphp
                                                 <a href="{{ route('admin.office.positions.show', $receiver_pos->id) }}">{{ $document->receiver ?? '' }}</a>
                                             </td>
+                                            <!-- CC -->
+                                            <td>
+                                                @php $search_cc = strpos($document->position->title, \App\Models\Document::find('cc')) @endphp
+                                                @foreach(explode(', ', $document->cc) as $cc)
+                                                    - <span class="{{ $cc == $document->position->title ? 'tx-bold' : '' }}">{{ $cc }}</span>
+                                                @endforeach
+                                            </td>
+                                            <!-- Subject -->
                                             <td>
                                                 <a href="{{ route('admin.documents.show', $document->id) }}">{{ $document->subject }}</a>
                                             </td>

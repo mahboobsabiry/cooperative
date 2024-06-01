@@ -19,9 +19,16 @@ class Document extends Model
     {
         return $this->belongsTo(Position::class);
     }
-    // Morph Document
+
+    // Morph File
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'transaction');
+    }
+
+    // Get CC
+    public function cc()
+    {
+        return explode(', ', $this->cc);
     }
 }
