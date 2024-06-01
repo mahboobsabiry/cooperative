@@ -286,7 +286,7 @@
                 <!--/==/ End of Contact Information -->
 
                 <!-- Custom ID Card -->
-                <div class="card custom-card">
+                <div class="card custom-card" style="display: flex; align-items: center;">
                     <div class="overflow-auto justify-content-center p-2">
                         <!-- Action Buttons -->
                         <h5>دکمه های کاربردی</h5>

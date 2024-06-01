@@ -19,7 +19,7 @@ class Employee extends Model
     use HasFactory, HasPhoto;
 
     protected $fillable = [
-        'position_id', 'hostel_id', 'start_job', 'position_code', 'name', 'last_name', 'father_name', 'gender',
+        'position_id', 'hostel_id', 'start_job', 'ps_code_id', 'name', 'last_name', 'father_name', 'gender',
         'emp_number', 'nid_number', 'appointment_number', 'appointment_date', 'last_duty', 'birth_year',
         'education', 'prr_npr', 'prr_date',
         'phone', 'phone2', 'email',
@@ -74,5 +74,11 @@ class Employee extends Model
     public function leaves() : HasMany
     {
         return $this->hasMany(Leave::class);
+    }
+
+    // Belongs to One Position Code
+    public function position_code()
+    {
+        return $this->belongsTo(PositionCode::class, 'ps_code_id');
     }
 }

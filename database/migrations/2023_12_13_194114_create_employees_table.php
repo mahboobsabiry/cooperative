@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('position_id')->unsigned()->index()->nullable();
             $table->bigInteger('hostel_id')->unsigned()->index()->nullable();
             $table->date('start_job');
-            $table->string('position_code')->nullable()->unique();
+            $table->unsignedBigInteger('ps_code_id');
             $table->string('name');
             $table->string('last_name')->nullable();
             $table->string('father_name');
@@ -52,6 +52,7 @@ return new class extends Migration
 
             $table->foreign('position_id')->references('id')->on('positions')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('hostel_id')->references('id')->on('hostels')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('ps_code_id')->references('id')->on('position_codes')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

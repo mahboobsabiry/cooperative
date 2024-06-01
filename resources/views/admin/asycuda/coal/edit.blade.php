@@ -53,6 +53,8 @@
                         <!-- Form -->
                         <form method="post" action="{{ route('admin.asycuda.coal.update', $cal->id) }}">
                             @csrf
+                            @method('PUT')
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <!-- Company Name -->
@@ -88,7 +90,7 @@
                                     <!-- Export Date -->
                                     <div class="form-group @error('export_date') has-danger @enderror">
                                         <p class="mb-2">تاریخ صدور: <span class="tx-danger">*</span></p>
-                                        <input data-jdp type="text" id="export_date" class="form-control @error('export_date') form-control-danger @enderror" name="export_date" value="{{ $cal->export_date ?? old('export_date') }}" required>
+                                        <input data-jdp type="text" id="export_date" class="form-control @error('export_date') form-control-danger @enderror" name="export_date" value="{{ \Morilog\Jalali\CalendarUtils::strftime('Y/m/d', strtotime($cal->export_date)) ?? old('export_date') }}" required>
 
                                         @error('export_date')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -98,7 +100,7 @@
                                     <!-- Expire Date -->
                                     <div class="form-group @error('expire_date') has-danger @enderror">
                                         <p class="mb-2">تاریخ ختم جواز: <span class="tx-danger">*</span></p>
-                                        <input data-jdp type="text" id="expire_date" class="form-control @error('expire_date') form-control-danger @enderror" name="expire_date" value="{{ $cal->expire_date ?? old('expire_date') }}" required>
+                                        <input data-jdp type="text" id="expire_date" class="form-control @error('expire_date') form-control-danger @enderror" name="expire_date" value="{{ \Morilog\Jalali\CalendarUtils::strftime('Y/m/d', strtotime($cal->expire_date)) ?? old('expire_date') }}" required>
 
                                         @error('expire_date')
                                         <div class="invalid-feedback">{{ $message }}</div>

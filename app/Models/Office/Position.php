@@ -6,7 +6,6 @@ use App\Models\Document;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Position extends Model
 {
@@ -65,5 +64,11 @@ class Position extends Model
     public function documents(): HasMany
     {
         return $this->hasMany(Document::class);
+    }
+
+    // Has Many Codes
+    public function codes()
+    {
+        return $this->hasMany(PositionCode::class);
     }
 }

@@ -59,7 +59,7 @@ class EmployeeController extends Controller
         $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
         $employee->start_job    = $request->start_job;
-        $employee->position_code = $request->position_code;
+        $employee->ps_code_id   = $request->ps_code_id;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
         $employee->father_name  = $request->father_name;
@@ -184,6 +184,7 @@ class EmployeeController extends Controller
         $employee->position_id  = $request->position_id;
         $employee->hostel_id    = $request->hostel_id;
         $employee->start_job    = $request->start_job;
+        $employee->ps_code_id   = $request->ps_code_id;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
         $employee->father_name  = $request->father_name;
