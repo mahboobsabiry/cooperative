@@ -20,8 +20,10 @@ class DatabaseSeeder extends Seeder
             RoleUserSeeder::class,
             SettingsTableSeeder::class,
             PositionsTableSeeder::class,
+            PositionCodeSeeder::class,
             HostelsTableSeeder::class,
-            EmployeesTableSeeder::class
+            EmployeesTableSeeder::class,
+            PositionCodeSeeder::class
         ]);
     }
 }
