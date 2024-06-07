@@ -29,7 +29,6 @@ class StoreEmployeeRequest extends FormRequest
             'photo'         => 'nullable|image|mimes:jpg,png,jfif',
             // 'document'      => 'nullable|image|mimes:jpg,png,jfif',
             'start_job'     => 'required',
-            'position_code' => 'required|min:3|max:4|unique:employees,position_code',
             'name'          => 'required|min:3|max:64',
             'last_name'     => 'nullable|min:3|max:64',
             'father_name'   => 'required|min:3|max:64',

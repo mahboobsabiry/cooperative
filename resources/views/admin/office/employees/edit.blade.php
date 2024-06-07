@@ -77,32 +77,19 @@
                                     <div class="col-md-6">
                                         <!-- Position && Position Code -->
                                         <div class="row" style="background-color: #EFF1F9;">
-                                            <!-- Position -->
-                                            <div class="col-md-6">
-                                                <div class="form-group @error('position_id') has-danger @enderror">
+                                            <!-- Position && Code -->
+                                            <div class="col-md-12">
+                                                <div class="form-group @error('ps_code_id') has-danger @enderror">
                                                     <p class="mb-2">1) @lang('form.position'): <span class="tx-danger">*</span></p>
 
-                                                    <select id="position_id" name="position_id" class="form-control select2 @error('position_id') form-control-danger @enderror">
+                                                    <select id="ps_code_id" name="ps_code_id" class="form-control select2 @error('ps_code_id') form-control-danger @enderror">
                                                         <option value="">@lang('form.chooseOne')</option>
-                                                        @foreach($positions as $position)
-                                                            <option value="{{ $position->id }}" {{ $employee->position_id == $position->id ? 'selected' : '' }}>{{ $position->title }} ({{ $position->place }})</option>
+                                                        @foreach($codes as $code)
+                                                            <option value="{{ $code->id }}" {{ $employee->position_code->id == $code->id ? 'selected' : '' }}>{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place }})</option>
                                                         @endforeach
                                                     </select>
 
-                                                    @error('position_id')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <!-- Position Code -->
-                                            <div class="col-md-6">
-                                                <!-- Position Code -->
-                                                <div class="form-group @error('position_code') has-danger @enderror">
-                                                    <p class="mb-2">2) @lang('form.positionCode'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="position_code" class="form-control @error('position_code') form-control-danger @enderror" name="position_code" value="{{ $employee->position_code ?? old('position_code') }}">
-
-                                                    @error('position_code')
+                                                    @error('ps_code_id')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
