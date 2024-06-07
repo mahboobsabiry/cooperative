@@ -65,7 +65,7 @@ class PositionController extends Controller
             ->log(trans('messages.positions.addedPositionMsg'));
 
         $message = trans('messages.positions.addedPositionMsg');
-        return redirect()->route('admin.office.positions.index')->with([
+        return redirect()->route('admin.office.positions.show', $position->id)->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);
@@ -163,30 +163,33 @@ class PositionController extends Controller
 
     // Appointment Positions
     public function appointment()
-    {// Send appointment and empty positions count to dashboard
+    {
+        // Send appointment and empty positions count to dashboard
         // Sum number of positions
-        $sum_appointment = Position::all()->sum('num_of_pos');
+        // $sum_appointment = Position::all()->sum('num_of_pos');
         // Count all employees
-        $employees_count = Employee::all()->count();
+        // $employees_count = Employee::all()->count();
         // Count all empty positions
-        $empty_positions = $sum_appointment - $employees_count;
+        // $empty_positions = $sum_appointment - $employees_count;
         // Count all appointment positions
-        $appointment_positions = $sum_appointment - $empty_positions;
-        $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
-        return view('admin.office.positions.appointment', compact('positions', 'appointment_positions'));
+        // $appointment_positions = $sum_appointment - $empty_positions;
+        $codes = PositionCode::whereHas('employee')->get();
+        return view('admin.office.positions.appointment', compact('codes'));
     }
 
     // Empty Positions
     public function empty()
-    {// Send appointment and empty positions count to dashboard
+    {
+        // Send appointment and empty positions count to dashboard
         // Sum number of positions
-        $sum_appointment = Position::all()->sum('num_of_pos');
+        // $sum_appointment = Position::all()->sum('num_of_pos');
         // Count all employees
-        $employees_count = Employee::all()->count();
+        // $employees_count = Employee::all()->count();
         // Count all empty positions
-        $empty_positions = $sum_appointment - $employees_count;
-        $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
-        return view('admin.office.positions.empty', compact('positions', 'empty_positions'));
+        // $empty_positions = $sum_appointment - $employees_count;
+        // $positions = Position::with('employees')->orderBy('created_at', 'desc')->get();
+        $codes = PositionCode::whereDoesntHave('employee')->get();
+        return view('admin.office.positions.empty', compact('codes'));
     }
 
     // Fetch All Data

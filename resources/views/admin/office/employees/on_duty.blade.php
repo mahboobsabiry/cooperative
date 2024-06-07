@@ -55,19 +55,19 @@
         <!-- Data Table -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Table Card -->
-                <div class="card custom-card main-content-body-profile">
+                <div class="card">
+                    <div class="card-header tx-15 tx-bold">
+                        @lang('pages.employees.onDuty') ({{ count($employees) }})
+                    </div>
+
                     <!-- Table Card Body -->
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
-
+                    <div class="card-body">
                         <!-- Employees -->
-                        <div class="tab-pane active">
-                            <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.employees.onDuty') ({{ count($employees) }})
-                            </div>
-
+                        <div class="">
                             <!-- Table -->
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100" style="width: 100%;">
@@ -95,7 +95,7 @@
                                             </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
                                             <td>{{ $employee->position->title ?? '' }} - {{ $employee->position->position_number ?? '' }}</td>
-                                            <td>{{ $employee->position_code ?? '' }}</td>
+                                            <td>{{ $employee->position_code->code ?? '' }}</td>
                                             <td class="tx-sm-12-f">
                                                 <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
                                             </td>

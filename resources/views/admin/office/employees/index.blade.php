@@ -91,7 +91,7 @@
                                             </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
                                             <td>{{ $employee->position->title ?? '' }} - {{ $employee->position->position_number ?? '' }}</td>
-                                            <td>{{ $employee->position_code ?? '' }}</td>
+                                            <td>{{ $employee->position_code->code ?? '' }}</td>
                                             <td class="tx-sm-12-f">
                                                 <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
                                             </td>

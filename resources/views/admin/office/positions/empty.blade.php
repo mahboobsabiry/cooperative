@@ -61,16 +61,18 @@
         <!-- Data Table -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Table Card -->
-                <div class="card custom-card main-content-body-profile">
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                <div class="card">
+                    <div class="card-header tx-15 tx-bold">
+                        @lang('pages.positions.emptyPositions') ({{ count($codes) }})
+                    </div>
+
+                    <div class="card-body">
                         <!-- All Positions -->
-                        <div class="tab-pane active">
-                            <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.positions.emptyPositions') ({{ $empty_positions }})
-                            </div>
+                        <div class="">
                             <!-- Table -->
                             <div class="table-responsive mt-2">
                                 <table class="table table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100">
@@ -78,42 +80,24 @@
                                     <tr>
                                         <th>#</th>
                                         <th>@lang('form.title')</th>
+                                        <th>@lang('form.code')</th>
                                         <th>@lang('pages.positions.underHand')</th>
                                         <th>@lang('pages.positions.positionNumber')</th>
-                                        <th>@lang('form.num_of_pos')</th>
                                         <th>@lang('form.extraInfo')</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
-                                    @foreach($positions as $position)
-                                        @if($position->employees)
-                                            @if($position->num_of_pos > $position->employees->count())
-                                                <tr>
-                                                    <td>
-                                                        {{ $position->id }}
-                                                    </td>
-                                                    <td><a href="{{ route('admin.office.positions.show', $position->id ) }}">{{ $position->title }}</a></td>
-
-                                                    <!-- Parent Position -->
-                                                    <td>
-                                                        {{ $position->parent->title ?? trans('pages.positions.afCustomsDep') }}
-                                                    </td>
-                                                    <td>{{ $position->position_number }}</td>
-                                                    <td>
-                                                        {{ $position->num_of_pos }}
-                                                        @if($position->employees->count() < $position->num_of_pos)
-                                                            {<span class="text-danger small">@lang('global.empty')</span>}
-                                                        @elseif($position->employees->count() == $position->num_of_pos)
-
-                                                        @elseif($position->employees->count() > $position->num_of_pos)
-                                                            {<span class="text-danger small">{{ $position->employees->count() - $position->num_of_pos }} @lang('global.empty')</span>}
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $position->desc }}</td>
-                                                </tr>
-                                            @endif
-                                        @endif
+                                    @foreach($codes as $code)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td><a href="{{ route('admin.office.positions.show', $code->position->id ) }}">{{ $code->position->title }}</a></td>
+                                            <td>{{ $code->code }}</td>
+                                            <!-- Parent Position -->
+                                            <td>{{ $code->position->parent->title ?? trans('pages.positions.afCustomsDep') }}</td>
+                                            <td>{{ $code->position->position_number }}</td>
+                                            <td>{{ $code->position->desc }}</td>
+                                        </tr>
                                     @endforeach
                                     </tbody>
                                 </table>

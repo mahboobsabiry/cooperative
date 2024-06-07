@@ -85,10 +85,9 @@
                                     <tr>
                                         <th>#</th>
                                         <th>@lang('form.title')</th>
-                                        <th>@lang('pages.positions.officials_emps')</th>
                                         <th>@lang('pages.positions.underHand')</th>
-                                        <th>@lang('pages.positions.positionNumber')</th>
-                                        <th>@lang('form.num_of_pos')</th>
+                                        <th>کد بست و کارمندان</th>
+                                        <th>نمبر و تعداد بست</th>
                                         <th>موقعیت</th>
                                         <th>@lang('form.extraInfo')</th>
                                     </tr>
@@ -102,40 +101,16 @@
                                             </td>
                                             <td><a href="{{ route('admin.office.positions.show', $position->id ) }}">{{ $position->title }}</a></td>
 
-                                            <!-- Employees and Officials -->
-                                            <td>
-                                                @if($position->employees)
-                                                    @foreach($position->employees as $emp)
-                                                        @can('office_employee_view')
-                                                            <a href="{{ route('admin.office.employees.show', $emp->id) }}">
-                                                                {{ $emp->name }}
-                                                                {{ $emp->last_name }}
-                                                            </a>{{ $position->num_of_pos > 1 ? ', ' : '' }}
-                                                        @else
-                                                            <a href="javascript:void(0);">{{ $emp->name }} {{ $emp->last_name }}
-                                                            </a>{{ $position->num_of_pos > 1 ? ', ' : '' }}
-                                                        @endcan
-                                                    @endforeach
-                                                @else
-                                                    @lang('global.empty')
-                                                @endif
-                                            </td>
-
                                             <!-- Parent Position -->
                                             <td>
                                                 {{ $position->parent->title ?? trans('pages.positions.afCustomsDep') }}
                                             </td>
-                                            <td>{{ $position->position_number }}</td>
+                                            <!-- Position Code && Employees -->
                                             <td>
-                                                {{ $position->num_of_pos }}
-                                                @if($position->employees->count() < $position->num_of_pos)
-                                                    {<span class="text-danger small">@lang('global.empty')</span>}
-                                                @elseif($position->employees->count() == $position->num_of_pos)
-
-                                                @elseif($position->employees->count() > $position->num_of_pos)
-                                                    {<span class="text-danger small">{{ $position->employees->count() - $position->num_of_pos }} @lang('global.empty')</span>}
-                                                @endif
+                                                {{ $position->codes->count() }} ==> @foreach($position->codes as $code) ({{ $code->code }} - @if($code->employee) <a href="{{ route('admin.office.employees.show', $code->employee->id) }}" target="_blank">{{ $code->employee->name . ' ' . $code->employee->last_name }}</a>@else <span class="text-danger">خالی</span>@endif)
+                                                {{ $position->codes && $position->codes->count() < $position->num_of_pos ? ' - ' : '' }} @endforeach
                                             </td>
+                                            <td>{{ $position->position_number }} ({{ $position->num_of_pos }})</td>
                                             <td>{{ $position->place }}</td>
                                             <td>{{ $position->desc }}</td>
                                         </tr>
