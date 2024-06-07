@@ -111,6 +111,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('appointment-positions', [PositionController::class, 'appointment'])->name('positions.appointment');
         Route::get('empty-positions', [PositionController::class, 'empty'])->name('positions.empty');
         Route::get('inactive-positions', [PositionController::class, 'inactive'])->name('positions.inactive');
+        // Add Position Code
+        Route::post('position/{id}/add-code', [PositionController::class, 'add_code'])->name('positions.add_code');
+
         // Hostel
         Route::resource('hostel', HostelController::class);
 

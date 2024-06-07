@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('position_codes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('position_id');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->tinyInteger('status')->default(1);
             $table->text('info')->nullable();
             $table->timestamps();

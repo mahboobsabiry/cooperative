@@ -296,6 +296,27 @@
                                         </div>
                                     </div>
                                 @endif
+
+                                <!-- Position Codes -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">کد ها:</p>
+                                    </div>
+                                    <div class="col">
+                                        {{ $position->codes->count() }} ==> @foreach($position->codes as $code) ({{ $code->code }} - @if($code->employee) {{ $code->employee->name . ' ' . $code->employee->last_name }} @else <span class="text-danger">خالی</span>@endif)
+                                        {{ $position->codes && $position->codes->count() < $position->num_of_pos ? ' - ' : '' }} @endforeach
+
+                                        @if($position->codes && $position->codes->count() < $position->num_of_pos)
+                                            <a class="modal-effect text-secondary"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#add_code{{ $position->id }}">
+                                                @lang('global.add')
+                                            </a>
+
+                                            @include('admin.office.positions.add_code')
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                             <!--/==/ End of General Information -->
                         </div>

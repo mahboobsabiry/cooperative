@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePositionRequest;
 use App\Models\Office\Employee;
 use App\Models\Office\Position;
+use App\Models\Office\PositionCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -193,5 +194,37 @@ class PositionController extends Controller
     {
         $positions = Position::with('employees')->where('status', 0)->orderBy('created_at', 'desc')->get();
         return view('admin.office.positions.inactive', compact('positions'));
+    }
+
+    // Add Code
+    public function add_code(Request $request, $id)
+    {
+        // Position
+        $position = Position::find($id);
+
+        // Return back if number of position is equal or greater than number of codes.
+//        if ($position->num_of_pos >= $position->codes->count()) {
+//            return back()->with([
+//                'message'   => 'بست هذا گنجایش کد جدید را ندارد، لطفا تعداد بست را ابتدا تغییر بدهید.',
+//                'alertType' => 'secondary'
+//            ]);
+//        }
+
+        // Validate
+        $request->validate([
+            'code'  => 'required|numeric|max:999|unique:position_codes,code'
+        ]);
+
+        // Store
+        $code = new PositionCode();
+        $code->position_id  = $position->id;
+        $code->code         = $request->code;
+        $code->info         = $request->code;
+        $code->save();
+
+        return redirect()->back()->with([
+            'message'   => 'کد بست موفقانه ذخیره شد.',
+            'alertType' => 'success'
+        ]);
     }
 }

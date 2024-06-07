@@ -22,8 +22,7 @@ class DatabaseSeeder extends Seeder
             PositionsTableSeeder::class,
             PositionCodeSeeder::class,
             HostelsTableSeeder::class,
-            EmployeesTableSeeder::class,
-            PositionCodeSeeder::class
+            EmployeesTableSeeder::class
         ]);
     }
 }

@@ -13,15 +13,11 @@ class PositionCodeSeeder extends Seeder
      */
     public function run(): void
     {
-        $codes = [
-            [
-                'position_id'   => 1,
-                'code'          => '001'
-            ]
+        $code = [
+            'position_id'   => 1,
+            'code'          => '001'
         ];
 
-        foreach ($codes as $code) {
-            PositionCode::create($code);
-        }
+        PositionCode::create($code);
     }
 }
