@@ -7,7 +7,7 @@ return [
     'active'        => 'فعال',
     'activity'      => 'فعالیت',
     'activities'    => 'فعالیت ها',
-    'add'           => 'ثبت',
+    'add'           => 'اضافه',
     'address'       => 'آدرس',
     'admin'         => 'ادمین',
     'afghani'       => 'افغانی',

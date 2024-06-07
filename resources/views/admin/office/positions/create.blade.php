@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', config('app.name') . ' ~ ' . trans('pages.positions.addPosition'))
+@section('title', trans('pages.positions.addPosition'))
 <!-- Extra Styles -->
 @section('extra_css')
 
@@ -83,6 +83,18 @@
                                         </div>
                                         <!--/==/ End of Title -->
 
+                                        <!-- Position Code -->
+                                        <div class="form-group" id="codeDiv">
+                                            <p class="mb-2">@lang('form.code'): <span class="tx-danger">*</span></p>
+                                            <div class="input-group" id="codeInnerDiv">
+                                                <input class="form-control" id="codeInput" type="text" name="code[0][code]" value="{{ old('code') }}" placeholder="@lang('form.code')">
+                                                <span class="input-group-btn btn btn-primary" id="addInputBtn"><i class="fa fa-plus"></i></span>
+                                            </div>
+                                        </div>
+                                        <!--/==/ End of Position Code -->
+                                    </div>
+
+                                    <div class="col-md-6">
                                         <!-- Number of Positions -->
                                         <div class="form-group @error('num_of_pos') has-danger @enderror">
                                             <p class="mb-2">@lang('form.num_of_pos'): <span class="tx-danger">*</span></p>
@@ -93,9 +105,7 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Number of Positions -->
-                                    </div>
 
-                                    <div class="col-md-6">
                                         <!-- Position Number -->
                                         <div class="form-group @error('position_number') has-danger @enderror">
                                             <p class="mb-2">@lang('pages.positions.positionNumber'): <span class="tx-danger">*</span></p>
@@ -156,6 +166,19 @@
 
 <!-- Extra Scripts -->
 @section('extra_js')
+    <script>
+        $(document).ready(function (){
+            var i = 0;
+            $('#addInputBtn').click(function (){
+                ++i;
+                $('#codeInnerDiv').append(`<div class="input-group mb-1"><input class="form-control" id="codeInput" type="text" name="inputs[`+i+`][name]"><span class="input-group-btn btn btn-danger" id="removeInputBtn"><i class="fa fa-minus"></i></span></div>`);
+            });
+
+            $(document).on("click", "#removeInputBtn", function (){
+                $(this).parent('div').remove();
+            });
+        });
+    </script>
     <!-- Form-elements js-->
     <script src="{{ asset('backend/assets/js/advanced-form-elements.js') }}"></script>
 

@@ -59,6 +59,14 @@ class PositionController extends Controller
         $position->status       = 1;
         $position->save();
 
+        // Store Code
+        foreach ($request->inputs as $key => $value) {
+            $code = new PositionCode();
+            $code->position_id  = $position->id;
+            $code->code         = $value;
+            $code->save();
+        }
+
         activity('added')
             ->causedBy(Auth::user())
             ->performedOn($position)
