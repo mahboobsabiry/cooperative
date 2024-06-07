@@ -87,7 +87,7 @@
                                         <div class="form-group" id="codeDiv">
                                             <p class="mb-2">@lang('form.code'): <span class="tx-danger">*</span></p>
                                             <div class="input-group" id="codeInnerDiv">
-                                                <input class="form-control" id="codeInput" type="text" name="code[0][code]" value="{{ old('code') }}" placeholder="@lang('form.code')">
+                                                <input class="form-control" id="codeInput" type="text" name="inputs[0][code]" value="{{ old('code') }}" placeholder="@lang('form.code')">
                                                 <span class="input-group-btn btn btn-primary" id="addInputBtn"><i class="fa fa-plus"></i></span>
                                             </div>
                                         </div>
@@ -171,7 +171,7 @@
             var i = 0;
             $('#addInputBtn').click(function (){
                 ++i;
-                $('#codeInnerDiv').append(`<div class="input-group mb-1"><input class="form-control" id="codeInput" type="text" name="inputs[`+i+`][name]"><span class="input-group-btn btn btn-danger" id="removeInputBtn"><i class="fa fa-minus"></i></span></div>`);
+                $('#codeInnerDiv').append(`<div class="input-group mb-1"><input class="form-control" id="codeInput" type="text" name="inputs[`+i+`][code]"><span class="input-group-btn btn btn-danger" id="removeInputBtn"><i class="fa fa-minus"></i></span></div>`);
             });
 
             $(document).on("click", "#removeInputBtn", function (){

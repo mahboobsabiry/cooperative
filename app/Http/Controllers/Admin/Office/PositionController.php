@@ -60,11 +60,8 @@ class PositionController extends Controller
         $position->save();
 
         // Store Code
-        foreach ($request->inputs as $key => $value) {
-            $code = new PositionCode();
-            $code->position_id  = $position->id;
-            $code->code         = $value;
-            $code->save();
+        foreach ($request->inputs as $value) {
+            $position->codes()->create($value);
         }
 
         activity('added')
