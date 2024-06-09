@@ -80,12 +80,16 @@
                                             <!-- Position && Code -->
                                             <div class="col-md-12">
                                                 <div class="form-group @error('ps_code_id') has-danger @enderror">
-                                                    <p class="mb-2">1) @lang('form.position'): <span class="tx-danger">*</span></p>
+                                                    <p class="mb-2">1) @lang('form.position'):</p>
 
                                                     <select id="ps_code_id" name="ps_code_id" class="form-control select2 @error('ps_code_id') form-control-danger @enderror">
                                                         <option value="">@lang('form.chooseOne')</option>
                                                         @foreach($codes as $code)
-                                                            <option value="{{ $code->id }}" {{ $employee->position_code->id == $code->id ? 'selected' : '' }}>{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place }})</option>
+                                                            @if($employee->position_code)
+                                                                <option value="{{ $code->id }}" {{ $employee->position_code->id == $code->id ? 'selected' : '' }}>{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place }})</option>
+                                                            @else
+                                                                <option value="{{ $code->id }}">{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place }})</option>
+                                                            @endif
                                                         @endforeach
                                                     </select>
 
@@ -438,7 +442,7 @@
                                                 <div class="form-group @error('hostel_id') has-danger @enderror">
                                                     <p class="mb-2">24) @lang('pages.hostel.hostel'):</p>
                                                     <select class="form-control select2" name="hostel_id" id="hostel_id">
-                                                        <option selected disabled>@lang('global.home')</option>
+                                                        <option selected>@lang('global.home')</option>
                                                         @foreach($hostels as $hostel)
                                                             <option value="{{ $hostel->id }}" {{ $employee->hostel_id == $hostel->id ? 'selected' : '' }}>@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }} ({{ $hostel->place }})</option>
                                                         @endforeach

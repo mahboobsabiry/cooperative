@@ -138,7 +138,7 @@ class EmployeeController extends Controller
     // Edit Info
     public function edit(Employee $employee)
     {
-        if ($employee->status == 0 || $employee->status == 4) {
+        if ($employee->status == 0 || $employee->status == 4 || $employee->status == 5) {
             $codes = PositionCode::all();
             $positions = Position::all();
             $hostels = Hostel::all();

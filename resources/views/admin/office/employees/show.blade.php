@@ -108,7 +108,7 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <div class="d-flex">
-                    @if($employee->status == 0 || $employee->status == 4)
+                    @if($employee->status == 0 || $employee->status == 4 || $employee->status == 5)
                         @can('office_employee_delete')
                             <div class="mr-2">
                                 <!-- Delete -->

@@ -451,7 +451,7 @@
                                                 <div class="form-group @error('hostel_id') has-danger @enderror">
                                                     <p class="mb-2">23) @lang('pages.hostel.hostel'):</p>
                                                     <select class="form-control select2" name="hostel_id" id="hostel_id">
-                                                        <option selected disabled>@lang('global.home')</option>
+                                                        <option selected>@lang('global.home')</option>
                                                         @foreach($hostels as $hostel)
                                                             <option value="{{ $hostel->id }}">@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }} ({{ $hostel->place }})</option>
                                                         @endforeach
