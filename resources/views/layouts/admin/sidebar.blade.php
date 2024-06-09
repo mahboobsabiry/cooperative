@@ -211,10 +211,11 @@
                     request()->is('admin/office/employees/*') ||
                     request()->is('admin/office/main-employees') ||
                     request()->is('admin/office/on-duty-employees') ||
-                    request()->is('admin/office/employee/position-conversion-employees') ||
-                    request()->is('admin/office/employee/fired-employees') ||
-                    request()->is('admin/office/employee/suspended-employees') ||
-                    request()->is('admin/office/employee/retired-employees') ||
+                    request()->is('admin/office/position-conversion-employees') ||
+                    request()->is('admin/office/fired-employees') ||
+                    request()->is('admin/office/suspended-employees') ||
+                    request()->is('admin/office/retired-employees') ||
+                    request()->is('admin/office/ocustom-duty-employees') ||
                     request()->is('admin/office/employee/*/resumes') ||
                     request()->is('admin/office/employee/*/add-duty-position') ||
                     request()->is('admin/office/employee/*/change-to-main-position') ||
@@ -265,7 +266,7 @@
                             </li>
 
                             <!-- Retired Employees -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/employee/retired-employees') ? 'active' : '' }}">
+                            <li class="nav-sub-item {{ request()->is('admin/office/retired-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.retired_employees') }}">
                                     متقاعدین
                                     ({{ \App\Models\Office\Employee::all()->where('status', 1)->count() }}
@@ -274,7 +275,7 @@
                             </li>
 
                             <!-- Fired Employees -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/employee/fired-employees') ? 'active' : '' }}">
+                            <li class="nav-sub-item {{ request()->is('admin/office/fired-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.fired_employees') }}">
                                     منفکی
                                     ({{ \App\Models\Office\Employee::all()->where('status', 2)->count() }}
@@ -283,7 +284,7 @@
                             </li>
 
                             <!-- Position Conversion Employees -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/employee/position-conversion-employees') ? 'active' : '' }}">
+                            <li class="nav-sub-item {{ request()->is('admin/office/position-conversion-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
                                    href="{{ route('admin.office.employees.position_conversion_employees') }}">
                                     تبدیل شده
@@ -292,7 +293,7 @@
                             </li>
 
                             <!-- Suspended Employees -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/employee/suspended-employees') ? 'active' : '' }}">
+                            <li class="nav-sub-item {{ request()->is('admin/office/suspended-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.suspended_employees') }}">
                                     <span class="text-secondary">معلق </span>&nbsp;
                                     ({{ \App\Models\Office\Employee::all()->where('status', 4)->count() }}
@@ -300,6 +301,15 @@
                                     @if(count(\App\Models\Office\Employee::all()->where('status', 4)) >= 1)
                                         &nbsp;<span class="fas fa-user-tie fa-pulse text-danger"></span>
                                     @endif
+                                </a>
+                            </li>
+
+                            <!-- Other Custom Duty Employees -->
+                            <li class="nav-sub-item {{ request()->is('admin/office/ocustom-duty-employees') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.office.employees.oc_duty_employees') }}">
+                                    خدمتی از اداره/ارگان دیگر
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 5)->count() }}
+                                    )
                                 </a>
                             </li>
                         </ul>

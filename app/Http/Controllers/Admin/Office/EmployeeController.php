@@ -314,6 +314,13 @@ class EmployeeController extends Controller
         return view('admin.office.employees.suspended_employees', compact('suspended_employees'));
     }
 
+    // O-Custom Duty Employees
+    public function oc_duty_employees()
+    {
+        $oc_duty_employees = Employee::whereNull('position_id')->where('status', 5)->get();
+        return view('admin.office.employees.oc_duty_employees', compact('oc_duty_employees'));
+    }
+
     // Custom ID Card
     public function custom_card($id)
     {

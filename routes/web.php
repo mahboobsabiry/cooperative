@@ -123,13 +123,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('main-employees', [EmployeeController::class, 'main_employees'])->name('employees.main');
         Route::get('on-duty-employees', [EmployeeController::class, 'on_duty_employees'])->name('employees.on_duty');
         // Change Position Employees
-        Route::get('employee/position-conversion-employees', [EmployeeController::class, 'position_conversion_employees'])->name('employees.position_conversion_employees');
+        Route::get('position-conversion-employees', [EmployeeController::class, 'position_conversion_employees'])->name('employees.position_conversion_employees');
         // Suspended Employees
-        Route::get('employee/suspended-employees', [EmployeeController::class, 'suspended_employees'])->name('employees.suspended_employees');
+        Route::get('suspended-employees', [EmployeeController::class, 'suspended_employees'])->name('employees.suspended_employees');
         // Retired Employees
-        Route::get('employee/retired-employees', [EmployeeController::class, 'retired_employees'])->name('employees.retired_employees');
+        Route::get('retired-employees', [EmployeeController::class, 'retired_employees'])->name('employees.retired_employees');
         // Fired Employees
-        Route::get('employee/fired-employees', [EmployeeController::class, 'fired_employees'])->name('employees.fired_employees');
+        Route::get('fired-employees', [EmployeeController::class, 'fired_employees'])->name('employees.fired_employees');
+        // O-Custom-Org Employees
+        Route::get('ocustom-duty-employees', [EmployeeController::class, 'oc_duty_employees'])->name('employees.oc_duty_employees');
         // Employee Custom ID Card
         Route::get('employee/custom-id-card/{id}', [EmployeeController::class, 'custom_card'])->name('employees.custom_card');
 
