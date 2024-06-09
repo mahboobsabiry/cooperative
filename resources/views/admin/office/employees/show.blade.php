@@ -198,6 +198,8 @@
                                         تبدیل گردیده است
                                     @elseif($employee->status == 4)
                                         معلق
+                                    @elseif($employee->status == 5)
+                                        از اداره/ارگان دیگر طور خدمتی آمده است.
                                     @endif
                                 </span>
                             @endif

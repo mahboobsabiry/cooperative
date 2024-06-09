@@ -403,9 +403,9 @@
                     @can('office_position_view')
                         <a href="{{ route('admin.office.positions.show', $employee->position->id) }}">
                             {{ $employee->position->title }}
-                        </a> (کد - {{ $employee->position_code }})
+                        </a> (کد - {{ $employee->position_code->code }})
                     @else
-                        {{ $employee->position->title }} (کد - {{ $employee->position_code }})
+                        {{ $employee->position->title }} (کد - {{ $employee->position_code->code }})
                     @endcan
                     <br>
 

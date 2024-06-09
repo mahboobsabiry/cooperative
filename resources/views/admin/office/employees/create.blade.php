@@ -73,8 +73,22 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <!-- Place Type -->
+                                        <div class="form-group @error('type') has-danger @enderror" id="placeTypeDiv">
+                                            <p class="mb-2">-) نوعیت: <span class="tx-danger">*</span></p>
+
+                                            <select id="placeType" name="type" class="form-control select2 @error('type') form-control-danger @enderror">
+                                                <option value="0">کارمند برحال این ریاست</option>
+                                                <option value="1">طور خدمتی از اداره دیگر</option>
+                                            </select>
+
+                                            @error('type')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
                                         <!-- Position && Position Code -->
-                                        <div class="row" style="background-color: #EFF1F9;">
+                                        <div class="row" style="background-color: #EFF1F9;" id="posDiv">
                                             <!-- Position && Code -->
                                             <div class="col-md-12">
                                                 <div class="form-group @error('ps_code_id') has-danger @enderror">
@@ -552,29 +566,42 @@
     <script src="{{ asset('backend/assets/js/form-elements.js') }}"></script>
 
     <script>
-        // Datepicker
-        $('.fc-datepicker').datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: true
-        });
+        $(document).ready(function (){
+            // Datepicker
+            $('.fc-datepicker').datepicker({
+                showOtherMonths: true,
+                selectOtherMonths: true
+            });
 
-        if($('input[type="checkbox"]').parents('#onDutyParent')){
-            $('#onDutyCheck').change(function() {
-                if (this.checked) {
-                    $('#mpText').show();
-                    $('#duty_position_div').show();
-                } else {
-                    $('#duty_position').val("");
-                    $('#duty_position_div').hide();
-                    $('#mpText').hide();
-                }
-            })
-        }
-        $(function() {
-            // Multiple images preview with JavaScript
-            var multiImgPreview = function(input, imgPreviewPlaceholder) {
-                if (input.files) {
-                    var filesAmount = input.files.length;
+            // Select BCD Employee or On Duty from other org/office
+            if($('#placeType').parents('#placeTypeDiv')){
+                $('#placeType').change(function() {
+                    if ($('#placeType').val() == "1") {
+                        $('#posDiv').hide();
+                    } else {
+                        $('#posDiv').show();
+                    }
+                })
+            }
+
+            // On Duty
+            if($('input[type="checkbox"]').parents('#onDutyParent')){
+                $('#onDutyCheck').change(function() {
+                    if (this.checked) {
+                        $('#mpText').show();
+                        $('#duty_position_div').show();
+                    } else {
+                        $('#duty_position').val("");
+                        $('#duty_position_div').hide();
+                        $('#mpText').hide();
+                    }
+                })
+            }
+            $(function() {
+                // Multiple images preview with JavaScript
+                var multiImgPreview = function(input, imgPreviewPlaceholder) {
+                    if (input.files) {
+                        var filesAmount = input.files.length;
                         for (i = 0; i < filesAmount; i++) {
                             var reader = new FileReader();
                             reader.onload = function(event) {
@@ -582,11 +609,12 @@
                             }
                             reader.readAsDataURL(input.files[i]);
                         }
-                }
-            };
-            $('#document').on('change', function() {
-                $(".imgPreview").html("");
-                multiImgPreview(this, 'div.imgPreview');
+                    }
+                };
+                $('#document').on('change', function() {
+                    $(".imgPreview").html("");
+                    multiImgPreview(this, 'div.imgPreview');
+                });
             });
         });
     </script>

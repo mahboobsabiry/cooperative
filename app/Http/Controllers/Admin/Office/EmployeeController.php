@@ -93,8 +93,13 @@ class EmployeeController extends Controller
             $avatar->storeAs('signatures', $fileName, 'public');
             $employee->signature        = $fileName;
         }
-        $employee->status           = 0;
-        $employee->info             = $request->info;
+        if ($request->type == '1') {
+            $status = 5;
+        } else {
+            $status = 0;
+        }
+        $employee->status   = $status;
+        $employee->info     = $request->info;
         $employee->save();
 
         //  Has File && Save Avatar Image
