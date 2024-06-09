@@ -44,11 +44,13 @@ class EmployeeController extends Controller
     {
         // Code
         $code = PositionCode::where('id', $request->ps_code_id)->first();
-        if (!empty($code->employee)) {
-            return back()->with([
-                'alertType' => 'danger',
-                'message'   => 'بست مورد نظر تکمیل میباشد.'
-            ]);
+        if ($code) {
+            if (!empty($code->employee)) {
+                return back()->with([
+                    'alertType' => 'danger',
+                    'message'   => 'بست مورد نظر تکمیل میباشد.'
+                ]);
+            }
         }
         $hostel = Hostel::where('id', $request->hostel_id)->first();
         if (!empty($hostel->employees) && $hostel->employees()->count() > $hostel->capacity) {
@@ -59,8 +61,13 @@ class EmployeeController extends Controller
         }
 
         $employee = new Employee();
-        $employee->position_id  = $code->position->id;
-        $employee->ps_code_id   = $code->id;
+        if ($code) {
+            $employee->position_id  = $code->position->id;
+            $employee->ps_code_id   = $code->id;
+        } else {
+            $employee->position_id = null;
+            $employee->ps_code_id  = null;
+        }
         $employee->hostel_id    = $request->hostel_id;
         $employee->start_job    = $request->start_job;
         $employee->name         = $request->name;
@@ -175,11 +182,13 @@ class EmployeeController extends Controller
 
         // Code
         $code = PositionCode::where('id', $request->ps_code_id)->first();
-        if ($employee->ps_code_id != $code->id && !empty($code->employee)) {
-            return back()->with([
-                'alertType' => 'danger',
-                'message'   => 'بست مورد نظر تکمیل میباشد.'
-            ]);
+        if ($code) {
+            if ($employee->ps_code_id != $code->id && !empty($code->employee)) {
+                return back()->with([
+                    'alertType' => 'danger',
+                    'message'   => 'بست مورد نظر تکمیل میباشد.'
+                ]);
+            }
         }
         $hostel = Hostel::where('id', $request->input('hostel_id'))->first();
         if (!empty($hostel->employees) && $hostel->employees()->count() > $hostel->capacity) {
@@ -189,8 +198,13 @@ class EmployeeController extends Controller
             ]);
         }
 
-        $employee->position_id  = $code->position->id;
-        $employee->ps_code_id   = $code->id;
+        if ($code) {
+            $employee->position_id  = $code->position->id;
+            $employee->ps_code_id   = $code->id;
+        } else {
+            $employee->position_id = null;
+            $employee->ps_code_id  = null;
+        }
         $employee->hostel_id    = $request->hostel_id;
         $employee->start_job    = $request->start_job;
         $employee->name         = $request->name;

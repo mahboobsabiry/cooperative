@@ -234,7 +234,7 @@
             <div class="col-6 col-sm-5">
                 <p class="fw-semi-bold mb-1"><strong>کد گمرکی:</strong></p>
             </div>
-            <div class="col">{{ $employee->position->custom_code }}</div>
+            <div class="col">{{ $employee->position->custom_code ?? '' }}</div>
         </div>
 
         <!-- Place -->
@@ -242,7 +242,7 @@
             <div class="col-6 col-sm-5">
                 <p class="fw-semi-bold mb-1"><strong>موقعیت:</strong></p>
             </div>
-            <div class="col">{{ $employee->position->place }}</div>
+            <div class="col">{{ $employee->position->place ?? '' }}</div>
         </div>
 
         <!-- All Leave Days -->
