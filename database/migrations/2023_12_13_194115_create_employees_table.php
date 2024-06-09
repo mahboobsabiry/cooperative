@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('position_id')->unsigned()->index()->nullable();
             $table->bigInteger('hostel_id')->unsigned()->index()->nullable();
             $table->date('start_job');
-            $table->unsignedBigInteger('ps_code_id');
+            $table->bigInteger('ps_code_id')->unsigned()->index()->nullable();
             $table->string('name');
             $table->string('last_name')->nullable();
             $table->string('father_name');
