@@ -150,7 +150,7 @@
 
             <!-- Office Routes -->
             @can('office_view')
-                <li class="nav-label">مدیریت عمومی اداری</li>
+                <li class="nav-label">مدیریت عمومی مالی و اداری</li>
 
                 <!-- Positions -->
                 @can('office_position_view')
