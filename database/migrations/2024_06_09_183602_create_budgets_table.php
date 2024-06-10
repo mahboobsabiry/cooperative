@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('code')->unique();
-            $table->bigInteger('budget');
+            $table->bigInteger('budget')->default(0);
             $table->string('year');
             $table->string('month');
             $table->string('amount');
+            $table->tinyInteger('status')->default(0);
+            $table->text('info')->nullable();
             $table->timestamps();
         });
     }

@@ -152,6 +152,30 @@
             @can('office_view')
                 <li class="nav-label">مدیریت عمومی مالی و اداری</li>
 
+                <!-- Finance -->
+                @can('office_finance_view')
+                    <li class="nav-item {{ request()->is('admin/office/budgets') ||
+                    request()->is('admin/office/budgets/*') ? 'active show' : '' }}">
+
+                        <a class="nav-link with-sub" href="javascript:void(0)">
+                            <i class="fe fe-"></i>
+                            <span class="sidemenu-label">@lang('admin.sidebar.positions')</span>
+                            <i class="angle fe fe-chevron-right"></i>
+                        </a>
+
+                        <ul class="nav-sub">
+                            <!-- Budgets -->
+                            <li class="nav-sub-item {{ request()->is('admin/office/budgets') ||
+                                request()->is('admin/office/budgets/*') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.office.budgets.index') }}">
+                                    بودجه ها
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
+                <!--/==/ End of Finance -->
+
                 <!-- Positions -->
                 @can('office_position_view')
                     <li class="nav-item {{ request()->is('admin/office/positions') ||

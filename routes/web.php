@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Asycuda\COALController;
 use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\Office\AgentColleagueController;
 use App\Http\Controllers\Admin\Office\AgentController;
+use App\Http\Controllers\Admin\Office\BudgetController;
 use App\Http\Controllers\Admin\Office\CompanyController;
 use App\Http\Controllers\Admin\Office\EmployeeHelperController;
 use App\Http\Controllers\Admin\Office\EmployeeController;
@@ -105,6 +106,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // ====== Office Routes ======
     Route::group(['prefix' => 'office', 'as' => 'office.'], function () {
+        // ====================== Finance ===========================
+        // Positions
+        Route::resource('budgets', BudgetController::class);
+
+        // ====================== Office ===========================
         // Positions
         Route::resource('positions', PositionController::class);
         Route::post('update-position-status', [PositionController::class, 'updatePositionStatus'])->name('updatePositionStatus');
