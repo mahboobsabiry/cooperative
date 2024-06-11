@@ -25,21 +25,14 @@ class COALController extends Controller
     // Index
     public function index()
     {
-        if (Auth::user()->isAdmin()) {
-            $coal = COAL::all()->where('status', 1);
-        } else {
-            $coal = Auth::user()->coal->where('status', 1);
-        }
+        $coal = COAL::all()->where('status', 1);
+
         return view('admin.asycuda.coal.index', compact('coal'));
     }
 
     public function expired()
     {
-        if (Auth::user()->isAdmin()) {
-            $coal = COAL::all()->where('status', 0);
-        } else {
-            $coal = Auth::user()->coal->where('status', 0);
-        }
+        $coal = COAL::all()->where('status', 0);
         return view('admin.asycuda.coal.expired', compact('coal'));
     }
 
