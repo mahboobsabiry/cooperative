@@ -147,22 +147,22 @@
                 <!--/==/ End of Contact Information -->
             </div>
             <div class="col-lg-9 col-md-12">
-                <div class="card custom-card main-content-body-profile">
-                    <!-- Card Body -->
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
 
-                        <!-- Header -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="font-weight-bold">تبدیل بست کارمند به اداره/ارگان دیگر</div>
-                            </div>
-                            <div class="col-md-6 text-left">
-
-                            </div>
+                <div class="card">
+                    <!-- Header -->
+                    <div class="card-header row">
+                        <div class="col-md-6">
+                            <div class="font-weight-bold">تبدیل بست کارمند به اداره/ارگان دیگر</div>
                         </div>
+                        <div class="col-md-6 text-left">
 
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body">
                         <!-- Form -->
                         <form method="post" action="{{ route('admin.office.employees.position_convert', $employee->id) }}" class="background_form" enctype="multipart/form-data">
                             @csrf
