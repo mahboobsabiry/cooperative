@@ -200,6 +200,10 @@
                                         معلق
                                     @elseif($employee->status == 5)
                                         از اداره/ارگان دیگر طور خدمتی آمده است.
+                                        <br>
+                                        @if($employee->on_duty == 1)
+                                            <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
+                                        @endif
                                     @endif
                                 </span>
                             @endif

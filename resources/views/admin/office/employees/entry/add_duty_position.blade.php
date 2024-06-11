@@ -57,22 +57,43 @@
                             <h4 class="pro-user-username text-dark mt-2 mb-0">
                                 <span>{{ $employee->name }} {{ $employee->last_name }}</span>
                             </h4>
-                            <!-- Position -->
-                            @can('office_position_view')
-                                <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->place }})</a>
+
+                            @if($employee->status == 0)
+                                <!-- Position -->
+                                @can('office_position_view')
+                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->place }})</a>
+                                @else
+                                    <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }} ({{ $employee->position->place }})</p>
+                                @endcan
+                                @if($employee->on_duty == 1)
+                                    <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
+                                @endif
+                                <!-- Employee Star -->
+                                <p class="user-info-rating">
+                                    @for($i=1; $i<=$employee->position->position_number; $i++)
+                                        <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                    @endfor
+                                </p>
+                                <!--/==/ End of Employee Star -->
                             @else
-                                <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }} ({{ $employee->position->place }})</p>
-                            @endcan
-                            @if($employee->on_duty == 1)
-                                <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
+                                <span class="text-danger">
+                                    @if($employee->status == 1)
+                                        تقاعد نموده است
+                                    @elseif($employee->status == 2)
+                                        منفک گردیده است
+                                    @elseif($employee->status == 3)
+                                        تبدیل گردیده است
+                                    @elseif($employee->status == 4)
+                                        معلق
+                                    @elseif($employee->status == 5)
+                                        از اداره/ارگان دیگر طور خدمتی آمده است.
+                                        <br>
+                                        @if($employee->on_duty == 1)
+                                            <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
+                                        @endif
+                                    @endif
+                                </span>
                             @endif
-                            <!-- Employee Star -->
-                            <p class="user-info-rating">
-                                @for($i=1; $i<=$employee->position->position_number; $i++)
-                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                @endfor
-                            </p>
-                            <!--/==/ End of Employee Star -->
                         </div>
                     </div>
                 </div>
@@ -153,8 +174,16 @@
                                         <p class="mb-2">@lang('form.dutyPosition'): <span class="tx-danger">*</span></p>
                                         <select class="form-control select2" name="position" id="position">
                                             <option value="">@lang('form.chooseOne')</option>
-                                            @foreach(\App\Models\Office\Position::all()->except($employee->position->id) as $position)
-                                                <option value="{{ $position->title }}">{{ $position->title }} ({{ $position->place }})</option>
+                                            @php
+                                            if ($employee->position_code) {
+                                                $codes = \App\Models\Office\PositionCode::all()->except($employee->position_code->id);
+                                            } else {
+                                                $codes = \App\Models\Office\PositionCode::all();
+                                            }
+                                            @endphp
+
+                                            @foreach($codes as $code)
+                                                <option value="{{ $code->position->title }}">{{ $code->position->title }} - {{ $code->position->place }} ({{ $code->position->place }})</option>
                                             @endforeach
                                         </select>
 

@@ -50,18 +50,19 @@
         <!-- Data Table -->
         <div class="row">
             <div class="col-lg-12">
-                <!-- Table Card -->
-                <div class="card custom-card main-content-body-profile">
-                    <!-- Table Card Body -->
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
 
+                <!-- Table Card -->
+                <div class="card">
+                    <div class="card-header tx-15 tx-bold">
+                        کارمندان منفکی ({{ count($fired_employees) }})
+                    </div>
+
+                    <!-- Table Card Body -->
+                    <div class="card-body">
                         <!-- Employees -->
-                        <div class="tab-pane active">
-                            <div class="main-content-label tx-13 mg-b-20">
-                                کارمندان منفکی ({{ count($fired_employees) }})
-                            </div>
+                        <div class="">
 
                             <!-- Table -->
                             <div class="table-responsive">

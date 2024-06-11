@@ -57,9 +57,10 @@
 
                 <!-- Table Card -->
                 <div class="card">
-                    <div class="card-header tx-16 font-weight-bold">
+                    <div class="card-header tx-15 font-weight-bold">
                         @lang('admin.sidebar.employees') ({{ count($employees) }})
                     </div>
+
                     <!-- Table Card Body -->
                     <div class="card-body">
                         <!-- Employees -->

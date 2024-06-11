@@ -83,6 +83,14 @@
                                         منفک گردیده است
                                     @elseif($employee->status == 3)
                                         تبدیل گردیده است
+                                    @elseif($employee->status == 4)
+                                        معلق
+                                    @elseif($employee->status == 5)
+                                        از اداره/ارگان دیگر طور خدمتی آمده است.
+                                        <br>
+                                        @if($employee->on_duty == 1)
+                                            <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
+                                        @endif
                                     @endif
                                 </span>
                             @endif
@@ -145,26 +153,28 @@
                         <h5>دکمه های کاربردی</h5>
                         <div class="row m-2">
                             <!-- Duty Position -->
-                            @if($employee->status == 0)
+                            @if($employee->status == 0 || $employee->status == 5)
                                 <!-- Change to main/duty position -->
                                 @can('office_employee_edit')
                                     <a class="btn btn-outline-info m-1"
                                        href="{{ route('admin.office.employees.add_duty_position', $employee->id) }}">@lang('pages.employees.onDuty')</a>
-                                    @if($employee->on_duty == 1)
-                                        <a class="btn btn-outline-success m-1" href="{{ route('admin.office.employees.change_to_main_position', $employee->id) }}">تبدیل به اصل بست</a>
+                                    @if($employee->status == 0)
+                                        @if($employee->on_duty == 1)
+                                            <a class="btn btn-outline-success m-1" href="{{ route('admin.office.employees.change_to_main_position', $employee->id) }}">تبدیل به اصل بست</a>
+                                        @endif
+
+                                        <!-- Retire Employee -->
+                                        @if($age >= 65)
+                                            <a class="btn btn-outline-success m-1" href="{{ route('admin.office.employees.retire_position', $employee->id) }}">تقاعد</a>
+                                        @endif
+
+                                        <!-- Fire Employee -->
+                                        <a class="modal-effect btn btn-outline-danger m-1" data-effect="effect-sign" data-toggle="modal"
+                                           href="#fire_employee{{ $employee->id }}">منفک</a>
+
+                                        <!-- Change Position Employee -->
+                                        <a class="btn btn-outline-dark m-1" href="{{ route('admin.office.employees.position_conversion', $employee->id) }}">تبدیل بست</a>
                                     @endif
-
-                                    <!-- Retire Employee -->
-                                    @if($age >= 65)
-                                        <a class="btn btn-outline-success m-1" href="{{ route('admin.office.employees.retire_position', $employee->id) }}">تقاعد</a>
-                                    @endif
-
-                                    <!-- Fire Employee -->
-                                    <a class="modal-effect btn btn-outline-danger m-1" data-effect="effect-sign" data-toggle="modal"
-                                       href="#fire_employee{{ $employee->id }}">منفک</a>
-
-                                    <!-- Change Position Employee -->
-                                    <a class="btn btn-outline-dark m-1" href="{{ route('admin.office.employees.position_conversion', $employee->id) }}">تبدیل بست</a>
                                 @endcan
 
                                 @include('admin.office.employees.inc.modals')
@@ -178,22 +188,22 @@
             </div>
 
             <div class="col-lg-9 col-md-12">
-                <div class="card custom-card main-content-body-profile">
-                    <!-- Card Body -->
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
 
-                        <!-- Header -->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="font-weight-bold">سوابق کاری کارمند (<span class="text-info">شروع وظیفه در این ریاست از تاریخ {{ $employee->start_job }}</span>)</div>
-                            </div>
-                            <div class="col-md-6 text-left">
-
-                            </div>
+                <div class="card">
+                    <!-- Header -->
+                    <div class="card-header row">
+                        <div class="col-md-6">
+                            <div class="font-weight-bold">سوابق کاری کارمند (<span class="text-info">شروع وظیفه در این ریاست از تاریخ {{ $employee->start_job }}</span>)</div>
                         </div>
+                        <div class="col-md-6 text-left">
 
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body">
                         <div class="table-responsive mt-2">
                             <table class="table table-bordered export-table border-top key-buttons display text-nowrap w-100">
                                 <thead>
