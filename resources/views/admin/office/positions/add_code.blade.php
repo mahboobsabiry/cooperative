@@ -15,7 +15,7 @@
                     <!-- Code -->
                     <div class="form-group @error('code') form-group-danger @enderror">
                         <p>@lang('form.code'): <span class="text-danger">*</span></p>
-                        <input type="text" name="code" id="code" class="form-control @error('code') form-control-danger @enderror" value="001">
+                        <input type="text" name="code" id="code" class="form-control @error('code') form-control-danger @enderror" required>
                     </div>
 
                     <!-- Extra Info -->
