@@ -6,6 +6,7 @@ use App\Models\File;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -32,5 +33,11 @@ class COAL extends Model
     public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'transaction');
+    }
+
+    // Experiences
+    public function experiences() : HasMany
+    {
+        return $this->hasMany(CalExp::class, 'cal_id', 'id');
     }
 }

@@ -102,6 +102,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::post('cal/upload-file/{id}', [COALController::class, 'upload_file'])->name('coal.upload_file');
         // Delete File
         Route::post('cal/delete-file/{id}', [COALController::class, 'delete_file'])->name('coal.delete_file');
+        Route::get('add-cal-exp/{id}', [COALController::class, 'add_cal_exp'])->name('coal.add_cal_exp');
+        Route::post('store-cal-exp/{id}', [COALController::class, 'store_cal_exp'])->name('coal.store_cal_exp');
     });
 
     // ====== Office Routes ======

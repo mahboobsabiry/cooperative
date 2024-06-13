@@ -3,11 +3,10 @@
 @section('title', 'جواز فعالیت شرکت ' . $cal->company_name)
 <!-- Extra Styles -->
 @section('extra_css')
-    @if(app()->getLocale() == 'en')
-        <link href="{{ asset('assets/css/treeview.css') }}" rel="stylesheet">
-    @else
-        <link href="{{ asset('assets/css/treeview.css') }}" rel="stylesheet">
-    @endif
+    <!---DataTables css-->
+    <link href="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/assets/plugins/datatable/responsivebootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 <!--/==/ End of Extra Styles -->
 
@@ -81,6 +80,7 @@
                 <!-- Success Message -->
                 @include('admin.inc.alerts')
 
+                <!-- Details Card -->
                 <div class="card mb-2">
                     <!-- Personal Information -->
                     <div class="card-header tx-15 tx-bold">
@@ -209,7 +209,7 @@
                                     <div class="col-6 col-sm-5">
                                         <p class="fw-semi-bold mb-1"><strong>مدت اعتبار:</strong></p>
                                     </div>
-                                    <div class="col">{{ now()->diffInDays($cal->export_date) + now()->diffInDays($cal->expire_date) + 1 }}</div>
+                                    <div class="col">{{ now()->diffInDays($cal->export_date) + now()->diffInDays($cal->expire_date) + 1 }} روز</div>
                                 </div>
 
                                 <!-- Valid Time -->
@@ -247,27 +247,34 @@
                         </div>
                     </div>
 
-                    <!-- Card Body -->
+                    <div class="card-footer">
+                        <!-- Buttons -->
+                        @can('asy_coal_create')
+                            <div class="row">
+                                <p class="m-2"><a href="{{ route('admin.asycuda.coal.reg_form', $cal->id) }}" target="_blank" class="btn btn-outline-success">فورمه ثبت جواز شرکت</a></p>
+
+                                <p class="m-2"><a href="{{ route('admin.asycuda.coal.refresh', $cal->id) }}" class="btn btn-outline-danger">تازه سازی</a></p>
+                            </div>
+                        @endcan
+                    </div>
+                </div>
+                <!--/==/ End of Details Card -->
+
+                <!-- CAL Form Card -->
+                <div class="card mb-2">
+                    <div class="card-header">
+                        <div class="">
+                            <h5 class="font-weight-bold">فورم جواز فعالیت شرکت</h5>
+                            <p class="text-muted">فورم جواز فعالیت شرکت پس از تایید مراجع ذیربط و تصدیق مقامات ذیصلاح و سایر اسناد مرتبط اینجا نمایش داده می‌شود.</p>
+                        </div>
+                    </div>
+
                     <div class="card-body">
                         <!-- User Information Details -->
-                        <div class="p-2">
-
-                            <!-- Buttons -->
-                            @can('asy_coal_create')
-                                <div class="row">
-                                    <p class="m-2"><a href="{{ route('admin.asycuda.coal.reg_form', $cal->id) }}" target="_blank" class="btn btn-outline-success">فورمه ثبت جواز شرکت</a></p>
-
-                                    <p class="m-2"><a href="{{ route('admin.asycuda.coal.refresh', $cal->id) }}" class="btn btn-outline-danger">تازه سازی</a></p>
-                                </div>
-                            @endcan
+                        <div class="">
 
                             <!-- File -->
-                            <div class="col-md-8 bd m-2">
-                                <div class="m-2">
-                                    <h5 class="font-weight-bold">فورم جواز فعالیت شرکت</h5>
-                                    <p class="text-muted">فورم جواز فعالیت شرکت پس از تایید مراجع ذیربط و تصدیق مقامات ذیصلاح و سایر اسناد مرتبط اینجا نمایش داده می‌شود.</p>
-                                </div>
-
+                            <div class="col-md-12">
                                 <!-- Form -->
                                 <form method="post" action="{{ route('admin.asycuda.coal.upload_file', $cal->id) }}" enctype="multipart/form-data">
                                     @csrf
@@ -308,6 +315,9 @@
                         <!--/==/ End of Information Details -->
                     </div>
                 </div>
+                <!--/==/ End of CAL Form Card -->
+
+                @include('admin.asycuda.coal.resumes')
             </div>
         </div>
         <!--/==/ End of Row Content -->
@@ -317,8 +327,21 @@
 
 <!-- Extra Scripts -->
 @section('extra_js')
-    <script src="{{ asset('backend/assets/js/pages/user-scripts.js') }}"></script>
+    <!-- Data Table js -->
+    <script src="{{ asset('backend/assets/plugins/datatable/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/jszip.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.colVis.min.js') }}"></script>
 
+    <!-- Custom Scripts -->
+    <script src="{{ asset('assets/js/datatable.js') }}"></script>
     @include('admin.inc.status_scripts')
 @endsection
 <!--/==/ End of Extra Scripts -->
