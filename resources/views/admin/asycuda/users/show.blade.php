@@ -359,7 +359,7 @@
                         </div>
 
                         <div class="col-md-6 text-left">
-                            <a href="{{ route('admin.asycuda.users.add_user_exp', $asycuda_user->id) }}" class="btn btn-outline-primary">ثبت</a>
+                            <a href="{{ route('admin.asycuda.users.add_user_resume', $asycuda_user->id) }}" class="btn btn-outline-primary">ثبت</a>
                         </div>
                     </div>
 
@@ -383,22 +383,22 @@
                                 </thead>
 
                                 <tbody>
-                                @foreach($asycuda_user->experiences as $exp)
+                                @foreach($asycuda_user->resumes as $resume)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $exp->position }}</td>
-                                        <td>{{ $exp->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
-                                        <td>{{ $exp->doc_number }}</td>
-                                        <td>{{ $exp->doc_date }}</td>
-                                        <td>{{ $exp->user_status == 1 ? 'فعال' : 'غیرفعال' }}</td>
-                                        <td>{{ $exp->user_roles }}</td>
+                                        <td>{{ $resume->position }}</td>
+                                        <td>{{ $resume->position_type == 1 ? 'خدمتی' : 'اصل بست' }}</td>
+                                        <td>{{ $resume->doc_number }}</td>
+                                        <td>{{ $resume->doc_date }}</td>
+                                        <td>{{ $resume->user_status == 1 ? 'فعال' : 'غیرفعال' }}</td>
+                                        <td>{{ $resume->user_roles }}</td>
                                         <td>
-                                            <a href="{{ $exp->image ?? asset('assets/images/id-card-default.png') }}" target="_blank">
-                                                <img src="{{ $exp->image ?? asset('assets/images/id-card-default.png') }}" alt="{{ $exp->asy_user->employee->name }}" width="80">
+                                            <a href="{{ $resume->image ?? asset('assets/images/id-card-default.png') }}" target="_blank">
+                                                <img src="{{ $resume->image ?? asset('assets/images/id-card-default.png') }}" alt="{{ $resume->asy_user->employee->name }}" width="80">
                                             </a>
                                         </td>
-                                        <td>{{ $exp->info }}</td>
-                                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($exp->created_at)) }}</td>
+                                        <td>{{ $resume->info }}</td>
+                                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($resume->created_at)) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

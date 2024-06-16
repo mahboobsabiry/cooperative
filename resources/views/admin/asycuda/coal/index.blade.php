@@ -96,12 +96,12 @@
                                             <td>{{ $cal->owner_name }}</td>
                                             <td>{{ $cal->owner_phone }}</td>
                                             <td>
-                                                {{ now()->diffInDays($cal->export_date) + now()->diffInDays($cal->expire_date) + 1 }}
+                                                {{ now()->diffInDays(\Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $cal->export_date)->toCarbon()) + now()->diffInDays(\Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $cal->expire_date)->toCarbon()) + 1 }}
                                             </td>
                                             <td>
                                                 @php
-                                                    $v_date = now()->diffInDays($cal->expire_date);
-                                                    if (today() < $cal->expire_date) {
+                                                    $v_date = now()->diffInDays(\Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $cal->expire_date)->toCarbon());
+                                                    if (today() < \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $cal->expire_date)->toCarbon()) {
                                                         echo $v_date . " روز باقیمانده";
                                                     } else {
                                                         echo "تاریخ ختم شده";

@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
-class AsyUserExp extends Model
+class AsyUserResume extends Model
 {
     use HasFactory, HasPhoto;
 
-    protected $table = 'asy_users_exp';
+    protected $table = 'asy_user_resumes';
 
     protected $fillable = ['asy_user_id', 'position', 'position_type', 'doc_number', 'doc_date', 'username', 'password', 'user_status', 'user_roles', 'info'];
 

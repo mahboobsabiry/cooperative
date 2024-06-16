@@ -178,7 +178,7 @@
                     <!-- Card Body -->
                     <div class="card-body">
                         <!-- Form -->
-                        <form method="post" action="{{ route('admin.asycuda.users.store_user_exp', $asycuda_user->id) }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.asycuda.users.store_user_resume', $asycuda_user->id) }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">

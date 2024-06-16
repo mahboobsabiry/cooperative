@@ -7,7 +7,7 @@
         </div>
 
         <div class="col-md-6 text-left">
-            <a href="{{ route('admin.asycuda.coal.add_cal_exp', $cal->id) }}" class="btn btn-outline-primary">ثبت</a>
+            <a href="{{ route('admin.asycuda.coal.add_cal_resume', $cal->id) }}" class="btn btn-outline-primary">ثبت</a>
         </div>
     </div>
 
@@ -34,26 +34,26 @@
                 </thead>
 
                 <tbody>
-                @foreach($cal->experiences as $exp)
+                @foreach($cal->resumes as $resume)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $exp->cal->company_name }}</td>
-                        <td>{{ $exp->cal->company_tin }}</td>
-                        <td>{{ $exp->license_number }}</td>
-                        <td>{{ $exp->owner_name }}</td>
-                        <td>{{ $exp->owner_phone }}</td>
-                        <td>{{ $exp->export_date }}</td>
-                        <td>{{ $exp->expire_date }}</td>
-                        <td>{{ now()->diffInDays($exp->export_date) + now()->diffInDays($exp->expire_date) + 1 }} روز</td>
+                        <td>{{ $resume->cal->company_name }}</td>
+                        <td>{{ $resume->cal->company_tin }}</td>
+                        <td>{{ $resume->license_number }}</td>
+                        <td>{{ $resume->owner_name }}</td>
+                        <td>{{ $resume->owner_phone }}</td>
+                        <td>{{ $resume->export_date }}</td>
+                        <td>{{ $resume->expire_date }}</td>
+                        <td>{{ now()->diffInDays(\Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $resume->export_date)->toCarbon()) + now()->diffInDays(\Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $resume->expire_date)->toCarbon()) + 1 }} روز</td>
                         <td>
-                            <a href="{{ $exp->image ?? asset('assets/images/id-card-default.png') }}" target="_blank">
-                                <img src="{{ $exp->image ?? asset('assets/images/id-card-default.png') }}" alt="{{ $exp->cal->company_name }}" width="80">
+                            <a href="{{ $resume->image ?? asset('assets/images/id-card-default.png') }}" target="_blank">
+                                <img src="{{ $resume->image ?? asset('assets/images/id-card-default.png') }}" alt="{{ $resume->cal->company_name }}" width="80">
                             </a>
                         </td>
 
-                        <td>{{ $exp->address }}</td>
-                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($exp->created_at)) }}</td>
-                        <td>{{ $exp->info }}</td>
+                        <td>{{ $resume->address }}</td>
+                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($resume->created_at)) }}</td>
+                        <td>{{ $resume->info }}</td>
                     </tr>
                 @endforeach
                 </tbody>

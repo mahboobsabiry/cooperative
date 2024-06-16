@@ -17,9 +17,9 @@ class AsycudaUser extends Model
         return $this->belongsTo(Employee::class);
     }
 
-    // Have Many Experiences
-    public function experiences()
+    // Have Many Resumes
+    public function resumes()
     {
-        return $this->hasMany(AsyUserExp::class, 'asy_user_id', 'id');
+        return $this->hasMany(AsyUserResume::class, 'asy_user_id', 'id');
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Asycuda;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\COALRequest;
-use App\Models\Asycuda\CalExp;
+use App\Models\Asycuda\CalResume;
 use App\Models\Asycuda\COAL;
 use App\Models\File;
 use Illuminate\Http\Request;
@@ -226,15 +226,15 @@ class COALController extends Controller
         ]);
     }
 
-    // Add CAL Experience
-    public function add_cal_exp($id)
+    // Add CAL Resume
+    public function add_cal_resume($id)
     {
         $cal = COAL::find($id);
-        return view('admin.asycuda.coal.add_cal_exp', compact('cal'));
+        return view('admin.asycuda.coal.add_cal_resume', compact('cal'));
     }
 
-    // Store CAL Experience
-    public function store_cal_exp(Request $request, $id)
+    // Store CAL Resume
+    public function store_cal_resume(Request $request, $id)
     {
         $request->validate([
             'license_number'    => 'required|numeric|min:11|max:999999',
@@ -248,19 +248,19 @@ class COALController extends Controller
 
         $cal = COAL::find($id);
 
-        $exp = new CalExp();
-        $exp->user_id       = Auth::user()->id;
-        $exp->cal_id        = $cal->id;
-        $exp->company_name  = $cal->company_name;
-        $exp->company_tin   = $cal->company_tin;
-        $exp->license_number    = $request->license_number;
-        $exp->owner_name        = $request->owner_name;
-        $exp->owner_phone       = $request->owner_phone;
-        $exp->export_date       = $request->export_date;
-        $exp->expire_date       = $request->expire_date;
-        $exp->address           = $request->address;
-        $exp->info              = $request->info;
-        $exp->save();
+        $resume = new CalResume();
+        $resume->user_id       = Auth::user()->id;
+        $resume->cal_id        = $cal->id;
+        $resume->company_name  = $cal->company_name;
+        $resume->company_tin   = $cal->company_tin;
+        $resume->license_number    = $request->license_number;
+        $resume->owner_name        = $request->owner_name;
+        $resume->owner_phone       = $request->owner_phone;
+        $resume->export_date       = $request->export_date;
+        $resume->expire_date       = $request->expire_date;
+        $resume->address           = $request->address;
+        $resume->info              = $request->info;
+        $resume->save();
 
         $cal->update(['owner_name' => $request->owner_name, 'owner_phone' => $request->owner_phone, 'export_date' => $request->export_date, 'expire_date' => $request->expire_date, 'address' => $request->address]);
 
@@ -268,7 +268,7 @@ class COALController extends Controller
         if ($request->hasFile('license')) {
             $license = $request->file('license');
             $fileName = 'cal-license-' . time() . rand(111, 99999) . '.' . $license->getClientOriginalExtension();
-            $exp->storeImage($license->storeAs('coal/files/licenses', $fileName, 'public'));
+            $resume->storeImage($license->storeAs('coal/files/licenses', $fileName, 'public'));
 
             // New File
             $file = new File();

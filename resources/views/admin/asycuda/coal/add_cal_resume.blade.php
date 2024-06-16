@@ -62,7 +62,7 @@
                     <!-- Card Body -->
                     <div class="card-body">
                         <!-- Form -->
-                        <form method="post" action="{{ route('admin.asycuda.coal.store_cal_exp', $cal->id) }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.asycuda.coal.store_cal_resume', $cal->id) }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">

@@ -35,9 +35,9 @@ class COAL extends Model
         return $this->morphMany(File::class, 'transaction');
     }
 
-    // Experiences
-    public function experiences() : HasMany
+    // Resumes
+    public function resumes() : HasMany
     {
-        return $this->hasMany(CalExp::class, 'cal_id', 'id');
+        return $this->hasMany(CalResume::class, 'cal_id', 'id');
     }
 }

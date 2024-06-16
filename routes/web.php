@@ -88,8 +88,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::post('update-asy-user-status', [AsycudaUserController::class, 'updateAsyUserStatus'])->name('users.updateAsyUserStatus');
         Route::get('user/select-employee', [AsycudaUserController::class, 'select_employee'])->name('users.select.employee');
         Route::get('inactive-users', [AsycudaUserController::class, 'inactive'])->name('users.inactive');
-        Route::get('add-user-exp/{id}', [AsycudaUserController::class, 'add_user_exp'])->name('users.add_user_exp');
-        Route::post('store-user-exp/{id}', [AsycudaUserController::class, 'store_user_exp'])->name('users.store_user_exp');
+        Route::get('add-user-resume/{id}', [AsycudaUserController::class, 'add_user_resume'])->name('users.add_user_resume');
+        Route::post('store-user-resume/{id}', [AsycudaUserController::class, 'store_user_resume'])->name('users.store_user_resume');
 
         // COAL
         Route::resource('coal', COALController::class);
@@ -102,8 +102,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::post('cal/upload-file/{id}', [COALController::class, 'upload_file'])->name('coal.upload_file');
         // Delete File
         Route::post('cal/delete-file/{id}', [COALController::class, 'delete_file'])->name('coal.delete_file');
-        Route::get('add-cal-exp/{id}', [COALController::class, 'add_cal_exp'])->name('coal.add_cal_exp');
-        Route::post('store-cal-exp/{id}', [COALController::class, 'store_cal_exp'])->name('coal.store_cal_exp');
+        Route::get('add-cal-resume/{id}', [COALController::class, 'add_cal_resume'])->name('coal.add_cal_resume');
+        Route::post('store-cal-resume/{id}', [COALController::class, 'store_cal_resume'])->name('coal.store_cal_resume');
     });
 
     // ====== Office Routes ======

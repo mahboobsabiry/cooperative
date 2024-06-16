@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
-class CalExp extends Model
+class CalResume extends Model
 {
     use HasFactory, HasPhoto;
 
-    public $table = 'cal_exp';
+    protected $table = 'cal_resumes';
 
     protected $fillable = ['user_id', 'cal_id', 'company_name', 'company_tin', 'license_number', 'owner_name', 'owner_phone', 'export_date', 'expire_date', 'address', 'status', 'info'];
 

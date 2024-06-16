@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Asycuda;
 
 use App\Http\Controllers\Controller;
 use App\Models\Asycuda\AsycudaUser;
-use App\Models\Asycuda\AsyUserExp;
+use App\Models\Asycuda\AsyUserResume;
 use App\Models\Office\Employee;
 use App\Models\Office\Resume;
 use Illuminate\Http\Request;
@@ -151,15 +151,15 @@ class AsycudaUserController extends Controller
         }
     }
 
-    // Add Asycuda User Experience
-    public function add_user_exp($id)
+    // Add Asycuda User Resume
+    public function add_user_resume($id)
     {
         $asycuda_user = AsycudaUser::find($id);
-        return view('admin.asycuda.users.add_user_exp', compact('asycuda_user'));
+        return view('admin.asycuda.users.add_user_resume', compact('asycuda_user'));
     }
 
-    // Store Asycuda User Experience
-    public function store_user_exp(Request $request, $id)
+    // Store Asycuda User Resume
+    public function store_user_resume(Request $request, $id)
     {
         $request->validate([
             'position'  => 'required',
@@ -175,18 +175,18 @@ class AsycudaUserController extends Controller
 
         $asycuda_user = AsycudaUser::find($id);
 
-        $exp = new AsyUserExp();
-        $exp->asy_user_id   = $asycuda_user->id;
-        $exp->position      = $request->position;
-        $exp->position_type = $request->position_type;
-        $exp->doc_number    = $request->doc_number;
-        $exp->doc_date      = $request->doc_date;
-        $exp->username      = $request->username;
-        $exp->password      = $request->password;
-        $exp->user_status   = $request->user_status;
-        $exp->user_roles    = $request->user_roles;
-        $exp->info          = $request->info;
-        $exp->save();
+        $resume = new AsyUserResume();
+        $resume->asy_user_id   = $asycuda_user->id;
+        $resume->position      = $request->position;
+        $resume->position_type = $request->position_type;
+        $resume->doc_number    = $request->doc_number;
+        $resume->doc_date      = $request->doc_date;
+        $resume->username      = $request->username;
+        $resume->password      = $request->password;
+        $resume->user_status   = $request->user_status;
+        $resume->user_roles    = $request->user_roles;
+        $resume->info          = $request->info;
+        $resume->save();
 
         $asycuda_user->update(['user' => $request->username, 'password' => $request->password, 'roles' => $request->user_roles, 'status' => $request->user_status]);
 
@@ -194,7 +194,7 @@ class AsycudaUserController extends Controller
         if ($request->hasFile('photo')) {
             $avatar = $request->file('photo');
             $fileName = 'asy-user-doc-' . time() . '.' . $avatar->getClientOriginalExtension();
-            $exp->storeImage($avatar->storeAs('asycuda/users/docs', $fileName, 'public'));
+            $resume->storeImage($avatar->storeAs('asycuda/users/docs', $fileName, 'public'));
         }
 
         return redirect()->route('admin.asycuda.users.show', $asycuda_user->id)->with([
