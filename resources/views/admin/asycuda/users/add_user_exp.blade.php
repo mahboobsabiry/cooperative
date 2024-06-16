@@ -164,19 +164,19 @@
 
             <!-- Large Part -->
             <div class="col-lg-9 col-md-12">
+                <!-- Errors Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Card -->
-                <div class="card custom-card overflow-hidden">
+                <div class="card">
+                    <!-- Form Title -->
+                    <div class="card-header">
+                        <h6 class="card-title mb-1">ثبت سوابق حساب کاربری سیستم اسیکودا ({{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }})</h6>
+                        <p class="text-muted card-sub-title">ثبت سوابق فعالیت حساب کاربری سیستم اسیکودا کارمندان گمرک بلخ اینجا انجام میشود.</p>
+                    </div>
+
                     <!-- Card Body -->
                     <div class="card-body">
-                        <!-- Errors Message -->
-                        @include('admin.inc.alerts')
-
-                        <!-- Form Title -->
-                        <div>
-                            <h6 class="card-title mb-1">ثبت سوابق حساب کاربری سیستم اسیکودا ({{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }})</h6>
-                            <p class="text-muted card-sub-title">ثبت سوابق فعالیت حساب کاربری سیستم اسیکودا کارمندان گمرک بلخ اینجا انجام میشود.</p>
-                        </div>
-
                         <!-- Form -->
                         <form method="post" action="{{ route('admin.asycuda.users.store_user_exp', $asycuda_user->id) }}" enctype="multipart/form-data">
                             @csrf

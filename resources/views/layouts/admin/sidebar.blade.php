@@ -95,9 +95,9 @@
 
                     <a class="nav-link with-sub" href="javascript:void(0)">
                         <i class="ion ion-ios-desktop"></i>
-                        @if(count(\App\Models\Asycuda\COAL::all()->where('expire_date', "<=", today())->where('status', 1)) >= 1)
-                            <span class="pulse"></span>
-                        @endif
+{{--                        @if(count(\App\Models\Asycuda\COAL::all()->where('expire_date', "<=", today())->where('status', 1)) >= 1)--}}
+{{--                            <span class="pulse"></span>--}}
+{{--                        @endif--}}
                         <span class="sidemenu-label">مدیریت عمومی سیستم</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
@@ -128,9 +128,9 @@
                                    href="{{ route('admin.asycuda.coal.index') }}">
                                     جواز فعالیت شرکت ها
                                     ({{ count(\App\Models\Asycuda\COAL::all()->where('status', 1)) }})
-                                    @if(count(\App\Models\Asycuda\COAL::all()->where('expire_date', "<=", today())->where('status', 1)) >= 1)
-                                        &nbsp;<span class="fas fa-building fa-pulse text-danger"></span>
-                                    @endif
+{{--                                    @if(count(\App\Models\Asycuda\COAL::all()->where('expire_date', "<=", today())->where('status', 1)) >= 1)--}}
+{{--                                        &nbsp;<span class="fas fa-building fa-pulse text-danger"></span>--}}
+{{--                                    @endif--}}
                                 </a>
                             </li>
 

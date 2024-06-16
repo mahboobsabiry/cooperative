@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Asycuda;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\COALRequest;
+use App\Models\Asycuda\CalExp;
 use App\Models\Asycuda\COAL;
 use App\Models\File;
 use Illuminate\Http\Request;
@@ -64,10 +65,10 @@ class COALController extends Controller
         $cal->license_number    = $request->license_number;
 
         // Convert Jalali to Georgian & Save to the DB
-        $export_date = Jalalian::fromFormat('Y/m/d', $request->export_date)->toCarbon();
-        $cal->export_date       = $export_date;
-        $expire_date = Jalalian::fromFormat('Y/m/d', $request->expire_date)->toCarbon();
-        $cal->expire_date   = $expire_date;
+        // $export_date = Jalalian::fromFormat('Y/m/d', $request->export_date)->toCarbon();
+        $cal->export_date   = $request->export_date;
+        // $expire_date = Jalalian::fromFormat('Y/m/d', $request->expire_date)->toCarbon();
+        $cal->expire_date   = $request->expire_date;
 
         $cal->owner_name    = $request->owner_name;
         $cal->owner_phone   = $request->owner_phone;
@@ -141,10 +142,10 @@ class COALController extends Controller
         $cal->license_number    = $request->license_number;
 
         // Convert Jalali to Georgian & Save to the DB
-        $export_date = Jalalian::fromFormat('Y/m/d', $request->export_date)->toCarbon();
-        $cal->export_date       = $export_date;
-        $expire_date = Jalalian::fromFormat('Y/m/d', $request->expire_date)->toCarbon();
-        $cal->expire_date   = $expire_date;
+        // $export_date = Jalalian::fromFormat('Y/m/d', $request->export_date)->toCarbon();
+        $cal->export_date   = $request->export_date;
+        // $expire_date = Jalalian::fromFormat('Y/m/d', $request->expire_date)->toCarbon();
+        $cal->expire_date   = $request->expire_date;
 
         $cal->owner_name    = $request->owner_name;
         $cal->owner_phone   = $request->owner_phone;
@@ -221,6 +222,64 @@ class COALController extends Controller
         $file->delete();
         return redirect()->back()->with([
             'message'   => 'سند موفقانه حذف گردید.',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Add CAL Experience
+    public function add_cal_exp($id)
+    {
+        $cal = COAL::find($id);
+        return view('admin.asycuda.coal.add_cal_exp', compact('cal'));
+    }
+
+    // Store CAL Experience
+    public function store_cal_exp(Request $request, $id)
+    {
+        $request->validate([
+            'license_number'    => 'required|numeric|min:11|max:999999',
+            'owner_name'        => 'required',
+            'owner_phone'       => 'required',
+            'export_date'       => 'required',
+            'expire_date'       => 'required',
+            'address'           => 'required',
+            'info'              => 'nullable'
+        ]);
+
+        $cal = COAL::find($id);
+
+        $exp = new CalExp();
+        $exp->user_id       = Auth::user()->id;
+        $exp->cal_id        = $cal->id;
+        $exp->company_name  = $cal->company_name;
+        $exp->company_tin   = $cal->company_tin;
+        $exp->license_number    = $request->license_number;
+        $exp->owner_name        = $request->owner_name;
+        $exp->owner_phone       = $request->owner_phone;
+        $exp->export_date       = $request->export_date;
+        $exp->expire_date       = $request->expire_date;
+        $exp->address           = $request->address;
+        $exp->info              = $request->info;
+        $exp->save();
+
+        $cal->update(['owner_name' => $request->owner_name, 'owner_phone' => $request->owner_phone, 'export_date' => $request->export_date, 'expire_date' => $request->expire_date, 'address' => $request->address]);
+
+        //  Has File && Save
+        if ($request->hasFile('license')) {
+            $license = $request->file('license');
+            $fileName = 'cal-license-' . time() . rand(111, 99999) . '.' . $license->getClientOriginalExtension();
+            $exp->storeImage($license->storeAs('coal/files/licenses', $fileName, 'public'));
+
+            // New File
+            $file = new File();
+            $fileName = 'cal-file-' . time() . '.' . $request->file('license')->getClientOriginalExtension();
+            $request->file('license')->storeAs('coal/files', $fileName, 'public');
+            $file->path   = $fileName;
+            $cal->files()->save($file);
+        }
+
+        return redirect()->route('admin.asycuda.coal.show', $cal->id)->with([
+            'message'   => 'موفقانه ثبت گردید!',
             'alertType' => 'success'
         ]);
     }

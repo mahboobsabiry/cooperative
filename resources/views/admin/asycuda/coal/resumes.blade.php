@@ -50,6 +50,7 @@
                                 <img src="{{ $exp->image ?? asset('assets/images/id-card-default.png') }}" alt="{{ $exp->cal->company_name }}" width="80">
                             </a>
                         </td>
+
                         <td>{{ $exp->address }}</td>
                         <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($exp->created_at)) }}</td>
                         <td>{{ $exp->info }}</td>

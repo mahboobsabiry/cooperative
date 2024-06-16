@@ -193,7 +193,7 @@
                                     <div class="col-6 col-sm-5">
                                         <p class="fw-semi-bold mb-1"><strong>تاریخ صدور جواز:</strong></p>
                                     </div>
-                                    <div class="col">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->export_date)) }}</div>
+                                    <div class="col">{{ $cal->export_date }}</div>
                                 </div>
 
                                 <!-- License Expire Date -->
@@ -201,7 +201,7 @@
                                     <div class="col-6 col-sm-5">
                                         <p class="fw-semi-bold mb-1"><strong>تاریخ ختم جواز:</strong></p>
                                     </div>
-                                    <div class="col">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($cal->expire_date)) }}</div>
+                                    <div class="col">{{ $cal->expire_date }}</div>
                                 </div>
 
                                 <!-- Valid Days -->
@@ -209,7 +209,7 @@
                                     <div class="col-6 col-sm-5">
                                         <p class="fw-semi-bold mb-1"><strong>مدت اعتبار:</strong></p>
                                     </div>
-                                    <div class="col">{{ now()->diffInDays($cal->export_date) + now()->diffInDays($cal->expire_date) + 1 }} روز</div>
+                                    <div class="col">{{ now()->diffInDays(\Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $cal->export_date)->toCarbon()) + now()->diffInDays(\Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $cal->expire_date)->toCarbon()) + 1 }} روز</div>
                                 </div>
 
                                 <!-- Valid Time -->
@@ -219,8 +219,8 @@
                                     </div>
                                     <div class="col">
                                         @php
-                                            $v_date = now()->diffInDays($cal->expire_date);
-                                            if (today() < $cal->expire_date) {
+                                            $v_date = now()->diffInDays(\Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $cal->expire_date)->toCarbon());
+                                            if (today() < \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $cal->expire_date)->toCarbon()) {
                                                 echo $v_date . " روز باقیمانده";
                                             } else {
                                                 echo "تاریخ ختم شده";

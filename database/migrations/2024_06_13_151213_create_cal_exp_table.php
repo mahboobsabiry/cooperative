@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('cal_id');
-            $table->string('company_name')->unique();
-            $table->bigInteger('company_tin')->unique();
+            $table->string('company_name');
+            $table->bigInteger('company_tin');
             $table->bigInteger('license_number')->unique();
             $table->string('owner_name');
             $table->string('owner_phone')->nullable();
