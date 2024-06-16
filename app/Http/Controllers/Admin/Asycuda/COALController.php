@@ -272,8 +272,8 @@ class COALController extends Controller
 
             // New File
             $file = new File();
-            $fileName = 'cal-file-' . time() . '.' . $request->file('license')->getClientOriginalExtension();
-            $request->file('license')->storeAs('coal/files', $fileName, 'public');
+            $fileName = 'cal-file-' . time() . '.' . $license->getClientOriginalExtension();
+            $license->storeAs('coal/files', $fileName, 'public');
             $file->path   = $fileName;
             $cal->files()->save($file);
         }
