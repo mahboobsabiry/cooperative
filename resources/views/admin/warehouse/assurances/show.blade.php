@@ -83,79 +83,141 @@
                     <div class="card-header tx-15 tx-bold">
                         @lang('global.details')
                     </div>
-
                     <!-- Card Body -->
-                    <div class="card-body">
-                        <!-- User Information Details -->
-                        <div class="p-2">
-                            <!-- Personal Information Table -->
-                            <div class="table-responsive ">
-                                <table class="table table-bordered">
-                                    <!-- Table 1 -->
-                                    <tbody class="p-0">
-                                    <!-- Header -->
-                                    <tr>
-                                        <th><strong># </strong></th>
-                                        <th><strong>نام شرکت </strong></th>
-                                        <th><strong>نوع جنس </strong></th>
-                                        <th><strong>مقدار تضمین </strong></th>
-                                        <th><strong>نمبر استعلام </strong></th>
-                                        <th><strong>تاریخ استعلام </strong></th>
-                                    </tr>
+                    <div class="card-body" style="background-color: #F7F9FCFF">
+                        <div class="row">
+                            <!-- General Information -->
+                            <div class="col-lg col-xxl-5">
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات عمومی</h6>
+                                <!-- ID -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">ID:</p>
+                                    </div>
+                                    <div class="col">ID-{{ $assurance->id }}</div>
+                                </div>
 
-                                    <!-- Body -->
-                                    <tr>
-                                        <td>{{ $assurance->id }}</td>
-                                        <td>{{ $assurance->company->name }}</td>
-                                        <td>{{ $assurance->good_name }}</td>
-                                        <td>{{ $assurance->assurance_total }}</td>
-                                        <td>{{ $assurance->inquiry_number }}</td>
-                                        <td>{{ $assurance->inquiry_date }}</td>
-                                    </tr>
-                                    </tbody>
-                                    <!--/==/ End of Table 1 -->
+                                <!-- Company Name -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">اسم شرکت:</p>
+                                    </div>
+                                    <div class="col">{{ $assurance->company->name }}</div>
+                                </div>
 
-                                    <!-- Table 2 -->
-                                    <tbody class="p-0">
-                                    <!-- Header -->
-                                    <tr>
-                                        <th><strong>نمبر آویز بانکی </strong></th>
-                                        <th><strong>تاریخ آویز بانکی </strong></th>
-                                        <th><strong>تاریخ ختم </strong></th>
-                                        <th><strong>تعداد روز </strong></th>
-                                        <th><strong>تعداد روز های باقیمانده </strong></th>
-                                        <th><strong>علت </strong></th>
-                                    </tr>
+                                <!-- Company TIN -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">نمبر تشخیصیه شرکت:</p>
+                                    </div>
+                                    <div class="col">{{ $assurance->company->tin }}</div>
+                                </div>
 
-                                    <!-- Body -->
-                                    <tr>
-                                        <td>{{ $assurance->bank_tt_number }}</td>
-                                        <td>{{ $assurance->bank_tt_date }}</td>
-                                        <td>{{ $assurance->expire_date }}</td>
-                                        <td>
-                                            @php
-                                                $convert_inq_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->inquiry_date)->toCarbon();
-                                                $convert_exp_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->expire_date)->toCarbon();
-                                                echo $convert_inq_date->diffInDays($convert_exp_date) . ' روز';
-                                            @endphp
-                                        </td>
-                                        <td>
-                                            @php
-                                                $convert_exp_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->expire_date)->toCarbon();
-                                                $diffInDays = today()->diffInDays($convert_exp_date);
-                                                if ($diffInDays <= 10) {
-                                                    echo "<span class='text-danger'>" . $diffInDays . " روز </span>";
-                                                } else {
-                                                    echo $diffInDays . " روز ";
-                                                }
-                                            @endphp
-                                        </td>
-                                        <td>{{ $assurance->reason }}</td>
-                                    </tr>
-                                    </tbody>
-                                    <!--/==/ End of Table 2 -->
-                                </table>
+                                <!-- Good Name -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">نوع جنس:</p>
+                                    </div>
+                                    <div class="col">{{ $assurance->good_name }}</div>
+                                </div>
+
+                                <!-- Assurance Amount -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">مقدار تضمین:</p>
+                                    </div>
+                                    <div class="col">{{ $assurance->assurance_total }}</div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">معلومات اضافی:</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="fst-italic text-400 mb-1">{{ $assurance->reason ?? '--' }}</p>
+                                    </div>
+                                </div>
                             </div>
+                            <!--/==/ End of General Information -->
+
+                            <!-- Assurance Information -->
+                            <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات تضمین</h6>
+
+                                <!-- Inquiry Number -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">نمبر استعلام:</p>
+                                    </div>
+                                    <div class="col">{{ $assurance->inquiry_number }}</div>
+                                </div>
+
+                                <!-- Inquiry Date -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">تاریخ استعلام:</p>
+                                    </div>
+                                    <div class="col">{{ $assurance->inquiry_date }}</div>
+                                </div>
+
+                                <!-- Bank TT Number -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">نمبر آویز بانکی:</p>
+                                    </div>
+                                    <div class="col">{{ $assurance->bank_tt_number }}</div>
+                                </div>
+
+                                <!-- Bank TT Date -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">تاریخ آویز بانکی:</p>
+                                    </div>
+                                    <div class="col">{{ $assurance->bank_tt_date }}</div>
+                                </div>
+
+                                <!-- Expire Date -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">تاریخ ختم:</p>
+                                    </div>
+                                    <div class="col">{{ $assurance->expire_date }}</div>
+                                </div>
+
+                                <!-- Number of Valid Days -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">اعتبار:</p>
+                                    </div>
+                                    <div class="col">
+                                        @php
+                                            $convert_inq_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->inquiry_date)->toCarbon();
+                                            $convert_exp_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->expire_date)->toCarbon();
+                                            echo $convert_inq_date->diffInDays($convert_exp_date) . ' روز';
+                                        @endphp
+                                    </div>
+                                </div>
+
+                                <!-- Number of Remaining Days -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1">تعداد روز باقیمانده:</p>
+                                    </div>
+                                    <div class="col">
+                                        @php
+                                            $convert_exp_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->expire_date)->toCarbon();
+                                            $diffInDays = today()->diffInDays($convert_exp_date);
+                                            if ($diffInDays <= 10) {
+                                                echo "<span class='text-danger'>" . $diffInDays . " روز </span>";
+                                            } else {
+                                                echo $diffInDays . " روز ";
+                                            }
+                                        @endphp
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/==/ End of Assurance Information -->
                         </div>
                     </div>
                 </div>
