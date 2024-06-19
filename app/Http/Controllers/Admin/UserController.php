@@ -208,19 +208,13 @@ class UserController extends Controller
 
         // Get Employee
         $employee   = $user->employee;
-        $head       = $employee->position->place == 'محصولی';
-        $border     = $employee->position->place == 'سرحدی';
-        $airport    = $employee->position->place == 'میدان هوایی';
-        $nAbad      = $employee->position->place == 'نایب آباد';
-        $mSayar     = $employee->position->place == 'مراقبت سیار';
-
-        // Store into users table
-        $user->employee_id  = $employee->id;
-        $user->name         = $employee->name;
-        $user->username     = $employee->emp_number;
-        $user->phone        = $employee->phone;
-        $user->email        = $employee->email;
         if ($employee) {
+            $head       = $employee->position->place == 'محصولی';
+            $border     = $employee->position->place == 'سرحدی';
+            $airport    = $employee->position->place == 'میدان هوایی';
+            $nAbad      = $employee->position->place == 'نایب آباد';
+            $mSayar     = $employee->position->place == 'مراقبت سیار';
+
             $user->is_admin = 1;
             if ($head) {
                 $user->place = 0;
@@ -233,14 +227,24 @@ class UserController extends Controller
             } elseif ($mSayar) {
                 $user->place = 4;
             }
+
+            $user->employee_id  = $employee->id;
+            $user->name         = $employee->name;
+            $user->username     = $employee->emp_number;
+            $user->phone        = $employee->phone;
+            $user->email        = $employee->email;
         } else {
+            $user->employee_id  = null;
+            $user->name         = $request->name;
+            $user->username     = $request->username;
+            $user->phone        = $request->phone;
+            $user->email        = $request->email;
             $user->is_admin = 0;
             $user->place    = $request->place;
         }
+
         $user->info         = $request->info;
         $user->save();
-
-        // $user->update($request->all());
 
         $user->roles()->sync($request->input('roles', []));
         $user->permissions()->sync($request->input('permissions', []));
@@ -258,7 +262,7 @@ class UserController extends Controller
 
         $message = trans('messages.users.updateUserMsg');
 
-        return redirect()->route('admin.users.show', $user->id)->with([
+        return redirect()->route('admin.users.show', encrypt($user->id))->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);
