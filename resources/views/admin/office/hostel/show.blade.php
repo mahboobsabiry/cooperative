@@ -76,18 +76,19 @@
         <!-- Row Content -->
         <div class="row">
             <div class="col-12">
-                <div class="card custom-card main-content-body-profile">
-                    <!-- Card Body -->
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
 
+                <!-- Details Card -->
+                <div class="card mb-2">
+                    <div class="card-header tx-15 tx-bold mg-b-20">
+                        @lang('global.details')
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body">
                         <!-- User Information Details -->
                         <div class="p-2">
-                            <div class="main-content-label tx-13 mg-b-20">
-                                @lang('global.details')
-                            </div>
-
                             <!-- Personal Information Table -->
                             <div class="table-responsive ">
                                 <table class="table table-bordered">
@@ -143,98 +144,99 @@
                         </div>
                     </div>
                 </div>
+                <!--/==/ End of Details Card -->
+
+                <!-- Employees -->
+                <div class="card mb-2">
+                    <!-- Table Title -->
+                    <div class="card-header">
+                        <h5 class="card-title tx-15 tx-bold">
+                            @lang('admin.sidebar.employees')
+                        </h5>
+                    </div>
+
+                    <div class="card-body tab-content h-100">
+                        <!-- Main Position Employees -->
+                        <div class="tab-pane active">
+                            <!-- Table -->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100"
+                                       style="width: 100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>@lang('form.photo')</th>
+                                        <th>@lang('form.idCard')</th>
+                                        <th>@lang('form.name')</th>
+                                        <th>@lang('form.fatherName')</th>
+                                        <th>@lang('form.position')</th>
+                                        <th>@lang('pages.positions.positionCode')</th>
+                                        <th>@lang('form.empNumber')</th>
+                                        <th>@lang('form.birthYear')</th>
+                                        <th>@lang('form.education')</th>
+                                        <th>@lang('form.phone')</th>
+                                        <th>@lang('form.mainProvince')</th>
+                                        <th>@lang('form.currentProvince')</th>
+                                        <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    @foreach($hostel->employees as $employee)
+                                        <tr>
+                                            <td>{{ $employee->id }}</td>
+                                            <td>
+                                                <a href="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}"
+                                                   target="_blank">
+                                                    <img src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}"
+                                                         width="50" class="rounded-50">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
+                                                   target="_blank">
+                                                    <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
+                                                         width="50" class="rounded-50">
+                                                </a>
+                                            </td>
+                                            <td>
+                                                @can('office_employee_view')
+                                                    <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
+                                                @else
+                                                    {{ $employee->name }} {{ $employee->last_name }}
+                                                @endcan
+                                            </td>
+                                            <td>{{ $employee->father_name ?? '' }}</td>
+                                            <td>{{ $employee->position->title ?? '' }}
+                                                - {{ $employee->position->position_number ?? '' }}</td>
+                                            <td>{{ $employee->position->code ?? '' }}</td>
+                                            <td>{{ $employee->emp_number ?? '' }}</td>
+                                            <td>{{ $employee->birth_year ?? '' }}</td>
+                                            <td>{{ $employee->education ?? '' }}</td>
+                                            <!-- Phone Number -->
+                                            <td class="tx-sm-12-f">
+                                                <a href="callto:{{ $employee->phone ?? '' }}"
+                                                   class="ctd">{{ $employee->phone ?? '' }}</a>
+                                                <a href="callto:{{ $employee->phone2 ?? '' }}"
+                                                   class="ctd">{{ $employee->phone2 ?? '' }}</a>
+                                            </td>
+                                            <td>{{ $employee->main_province ?? '' }}</td>
+                                            <td>{{ $employee->current_province ?? '' }}</td>
+                                            <td>{{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }} {{ $employee->duty_position ? ' - ' : '' }} {{ $employee->duty_position ?? '' }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--/==/ End of Table -->
+                        </div>
+                        <!--/==/ End of Main Position Employees -->
+                    </div>
+                </div>
+                <!--/==/ End of Employees -->
             </div>
         </div>
         <!--/==/ End of Row Content -->
-
-        <!-- Employees -->
-        <div class="card custom-card main-content-body-profile">
-            <!-- Table Title -->
-            <div class="nav main-nav-line mb-2">
-                <a class="nav-link active" data-toggle="tab" href="javascript:void(0);">
-                    @lang('admin.sidebar.employees')
-                </a>
-            </div>
-
-            <div class="card-body tab-content h-100">
-                <!-- Main Position Employees -->
-                <div class="tab-pane active">
-                    <!-- Table -->
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100"
-                               style="width: 100%;">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>@lang('form.photo')</th>
-                                <th>@lang('form.idCard')</th>
-                                <th>@lang('form.name')</th>
-                                <th>@lang('form.fatherName')</th>
-                                <th>@lang('form.position')</th>
-                                <th>@lang('pages.positions.positionCode')</th>
-                                <th>@lang('form.empNumber')</th>
-                                <th>@lang('form.birthYear')</th>
-                                <th>@lang('form.education')</th>
-                                <th>@lang('form.phone')</th>
-                                <th>@lang('form.mainProvince')</th>
-                                <th>@lang('form.currentProvince')</th>
-                                <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            @foreach($hostel->employees as $employee)
-                                <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>
-                                        <a href="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}"
-                                           target="_blank">
-                                            <img src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}"
-                                                 width="50" class="rounded-50">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
-                                           target="_blank">
-                                            <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
-                                                 width="50" class="rounded-50">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        @can('office_employee_view')
-                                            <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
-                                        @else
-                                            {{ $employee->name }} {{ $employee->last_name }}
-                                        @endcan
-                                    </td>
-                                    <td>{{ $employee->father_name ?? '' }}</td>
-                                    <td>{{ $employee->position->title ?? '' }}
-                                        - {{ $employee->position->position_number ?? '' }}</td>
-                                    <td>{{ $employee->position->code ?? '' }}</td>
-                                    <td>{{ $employee->emp_number ?? '' }}</td>
-                                    <td>{{ $employee->birth_year ?? '' }}</td>
-                                    <td>{{ $employee->education ?? '' }}</td>
-                                    <!-- Phone Number -->
-                                    <td class="tx-sm-12-f">
-                                        <a href="callto:{{ $employee->phone ?? '' }}"
-                                           class="ctd">{{ $employee->phone ?? '' }}</a>
-                                        <a href="callto:{{ $employee->phone2 ?? '' }}"
-                                           class="ctd">{{ $employee->phone2 ?? '' }}</a>
-                                    </td>
-                                    <td>{{ $employee->main_province ?? '' }}</td>
-                                    <td>{{ $employee->current_province ?? '' }}</td>
-                                    <td>{{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }} {{ $employee->duty_position ? ' - ' : '' }} {{ $employee->duty_position ?? '' }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--/==/ End of Table -->
-                </div>
-                <!--/==/ End of Main Position Employees -->
-            </div>
-        </div>
-        <!--/==/ End of Employees -->
     </div>
 @endsection
 <!--/==/ End of Page Content -->
