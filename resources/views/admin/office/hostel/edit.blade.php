@@ -65,6 +65,7 @@
                                                 <option value="محصولی" {{ $hostel->place == 'محصولی' ? 'selected' : '' }}>محصولی</option>
                                                 <option value="سرحدی" {{ $hostel->place == 'سرحدی' ? 'selected' : '' }}>سرحدی</option>
                                                 <option value="پورت یکم" {{ $hostel->place == 'پورت یکم' ? 'selected' : '' }}>پورت یکم</option>
+                                                <option value="مراقبت سیار" {{ $hostel->place == 'مراقبت سیار' ? 'selected' : '' }}>مراقبت سیار</option>
                                             </select>
 
                                             @error('place')

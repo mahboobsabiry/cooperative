@@ -72,6 +72,9 @@
                         <br>
                         @lang('pages.hostel.hostel') پورت یکم دارای
                         ({{ \App\Models\Office\Hostel::where('place', 'پورت یکم')->select('id')->distinct('id')->count() }}) اتاق
+                        <br>
+                        @lang('pages.hostel.hostel') مراقبت سیار دارای
+                        ({{ \App\Models\Office\Hostel::where('place', 'مراقبت سیار')->select('id')->distinct('id')->count() }}) اتاق
                     </div>
 
                     <div class="card-body">

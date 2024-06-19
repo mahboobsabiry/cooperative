@@ -63,6 +63,7 @@
                                                 <option value="محصولی">محصولی</option>
                                                 <option value="سرحدی">سرحدی</option>
                                                 <option value="پورت یکم">پورت یکم</option>
+                                                <option value="مراقبت سیار">مراقبت سیار</option>
                                             </select>
 
                                             @error('select')
