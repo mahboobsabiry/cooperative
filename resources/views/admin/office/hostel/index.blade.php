@@ -58,23 +58,25 @@
         <!-- Data Table -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Table Card -->
-                <div class="card custom-card main-content-body-profile">
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                <div class="card">
+                    <div class="card-header tx-15 tx-bold mg-b-20">
+                        @lang('pages.hostel.hostel') محصولی دارای
+                        ({{ \App\Models\Office\Hostel::where('place', 'محصولی')->select('id')->distinct('id')->count() }}) اتاق
+                        <br>
+                        @lang('pages.hostel.hostel')  سرحدی دارای
+                        ({{ \App\Models\Office\Hostel::where('place', 'سرحدی')->select('id')->distinct('id')->count() }}) اتاق
+                        <br>
+                        @lang('pages.hostel.hostel') پورت یکم دارای
+                        ({{ \App\Models\Office\Hostel::where('place', 'پورت یکم')->select('id')->distinct('id')->count() }}) اتاق
+                    </div>
+
+                    <div class="card-body">
                         <!-- All Positions -->
-                        <div class="tab-pane active">
-                            <div class="main-content-label tx-13 mg-b-20">
-                                @lang('pages.hostel.hostel') محصولی دارای
-                                ({{ \App\Models\Office\Hostel::where('place', 'محصولی')->select('id')->distinct('id')->count() }}) اتاق
-                                <br>
-                                @lang('pages.hostel.hostel')  سرحدی دارای
-                                ({{ \App\Models\Office\Hostel::where('place', 'سرحدی')->select('id')->distinct('id')->count() }}) اتاق
-                                <br>
-                                @lang('pages.hostel.hostel') پورت یکم دارای
-                                ({{ \App\Models\Office\Hostel::where('place', 'پورت یکم')->select('id')->distinct('id')->count() }}) اتاق
-                            </div>
+                        <div class="">
                             <!-- Table -->
                             <div class="table-responsive mt-2">
                                 <table class="table table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100">

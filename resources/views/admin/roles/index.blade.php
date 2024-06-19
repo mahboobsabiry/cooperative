@@ -43,19 +43,19 @@
         <!-- Data Table -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Messages -->
+                @include('admin.inc.alerts')
+
                 <!-- Table Card -->
-                <div class="card custom-card overflow-hidden">
+                <div class="card">
+                    <!-- Table Title -->
+                    <div class="card-header">
+                        <h6 class="card-title mb-1">@lang('admin.sidebar.roles')</h6>
+                        <p class="text-muted card-sub-title">در این قسمت صلاحیت های مرتبط با سیستم با مجوز های آن لیست می‌شود.</p>
+                    </div>
+
                     <!-- Table Card Body -->
                     <div class="card-body">
-                        <!-- Messages -->
-                        @include('admin.inc.alerts')
-
-                        <!-- Table Title -->
-                        <div>
-                            <h6 class="card-title mb-1">@lang('admin.sidebar.roles')</h6>
-                            <p class="text-muted card-sub-title">در این قسمت صلاحیت های مرتبط با سیستم با مجوز های آن لیست می‌شود.</p>
-                        </div>
-
                         <!-- Table -->
                         <div class="table-responsive">
                             <table class="table table-bordered export-table border-t0 key-buttons text-nowrap w-100">

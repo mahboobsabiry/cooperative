@@ -317,7 +317,7 @@
     @if($employee->asycuda_user)
         <div class="col-md-5 p-2 bd bd-secondary m-1">
             <h5 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">
-                <span class="badge badge-primary badge-pill">@if($employee->user && !$employee->asycuda_user) 4 @elseif(!$employee->user && $employee->asycuda_user) 3 @else 3 @endif</span>
+                <span class="badge badge-primary badge-pill">@if($employee->user && !$employee->asycuda_user) 4 @elseif(!$employee->user && $employee->asycuda_user) 3 @else 4 @endif</span>
                 معلومات حساب کاربری اسیکودا
             </h5>
 

@@ -79,6 +79,10 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name'      => 'office_view'
             ],
+            // Finance
+            [
+                'name'      => 'office_finance_view'
+            ],
             // Positions
             [
                 'name'      => 'office_position_view'

@@ -35,19 +35,19 @@
         <!-- Data Table -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Table Card -->
-                <div class="card custom-card overflow-hidden">
+                <div class="card">
+                    <!-- Table Title -->
+                    <div class="card-header">
+                        <h6 class="card-title mb-1">@lang('admin.sidebar.permissions')</h6>
+                        <p class="text-muted card-sub-title">Exporting data from a table can often be a key part of a complex application. The Buttons extension for DataTables provides three plug-ins that provide overlapping functionality for data export:</p>
+                    </div>
+
                     <!-- Table Card Body -->
                     <div class="card-body">
-                        <!-- Message -->
-                        @include('admin.inc.alerts')
-
-                        <!-- Table Title -->
-                        <div>
-                            <h6 class="card-title mb-1">@lang('admin.sidebar.permissions')</h6>
-                            <p class="text-muted card-sub-title">Exporting data from a table can often be a key part of a complex application. The Buttons extension for DataTables provides three plug-ins that provide overlapping functionality for data export:</p>
-                        </div>
-
                         <!-- Table -->
                         <div class="table-responsive">
                             <table id="exportexample" class="table table-bordered border-t0 key-buttons text-nowrap w-100" >

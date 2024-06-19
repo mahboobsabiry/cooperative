@@ -158,8 +158,8 @@
                     request()->is('admin/office/budgets/*') ? 'active show' : '' }}">
 
                         <a class="nav-link with-sub" href="javascript:void(0)">
-                            <i class="fe fe-"></i>
-                            <span class="sidemenu-label">@lang('admin.sidebar.positions')</span>
+                            <i class="fas fa-dollar-sign"></i>
+                            <span class="sidemenu-label">مالی</span>
                             <i class="angle fe fe-chevron-right"></i>
                         </a>
 
