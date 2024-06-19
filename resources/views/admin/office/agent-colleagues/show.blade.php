@@ -3,7 +3,10 @@
 @section('title', $colleague->name . ' -  همکار نماینده')
 <!-- Extra Styles -->
 @section('extra_css')
-
+    <!---DataTables css-->
+    <link href="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/assets/plugins/datatable/responsivebootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 <!--/==/ End of Extra Styles -->
 
@@ -66,15 +69,18 @@
         <!-- Row Content -->
         <div class="row">
             <div class="col-12">
-                <div class="card custom-card main-content-body-profile">
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
+
+                <div class="card">
+                    <div class="card-header tx-15 tx-bold">
+                        @lang('global.details')
+                    </div>
+
                     <!-- Card Body -->
                     <div class="card-body tab-content h-100">
                         <!-- Information Details -->
                         <div class="p-2 bd">
-                            <div class="main-content-label tx-13 mg-b-20">
-                                @lang('global.details')
-                            </div>
-
                             <!-- Personal Information Table -->
                             <div class="table-responsive ">
                                 <table class="table row table-borderless">
@@ -190,12 +196,10 @@
                             <!--/==/ End of Personal Information Table -->
 
                             <hr>
-                            <!-- Success Message -->
-                            @include('admin.inc.alerts')
-
                             <div class="main-content-label tx-13 mg-b-20 pt-2" style="border-top: 1px solid #ddd;">
                                 @lang('global.extraInfo')
                             </div>
+
                             <p>{!! $colleague->background !!}</p>
                             <p>{{ $colleague->info ?? '--' }}</p>
                         </div>
@@ -211,6 +215,20 @@
 
 <!-- Extra Scripts -->
 @section('extra_js')
+    <!-- Data Table js -->
+    <script src="{{ asset('backend/assets/plugins/datatable/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/jszip.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/fileexport/buttons.colVis.min.js') }}"></script>
 
+    <!-- Custom Scripts -->
+    <script src="{{ asset('assets/js/datatable.js') }}"></script>
 @endsection
 <!--/==/ End of Extra Scripts -->

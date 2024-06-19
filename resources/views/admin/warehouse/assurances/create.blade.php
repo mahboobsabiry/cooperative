@@ -36,20 +36,20 @@
         <!-- Main Row -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Errors Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Card -->
-                <div class="card custom-card overflow-hidden">
+                <div class="card">
+                    <!-- Form Title -->
+                    <div class="card-header">
+                        <h6 class="card-title tx-15 tx-bold mb-1">ثبت تضمین جدید</h6>
+                        <p class="text-muted card-sub-title">در این قسمت تضمین شرکت از بابت ترخیص اموال آن لیست می‌شود.</p>
+                    </div>
+
                     <!-- Card Body -->
                     <div class="card-body">
                         <div class="">
-                            <!-- Errors Message -->
-                            @include('admin.inc.alerts')
-
-                            <!-- Form Title -->
-                            <div>
-                                <h6 class="card-title mb-1">ثبت تضمین جدید</h6>
-                                <p class="text-muted card-sub-title">در این قسمت تضمین شرکت از بابت ترخیص اموال آن لیست می‌شود.</p>
-                            </div>
-
                             <!-- Form -->
                             <form method="post" action="{{ route('admin.warehouse.assurances.store') }}">
                                 @csrf

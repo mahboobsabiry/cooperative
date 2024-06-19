@@ -76,18 +76,18 @@
         <!-- Row Content -->
         <div class="row">
             <div class="col-12">
-                <div class="card custom-card main-content-body-profile">
-                    <!-- Card Body -->
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
 
+                <div class="card">
+                    <div class="card-header tx-15 tx-bold">
+                        @lang('global.details')
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body">
                         <!-- User Information Details -->
                         <div class="p-2">
-                            <div class="main-content-label tx-13 mg-b-20">
-                                @lang('global.details')
-                            </div>
-
                             <!-- Personal Information Table -->
                             <div class="table-responsive ">
                                 <table class="table table-bordered">

@@ -42,20 +42,20 @@
         <!-- Main Row -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Errors Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Card -->
-                <div class="card custom-card overflow-hidden">
+                <div class="card">
+                    <!-- Form Title -->
+                    <div class="card-header">
+                        <h6 class="card-title tx-15 tx-bold mb-1">@lang('pages.companies.agents')</h6>
+                        <p class="text-muted card-sub-title">You can add new record here.</p>
+                    </div>
+
                     <!-- Card Body -->
                     <div class="card-body">
                         <div class="">
-                            <!-- Errors Message -->
-                            @include('admin.inc.alerts')
-
-                            <!-- Form Title -->
-                            <div>
-                                <h6 class="card-title mb-1">@lang('pages.companies.agents')</h6>
-                                <p class="text-muted card-sub-title">You can add new record here.</p>
-                            </div>
-
                             <!-- Form -->
                             <form method="post" action="{{ route('admin.office.agents.update', $agent->id) }}" enctype="multipart/form-data">
                                 @csrf

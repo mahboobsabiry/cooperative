@@ -38,19 +38,19 @@
         <!-- Main Row -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Errors Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Card -->
-                <div class="card custom-card overflow-hidden">
+                <div class="card">
+                    <!-- Form Title -->
+                    <div class="card-header">
+                        <h6 class="card-title tx-15 tx-bold mb-1">ویرایش معلومات ({{ $colleague->name }})</h6>
+                    </div>
+
                     <!-- Card Body -->
                     <div class="card-body">
                         <div class="">
-                            <!-- Errors Message -->
-                            @include('admin.inc.alerts')
-
-                            <!-- Form Title -->
-                            <div>
-                                <h6 class="card-title mb-1">ویرایش معلومات ({{ $colleague->name }})</h6>
-                            </div>
-
                             <!-- Form -->
                             <form method="post" action="{{ route('admin.office.agent-colleagues.update', $colleague->id) }}" enctype="multipart/form-data">
                                 @csrf

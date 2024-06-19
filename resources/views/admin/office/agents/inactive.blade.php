@@ -58,16 +58,18 @@
         <!-- Data Table -->
         <div class="row">
             <div class="col-lg-12">
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Table Card -->
-                <div class="card custom-card main-content-body-profile">
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                <div class="card">
+                    <div class="card-header tx-15 tx-bold">
+                        نماینده های غیرفعال ({{ count($agents) }})
+                    </div>
+
+                    <div class="card-body">
                         <!-- All Positions -->
-                        <div class="tab-pane active">
-                            <div class="main-content-label tx-13 mg-b-20">
-                                نماینده های غیرفعال ({{ count($agents) }})
-                            </div>
+                        <div class="">
                             <!-- Table -->
                             <div class="table-responsive mt-2">
                                 <table class="table table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100">

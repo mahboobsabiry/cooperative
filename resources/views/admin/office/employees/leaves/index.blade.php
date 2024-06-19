@@ -162,21 +162,23 @@
             </div>
 
             <div class="col-lg-9 col-md-12">
+                <!-- Success Message -->
+                @include('admin.inc.alerts')
+
                 <!-- Table Card -->
-                <div class="card custom-card main-content-body-profile">
-                    <div class="card-body tab-content h-100">
-                        <!-- Success Message -->
-                        @include('admin.inc.alerts')
+                <div class="card">
+                    <div class="card-header tx-15 tx-bold">
+                        مجموع روز های رخصتی
+                        {{ $employee->name }} {{ $employee->last_name }}
+                        (<span class="text-info">{{ $employee->leaves ? $employee->leaves()->where('year', \Morilog\Jalali\Jalalian::now()->getYear())->sum('days') : '0' }}</span>)
+                        تعداد دفعات رخصتی این کارمند
+                        (<span class="text-info">{{ $employee->leaves->where('year', \Morilog\Jalali\Jalalian::now()->getYear())->count() }}</span>)
+                        در سال جاری
+                    </div>
+
+                    <div class="card-body">
                         <!-- All Leaves -->
-                        <div class="tab-pane active">
-                            <div class="main-content-label tx-15 mg-b-20">
-                                مجموع روز های رخصتی
-                                {{ $employee->name }} {{ $employee->last_name }}
-                                (<span class="text-info">{{ $employee->leaves ? $employee->leaves()->where('year', \Morilog\Jalali\Jalalian::now()->getYear())->sum('days') : '0' }}</span>)
-                                تعداد دفعات رخصتی این کارمند
-                                (<span class="text-info">{{ $employee->leaves->where('year', \Morilog\Jalali\Jalalian::now()->getYear())->count() }}</span>)
-                                 در سال جاری
-                            </div>
+                        <div class="">
                             <!-- Table -->
                             <div class="table-responsive mt-2">
                                 <table class="table table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100">
