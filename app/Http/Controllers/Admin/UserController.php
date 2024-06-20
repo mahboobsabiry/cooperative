@@ -300,10 +300,7 @@ class UserController extends Controller
             }
             $user = User::where('id', $data['user_id'])->first();
             $user->update(['status' => $status]);
-            $exp = $user->employee->experiences()->latest()->first();
-            if ($exp) {
-                $exp->update(['user_status' => $status]);
-            }
+
             return response()->json(['status' => $status, 'user_id' => $data['user_id']]);
         }
     }
