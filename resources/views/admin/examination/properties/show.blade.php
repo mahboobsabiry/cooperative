@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'تضمین - ' . $assurance->good_name)
+@section('title', 'جایداد - ' . $property->property_name)
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -23,7 +23,7 @@
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.warehouse.assurances.index') }}">تضمین ها</a>
+                        <a href="{{ route('admin.examination.properties.index') }}">تعرفه ترجیحی - جایدات اموال</a>
                     </li>
                     <li class="breadcrumb-item active"
                         aria-current="page">@lang('global.details')</li>
@@ -33,36 +33,36 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <div class="d-flex">
-                    @can('warehouse_assurance_delete')
+                    @can('examination_property_delete')
                         <div class="mr-2">
                             <!-- Delete -->
                             <a class="modal-effect btn btn-sm ripple btn-danger text-white"
                                data-effect="effect-sign" data-toggle="modal"
-                               href="#delete_record{{ $assurance->id }}"
+                               href="#delete_record{{ $property->id }}"
                                title="@lang('global.delete')">
                                 @lang('global.delete')
                                 <i class="fe fe-trash"></i>
                             </a>
 
-                            @include('admin.warehouse.assurances.delete')
+                            @include('admin.examination.properties.delete')
                         </div>
                     @endcan
 
-                    @can('warehouse_assurance_edit')
+                    @can('examination_property_edit')
                         <div class="mr-2">
                             <!-- Edit -->
                             <a class="btn ripple bg-dark btn-sm text-white"
-                               href="{{ route('admin.warehouse.assurances.edit', $assurance->id) }}">
+                               href="{{ route('admin.examination.properties.edit', $property->id) }}">
                                 @lang('global.edit')
                                 <i class="fe fe-edit"></i>
                             </a>
                         </div>
                     @endcan
 
-                    @can('warehouse_assurance_create')
+                    @can('examination_property_create')
                         <div class="mr-2">
                             <!-- Add -->
-                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.warehouse.assurances.create') }}">
+                            <a class="btn ripple btn-primary btn-sm" href="{{ route('admin.examination.properties.create') }}">
                                 @lang('global.new')
                                 <i class="fe fe-plus-circle"></i>
                             </a>
@@ -94,7 +94,7 @@
                                     <div class="col-5 col-sm-4">
                                         <p class="fw-semi-bold mb-1">ID:</p>
                                     </div>
-                                    <div class="col">ID-{{ $assurance->id }}</div>
+                                    <div class="col">ID-{{ $property->id }}</div>
                                 </div>
 
                                 <!-- Company Name -->
@@ -102,7 +102,7 @@
                                     <div class="col-5 col-sm-4">
                                         <p class="fw-semi-bold mb-1">اسم شرکت:</p>
                                     </div>
-                                    <div class="col">{{ $assurance->company->name }}</div>
+                                    <div class="col">{{ $property->company->name }}</div>
                                 </div>
 
                                 <!-- Company TIN -->
@@ -110,23 +110,23 @@
                                     <div class="col-5 col-sm-4">
                                         <p class="fw-semi-bold mb-1">نمبر تشخیصیه شرکت:</p>
                                     </div>
-                                    <div class="col">{{ $assurance->company->tin }}</div>
+                                    <div class="col">{{ $property->company->tin }}</div>
                                 </div>
 
-                                <!-- Good Name -->
+                                <!-- Document Number -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">نوع جنس:</p>
+                                        <p class="fw-semi-bold mb-1">نمبر مکتوب:</p>
                                     </div>
-                                    <div class="col">{{ $assurance->good_name }}</div>
+                                    <div class="col">{{ $property->doc_number }}</div>
                                 </div>
 
-                                <!-- Assurance Amount -->
+                                <!-- Document Date -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">مقدار تضمین:</p>
+                                        <p class="fw-semi-bold mb-1">تاریخ مکتوب:</p>
                                     </div>
-                                    <div class="col">{{ $assurance->assurance_total }}</div>
+                                    <div class="col">{{ $property->doc_date }}</div>
                                 </div>
 
                                 <!-- Description -->
@@ -135,7 +135,7 @@
                                         <p class="fw-semi-bold mb-1">معلومات اضافی:</p>
                                     </div>
                                     <div class="col">
-                                        <p class="fst-italic text-400 mb-1">{{ $assurance->reason ?? '--' }}</p>
+                                        <p class="fst-italic text-400 mb-1">{{ $property->info ?? '--' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -143,77 +143,80 @@
 
                             <!-- Assurance Information -->
                             <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
-                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات تضمین</h6>
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات جایداد</h6>
 
-                                <!-- Inquiry Number -->
+                                <!-- Property Name -->
                                 <div class="row">
-                                    <div class="col-6 col-sm-5">
-                                        <p class="fw-semi-bold mb-1">نمبر استعلام:</p>
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">نوع جنس:</p>
                                     </div>
-                                    <div class="col">{{ $assurance->inquiry_number }}</div>
+                                    <div class="col">{{ $property->property_name }}</div>
                                 </div>
 
-                                <!-- Inquiry Date -->
+                                <!-- Property Code & TSC -->
                                 <div class="row">
-                                    <div class="col-6 col-sm-5">
-                                        <p class="fw-semi-bold mb-1">تاریخ استعلام:</p>
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">کد جنس و TSC:</p>
                                     </div>
-                                    <div class="col">{{ $assurance->inquiry_date }}</div>
+                                    <div class="col">{{ $property->property_code . ' (TSC' . $property->ts_code . ')' }}</div>
                                 </div>
 
-                                <!-- Bank TT Number -->
+                                <!-- Weight -->
                                 <div class="row">
-                                    <div class="col-6 col-sm-5">
-                                        <p class="fw-semi-bold mb-1">نمبر آویز بانکی:</p>
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">مقدار جنس:</p>
                                     </div>
-                                    <div class="col">{{ $assurance->bank_tt_number }}</div>
+                                    <div class="col">{{ $property->weight }}<sup>{{ app()->getLocale() == 'en' ? 'kg' : 'کیلوگرام' }}</sup></div>
                                 </div>
 
-                                <!-- Bank TT Date -->
+                                <!-- Start Date -->
                                 <div class="row">
-                                    <div class="col-6 col-sm-5">
-                                        <p class="fw-semi-bold mb-1">تاریخ آویز بانکی:</p>
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">تاریخ شروع:</p>
                                     </div>
-                                    <div class="col">{{ $assurance->bank_tt_date }}</div>
+                                    <div class="col">{{ $property->start_date }}</div>
                                 </div>
 
-                                <!-- Expire Date -->
+                                <!-- End Date -->
                                 <div class="row">
-                                    <div class="col-6 col-sm-5">
+                                    <div class="col-5 col-sm-4">
                                         <p class="fw-semi-bold mb-1">تاریخ ختم:</p>
                                     </div>
-                                    <div class="col">{{ $assurance->expire_date }}</div>
+                                    <div class="col">{{ $property->end_date }}</div>
                                 </div>
 
                                 <!-- Number of Valid Days -->
                                 <div class="row">
-                                    <div class="col-6 col-sm-5">
-                                        <p class="fw-semi-bold mb-1">اعتبار:</p>
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">مدت اعتبار:</p>
                                     </div>
                                     <div class="col">
                                         @php
-                                            $convert_inq_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->inquiry_date)->toCarbon();
-                                            $convert_exp_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->expire_date)->toCarbon();
-                                            echo $convert_inq_date->diffInDays($convert_exp_date) . ' روز';
+                                            $start_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $property->start_date)->toCarbon();
+                                            $end_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $property->end_date)->toCarbon();
+                                            $valid_days = $start_date->diffInDays($end_date);
+                                            echo $valid_days;
                                         @endphp
                                     </div>
                                 </div>
 
                                 <!-- Number of Remaining Days -->
                                 <div class="row">
-                                    <div class="col-6 col-sm-5">
-                                        <p class="fw-semi-bold mb-1">تعداد روز باقیمانده:</p>
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">مقدار روز باقیمانده:</p>
                                     </div>
                                     <div class="col">
                                         @php
-                                            $convert_exp_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->expire_date)->toCarbon();
-                                            $diffInDays = today()->diffInDays($convert_exp_date);
-                                            if ($diffInDays <= 10) {
-                                                echo "<span class='text-danger'>" . $diffInDays . " روز </span>";
-                                            } else {
-                                                echo $diffInDays . " روز ";
-                                            }
+                                            $end_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $property->end_date)->toCarbon();
+                                            $remaining_days = now()->diffInDays($end_date);
                                         @endphp
+                                        @if($remaining_days > 10)
+                                            {{ $remaining_days }} روز
+                                        @else
+                                            <span class="text-danger">{{ $remaining_days }} روز</span>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <span class="fas fa-dollar-sign fa-pulse text-danger"></span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

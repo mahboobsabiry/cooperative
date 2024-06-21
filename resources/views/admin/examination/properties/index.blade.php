@@ -87,6 +87,7 @@
                                         <th>تاریخ ختم</th>
                                         <th>مدت اعتبار</th>
                                         <th>مدت باقیمانده</th>
+                                        <th>اسکن مکتوب</th>
                                         <th>معلومات اضافی</th>
                                         <th>تاریخ ثبت</th>
                                     </tr>
@@ -97,7 +98,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $property->user->name }}</td>
-                                            <td>{{ $property->company->name . ' - ' . $properties->company->tin }}</td>
+                                            <td>{{ $property->company->name . ' - ' . $property->company->tin }}</td>
                                             <td>{{ $property->doc_number }}</td>
                                             <td>{{ $property->doc_date }}</td>
                                             <td>
@@ -130,6 +131,13 @@
                                                     <span class="fas fa-dollar-sign fa-pulse text-danger"></span>
                                                 @endif
                                             </td>
+
+                                            <td>
+                                                <a href="{{ $property->image }}" target="_blank">
+                                                    <img src="{{ $property->image }}" alt="" width="70">
+                                                </a>
+                                            </td>
+
                                             <td>{{ $property->info }}</td>
                                             <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-F-d', strtotime($property->created_at)) }}</td>
                                         </tr>

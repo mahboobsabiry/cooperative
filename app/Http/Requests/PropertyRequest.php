@@ -30,7 +30,7 @@ class PropertyRequest extends FormRequest
             'doc_number'    => 'required',
             'doc_date'      => 'required',
             'property_name' => 'required|min:3|max:148',
-            'property_code' => 'required"numeric|max:9999999999',
+            'property_code' => 'required|numeric|max:9999999999',
             'ts_code'       => 'required|numeric|max:9999',
             'weight'        => 'required|numeric|min:11|max:99999999',
             'start_date'    => 'required',

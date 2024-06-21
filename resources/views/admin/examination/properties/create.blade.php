@@ -3,7 +3,12 @@
 @section('title', 'ثبت جایداد')
 <!-- Extra Styles -->
 @section('extra_css')
-
+    <!---Fileupload css-->
+    <link href="{{ asset('backend/assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet">
+    <!---Fancy uploader css-->
+    <link href="{{ asset('backend/assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet">
+    <!--Sumoselect css-->
+    <link href="{{ asset('backend/assets/plugins/sumoselect/sumoselect.css') }}" rel="stylesheet">
 @endsection
 <!--/==/ End of Extra Styles -->
 
@@ -51,7 +56,7 @@
                     <div class="card-body">
                         <div class="">
                             <!-- Form -->
-                            <form method="post" action="{{ route('admin.examination.properties.store') }}">
+                            <form method="post" action="{{ route('admin.examination.properties.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -150,9 +155,7 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Total Weight -->
-                                    </div>
 
-                                    <div class="col-md-6">
                                         <!-- Start Date -->
                                         <div class="form-group @error('start_date') has-danger @enderror">
                                             <p class="mb-2">از تاریخ: <span class="tx-danger">*</span></p>
@@ -163,17 +166,29 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Start Date -->
+                                    </div>
 
+                                    <div class="col-md-6">
                                         <!-- End Date -->
                                         <div class="form-group @error('end_date') has-danger @enderror">
                                             <p class="mb-2">الی تاریخ: <span class="tx-danger">*</span></p>
-                                            <input data-jdp data-jdp-max-date="today" type="text" id="end_date" class="form-control @error('end_date') form-control-danger @enderror" name="end_date" value="{{ old('end_date') }}" required>
+                                            <input data-jdp type="text" id="end_date" class="form-control @error('end_date') form-control-danger @enderror" name="end_date" value="{{ old('end_date') }}" required>
 
                                             @error('end_date')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <!--/==/ End of End Date -->
+
+                                        <!-- File -->
+                                        <div class="form-group @error('photo') has-danger @enderror" id="avatar_div">
+                                            <p class="mb-2">اسکن مکتوب:</p>
+                                            <input type="file" class="dropify" name="photo" accept="image/*" data-height="200" />
+                                            @error('photo')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of File -->
 
                                         <!-- Extra Info -->
                                         <div class="form-group @error('info') has-danger @enderror">
@@ -186,7 +201,7 @@
                                         </div>
                                         <!--/==/ End of Extra Info -->
 
-                                        <div class="form-group">
+                                        <div class="form-group float-left">
                                             <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
                                         </div>
                                     </div>
@@ -207,6 +222,16 @@
 
 <!-- Extra Scripts -->
 @section('extra_js')
+    <!--Fileuploads js-->
+    <script src="{{ asset('backend/assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+    <!--Fancy uploader js-->
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
+
     <!-- Form-elements js-->
     <script src="{{ asset('backend/assets/js/advanced-form-elements.js') }}"></script>
 

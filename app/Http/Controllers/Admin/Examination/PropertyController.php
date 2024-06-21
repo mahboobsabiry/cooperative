@@ -53,6 +53,7 @@ class PropertyController extends Controller
         $property->ts_code      = $request->ts_code;
         $property->weight       = $request->weight;
         $property->start_date   = $request->start_date;
+        $property->end_date     = $request->end_date;
         $property->info         = $request->info;
         $property->save();
 
@@ -83,7 +84,7 @@ class PropertyController extends Controller
     public function edit(Property $property)
     {
         $companies = Company::all()->where('status', 1);
-        return view('admin.examination.properties.show', compact('property', 'companies'));
+        return view('admin.examination.properties.edit', compact('property', 'companies'));
     }
 
     /**
@@ -100,6 +101,7 @@ class PropertyController extends Controller
         $property->ts_code      = $request->ts_code;
         $property->weight       = $request->weight;
         $property->start_date   = $request->start_date;
+        $property->end_date     = $request->end_date;
         $property->info         = $request->info;
         $property->save();
 

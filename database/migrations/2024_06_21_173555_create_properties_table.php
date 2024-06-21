@@ -17,14 +17,14 @@ return new class extends Migration
             $table->unsignedBigInteger('company_id');
             $table->string('doc_number');
             $table->date('doc_date');
-            $table->bigInteger('property_name');
+            $table->string('property_name');
             $table->bigInteger('property_code');
             $table->bigInteger('ts_code');
             $table->bigInteger('weight');
             $table->date('start_date');
             $table->date('end_date');
             $table->tinyInteger('status')->default(1);
-            $table->text('info');
+            $table->text('info')->nullable();
             $table->timestamps();
         });
     }
