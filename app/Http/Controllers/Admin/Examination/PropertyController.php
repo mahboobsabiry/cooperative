@@ -56,6 +56,13 @@ class PropertyController extends Controller
         $property->info         = $request->info;
         $property->save();
 
+        //  Has File && Save Avatar Image
+        if ($request->hasFile('photo')) {
+            $avatar = $request->file('photo');
+            $fileName = 'property-' . time() . rand(111, 99999) . '.' . $avatar->getClientOriginalExtension();
+            $property->storeImage($avatar->storeAs('examination/properties', $fileName, 'public'));
+        }
+
         return redirect()->route('admin.examination.properties.index')->with([
             'message'   => 'جایداد ثبت گردید!',
             'alertType' => 'success'
@@ -95,6 +102,13 @@ class PropertyController extends Controller
         $property->start_date   = $request->start_date;
         $property->info         = $request->info;
         $property->save();
+
+        //  Has File && Save Avatar Image
+        if ($request->hasFile('photo')) {
+            $avatar = $request->file('photo');
+            $fileName = 'property-' . time() . rand(111, 99999) . '.' . $avatar->getClientOriginalExtension();
+            $property->updateImage($avatar->storeAs('examination/properties', $fileName, 'public'));
+        }
 
         return redirect()->route('admin.examination.properties.index')->with([
             'message'   => 'جایداد بروزرسانی گردید!',

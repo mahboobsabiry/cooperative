@@ -70,96 +70,126 @@
                                         </div>
                                         <!--/==/ End of Company -->
 
-                                        <!-- Good Name -->
-                                        <div class="form-group @error('good_name') has-danger @enderror">
-                                            <p class="mb-2">نوع جنس: <span class="tx-danger">*</span></p>
-                                            <input type="text" id="good_name" class="form-control @error('good_name') form-control-danger @enderror" name="good_name" value="{{ old('good_name') }}" required>
-
-                                            @error('good_name')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Good Name -->
-
-                                        <!-- Assurance Total -->
-                                        <div class="form-group @error('assurance_total') has-danger @enderror">
-                                            <p class="mb-2">مقدار تضمین: <span class="tx-danger">*</span></p>
-                                            <input type="number" id="assurance_total" class="form-control @error('assurance_total') form-control-danger @enderror" name="assurance_total" value="{{ old('assurance_total') }}" required>
-
-                                            @error('assurance_total')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Assurance Total -->
-
-                                        <!-- Bank TT -->
+                                        <!-- Document Number && Date -->
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <!-- Bank TT Number -->
-                                                <div class="form-group @error('bank_tt_number') has-danger @enderror">
-                                                    <p class="mb-2">نمبر آویز بانکی: <span class="tx-danger">*</span></p>
-                                                    <input type="number" id="bank_tt_number" class="form-control @error('bank_tt_number') form-control-danger @enderror" name="bank_tt_number" value="{{ old('bank_tt_number') }}" required>
+                                                <!-- Document Number -->
+                                                <div class="form-group @error('doc_number') has-danger @enderror">
+                                                    <p class="mb-2">نمبر مکتوب: <span class="tx-danger">*</span></p>
+                                                    <input type="text" id="doc_number" class="form-control @error('doc_number') form-control-danger @enderror" name="doc_number" value="{{ old('doc_number') }}" required>
 
-                                                    @error('bank_tt_number')
+                                                    @error('doc_number')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                <!--/==/ End of Bank TT Number -->
+                                                <!--/==/ End of Document Number -->
                                             </div>
 
                                             <div class="col-md-6">
-                                                <!-- Bank TT Date -->
-                                                <div class="form-group @error('bank_tt_date') has-danger @enderror">
-                                                    <p class="mb-2">تاریخ آویز بانکی: <span class="tx-danger">*</span></p>
-                                                    <input type="text" data-jdp data-jdp-max-date="today" id="bank_tt_date" class="form-control @error('bank_tt_date') form-control-danger @enderror" name="bank_tt_date" value="{{ old('bank_tt_date') }}" required>
+                                                <!-- Document Date -->
+                                                <div class="form-group @error('doc_date') has-danger @enderror">
+                                                    <p class="mb-2">تاریخ مکتوب: <span class="tx-danger">*</span></p>
+                                                    <input data-jdp type="text" id="doc_date" class="form-control @error('doc_date') form-control-danger @enderror" name="doc_date" value="{{ old('doc_date') }}" required>
 
-                                                    @error('bank_tt_date')
+                                                    @error('doc_date')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
-                                                <!--/==/ End of Bank TT Date -->
+                                                <!--/==/ End of Document Date -->
                                             </div>
                                         </div>
-                                        <!--/==/ End of Bank TT -->
+                                        <!--/==/ End of Document Number && Date -->
+
+                                        <!-- Property Name -->
+                                        <div class="form-group @error('property_name') has-danger @enderror">
+                                            <p class="mb-2">نوع جنس: <span class="tx-danger">*</span></p>
+                                            <input type="text" id="property_name" class="form-control @error('property_name') form-control-danger @enderror" name="property_name" value="{{ old('property_name') }}" required>
+
+                                            @error('property_name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Property Name -->
+
+                                        <!-- Property and TS Code -->
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <!-- Property Code -->
+                                                <div class="form-group @error('property_code') has-danger @enderror">
+                                                    <p class="mb-2">کد جنس: <span class="tx-danger">*</span></p>
+                                                    <input type="number" id="property_code" class="form-control @error('property_code') form-control-danger @enderror" name="property_code" value="{{ old('property_code') }}" required>
+
+                                                    @error('property_code')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of Property Code -->
+                                            </div>
+                                            <div class="col-md-5">
+                                                <!-- TS Code -->
+                                                <div class="form-group @error('ts_code') has-danger @enderror">
+                                                    <p class="mb-2">TSC: <span class="tx-danger">*</span></p>
+                                                    <input type="number" id="ts_code" class="form-control @error('ts_code') form-control-danger @enderror" name="ts_code" value="{{ old('ts_code') }}" required>
+
+                                                    @error('ts_code')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <!--/==/ End of TS Code -->
+                                            </div>
+                                        </div>
+                                        <!--/==/ End of Property and TS Code -->
+
+                                        <!-- Total Weight -->
+                                        <div class="form-group @error('weight') has-danger @enderror">
+                                            <p class="mb-2">مقدار جنس به کیلوگرام: <span class="tx-danger">*</span></p>
+                                            <input type="number" id="weight" class="form-control @error('weight') form-control-danger @enderror" name="weight" value="{{ old('weight') }}" required>
+
+                                            @error('weight')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Total Weight -->
                                     </div>
 
                                     <div class="col-md-6">
-                                        <!-- Inquiry Number -->
-                                        <div class="form-group @error('inquiry_number') has-danger @enderror">
-                                            <p class="mb-2">نمبر استعلام: <span class="tx-danger">*</span></p>
-                                            <input type="number" id="inquiry_number" class="form-control @error('inquiry_number') form-control-danger @enderror" name="inquiry_number" value="{{ old('inquiry_number') }}" required>
+                                        <!-- Start Date -->
+                                        <div class="form-group @error('start_date') has-danger @enderror">
+                                            <p class="mb-2">از تاریخ: <span class="tx-danger">*</span></p>
+                                            <input data-jdp data-jdp-max-date="today" type="text" id="start_date" class="form-control @error('start_date') form-control-danger @enderror" name="start_date" value="{{ old('start_date') }}" required>
 
-                                            @error('inquiry_number')
+                                            @error('start_date')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Inquiry Number -->
+                                        <!--/==/ End of Start Date -->
 
-                                        <!-- Inquiry Date -->
-                                        <div class="form-group @error('inquiry_date') has-danger @enderror">
-                                            <p class="mb-2">تاریخ استعلام: <span class="tx-danger">*</span></p>
-                                            <input type="text" data-jdp data-jdp-max-date="today" id="inquiry_date" class="form-control @error('inquiry_date') form-control-danger @enderror" name="inquiry_date" value="{{ old('inquiry_date') }}" required>
+                                        <!-- End Date -->
+                                        <div class="form-group @error('end_date') has-danger @enderror">
+                                            <p class="mb-2">الی تاریخ: <span class="tx-danger">*</span></p>
+                                            <input data-jdp data-jdp-max-date="today" type="text" id="end_date" class="form-control @error('end_date') form-control-danger @enderror" name="end_date" value="{{ old('end_date') }}" required>
 
-                                            @error('inquiry_date')
+                                            @error('end_date')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Inquiry Date -->
+                                        <!--/==/ End of End Date -->
 
-                                        <!-- Reason -->
-                                        <div class="form-group @error('reason') has-danger @enderror">
-                                            <p class="mb-2">علت: </p>
-                                            <textarea id="reason" class="form-control @error('reason') form-control-danger @enderror" name="reason">{{ old('reason') }}</textarea>
+                                        <!-- Extra Info -->
+                                        <div class="form-group @error('info') has-danger @enderror">
+                                            <p class="mb-2">@lang('global.extraInfo'): </p>
+                                            <textarea id="info" class="form-control @error('info') form-control-danger @enderror" name="info">{{ old('info') }}</textarea>
 
-                                            @error('reason')
+                                            @error('info')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Reason -->
+                                        <!--/==/ End of Extra Info -->
+
+                                        <div class="form-group">
+                                            <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
                                 </div>
                             </form>
                             <!--/==/ End of Form -->

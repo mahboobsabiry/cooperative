@@ -143,6 +143,13 @@ class UserController extends Controller
         $user->save();
         // $user = User::create($request->all());
 
+        //  Has File && Save Avatar Image
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $fileName = 'user-' . time() . rand(111, 99999) . '.' . $avatar->getClientOriginalExtension();
+            $user->storeImage($avatar->storeAs('users', $fileName, 'public'));
+        }
+
         $user->roles()->sync($request->input('roles', []));
         $user->permissions()->sync($request->input('permissions', []));
 

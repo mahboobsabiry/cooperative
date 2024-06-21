@@ -142,7 +142,10 @@ class AgentController extends Controller
             ]);
         }
 
-        $companies = Company::all()->where('status', 1);
+        /** @var $companies
+         * Send companies that doesn't have Agent and inactive
+         */
+        $companies = Company::all()->where('status', 0);
 
         return view('admin.office.agents.add_company', compact('agent', 'companies'));
     }
