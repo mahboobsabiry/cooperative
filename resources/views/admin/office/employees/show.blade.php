@@ -435,20 +435,15 @@
                 </div>
                 <!--/==/ End of Score/Notice Card -->
 
-                <!-- Details Card -->
-                <div class="card mb-2">
-                    <!-- Personal Information -->
-                    <div class="card-header">
-                        <h4 class="card-title font-weight-bold">@lang('global.details')</h4>
-                    </div>
-                    <!-- Card Body -->
-                    <div class="card-body" style="background-color: #F7F9FCFF">
-                        <!-- Notice -->
-                        @if($employee->notices->count() >= 1)
-                            <div class="row bg-danger-transparent p-2">
-                                <p class="tx-14 tx-bold">سطح دریافت هشدار <i class="far fa-bell text-danger"></i></p>
-                                <hr>
-
+                <!-- Notice Card -->
+                @if($employee->notices->count() >= 1)
+                    <div class="card bg-danger-transparent mb-2">
+                        <div class="card-header">
+                            <p class="tx-14 tx-bold">سطح دریافت هشدار <i class="far fa-bell text-danger"></i></p>
+                        </div>
+                        <div class="card-body">
+                            <!-- Notice -->
+                            <div class="row p-2">
                                 <!-- Table -->
                                 <table class="table table-responsive table-bordered">
                                     <thead>
@@ -478,9 +473,20 @@
                                     </tbody>
                                 </table>
                             </div>
-                        @endif
-                        <!--/==/ End of Notice -->
+                            <!--/==/ End of Notice -->
+                        </div>
+                    </div>
+                @endif
+                <!--/==/ End of Notice Card -->
 
+                <!-- Details Card -->
+                <div class="card mb-2">
+                    <!-- Personal Information -->
+                    <div class="card-header">
+                        <h4 class="card-title font-weight-bold">@lang('global.details')</h4>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body" style="background-color: #F7F9FCFF">
                         <!-- Personal Information Table -->
                         @include('admin.office.employees.inc.tables')
                         <!--/==/ End of Personal Information -->

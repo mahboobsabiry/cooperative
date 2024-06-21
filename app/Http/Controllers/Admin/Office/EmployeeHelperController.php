@@ -104,7 +104,7 @@ class EmployeeHelperController extends Controller
                 'duty_doc_date'     => null,
                 'duty_position'     => null,
                 'status'            => 2,
-                'info'              => 'به علت ' . $notice->reason . 'منفک گردیده است.'
+                'info'              => 'به علت ' . $notice->reason . ' منفک گردیده است.'
             ]);
 
             return redirect()->back()->with([
