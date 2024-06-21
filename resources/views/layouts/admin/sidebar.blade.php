@@ -450,7 +450,7 @@
                     <li class="nav-item {{ request()->is('admin/examination/properties') ||
                         request()->is('admin/examination/properties/*') ? 'active show' : '' }}">
                         <a class="nav-link with-sub" href="javascript:void(0)">
-                            <i class="fa fa-file-word"></i>
+                            <i class="fa fa-file-alt"></i>
                             <span class="sidemenu-label">تعرفه ترجیحی</span>
                             <i class="angle fe fe-chevron-right"></i>
                         </a>

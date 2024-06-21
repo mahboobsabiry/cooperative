@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'تضمین ها')
+@section('title', 'تعرفه ترجیحی - جایداد اموال')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -34,20 +34,20 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">مدیریت عمومی گدام ها</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">مدیریت عمومی تشریح اموال</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">تضمین ها</li>
+                    <li class="breadcrumb-item active" aria-current="page">تعرفه ترجیحی - جایداد اموال</li>
                 </ol>
             </div>
 
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                @can('warehouse_assurance_create')
-                    <a class="btn ripple btn-primary" href="{{ route('admin.warehouse.assurances.create') }}">
+                @can('examination_property_create')
+                    <a class="btn ripple btn-primary" href="{{ route('admin.examination.properties.create') }}">
                         <i class="fe fe-plus-circle"></i> @lang('global.new')
                     </a>
                 @endcan
@@ -64,11 +64,11 @@
                 <!-- Table Card -->
                 <div class="card">
                     <div class="card-header tx-15 tx-bold">
-                        تضمین های جاری ({{ $assurances->count() }})
+                        مجموع جایداد اموال ({{ $properties->count() }})
                     </div>
 
                     <div class="card-body">
-                        <!-- All Positions -->
+                        <!-- All -->
                         <div class="">
                             <!-- Table -->
                             <div class="table-responsive mt-2">
@@ -76,45 +76,62 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>نام شرکت</th>
-                                        <th>نام جنس</th>
-                                        <th>مقدار تضمین</th>
-                                        <th>نمبر استعلام</th>
-                                        <th>تاریخ استعلام</th>
-                                        <th>نمبر آویز بانکی</th>
-                                        <th>تاریخ آویز بانکی</th>
+                                        <th>کاربر ثبت کننده</th>
+                                        <th>اسم و نمبر تشخیصیه شرکت</th>
+                                        <th>نمبر مکتوب</th>
+                                        <th>تاریخ مکتوب</th>
+                                        <th>نوع جنس</th>
+                                        <th>کد اموال</th>
+                                        <th>مقدار جنس (Kg)</th>
+                                        <th>تاریخ شروع</th>
                                         <th>تاریخ ختم</th>
                                         <th>مدت اعتبار</th>
+                                        <th>مدت باقیمانده</th>
+                                        <th>معلومات اضافی</th>
+                                        <th>تاریخ ثبت</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
-                                    @foreach($assurances as $assurance)
+                                    @foreach($properties as $property)
                                         <tr>
-                                            <td>{{ $assurance->id }}</td>
-                                            <td>{{ $assurance->company->name }}</td>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $property->user->name }}</td>
+                                            <td>{{ $property->company->name . ' - ' . $properties->company->tin }}</td>
+                                            <td>{{ $property->doc_number }}</td>
+                                            <td>{{ $property->doc_date }}</td>
                                             <td>
-                                                <a href="{{ route('admin.warehouse.assurances.show', $assurance->id ) }}">{{ $assurance->good_name }}</a>
+                                                <a href="{{ route('admin.examination.properties.show', $property->id ) }}">{{ $property->property_name }}</a>
                                             </td>
-                                            <td>{{ $assurance->assurance_total }}</td>
-                                            <td>{{ $assurance->inquiry_number }}</td>
-                                            <td>{{ $assurance->inquiry_date }}</td>
-                                            <td>{{ $assurance->bank_tt_number }}</td>
-                                            <td>{{ $assurance->bank_tt_date }}</td>
-                                            <td>{{ $assurance->expire_date }}</td>
+                                            <td>{{ $property->property_code . ' TSC-'. $property->ts_code }}</td>
+                                            <td>{{ $property->weight }}<sup>{{ app()->getLocale() == 'en' ? 'kg' : 'کیلوگرام' }}</sup></td>
+                                            <td>{{ $property->start_date }}</td>
+                                            <td>{{ $property->end_date }}</td>
+                                            <!-- Valid Days -->
                                             <td>
                                                 @php
-                                                $exp_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $assurance->expire_date)->toCarbon();
-                                                $valid_days = now()->diffInDays($exp_date);
+                                                    $start_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $property->start_date)->toCarbon();
+                                                    $end_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $property->end_date)->toCarbon();
+                                                    $valid_days = $start_date->diffInDays($end_date);
+                                                    echo $valid_days;
                                                 @endphp
-                                                @if($valid_days > 10)
-                                                    {{ $valid_days }} روز
+                                            </td>
+                                            <!-- Remaining Days -->
+                                            <td>
+                                                @php
+                                                    $end_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $property->end_date)->toCarbon();
+                                                    $remaining_days = now()->diffInDays($end_date);
+                                                @endphp
+                                                @if($remaining_days > 10)
+                                                    {{ $remaining_days }} روز
                                                 @else
-                                                    <span class="text-danger">{{ $valid_days }} روز</span>
+                                                    <span class="text-danger">{{ $remaining_days }} روز</span>
                                                     &nbsp;&nbsp;&nbsp;
                                                     <span class="fas fa-dollar-sign fa-pulse text-danger"></span>
                                                 @endif
                                             </td>
+                                            <td>{{ $property->info }}</td>
+                                            <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-F-d', strtotime($property->created_at)) }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

@@ -182,6 +182,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         // ================= Agents and Companies ===========================
         // Agents & Companies
         Route::resource('agents', AgentController::class);
+        // Select Company
+        Route::get('agent/select-company', [AgentController::class, 'select_company'])->name('agents.select.company');
         // Agent Add Company Page
         Route::get('agent/add-company/{id}', [AgentController::class, 'add_company'])->name('agents.add_company');
         Route::post('agent/add-agent-company/{id}', [AgentController::class, 'add_agent_company'])->name('agents.add_agent_company');

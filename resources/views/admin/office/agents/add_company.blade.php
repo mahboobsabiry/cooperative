@@ -90,7 +90,19 @@
 
                                     <div class="col-md-6">
                                         <!-- Company -->
-                                        <div class="form-group @error('company_name') has-danger @enderror">
+                                        <div class="form-group @error('company_id') has-danger @enderror" id="companyDiv">
+                                            <p class="mb-2">شرکت:</p>
+
+                                            <select id="company_id" name="company_id" class="form-control select2 @error('company_id') form-control-danger @enderror">
+                                                <option value="">@lang('form.chooseOne')</option>
+                                                @foreach($companies as $company)
+                                                    <option value="{{ $company->id }}">{{ $company->name }} - {{ $company->tin }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <!-- Company -->
+                                        <div class="form-group @error('company_name') has-danger @enderror" id="companyName">
                                             <p class="mb-2">نام شرکت: <span class="tx-danger">*</span></p>
 
                                             <input type="text" id="company_name" class="form-control @error('company_name') form-control-danger @enderror" name="company_name" value="{{ old('company_name') }}" required>
@@ -101,7 +113,7 @@
                                         </div>
 
                                         <!-- TIN -->
-                                        <div class="form-group @error('tin') has-danger @enderror">
+                                        <div class="form-group @error('tin') has-danger @enderror" id="companyTin">
                                             <p class="mb-2">@lang('form.tin'): <span class="tx-danger">*</span></p>
 
                                             <input type="number" id="tin" class="form-control @error('tin') form-control-danger @enderror" name="tin" value="{{ old('tin') }}" required>
@@ -163,5 +175,36 @@
 
     <!-- Form-elements js-->
     <script src="{{ asset('backend/assets/js/form-elements.js') }}"></script>
+
+    <script>
+        // Select Employee
+        $(document).ready(function() {
+            $(document).on('change', '#company_id', function () {
+                var company_id = $(this).val();
+                var a = $("#company_name").parent();
+                var b = $("#tin").parent();
+
+                if (!company_id == '') {
+                    $.ajax({
+                        type: 'get',
+                        url: '{{ route('admin.office.agents.select.company') }}',
+                        data: { 'company_id': company_id },
+                        dataType: 'json',
+                        success: function (data) {
+                            a.find('#company_name').val(data.company_name);
+                            b.find('#tin').val(data.tin);
+                        },
+                        error: function () {
+                            alert("ERROR");
+                            $(".errorMsg").html(data.error);
+                        }
+                    });
+                } else {
+                    a.find('#company_name').val("");
+                    b.find('#tin').val("");
+                }
+            });
+        });
+    </script>
 @endsection
 <!--/==/ End of Extra Scripts -->

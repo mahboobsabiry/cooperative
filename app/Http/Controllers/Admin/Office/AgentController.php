@@ -106,6 +106,31 @@ class AgentController extends Controller
         ]);
     }
 
+    // Select Company
+    public function select_company(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $request->all();
+
+            // Query the database to get the relevant data
+            $company = Company::find($data['company_id']);
+
+            if ($company) {
+                // Assuming 'employee_name' is the field you want to retrieve
+                $company_name = $company->name;
+                $company_tin = $company->tin;
+                // Return the data as a JSON response
+                return response()->json([
+                    'company_name' => $company_name,
+                    'tin' => $company_tin
+                ]);
+            } else {
+                // Handle the case when the aircraft ID is not found
+                return response()->json(['error' => 'Aircraft not found'], 404);
+            }
+        }
+    }
+
     // Add Company
     public function add_company($id)
     {
@@ -115,9 +140,11 @@ class AgentController extends Controller
                 'message'   => 'یک شخص نماینده بیشتر از یک شرکت بوده نمی تواند.',
                 'alertType' => 'danger'
             ]);
-        } else {
-            return view('admin.office.agents.add_company', compact('agent'));
         }
+
+        $companies = Company::all()->where('status', 1);
+
+        return view('admin.office.agents.add_company', compact('agent', 'companies'));
     }
 
     // Add Agent Company
@@ -133,24 +160,51 @@ class AgentController extends Controller
             'tin'           => 'required'
         ]);
 
+        // Request Company
+        $req_company = Company::where('id', $request->company_id)->first();
+
+        // Get Saved Company and save
+        $saved_company = Company::where('tin', $request->tin)->first();
+        if (!empty($saved_company->agent_id)) {
+            return back()->with(['message' => 'شرکت متذکره دارای نماینده میباشد.', 'alertType' => 'warning']);
+        }
+
+        /**
+         * Save Company
+         */
         if ($agent->company_name == null) {
             $agent->from_date   = $request->from_date;
             $agent->to_date     = $request->to_date;
             $agent->doc_number  = $request->doc_number;
-            $agent->company_name    = $request->company_name;
-            $agent->company_tin     = $request->tin;
+            if ($req_company) {
+                $agent->company_name    = $req_company->name;
+                $agent->company_tin     = $req_company->tin;
+            } else {
+                $agent->company_name    = $request->company_name;
+                $agent->company_tin     = $request->tin;
+            }
         } elseif ($agent->company_name2 == null) {
             $agent->from_date2   = $request->from_date;
             $agent->to_date2     = $request->to_date;
             $agent->doc_number2  = $request->doc_number;
-            $agent->company_name2    = $request->company_name;
-            $agent->company_tin2     = $request->tin;
+            if ($req_company) {
+                $agent->company_name2   = $req_company->name;
+                $agent->company_tin2    = $req_company->tin;
+            } else {
+                $agent->company_name2   = $request->company_name;
+                $agent->company_tin2    = $request->tin;
+            }
         } elseif ($agent->company_name3 == null) {
             $agent->from_date3   = $request->from_date;
             $agent->to_date3     = $request->to_date;
             $agent->doc_number3  = $request->doc_number;
-            $agent->company_name3    = $request->company_name;
-            $agent->company_tin3     = $request->tin;
+            if ($req_company) {
+                $agent->company_name3   = $req_company->name;
+                $agent->company_tin3    = $req_company->tin;
+            } else {
+                $agent->company_name3   = $request->company_name;
+                $agent->company_tin3    = $request->tin;
+            }
         } elseif(!empty($agent->company_name) && !empty($agent->company_name2) && !empty($agent->company_name3)) {
             return redirect()->back()->with([
                 'message'   => 'یک شخص نماینده بیشتر از یک شرکت بوده نمی تواند.',
@@ -159,7 +213,10 @@ class AgentController extends Controller
         }
         $agent->status = 1;
         $agent->save();
-        $saved_company = Company::where('name', $request->company_name)->where('tin', $request->tin)->first();
+
+        /**
+         * Save company details
+         */
         if ($saved_company) {
             $company = $saved_company;
             $company->agent_id  = $agent->id;
@@ -171,8 +228,13 @@ class AgentController extends Controller
         } else {
             $company = new Company();
             $company->agent_id  = $agent->id;
-            $company->name      = $request->company_name;
-            $company->tin       = $request->tin;
+            if ($req_company) {
+                $company->name      = $req_company->name;
+                $company->tin       = $req_company->tin;
+            } else {
+                $company->name      = $request->company_name;
+                $company->tin       = $request->tin;
+            }
             $type = implode(',', $request->input('type'));
             $company->type      = $type;
         }
