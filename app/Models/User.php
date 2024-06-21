@@ -4,10 +4,13 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Asycuda\COAL;
+use App\Models\Examination\Property;
 use App\Models\Office\Employee;
+use App\Models\Warehouse\Assurance;
 use App\Traits\HasPhoto;
 use App\Traits\HasTazkira;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -121,5 +124,17 @@ class User extends Authenticatable
     public function mSayar()
     {
         return $this->place == 4;
+    }
+
+    // Has Many Assurance
+    public function assurances() : HasMany
+    {
+        return $this->hasMany(Assurance::class);
+    }
+
+    // Has Many Properties
+    public function properties() : HasMany
+    {
+        return $this->hasMany(Property::class);
     }
 }

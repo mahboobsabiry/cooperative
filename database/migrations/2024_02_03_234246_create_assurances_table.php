@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('assurances', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('company_id');
             $table->string('good_name');
             $table->bigInteger('assurance_total');
@@ -24,6 +25,9 @@ return new class extends Migration
             $table->tinyInteger('status')->default(1);
             $table->text('reason')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('company_id')->references('id')->on('companies')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreAssuranceRequest;
 use App\Models\Office\Company;
 use App\Models\Warehouse\Assurance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Morilog\Jalali\CalendarUtils;
 use Morilog\Jalali\Jalalian;
 
@@ -62,6 +63,7 @@ class AssuranceController extends Controller
     public function store(StoreAssuranceRequest $request)
     {
         $assurance = new Assurance();
+        $assurance->user_id         = Auth::user()->id;
         $assurance->company_id      = $request->company_id;
         $assurance->good_name       = $request->good_name;
         $assurance->assurance_total = $request->assurance_total;

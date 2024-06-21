@@ -2,6 +2,7 @@
 
 namespace App\Models\Office;
 
+use App\Models\Examination\Property;
 use App\Models\Warehouse\Assurance;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,5 +24,11 @@ class Company extends Model
     public function assurances() : HasMany
     {
         return $this->hasMany(Assurance::class);
+    }
+
+    // Has Many Properties
+    public function properties() : HasMany
+    {
+        return $this->hasMany(Property::class);
     }
 }

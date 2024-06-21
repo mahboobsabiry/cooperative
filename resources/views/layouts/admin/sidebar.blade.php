@@ -443,6 +443,31 @@
                 @endcan
             @endcan
 
+            <!-- General Management Of Property Examination -->
+            @can('examination_view')
+                <li class="nav-label">مدیریت عمومی تشریح اموال</li>
+                @can('examination_property_view')
+                    <li class="nav-item {{ request()->is('admin/examination/properties') ||
+                        request()->is('admin/examination/properties/*') ? 'active show' : '' }}">
+                        <a class="nav-link with-sub" href="javascript:void(0)">
+                            <i class="fa fa-file-word"></i>
+                            <span class="sidemenu-label">تعرفه ترجیحی</span>
+                            <i class="angle fe fe-chevron-right"></i>
+                        </a>
+
+                        <ul class="nav-sub">
+                            <!-- Properties -->
+                            <li class="nav-sub-item {{ request()->is('admin/examination/properties') ||
+                                request()->is('admin/examination/properties/*') ? 'active' : '' }}">
+                                <a class="nav-sub-link"
+                                   href="{{ route('admin.examination.properties.index') }}">جایداد اموال ({{ count(\App\Models\Examination\Property::all()->where('status', 1)) }})</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+            @endcan
+            <!--/==/ End of General Management Of Property Examination -->
+
             <!-- General Management Of Warehouses -->
             @can('warehouse_view')
                 <li class="nav-label">مدیریت عمومی گدام ها</li>
