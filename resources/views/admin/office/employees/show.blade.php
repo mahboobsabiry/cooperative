@@ -367,7 +367,7 @@
                                     <p class="fw-semi-bold mb-1"><strong><i class="fa fa-coins text-success"></i> امتیازات:</strong></p>
                                 </div>
                                 <div class="col">
-                                    <div class="progress mb-1">
+                                    <div class="progress bd bd-success mb-1">
                                         <div aria-valuemax="100" aria-valuemin="0"
                                              aria-valuenow="78"
                                              class="progress-bar progress-bar-lg wd-78p bg-success"
@@ -414,20 +414,24 @@
                         @if($employee->status == 0)
                             <div class="row mt-2">
                                 <div class="col-md-6">
-                                    <a class="modal-effect btn btn-sm ripple btn-outline-success"
-                                       data-effect="effect-sign" data-toggle="modal"
-                                       href="#score_modal">
-                                        ثبت امتیاز
-                                    </a>
-                                    @include('admin.office.employees.inc.score')
+                                    @can('office_employee_add_score')
+                                        <a class="modal-effect btn btn-sm ripple btn-outline-success"
+                                           data-effect="effect-sign" data-toggle="modal"
+                                           href="#score_modal">
+                                            ثبت امتیاز
+                                        </a>
+                                        @include('admin.office.employees.inc.score')
+                                    @endcan
                                 </div>
                                 <div class="col-md-6 text-left">
-                                    <a class="modal-effect btn btn-sm ripple btn-outline-danger"
-                                       data-effect="effect-sign" data-toggle="modal"
-                                       href="#notice_modal">
-                                        ثبت هشدار
-                                    </a>
-                                    @include('admin.office.employees.inc.notice')
+                                    @can('office_employee_add_notice')
+                                        <a class="modal-effect btn btn-sm ripple btn-outline-danger"
+                                           data-effect="effect-sign" data-toggle="modal"
+                                           href="#notice_modal">
+                                            ثبت هشدار
+                                        </a>
+                                        @include('admin.office.employees.inc.notice')
+                                    @endcan
                                 </div>
                             </div>
                         @endif
@@ -441,6 +445,7 @@
                         <div class="card-header">
                             <p class="tx-14 tx-bold">سطح دریافت هشدار <i class="far fa-bell text-danger"></i></p>
                         </div>
+
                         <div class="card-body">
                             <!-- Notice -->
                             <div class="row p-2">
@@ -452,6 +457,7 @@
                                         <th>علت</th>
                                         <th>سطح هشدار</th>
                                         <th>مدرک</th>
+                                        <th>تاریخ</th>
                                     </tr>
                                     </thead>
 
@@ -460,7 +466,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $notice->reason }}</td>
-                                            <td>{{ $notice->notice_text . ' - ' . $notice->notice }}</td>
+                                            <td>{{ $notice->notice . ' - ' . $notice->notice_text }}</td>
                                             <td>
                                                 @if($notice->image)
                                                     <a href="{{ $notice->image }}" target="_blank">
@@ -468,6 +474,7 @@
                                                     </a>
                                                 @endif
                                             </td>
+                                            <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-F-d', strtotime($notice->created_at)) }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

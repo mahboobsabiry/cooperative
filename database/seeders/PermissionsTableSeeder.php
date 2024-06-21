@@ -109,6 +109,12 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name'      => 'office_employee_delete'
             ],
+            [
+                'name'      => 'office_employee_add_notice'
+            ],
+            [
+                'name'      => 'office_employee_add_score'
+            ],
             // Agents
             [
                 'name'      => 'office_agent_view'

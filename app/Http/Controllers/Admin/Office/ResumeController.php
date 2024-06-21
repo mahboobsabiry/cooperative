@@ -299,7 +299,8 @@ class ResumeController extends Controller
             'duty_doc_number'   => null,
             'duty_doc_date'     => null,
             'duty_position'     => null,
-            'status'            => 3
+            'status'            => 3,
+            'info'              => 'کارمند هذا به اداره/ارگان دیگر تبدیل گردید.'
         ]);
 
         if ($request->hasFile('photo')) {
