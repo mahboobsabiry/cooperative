@@ -86,61 +86,86 @@
                     </div>
 
                     <!-- Card Body -->
-                    <div class="card-body">
-                        <!-- User Information Details -->
-                        <div class="p-2">
-                            <!-- Personal Information Table -->
-                            <div class="table-responsive ">
-                                <table class="table table-bordered">
-                                    <!-- Table -->
-                                    <tbody class="p-0">
-                                    <!-- Header -->
-                                    <tr>
-                                        <th><strong>#: </strong></th>
-                                        <th><strong>موقعیت: </strong></th>
-                                        <th><strong>@lang('pages.hostel.roomNumber'): </strong></th>
-                                        <th><strong>@lang('pages.hostel.roomSection'): </strong></th>
-                                        <th><strong>@lang('pages.hostel.numOfMembers'): </strong></th>
-                                        <th><strong>@lang('global.extraInfo'): </strong></th>
-                                    </tr>
+                    <div class="card-body" style="background-color: #F7F9FCFF">
+                        <div class="row">
+                            <!-- Hostel Information -->
+                            <div class="col-lg col-xxl-5">
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات عمومی</h6>
+                                <!-- ID -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">ID:</p>
+                                    </div>
+                                    <div class="col">ID-{{ $hostel->id }}</div>
+                                </div>
 
-                                    <!-- Body -->
-                                    <tr>
-                                        <td>{{ $hostel->id }}</td>
-                                        <td>{{ $hostel->place }}</td>
-                                        <td>{{ $hostel->number }}</td>
-                                        <td>{{ $hostel->section }}</td>
-                                        <td>
-                                            @php
-                                                if (!$hostel->employees || $hostel->employees->count() == 0) {
-                                                    $count_number = 0;
-                                                } elseif ($hostel->employees->count() == 1) {
-                                                    $count_number = 20;
-                                                } elseif ($hostel->employees->count() == 2) {
-                                                    $count_number = 40;
-                                                } elseif ($hostel->employees->count() == 3) {
-                                                    $count_number = 60;
-                                                } elseif ($hostel->employees->count() == 4) {
-                                                    $count_number = 80;
-                                                } elseif ($hostel->employees->count() == 5) {
-                                                    $count_number = 100;
-                                                } else {
-                                                    $count_number = 0;
-                                                }
-                                            @endphp
-                                            <div class="progress mb-1">
-                                                <div aria-valuemax="100" aria-valuemin="0"
-                                                     aria-valuenow="{{ $count_number }}"
-                                                     class="progress-bar progress-bar-lg wd-{{ $count_number }}p bg-info"
-                                                     role="progressbar">{{ count($hostel->employees) }}</div>
-                                            </div>
-                                        </td>
-                                        <td>{{ $hostel->info }}</td>
-                                    </tr>
-                                    </tbody>
-                                    <!--/==/ End of Table -->
-                                </table>
+                                <!-- Place -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">موقعیت:</p>
+                                    </div>
+                                    <div class="col">{{ $hostel->place }}</div>
+                                </div>
+
+                                <!-- Room Number -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">نمبر اتاق:</p>
+                                    </div>
+                                    <div class="col">{{ $hostel->number }}</div>
+                                </div>
+
+                                <!-- Room Section -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"> سکشن:</p>
+                                    </div>
+                                    <div class="col">{{ $hostel->section }}</div>
+                                </div>
+
+                                <!-- Number of Employees In the room -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">تعداد اعضای اتاق:</p>
+                                    </div>
+                                    <div class="col">
+                                        @php
+                                            if (!$hostel->employees || $hostel->employees->count() == 0) {
+                                                $count_number = 0;
+                                            } elseif ($hostel->employees->count() == 1) {
+                                                $count_number = 20;
+                                            } elseif ($hostel->employees->count() == 2) {
+                                                $count_number = 40;
+                                            } elseif ($hostel->employees->count() == 3) {
+                                                $count_number = 60;
+                                            } elseif ($hostel->employees->count() == 4) {
+                                                $count_number = 80;
+                                            } elseif ($hostel->employees->count() == 5) {
+                                                $count_number = 100;
+                                            } else {
+                                                $count_number = 0;
+                                            }
+                                        @endphp
+                                        <div class="progress mb-1">
+                                            <div aria-valuemax="100" aria-valuemin="0"
+                                                 aria-valuenow="{{ $count_number }}"
+                                                 class="progress-bar progress-bar-lg wd-{{ $count_number }}p bg-info"
+                                                 role="progressbar">{{ count($hostel->employees) }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1">معلومات اضافی:</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="fst-italic text-400 mb-1">{{ $hostel->info ?? '--' }}</p>
+                                    </div>
+                                </div>
                             </div>
+                            <!--/==/ End of Position Information -->
                         </div>
                     </div>
                 </div>
@@ -165,17 +190,15 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>اتاق</th>
                                         <th>@lang('form.photo')</th>
-                                        <th>@lang('form.idCard')</th>
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.fatherName')</th>
                                         <th>@lang('form.position')</th>
                                         <th>@lang('pages.positions.positionCode')</th>
                                         <th>@lang('form.empNumber')</th>
-                                        <th>@lang('form.birthYear')</th>
                                         <th>@lang('form.education')</th>
                                         <th>@lang('form.phone')</th>
-                                        <th>@lang('form.mainProvince')</th>
                                         <th>@lang('form.currentProvince')</th>
                                         <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
                                     </tr>
@@ -184,7 +207,9 @@
                                     <tbody>
                                     @foreach($hostel->employees as $employee)
                                         <tr>
-                                            <td>{{ $employee->id }}</td>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $hostel->section . $hostel->number . ' - ' . $hostel->place }}</td>
+                                            <!-- Avatar -->
                                             <td>
                                                 <a href="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}"
                                                    target="_blank">
@@ -192,13 +217,7 @@
                                                          width="50" class="rounded-50">
                                                 </a>
                                             </td>
-                                            <td>
-                                                <a href="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
-                                                   target="_blank">
-                                                    <img src="{{ $employee->taz ?? asset('assets/images/id-card-default.png') }}"
-                                                         width="50" class="rounded-50">
-                                                </a>
-                                            </td>
+                                            <!-- Full Name -->
                                             <td>
                                                 @can('office_employee_view')
                                                     <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
@@ -209,9 +228,8 @@
                                             <td>{{ $employee->father_name ?? '' }}</td>
                                             <td>{{ $employee->position->title ?? '' }}
                                                 - {{ $employee->position->position_number ?? '' }}</td>
-                                            <td>{{ $employee->position->code ?? '' }}</td>
+                                            <td>{{ $employee->position_code->code ?? '' }}</td>
                                             <td>{{ $employee->emp_number ?? '' }}</td>
-                                            <td>{{ $employee->birth_year ?? '' }}</td>
                                             <td>{{ $employee->education ?? '' }}</td>
                                             <!-- Phone Number -->
                                             <td class="tx-sm-12-f">
@@ -220,7 +238,6 @@
                                                 <a href="callto:{{ $employee->phone2 ?? '' }}"
                                                    class="ctd">{{ $employee->phone2 ?? '' }}</a>
                                             </td>
-                                            <td>{{ $employee->main_province ?? '' }}</td>
                                             <td>{{ $employee->current_province ?? '' }}</td>
                                             <td>{{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }} {{ $employee->duty_position ? ' - ' : '' }} {{ $employee->duty_position ?? '' }}</td>
                                         </tr>

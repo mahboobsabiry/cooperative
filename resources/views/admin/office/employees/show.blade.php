@@ -186,6 +186,9 @@
                                     @for($i=1; $i<=$employee->position->position_number; $i++)
                                         <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
                                     @endfor
+                                    @if($employee->notices->count() >= 1)
+                                        <a href="javascript:void(0);"><i class="fa fa-exclamation-triangle text-danger"> </i></a>
+                                    @endif
                                 </p>
                                 <!--/==/ End of Employee Star -->
                             @else
@@ -216,7 +219,7 @@
                 <div class="card custom-card">
                     <div class="card-header custom-card-header">
                         <div>
-                            <h6 class="card-title mb-0">
+                            <h6 class="card-title tx-15 tx-bold mb-0">
                                 اطلاعات لازم
                             </h6>
                         </div>
@@ -295,7 +298,8 @@
                 <div class="card custom-card" style="display: flex; align-items: center;">
                     <div class="overflow-auto justify-content-center p-2">
                         <!-- Action Buttons -->
-                        <h5>دکمه های کاربردی</h5>
+                        <div class="tx-15 tx-bold">دکمه های کاربردی</div>
+                        <hr>
                         <div class="row m-2">
                             <a href="{{ route('admin.office.employees.resumes', $employee->id) }}" class="btn btn-outline-success m-1">سابقه کاری</a>
 
@@ -347,6 +351,90 @@
                 <!-- Success Message -->
                 @include('admin.inc.alerts')
 
+                <!-- Score/Notice  Card -->
+                <div class="card mb-2">
+                    <!-- Personal Information -->
+                    <div class="card-header">
+                        <h4 class="card-title font-weight-bold">امتیاز/اخطاریه</h4>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body" style="background-color: #F7F9FCFF">
+                        <!-- Score/Notice -->
+                        <div class="col-xxl">
+                            <!-- Score -->
+                            <div class="row">
+                                <div class="col-3 col-sm-2">
+                                    <p class="fw-semi-bold mb-1"><strong><i class="fa fa-coins text-success"></i> امتیازات:</strong></p>
+                                </div>
+                                <div class="col">
+                                    <div class="progress mb-1">
+                                        <div aria-valuemax="100" aria-valuemin="0"
+                                             aria-valuenow="78"
+                                             class="progress-bar progress-bar-lg wd-78p bg-success"
+                                             role="progressbar" style="width: 78%;">78%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/==/ End of Score -->
+
+                            <!-- Notice -->
+                            <div class="row">
+                                <div class="col-3 col-sm-2">
+                                    <p class="fw-semi-bold mb-1"><strong><i class="fa fa-exclamation-triangle text-danger"></i> اخطاریه:</strong></p>
+                                </div>
+                                <div class="col">
+                                    @php
+                                        if (!$employee->notices || $employee->notices->count() == 0) {
+                                            $count_number = 1;
+                                        } elseif ($employee->notices->count() == 1) {
+                                            $count_number = 25;
+                                        } elseif ($employee->notices->count() == 2) {
+                                            $count_number = 50;
+                                        } elseif ($employee->notices->count() == 3) {
+                                            $count_number = 75;
+                                        } elseif ($employee->notices->count() == 4) {
+                                            $count_number = 100;
+                                        } else {
+                                            $count_number = 1;
+                                        }
+                                    @endphp
+                                    <div class="progress bd bd-danger mb-1">
+                                        <div aria-valuemax="100" aria-valuemin="0"
+                                             aria-valuenow="{{ $count_number }}"
+                                             class="progress-bar progress-bar-lg wd-{{ $count_number }}p bg-danger"
+                                             role="progressbar" style="width: {{ $count_number }}%;">{{ count($employee->notices) }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/==/ End of Notice -->
+                        </div>
+                        <!--/==/ End of Score/Notice -->
+
+                        <!-- Buttons -->
+                        @if($employee->status == 0)
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <a class="modal-effect btn btn-sm ripple btn-outline-success"
+                                       data-effect="effect-sign" data-toggle="modal"
+                                       href="#score_modal">
+                                        ثبت امتیاز
+                                    </a>
+                                    @include('admin.office.employees.inc.score')
+                                </div>
+                                <div class="col-md-6 text-left">
+                                    <a class="modal-effect btn btn-sm ripple btn-outline-danger"
+                                       data-effect="effect-sign" data-toggle="modal"
+                                       href="#notice_modal">
+                                        ثبت هشدار
+                                    </a>
+                                    @include('admin.office.employees.inc.notice')
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <!--/==/ End of Score/Notice Card -->
+
                 <!-- Details Card -->
                 <div class="card mb-2">
                     <!-- Personal Information -->
@@ -355,6 +443,44 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="background-color: #F7F9FCFF">
+                        <!-- Notice -->
+                        @if($employee->notices->count() >= 1)
+                            <div class="row bg-danger-transparent p-2">
+                                <p class="tx-14 tx-bold">سطح دریافت هشدار <i class="far fa-bell text-danger"></i></p>
+                                <hr>
+
+                                <!-- Table -->
+                                <table class="table table-responsive table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>علت</th>
+                                        <th>سطح هشدار</th>
+                                        <th>مدرک</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    @foreach($employee->notices as $notice)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $notice->reason }}</td>
+                                            <td>{{ $notice->notice_text . ' - ' . $notice->notice }}</td>
+                                            <td>
+                                                @if($notice->image)
+                                                    <a href="{{ $notice->image }}" target="_blank">
+                                                        <img src="{{ $notice->image }}" alt="{{ $notice->notice_text }}" width="70">
+                                                    </a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                        <!--/==/ End of Notice -->
+
                         <!-- Personal Information Table -->
                         @include('admin.office.employees.inc.tables')
                         <!--/==/ End of Personal Information -->

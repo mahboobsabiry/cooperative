@@ -220,7 +220,7 @@ class ResumeController extends Controller
         $employee->update([
             'position_id'       => null,
             'hostel_id'         => null,
-            'position_code'     => null,
+            'ps_code_id'        => null,
             'on_duty'           => 0,
             'start_duty'        => null,
             'duty_doc_number'   => null,
@@ -293,7 +293,7 @@ class ResumeController extends Controller
         $employee->update([
             'position_id'       => null,
             'hostel_id'         => null,
-            'position_code'     => null,
+            'ps_code_id'        => null,
             'on_duty'           => 0,
             'start_duty'        => null,
             'duty_doc_number'   => null,

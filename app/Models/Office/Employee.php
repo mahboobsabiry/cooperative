@@ -81,4 +81,10 @@ class Employee extends Model
     {
         return $this->belongsTo(PositionCode::class, 'ps_code_id');
     }
+
+    // Notices
+    public function notices() : HasMany
+    {
+        return $this->hasMany(Notice::class);
+    }
 }

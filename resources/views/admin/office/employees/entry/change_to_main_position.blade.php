@@ -73,6 +73,9 @@
                                     @for($i=1; $i<=$employee->position->position_number; $i++)
                                         <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
                                     @endfor
+                                    @if($employee->notices->count() >= 1)
+                                        <a href="javascript:void(0);"><i class="fa fa-exclamation-triangle text-danger"> </i></a>
+                                    @endif
                                 </p>
                                 <!--/==/ End of Employee Star -->
                             @else

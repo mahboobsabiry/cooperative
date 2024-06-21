@@ -153,8 +153,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::post('employee/change-position-in-return/{id}', [EmployeeHelperController::class, 'in_return'])->name('employees.in_return');
         // Employee Discount/Update/Change Position
         Route::post('employee/duc-position/{id}', [EmployeeHelperController::class, 'duc_position'])->name('employees.duc_position');
-        // Fire Employee
-        Route::post('employee/fire-employee/{id}', [EmployeeHelperController::class, 'fire_employee'])->name('employees.fire_employee');
+
+        // ================= Notice ==============
+        Route::post('employee/{id}/add-notice', [EmployeeHelperController::class, 'add_notice'])->name('employees.add_notice');
 
         // ========================== Employee Resumes ======================
         Route::get('employee/{id}/resumes', [ResumeController::class, 'index'])->name('employees.resumes');

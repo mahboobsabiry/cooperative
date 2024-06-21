@@ -73,6 +73,9 @@
                                     @for($i=1; $i<=$employee->position->position_number; $i++)
                                         <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
                                     @endfor
+                                    @if($employee->notices->count() >= 1)
+                                        <a href="javascript:void(0);"><i class="fa fa-exclamation-triangle text-danger"> </i></a>
+                                    @endif
                                 </p>
                                 <!--/==/ End of Employee Star -->
                             @else
@@ -167,10 +170,6 @@
                                         @if($age >= 65)
                                             <a class="btn btn-outline-success m-1" href="{{ route('admin.office.employees.retire_position', $employee->id) }}">تقاعد</a>
                                         @endif
-
-                                        <!-- Fire Employee -->
-                                        <a class="modal-effect btn btn-outline-danger m-1" data-effect="effect-sign" data-toggle="modal"
-                                           href="#fire_employee{{ $employee->id }}">منفک</a>
 
                                         <!-- Change Position Employee -->
                                         <a class="btn btn-outline-dark m-1" href="{{ route('admin.office.employees.position_conversion', $employee->id) }}">تبدیل بست</a>

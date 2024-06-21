@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Office;
 use App\Http\Controllers\Controller;
 use App\Models\File;
 use App\Models\Office\Employee;
+use App\Models\Office\Notice;
 use App\Models\Office\Resume;
 use App\Models\Office\Position;
 use Illuminate\Http\Request;
@@ -42,41 +43,78 @@ class EmployeeHelperController extends Controller
     }
 
     // Fire Employee
-    public function fire_employee(Request $request, $id)
+    public function add_notice(Request $request, $id)
     {
         $request->validate([
-            'info'  => 'required'
+            'notice_file'  => 'nullable|image|mimes:jpg,png,jfif',
+            'reason'    => 'required'
         ]);
+        // Employee
         $employee = Employee::find($id);
+        // Latest Notice
+        $latest_notice = $employee->notices->last();
 
-        // Deactivate BCD-MIS user
-        if ($employee->user) {
-            $employee->user->update(['status', 0]);
+        /**
+         * Return back if employee already fired.
+         */
+        if ($latest_notice && $latest_notice->notice == 4) {
+            return back()->with(['message' => 'کارمند هذا منفک گردیده است!', 'alertType' => 'warning']);
         }
 
-        // Deactivate Asycuda user
-        if ($employee->asycuda_user) {
-            $employee->asycuda_user->update(['status', 0]);
+        /** @var $notice
+         * Save into notices table
+         */
+        $notice = new Notice();
+        $notice->employee_id = $employee->id;
+        $notice->reason = $request->reason;
+
+        if ($latest_notice && $latest_notice->notice == 1) {
+            $notice->notice = 2;
+            $notice->notice_text = 'اخطاریه';
+        } elseif ($latest_notice && $latest_notice->notice == 2) {
+            $notice->notice = 3;
+            $notice->notice_text = 'اخطاریه کتبی';
+        } elseif ($latest_notice && $latest_notice->notice == 3) {
+            $notice->notice = 4;
+            $notice->notice_text = 'منفک';
+        } else {
+            $notice->notice = 1;
+            $notice->notice_text = 'توصیه';
+        }
+        $notice->save();
+
+        //  Has File && Save Notice Image
+        if ($request->hasFile('notice_file')) {
+            $doc = $request->file('notice_file');
+            $fileName = 'employee-notice-' . time() . rand(111, 99999) . '.' . $doc->getClientOriginalExtension();
+            $notice->storeImage($doc->storeAs('employees/files', $fileName, 'public'));
         }
 
-        // Update Experiences
-        $last_exp = $employee->experiences()->latest()->first();
-        $last_exp->update(['end_date' => CalendarUtils::strftime('Y-m-d', strtotime(now()))]);
+        /**
+         * If employee fires
+         */
+        if ($notice->notice == 4) {
+            $employee->update([
+                'position_id'   => null,
+                'hostel_id'     => null,
+                'ps_code_id'    => null,
+                'on_duty'       => 0,
+                'start_duty'    => null,
+                'duty_doc_number'   => null,
+                'duty_doc_date'     => null,
+                'duty_position'     => null,
+                'status'            => 2,
+                'info'              => 'به علت ' . $notice->reason . 'منفک گردیده است.'
+            ]);
 
-        // Fire Employee
-        $employee->update([
-            'position_id'   => null,
-            'hostel_id'     => null,
-            'position_code' => null,
-            'status'        => 3,
-            'info'          => $request->info,
-            'on_duty'       => 0,
-            'duty_position' => null,
-            'start_duty'    => null,
-            'duty_doc_number'   => null
-        ]);
+            return redirect()->back()->with([
+                'message'   => 'کارمند منفک گردید!',
+                'alertType' => 'danger'
+            ]);
+        }
+
         return redirect()->back()->with([
-            'message'   => 'کارمند منفک گردید!',
+            'message'   => 'هشدار ثبت شد!',
             'alertType' => 'danger'
         ]);
     }

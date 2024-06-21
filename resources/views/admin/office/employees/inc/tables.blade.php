@@ -378,135 +378,49 @@
             </div>
         </div>
     @endif
-</div>
 
-<div class="table-responsive ">
-    <table class="table table-bordered">
-        <!-- Fourth Table -->
-        <tbody>
-        <!-- Details -->
-        <tr>
-            <td colspan="6" class="font-weight-bold">
-                <span class="badge badge-primary badge-pill">@if($employee->user && $employee->asycuda_user) 5 @elseif($employee->user || $employee->asycuda_user) 4 @else 3 @endif</span>
-                @lang('pages.employees.otherInfo')
-            </td>
-        </tr>
-        <tr>
-            <th colspan="3"><strong>بست/@lang('form.status')</strong></th>
-            <th colspan="3"><strong>@lang('global.extraInfo')</strong></th>
-        </tr>
-        <tr>
-            <td colspan="3">
-                @if($employee->position)
-                    <strong>اصل بست: </strong>
-                    {{ $employee->position->position_number }} -
-                    @can('office_position_view')
-                        <a href="{{ route('admin.office.positions.show', $employee->position->id) }}">
-                            {{ $employee->position->title }}
-                        </a> (کد - {{ $employee->position_code->code }})
-                    @else
-                        {{ $employee->position->title }} (کد - {{ $employee->position_code->code }})
-                    @endcan
-                    <br>
+    <!-- Other Information -->
+    <div class="col-md-5 p-2 bd bd-secondary m-1">
+        <h5 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">
+            <span class="badge badge-primary badge-pill">@if($employee->user && $employee->asycuda_user) 5 @elseif($employee->user || $employee->asycuda_user) 4 @else 3 @endif</span>
+            @lang('pages.employees.generalInfo')
+        </h5>
 
-                    @if($employee->on_duty == 1)
-                        <strong>خدمتی: </strong>
-                        {{ $employee->duty_position }}
-                    @endif
-                @endif
-            </td>
-            <td colspan="3">{{ $employee->info }}</td>
-        </tr>
-        </tbody>
-        <!--/==/ End of Fourth Table -->
+        @if($employee->position)
+            <!-- Position -->
+            <div class="row">
+                <div class="col-6 col-sm-5">
+                    <p class="fw-semi-bold mb-1"><strong>@lang('form.position'):</strong></p>
+                </div>
+                <div class="col">{{ $employee->position->title . ' - ' . $employee->position->position_number }}</div>
+            </div>
 
-        <!-- Fifth Table -->
-        @if($employee->status == 0)
-            @can('office_employee_edit')
-                <tbody>
-                <!-- Details -->
-                <tr>
-                    <td colspan="6" class="font-weight-bold">
-                        تبدیل بست در این ریاست
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="3"><strong>بالمعاوضه: </strong></th>
-                    <th colspan="3"><strong>تنزیل/ارتقا/تغییر: </strong></th>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <form action="{{ route('admin.office.employees.in_return', $employee->id) }}"
-                              method="post">
-                            @csrf
-                            <div class="form-group @error('position_id') @enderror">
-                                <p><strong>@lang('pages.employees.employee'): </strong></p>
-                                <select class="form-control select2" name="position_id">
-                                    @foreach($active_employees as $emp)
-                                        <option
-                                            value="{{ $emp->position_id }}">{{ $emp->name }} {{ $emp->last_name ?? '' }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button class="btn btn-primary btn-sm"
-                                    type="submit">@lang('global.save')</button>
-                        </form>
-                    </td>
-
-                    <td colspan="3">
-                        <form
-                            action="{{ route('admin.office.employees.duc_position', $employee->id) }}"
-                            method="post">
-                            @csrf
-                            <!-- Position -->
-                            <div class="form-group @error('position_id') @enderror">
-                                <p><strong>@lang('form.position'): <span
-                                            class="text-danger">*</span></strong></p>
-                                <select class="form-control select2" name="position_id">
-                                    @foreach(\App\Models\Office\Position::all()->where('id', '!=', $employee->position_id) as $position)
-                                        <option
-                                            value="{{ $position->id }}">{{ $position->title }}</option>
-                                    @endforeach
-                                </select>
-
-                                @error('position_id')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <!-- Position Code -->
-                            <div class="form-group @error('position_code') @enderror">
-                                <p><strong>@lang('form.positionCode'): <span
-                                            class="text-danger">*</span></strong></p>
-                                <input type="text" name="position_code"
-                                       class="form-control @error('position_code') form-control-danger @enderror"
-                                       value="{{ old('position_code') }}" required>
-
-                                @error('position_code')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <!-- Doc Number -->
-                            <div class="form-group @error('doc_number') @enderror">
-                                <p><strong>نمبر مکتوب: <span
-                                            class="text-danger">*</span></strong></p>
-                                <input type="text" name="doc_number"
-                                       class="form-control @error('doc_number') form-control-danger @enderror"
-                                       value="{{ old('doc_number') }}" required>
-
-                                @error('doc_number')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <button class="btn btn-primary btn-sm"
-                                    type="submit">@lang('global.save')</button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            @endcan
+            <!-- Position Place -->
+            <div class="row">
+                <div class="col-6 col-sm-5">
+                    <p class="fw-semi-bold mb-1"><strong>موقعیت و کد بست:</strong></p>
+                </div>
+                <div class="col">{{ $employee->position->place . ' - ' . $employee->position_code->code }}</div>
+            </div>
         @endif
-        <!--/==/ End of Fifth Table -->
-    </table>
+
+        <!-- Position Place -->
+        @if($employee->on_duty == 1)
+            <div class="row">
+                <div class="col-6 col-sm-5">
+                    <p class="fw-semi-bold mb-1"><strong>بست خدمتی:</strong></p>
+                </div>
+                <div class="col">{{ $employee->duty_position }}</div>
+            </div>
+        @endif
+
+        <!-- Extra Info -->
+        <div class="row">
+            <div class="col-6 col-sm-5">
+                <p class="fw-semi-bold mb-1"><strong>@lang('global.extraInfo'):</strong></p>
+            </div>
+            <div class="col">{{ $employee->info }}</div>
+        </div>
+    </div>
+    <!--/==/ End of Other Information -->
 </div>

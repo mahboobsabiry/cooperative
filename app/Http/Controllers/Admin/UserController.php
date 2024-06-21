@@ -270,11 +270,18 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        /** @var  $ID
+         * Decrypt the id
+         * Find specified user then delete it
+         */
         $ID = decrypt($id);
         $user = User::find($ID);
 
         $user->delete();
 
+        /**
+         * Get activity log
+         */
         activity('deleted')
             ->causedBy(Auth::user())
             ->performedOn($user)
@@ -291,8 +298,15 @@ class UserController extends Controller
     // Update Status
     public function updateUserStatus(Request $request)
     {
+        /**
+         * Request from ajax
+         */
         if ($request->ajax()) {
             $data = $request->all();
+
+            /**
+             * Assign status based on end-user selection
+             */
             if ($data['status'] == 'Active') {
                 $status = 0;
             } else {
@@ -308,7 +322,11 @@ class UserController extends Controller
     // Reset Password
     public function reset_pswd($id)
     {
+        /** @var  $user */
         $user = User::find($id);
+        /**
+         * Update user password
+         */
         $user->update(['password' => Hash::make('14021403')]);
         return back()->with([
             'message'   => 'رمز عبور موفقانه بازیابی شد.',
