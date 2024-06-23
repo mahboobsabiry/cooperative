@@ -65,7 +65,7 @@
                                             <p class="mb-2"> شرکت: <span class="tx-danger">*</span></p>
                                             <select class="form-control @error('company_id') has-danger @enderror select2" name="company_id">
                                                 @foreach($companies as $company)
-                                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                                    <option value="{{ $company->id }}">{{ $company->tin . ' - ' .$company->name }}</option>
                                                 @endforeach
                                             </select>
 

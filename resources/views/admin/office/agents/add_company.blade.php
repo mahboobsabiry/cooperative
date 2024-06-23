@@ -96,7 +96,7 @@
                                             <select id="company_id" name="company_id" class="form-control select2 @error('company_id') form-control-danger @enderror">
                                                 <option value="">@lang('form.chooseOne')</option>
                                                 @foreach($companies as $company)
-                                                    <option value="{{ $company->id }}">{{ $company->name }} - {{ $company->tin }}</option>
+                                                    <option value="{{ $company->id }}">{{ $company->tin . ' - ' . $company->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
