@@ -7,7 +7,9 @@
         </div>
 
         <div class="col-md-6 text-left">
-            <a href="{{ route('admin.asycuda.coal.add_cal_resume', $cal->id) }}" class="btn btn-outline-primary">ثبت</a>
+            @if(auth()->user()->isEmployee())
+                <a href="{{ route('admin.asycuda.coal.add_cal_resume', $cal->id) }}" class="btn btn-outline-primary">ثبت</a>
+            @endif
         </div>
     </div>
 

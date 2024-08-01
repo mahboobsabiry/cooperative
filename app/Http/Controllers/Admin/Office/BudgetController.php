@@ -11,7 +11,7 @@ class BudgetController extends Controller
     public function index()
     {
         $budgets = Budget::all();
-        return view('admin.office.budgets.index', compact('budgets'));
+        return 'There is no page yet. ';
     }
 
     public function create()

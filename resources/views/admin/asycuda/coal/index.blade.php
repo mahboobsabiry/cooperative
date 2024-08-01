@@ -40,9 +40,11 @@
             <div class="btn btn-list">
                 <!-- Add New -->
                 @can('asy_coal_create')
-                    <a class="btn ripple btn-primary" href="{{ route('admin.asycuda.coal.create') }}">
-                        <i class="fe fe-plus-circle"></i> @lang('global.new')
-                    </a>
+                    @if(auth()->user()->isEmployee())
+                        <a class="btn ripple btn-primary" href="{{ route('admin.asycuda.coal.create') }}">
+                            <i class="fe fe-plus-circle"></i> @lang('global.new')
+                        </a>
+                    @endif
                 @endcan
             </div>
         </div>
