@@ -67,7 +67,7 @@
                 <div class="dropdown-menu">
                     <div class="header-navheading">
                         <h6 class="main-notification-title">{{ Auth::user()->name }}</h6>
-                        <p class="main-notification-text">@lang('admin.admin')</p>
+                        <p class="main-notification-text">{{ \Illuminate\Support\Facades\Auth::user()->username }}</p>
                     </div>
 
                     <!-- Profile -->
