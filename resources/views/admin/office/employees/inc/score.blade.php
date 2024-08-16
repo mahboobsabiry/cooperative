@@ -9,14 +9,11 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.office.employees.destroy', $employee->id) }}" data-parsley-validate="">
-                @csrf
-                @method('DELETE')
+            <form method="post" action="" data-parsley-validate="">
                 <div class="modal-body">
                     <p>@lang('global.areYouSure')</p>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn ripple btn-primary" type="submit">@lang('global.yes')</button>
                     <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">@lang('global.no')</button>
                 </div>
             </form>

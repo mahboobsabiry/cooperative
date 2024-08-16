@@ -178,7 +178,7 @@ class COALController extends Controller
     {
         $cal = COAL::find($id);
 
-        if ($cal->expire_date < today()) {
+        if (Jalalian::fromFormat('Y-m-d', $cal->expire_date)->toCarbon() < today()) {
             $cal->update([
                 'status'    => 0,
                 'info'      => 'تاریخ جواز ختم گردیده است.'
@@ -230,6 +230,18 @@ class COALController extends Controller
     public function add_cal_resume($id)
     {
         $cal = COAL::find($id);
+        if (Auth::user()->isAdmin()) {
+            return redirect()->back()->with([
+                'message'   => 'شما اجازه ویرایش جواز شرکت را ندارید.',
+                'alertType' => 'danger'
+            ]);
+        }
+        if (Jalalian::fromFormat('Y-m-d', $cal->expire_date)->toCarbon() > today()) {
+            return redirect()->back()->with([
+                'message'   => 'تاریخ جواز فعالیت فعلی شرکت تا هنوز انقضاء نگردیده است. مدت ' . '<b>' . now()->diffInDays(Jalalian::fromFormat('Y-m-d', $cal->expire_date)->toCarbon()) . '</b>' . ' روز دیگر باقی مانده است.',
+                'alertType' => 'danger'
+            ]);
+        }
         return view('admin.asycuda.coal.add_cal_resume', compact('cal'));
     }
 

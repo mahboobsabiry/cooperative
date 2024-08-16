@@ -68,7 +68,11 @@ class EmployeeController extends Controller
             $employee->position_id = null;
             $employee->ps_code_id  = null;
         }
-        $employee->hostel_id    = $request->hostel_id;
+        if ($hostel) {
+            $employee->hostel_id    = $request->hostel_id;
+        } else {
+            $employee->hostel_id    = null;
+        }
         $employee->start_job    = $request->start_job;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
@@ -205,7 +209,11 @@ class EmployeeController extends Controller
             $employee->position_id = null;
             $employee->ps_code_id  = null;
         }
-        $employee->hostel_id    = $request->hostel_id;
+        if ($hostel) {
+            $employee->hostel_id    = $request->hostel_id;
+        } else {
+            $employee->hostel_id    = null;
+        }
         $employee->start_job    = $request->start_job;
         $employee->name         = $request->name;
         $employee->last_name    = $request->last_name;
