@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Office\Employee;
 use App\Models\Office\Position;
+use App\Models\Office\PositionCode;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,13 +28,16 @@ class AdminController extends Controller
 
          // Send appointment and empty positions count to dashboard
          // Sum number of positions
-         $sum_appointment = Position::all()->sum('num_of_pos');
+         // $sum_appointment = Position::all()->sum('num_of_pos');
          // Count all employees
-         $employees_count = Employee::all()->count();
+         // $employees_count = Employee::all()->count();
          // Count all empty positions
-         $empty_positions = $sum_appointment - $employees_count;
+         // $empty_positions = $sum_appointment - $employees_count;
          // Count all appointment positions
-         $appointment_positions = $sum_appointment - $empty_positions;
+         // $appointment_positions = $sum_appointment - $empty_positions;
+
+        $appointment_positions = PositionCode::whereHas('employee')->count();
+        $empty_positions = PositionCode::whereDoesntHave('employee')->count();
 
          return view('admin.dashboard', compact('logActivities', 'top_users', 'appointment_positions', 'empty_positions'));
     }

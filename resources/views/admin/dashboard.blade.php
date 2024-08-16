@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                             <div>
-                                <h3 class="dash-25">{{ count(\App\Models\Office\Position::all()) }}</h3>
+                                <h3 class="dash-25">{{ count(\App\Models\Office\PositionCode::all()) }}</h3>
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
@@ -196,7 +196,7 @@
                                 </div>
                             </div>
                             <div>
-                                <h3 class="dash-25">{{ count(\App\Models\Office\Position::all()) }}</h3>
+                                <h3 class="dash-25">{{ count(\App\Models\Office\PositionCode::all()) }}</h3>
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
