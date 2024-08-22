@@ -14,7 +14,7 @@ class AgentColleague extends Model
 
     protected $fillable = [
         'agent_id', 'name', 'phone', 'phone2', 'address',
-        'status', 'info',
+        'status', 'info', 'signature',
         'from_date', 'to_date', 'doc_number', 'background'
     ];
 

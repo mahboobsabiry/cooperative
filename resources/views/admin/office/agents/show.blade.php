@@ -149,6 +149,22 @@
                                         <td>{{ \Morilog\Jalali\CalendarUtils::date('Y-m-d', $agent->created_at) }}</td>
                                     </tr>
                                     </tbody>
+
+                                    <!-- Signature -->
+                                    <tbody class="col-lg-12 col-xl-5 p-0">
+                                    <tr>
+                                        <th class="font-weight-bold">امضاء:</th>
+                                        <td>
+                                            <div class="main-profile-overview widget-user-image text-center">
+                                                <div class="main-img-user">
+                                                    <a href="{{ asset('storage/agents/signatures/' . $agent->signature) ?? asset('assets/images/avatar-default.jpeg') }}" target="_blank">
+                                                        <img alt="signature" src="{{ asset('storage/agents/signatures/' . $agent->signature) ?? asset('assets/images/avatar-default.jpeg') }}">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
                                 </table>
                             </div>
                             <!--/==/ End of Personal Information Table -->
@@ -213,7 +229,7 @@
                                 @if($agent->companies->count() > 0)
                                     @foreach($agent->companies as $company)
                                         <tr>
-                                            <th scope="row">{{ $company->id }}</th>
+                                            <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $company->name }}</td>
                                             <td>{{ $company->tin }}</td>
                                             <td>@foreach(explode(',', $company->type) as $t) {{ $t }} - @endforeach</td>

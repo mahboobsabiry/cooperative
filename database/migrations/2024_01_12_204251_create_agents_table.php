@@ -36,6 +36,8 @@ return new class extends Migration
             $table->string('company_name3')->nullable();
             $table->bigInteger('company_tin3')->nullable();
 
+            $table->string('signature')->nullable();
+
             $table->text('background')->nullable();
             $table->text('info')->nullable();
             $table->tinyInteger('status')->default(1);

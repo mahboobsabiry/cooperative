@@ -25,6 +25,8 @@ return new class extends Migration
             $table->date('to_date')->nullable();
             $table->string('doc_number')->nullable();
             $table->text('background')->nullable();
+            $table->string('signature')->nullable();
+
             $table->timestamps();
 
             $table->foreign('agent_id')->references('id')->on('agents')->onUpdate('cascade')->onDelete('cascade');
