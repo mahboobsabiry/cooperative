@@ -101,9 +101,7 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-6">
                                         <!-- Description -->
                                         <div class="form-group @error('info') has-danger @enderror">
                                             <p class="mb-2">5) @lang('form.extraInfo'):</p>
@@ -114,7 +112,9 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Description -->
+                                    </div>
 
+                                    <div class="col-md-6">
                                         <!-- Photo -->
                                         <div class="form-group @error('photo') has-danger @enderror">
                                             <p class="mb-2">6) @lang('form.photo'):</p>
@@ -129,10 +129,26 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Photo -->
+
+                                        <!-- Signature -->
+                                        <div class="form-group @error('signature') has-danger @enderror">
+                                            <p class="mb-2">7) امضاء:</p>
+                                            @if($agent->signature)
+                                                <a href="{{ asset('storage/agents/signatures/' . $agent->signature) }}" target="_blank">
+                                                    <img src="{{ asset('storage/agents/signatures/' . $agent->signature) ?? asset('assets/images/avatar-default.jpeg') }}" alt="{{ $agent->name }}" width="40">
+                                                </a>
+                                            @endif
+                                            <input type="file" class="dropify" name="signature" accept="image/*" data-height="200" />
+                                            @error('signature')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Signature -->
+
+                                        <div class="form-group float-left">
+                                            <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
                                 </div>
                             </form>
                             <!--/==/ End of Form -->

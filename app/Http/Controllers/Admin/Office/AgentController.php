@@ -36,7 +36,21 @@ class AgentController extends Controller
     // Store Data
     public function store(StoreAgentRequest $request)
     {
-        $agent = Agent::create($request->all());
+        $agent = new Agent();
+        $agent->name    = $request->name;
+        $agent->phone   = $request->phone;
+        $agent->phone2  = $request->phone2;
+        $agent->address = $request->address;
+        $agent->info    = $request->info;
+
+        //  Has File && Save Signature Scan
+        if ($request->hasFile('signature')) {
+            $avatar = $request->file('signature');
+            $fileName = 'agent-signature-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $avatar->storeAs('agents/signatures', $fileName, 'public');
+            $agent->signature        = $fileName;
+        }
+        $agent->save();
 
         //  Has File && Save Avatar Image
         if ($request->hasFile('photo')) {
@@ -46,7 +60,7 @@ class AgentController extends Controller
         }
 
         $message = 'ثبت شد!';
-        return redirect()->route('admin.office.agents.index')->with([
+        return redirect()->route('admin.office.agents.show', $agent->id)->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);
@@ -78,7 +92,20 @@ class AgentController extends Controller
         ]);
 
         // Save Record
-        $agent->update($request->all());
+        $agent->name    = $request->name;
+        $agent->phone   = $request->phone;
+        $agent->phone2  = $request->phone2;
+        $agent->address = $request->address;
+        $agent->info    = $request->info;
+
+        //  Has File && Save Signature Scan
+        if ($request->hasFile('signature')) {
+            $avatar = $request->file('signature');
+            $fileName = 'agent-signature-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $avatar->storeAs('agents/signatures', $fileName, 'public');
+            $agent->signature        = $fileName;
+        }
+        $agent->save();
 
         //  Has Photo
         if ($request->hasFile('photo')) {
@@ -88,7 +115,7 @@ class AgentController extends Controller
         }
 
         $message = 'بروزرسانی گردید!';
-        return redirect()->route('admin.office.agents.index')->with([
+        return redirect()->route('admin.office.agents.show', $agent->id)->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);
