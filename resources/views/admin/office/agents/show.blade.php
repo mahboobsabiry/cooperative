@@ -93,8 +93,7 @@
                             <div class="table-responsive ">
                                 <table class="table row table-borderless">
                                     <!-- Photo -->
-                                    <tbody class="col-lg-12 col-xl-2 p-0">
-                                    <!-- ID -->
+                                    <tbody class="col-sm-12 col-xl-2 p-0">
                                     <tr>
                                         <td>
                                             <div class="main-profile-overview widget-user-image text-center">
@@ -109,7 +108,7 @@
                                     </tbody>
 
                                     <!-- Right Column -->
-                                    <tbody class="col-lg-12 col-xl-5 p-0">
+                                    <tbody class="col-sm-12 col-xl-4 p-0">
                                     <!-- ID -->
                                     <tr>
                                         <th class="font-weight-bold">نمبر مسلسل:</th>
@@ -130,7 +129,7 @@
                                     </tbody>
 
                                     <!-- Left Column -->
-                                    <tbody class="col-lg-12 col-xl-5 p-0">
+                                    <tbody class="col-sm-12 col-xl-4 p-0">
                                     <!-- Address -->
                                     <tr>
                                         <th class="font-weight-bold">@lang('global.address'):</th>
@@ -147,6 +146,21 @@
                                     <tr>
                                         <th class="font-weight-bold">@lang('global.date'):</th>
                                         <td>{{ \Morilog\Jalali\CalendarUtils::date('Y-m-d', $agent->created_at) }}</td>
+                                    </tr>
+                                    </tbody>
+
+                                    <!-- Signature -->
+                                    <tbody class="col-sm-12 col-xl-2 p-0">
+                                    <tr>
+                                        <td>
+                                            <div class="main-profile-overview widget-user-image text-center">
+                                                <div class="main-img-user">
+                                                    <a href="{{ asset('storage/agents/signatures/' . $agent->signature) ?? asset('assets/images/avatar-default.jpeg') }}" target="_blank">
+                                                        <img alt="avatar" src="{{ asset('storage/agents/signatures/' . $agent->signature) ?? asset('assets/images/avatar-default.jpeg') }}">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
