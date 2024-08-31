@@ -61,7 +61,7 @@
                                 @foreach($companies as $company)
                                     <tr>
                                         <td>{{ $company->id }}</td>
-                                        <td>{{ $company->name }}</td>
+                                        <td><a href="{{ route('admin.office.companies.show', $company->id) }}">{{ $company->name }}</a></td>
                                         <td>{{ $company->tin }}</td>
                                         <td>@foreach(explode(',', $company->type) as $t) {{ $t }} - @endforeach</td>
                                         <td>{{ $company->agent->name ?? 'ندارد' }}</td>
