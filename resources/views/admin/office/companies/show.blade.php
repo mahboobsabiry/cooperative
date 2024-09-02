@@ -123,7 +123,7 @@
                                         <p class="font-weight-bold mb-1">رزومه:</p>
                                     </div>
                                     <div class="col">
-                                        <p class="fst-italic text-400 mb-1">{{ $company->background ?? '--' }}</p>
+                                        <p class="fst-italic text-400 mb-1">{!! $company->background ?? '' !!}</p>
                                     </div>
                                 </div>
 

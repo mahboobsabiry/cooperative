@@ -65,7 +65,7 @@
                                         <td>{{ $company->tin }}</td>
                                         <td>@foreach(explode(',', $company->type) as $t) {{ $t }} - @endforeach</td>
                                         <td>{{ $company->agent->name ?? 'ندارد' }}</td>
-                                        <td>{!! $company->background !!}</td>
+                                        <td>{!! $company->info !!}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

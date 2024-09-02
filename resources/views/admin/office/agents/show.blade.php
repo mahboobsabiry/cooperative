@@ -262,8 +262,8 @@
                                                 <!-- First Company -->
                                                 @if($company->name == $agent->company_name)
                                                     @php
-                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date)->toCarbon();
-                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
+                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->from_date)->toCarbon();
+                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->to_date)->toCarbon();
                                                         $valid_days = $to_date->diffInDays($from_date);
                                                         echo $valid_days;
                                                     @endphp
@@ -272,8 +272,8 @@
                                                 <!-- Second Company -->
                                                 @if($company->name == $agent->company_name2)
                                                     @php
-                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date2)->toCarbon();
-                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
+                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->from_date2)->toCarbon();
+                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->to_date2)->toCarbon();
                                                         $valid_days = $to_date->diffInDays($from_date);
                                                         echo $valid_days;
                                                     @endphp
@@ -282,8 +282,8 @@
                                                 <!-- Third Company -->
                                                 @if($company->name == $agent->company_name3)
                                                     @php
-                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date3)->toCarbon();
-                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
+                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->from_date3)->toCarbon();
+                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->to_date3)->toCarbon();
                                                         $valid_days = $to_date->diffInDays($from_date);
                                                         echo $valid_days;
                                                     @endphp
@@ -293,8 +293,8 @@
                                                 <!-- First Company -->
                                                 @if($company->name == $agent->company_name)
                                                     @php
-                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date)->toCarbon();
-                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
+                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->from_date)->toCarbon();
+                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->to_date)->toCarbon();
 
                                                         // $diff_days = $to_date->diffInDays($from_date);
                                                         $valid_days = now()->diffInDays($to_date);
@@ -309,8 +309,8 @@
                                                 <!-- Second Company -->
                                                 @if($company->name == $agent->company_name2)
                                                     @php
-                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date2)->toCarbon();
-                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
+                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->from_date2)->toCarbon();
+                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->to_date2)->toCarbon();
 
                                                         // $diff_days = $to_date->diffInDays($from_date);
                                                         $valid_days = now()->diffInDays($to_date);
@@ -325,8 +325,8 @@
                                                 <!-- Third Company -->
                                                 @if($company->name == $agent->company_name3)
                                                     @php
-                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->from_date3)->toCarbon();
-                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
+                                                        $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->from_date3)->toCarbon();
+                                                        $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->to_date3)->toCarbon();
 
                                                         // $diff_days = $to_date->diffInDays($from_date);
                                                         $valid_days = now()->diffInDays($to_date);

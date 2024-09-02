@@ -133,7 +133,7 @@
                                                 @if($agent->to_date)
                                                     <span class="bd-b">
                                                         @php
-                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->to_date)->toCarbon();
 
                                                             // $diff_days = $to_date->diffInDays($from_date);
                                                             $valid_days = now()->diffInDays($to_date);
@@ -152,7 +152,7 @@
                                                 @if($agent->to_date2)
                                                     <span class="bd-b">
                                                         @php
-                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->to_date2)->toCarbon();
 
                                                             // $diff_days = $to_date->diffInDays($from_date);
                                                             $valid_days = now()->diffInDays($to_date);
@@ -171,7 +171,7 @@
                                                 @if($agent->to_date3)
                                                     <span class="bd-b">
                                                         @php
-                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
+                                                            $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $agent->to_date3)->toCarbon();
 
                                                             // $diff_days = $to_date->diffInDays($from_date);
                                                             $valid_days = now()->diffInDays($to_date);

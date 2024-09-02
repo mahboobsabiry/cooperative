@@ -18,20 +18,20 @@ return new class extends Migration
             $table->string('phone2')->nullable();
             $table->string('address')->nullable();
 
-            $table->date('from_date')->nullable();
-            $table->date('to_date')->nullable();
+            $table->string('from_date')->nullable();
+            $table->string('to_date')->nullable();
             $table->string('doc_number')->nullable();
             $table->string('company_name')->nullable();
             $table->bigInteger('company_tin')->nullable();
 
-            $table->date('from_date2')->nullable();
-            $table->date('to_date2')->nullable();
+            $table->string('from_date2')->nullable();
+            $table->string('to_date2')->nullable();
             $table->string('doc_number2')->nullable();
             $table->string('company_name2')->nullable();
             $table->bigInteger('company_tin2')->nullable();
 
-            $table->date('from_date3')->nullable();
-            $table->date('to_date3')->nullable();
+            $table->string('from_date3')->nullable();
+            $table->string('to_date3')->nullable();
             $table->string('doc_number3')->nullable();
             $table->string('company_name3')->nullable();
             $table->bigInteger('company_tin3')->nullable();

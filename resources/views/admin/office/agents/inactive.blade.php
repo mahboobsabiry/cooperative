@@ -98,7 +98,7 @@
 
                                             <td>{{ $agent->phone }}{{ $agent->phone2 ? ', ' : '' }} {{ $agent->phone2 ?? '' }}</td>
                                             <td>{{ $agent->address }}</td>
-                                            <td>{{ $agent->background }}</td>
+                                            <td>{!! $agent->background !!}</td>
                                             <td>{{ $agent->info }}</td>
                                         </tr>
                                     @endforeach
