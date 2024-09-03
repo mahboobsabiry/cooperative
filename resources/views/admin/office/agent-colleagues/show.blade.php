@@ -74,7 +74,7 @@
 
                 <div class="card">
                     <div class="card-header tx-15 tx-bold">
-                        @lang('global.details')
+                        جزئیات معلومات همکار نماینده
                     </div>
 
                     <!-- Card Body -->
@@ -85,7 +85,7 @@
                             <div class="table-responsive ">
                                 <table class="table row table-borderless">
                                     <!-- Photo -->
-                                    <tbody class="col-lg-12 col-xl-2 p-0">
+                                    <tbody class="col-sm-12 col-md-2 p-0">
                                     <!-- ID -->
                                     <tr>
                                         <td>
@@ -101,7 +101,7 @@
                                     </tbody>
 
                                     <!-- Right Column -->
-                                    <tbody class="col-lg-12 col-xl-5 p-0">
+                                    <tbody class="col-sm-12 col-md-4 p-0">
                                     <!-- ID -->
                                     <tr>
                                         <th class="font-weight-bold">نمبر مسلسل:</th>
@@ -116,8 +116,18 @@
 
                                     <!-- Agent -->
                                     <tr>
-                                        <th class="font-weight-bold">مافوق:</th>
-                                        <td>{{ $colleague->agent->name ?? trans('global.empty') }}</td>
+                                        <th class="font-weight-bold">نماینده:</th>
+                                        <td><a href="{{ route('admin.office.agents.show', $colleague->agent->id) }}" target="_blank">{{ $colleague->agent->name }}</a></td>
+                                    </tr>
+
+                                    <!-- Companies -->
+                                    <tr>
+                                        <th class="font-weight-bold">شرکت ها ({{ $colleague->agent->companies->count() }}):</th>
+                                        <td>
+                                            @foreach($colleague->agent->companies as $company)
+                                                <a href="{{ route('admin.office.companies.show', $company->id) }}" target="_blank">{{ $company->name }}</a> -
+                                            @endforeach
+                                        </td>
                                     </tr>
 
                                     <!-- Address -->
@@ -135,7 +145,7 @@
 
                                     <!-- Left Column -->
                                     @if($colleague->agent)
-                                        <tbody class="col-lg-12 col-xl-5 p-0">
+                                        <tbody class="col-sm-12 col-md-4 p-0">
                                         <!-- From Date -->
                                         <tr>
                                             <th class="font-weight-bold">@lang('form.fromDate'):</th>
@@ -191,6 +201,21 @@
                                         </tr>
                                         </tbody>
                                     @endif
+
+                                    <!-- Signature -->
+                                    <tbody class="col-sm-12 col-md-2 p-0">
+                                    <tr>
+                                        <td>
+                                            <div class="main-profile-overview widget-user-image text-center">
+                                                <div class="main-img-user">
+                                                    <a href="{{ asset('storage/agent-colleagues/signatures/' . $colleague->signature) ?? asset('assets/images/avatar-default.jpeg') }}" target="_blank">
+                                                        <img alt="signature" src="{{ asset('storage/agent-colleagues/signatures/' . $colleague->signature) ?? asset('assets/images/avatar-default.jpeg') }}">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
                                 </table>
                             </div>
                             <!--/==/ End of Personal Information Table -->

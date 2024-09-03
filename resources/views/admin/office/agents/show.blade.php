@@ -156,7 +156,7 @@
                                             <div class="main-profile-overview widget-user-image text-center">
                                                 <div class="main-img-user">
                                                     <a href="{{ asset('storage/agents/signatures/' . $agent->signature) ?? asset('assets/images/avatar-default.jpeg') }}" target="_blank">
-                                                        <img alt="avatar" src="{{ asset('storage/agents/signatures/' . $agent->signature) ?? asset('assets/images/avatar-default.jpeg') }}">
+                                                        <img alt="signature" src="{{ asset('storage/agents/signatures/' . $agent->signature) ?? asset('assets/images/avatar-default.jpeg') }}">
                                                     </a>
                                                 </div>
                                             </div>
