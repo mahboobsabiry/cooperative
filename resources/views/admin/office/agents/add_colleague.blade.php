@@ -115,9 +115,7 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-6">
                                         <!-- Document Number -->
                                         <div class="form-group @error('doc_number') has-danger @enderror">
                                             <p class="mb-2">@lang('pages.employees.docNumber'): <span class="tx-danger">*</span></p>
@@ -127,7 +125,9 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                    </div>
 
+                                    <div class="col-md-6">
                                         <!-- Description -->
                                         <div class="form-group @error('info') has-danger @enderror">
                                             <p class="mb-2">@lang('form.extraInfo'):</p>
@@ -148,6 +148,16 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Photo -->
+
+                                        <!-- Signature -->
+                                        <div class="form-group @error('signature') has-danger @enderror">
+                                            <p class="mb-2">امضاء:</p>
+                                            <input type="file" class="dropify" name="signature" accept="image/*" data-height="200" />
+                                            @error('signature')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Signature -->
                                     </div>
                                 </div>
                                 <div class="modal-footer">

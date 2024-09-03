@@ -96,9 +96,7 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-6">
                                         <!-- Description -->
                                         <div class="form-group @error('info') has-danger @enderror">
                                             <p class="mb-2">@lang('form.extraInfo'):</p>
@@ -109,7 +107,9 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Description -->
+                                    </div>
 
+                                    <div class="col-md-6">
                                         <!-- Photo -->
                                         <div class="form-group @error('photo') has-danger @enderror">
                                             <p class="mb-2">@lang('form.photo'):</p>
@@ -122,6 +122,19 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Photo -->
+
+                                        <!-- Signature -->
+                                        <div class="form-group @error('signature') has-danger @enderror">
+                                            <p class="mb-2">امضاء:</p>
+                                            @if($colleague->signature)
+                                                <img src="{{ asset('storage/agent-colleagues/signatures/' . $colleague->image) ?? asset('assets/images/avatar-default.jpeg') }}" alt="امضاء" width="40">
+                                            @endif
+                                            <input type="file" class="dropify" name="signature" accept="image/*" data-height="200" />
+                                            @error('signature')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Signature -->
                                     </div>
                                 </div>
                                 <div class="modal-footer">

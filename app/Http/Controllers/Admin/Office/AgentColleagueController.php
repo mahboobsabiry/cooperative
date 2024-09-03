@@ -58,6 +58,14 @@ class AgentColleagueController extends Controller
         $colleague->phone2      = $request->phone2;
         $colleague->address     = $request->address;
         $colleague->info        = $request->info;
+        //  Has File && Save Signature Scan
+        if ($request->hasFile('signature')) {
+            $avatar = $request->file('signature');
+            $fileName = 'agent-colleague-signature-' . time() . '.' . $avatar->getClientOriginalExtension();
+            $avatar->storeAs('agent-colleagues/signatures', $fileName, 'public');
+            $colleague->signature        = $fileName;
+        }
+
         $colleague->save();
 
         //  Has File && Save Avatar Image
