@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\Office\LeaveController;
 use App\Http\Controllers\Admin\Office\PositionController;
 // Admin Role Controllers
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\PlaceController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
@@ -80,6 +81,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // Documents
     Route::resource('documents', DocumentController::class);
+    // Places
+    Route::resource('places', PlaceController::class);
+
     Route::get('received-documents', [DocumentController::class, 'received'])->name('documents.received');
 
     // =============================== Asycuda Routes ===================================

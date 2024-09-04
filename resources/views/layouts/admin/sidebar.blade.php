@@ -20,6 +20,19 @@
                 </a>
             </li>
 
+            <!-- Places -->
+            @can('place_view')
+                <li class="nav-item {{ request()->is('admin/places') || request()->is('admin/places/*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.places.index') }}">
+                        <i class="fa fa-map-marker"></i>
+                        <span class="sidemenu-label">
+                        موقعیت ها
+                        ({{ \App\Models\Place::all()->count() }})
+                    </span>
+                    </a>
+                </li>
+            @endcan
+
             <!-- Documents -->
             @can('docs_view')
                 @if(auth()->user()->isAdmin())

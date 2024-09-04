@@ -28,6 +28,20 @@ class PermissionsTableSeeder extends Seeder
                 'name'      => 'setting_mgmt' // Manage app settings
             ],
 
+            // Places
+            [
+                'name'      => 'place_view'
+            ],
+            [
+                'name'      => 'place_create'
+            ],
+            [
+                'name'      => 'place_edit'
+            ],
+            [
+                'name'      => 'place_delete'
+            ],
+
             // Documents
             [
                 'name'      => 'docs_view'
