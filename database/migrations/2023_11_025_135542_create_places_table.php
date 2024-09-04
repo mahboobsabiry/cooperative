@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code');
-            $table->string('custom_code');
+            $table->string('name')->unique();
+            $table->string('code')->unique();
+            $table->string('custom_code')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->text('info')->nullable();
             $table->timestamps();

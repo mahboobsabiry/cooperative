@@ -79,6 +79,33 @@
                 <!-- Success Message -->
                 @include('admin.inc.alerts')
 
+                <!-- Header Card -->
+                <div class="card mb-1">
+                    <div class="card-header">
+                        <!-- Heading -->
+                        <div class="row font-weight-bold">
+                            <div class="col-6">
+                                {{ $agent->name }}
+                            </div>
+                            <div class="col-6 {{ app()->getLocale() == 'en' ? 'text-right' : 'text-left' }}">
+                                <i class="fa fa-user-tie"></i> نماینده شرکت
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row mr-1 ml-1">
+                            <div class="{{ app()->getLocale() == 'en' ? 'pr-2' : 'pl-2' }}"><i class="far fa-clock"></i></div>
+                            <div>
+                                تاریخ ثبت
+                                <br>
+                                <p class="text-muted small">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d h:i a', strtotime($agent->created_at)) }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/==/ End of Header Card -->
+
                 <!-- Details Card -->
                 <div class="card mb-2">
                     <div class="card-header tx-15 tx-bold">
@@ -228,7 +255,7 @@
                                     @foreach($agent->companies as $company)
                                         <tr>
                                             <th scope="row">{{ $company->id }}</th>
-                                            <td>{{ $company->name }}</td>
+                                            <td><a href="{{ route('admin.office.companies.show', $company->id) }}">{{ $company->name }}</a></td>
                                             <td>{{ $company->tin }}</td>
                                             <td>@foreach(explode(',', $company->type) as $t) {{ $t }} - @endforeach</td>
                                             <td>

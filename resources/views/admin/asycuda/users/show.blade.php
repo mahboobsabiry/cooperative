@@ -194,6 +194,33 @@
                 <!-- Success Message -->
                 @include('admin.inc.alerts')
 
+                <!-- Header Card -->
+                <div class="card mb-1">
+                    <div class="card-header">
+                        <!-- Heading -->
+                        <div class="row font-weight-bold">
+                            <div class="col-6">
+                                {{ $asycuda_user->employee->name . ' «' . $asycuda_user->employee->last_name . '»' }}
+                            </div>
+                            <div class="col-6 {{ app()->getLocale() == 'en' ? 'text-right' : 'text-left' }}">
+                                <i class="fa fa-user-tie"></i> حساب کاربری اسیکودا
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row mr-1 ml-1">
+                            <div class="{{ app()->getLocale() == 'en' ? 'pr-2' : 'pl-2' }}"><i class="far fa-clock"></i></div>
+                            <div>
+                                تاریخ ثبت
+                                <br>
+                                <p class="text-muted small">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d h:i a', strtotime($asycuda_user->created_at)) }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/==/ End of Header Card -->
+
                 <!-- Details -->
                 <div class="card mb-2">
                     <!-- Personal Information -->

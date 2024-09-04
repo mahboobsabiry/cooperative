@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', $company->name)
+@section('title', $place->name)
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -23,7 +23,7 @@
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.office.companies.index') }}">شرکت ها</a>
+                        <a href="{{ route('admin.places.index') }}">موقعیت ها</a>
                     </li>
                     <li class="breadcrumb-item active"
                         aria-current="page">@lang('global.details')</li>
@@ -33,33 +33,31 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <div class="d-flex">
-                    @can('office_company_delete')
+                    @include('admin.places.ed')
+
+                    @can('place_delete')
                         <div class="mr-2">
                             <!-- Delete -->
                             <a class="modal-effect btn btn-sm ripple btn-danger text-white"
                                data-effect="effect-sign" data-toggle="modal"
-                               href="#delete_record{{ $company->id }}"
+                               href="#delete_record{{ $place->id }}"
                                title="@lang('global.delete')">
                                 @lang('global.delete')
                                 <i class="fe fe-trash"></i>
                             </a>
-
-                            @include('admin.office.companies.delete')
                         </div>
                     @endcan
 
-                    @can('office_company_edit')
+                    @can('place_edit')
                         <div class="mr-2">
                             <!-- Edit -->
-                            <a class="modal-effect btn btn-sm ripple btn-info"
+                            <a class="modal-effect btn btn-sm ripple bg-dark text-white"
                                data-effect="effect-sign" data-toggle="modal"
-                               href="#edit_record{{ $company->id }}"
+                               href="#edit_record{{ $place->id }}"
                                title="@lang('global.edit')">
                                 @lang('global.edit')
                                 <i class="fe fe-edit"></i>
                             </a>
-
-                            @include('admin.office.companies.edit')
                         </div>
                     @endcan
                 </div>
@@ -79,10 +77,10 @@
                         <!-- Heading -->
                         <div class="row font-weight-bold">
                             <div class="col-6">
-                                {{ $company->name }}
+                                {{ $place->name }}
                             </div>
                             <div class="col-6 {{ app()->getLocale() == 'en' ? 'text-right' : 'text-left' }}">
-                                <i class="fa fa-building"></i> شرکت بازرگانی
+                                <i class="fa fa-map-marker"></i> موقعیت
                             </div>
                         </div>
                     </div>
@@ -93,7 +91,7 @@
                             <div>
                                 تاریخ ثبت
                                 <br>
-                                <p class="text-muted small">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d h:i a', strtotime($company->created_at)) }}</p>
+                                <p class="text-muted small">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d h:i a', strtotime($place->created_at)) }}</p>
                             </div>
                         </div>
                     </div>
@@ -109,7 +107,7 @@
                     <!-- Card Body -->
                     <div class="card-body" style="background-color: #F7F9FCFF">
                         <div class="row">
-                            <!-- General Information -->
+                            <!-- Global Information -->
                             <div class="col-lg col-xxl-5">
                                 <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات عمومی</h6>
                                 <!-- ID -->
@@ -117,40 +115,44 @@
                                     <div class="col-5 col-sm-4">
                                         <p class="font-weight-bold mb-1">ID:</p>
                                     </div>
-                                    <div class="col">ID-{{ $company->id }}</div>
+                                    <div class="col">ID-{{ $place->id }}</div>
                                 </div>
 
                                 <!-- Name -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="font-weight-bold mb-1">نام:</p>
+                                        <p class="font-weight-bold mb-1">@lang('form.name'):</p>
                                     </div>
-                                    <div class="col">{{ $company->name }}</div>
+                                    <div class="col">{{ $place->name }}</div>
                                 </div>
 
-                                <!-- TIN -->
+                                <!-- Code -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="font-weight-bold mb-1">نمبر تشخیصیه:</p>
+                                        <p class="font-weight-bold mb-1">@lang('form.code'):</p>
                                     </div>
-                                    <div class="col">{{ $company->tin }}</div>
+                                    <div class="col">{{ $place->code }}</div>
                                 </div>
 
-                                <!-- Type -->
+                                <!-- Custom Code -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="font-weight-bold mb-1"> نوع:</p>
+                                        <p class="font-weight-bold mb-1"> کد گمرکی:</p>
                                     </div>
-                                    <div class="col">@foreach(explode(',', $company->type) as $t) <span class="tag tag-sm tag-info">{{ $t }}</span> - @endforeach</div>
+                                    <div class="col">{{ $place->custom_code }}</div>
                                 </div>
 
-                                <!-- Background -->
+                                <!-- Status -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="font-weight-bold mb-1">رزومه:</p>
+                                        <p class="font-weight-bold mb-1"> @lang('form.status'):</p>
                                     </div>
                                     <div class="col">
-                                        <p class="fst-italic text-400 mb-1">{!! $company->background ?? '' !!}</p>
+                                        @if($place->status == 1)
+                                            <span class="text-success">@lang('global.active')</span>
+                                        @else
+                                            <span class="text-warning">@lang('global.inactive')</span>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -160,21 +162,69 @@
                                         <p class="font-weight-bold mb-1">معلومات اضافی:</p>
                                     </div>
                                     <div class="col">
-                                        <p class="fst-italic text-400 mb-1">{{ $company->info ?? '--' }}</p>
+                                        <p class="fst-italic text-400 mb-1">{{ $place->info ?? '--' }}</p>
                                     </div>
                                 </div>
                             </div>
-                            <!--/==/ End of General Information -->
+                            <!--/==/ End of Global Information -->
 
                             <!-- Other Information -->
                             <div class="col-lg col-xxl-5">
                                 <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات دیگر</h6>
-                                <!-- Agent -->
+                                <!-- ID -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="font-weight-bold mb-1">نماینده:</p>
+                                        <p class="font-weight-bold mb-1">ID:</p>
                                     </div>
-                                    <div class="col">{{ $company->agent->name ?? '-' }}</div>
+                                    <div class="col">ID-{{ $place->id }}</div>
+                                </div>
+
+                                <!-- Name -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1">@lang('form.name'):</p>
+                                    </div>
+                                    <div class="col">{{ $place->name }}</div>
+                                </div>
+
+                                <!-- Code -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1">@lang('form.code'):</p>
+                                    </div>
+                                    <div class="col">{{ $place->code }}</div>
+                                </div>
+
+                                <!-- Custom Code -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1"> کد گمرکی:</p>
+                                    </div>
+                                    <div class="col">{{ $place->custom_code }}</div>
+                                </div>
+
+                                <!-- Status -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1"> @lang('form.status'):</p>
+                                    </div>
+                                    <div class="col">
+                                        @if($place->status == 1)
+                                            <span class="text-success">@lang('global.active')</span>
+                                        @else
+                                            <span class="text-warning">@lang('global.inactive')</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1">معلومات اضافی:</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="fst-italic text-400 mb-1">{{ $place->info ?? '--' }}</p>
+                                    </div>
                                 </div>
                             </div>
                             <!--/==/ End of Other Information -->

@@ -174,6 +174,33 @@
                 <!-- Success Message -->
                 @include('admin.inc.alerts')
 
+                <!-- Header Card -->
+                <div class="card mb-1">
+                    <div class="card-header">
+                        <!-- Heading -->
+                        <div class="row font-weight-bold">
+                            <div class="col-6">
+                                {{ $document->subject }}
+                            </div>
+                            <div class="col-6 {{ app()->getLocale() == 'en' ? 'text-right' : 'text-left' }}">
+                                <i class="fa fa-file"></i> مکتوب
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row mr-1 ml-1">
+                            <div class="{{ app()->getLocale() == 'en' ? 'pr-2' : 'pl-2' }}"><i class="far fa-clock"></i></div>
+                            <div>
+                                تاریخ ثبت
+                                <br>
+                                <p class="text-muted small">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d h:i a', strtotime($document->created_at)) }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/==/ End of Header Card -->
+
                 <!-- Details Card -->
                 <div class="card mb-2">
                     <div class="card-header">
