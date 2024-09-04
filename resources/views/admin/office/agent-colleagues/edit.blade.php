@@ -127,7 +127,7 @@
                                         <div class="form-group @error('signature') has-danger @enderror">
                                             <p class="mb-2">امضاء:</p>
                                             @if($colleague->signature)
-                                                <img src="{{ asset('storage/agent-colleagues/signatures/' . $colleague->image) ?? asset('assets/images/avatar-default.jpeg') }}" alt="امضاء" width="40">
+                                                <img src="{{ asset('storage/agent-colleagues/signatures/' . $colleague->signature) ?? asset('assets/images/avatar-default.jpeg') }}" alt="امضاء" width="40">
                                             @endif
                                             <input type="file" class="dropify" name="signature" accept="image/*" data-height="200" />
                                             @error('signature')
