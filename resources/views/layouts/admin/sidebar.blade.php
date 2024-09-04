@@ -176,6 +176,100 @@
                 @endcan
                 <!--/==/ End of Finance -->
 
+                <!-- Agents -->
+                @can('office_agent_view')
+                    <li class="nav-item {{ request()->is('admin/office/agents') ||
+                    request()->is('admin/office/agents/*') ||
+                    request()->is('admin/office/agent/add-company/*') ||
+                    request()->is('admin/office/agent/add-colleague/*') ||
+                    request()->is('admin/office/inactive-agents') ||
+                    request()->is('admin/office/agent-colleagues') ||
+                    request()->is('admin/office/agent-colleagues/*') ||
+                    request()->is('admin/office/inactive-agent-colleagues') ? 'active show' : '' }}">
+
+                        <a class="nav-link with-sub" href="javascript:void(0)">
+                            <i class="fa fa-user-tie"></i>
+                            <span class="sidemenu-label">@lang('pages.companies.agents')</span>
+                            <i class="angle fe fe-chevron-right"></i>
+                        </a>
+
+                        <ul class="nav-sub">
+                            <!-- Agents -->
+                            <li class="nav-sub-item {{ request()->is('admin/office/agents') ||
+                            request()->is('admin/office/agents/*') ||
+                            request()->is('admin/office/agent/add-company/*') ||
+                            request()->is('admin/office/agent/add-colleague/*') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.office.agents.index') }}">
+                                    @lang('pages.companies.agents')
+                                    ({{ \App\Models\Office\Agent::all()->where('status', 1)->count() }})
+                                </a>
+                            </li>
+
+                            <!-- Inactive Agents -->
+                            <li class="nav-sub-item {{ request()->is('admin/office/inactive-agents') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.office.agents.inactive') }}">
+                                    نماینده های غیرفعال
+                                    ({{ count(\App\Models\Office\Agent::all()->where('status', 0)) }})
+                                </a>
+                            </li>
+
+                            <!-- Agent Colleagues -->
+                            <li class="nav-sub-item {{ request()->is('admin/office/agent-colleagues') ||
+                            request()->is('admin/office/agent-colleagues/*') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.office.agent-colleagues.index') }}">
+                                    همکاران نماینده ها
+                                    ({{ count(\App\Models\Office\AgentColleague::all()->where('status', 1)) }})
+                                </a>
+                            </li>
+
+                            <!-- Agent Inactive Colleagues -->
+                            <li class="nav-sub-item {{ request()->is('admin/office/inactive-agent-colleagues') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.office.agent-colleagues.inactive') }}">
+                                    همکاران نماینده ها (غیرفعال)
+                                    ({{ count(\App\Models\Office\AgentColleague::all()->where('status', 0)) }})
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
+                <!--/==/ End of Agents -->
+
+                <!-- Companies -->
+                @can('office_company_view')
+                    <li class="nav-item {{ request()->is('admin/office/companies') ||
+                    request()->is('admin/office/companies/*') ||
+                    request()->is('admin/office/inactive-companies') ? 'active show' : '' }}">
+
+                        <a class="nav-link with-sub" href="javascript:void(0)">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span class="sidemenu-label">@lang('admin.sidebar.companies')</span>
+                            <i class="angle fe fe-chevron-right"></i>
+                        </a>
+
+                        <ul class="nav-sub">
+                            <!-- Active Companies -->
+                            <li class="nav-sub-item {{ request()->is('admin/office/companies') ||
+                        request()->is('admin/office/companies/*') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.office.companies.index') }}">
+                                    @lang('admin.sidebar.companies')
+                                    ({{ count(\App\Models\Office\Company::all()->where('status', 1)) }})
+                                </a>
+                            </li>
+
+                            <!-- Inactive Companies -->
+                            <li class="nav-sub-item {{ request()->is('admin/office/inactive-companies') ? 'active' : '' }}">
+                                <a class="nav-sub-link" href="{{ route('admin.office.companies.inactive') }}">
+                                    شرکت های غیرفعال
+                                    ({{ count(\App\Models\Office\Company::all()->where('status', 0)) }})
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endcan
+                <!--/==/ End of Companies -->
+
+                <li class="nav-label">مدیریت منابع بشری</li>
+
                 <!-- Positions -->
                 @can('office_position_view')
                     <li class="nav-item {{ request()->is('admin/office/positions') ||
@@ -340,98 +434,6 @@
                     </li>
                 @endcan
                 <!--/==/ End of Employees -->
-
-                <!-- Agents -->
-                @can('office_agent_view')
-                    <li class="nav-item {{ request()->is('admin/office/agents') ||
-                    request()->is('admin/office/agents/*') ||
-                    request()->is('admin/office/agent/add-company/*') ||
-                    request()->is('admin/office/agent/add-colleague/*') ||
-                    request()->is('admin/office/inactive-agents') ||
-                    request()->is('admin/office/agent-colleagues') ||
-                    request()->is('admin/office/agent-colleagues/*') ||
-                    request()->is('admin/office/inactive-agent-colleagues') ? 'active show' : '' }}">
-
-                        <a class="nav-link with-sub" href="javascript:void(0)">
-                            <i class="fa fa-user-tie"></i>
-                            <span class="sidemenu-label">@lang('pages.companies.agents')</span>
-                            <i class="angle fe fe-chevron-right"></i>
-                        </a>
-
-                        <ul class="nav-sub">
-                            <!-- Agents -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/agents') ||
-                            request()->is('admin/office/agents/*') ||
-                            request()->is('admin/office/agent/add-company/*') ||
-                            request()->is('admin/office/agent/add-colleague/*') ? 'active' : '' }}">
-                                <a class="nav-sub-link" href="{{ route('admin.office.agents.index') }}">
-                                    @lang('pages.companies.agents')
-                                    ({{ \App\Models\Office\Agent::all()->where('status', 1)->count() }})
-                                </a>
-                            </li>
-
-                            <!-- Inactive Agents -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/inactive-agents') ? 'active' : '' }}">
-                                <a class="nav-sub-link" href="{{ route('admin.office.agents.inactive') }}">
-                                    نماینده های غیرفعال
-                                    ({{ count(\App\Models\Office\Agent::all()->where('status', 0)) }})
-                                </a>
-                            </li>
-
-                            <!-- Agent Colleagues -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/agent-colleagues') ||
-                            request()->is('admin/office/agent-colleagues/*') ? 'active' : '' }}">
-                                <a class="nav-sub-link" href="{{ route('admin.office.agent-colleagues.index') }}">
-                                    همکاران نماینده ها
-                                    ({{ count(\App\Models\Office\AgentColleague::all()->where('status', 1)) }})
-                                </a>
-                            </li>
-
-                            <!-- Agent Inactive Colleagues -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/inactive-agent-colleagues') ? 'active' : '' }}">
-                                <a class="nav-sub-link" href="{{ route('admin.office.agent-colleagues.inactive') }}">
-                                    همکاران نماینده ها (غیرفعال)
-                                    ({{ count(\App\Models\Office\AgentColleague::all()->where('status', 0)) }})
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
-                <!--/==/ End of Agents -->
-
-                <!-- Companies -->
-                @can('office_company_view')
-                    <li class="nav-item {{ request()->is('admin/office/companies') ||
-                    request()->is('admin/office/companies/*') ||
-                    request()->is('admin/office/inactive-companies') ? 'active show' : '' }}">
-
-                        <a class="nav-link with-sub" href="javascript:void(0)">
-                            <i class="fa fa-shopping-bag"></i>
-                            <span class="sidemenu-label">@lang('admin.sidebar.companies')</span>
-                            <i class="angle fe fe-chevron-right"></i>
-                        </a>
-
-                        <ul class="nav-sub">
-                            <!-- Active Companies -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/companies') ||
-                        request()->is('admin/office/companies/*') ? 'active' : '' }}">
-                                <a class="nav-sub-link" href="{{ route('admin.office.companies.index') }}">
-                                    @lang('admin.sidebar.companies')
-                                    ({{ count(\App\Models\Office\Company::all()->where('status', 1)) }})
-                                </a>
-                            </li>
-
-                            <!-- Inactive Companies -->
-                            <li class="nav-sub-item {{ request()->is('admin/office/inactive-companies') ? 'active' : '' }}">
-                                <a class="nav-sub-link" href="{{ route('admin.office.companies.inactive') }}">
-                                    شرکت های غیرفعال
-                                    ({{ count(\App\Models\Office\Company::all()->where('status', 0)) }})
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                @endcan
-                <!--/==/ End of Companies -->
 
                 <!-- Hostel -->
                 @can('office_hostel_view')
