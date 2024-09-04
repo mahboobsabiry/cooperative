@@ -59,16 +59,15 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <!-- Place -->
-                                        <div class="form-group @error('place') has-danger @enderror">
+                                        <div class="form-group @error('place_id') has-danger @enderror">
                                             <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
-                                            <select name="place" id="place" class="form-control">
-                                                <option value="محصولی" {{ $hostel->place == 'محصولی' ? 'selected' : '' }}>محصولی</option>
-                                                <option value="سرحدی" {{ $hostel->place == 'سرحدی' ? 'selected' : '' }}>سرحدی</option>
-                                                <option value="پورت یکم" {{ $hostel->place == 'پورت یکم' ? 'selected' : '' }}>پورت یکم</option>
-                                                <option value="مراقبت سیار" {{ $hostel->place == 'مراقبت سیار' ? 'selected' : '' }}>مراقبت سیار</option>
+                                            <select name="place_id" id="place_id" class="form-control">
+                                                @foreach($places as $place)
+                                                    <option value="{{ $place->id }}" {{ $hostel->place_id == $place->id ? 'selected' : '' }}>{{ $place->name }}</option>
+                                                @endforeach
                                             </select>
 
-                                            @error('place')
+                                            @error('place_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>

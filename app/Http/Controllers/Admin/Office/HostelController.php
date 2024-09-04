@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Office;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreHostelRequest;
 use App\Models\Office\Hostel;
+use App\Models\Place;
 use Illuminate\Http\Request;
 
 class HostelController extends Controller
@@ -21,13 +22,15 @@ class HostelController extends Controller
     public function index()
     {
         $hostels = Hostel::all();
-        return view('admin.office.hostel.index', compact('hostels'));
+        $places = Place::with('hostels')->whereHas('hostels')->get();
+        return view('admin.office.hostel.index', compact('hostels', 'places'));
     }
 
     // Create
     public function create()
     {
-        return view('admin.office.hostel.create');
+        $places = Place::all();
+        return view('admin.office.hostel.create', compact('places'));
     }
 
     // Store Data
@@ -51,7 +54,8 @@ class HostelController extends Controller
     // Edit
     public function edit(Hostel $hostel)
     {
-        return view('admin.office.hostel.edit', compact('hostel'));
+        $places = Place::all();
+        return view('admin.office.hostel.edit', compact('hostel', 'places'));
     }
 
     // Update Data

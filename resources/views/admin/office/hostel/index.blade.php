@@ -63,18 +63,11 @@
 
                 <!-- Table Card -->
                 <div class="card">
-                    <div class="card-header tx-15 tx-bold mg-b-20">
-                        @lang('pages.hostel.hostel') محصولی دارای
-                        ({{ \App\Models\Office\Hostel::where('place', 'محصولی')->select('id')->distinct('id')->count() }}) اتاق
-                        <br>
-                        @lang('pages.hostel.hostel')  سرحدی دارای
-                        ({{ \App\Models\Office\Hostel::where('place', 'سرحدی')->select('id')->distinct('id')->count() }}) اتاق
-                        <br>
-                        @lang('pages.hostel.hostel') پورت یکم دارای
-                        ({{ \App\Models\Office\Hostel::where('place', 'پورت یکم')->select('id')->distinct('id')->count() }}) اتاق
-                        <br>
-                        @lang('pages.hostel.hostel') مراقبت سیار دارای
-                        ({{ \App\Models\Office\Hostel::where('place', 'مراقبت سیار')->select('id')->distinct('id')->count() }}) اتاق
+                    <div class="card-header tx-15 mg-b-20">
+                        @foreach($places as $place)
+                            لیلیه <a href="{{ route('admin.places.show', $place->id) }}" target="_blank"><b class="text-primary">{{$place->name}}</b></a> دارای <b>{{ $place->hostels->count() }}</b> اتاق
+                            <br>
+                        @endforeach
                     </div>
 
                     <div class="card-body">
@@ -99,7 +92,7 @@
                                     @foreach($hostels as $hostel)
                                         <tr>
                                             <td>{{ $hostel->id }}</td>
-                                            <td>{{ $hostel->place }}</td>
+                                            <td><a href="{{ route('admin.places.show', $hostel->place->id) }}" target="_blank">{{ $hostel->place->name }}</a></td>
                                             <td>
                                                 <a href="{{ route('admin.office.hostel.show', $hostel->id ) }}">{{ $hostel->number }}</a>
                                             </td>

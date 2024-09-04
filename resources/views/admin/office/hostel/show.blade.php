@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'اتاق نمبر ' . $hostel->number . ' بخش ' . $hostel->place)
+@section('title', 'اتاق نمبر ' . $hostel->number . ' بخش ' . $hostel->place->name)
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -131,7 +131,7 @@
                                     <div class="col-5 col-sm-4">
                                         <p class="fw-semi-bold mb-1">موقعیت:</p>
                                     </div>
-                                    <div class="col">{{ $hostel->place }}</div>
+                                    <div class="col">{{ $hostel->place->name }}</div>
                                 </div>
 
                                 <!-- Room Number -->

@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('hostels', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('place_id');
             $table->integer('number');
             $table->char('section')->nullable();
-            $table->string('place')->default('محصولی');
             $table->integer('capacity')->default(5);
             $table->tinyInteger('status')->default(1);
             $table->text('info')->nullable();
             $table->timestamps();
+
+            $table->foreign('place_id')->references('id')->on('places')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

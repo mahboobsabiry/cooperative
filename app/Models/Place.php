@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Office\Hostel;
 use App\Models\Office\Position;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,5 +18,11 @@ class Place extends Model
     public function positions() : HasMany
     {
         return $this->hasMany(Position::class);
+    }
+
+    // Hostels
+    public function hostels() : HasMany
+    {
+        return $this->hasMany(Hostel::class);
     }
 }
