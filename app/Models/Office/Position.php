@@ -3,21 +3,21 @@
 namespace App\Models\Office;
 
 use App\Models\Document;
+use App\Models\Place;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class Position extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'parent_id', 'title',
+        'parent_id', 'place_id', 'title',
         'position_number', // Position Number for ex: 2 is Head of Custom
         'num_of_pos', // Number of Position
         'desc',
-        'place', // Place -> [0 => 'Balkh Custom'],[1 => 'Hairatan Border'], [2 => 'Nayeb Abad'], [3 => 'Airport'], [4 => 'Muraqebat Sayar']
-        'custom_code', // For Ex: AF151
         'status'
     ];
 
@@ -40,6 +40,12 @@ class Position extends Model
                 self::formatTree($position->children, $allPositions);
             }
         }
+    }
+
+    // Place
+    public function place() : Relation
+    {
+        return $this->belongsTo(Place::class);
     }
 
     // Parent

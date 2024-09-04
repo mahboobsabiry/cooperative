@@ -124,11 +124,11 @@
                         @lang('pages.hostel.hostel') -
                         @lang('pages.hostel.roomNumber')
                         {{ $employee->hostel->number }}
-                        @if($employee->hostel->place == 'محصولی')
+                        @if($employee->hostel->place->code == 'P01')
                             @lang('pages.hostel.section')
                             {{ $employee->hostel->section }}
                         @endif
-                        ({{ $employee->hostel->place }})
+                        ({{ $employee->hostel->place->name }})
                     @else
                         @lang('global.home')
                     @endif
@@ -229,20 +229,12 @@
             </div>
         </div>
 
-        <!-- Custom Code -->
-        <div class="row">
-            <div class="col-6 col-sm-5">
-                <p class="fw-semi-bold mb-1"><strong>کد گمرکی:</strong></p>
-            </div>
-            <div class="col">{{ $employee->position->custom_code ?? '' }}</div>
-        </div>
-
         <!-- Place -->
         <div class="row">
             <div class="col-6 col-sm-5">
                 <p class="fw-semi-bold mb-1"><strong>موقعیت:</strong></p>
             </div>
-            <div class="col">{{ $employee->position->place ?? '' }}</div>
+            <div class="col">{{ $employee->position->place->name ?? '' }} - {{ $employee->position->place->custom_code ?? '' }}</div>
         </div>
 
         <!-- All Leave Days -->
@@ -400,7 +392,7 @@
                 <div class="col-6 col-sm-5">
                     <p class="fw-semi-bold mb-1"><strong>موقعیت و کد بست:</strong></p>
                 </div>
-                <div class="col">{{ $employee->position->place . ' - ' . $employee->position_code->code }}</div>
+                <div class="col">{{ $employee->position->place->name . ' - ' . $employee->position_code->code }}</div>
             </div>
         @endif
 

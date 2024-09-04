@@ -97,7 +97,7 @@
                                                     <select id="ps_code_id" name="ps_code_id" class="form-control select2 @error('ps_code_id') form-control-danger @enderror">
                                                         <option value="">@lang('form.chooseOne')</option>
                                                         @foreach($codes as $code)
-                                                            <option value="{{ $code->id }}">{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place }})</option>
+                                                            <option value="{{ $code->id }}">{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place->name }})</option>
                                                         @endforeach
                                                     </select>
 

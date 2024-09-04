@@ -173,7 +173,7 @@
                             @if($employee->status == 0)
                                 <!-- Position -->
                                 @can('office_position_view')
-                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->place ?? '' }})</a>
+                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->place->name ?? '' }})</a>
                                 @else
                                     <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }}</p>
                                 @endcan

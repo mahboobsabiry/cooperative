@@ -15,12 +15,11 @@ class PositionsTableSeeder extends Seeder
     {
         $position = [
             'parent_id' => null,
+            'place_id'  => 1,
             'title'     => 'ریاست گمرک بلخ',
             'position_number'   => 2,
             'num_of_pos'        => 1,
             'desc'              => '',
-            'place'             => 'محصولی',
-            'custom_code'       => 'AF151',
             'status'            => 1
         ];
 

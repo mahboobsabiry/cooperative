@@ -73,7 +73,7 @@
                                                 @endif
 
                                                 @foreach($positions as $pos)
-                                                    <option value="{{ $pos->id ?? '' }}" {{ $position->parent_id == $pos->id ? 'selected' : '' }}>{{ $pos->title }} ({{ $pos->place }})</option>
+                                                    <option value="{{ $pos->id ?? '' }}" {{ $position->parent_id == $pos->id ? 'selected' : '' }}>{{ $pos->title }} ({{ $pos->place->name }})</option>
                                                 @endforeach
 
                                             </select>
@@ -124,11 +124,9 @@
                                             <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
 
                                             <select id="place" name="place" class="form-control select2 @error('place') form-control-danger @enderror">
-                                                <option value="محصولی" {{ $position->place == 'محصولی' ? 'selected' : '' }}>محصولی</option>
-                                                <option value="سرحدی" {{ $position->place == 'سرحدی' ? 'selected' : '' }}>سرحدی</option>
-                                                <option value="نایب آباد" {{ $position->place == 'نایب آباد' ? 'selected' : '' }}>نایب آباد</option>
-                                                <option value="میدان هوایی" {{ $position->place == 'میدان هوایی' ? 'selected' : '' }}>میدان هوایی</option>
-                                                <option value="مراقبت سیار" {{ $position->place == 'مراقبت سیار' ? 'selected' : '' }}>مراقبت سیار</option>
+                                                @foreach($places as $place)
+                                                    <option value="{{ $place->id }}" {{ $position->place_id == $place->id ? 'selected' : '' }}>{{ $place->name }}</option>
+                                                @endforeach
                                             </select>
 
                                             @error('place')

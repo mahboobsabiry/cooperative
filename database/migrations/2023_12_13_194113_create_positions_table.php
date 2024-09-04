@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('parent_id')->index()->unsigned()->nullable();
+            $table->unsignedBigInteger('place_id');
             $table->string('title');
             $table->bigInteger('position_number');
             $table->bigInteger('num_of_pos')->default(1);
@@ -22,6 +23,8 @@ return new class extends Migration
             $table->string('custom_code')->default('AF151');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
+
+            $table->foreign('place_id')->references('id')->on('places')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

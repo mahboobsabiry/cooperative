@@ -61,9 +61,9 @@
                             @if($employee->status == 0)
                                 <!-- Position -->
                                 @can('office_position_view')
-                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->place }})</a>
+                                    <a href="{{ route('admin.office.positions.show', $employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $employee->position->title }} ({{ $employee->position->place->name }})</a>
                                 @else
-                                    <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }} ({{ $employee->position->place }})</p>
+                                    <p class="pro-user-desc text-muted mb-1">{{ $employee->position->title ?? '' }} ({{ $employee->position->place->name }})</p>
                                 @endcan
                                 @if($employee->on_duty == 1)
                                     <p class="pro-user-desc text-muted mb-1">{{ $employee->duty_position ?? '' }}</p>
@@ -186,7 +186,7 @@
                                             @endphp
 
                                             @foreach($codes as $code)
-                                                <option value="{{ $code->position->title }}">({{ $code->code }}) {{ $code->position->title }} - {{ $code->position->place }}</option>
+                                                <option value="{{ $code->position->title }}">({{ $code->code }}) {{ $code->position->title }} - {{ $code->position->place->name }}</option>
                                             @endforeach
                                         </select>
 

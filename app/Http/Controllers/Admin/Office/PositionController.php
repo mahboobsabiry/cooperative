@@ -7,6 +7,7 @@ use App\Http\Requests\StorePositionRequest;
 use App\Models\Office\Employee;
 use App\Models\Office\Position;
 use App\Models\Office\PositionCode;
+use App\Models\Place;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,7 +33,8 @@ class PositionController extends Controller
     public function create()
     {
         $positions = Position::all();
-        return view('admin.office.positions.create', compact('positions'));
+        $places = Place::all();
+        return view('admin.office.positions.create', compact('positions', 'places'));
     }
 
     // Store
@@ -40,21 +42,10 @@ class PositionController extends Controller
     {
         $position           = new Position();
         $position->parent_id    = $request->parent_id;
+        $position->place_id     = $request->place_id;
         $position->title        = $request->title;
         $position->position_number = $request->position_number;
         $position->num_of_pos   = $request->num_of_pos;
-        $position->place        = $request->place;
-
-        // Select Custom Code
-        if ($position->place == 'محصولی' || $position->place == 'نایب آباد' || $position->place == 'مراقبت سیار') {
-            $custom_code = 'AF151';
-        } elseif ($position->place == 'سرحدی') { // Border Custom
-            $custom_code = 'AF152';
-        } elseif ($position->place == 'میدان هوایی') { // Airport
-            $custom_code = 'AF153';
-        }
-
-        $position->custom_code  = $custom_code;
         $position->desc         = $request->desc;
         $position->status       = 1;
         $position->save();
@@ -101,22 +92,11 @@ class PositionController extends Controller
             'desc'      => 'nullable'
         ]);
 
+        $position->place_id     = $request->place_id;
         $position->parent_id    = $request->parent_id;
         $position->title        = $request->title;
         $position->position_number = $request->position_number;
         $position->num_of_pos   = $request->num_of_pos;
-        $position->place        = $request->place;
-
-        // Select Custom Code
-        if ($position->place == 'محصولی' || $position->place == 'نایب آباد' || $position->place == 'مراقبت سیار') {
-            $custom_code = 'AF151';
-        } elseif ($position->place == 'سرحدی') { // Border Custom
-            $custom_code = 'AF152';
-        } elseif ($position->place == 'میدان هوایی') { // Airport
-            $custom_code = 'AF153';
-        }
-
-        $position->custom_code  = $custom_code;
         $position->desc         = $request->desc;
         $position->save();
 

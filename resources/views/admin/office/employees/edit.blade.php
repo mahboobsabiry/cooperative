@@ -86,9 +86,9 @@
                                                         <option value="">@lang('form.chooseOne')</option>
                                                         @foreach($codes as $code)
                                                             @if($employee->position_code)
-                                                                <option value="{{ $code->id }}" {{ $employee->position_code->id == $code->id ? 'selected' : '' }}>{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place }})</option>
+                                                                <option value="{{ $code->id }}" {{ $employee->position_code->id == $code->id ? 'selected' : '' }}>{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place->name }})</option>
                                                             @else
-                                                                <option value="{{ $code->id }}">{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place }})</option>
+                                                                <option value="{{ $code->id }}">{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place->name }})</option>
                                                             @endif
                                                         @endforeach
                                                     </select>

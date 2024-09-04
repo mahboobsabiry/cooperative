@@ -105,13 +105,14 @@
                                             <td>
                                                 {{ $position->parent->title ?? trans('pages.positions.afCustomsDep') }}
                                             </td>
+
                                             <!-- Position Code && Employees -->
                                             <td class="text-wrap">
                                                 {{ $position->codes->count() }} ==> @foreach($position->codes as $code) ({{ $code->code }} - @if($code->employee) <a href="{{ route('admin.office.employees.show', $code->employee->id) }}" target="_blank">{{ $code->employee->name . ' ' . $code->employee->last_name }}</a>@else <span class="text-danger">خالی</span>@endif)
                                                 {{ $position->codes && $position->codes->count() < $position->num_of_pos ? ' - ' : '' }} @endforeach
                                             </td>
                                             <td>{{ $position->position_number }} ({{ $position->num_of_pos }})</td>
-                                            <td>{{ $position->place }}</td>
+                                            <td>{{ $position->place->name }} - {{ $position->place->custom_code }}</td>
                                             <td class="text-wrap">{{ $position->desc }}</td>
                                         </tr>
                                     @endforeach

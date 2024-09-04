@@ -62,11 +62,11 @@
                                             <select id="parent_id" name="parent_id" class="form-control select2 @error('parent_id') form-control-danger @enderror">
                                                 <option value="" selected>@lang('form.chooseOne')</option>
                                                 @foreach($positions as $position)
-                                                    <option value="{{ $position->id }}">{{ $position->title }} ({{ $position->place }})</option>
+                                                    <option value="{{ $position->id }}">{{ $position->title }} ({{ $position->place->name }})</option>
                                                 @endforeach
                                             </select>
 
-                                            @error('title')
+                                            @error('parent_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -118,22 +118,21 @@
                                         <!--/==/ End of Position Number -->
 
                                         <!-- Place -->
-                                        <div class="form-group @error('type') has-danger @enderror">
+                                        <div class="form-group @error('place_id') has-danger @enderror">
                                             <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
 
-                                            <select id="place" name="place" class="form-control select2 @error('place') form-control-danger @enderror">
-                                                <option value="محصولی">محصولی</option>
-                                                <option value="سرحدی">سرحدی</option>
-                                                <option value="نایب آباد">نایب آباد</option>
-                                                <option value="میدان هوایی">میدان هوایی</option>
-                                                <option value="مراقبت سیار">مراقبت سیار</option>
+                                            <select id="place_id" name="place_id" class="form-control select2 @error('place_id') form-control-danger @enderror">
+                                                <option value="" selected>@lang('form.chooseOne')</option>
+                                                @foreach($places as $place)
+                                                    <option value="{{ $place->id }}">{{ $place->name }}</option>
+                                                @endforeach
                                             </select>
 
-                                            @error('place')
+                                            @error('place_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Type -->
+                                        <!--/==/ End of Place -->
 
                                         <!-- Description -->
                                         <div class="form-group @error('desc') has-danger @enderror">
