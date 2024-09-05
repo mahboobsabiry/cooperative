@@ -332,7 +332,7 @@
         @can('site_admin')
             <div class="row row-sm">
                 <!-- Activity -->
-                <div class="col-sm-12 col-xl-6 col-lg-6">
+                <div class="col-sm-12 col-xl-4 col-lg-4">
                     <div class="card custom-card">
                         <div class="card-body">
                             <div>
@@ -386,7 +386,7 @@
                 <!--/==/ End of Activity -->
 
                 <!-- Top Users Based on their activities -->
-                <div class="col-sm-12 col-xl-6 col-lg-6">
+                <div class="col-sm-12 col-xl-4 col-lg-4">
                     <div class="card custom-card">
                         <div class="card-body">
                             <div>
@@ -423,7 +423,7 @@
                                                         0%
                                                     @endif
                                                 </h6>
-                                                <small class="tx-11 tx-gray-500">Activity Rate</small>
+                                                <small class="tx-11 tx-gray-500">میزان فعالیت</small>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -434,6 +434,78 @@
                     </div>
                 </div>
                 <!--/==/ End of Top Users Based on their activities -->
+
+                <!-- Mini CHARTS -->
+                <div class="col-sm-12 col-lg-4 col-xl-4">
+                    <!-- First Chart -->
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div><h6 class="card-title mb-1">گمرک ولایت بلخ</h6>
+                                <p class="text-muted card-sub-title">مجموع تشکیلات و موقعیت ها.</p></div>
+                            <div class="row">
+                                <!-- Organization -->
+                                <div class="col-6 col-md-6 text-center">
+                                    <div class="mb-2">
+                                        <span class="peity-donut d-none" data-peity="{ &quot;fill&quot;: [&quot;#eb6f33&quot;, &quot;#e1e6f1&quot;], &quot;innerRadius&quot;: 14, &quot;radius&quot;: 20 }">4/7</span>
+                                        <svg class="peity" height="40" width="40">
+                                            <path
+                                                d="M 20 0 A 20 20 0 1 1 11.322325217648839 38.01937735804839 L 13.925627652354187 32.61356415063387 A 14 14 0 1 0 20 6"
+                                                data-value="4" fill="#02c792ff"></path>
+                                            <path
+                                                d="M 11.322325217648839 38.01937735804839 A 20 20 0 0 1 19.999999999999996 0 L 19.999999999999996 6 A 14 14 0 0 0 13.925627652354187 32.61356415063387"
+                                                data-value="3" fill="#e1e6f1"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="mb-1 tx-inverse">تشکیلات</p><h5 class="mb-1">{{ \App\Models\Office\Employee::all()->count() }}</h5>
+                                </div>
+                                <!--/==/ End of Organization -->
+
+                                <!-- Places -->
+                                <div class="col-6 col-md-6 text-center">
+                                    <div class="mb-2">
+                                        <span class="peity-donut d-none" data-peity="{ &quot;fill&quot;: [&quot;#01b8ff&quot;, &quot;#e1e6f1&quot;], &quot;innerRadius&quot;: 14, &quot;radius&quot;: 20 }">2/7</span>
+                                        <svg class="peity" height="40" width="40">
+                                            <path
+                                                d="M 20 0 A 20 20 0 0 1 39.498558243636474 24.450418679126287 L 33.64899077054553 23.1152930753884 A 14 14 0 0 0 20 6"
+                                                data-value="2" fill="#02c792ff"></path>
+                                            <path
+                                                d="M 39.498558243636474 24.450418679126287 A 20 20 0 1 1 19.999999999999996 0 L 19.999999999999996 6 A 14 14 0 1 0 33.64899077054553 23.1152930753884"
+                                                data-value="5" fill="#e1e6f1"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="mb-1 tx-inverse">موقعیت ها</p><h5 class="mb-1">{{ count(\App\Models\Place::all()) }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Chart -->
+                    <div class="card custom-card">
+                        <div class="card-body">
+                            <div><h6 class="card-title mb-1">Monthly Profits</h6>
+                                <p class="text-muted mb-2 card-sub-title">Excepteur sint occaecat cupidatat non
+                                    proident. </p></div>
+                            <h4><span>$</span>22,534</h4>
+                            <div class="clearfix mb-2">
+                                <div class="clearfix"><span class="float-start text-muted">This Month</span> <span
+                                        class="float-end">75%</span></div>
+                                <div class="progress progress-xs  mb-1" role="progressbar" aria-label="Basic example"
+                                     aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="clearfix"><span class="float-start text-muted">Last Month</span> <span
+                                        class="float-end">50%</span></div>
+                                <div class="progress progress-xs  mb-1" role="progressbar" aria-label="Basic example"
+                                     aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar bg-success" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/==/ End of Mini CHARTS -->
             </div>
         @endcan
         <!-- End Row -->

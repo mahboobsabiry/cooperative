@@ -23,8 +23,8 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-         $top_users = User::all()->take(6);
-         $logActivities = Activity::orderBy('created_at', 'desc')->take(6)->get();
+         $top_users = User::all()->take(5);
+         $logActivities = Activity::orderBy('created_at', 'desc')->take(5)->get();
 
          // Send appointment and empty positions count to dashboard
          // Sum number of positions
