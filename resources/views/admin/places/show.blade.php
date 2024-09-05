@@ -162,7 +162,11 @@
                                         <p class="font-weight-bold mb-1">معلومات اضافی:</p>
                                     </div>
                                     <div class="col">
-                                        <p class="fst-italic text-400 mb-1">{{ $place->info ?? '--' }}</p>
+                                        <p class="fst-italic text-400 mb-1">
+                                            دارای <span class="font-weight-bold">{{ $place->positions->count() }}</span> بست و دارای <span class="font-weight-bold">{{ $place->hostels->count() }}</span> اتاق لیلیه می باشد.
+                                            <br>
+                                            {{ $place->info }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +227,11 @@
                                         <p class="font-weight-bold mb-1">معلومات اضافی:</p>
                                     </div>
                                     <div class="col">
-                                        <p class="fst-italic text-400 mb-1">{{ $place->info ?? '--' }}</p>
+                                        <p class="fst-italic text-400 mb-1">
+                                            دارای <span class="font-weight-bold">{{ $place->positions->count() }}</span> بست و دارای <span class="font-weight-bold">{{ $place->hostels->count() }}</span> اتاق لیلیه می باشد.
+                                            <br>
+                                            {{ $place->info }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
