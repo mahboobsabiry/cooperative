@@ -46,7 +46,7 @@
                             <div class="d-flex">
                                 <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.users')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fas fa-users fs-20 text-primary"></i>
+                                    <i class="fas fa-users fs-20 text-dark"></i>
                                 </div>
                             </div>
                             <div>
@@ -54,16 +54,16 @@
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
-                                     class="progress-bar progress-bar-xs wd-100p" role="progressbar"></div>
+                                     class="progress-bar bg-dark progress-bar-xs wd-100p" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">@lang('pages.users.activeUsers')</span>
                                 <span class="ml-auto">
-                                <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 1)->count() > \App\Models\User::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-primary"></i>{{ \App\Models\User::all()->where('status', 1)->count() }}
+                                <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 1)->count() > \App\Models\User::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>{{ \App\Models\User::all()->where('status', 1)->count() }}
                             </span>
                                 <span class="font-weight-bold">@lang('pages.users.inactiveUsers')</span>
                                 <span class="ml-auto">
-                                <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 0)->count() > \App\Models\User::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-primary"></i>{{ \App\Models\User::all()->where('status', 0)->count() }}
+                                <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 0)->count() > \App\Models\User::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>{{ \App\Models\User::all()->where('status', 0)->count() }}
                             </span>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                             <div class="d-flex">
                                 <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.positions')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fe fe-activity fs-20 text-info"></i>
+                                    <i class="fe fe-activity fs-20 text-dark"></i>
                                 </div>
                             </div>
                             <div>
@@ -88,17 +88,17 @@
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
-                                     class="progress-bar progress-bar-xs wd-100p bg-info" role="progressbar"></div>
+                                     class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">@lang('pages.positions.appointed')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ $appointment_positions > $empty_positions ? 'up' : 'down' }} mr-1 text-info"></i>
+                                    <i class="fas fa-caret-{{ $appointment_positions > $empty_positions ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ $appointment_positions }}
                                 </span>
                                 <span class="font-weight-bold">@lang('global.empty')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ $empty_positions > $appointment_positions ? 'up' : 'down' }} mr-1 text-info"></i>
+                                    <i class="fas fa-caret-{{ $empty_positions > $appointment_positions ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ $empty_positions }}
                                 </span>
                             </div>
@@ -116,7 +116,7 @@
                             <div class="d-flex">
                                 <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.employees')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fa fa-user-tie fs-20 text-secondary"></i>
+                                    <i class="fa fa-user-tie fs-20 text-dark"></i>
                                 </div>
                             </div>
                             <div>
@@ -124,17 +124,17 @@
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
-                                     class="progress-bar progress-bar-xs wd-100p bg-secondary" role="progressbar"></div>
+                                     class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">@lang('pages.employees.mainPosition')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 0)->count() > \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 1)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 0)->count() > \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 0)->count() }}
                                 </span>
                                 <span class="font-weight-bold">@lang('pages.employees.onDuty')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 1)->count() > \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 0)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 1)->count() > \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 1)->count() }}
                                 </span>
                             </div>
@@ -152,7 +152,7 @@
                             <div class="d-flex">
                                 <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.companies')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fas fa-shopping-bag fs-20 text-danger"></i>
+                                    <i class="fas fa-shopping-bag fs-20 text-dark"></i>
                                 </div>
                             </div>
                             <div>
@@ -160,17 +160,17 @@
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
-                                     class="progress-bar progress-bar-xs wd-100p bg-danger" role="progressbar"></div>
+                                     class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">@lang('pages.companies.import')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->where('type', 0)->count() > \App\Models\Office\Company::all()->where('type', 1)->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->where('type', 0)->count() > \App\Models\Office\Company::all()->where('type', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Company::all()->where('type', 0)->count() }}
                                 </span>
                                 <span class="font-weight-bold">@lang('pages.companies.export')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->where('type', 1)->count() > \App\Models\Office\Company::all()->where('type', 0)->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->where('type', 1)->count() > \App\Models\Office\Company::all()->where('type', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Company::all()->where('type', 1)->count() }}
                                 </span>
                             </div>
@@ -192,7 +192,7 @@
                             <div class="d-flex">
                                 <p class="mb-1 tx-inverse font-weight-bold">بست های فعال و غیرفعال</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fas fa-users fs-20 text-info"></i>
+                                    <i class="fas fa-users fs-20 text-dark"></i>
                                 </div>
                             </div>
                             <div>
@@ -200,16 +200,16 @@
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
-                                     class="progress-bar progress-bar-xs wd-100p bg-info" role="progressbar"></div>
+                                     class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">بست های فعال</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Position::all()->where('status', 1)->count() > \App\Models\Office\Position::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-info"></i>{{ \App\Models\Office\Position::all()->where('status', 1)->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Position::all()->where('status', 1)->count() > \App\Models\Office\Position::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>{{ \App\Models\Office\Position::all()->where('status', 1)->count() }}
                                 </span>
                                 <span class="font-weight-bold">بست های غیرفعال</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Position::all()->where('status', 0)->count() > \App\Models\Office\Position::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-info"></i>{{ \App\Models\Office\Position::all()->where('status', 0)->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Position::all()->where('status', 0)->count() > \App\Models\Office\Position::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>{{ \App\Models\Office\Position::all()->where('status', 0)->count() }}
                                 </span>
                             </div>
                         </div>
@@ -226,7 +226,7 @@
                             <div class="d-flex">
                                 <p class="mb-1 tx-inverse font-weight-bold">کارمندان براساس برحالی و تبدیلی</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fe fe-activity fs-20 text-secondary"></i>
+                                    <i class="fe fe-activity fs-20 text-dark"></i>
                                 </div>
                             </div>
                             <div>
@@ -234,17 +234,17 @@
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
-                                     class="progress-bar progress-bar-xs wd-100p bg-secondary" role="progressbar"></div>
+                                     class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">کارمندان برحال</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->count() > \App\Models\Office\Employee::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->count() > \App\Models\Office\Employee::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 1)->count() }}
                                 </span>
                                 <span class="font-weight-bold">کارمندان تبدیل شده</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->count() > \App\Models\Office\Employee::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->count() > \App\Models\Office\Employee::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 0)->count() }}
                                 </span>
                             </div>
@@ -262,7 +262,7 @@
                             <div class="d-flex">
                                 <p class="mb-1 tx-inverse font-weight-bold">کارمندان بر اساس بودوباش</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fas fa-building fs-20 text-secondary"></i>
+                                    <i class="fas fa-building fs-20 text-dark"></i>
                                 </div>
                             </div>
                             <div>
@@ -270,17 +270,17 @@
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
-                                     class="progress-bar progress-bar-xs wd-100p bg-secondary" role="progressbar"></div>
+                                     class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">کارمندان در خانه</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->whereNull('hostel_id')->count() > \App\Models\Office\Employee::all()->where('status', 1)->whereNotNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->whereNull('hostel_id')->count() > \App\Models\Office\Employee::all()->where('status', 1)->whereNotNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 1)->whereNull('hostel_id')->count() }}
                                 </span>
                                 <span class="font-weight-bold">کارمندان در لیلیه</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->whereNotNull('hostel_id')->count() > \App\Models\Office\Employee::all()->where('status', 1)->whereNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-secondary"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->whereNotNull('hostel_id')->count() > \App\Models\Office\Employee::all()->where('status', 1)->whereNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 1)->whereNotNull('hostel_id')->count() }}
                                 </span>
                             </div>
@@ -298,7 +298,7 @@
                             <div class="d-flex">
                                 <p class="mb-1 tx-inverse font-weight-bold">شرکت های دارای نماینده/بدون نماینده</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fa fa-shopping-bag fs-20 text-danger"></i>
+                                    <i class="fa fa-shopping-bag fs-20 text-dark"></i>
                                 </div>
                             </div>
                             <div>
@@ -306,17 +306,17 @@
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
-                                     class="progress-bar progress-bar-xs wd-100p bg-danger" role="progressbar"></div>
+                                     class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">دارای نماینده</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->whereNotNull('agent_id')->count() > \App\Models\Office\Company::all()->whereNull('agent_id')->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->whereNotNull('agent_id')->count() > \App\Models\Office\Company::all()->whereNull('agent_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Company::all()->whereNotNull('agent_id')->count() }}
                                 </span>
                                 <span class="font-weight-bold">بدون نماینده</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->whereNull('agent_id')->count() > \App\Models\Office\Company::all()->whereNotNull('agent_id')->count() ? 'up' : 'down' }} mr-1 text-danger"></i>
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->whereNull('agent_id')->count() > \App\Models\Office\Company::all()->whereNotNull('agent_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Company::all()->whereNull('agent_id')->count() }}
                                 </span>
                             </div>
@@ -340,7 +340,7 @@
                                     <div class="row">
                                         <div class="col-md-6">@lang('global.activity')</div>
                                         <div class="col-md-6 {{ app()->getLocale() == 'en' ? 'text-right' : 'text-left' }}">
-                                            <a href="{{ route('admin.activities') }}" class="ctd">
+                                            <a href="{{ route('admin.activities') }}">
                                                 @lang('global.activities')
                                             </a>
                                         </div>
@@ -406,9 +406,10 @@
                                                          src="{{ $user->image ? $user->image : asset('assets/images/avatar-default.jpeg') }}">
                                                 </div>
                                             </td>
+
                                             <td class="bd-t-0">
                                                 <h6 class="mg-b-0">
-                                                    <a href="{{ route('admin.users.show', $user->id) }}" class="ctd"
+                                                    <a href="{{ route('admin.users.show', $user->id) }}"
                                                        target="_blank">{{ $user->name }}</a>
                                                 </h6>
                                                 <small class="tx-11 tx-gray-500">{{ $user->roles->first()->name ?? '' }}</small>
