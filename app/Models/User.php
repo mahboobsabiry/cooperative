@@ -103,36 +103,6 @@ class User extends Authenticatable
         return $this->is_admin == 1;
     }
 
-    // Head - Riyasat
-    public function head()
-    {
-        return $this->place == 0;
-    }
-
-    // Border
-    public function border()
-    {
-        return $this->place == 1;
-    }
-
-    // Airport
-    public function airport()
-    {
-        return $this->place == 2;
-    }
-
-    // Nayeb ABAD
-    public function nAbad()
-    {
-        return $this->place == 3;
-    }
-
-    // Muraqeban Sayar
-    public function mSayar()
-    {
-        return $this->place == 4;
-    }
-
     // Has Many Assurance
     public function assurances() : HasMany
     {
