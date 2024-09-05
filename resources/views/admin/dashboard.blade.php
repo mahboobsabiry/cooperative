@@ -144,41 +144,41 @@
             @endcan
             <!--/==/ End of Employees -->
 
-            <!-- Companies -->
-            @can('office_company_view')
+            <!-- Places -->
+            @can('place_view')
                 <div class="col-sm-6 col-xl-3 col-lg-6">
                     <div class="card custom-card">
                         <div class="card-body dash1">
                             <div class="d-flex">
-                                <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.companies')</p>
+                                <p class="mb-1 tx-inverse font-weight-bold">موقعیت ها</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fas fa-shopping-bag fs-20 text-dark"></i>
+                                    <i class="fas fa-map-marker fs-20 text-dark"></i>
                                 </div>
                             </div>
                             <div>
-                                <h3 class="dash-25">{{ count(\App\Models\Office\Company::all()) }}</h3>
+                                <h3 class="dash-25">{{ count(\App\Models\Place::all()) }}</h3>
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
                                      class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">@lang('pages.companies.import')</span>
+                                <span class="font-weight-bold">گمرک محصولی</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->where('type', 0)->count() > \App\Models\Office\Company::all()->where('type', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
-                                    {{ \App\Models\Office\Company::all()->where('type', 0)->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Place::all()->where('custom_code', '!=', null)->count() > \App\Models\Place::all()->where('custom_code', '=', null)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                    {{ \App\Models\Place::all()->where('custom_code', '!=', null)->count() }}
                                 </span>
-                                <span class="font-weight-bold">@lang('pages.companies.export')</span>
+                                <span class="font-weight-bold">غیر محصولی</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->where('type', 1)->count() > \App\Models\Office\Company::all()->where('type', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
-                                    {{ \App\Models\Office\Company::all()->where('type', 1)->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Place::all()->where('custom_code', '=', null)->count() > \App\Models\Place::all()->where('custom_code', '!=', null)->count()? 'up' : 'down' }} mr-1 text-dark"></i>
+                                    {{ \App\Models\Place::all()->where('custom_code', '=', null)->count() }}
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
             @endcan
-            <!--/==/ End of Companies -->
+            <!--/==/ End of Places -->
         </div>
         <!--/==/ End of First Cards Row -->
 
@@ -290,15 +290,15 @@
             @endcan
             <!--/==/ End of Employees Have Home/Hostel -->
 
-            <!-- Companies Have Agents Or Not -->
+            <!-- Companies -->
             @can('office_company_view')
                 <div class="col-sm-6 col-xl-3 col-lg-6">
                     <div class="card custom-card">
                         <div class="card-body dash1">
                             <div class="d-flex">
-                                <p class="mb-1 tx-inverse font-weight-bold">شرکت های دارای نماینده/بدون نماینده</p>
+                                <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.companies')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fa fa-shopping-bag fs-20 text-dark"></i>
+                                    <i class="fas fa-shopping-bag fs-20 text-dark"></i>
                                 </div>
                             </div>
                             <div>
@@ -309,22 +309,22 @@
                                      class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">دارای نماینده</span>
+                                <span class="font-weight-bold">@lang('pages.companies.import')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->whereNotNull('agent_id')->count() > \App\Models\Office\Company::all()->whereNull('agent_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
-                                    {{ \App\Models\Office\Company::all()->whereNotNull('agent_id')->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->where('type', 0)->count() > \App\Models\Office\Company::all()->where('type', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                    {{ \App\Models\Office\Company::all()->where('type', 0)->count() }}
                                 </span>
-                                <span class="font-weight-bold">بدون نماینده</span>
+                                <span class="font-weight-bold">@lang('pages.companies.export')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->whereNull('agent_id')->count() > \App\Models\Office\Company::all()->whereNotNull('agent_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
-                                    {{ \App\Models\Office\Company::all()->whereNull('agent_id')->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->where('type', 1)->count() > \App\Models\Office\Company::all()->where('type', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                    {{ \App\Models\Office\Company::all()->where('type', 1)->count() }}
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
             @endcan
-            <!--/==/ End of Companies Have Agents Or Not -->
+            <!--/==/ End of Companies -->
         </div>
         <!--/==/ End of Second Cards Row -->
 
