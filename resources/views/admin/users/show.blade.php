@@ -319,24 +319,12 @@
                                     @endif
                                 @endif
 
-                                @if(auth()->user()->isEmployee())
-                                    <!-- Custom Code -->
-                                    <div class="row">
-                                        <div class="col-5 col-sm-4">
-                                            <p class="fw-semi-bold mb-1"><strong>کد گمرکی: </strong></p>
-                                        </div>
-                                        <div class="col">{{ $user->employee->position->custom_code }}</div>
-                                    </div>
-                                @endif
-
                                 <!-- Place -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
                                         <p class="fw-semi-bold mb-1"><strong>موقعیت: </strong></p>
                                     </div>
-                                    <div class="col">
-                                        @if($user->place == 0) ریاست گمرک بلخ@elseif($user->place == 1) گمرک سرحدی حیرتان@elseif($user->place == 2) گمرک میدان هوایی@elseif($user->place == 3) گمرک نایب آباد@elseif($user->place == 4) مراقبت سیار @endif
-                                    </div>
+                                    <div class="col">{{ $user->place->name ?? 'Unsigned' }} - {{ $user->place->custom_code ?? '' }}</div>
                                 </div>
 
                                 <!-- Description -->

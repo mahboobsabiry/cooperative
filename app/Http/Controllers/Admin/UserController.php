@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Office\Employee;
+use App\Models\Place;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,13 +32,23 @@ class UserController extends Controller
     // Index
     public function activeUsers()
     {
-        $users = User::where('status', 1)->get();
+        if (Auth::user()->place_id != null) {
+            $users = User::all()->where('status', 1);
+        } else {
+            $users = User::all()->where('place_id', Auth::user()->place_id)->where('status', 1);
+        }
+
         return view('admin.users.active', compact('users'));
     }
 
     public function inactiveUsers()
     {
-        $users = User::where('status', 0)->get();
+        if (Auth::user()->place_id != null) {
+            $users = User::all()->where('status', 0);
+        } else {
+            $users = User::all()->where('place_id', Auth::user()->place_id)->where('status', 0);
+        }
+
         return view('admin.users.inactive', compact('users'));
     }
     public function activities($id)
@@ -48,16 +59,10 @@ class UserController extends Controller
 
     public function index()
     {
-        if (Auth::user()->place == 0) {
+        if (Auth::user()->place_id != null) {
             $users = User::all();
-        } elseif (Auth::user()->place == 1) {
-            $users = User::all()->where('place', 1);
-        } elseif (Auth::user()->place == 2) {
-            $users = User::all()->where('place', 2);
-        } elseif (Auth::user()->place == 3) {
-            $users = User::all()->where('place', 3);
-        } elseif (Auth::user()->place == 4) {
-            $users = User::all()->where('place', 4);
+        } else {
+            $users = User::all()->where('place_id', Auth::user()->place_id);
         }
 
         return view('admin.users.index', compact('users'));
@@ -65,10 +70,11 @@ class UserController extends Controller
 
     public function create()
     {
+        $places = Place::all();
         $employees = Employee::all();
         $roles = Role::all();
         $permissions = Permission::all();
-        return view('admin.users.create', compact('employees', 'roles', 'permissions'));
+        return view('admin.users.create', compact('places', 'employees', 'roles', 'permissions'));
     }
 
     // Select Employee
@@ -106,42 +112,18 @@ class UserController extends Controller
     // Store User Information
     public function store(StoreUserRequest $request)
     {
-        // Get Employee
-        $employee = Employee::where('id', $request->employee_id)->first();
-        $head       = $employee->position->place == 'محصولی';
-        $border     = $employee->position->place == 'سرحدی';
-        $airport    = $employee->position->place == 'میدان هوایی';
-        $nAbad      = $employee->position->place == 'نایب آباد';
-        $mSayar     = $employee->position->place == 'مراقبت سیار';
-
         // Store into users table
         $user = new User();
+        $user->place_id     = $request->place_id;
         $user->employee_id  = $request->employee_id;
         $user->name         = $request->name;
         $user->username     = $request->username;
         $user->phone        = $request->phone;
         $user->email        = $request->email;
         $user->password     = $request->password;
-        if ($employee) {
-            $user->is_admin = 1;
-            if ($head) {
-                $user->place = 0;
-            } elseif ($border) {
-                $user->place = 1;
-            } elseif ($airport) {
-                $user->place = 2;
-            } elseif ($nAbad) {
-                $user->place = 3;
-            } elseif ($mSayar) {
-                $user->place = 4;
-            }
-        } else {
-            $user->is_admin = 0;
-            $user->place    = $request->place;
-        }
+
         $user->info         = $request->info;
         $user->save();
-        // $user = User::create($request->all());
 
         //  Has File && Save Avatar Image
         if ($request->hasFile('avatar')) {
@@ -179,10 +161,11 @@ class UserController extends Controller
         $ID = decrypt($id);
         $user = User::find($ID);
 
+        $places = Place::all();
         $roles = Role::all();
         $permissions = Permission::all();
         $user->load('roles');
-        return view('admin.users.edit', compact('roles', 'permissions', 'user'));
+        return view('admin.users.edit', compact('places', 'roles', 'permissions', 'user'));
     }
 
     public function update(Request $request, $id)
@@ -215,26 +198,8 @@ class UserController extends Controller
 
         // Get Employee
         $employee   = $user->employee;
+        $user->place_id     = $request->place_id;
         if ($employee) {
-            $head       = $employee->position->place == 'محصولی';
-            $border     = $employee->position->place == 'سرحدی';
-            $airport    = $employee->position->place == 'میدان هوایی';
-            $nAbad      = $employee->position->place == 'نایب آباد';
-            $mSayar     = $employee->position->place == 'مراقبت سیار';
-
-            $user->is_admin = 1;
-            if ($head) {
-                $user->place = 0;
-            } elseif ($border) {
-                $user->place = 1;
-            } elseif ($airport) {
-                $user->place = 2;
-            } elseif ($nAbad) {
-                $user->place = 3;
-            } elseif ($mSayar) {
-                $user->place = 4;
-            }
-
             $user->employee_id  = $employee->id;
             $user->name         = $employee->name;
             $user->username     = $employee->emp_number;
@@ -247,7 +212,6 @@ class UserController extends Controller
             $user->phone        = $request->phone;
             $user->email        = $request->email;
             $user->is_admin = 0;
-            $user->place    = $request->place;
         }
 
         $user->info         = $request->info;

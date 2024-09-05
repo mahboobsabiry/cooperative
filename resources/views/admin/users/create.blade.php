@@ -146,15 +146,18 @@
 
                                     <div class="col-md-6">
                                         <!-- Place -->
-                                        <div class="form-group @error('place') has-danger @enderror" id="place_div">
+                                        <div class="form-group @error('place_id') has-danger @enderror" id="place_div">
                                             <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
-                                            <select id="place" name="place" class="form-control select2 @error('place') form-control-danger @enderror">
-                                                <option value="0">ریاست گمرک بلخ</option>
-                                                <option value="1">گمرک سرحدی حیرتان</option>
-                                                <option value="2">گمرک میدان هوایی</option>
-                                                <option value="3">گمرک نایب آباد</option>
-                                                <option value="4">گمرک مراقبت سیار</option>
+                                            <select id="place_id" name="place_id" class="form-control select2 @error('place_id') form-control-danger @enderror">
+                                                <option value="" disabled selected>@lang('form.chooseOne')</option>
+                                                @foreach($places as $place)
+                                                    <option value="{{ $place->id }}">{{ $place->name }} - {{ $place->custom_code }}</option>
+                                                @endforeach
                                             </select>
+
+                                            @error('place_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                         <!-- Avatar -->

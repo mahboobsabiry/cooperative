@@ -126,19 +126,20 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        @if(auth()->user()->head())
-                                            <!-- Place -->
-                                            <div class="form-group @error('place') has-danger @enderror" id="place_div">
-                                                <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
-                                                <select id="place" name="place" class="form-control select2 @error('place') form-control-danger @enderror">
-                                                    <option value="0" {{ $user->place == 0 ? 'selected' : '' }}>ریاست گمرک بلخ</option>
-                                                    <option value="1" {{ $user->place == 1 ? 'selected' : '' }}>گمرک سرحدی حیرتان</option>
-                                                    <option value="2" {{ $user->place == 2 ? 'selected' : '' }}>گمرک میدان هوایی</option>
-                                                    <option value="3" {{ $user->place == 3 ? 'selected' : '' }}>گمرک نایب آباد</option>
-                                                    <option value="4" {{ $user->place == 4 ? 'selected' : '' }}>گمرک مراقبت سیار</option>
-                                                </select>
-                                            </div>
-                                        @endif
+                                        <!-- Place -->
+                                        <div class="form-group @error('place_id') has-danger @enderror" id="place_div">
+                                            <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
+                                            <select id="place_id" name="place_id" class="form-control select2 @error('place_id') form-control-danger @enderror">
+                                                <option value="" disabled selected>@lang('form.chooseOne')</option>
+                                                @foreach($places as $place)
+                                                    <option value="{{ $place->id }}" {{ $user->place_id == $place->id ? 'selected' : '' }}>{{ $place->name }} - {{ $place->custom_code }}</option>
+                                                @endforeach
+                                            </select>
+
+                                            @error('place_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
 
                                         @if($user->employee_id == null)
                                             <!-- Avatar -->

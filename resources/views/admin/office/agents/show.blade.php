@@ -251,7 +251,6 @@
                                 </thead>
 
                                 <tbody>
-                                @if($agent->companies->count() > 0)
                                     @foreach($agent->companies as $company)
                                         <tr>
                                             <th scope="row">{{ $company->id }}</th>
@@ -367,11 +366,6 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                @else
-                                    <tr>
-                                        <th colspan="9" class="text-center">شرکتی پیدا نشد!</th>
-                                    </tr>
-                                @endif
                                 </tbody>
                             </table>
                         </div>
@@ -427,7 +421,6 @@
                                 </thead>
 
                                 <tbody>
-                                @if($agent->colleagues->count() > 0)
                                     @foreach($agent->colleagues as $colleague)
                                         <tr>
                                             <th scope="row">{{ $colleague->id }}</th>
@@ -465,11 +458,6 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                @else
-                                    <tr>
-                                        <th colspan="10" class="text-center">نماینده همکار ندارد!</th>
-                                    </tr>
-                                @endif
                                 </tbody>
                             </table>
                         </div>

@@ -14,6 +14,12 @@ class Place extends Model
 
     protected $fillable = ['name', 'code', 'custom_code', 'status', 'info'];
 
+    // Users
+    public function users() : HasMany
+    {
+        return $this->hasMany(User::class);
+    }
+
     // Positions
     public function positions() : HasMany
     {

@@ -12,6 +12,7 @@ use App\Traits\HasTazkira;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -28,6 +29,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'place_id',
         'employee_id',
         'name',
         'username',
@@ -35,7 +37,6 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
-        'place',
         'status',
         'info'
     ];
@@ -59,6 +60,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Place
+    public function place() : Relation
+    {
+        return $this->belongsTo(Place::class);
+    }
 
     // Morph Photo
     public function photo(): MorphOne
