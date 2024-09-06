@@ -39,7 +39,7 @@ return new class extends Migration
             $table->string('current_district');
             $table->string('introducer')->nullable();
             $table->string('signature')->nullable();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(1);
             $table->string('info')->nullable();
 
             // Duty
