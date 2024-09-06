@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                             <div>
-                                <h3 class="dash-25">{{ count(\App\Models\Office\Employee::all()->where('status', 1)) }}</h3>
+                                <h3 class="dash-25">{{ count(\App\Models\Office\Employee::all()->where('status', 0)) }}</h3>
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
@@ -129,13 +129,13 @@
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">@lang('pages.employees.mainPosition')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 0)->count() > \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
-                                    {{ \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 0)->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 0)->count() > \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                    {{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 0)->count() }}
                                 </span>
                                 <span class="font-weight-bold">@lang('pages.employees.onDuty')</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 1)->count() > \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
-                                    {{ \App\Models\Office\Employee::all()->where('status', 1)->where('on_duty', 1)->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 1)->count() > \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                    {{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 1)->count() }}
                                 </span>
                             </div>
                         </div>
