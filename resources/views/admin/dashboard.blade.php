@@ -482,9 +482,8 @@
                     <!-- Second Chart -->
                     <div class="card custom-card">
                         <div class="card-body">
-                            <div><h6 class="card-title mb-1">Monthly Profits</h6>
-                                <p class="text-muted mb-2 card-sub-title">Excepteur sint occaecat cupidatat non
-                                    proident. </p></div>
+                            <div><h6 class="card-title mb-1">تشکیلات</h6>
+                                <p class="text-muted mb-2 card-sub-title">ریاست گمرک بلخ</p></div>
                             <h4><span>$</span>22,534</h4>
                             <div class="clearfix mb-2">
                                 <div class="clearfix"><span class="float-start text-muted">This Month</span> <span
