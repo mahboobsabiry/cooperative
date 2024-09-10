@@ -16,7 +16,24 @@ return [
         'totalActiveMembers' 	=> 'مجموع اعضای فعال',
         'totalInactiveMembers' 	=> 'مجموع اعضای غیرفعال',
         'usersActivities'    => 'فعالیت های کاربران',
-        'userAcParagMsg'     => 'تمام فعالیت های کاربران از جمله: ثبت و بروز رسانی معلومات اعضاء؛'
+        'userAcParagMsg'     => 'تمام فعالیت های کاربران از جمله: ثبت و بروز رسانی معلومات اعضاء؛',
+
+        // New Translations
+        'acInPositions'     => "فعال و غیرفعال پوزیتسیه‌لر",
+        'activePositions'   => "فعال پوزیتسیه‌لر",
+        'activityRate'      => "فعالیت مقداری",
+        'bcd'               => "بلخ بوژنه باشقرمه‌سی",
+        'convertedEmps'     => "اوزگرتیریلگن خادم‌لر",
+        'currentEmps'       => "حاضرگی خادملر",
+        'customsDuty'       => "گمرک محصولی",
+        'customsNonDuty'    => "غیرمحصولی",
+        'empBHousing'       => "اوی-جایگه اسوسلنگن خادم‌لر",
+        'empBStatus'        => "مقامی بویچه خادم‌لر",
+        'empsAtHome'        => "اویدگی خادم‌لر",
+        'empsAtHostel'      => "یوتاق‌سوندگی خادل‌لر",
+        'inactivePositions' => "فعال ایمس پوزیتسیه‌لر",
+        'places'            => "جای‌لر",
+        'todaysDate'        => "بوگونگی سنه",
     ],
 
     'companies' => [

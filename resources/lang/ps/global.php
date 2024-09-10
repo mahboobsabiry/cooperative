@@ -111,5 +111,10 @@ return [
     'viewAll'   => 'مشاهده همه',
     'wellDone'  => 'آفرین',
     'yes'       => 'هو',
-    'you'       => 'تاسو'
+    'you'       => 'تاسو',
+
+    // New Translations
+    'day'           => 'ورځ',
+    'hour'		    => 'ساعت',
+    'organization'	=> 'تشکیلات',
 ];

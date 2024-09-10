@@ -112,5 +112,10 @@ return [
     'viewAll'   => 'View All',
     'wellDone'  => 'Well Done',
     'yes'       => 'Yes',
-    'you'       => 'You'
+    'you'       => 'You',
+
+    // New Translations
+    'day'           => 'Day',
+    'hour'		    => 'Hour',
+    'organization'	=> 'Organization',
 ];

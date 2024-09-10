@@ -26,12 +26,12 @@
 
         <!-- Date -->
         <div class="card custom-card">
-            <div class="card-body bg-primary-transparent font-weight-bold" style="border: 1px solid #0f0373;">
-                تقویم امروز: {{ date_format(now(), 'Y-M-d') }} مصادف با {{ \Morilog\Jalali\CalendarUtils::strftime('Y-M-d', strtotime(now())) }}
+            <div class="card-body bg-primary-transparent" style="border: 1px solid #0f0373;">
+                <span class="font-weight-bold">@lang('pages.dashboard.todaysDate'):</span> {{ date_format(now(), 'Y-M-d') }} <span class="font-weight-bold">@lang('pages.dashboard.coincidingWith'):</span> {{ \Morilog\Jalali\CalendarUtils::strftime('Y-F-d', strtotime(now())) }}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                روز: {{ \Morilog\Jalali\CalendarUtils::strftime('%A', strtotime(now())) }}
+                <span class="font-weight-bold">@lang('global.day'):</span> {{ \Morilog\Jalali\CalendarUtils::strftime('%A', strtotime(now())) }}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                ساعت: {{ \Morilog\Jalali\CalendarUtils::strftime('h:i A', strtotime(now())) }}
+                <span class="font-weight-bold">@lang('global.hour'):</span> {{ \Morilog\Jalali\CalendarUtils::strftime('h:i A', strtotime(now())) }}
             </div>
         </div>
         <!--/==/ End of Date -->
@@ -57,12 +57,12 @@
                                      class="progress-bar bg-dark progress-bar-xs wd-100p" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">@lang('pages.users.activeUsers')</span>
-                                <span class="ml-auto">
+                                <span class="font-weight-bold">@lang('pages.users.activeUsers')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
                                 <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 1)->count() > \App\Models\User::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>{{ \App\Models\User::all()->where('status', 1)->count() }}
                             </span>
-                                <span class="font-weight-bold">@lang('pages.users.inactiveUsers')</span>
-                                <span class="ml-auto">
+                                <span class="font-weight-bold">@lang('pages.users.inactiveUsers')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
                                 <i class="fas fa-caret-{{ \App\Models\User::all()->where('status', 0)->count() > \App\Models\User::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>{{ \App\Models\User::all()->where('status', 0)->count() }}
                             </span>
                             </div>
@@ -91,14 +91,14 @@
                                      class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">@lang('pages.positions.appointed')</span>
-                                <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ $appointment_positions > $empty_positions ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                <span class="font-weight-bold">@lang('pages.positions.appointed')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
+                                    <i class="fas fa-caret-{{ $appointment_positions > $empty_positions ? 'up' : 'down' }} text-dark"></i>
                                     {{ $appointment_positions }}
                                 </span>
-                                <span class="font-weight-bold">@lang('global.empty')</span>
-                                <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ $empty_positions > $appointment_positions ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                <span class="font-weight-bold">@lang('global.empty')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
+                                    <i class="fas fa-caret-{{ $empty_positions > $appointment_positions ? 'up' : 'down' }} text-dark"></i>
                                     {{ $empty_positions }}
                                 </span>
                             </div>
@@ -127,14 +127,14 @@
                                      class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">@lang('pages.employees.mainPosition')</span>
-                                <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 0)->count() > \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                <span class="font-weight-bold">@lang('pages.employees.mainPosition')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 0)->count() > \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 1)->count() ? 'up' : 'down' }} text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 0)->count() }}
                                 </span>
-                                <span class="font-weight-bold">@lang('pages.employees.onDuty')</span>
-                                <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 1)->count() > \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                <span class="font-weight-bold">@lang('pages.employees.onDuty')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 1)->count() > \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 0)->count() ? 'up' : 'down' }} text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 1)->count() }}
                                 </span>
                             </div>
@@ -150,7 +150,7 @@
                     <div class="card custom-card">
                         <div class="card-body dash1">
                             <div class="d-flex">
-                                <p class="mb-1 tx-inverse font-weight-bold">موقعیت ها</p>
+                                <p class="mb-1 tx-inverse font-weight-bold">@lang('pages.dashboard.places')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
                                     <i class="fas fa-map-marker fs-20 text-dark"></i>
                                 </div>
@@ -163,14 +163,14 @@
                                      class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">گمرک محصولی</span>
-                                <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Place::all()->where('custom_code', '!=', null)->count() > \App\Models\Place::all()->where('custom_code', '=', null)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                <span class="font-weight-bold">@lang('pages.dashboard.customsDuty')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
+                                    <i class="fas fa-caret-{{ \App\Models\Place::all()->where('custom_code', '!=', null)->count() > \App\Models\Place::all()->where('custom_code', '=', null)->count() ? 'up' : 'down' }} text-dark"></i>
                                     {{ \App\Models\Place::all()->where('custom_code', '!=', null)->count() }}
                                 </span>
-                                <span class="font-weight-bold">غیر محصولی</span>
-                                <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Place::all()->where('custom_code', '=', null)->count() > \App\Models\Place::all()->where('custom_code', '!=', null)->count()? 'up' : 'down' }} mr-1 text-dark"></i>
+                                <span class="font-weight-bold">@lang('pages.dashboard.customsNonDuty')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
+                                    <i class="fas fa-caret-{{ \App\Models\Place::all()->where('custom_code', '=', null)->count() > \App\Models\Place::all()->where('custom_code', '!=', null)->count()? 'up' : 'down' }} text-dark"></i>
                                     {{ \App\Models\Place::all()->where('custom_code', '=', null)->count() }}
                                 </span>
                             </div>
@@ -190,7 +190,7 @@
                     <div class="card custom-card">
                         <div class="card-body dash1">
                             <div class="d-flex">
-                                <p class="mb-1 tx-inverse font-weight-bold">بست های فعال و غیرفعال</p>
+                                <p class="mb-1 tx-inverse font-weight-bold">@lang('pages.dashboard.acInPositions')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
                                     <i class="fas fa-users fs-20 text-dark"></i>
                                 </div>
@@ -203,12 +203,12 @@
                                      class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">بست های فعال</span>
-                                <span class="ml-auto">
+                                <span class="font-weight-bold">@lang('pages.dashboard.activePositions')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
                                     <i class="fas fa-caret-{{ \App\Models\Office\Position::all()->where('status', 1)->count() > \App\Models\Office\Position::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>{{ \App\Models\Office\Position::all()->where('status', 1)->count() }}
                                 </span>
-                                <span class="font-weight-bold">بست های غیرفعال</span>
-                                <span class="ml-auto">
+                                <span class="font-weight-bold">@lang('pages.dashboard.inactivePositions')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
                                     <i class="fas fa-caret-{{ \App\Models\Office\Position::all()->where('status', 0)->count() > \App\Models\Office\Position::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>{{ \App\Models\Office\Position::all()->where('status', 0)->count() }}
                                 </span>
                             </div>
@@ -224,7 +224,7 @@
                     <div class="card custom-card">
                         <div class="card-body dash1">
                             <div class="d-flex">
-                                <p class="mb-1 tx-inverse font-weight-bold">کارمندان براساس برحالی و تبدیلی</p>
+                                <p class="mb-1 tx-inverse font-weight-bold">@lang('pages.dashboard.empBStatus')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
                                     <i class="fe fe-activity fs-20 text-dark"></i>
                                 </div>
@@ -237,13 +237,13 @@
                                      class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">کارمندان برحال</span>
-                                <span class="ml-auto">
+                                <span class="font-weight-bold">@lang('pages.dashboard.currentEmps')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
                                     <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->count() > \App\Models\Office\Employee::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 0)->count() }}
                                 </span>
-                                <span class="font-weight-bold">کارمندان تبدیل شده</span>
-                                <span class="ml-auto">
+                                <span class="font-weight-bold">@lang('pages.dashboard.convertedEmps')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
                                     <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->count() > \App\Models\Office\Employee::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 1)->count() }}
                                 </span>
@@ -260,7 +260,7 @@
                     <div class="card custom-card">
                         <div class="card-body dash1">
                             <div class="d-flex">
-                                <p class="mb-1 tx-inverse font-weight-bold">کارمندان بر اساس بودوباش</p>
+                                <p class="mb-1 tx-inverse font-weight-bold">@lang('pages.dashboard.empBHousing')</p>
                                 <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
                                     <i class="fas fa-building fs-20 text-dark"></i>
                                 </div>
@@ -273,13 +273,13 @@
                                      class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">کارمندان در خانه</span>
-                                <span class="ml-auto">
+                                <span class="font-weight-bold">@lang('pages.dashboard.empsAtHome')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
                                     <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->whereNull('hostel_id')->count() > \App\Models\Office\Employee::all()->where('status', 0)->whereNotNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 0)->whereNull('hostel_id')->count() }}
                                 </span>
-                                <span class="font-weight-bold">کارمندان در لیلیه</span>
-                                <span class="ml-auto">
+                                <span class="font-weight-bold">@lang('pages.dashboard.empsAtHostel')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
                                     <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->whereNotNull('hostel_id')->count() > \App\Models\Office\Employee::all()->where('status', 0)->whereNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Employee::all()->where('status', 0)->whereNotNull('hostel_id')->count() }}
                                 </span>
@@ -309,13 +309,13 @@
                                      class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
                             </div>
                             <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">@lang('pages.companies.import')</span>
-                                <span class="ml-auto">
+                                <span class="font-weight-bold">@lang('pages.companies.import')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
                                     <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->where('type', 0)->count() > \App\Models\Office\Company::all()->where('type', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Company::all()->where('type', 0)->count() }}
                                 </span>
-                                <span class="font-weight-bold">@lang('pages.companies.export')</span>
-                                <span class="ml-auto">
+                                <span class="font-weight-bold">@lang('pages.companies.export')&nbsp;&nbsp;</span>
+                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
                                     <i class="fas fa-caret-{{ \App\Models\Office\Company::all()->where('type', 1)->count() > \App\Models\Office\Company::all()->where('type', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
                                     {{ \App\Models\Office\Company::all()->where('type', 1)->count() }}
                                 </span>
@@ -423,7 +423,7 @@
                                                         0%
                                                     @endif
                                                 </h6>
-                                                <small class="tx-11 tx-gray-500">میزان فعالیت</small>
+                                                <small class="tx-11 tx-gray-500">@lang('pages.dashboard.activityRate')</small>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -440,7 +440,7 @@
                     <!-- First Chart -->
                     <div class="card custom-card">
                         <div class="card-body">
-                            <div><h6 class="card-title mb-1">گمرک ولایت بلخ</h6>
+                            <div><h6 class="card-title mb-1">@lang('pages.dashboard.bcd')</h6>
                                 <p class="text-muted card-sub-title">مجموع تشکیلات و موقعیت ها.</p></div>
                             <div class="row">
                                 <!-- Organization -->
@@ -456,7 +456,7 @@
                                                 data-value="3" fill="#e1e6f1"></path>
                                         </svg>
                                     </div>
-                                    <p class="mb-1 tx-inverse">تشکیلات</p><h5 class="mb-1">{{ \App\Models\Office\Employee::all()->count() }}</h5>
+                                    <p class="mb-1 tx-inverse">@lang('global.organization')</p><h5 class="mb-1">{{ \App\Models\Office\Employee::all()->count() }}</h5>
                                 </div>
                                 <!--/==/ End of Organization -->
 
@@ -473,7 +473,7 @@
                                                 data-value="5" fill="#e1e6f1"></path>
                                         </svg>
                                     </div>
-                                    <p class="mb-1 tx-inverse">موقعیت ها</p><h5 class="mb-1">{{ count(\App\Models\Place::all()) }}</h5>
+                                    <p class="mb-1 tx-inverse">@lang('pages.dashboard.places')</p><h5 class="mb-1">{{ count(\App\Models\Place::all()) }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -482,8 +482,8 @@
                     <!-- Second Chart -->
                     <div class="card custom-card">
                         <div class="card-body">
-                            <div><h6 class="card-title mb-1">تشکیلات</h6>
-                                <p class="text-muted mb-2 card-sub-title">ریاست گمرک بلخ</p></div>
+                            <div><h6 class="card-title mb-1">@lang('global.organization')</h6>
+                                <p class="text-muted mb-2 card-sub-title">@lang('pages.dashboard.bcd')</p></div>
                             <h4><span>$</span>22,534</h4>
                             <div class="clearfix mb-2">
                                 <div class="clearfix"><span class="float-start text-muted">This Month</span> <span

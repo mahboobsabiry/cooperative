@@ -16,7 +16,24 @@ return [
         'totalActiveMembers' 	=> 'مجموع اعضای فعال',
         'totalInactiveMembers' 	=> 'مجموع اعضای غیرفعال',
         'usersActivities'    => 'فعالیت های کاربران',
-        'userAcParagMsg'     => 'تمام فعالیت های کاربران از جمله: ثبت و بروز رسانی معلومات اعضاء؛'
+        'userAcParagMsg'     => 'تمام فعالیت های کاربران از جمله: ثبت و بروز رسانی معلومات اعضاء؛',
+
+        // New Translations
+        'acInPositions'     => "غیرفعال بستونه",
+        'activePositions'   => "فعال بستونه",
+        'activityRate'      => "د فعالیت اندازه",
+        'bcd'               => "د بلخ گمرک ریاست",
+        'convertedEmps'     => "بدل شوي کارکوونکي",
+        'currentEmps'       => "موجود کارکوونکي",
+        'customsDuty'       => "محصولی",
+        'customsNonDuty'    => "غیرمحصولی",
+        'empBHousing'       => "کارکوونکي د ځایو پراساس",
+        'empBStatus'        => "کارکوونکي د وضعیت پراساس",
+        'empsAtHome'        => "کارکوونکي په کور کی",
+        'empsAtHostel'      => "کارکوونکي په لیلیی کی",
+        'inactivePositions' => "غیرفعال بستونه",
+        'places'            => "ځایونه",
+        'todaysDate'        => "نن ورځ نیټه",
     ],
 
     'companies' => [
