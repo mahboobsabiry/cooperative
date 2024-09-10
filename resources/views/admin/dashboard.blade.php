@@ -239,13 +239,13 @@
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">کارمندان برحال</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->count() > \App\Models\Office\Employee::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
-                                    {{ \App\Models\Office\Employee::all()->where('status', 1)->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->count() > \App\Models\Office\Employee::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                    {{ \App\Models\Office\Employee::all()->where('status', 0)->count() }}
                                 </span>
                                 <span class="font-weight-bold">کارمندان تبدیل شده</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->count() > \App\Models\Office\Employee::all()->where('status', 1)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
-                                    {{ \App\Models\Office\Employee::all()->where('status', 0)->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->count() > \App\Models\Office\Employee::all()->where('status', 0)->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                    {{ \App\Models\Office\Employee::all()->where('status', 1)->count() }}
                                 </span>
                             </div>
                         </div>
@@ -266,7 +266,7 @@
                                 </div>
                             </div>
                             <div>
-                                <h3 class="dash-25">{{ count(\App\Models\Office\Employee::all()->where('status', 1)) }}</h3>
+                                <h3 class="dash-25">{{ count(\App\Models\Office\Employee::all()->where('status', 0)) }}</h3>
                             </div>
                             <div class="progress mb-1">
                                 <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
@@ -275,13 +275,13 @@
                             <div class="expansion-label d-flex">
                                 <span class="font-weight-bold">کارمندان در خانه</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->whereNull('hostel_id')->count() > \App\Models\Office\Employee::all()->where('status', 1)->whereNotNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
-                                    {{ \App\Models\Office\Employee::all()->where('status', 1)->whereNull('hostel_id')->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->whereNull('hostel_id')->count() > \App\Models\Office\Employee::all()->where('status', 0)->whereNotNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                    {{ \App\Models\Office\Employee::all()->where('status', 0)->whereNull('hostel_id')->count() }}
                                 </span>
                                 <span class="font-weight-bold">کارمندان در لیلیه</span>
                                 <span class="ml-auto">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->whereNotNull('hostel_id')->count() > \App\Models\Office\Employee::all()->where('status', 1)->whereNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
-                                    {{ \App\Models\Office\Employee::all()->where('status', 1)->whereNotNull('hostel_id')->count() }}
+                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->whereNotNull('hostel_id')->count() > \App\Models\Office\Employee::all()->where('status', 0)->whereNull('hostel_id')->count() ? 'up' : 'down' }} mr-1 text-dark"></i>
+                                    {{ \App\Models\Office\Employee::all()->where('status', 0)->whereNotNull('hostel_id')->count() }}
                                 </span>
                             </div>
                         </div>
@@ -394,6 +394,7 @@
                                 <p class="text-muted mb-0 card-sub-title">@lang('admin.dashboard.usersWithMostAc')</p>
                             </div>
                         </div>
+                        
                         <div class="user-manager scroll-widget border-top">
                             <div class="table-responsive">
                                 <table class="table mg-b-0">
