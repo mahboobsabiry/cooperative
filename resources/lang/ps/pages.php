@@ -23,6 +23,7 @@ return [
         'activePositions'   => "فعال بستونه",
         'activityRate'      => "د فعالیت اندازه",
         'bcd'               => "د بلخ گمرک ریاست",
+        'coincidingWith'    => "سره همغږي",
         'convertedEmps'     => "بدل شوي کارکوونکي",
         'currentEmps'       => "موجود کارکوونکي",
         'customsDuty'       => "محصولی",

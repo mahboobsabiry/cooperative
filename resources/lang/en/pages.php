@@ -33,6 +33,7 @@ return [
         'activePositions'   => "Active Positions",
         'activityRate'      => "Activity Rate",
         'bcd'               => "Balkh Custom Department",
+        'coincidingWith'    => "Coinciding With",
         'convertedEmps'     => "Converted Employees",
         'currentEmps'       => "Current Employees",
         'customsDuty'       => "Custom Duty",

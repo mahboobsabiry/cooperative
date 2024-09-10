@@ -23,6 +23,7 @@ return [
         'activePositions'   => "بست های فعال",
         'activityRate'      => "میزان فعالیت",
         'bcd'               => "ریاست گمرک بلخ",
+        'coincidingWith'    => "مصادف با",
         'convertedEmps'     => "کارمندان تبدیل شده",
         'currentEmps'       => "کارمندان برحال",
         'customsDuty'       => "گمرک محصولی",

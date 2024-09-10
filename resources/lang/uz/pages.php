@@ -23,6 +23,7 @@ return [
         'activePositions'   => "فعال پوزیتسیه‌لر",
         'activityRate'      => "فعالیت مقداری",
         'bcd'               => "بلخ بوژنه باشقرمه‌سی",
+        'coincidingWith'    => "بیلن مص کیلدی",
         'convertedEmps'     => "اوزگرتیریلگن خادم‌لر",
         'currentEmps'       => "حاضرگی خادملر",
         'customsDuty'       => "گمرک محصولی",
@@ -170,17 +171,6 @@ return [
         'setting'        => 'تنظیم',
         'deleteSetting'  => 'حذف تنظیم',
         'editSetting'    => 'ویرایش تنظیم'
-    ],
-
-    'statements' => [
-        'addNewStatement'  => 'ثبت بیانیه جدید',
-        'deleteStatement'  => 'حذف بیانیه',
-        'editStatement'    => 'ویرایش بیانیه',
-        'latestStatements' => 'آخرین بیانیه‌ها',
-        'mostContStatements'      => 'پْربحث‌ترین بیانیه‌ها',
-        'mostVisitedStatements'   => 'پْربازدیدترین بیانیه‌ها',
-        'statement'        => 'بیانیه',
-        'statementDetails' => 'جزئیات بیانیه'
     ],
 
     'users' => [
