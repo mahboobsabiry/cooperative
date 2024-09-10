@@ -26,7 +26,7 @@
                     <a class="nav-link" href="{{ route('admin.places.index') }}">
                         <i class="fa fa-map-marker"></i>
                         <span class="sidemenu-label">
-                        موقعیت ها
+                        @lang('pages.dashboard.places')
                         ({{ \App\Models\Place::all()->count() }})
                     </span>
                     </a>
@@ -40,7 +40,7 @@
                         <a class="nav-link" href="{{ route('admin.documents.index') }}">
                             <i class="fe fe-file-text"></i>
                             <span class="sidemenu-label">
-                                مکتوب ها
+                                @lang('admin.sidebar.documents')
                                 ({{ \App\Models\Document::all()->count() }})
                             </span>
                         </a>
@@ -54,7 +54,7 @@
                         <a class="nav-link with-sub" href="javascript:void(0)">
                             <i class="fe fe-file-text"></i>
 
-                            <span class="sidemenu-label">مکتوب ها</span>
+                            <span class="sidemenu-label">@lang('admin.sidebar.documents')</span>
                             <i class="angle fe fe-chevron-right"></i>
                         </a>
 
@@ -67,7 +67,7 @@
                         <ul class="nav-sub">
                             <li class="nav-sub-item {{ request()->is('admin/documents') || request()->is('admin/documents/*') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.documents.index') }}">
-                                    مکتوب های ارسالی
+                                    @lang('admin.sidebar.sentDocs')
                                     @if($auth_user_pos)
                                         ({{ count(\App\Models\Document::all()->where('position_id', $auth_user_pos->id)) }})
                                     @endif
@@ -77,7 +77,7 @@
                             <!-- Employees Inactive Users -->
                             <li class="nav-sub-item {{ request()->is('admin/received-documents') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.documents.received') }}">
-                                    مکتوب های دریافتی
+                                    @lang('admin.sidebar.receivedDocs')
                                     (<?php
                                          // Check if Authenticated Employee is On Duty or not
                                          if (\Illuminate\Support\Facades\Auth::user()->employee->on_duty == 1) {
@@ -97,7 +97,7 @@
 
             <!-- Asycuda -->
             @can('asycuda_view')
-                <li class="nav-label">مدیریت عمومی سیسستم</li>
+                <li class="nav-label">@lang('admin.sidebar.systemGenMgmt')</li>
 
                 <li class="nav-item {{ request()->is('admin/asycuda/users') ||
                     request()->is('admin/asycuda/users/*') ||
@@ -111,7 +111,7 @@
 {{--                        @if(count(\App\Models\Asycuda\COAL::all()->where('expire_date', "<=", today())->where('status', 1)) >= 1)--}}
 {{--                            <span class="pulse"></span>--}}
 {{--                        @endif--}}
-                        <span class="sidemenu-label">مدیریت عمومی سیستم</span>
+                        <span class="sidemenu-label">@lang('admin.sidebar.systemGenMgmt')</span>
                         <i class="angle fe fe-chevron-right"></i>
                     </a>
 
@@ -120,7 +120,7 @@
                         @can('asy_user_view')
                             <li class="nav-sub-item {{ request()->is('admin/asycuda/users') || request()->is('admin/asycuda/users/*') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.asycuda.users.index') }}">
-                                    حساب های کاربری اسیکودا
+                                    @lang('admin.sidebar.asyUserAccs')
                                     ({{ count(\App\Models\Asycuda\AsycudaUser::all()->where('status', 1)) }})
                                 </a>
                             </li>
@@ -128,7 +128,7 @@
                             <!-- Employees Inactive Users -->
                             <li class="nav-sub-item {{ request()->is('admin/asycuda/inactive-users') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.asycuda.users.inactive') }}">
-                                    حساب های کاربری غیرفعال اسیکودا
+                                    @lang('admin.sidebar.asyInactiveUserAccs')
                                     ({{ count(\App\Models\Asycuda\AsycudaUser::all()->where('status', 0)) }})
                                 </a>
                             </li>
@@ -139,7 +139,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/asycuda/coal') || request()->is('admin/asycuda/coal/*') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
                                    href="{{ route('admin.asycuda.coal.index') }}">
-                                    جواز فعالیت شرکت ها
+                                    @lang('admin.sidebar.companiesAL')
                                     ({{ count(\App\Models\Asycuda\COAL::all()->where('status', 1)) }})
 {{--                                    @if(count(\App\Models\Asycuda\COAL::all()->where('expire_date', "<=", today())->where('status', 1)) >= 1)--}}
 {{--                                        &nbsp;<span class="fas fa-building fa-pulse text-danger"></span>--}}
@@ -151,7 +151,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/asycuda/expired-coal') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
                                    href="{{ route('admin.asycuda.coal.expired') }}">
-                                    جواز فعالیت ختم شده
+                                    @lang('admin.sidebar.expiredAL')
                                     ({{ count(\App\Models\Asycuda\COAL::all()->where('status', 0)) }})
                                 </a>
                             </li>
@@ -163,7 +163,7 @@
 
             <!-- Office Routes -->
             @can('office_view')
-                <li class="nav-label">مدیریت عمومی مالی و اداری</li>
+                <li class="nav-label">@lang('admin.sidebar.offFGenMgmt')</li>
 
                 <!-- Finance -->
                 @can('office_finance_view')
@@ -172,7 +172,7 @@
 
                         <a class="nav-link with-sub" href="javascript:void(0)">
                             <i class="fas fa-dollar-sign"></i>
-                            <span class="sidemenu-label">مالی</span>
+                            <span class="sidemenu-label">@lang('admin.sidebar.finance')</span>
                             <i class="angle fe fe-chevron-right"></i>
                         </a>
 
@@ -181,7 +181,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/budgets') ||
                                 request()->is('admin/office/budgets/*') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.budgets.index') }}">
-                                    بودجه ها
+                                    @lang('admin.sidebar.budgets')
                                 </a>
                             </li>
                         </ul>
@@ -221,7 +221,7 @@
                             <!-- Inactive Agents -->
                             <li class="nav-sub-item {{ request()->is('admin/office/inactive-agents') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.agents.inactive') }}">
-                                    نماینده های غیرفعال
+                                    @lang('admin.sidebar.inactiveAgents')
                                     ({{ count(\App\Models\Office\Agent::all()->where('status', 0)) }})
                                 </a>
                             </li>
@@ -230,7 +230,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/agent-colleagues') ||
                             request()->is('admin/office/agent-colleagues/*') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.agent-colleagues.index') }}">
-                                    همکاران نماینده ها
+                                    @lang('admin.sidebar.agentColleagues')
                                     ({{ count(\App\Models\Office\AgentColleague::all()->where('status', 1)) }})
                                 </a>
                             </li>
@@ -238,7 +238,7 @@
                             <!-- Agent Inactive Colleagues -->
                             <li class="nav-sub-item {{ request()->is('admin/office/inactive-agent-colleagues') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.agent-colleagues.inactive') }}">
-                                    همکاران نماینده ها (غیرفعال)
+                                    @lang('admin.sidebar.agentColleagues') (@lang('global.inactive'))
                                     ({{ count(\App\Models\Office\AgentColleague::all()->where('status', 0)) }})
                                 </a>
                             </li>
@@ -272,7 +272,7 @@
                             <!-- Inactive Companies -->
                             <li class="nav-sub-item {{ request()->is('admin/office/inactive-companies') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.companies.inactive') }}">
-                                    شرکت های غیرفعال
+                                    @lang('admin.sidebar.inactiveCompanies')
                                     ({{ count(\App\Models\Office\Company::all()->where('status', 0)) }})
                                 </a>
                             </li>
@@ -281,7 +281,7 @@
                 @endcan
                 <!--/==/ End of Companies -->
 
-                <li class="nav-label">مدیریت منابع بشری</li>
+                <li class="nav-label">@lang('admin.sidebar.hrMgmt')</li>
 
                 <!-- Positions -->
                 @can('office_position_view')
@@ -373,9 +373,8 @@
                                 request()->is('admin/office/employee/*/leaves/create') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.index') }}">
                                     {<span class="small text-sm-center tx-danger">M</span>}
-                                    همه کارمندان برحال
-                                    ({{ count(\App\Models\Office\Employee::all()->whereNotNull('position_id')) }}
-                                    )
+                                    @lang('admin.sidebar.allCurEmployees')
+                                    ({{ count(\App\Models\Office\Employee::all()->whereNotNull('position_id')) }})
                                 </a>
                             </li>
 
@@ -391,26 +390,23 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/on-duty-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.on_duty') }}">
                                     @lang('pages.employees.onDuty')
-                                    ({{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 1)->count() }}
-                                    )
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 0)->where('on_duty', 1)->count() }})
                                 </a>
                             </li>
 
                             <!-- Retired Employees -->
                             <li class="nav-sub-item {{ request()->is('admin/office/retired-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.retired_employees') }}">
-                                    متقاعدین
-                                    ({{ \App\Models\Office\Employee::all()->where('status', 1)->count() }}
-                                    )
+                                    @lang('admin.sidebar.retired')
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 1)->count() }})
                                 </a>
                             </li>
 
                             <!-- Fired Employees -->
                             <li class="nav-sub-item {{ request()->is('admin/office/fired-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.fired_employees') }}">
-                                    منفکی
-                                    ({{ \App\Models\Office\Employee::all()->where('status', 2)->count() }}
-                                    )
+                                    @lang('admin.sidebar.fired')
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 2)->count() }})
                                 </a>
                             </li>
 
@@ -418,7 +414,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/office/position-conversion-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
                                    href="{{ route('admin.office.employees.position_conversion_employees') }}">
-                                    تبدیل شده
+                                    @lang('admin.sidebar.converted')
                                     ({{ \App\Models\Office\Employee::all()->where('status', 3)->count() }})
                                 </a>
                             </li>
@@ -426,9 +422,8 @@
                             <!-- Suspended Employees -->
                             <li class="nav-sub-item {{ request()->is('admin/office/suspended-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.suspended_employees') }}">
-                                    <span class="text-secondary">معلق </span>&nbsp;
-                                    ({{ \App\Models\Office\Employee::all()->where('status', 4)->count() }}
-                                    )
+                                    <span class="text-secondary">@lang('admin.sidebar.suspended') </span>&nbsp;
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 4)->count() }})
                                     @if(count(\App\Models\Office\Employee::all()->where('status', 4)) >= 1)
                                         &nbsp;<span class="fas fa-user-tie fa-pulse text-danger"></span>
                                     @endif
@@ -438,9 +433,8 @@
                             <!-- Other Custom Duty Employees -->
                             <li class="nav-sub-item {{ request()->is('admin/office/ocustom-duty-employees') ? 'active' : '' }}">
                                 <a class="nav-sub-link" href="{{ route('admin.office.employees.oc_duty_employees') }}">
-                                    خدمتی از اداره/ارگان دیگر
-                                    ({{ \App\Models\Office\Employee::all()->where('status', 5)->count() }}
-                                    )
+                                    @lang('admin.sidebar.onDutyOC')
+                                    ({{ \App\Models\Office\Employee::all()->where('status', 5)->count() }})
                                 </a>
                             </li>
                         </ul>
@@ -460,13 +454,13 @@
 
             <!-- General Management Of Property Examination -->
             @can('examination_view')
-                <li class="nav-label">مدیریت عمومی تشریح اموال</li>
+                <li class="nav-label">@lang('admin.sidebar.exPropGenMgmt')</li>
                 @can('examination_property_view')
                     <li class="nav-item {{ request()->is('admin/examination/properties') ||
                         request()->is('admin/examination/properties/*') ? 'active show' : '' }}">
                         <a class="nav-link with-sub" href="javascript:void(0)">
                             <i class="fa fa-file-alt"></i>
-                            <span class="sidemenu-label">تعرفه ترجیحی</span>
+                            <span class="sidemenu-label">@lang('admin.sidebar.preferredTarrif')</span>
                             <i class="angle fe fe-chevron-right"></i>
                         </a>
 
@@ -475,7 +469,7 @@
                             <li class="nav-sub-item {{ request()->is('admin/examination/properties') ||
                                 request()->is('admin/examination/properties/*') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
-                                   href="{{ route('admin.examination.properties.index') }}">جایداد اموال ({{ count(\App\Models\Examination\Property::all()->where('status', 1)) }})</a>
+                                   href="{{ route('admin.examination.properties.index') }}">@lang('admin.sidebar.propertyEstate') ({{ count(\App\Models\Examination\Property::all()->where('status', 1)) }})</a>
                             </li>
                         </ul>
                     </li>
@@ -485,7 +479,7 @@
 
             <!-- General Management Of Warehouses -->
             @can('warehouse_view')
-                <li class="nav-label">مدیریت عمومی گدام ها</li>
+                <li class="nav-label">@lang('admin.sidebar.warehousesGenMgmt')</li>
                 @can('warehouse_assurance_view')
                     <li class="nav-item {{ request()->is('admin/warehouse/assurances') ||
                         request()->is('admin/warehouse/assurances/*') ||
@@ -493,7 +487,7 @@
                         request()->is('admin/warehouse/absolute-assurances') ? 'active show' : '' }}">
                         <a class="nav-link with-sub" href="javascript:void(0)">
                             <i class="fe fe-dollar-sign"></i>
-                            <span class="sidemenu-label">تضمین</span>
+                            <span class="sidemenu-label">@lang('admin.sidebar.assurance')</span>
                             <i class="angle fe fe-chevron-right"></i>
                         </a>
 
@@ -501,17 +495,17 @@
                             <!-- Current Assurance -->
                             <li class="nav-sub-item {{ request()->is('admin/warehouse/assurances') || request()->is('admin/warehouse/assurances/*') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
-                                   href="{{ route('admin.warehouse.assurances.index') }}">جاری ({{ count(\App\Models\Warehouse\Assurance::all()->where('status', 1)) }})</a>
+                                   href="{{ route('admin.warehouse.assurances.index') }}">@lang('admin.sidebar.onGoing') ({{ count(\App\Models\Warehouse\Assurance::all()->where('status', 1)) }})</a>
                             </li>
                             <!-- Returned Assurance -->
                             <li class="nav-sub-item {{ request()->is('admin/warehouse/returned-assurances') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
-                                   href="{{ route('admin.warehouse.assurances.returned') }}">مسترد شده ({{ count(\App\Models\Warehouse\Assurance::all()->where('status', 2)) }})</a>
+                                   href="{{ route('admin.warehouse.assurances.returned') }}">@lang('admin.sidebar.returned') ({{ count(\App\Models\Warehouse\Assurance::all()->where('status', 2)) }})</a>
                             </li>
                             <!-- Absolute Assurance -->
                             <li class="nav-sub-item {{ request()->is('admin/warehouse/absolute-assurances') ? 'active' : '' }}">
                                 <a class="nav-sub-link"
-                                   href="{{ route('admin.warehouse.assurances.absolute') }}">قطعی ({{ count(\App\Models\Warehouse\Assurance::all()->where('status', 3)) }})</a>
+                                   href="{{ route('admin.warehouse.assurances.absolute') }}">@lang('admin.sidebar.absolute') ({{ count(\App\Models\Warehouse\Assurance::all()->where('status', 3)) }})</a>
                             </li>
                         </ul>
                     </li>

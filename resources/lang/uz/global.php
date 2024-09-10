@@ -111,5 +111,10 @@ return [
     'viewAll'   => 'مشاهده همه',
     'wellDone'  => 'آفرین',
     'yes'       => 'بلی',
-    'you'       => 'شما'
+    'you'       => 'شما',
+
+    // New Translations
+    'day'           => 'کن',
+    'hour'		    => 'ساعت',
+    'organization'	=> 'تشکیلات',
 ];

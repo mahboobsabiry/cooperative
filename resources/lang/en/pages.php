@@ -26,7 +26,25 @@ return [
         'totalMembersSubHeaderMsg'  => 'All users with percentage of added members by them;',
         'totalUsers'         => 'Total Users',
         'usersActivities'    => 'Users Activities',
-        'userAcParagMsg'     => 'Users all activities including add or update members;'
+        'userAcParagMsg'     => 'Users all activities including add or update members;',
+
+        // New Translations
+        'acInPositions'     => "Active & Inactive Positions",
+        'activePositions'   => "Active Positions",
+        'activityRate'      => "Activity Rate",
+        'bcd'               => "Balkh Custom Department",
+        'coincidingWith'    => "Coinciding With",
+        'convertedEmps'     => "Converted Employees",
+        'currentEmps'       => "Current Employees",
+        'customsDuty'       => "Custom Duty",
+        'customsNonDuty'    => "Custom Non-Duty",
+        'empBHousing'       => "Employees Based on Housing",
+        'empBStatus'        => "Employees Based on Status",
+        'empsAtHome'        => "Employees At Home",
+        'empsAtHostel'      => "Employees At Hostel",
+        'inactivePositions' => "Inactive Positions",
+        'places'            => "Places",
+        'todaysDate'        => "Today's Date",
     ],
 
     'companies' => [

@@ -16,7 +16,25 @@ return [
     	'totalActiveMembers' 	=> 'مجموع اعضای فعال',
     	'totalInactiveMembers' 	=> 'مجموع اعضای غیرفعال',
         'usersActivities'    => 'فعالیت های کاربران',
-        'userAcParagMsg'     => 'تمام فعالیت های کاربران از جمله: ثبت و بروز رسانی معلومات اعضاء؛'
+        'userAcParagMsg'     => 'تمام فعالیت های کاربران از جمله: ثبت و بروز رسانی معلومات اعضاء؛',
+
+        // New Translations
+        'acInPositions'     => "بست های فعال و غیر فعال",
+        'activePositions'   => "بست های فعال",
+        'activityRate'      => "میزان فعالیت",
+        'bcd'               => "ریاست گمرک بلخ",
+        'coincidingWith'    => "مصادف با",
+        'convertedEmps'     => "کارمندان تبدیل شده",
+        'currentEmps'       => "کارمندان برحال",
+        'customsDuty'       => "گمرک محصولی",
+        'customsNonDuty'    => "غیرمحصولی",
+        'empBHousing'       => "کارمندان براساس بودوباش",
+        'empBStatus'        => "کارمندان براساس وضعیت",
+        'empsAtHome'        => "کارمندان در خانه",
+        'empsAtHostel'      => "کارمندان در لیلیه",
+        'inactivePositions' => "بست های غیرفعال",
+        'places'            => "موقعیت ها",
+        'todaysDate'        => "تاریخ امروز",
     ],
 
     'companies' => [
