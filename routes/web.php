@@ -95,6 +95,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('inactive-users', [AsycudaUserController::class, 'inactive'])->name('users.inactive');
         Route::get('add-user-resume/{id}', [AsycudaUserController::class, 'add_user_resume'])->name('users.add_user_resume');
         Route::post('store-user-resume/{id}', [AsycudaUserController::class, 'store_user_resume'])->name('users.store_user_resume');
+        // User Form
+        Route::get('user/{id}/user-form', [AsycudaUserController::class, 'user_form'])->name('users.user_form');
 
         // COAL
         Route::resource('coal', COALController::class);

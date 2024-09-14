@@ -7,6 +7,7 @@ use App\Models\Asycuda\AsycudaUser;
 use App\Models\Asycuda\AsyUserResume;
 use App\Models\Office\Employee;
 use App\Models\Office\Resume;
+use App\Models\Place;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,8 +36,9 @@ class AsycudaUserController extends Controller
     // Create
     public function create()
     {
-        $employees = Employee::doesntHave('asycuda_user')->whereBetween('status', [0,1])->get();
-        return view('admin.asycuda.users.create', compact('employees'));
+        $employees = Employee::doesntHave('asycuda_user')->where('status', 0)->get();
+        $places = Place::all()->where('status', 1)->where('custom_code', '!=', null);
+        return view('admin.asycuda.users.create', compact('employees', 'places'));
     }
 
     // Select Employee
@@ -91,9 +93,10 @@ class AsycudaUserController extends Controller
     public function edit($id)
     {
         $asycuda_user = AsycudaUser::findOrFail($id);
-        $employees = Employee::whereBetween('status', [0,1])->get();
-        return view('admin.asycuda.users.edit', compact('asycuda_user', 'employees'));
+        $places = Place::all()->where('status', 1)->where('custom_code', '!=', null);
+        return view('admin.asycuda.users.edit', compact('asycuda_user', 'places'));
     }
+
     // Store
     public function update(Request $request, $id)
     {
@@ -201,5 +204,12 @@ class AsycudaUserController extends Controller
             'message'   => 'موفقانه ثبت گردید!',
             'alertType' => 'success'
         ]);
+    }
+
+    // User Form
+    public function user_form($id)
+    {
+        $asycuda_user = AsycudaUser::find($id);
+        return view('admin.asycuda.users.user_form', compact('asycuda_user'));
     }
 }

@@ -97,6 +97,22 @@
                                 </div>
 
                                 <div class="col-md-6">
+                                    <!-- Place -->
+                                    <div class="form-group @error('place_id') has-danger @enderror">
+                                        <p class="mb-2">@lang('pages.users.place'): <span class="tx-danger">*</span></p>
+
+                                        <select class="form-control @error('place_id') form-control-danger @enderror select2" id="place_id" name="place_id">
+                                            <option value="" selected disabled>@lang('form.chooseOne')</option>
+                                            @foreach($places as $place)
+                                                <option value="{{ $place->id }}">{{ $place->name }} - {{ $place->custom_code }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('place_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
                                     <!-- Roles -->
                                     <div class="form-group @error('roles') has-danger @enderror">
                                         <p class="mb-2">@lang('admin.sidebar.roles'): <span class="tx-danger">*</span></p>

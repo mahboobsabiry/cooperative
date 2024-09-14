@@ -1,17 +1,6 @@
 <?php
 
 return [
-    'articles' => [
-        'articleDetails' => 'Article Details',
-        'addNewArticle'  => 'Add New Article',
-        'article'        => 'Article',
-        'deleteArticle'  => 'Delete Article',
-        'editArticle'    => 'Edit Article',
-        'latestArticles' => 'Latest Articles',
-        'mostContArticles'      => 'Most Controversial Articles',
-        'mostVisitedArticles'   => 'Most Visited Articles'
-    ],
-
     'dashboard' => [
         'latestAddedMembers' => 'Latest added members',
         'ltMbParagMsg'       => 'List of latest member added in all over system!',
@@ -189,9 +178,11 @@ return [
         'myActivities'     => 'My Activities',
         'overview'         => 'Overview',
         'personalInfo'     => 'Personal Information',
+        'place'            => 'Place',
         'rolesOf'          => 'Roles of',
     	'user' 	           => 'User',
         'userDetails'      => 'User Details',
+        'userForm'         => 'User Form',
         'userProfile'      => 'User Profile',
     	'users'	           => 'Users',
         'Teacher', '0784212382'

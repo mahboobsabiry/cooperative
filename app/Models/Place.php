@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Asycuda\AsycudaUser;
 use App\Models\Office\Hostel;
 use App\Models\Office\Position;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,12 @@ class Place extends Model
     public function users() : HasMany
     {
         return $this->hasMany(User::class);
+    }
+
+    // Asycuda Users
+    public function asycuda_users() : HasMany
+    {
+        return $this->hasMany(AsycudaUser::class);
     }
 
     // Positions

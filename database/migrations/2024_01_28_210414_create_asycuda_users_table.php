@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('asycuda_users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('place_id');
             $table->integer('user');
             $table->integer('password');
             $table->string('roles');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('employee_id')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('place_id')->references('id')->on('places')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

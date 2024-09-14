@@ -110,7 +110,7 @@
 
                             @if($asycuda_user->employee->position->position_number == 2 || $asycuda_user->employee->position->position_number == 3)
                             @else
-                                <p class="pro-user-desc text-primary mb-1">({{ $asycuda_user->employee->position->place ?? '' }})</p>
+                                <p class="pro-user-desc text-primary mb-1">({{ $asycuda_user->employee->position->place->name ?? '' }})</p>
                             @endif
                             <!-- Employee Star -->
                             @if($asycuda_user->employee->position)
@@ -224,8 +224,15 @@
                 <!-- Details -->
                 <div class="card mb-2">
                     <!-- Personal Information -->
-                    <div class="card-header tx-15 tx-bold">
-                        @lang('global.details')
+                    <div class="card-header row">
+                        <div class="col-md-6">
+                            <div class="tx-15 tx-bold">
+                                @lang('global.details')
+                            </div>
+                        </div>
+                        <div class="col-md-6 {{ app()->getLocale() == 'en' ? 'text-right' : 'text-left' }}">
+                            <a href="{{ route('admin.asycuda.users.user_form', $asycuda_user->id) }}" class="btn btn-outline-dark btn-sm" target="_blank">@lang('pages.users.userForm')</a>
+                        </div>
                     </div>
 
                     <!-- Card Body -->
@@ -300,26 +307,10 @@
                                     </div>
                                 @endif
 
-                                <!-- Custom Code -->
-                                <div class="row">
-                                    <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1"><strong>کد گمرکی: </strong></p>
-                                    </div>
-                                    <div class="col">{{ $asycuda_user->employee->position->custom_code }}</div>
-                                </div>
-
-                                <!-- Place -->
-                                <div class="row">
-                                    <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1"><strong>موقعیت: </strong></p>
-                                    </div>
-                                    <div class="col">{{ $asycuda_user->employee->position->place }}</div>
-                                </div>
-
                                 <!-- Description -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1"><strong>@lang('global.extraInfo'): </strong>:</p>
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('global.extraInfo'): </strong></p>
                                     </div>
                                     <div class="col">
                                         <p class="fst-italic text-400 mb-1">{{ $asycuda_user->info ?? '--' }}</p>
@@ -369,6 +360,14 @@
                                         <p class="fw-semi-bold mb-1"><strong>@lang('form.status'):</strong></p>
                                     </div>
                                     <div class="col">{{ $asycuda_user->status == 1 ? trans('global.active') : trans('global.inactive') }}</div>
+                                </div>
+
+                                <!-- Place -->
+                                <div class="row">
+                                    <div class="col-6 col-sm-5">
+                                        <p class="fw-semi-bold mb-1"><strong>موقعیت: </strong></p>
+                                    </div>
+                                    <div class="col">{{ $asycuda_user->place->name }} - {{ $asycuda_user->place->custom_code }}</div>
                                 </div>
                             </div>
                             <!--/==/ End of General Information -->

@@ -173,17 +173,6 @@ return [
         'editSetting'    => 'ویرایش تنظیم'
     ],
 
-    'statements' => [
-        'addNewStatement'  => 'ثبت بیانیه جدید',
-        'deleteStatement'  => 'حذف بیانیه',
-        'editStatement'    => 'ویرایش بیانیه',
-        'latestStatements' => 'آخرین بیانیه‌ها',
-        'mostContStatements'      => 'پْربحث‌ترین بیانیه‌ها',
-        'mostVisitedStatements'   => 'پْربازدیدترین بیانیه‌ها',
-        'statement'        => 'بیانیه',
-        'statementDetails' => 'جزئیات بیانیه'
-    ],
-
     'users' => [
         'activeUsers'      => 'کاربران فعال',
         'addNewUser'       => 'ثبت کاربر جدید',
@@ -199,10 +188,12 @@ return [
         'myActivities'     => 'فعالیت های من',
         'overview'         => 'بررسی اجمالی',
         'personalInfo'     => 'اطلاعات شخصی',
+        'place'            => 'موقعیت',
         'rolesOf'          => 'صلاحیت های',
         'totalMAddedBy'    => 'لیست مجموع اعضای ثبت شده توسط ',
     	'user' 	           => 'کاربر',
         'userDetails'      => 'جزئیات کاربر',
+        'userForm'         => 'یوزر فورم',
         'userProfile'      => 'پروفایل کاربر',
     	'users'	           => 'کاربران'
     ],
