@@ -444,7 +444,7 @@
                                                     <select class="form-control select2" name="hostel_id" id="hostel_id">
                                                         <option selected>@lang('global.home')</option>
                                                         @foreach($hostels as $hostel)
-                                                            <option value="{{ $hostel->id }}" {{ $employee->hostel_id == $hostel->id ? 'selected' : '' }}>@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }} ({{ $hostel->place }})</option>
+                                                            <option value="{{ $hostel->id }}" {{ $employee->hostel_id == $hostel->id ? 'selected' : '' }}>@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }} ({{ $hostel->place->name }})</option>
                                                         @endforeach
                                                     </select>
 
