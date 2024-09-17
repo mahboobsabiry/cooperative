@@ -86,4 +86,13 @@ return [
         'replaceImgMsg'     => 'برای تغییر فایل، فایل را اینجا بکشید و یا کلیک کنید.',
         'youWontSeeAgain'   => 'شما دوباره قادر به دیدن این موضوع نخواهید بود.'
     ],
+
+    // New Translations
+    'activity_sector'   => 'سکتور فعالیت',
+    'deputy_name'       => 'اسم معاون',
+    'owner_name'        => 'اسم مالک',
+    'owner_id_card'     => 'شماره تذکره مالک',
+    'owner_phone'       => 'شماره تماس مالک',
+    'owner_main_add'    => 'آدرس اصلی مالک',
+    'owner_cur_add'     => 'آدرس فعلی مالک'
 ];
