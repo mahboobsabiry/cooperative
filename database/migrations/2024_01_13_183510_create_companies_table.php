@@ -17,6 +17,18 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->bigInteger('tin')->unique();
             $table->string('type');
+            $table->string('activity_sector')->nullable();
+            $table->string('address')->nullable();
+
+            // Owner
+            $table->string('owner_name')->nullable();
+            $table->string('deputy_name')->nullable();
+            $table->string('owner_id_number')->nullable();
+            $table->string('owner_phone')->nullable();
+            $table->string('owner_main_add')->nullable();
+            $table->string('owner_cur_add')->nullable();
+
+            // Default
             $table->text('background')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

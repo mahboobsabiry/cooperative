@@ -51,15 +51,11 @@
                     @can('office_company_edit')
                         <div class="mr-2">
                             <!-- Edit -->
-                            <a class="modal-effect btn btn-sm ripple btn-info"
-                               data-effect="effect-sign" data-toggle="modal"
-                               href="#edit_record{{ $company->id }}"
+                            <a class="btn btn-sm ripple btn-info" href="{{ route('admin.office.companies.edit', $company->id) }}"
                                title="@lang('global.edit')">
                                 @lang('global.edit')
                                 <i class="fe fe-edit"></i>
                             </a>
-
-                            @include('admin.office.companies.edit')
                         </div>
                     @endcan
                 </div>

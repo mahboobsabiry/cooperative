@@ -86,4 +86,13 @@ return [
         'replaceImgMsg'     => 'Drag and drop your file here or click to change the file!',
         'youWontSeeAgain'   => 'You won\'t be able to see the file again.'
     ],
+
+    // New Translations
+    'activity_sector'   => 'Activity Sector',
+    'deputy_name'       => 'Deputy Name',
+    'owner_name'        => 'Owner Name',
+    'owner_id_card'     => 'Owner ID Card',
+    'owner_phone'       => 'Owner Phone',
+    'owner_main_add'    => 'Owner Main Address',
+    'owner_cur_add'     => 'Owner Current Address'
 ];
