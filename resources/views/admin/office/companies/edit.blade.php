@@ -82,28 +82,18 @@
                                             @enderror
                                         </div>
 
-                                        <!-- Company Type -->
-                                        <div class="form-group @error('type') has-danger @enderror">
-                                            <p class="mb-2">3) @lang('global.type'): <span class="tx-danger">*</span></p>
+                                        <!-- Activity Sector -->
+                                        <div class="form-group @error('activity_sector') has-danger @enderror">
+                                            <p class="mb-2">3) @lang('form.activity_sector'): <span class="tx-danger">*</span></p>
 
-                                            <select class="form-control select2" name="type[]" multiple>
-                                                <option value="وارداتی" {{ str()->contains($company->type, 'وارداتی') ? 'selected' : '' }}>@lang('pages.companies.import')</option>
-                                                <option value="صادراتی" {{ str()->contains($company->type, 'صادراتی') ? 'selected' : '' }}>@lang('pages.companies.export')</option>
-                                                <option value="بارچالانی" {{ str()->contains($company->type, 'بارچالانی') ? 'selected' : '' }}>بارچالانی</option>
-                                                <option value="TIR" {{ str()->contains($company->type, 'TIR') ? 'selected' : '' }}>TIR</option>
+                                            <select class="form-control select2" name="activity_sector[]" multiple>
+                                                <option value="واردات" {{ str()->contains($company->activity_sector, 'واردات') ? 'selected' : '' }}>واردات</option>
+                                                <option value="صادرات" {{ str()->contains($company->activity_sector, 'صادرات') ? 'selected' : '' }}>صادرات</option>
+                                                <option value="بارچالانی" {{ str()->contains($company->activity_sector, 'بارچالانی') ? 'selected' : '' }}>بارچالانی</option>
+                                                <option value="TIR" {{ str()->contains($company->activity_sector, 'TIR') ? 'selected' : '' }}>TIR</option>
                                             </select>
 
                                             @error('type')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                        <!-- Activity Sector -->
-                                        <div class="form-group @error('activity_sector') has-danger @enderror">
-                                            <p class="mb-2">4) @lang('form.activity_sector'):</p>
-                                            <input type="text" id="activity_sector" class="form-control @error('activity_sector') form-control-danger @enderror" name="activity_sector" value="{{ $company->activity_sector ?? old('activity_sector') }}">
-
-                                            @error('activity_sector')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -113,8 +103,8 @@
                                             <div class="col-md-6">
                                                 <!-- Owner Name -->
                                                 <div class="form-group @error('owner_name') has-danger @enderror">
-                                                    <p class="mb-2">5) @lang('form.owner_name'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="owner_name" class="form-control @error('owner_name') form-control-danger @enderror" name="owner_name" value="{{ $company->owner_name ?? old('owner_name') }}" placeholder="@lang('form.owner_name')" required>
+                                                    <p class="mb-2">4) @lang('form.owner_name'):</p>
+                                                    <input type="text" id="owner_name" class="form-control @error('owner_name') form-control-danger @enderror" name="owner_name" value="{{ $company->owner_name ?? old('owner_name') }}" placeholder="@lang('form.owner_name')">
 
                                                     @error('owner_name')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -125,8 +115,8 @@
                                             <div class="col-md-6">
                                                 <!-- Deputy Name -->
                                                 <div class="form-group @error('deputy_name') has-danger @enderror">
-                                                    <p class="mb-2">6) @lang('form.deputy_name'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="deputy_name" class="form-control @error('deputy_name') form-control-danger @enderror" name="deputy_name" value="{{ $company->deputy_name ?? old('deputy_name') }}" placeholder="@lang('form.deputy_name')" required>
+                                                    <p class="mb-2">5) @lang('form.deputy_name'):</p>
+                                                    <input type="text" id="deputy_name" class="form-control @error('deputy_name') form-control-danger @enderror" name="deputy_name" value="{{ $company->deputy_name ?? old('deputy_name') }}" placeholder="@lang('form.deputy_name')">
 
                                                     @error('deputy_name')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -143,8 +133,8 @@
                                             <div class="col-md-6">
                                                 <!-- Owner ID Card -->
                                                 <div class="form-group @error('owner_id_card') has-danger @enderror">
-                                                    <p class="mb-2">7) @lang('form.owner_id_card'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="owner_id_card" class="form-control @error('owner_id_card') form-control-danger @enderror" name="owner_id_card" value="{{ $company->owner_id_card ?? old('owner_id_card') }}" placeholder="@lang('form.owner_id_card')" required>
+                                                    <p class="mb-2">6) @lang('form.owner_id_card'):</p>
+                                                    <input type="text" id="owner_id_card" class="form-control @error('owner_id_card') form-control-danger @enderror" name="owner_id_card" value="{{ $company->owner_id_card ?? old('owner_id_card') }}" placeholder="@lang('form.owner_id_card')">
 
                                                     @error('owner_id_card')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -155,8 +145,8 @@
                                             <div class="col-md-6">
                                                 <!-- Owner Phone -->
                                                 <div class="form-group @error('owner_phone') has-danger @enderror">
-                                                    <p class="mb-2">8) @lang('form.owner_phone'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="owner_phone" class="form-control @error('owner_phone') form-control-danger @enderror" name="owner_phone" value="{{ $company->owner_phone ?? old('owner_phone') }}" placeholder="@lang('form.owner_phone')" required>
+                                                    <p class="mb-2">7) @lang('form.owner_phone'):</p>
+                                                    <input type="text" id="owner_phone" class="form-control @error('owner_phone') form-control-danger @enderror" name="owner_phone" value="{{ $company->owner_phone ?? old('owner_phone') }}" placeholder="@lang('form.owner_phone')">
 
                                                     @error('owner_phone')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -171,8 +161,8 @@
                                             <div class="col-md-6">
                                                 <!-- Owner Main Address -->
                                                 <div class="form-group @error('owner_main_add') has-danger @enderror">
-                                                    <p class="mb-2">9) @lang('form.owner_main_add'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="owner_main_add" class="form-control @error('owner_main_add') form-control-danger @enderror" name="owner_main_add" value="{{ $company->owner_main_add ?? old('owner_main_add') }}" placeholder="@lang('form.owner_main_add')" required>
+                                                    <p class="mb-2">8) @lang('form.owner_main_add'):</p>
+                                                    <input type="text" id="owner_main_add" class="form-control @error('owner_main_add') form-control-danger @enderror" name="owner_main_add" value="{{ $company->owner_main_add ?? old('owner_main_add') }}" placeholder="@lang('form.owner_main_add')">
 
                                                     @error('owner_main_add')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -183,8 +173,8 @@
                                             <div class="col-md-6">
                                                 <!-- Owner Current Address -->
                                                 <div class="form-group @error('owner_cur_add') has-danger @enderror">
-                                                    <p class="mb-2">10) @lang('form.owner_cur_add'): <span class="tx-danger">*</span></p>
-                                                    <input type="text" id="owner_cur_add" class="form-control @error('owner_cur_add') form-control-danger @enderror" name="owner_cur_add" value="{{ $company->owner_cur_add ?? old('owner_cur_add') }}" placeholder="@lang('form.owner_cur_add')" required>
+                                                    <p class="mb-2">9) @lang('form.owner_cur_add'):</p>
+                                                    <input type="text" id="owner_cur_add" class="form-control @error('owner_cur_add') form-control-danger @enderror" name="owner_cur_add" value="{{ $company->owner_cur_add ?? old('owner_cur_add') }}" placeholder="@lang('form.owner_cur_add')">
 
                                                     @error('owner_cur_add')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -196,8 +186,8 @@
 
                                         <!-- Address -->
                                         <div class="form-group @error('address') has-danger @enderror">
-                                            <p class="mb-2">11) @lang('global.address'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="address" class="form-control @error('address') form-control-danger @enderror" name="address" value="{{ $company->address ?? old('address') }}" required>
+                                            <p class="mb-2">10) @lang('global.address'):</p>
+                                            <input type="text" id="address" class="form-control @error('address') form-control-danger @enderror" name="address" value="{{ $company->address ?? old('address') }}">
 
                                             @error('address')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -206,7 +196,7 @@
 
                                         <!-- Description -->
                                         <div class="form-group @error('info') has-danger @enderror">
-                                            <p class="mb-2">12) @lang('form.extraInfo'):</p>
+                                            <p class="mb-2">11) @lang('form.extraInfo'):</p>
                                             <textarea name="info" class="form-control @error('info') form-control-danger @enderror">{{ $company->info ?? old('info') }}</textarea>
 
                                             @error('info')

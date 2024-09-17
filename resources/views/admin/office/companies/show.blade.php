@@ -107,7 +107,7 @@
                         <div class="row">
                             <!-- General Information -->
                             <div class="col-lg col-xxl-5">
-                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات عمومی</h6>
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">@lang('pages.companies.company_info')</h6>
                                 <!-- ID -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
@@ -119,7 +119,7 @@
                                 <!-- Name -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="font-weight-bold mb-1">نام:</p>
+                                        <p class="font-weight-bold mb-1">@lang('form.name'):</p>
                                     </div>
                                     <div class="col">{{ $company->name }}</div>
                                 </div>
@@ -127,17 +127,27 @@
                                 <!-- TIN -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="font-weight-bold mb-1">نمبر تشخیصیه:</p>
+                                        <p class="font-weight-bold mb-1">@lang('form.tin'):</p>
                                     </div>
                                     <div class="col">{{ $company->tin }}</div>
                                 </div>
 
-                                <!-- Type -->
+                                <!-- Activity Sector -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="font-weight-bold mb-1"> نوع:</p>
+                                        <p class="font-weight-bold mb-1"> @lang('form.activity_sector'):</p>
                                     </div>
-                                    <div class="col">@foreach(explode(',', $company->type) as $t) <span class="tag tag-sm tag-info">{{ $t }}</span> - @endforeach</div>
+                                    <div class="col">@foreach(explode(',', $company->activity_sector) as $t) <span class="text-dark">{{ $t }}</span> - @endforeach</div>
+                                </div>
+
+                                <!-- Address -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1">@lang('global.address'):</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="fst-italic text-400 mb-1">{!! $company->address ?? '' !!}</p>
+                                    </div>
                                 </div>
 
                                 <!-- Background -->
@@ -156,24 +166,86 @@
                                         <p class="font-weight-bold mb-1">معلومات اضافی:</p>
                                     </div>
                                     <div class="col">
-                                        <p class="fst-italic text-400 mb-1">{{ $company->info ?? '--' }}</p>
+                                        <p class="fst-italic text-400 mb-1">{{ $company->info ?? '' }}</p>
                                     </div>
                                 </div>
                             </div>
                             <!--/==/ End of General Information -->
 
-                            <!-- Other Information -->
+                            <!-- General Information -->
                             <div class="col-lg col-xxl-5">
-                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">معلومات دیگر</h6>
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">@lang('global.general_info')</h6>
                                 <!-- Agent -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="font-weight-bold mb-1">نماینده:</p>
+                                        <p class="font-weight-bold mb-1">@lang('pages.companies.agent'):</p>
                                     </div>
-                                    <div class="col">{{ $company->agent->name ?? '-' }}</div>
+                                    <div class="col">
+                                        <a href="{{ route('admin.office.agents.show', $company->agent->id) }}" target="_blank">{{ $company->agent->name ?? '-' }}</a>
+                                    </div>
+                                </div>
+
+                                <!-- Agent Colleagues -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1">@lang('pages.companies.agent_cols'):</p>
+                                    </div>
+                                    <div class="col">
+                                        @foreach($company->agent->colleagues as $colleague)
+                                            <a href="{{ route('admin.office.agent-colleagues.show', $colleague->id) }}" target="_blank">{{ $colleague->name ?? '-' }}</a> -
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <!-- Owner Name -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1">@lang('form.owner_name'):</p>
+                                    </div>
+                                    <div class="col">{{ $company->owner_name }}</div>
+                                </div>
+
+                                <!-- Deputy Name -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1">@lang('form.deputy_name'):</p>
+                                    </div>
+                                    <div class="col">{{ $company->deputy_name }}</div>
+                                </div>
+
+                                <!-- Owner ID Card -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1">@lang('form.owner_id_card'):</p>
+                                    </div>
+                                    <div class="col">{{ $company->owner_id_card }}</div>
+                                </div>
+
+                                <!-- Owner Phone -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1">@lang('form.owner_phone'):</p>
+                                    </div>
+                                    <div class="col"><a href="tel:{{ $company->owner_phone }}">{{ $company->owner_phone }}</a></div>
+                                </div>
+
+                                <!-- Owner Main Address -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1">@lang('form.owner_main_add'):</p>
+                                    </div>
+                                    <div class="col">{{ $company->owner_main_add }}</div>
+                                </div>
+
+                                <!-- Owner Current Address -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="font-weight-bold mb-1">@lang('form.owner_cur_add'):</p>
+                                    </div>
+                                    <div class="col">{{ $company->owner_cur_add }}</div>
                                 </div>
                             </div>
-                            <!--/==/ End of Other Information -->
+                            <!--/==/ End of General Information -->
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@ class Company extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['agent_id', 'name', 'tin', 'type', 'activity_sector', 'address', 'owner_name', 'deputy_name', 'owner_id_card', 'owner_phone', 'owner_main_add', 'owner_cur_add', 'background', 'status', 'created_at', 'updated_at'];
+    protected $fillable = ['agent_id', 'name', 'tin', 'activity_sector', 'address', 'owner_name', 'deputy_name', 'owner_id_card', 'owner_phone', 'owner_main_add', 'owner_cur_add', 'background', 'info', 'status', 'created_at', 'updated_at'];
 
     public function agent(): Relation
     {

@@ -50,7 +50,7 @@
                                     <th>#</th>
                                     <th>@lang('form.name')</th>
                                     <th>@lang('form.tin')</th>
-                                    <th>@lang('global.type')</th>
+                                    <th>@lang('form.activity_sector')</th>
                                     <th>@lang('pages.companies.agent')</th>
                                     <th>ملاحظات</th>
                                 </tr>
@@ -62,7 +62,11 @@
                                         <td>{{ $company->id }}</td>
                                         <td>{{ $company->name }}</td>
                                         <td>{{ $company->tin }}</td>
-                                        <td>{{ $company->type == 0 ? trans('pages.companies.import') : trans('pages.companies.export') }}</td>
+                                        <td>
+                                            @foreach(explode(',', $company->activity_sector) as $a_sector)
+                                                {{ $a_sector }} -
+                                            @endforeach
+                                        </td>
                                         <td>{{ $company->agent->name ?? 'ندارد' }}</td>
                                         <td>{!! $company->background !!}</td>
                                     </tr>

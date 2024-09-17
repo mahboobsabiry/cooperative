@@ -118,4 +118,6 @@ return [
     'day'           => 'Day',
     'hour'		    => 'Hour',
     'organization'	=> 'Organization',
+    'general_info'  => 'General Information',
+    'other_info'    => 'Other Information'
 ];

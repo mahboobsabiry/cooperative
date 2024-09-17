@@ -117,4 +117,6 @@ return [
     'day'           => 'روز',
     'hour'		    => 'ساعت',
     'organization'	=> 'تشکیلات',
+    'general_info'  => 'معلومات عمومی',
+    'other_info'    => 'معلومات دیگر'
 ];

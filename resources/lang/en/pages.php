@@ -38,10 +38,16 @@ return [
 
     'companies' => [
         'agent'     => 'Agent',
+        'agent_col'     => 'Agent Colleague',
+        'agent_cols'    => 'Agent Colleagues',
         'agents'    => 'Agents',
         'company'   => 'Company',
         'export'    => 'Export',
-        'import'    => 'Import'
+        'import'    => 'Import',
+
+        // New Translations
+        'companies' => 'Companies',
+        'company_info'  => 'Company Information'
     ],
 
     'employees' => [

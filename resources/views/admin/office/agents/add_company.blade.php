@@ -123,18 +123,18 @@
                                             @enderror
                                         </div>
 
-                                        <!-- Company Type -->
-                                        <div class="form-group @error('type') has-danger @enderror">
-                                            <p class="mb-2">@lang('global.type'): <span class="tx-danger">*</span></p>
+                                        <!-- Company Activity Sector -->
+                                        <div class="form-group @error('activity_sector') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.activity_sector'): <span class="tx-danger">*</span></p>
 
-                                            <select class="form-control select2" name="type[]" multiple>
-                                                <option value="وارداتی" selected>@lang('pages.companies.import')</option>
-                                                <option value="صادراتی">@lang('pages.companies.export')</option>
+                                            <select class="form-control select2" name="activity_sector[]" multiple>
+                                                <option value="واردات" selected>واردات</option>
+                                                <option value="صادرات">صادرات</option>
                                                 <option value="بارچالانی">بارچالانی</option>
                                                 <option value="TIR">TIR</option>
                                             </select>
 
-                                            @error('type')
+                                            @error('activity_sector')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>

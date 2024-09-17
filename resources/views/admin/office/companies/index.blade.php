@@ -51,7 +51,7 @@
                                     <th>#</th>
                                     <th>@lang('form.name')</th>
                                     <th>@lang('form.tin')</th>
-                                    <th>@lang('global.type')</th>
+                                    <th>@lang('form.activity_sector')</th>
                                     <th>@lang('pages.companies.agent')</th>
                                     <th>ملاحظات</th>
                                 </tr>
@@ -63,7 +63,7 @@
                                         <td>{{ $company->id }}</td>
                                         <td><a href="{{ route('admin.office.companies.show', $company->id) }}">{{ $company->name }}</a></td>
                                         <td>{{ $company->tin }}</td>
-                                        <td>@foreach(explode(',', $company->type) as $t) {{ $t }} - @endforeach</td>
+                                        <td>@foreach(explode(',', $company->activity_sector) as $t) {{ $t }} - @endforeach</td>
                                         <td>{{ $company->agent->name ?? 'ندارد' }}</td>
                                         <td>{!! $company->info !!}</td>
                                     </tr>

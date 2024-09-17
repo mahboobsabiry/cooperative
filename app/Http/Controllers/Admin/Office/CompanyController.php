@@ -43,8 +43,25 @@ class CompanyController extends Controller
     // Update
     public function update(Request $request, Company $company)
     {
-        $request->validate(['info' => 'required']);
-        $company->info = $request->input('info');
+        $request->validate([
+            'name'  => 'required',
+            'tin'  => 'required',
+            'activity_sector'  => 'required',
+            'info' => 'nullable'
+        ]);
+
+        $company->name      = $request->input('name');
+        $company->tin       = $request->input('tin');
+        $activity_sector    = implode(',', $request->input('activity_sector'));
+        $company->activity_sector   = $activity_sector;
+        $company->owner_name        = $request->input('owner_name');
+        $company->deputy_name       = $request->input('deputy_name');
+        $company->owner_id_card     = $request->input('owner_id_card');
+        $company->owner_phone       = $request->input('owner_phone');
+        $company->owner_main_add    = $request->input('owner_main_add');
+        $company->owner_cur_add     = $request->input('owner_cur_add');
+        $company->address           = $request->input('address');
+        $company->info              = $request->input('info');
         $company->save();
         return redirect()->route('admin.office.companies.show', $company->id)->with(['message' => 'موفقانه ویرایش شد!', 'alertType' => 'success']);
     }

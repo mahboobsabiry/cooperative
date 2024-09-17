@@ -16,8 +16,7 @@ return new class extends Migration
             $table->bigInteger('agent_id')->unsigned()->index()->nullable();
             $table->string('name')->unique();
             $table->bigInteger('tin')->unique();
-            $table->string('type');
-            $table->string('activity_sector')->nullable();
+            $table->string('activity_sector');
             $table->string('address')->nullable();
 
             // Owner
@@ -30,6 +29,7 @@ return new class extends Migration
 
             // Default
             $table->text('background')->nullable();
+            $table->text('info')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
 

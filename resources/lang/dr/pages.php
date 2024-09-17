@@ -39,10 +39,16 @@ return [
 
     'companies' => [
         'agent'     => 'نماینده',
+        'agent_col'     => 'همکاران نماینده',
+        'agent_cols'    => 'همکاران نماینده ها',
         'agents'    => 'نماینده ها',
         'company'   => 'شرکت',
         'export'    => 'صادراتی',
-        'import'    => 'وارداتی'
+        'import'    => 'وارداتی',
+
+        // New Translations
+        'companies' => 'شرکت ها',
+        'company_info'  => 'معلومات شرکت'
     ],
 
     'employees' => [
