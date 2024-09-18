@@ -250,6 +250,19 @@
                     </div>
                 </div>
                 <!--/==/ End of Details Card -->
+
+                <!-- Form -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card mb-2">
+                            <div class="card-header font-weight-bold">@lang('global.other_info')</div>
+                            <div class="card-body">
+                                .//
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/==/ End of Form -->
             </div>
         </div>
         <!--/==/ End of Row Content -->
