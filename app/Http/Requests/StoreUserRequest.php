@@ -28,6 +28,7 @@ class StoreUserRequest extends FormRequest
         return [
             'avatar'    => 'image|mimes:jpg,png',
             'name'      => 'required',
+            'place_id'  => 'required',
             'username'  => 'required|unique:users,username',
             'phone'     => 'nullable|min:8|max:15|unique:users,phone',
             'email'     => 'nullable|min:8|max:64|unique:users,email',
