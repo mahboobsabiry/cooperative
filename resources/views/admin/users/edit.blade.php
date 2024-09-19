@@ -36,7 +36,7 @@
                     <i class="typcn typcn-lock-open"></i>
                 </a>
                 <!-- Back -->
-                <a class="btn btn-dark btn-sm" href="{{ route('admin.users.show', $user->id) }}">
+                <a class="btn btn-dark btn-sm" href="{{ route('admin.users.show', encrypt($user->id)) }}">
                     @lang('global.back')
                     <i class="fe fe-arrow-left"></i>
                 </a>
@@ -103,8 +103,8 @@
 
                                             <!-- Email -->
                                             <div class="form-group @error('email') has-danger @enderror">
-                                                <p class="mb-2">@lang('form.email'): <span class="tx-danger">*</span></p>
-                                                <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $user->email ?? old('email') }}" placeholder="@lang('form.email')" required>
+                                                <p class="mb-2">@lang('form.email'):</p>
+                                                <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $user->email ?? old('email') }}" placeholder="@lang('form.email')">
 
                                                 @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -128,9 +128,9 @@
                                     <div class="col-md-6">
                                         <!-- Place -->
                                         <div class="form-group @error('place_id') has-danger @enderror" id="place_div">
-                                            <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
+                                            <p class="mb-2">@lang('pages.place'):</p>
                                             <select id="place_id" name="place_id" class="form-control select2 @error('place_id') form-control-danger @enderror">
-                                                <option value="" disabled selected>@lang('form.chooseOne')</option>
+                                                <option value="">@lang('form.chooseOne')</option>
                                                 @foreach($places as $place)
                                                     <option value="{{ $place->id }}" {{ $user->place_id == $place->id ? 'selected' : '' }}>{{ $place->name }} - {{ $place->custom_code }}</option>
                                                 @endforeach
@@ -174,7 +174,7 @@
                                         <!-- Roles -->
                                         <div class="form-group @error('roles') has-danger @enderror">
                                             <p class="mb-2">
-                                                @lang('admin.sidebar.roles'): <span class="tx-danger">*</span>
+                                                @lang('admin.sidebar.roles'):
                                                 <span class="btn btn-primary btn-sm deselect-all pl-1 pr-1" id="mybutton">@lang('global.deselectAll')</span>
                                                 &nbsp;
                                                 <span class="btn btn-success btn-sm select-all" id="mybutton">@lang('global.selectAll')</span>
@@ -191,10 +191,11 @@
                                             </div>
                                         </div>
                                         <!--/==/ End of Roles -->
+
+                                        <div class="form-group float-left">
+                                            <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
                                 </div>
                             </form>
                             <!--/==/ End of Form -->

@@ -147,8 +147,9 @@
                                     <div class="col-md-6">
                                         <!-- Place -->
                                         <div class="form-group @error('place_id') has-danger @enderror" id="place_div">
-                                            <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
+                                            <p class="mb-2">@lang('pages.place'):</p>
                                             <select id="place_id" name="place_id" class="form-control select2 @error('place_id') form-control-danger @enderror">
+                                                <option value="">@lang('form.chooseOne')</option>
                                                 @foreach($places as $place)
                                                     <option value="{{ $place->id }}">{{ $place->name }} - {{ $place->custom_code }}</option>
                                                 @endforeach
@@ -183,7 +184,7 @@
                                         <!-- Roles -->
                                         <div class="form-group @error('roles') has-danger @enderror">
                                             <p class="mb-2">
-                                                @lang('admin.sidebar.roles'): <span class="tx-danger">*</span>
+                                                @lang('admin.sidebar.roles'):
                                                 <span class="btn btn-primary btn-sm deselect-all pl-1 pr-1" id="mybutton">@lang('global.deselectAll')</span>
                                                 &nbsp;
                                                 <span class="btn btn-success btn-sm select-all" id="mybutton">@lang('global.selectAll')</span>
@@ -200,10 +201,11 @@
                                             </div>
                                         </div>
                                         <!--/==/ End of Roles -->
+
+                                        <div class="form-group float-left">
+                                            <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
                                 </div>
                             </form>
                             <!--/==/ End of Form -->

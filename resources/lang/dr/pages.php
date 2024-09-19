@@ -1,6 +1,9 @@
 <?php
 
 return [
+    // Single
+    'place' => 'موقعیت',
+
     'dashboard' => [
         'addedEmpMsg'       => 'کارمند جدید موفقانه ثبت شد!',
         'latestAddedMembers' => 'آخرین اعضای ثبت شده',

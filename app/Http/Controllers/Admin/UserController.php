@@ -32,10 +32,10 @@ class UserController extends Controller
     // Index
     public function activeUsers()
     {
-        if (Auth::user()->place_id != null) {
+        if (Auth::user()->place_id == null) {
             $users = User::all()->where('status', 1);
         } else {
-            $users = User::all()->where('place_id', Auth::user()->place_id)->where('status', 1);
+            $users = User::all()->where('place_id', Auth::user()->place->id)->where('status', 1);
         }
 
         return view('admin.users.active', compact('users'));
@@ -43,10 +43,10 @@ class UserController extends Controller
 
     public function inactiveUsers()
     {
-        if (Auth::user()->place_id != null) {
+        if (Auth::user()->place_id == null) {
             $users = User::all()->where('status', 0);
         } else {
-            $users = User::all()->where('place_id', Auth::user()->place_id)->where('status', 0);
+            $users = User::all()->where('place_id', Auth::user()->place->id)->where('status', 0);
         }
 
         return view('admin.users.inactive', compact('users'));
@@ -59,10 +59,10 @@ class UserController extends Controller
 
     public function index()
     {
-        if (Auth::user()->place_id != null) {
+        if (Auth::user()->place_id == null) {
             $users = User::all();
         } else {
-            $users = User::all()->where('place_id', Auth::user()->place_id);
+            $users = User::all()->where('place_id', Auth::user()->place->id);
         }
 
         return view('admin.users.index', compact('users'));
@@ -71,7 +71,7 @@ class UserController extends Controller
     public function create()
     {
         $places = Place::all();
-        $employees = Employee::all();
+        $employees = Employee::whereDoesntHave('user')->get();
         $roles = Role::all();
         $permissions = Permission::all();
         return view('admin.users.create', compact('places', 'employees', 'roles', 'permissions'));

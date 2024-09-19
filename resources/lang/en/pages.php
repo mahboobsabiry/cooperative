@@ -1,6 +1,9 @@
 <?php
 
 return [
+    // Single
+    'place' => 'Place',
+
     'dashboard' => [
         'latestAddedMembers' => 'Latest added members',
         'ltMbParagMsg'       => 'List of latest member added in all over system!',
