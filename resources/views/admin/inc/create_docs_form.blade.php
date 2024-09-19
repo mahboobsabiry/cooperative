@@ -7,7 +7,7 @@
             <select id="receiver" name="receiver" class="form-control select2 @error('receiver') form-control-danger @enderror">
                 <option value="">@lang('form.chooseOne')</option>
                 @foreach(\App\Models\Office\Position::all()->except(auth()->user()->employee->position->id) as $position)
-                    <option value="{{ $position->title }}">{{ $position->title }} ({{ $position->place }})</option>
+                    <option value="{{ $position->title }}">{{ $position->title }} ({{ $position->place->name }})</option>
                 @endforeach
             </select>
 
@@ -23,7 +23,7 @@
             <select id="cc" name="cc[]" class="form-control select2 @error('cc') form-control-danger @enderror" multiple>
                 <option value="">@lang('form.chooseOne')</option>
                 @foreach(\App\Models\Office\Position::all()->except(auth()->user()->employee->position->id) as $position)
-                    <option value="{{ $position->title }}">{{ $position->title }} ({{ $position->place }})</option>
+                    <option value="{{ $position->title }}">{{ $position->title }} ({{ $position->place->name }})</option>
                 @endforeach
             </select>
 
