@@ -186,7 +186,7 @@
 
                                 <!-- Created Date -->
                                 <div class="row">
-                                    <div class="col-6 col-sm-5">
+                                    <div class="col-5 col-sm-4">
                                         <p class="fw-semi-bold mb-1"><strong>@lang('global.createdDate'):</strong></p>
                                     </div>
                                     <div class="col">{{ \Morilog\Jalali\CalendarUtils::strftime('Y/m/d', strtotime($cal->created_at)) }}</div>
