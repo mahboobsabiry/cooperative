@@ -127,7 +127,7 @@
 
                                     <div class="col-md-6">
                                         <!-- Place -->
-                                        <div class="form-group @error('place_id') has-danger @enderror" id="place_div">
+                                        <div class="form-group @error('place_id') has-danger @enderror">
                                             <p class="mb-2">@lang('pages.place'):</p>
                                             <select id="place_id" name="place_id" class="form-control select2 @error('place_id') form-control-danger @enderror">
                                                 <option value="">@lang('form.chooseOne')</option>

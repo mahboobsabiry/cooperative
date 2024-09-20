@@ -114,7 +114,7 @@
 
                                 @if($user->employee->position->position_number == 2 || $user->employee->position->position_number == 3)
                                 @else
-                                    <p class="pro-user-desc text-primary mb-1">({{ $user->employee->position->place ?? '' }})</p>
+                                    <p class="pro-user-desc text-muted mb-1">({{ $user->place->name ?? 'UNSIGNED' }})</p>
                                 @endif
                                 <!-- Employee Star -->
                                 @if($user->employee->position)
