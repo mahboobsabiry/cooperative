@@ -92,7 +92,11 @@
                                     @foreach($hostels as $hostel)
                                         <tr>
                                             <td>{{ $hostel->id }}</td>
-                                            <td><a href="{{ route('admin.places.show', $hostel->place->id) }}" target="_blank">{{ $hostel->place->name }}</a></td>
+                                            <td>
+                                                @if($hostel->place)
+                                                    <a href="{{ route('admin.places.show', $hostel->place->id) }}" target="_blank">{{ $hostel->place->name }}</a>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <a href="{{ route('admin.office.hostel.show', $hostel->id ) }}">{{ $hostel->number }}</a>
                                             </td>
