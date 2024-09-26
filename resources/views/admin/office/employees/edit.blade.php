@@ -86,9 +86,9 @@
                                                         <option value="">@lang('form.chooseOne')</option>
                                                         @foreach($codes as $code)
                                                             @if($employee->position_code)
-                                                                <option value="{{ $code->id }}" {{ $employee->position_code->id == $code->id ? 'selected' : '' }}>{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place->name }})</option>
+                                                                <option value="{{ $code->id }}" {{ $employee->position_code->id == $code->id ? 'selected' : '' }}>{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place->name ?? '' }})</option>
                                                             @else
-                                                                <option value="{{ $code->id }}">{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place->name }})</option>
+                                                                <option value="{{ $code->id }}">{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place->name ?? '' }})</option>
                                                             @endif
                                                         @endforeach
                                                     </select>
@@ -444,7 +444,7 @@
                                                     <select class="form-control select2" name="hostel_id" id="hostel_id">
                                                         <option selected>@lang('global.home')</option>
                                                         @foreach($hostels as $hostel)
-                                                            <option value="{{ $hostel->id }}" {{ $employee->hostel_id == $hostel->id ? 'selected' : '' }}>@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }} ({{ $hostel->place->name }})</option>
+                                                            <option value="{{ $hostel->id }}" {{ $employee->hostel_id == $hostel->id ? 'selected' : '' }}>@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }} ({{ $hostel->place->name ?? '' }})</option>
                                                         @endforeach
                                                     </select>
 

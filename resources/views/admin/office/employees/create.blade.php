@@ -97,7 +97,7 @@
                                                     <select id="ps_code_id" name="ps_code_id" class="form-control select2 @error('ps_code_id') form-control-danger @enderror">
                                                         <option value="">@lang('form.chooseOne')</option>
                                                         @foreach($codes as $code)
-                                                            <option value="{{ $code->id }}">{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place->name }})</option>
+                                                            <option value="{{ $code->id }}">{{ $code->code }} ({{ $code->position->title . ' - ' . $code->position->place->name ?? '' }})</option>
                                                         @endforeach
                                                     </select>
 
@@ -453,7 +453,7 @@
                                                     <select class="form-control select2" name="hostel_id" id="hostel_id">
                                                         <option selected>@lang('global.home')</option>
                                                         @foreach($hostels as $hostel)
-                                                            <option value="{{ $hostel->id }}">@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }} ({{ $hostel->place->name }})</option>
+                                                            <option value="{{ $hostel->id }}">@lang('pages.hostel.roomNumber') {{ $hostel->number }} - {{ $hostel->section }} ({{ $hostel->place->name ?? '' }})</option>
                                                         @endforeach
                                                     </select>
 
