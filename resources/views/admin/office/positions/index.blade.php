@@ -112,7 +112,7 @@
                                                 {{ $position->codes && $position->codes->count() < $position->num_of_pos ? ' - ' : '' }} @endforeach
                                             </td>
                                             <td>{{ $position->position_number }} ({{ $position->num_of_pos }})</td>
-                                            <td>{{ $position->place->name }} - {{ $position->place->custom_code }}</td>
+                                            <td>{{ $position->place->name ?? '' }} - {{ $position->place->custom_code ?? '' }}</td>
                                             <td class="text-wrap">{{ $position->desc }}</td>
                                         </tr>
                                     @endforeach

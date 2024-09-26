@@ -73,7 +73,7 @@
                                                 @endif
 
                                                 @foreach($positions as $pos)
-                                                    <option value="{{ $pos->id ?? '' }}" {{ $position->parent_id == $pos->id ? 'selected' : '' }}>{{ $pos->title }} ({{ $pos->place->name }})</option>
+                                                    <option value="{{ $pos->id ?? '' }}" {{ $position->parent_id == $pos->id ? 'selected' : '' }}>{{ $pos->title }} ({{ $pos->place->name ?? '' }})</option>
                                                 @endforeach
 
                                             </select>

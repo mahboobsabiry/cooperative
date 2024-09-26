@@ -62,7 +62,7 @@
                                             <select id="parent_id" name="parent_id" class="form-control select2 @error('parent_id') form-control-danger @enderror">
                                                 <option value="" selected>@lang('form.chooseOne')</option>
                                                 @foreach($positions as $position)
-                                                    <option value="{{ $position->id }}">{{ $position->title }} ({{ $position->place->name }})</option>
+                                                    <option value="{{ $position->id }}">{{ $position->title }} ({{ $position->place->name ?? '' }})</option>
                                                 @endforeach
                                             </select>
 
