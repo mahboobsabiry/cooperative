@@ -81,7 +81,7 @@
 
                             @if($asycuda_user->employee->position->position_number == 2 || $asycuda_user->employee->position->position_number == 3)
                             @else
-                                <p class="pro-user-desc text-primary mb-1">({{ $asycuda_user->employee->position->type ?? '' }})</p>
+                                <p class="pro-user-desc text-primary mb-1">({{ $asycuda_user->employee->position->place->name ?? '' }})</p>
                             @endif
                             <!-- Employee Star -->
                             @if($asycuda_user->employee->position)

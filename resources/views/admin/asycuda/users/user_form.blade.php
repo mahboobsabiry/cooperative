@@ -191,7 +191,7 @@
                     <!-- Reyasat / Ameryat -->
                     <tr>
                         <th class="font-weight-bold">ریاست/آمریت <span class="text-danger">*</span></th>
-                        <td colspan="5">{{ $asycuda_user->place->custom_code == 'AF152' ? 'آمریت گمرک سرحدی حیرتان' : 'ریاست گمرک بلخ' }}</td>
+                        <td colspan="5">{{ $asycuda_user->place && $asycuda_user->place->custom_code == 'AF152' ? 'آمریت گمرک سرحدی حیرتان' : 'ریاست گمرک بلخ' }}</td>
                     </tr>
 
                     <!-- Sawaneh Number -->
@@ -221,7 +221,7 @@
                     <!-- Custom Code -->
                     <tr>
                         <th class="font-weight-bold">کد گمرک مربوطه <span class="text-danger">*</span></th>
-                        <td colspan="5">{{ $asycuda_user->place->custom_code }}</td>
+                        <td colspan="5">{{ $asycuda_user->place->custom_code ?? '' }}</td>
                     </tr>
 
                     <!-- Roles -->
@@ -254,8 +254,8 @@
                 <div class="grid-item">
                     <div class="mt-4">
                         <p>تائید مقام ذیصلاح: رئیس، آمر</p>
-                        <p>نام و وظیفه: {{ $asycuda_user->place->custom_code == 'AF152' ? 'مفتی محمد نسیم محمدی' : 'مولوی عبدالله بلال' }}</p>
-                        <p>{{ $asycuda_user->place->custom_code == 'AF152' ? 'آمر گمرک سرحدی حیرتان' : 'رئیس گمرک بلخ' }}</p>
+                        <p>نام و وظیفه: {{ $asycuda_user->place && $asycuda_user->place->custom_code == 'AF152' ? 'مفتی محمد نسیم محمدی' : 'مولوی عبدالله بلال' }}</p>
+                        <p>{{ $asycuda_user->place && $asycuda_user->place->custom_code == 'AF152' ? 'آمر گمرک سرحدی حیرتان' : 'رئیس گمرک بلخ' }}</p>
                     </div>
                 </div>
             </div>

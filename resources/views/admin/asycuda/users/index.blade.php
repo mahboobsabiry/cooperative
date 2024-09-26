@@ -88,7 +88,7 @@
                                     @foreach($asycuda_users as $asycuda_user)
                                         <tr>
                                             <td>{{ $asycuda_user->id }}</td>
-                                            <td>{{ $asycuda_user->place->name }} - {{ $asycuda_user->place->custom_code }}</td>
+                                            <td>{{ $asycuda_user->place->name ?? '' }} - {{ $asycuda_user->place->custom_code ?? '' }}</td>
                                             <td>
                                                 <a href="{{ route('admin.asycuda.users.show', $asycuda_user->id) }}">{{ $asycuda_user->employee->name }} {{ $asycuda_user->employee->last_name }}</a>
                                             </td>

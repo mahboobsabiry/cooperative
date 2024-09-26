@@ -87,7 +87,7 @@
                                              \App\Models\Document::all()->where('receiver', \Illuminate\Support\Facades\Auth::user()->employee->duty_position)->count(); + \App\Models\Document::all()->where('cc', strpos(\Illuminate\Support\Facades\Auth::user()->employee->duty_position, $pos_docs))->count();
                                          } else {
                                              // Count all Received Documents
-                                             \App\Models\Document::all()->where('receiver', $auth_user_pos->title)->count(); + \App\Models\Document::all()->where('cc', strpos($auth_user_pos->title, $pos_docs))->count();
+                                             \App\Models\Document::all()->where('receiver', $auth_user_pos->title)->count(); + \App\Models\Document::all()->where('cc', str()->contains(\App\Models\Document::all()->pluck('cc'), $auth_user_pos->title))->count();
                                          }
                                     ?>)
                                 </a>

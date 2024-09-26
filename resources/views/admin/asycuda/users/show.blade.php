@@ -367,7 +367,7 @@
                                     <div class="col-6 col-sm-5">
                                         <p class="fw-semi-bold mb-1"><strong>موقعیت: </strong></p>
                                     </div>
-                                    <div class="col">{{ $asycuda_user->place->name }} - {{ $asycuda_user->place->custom_code }}</div>
+                                    <div class="col">{{ $asycuda_user->place->name ?? '' }} - {{ $asycuda_user->place->custom_code ?? '' }}</div>
                                 </div>
                             </div>
                             <!--/==/ End of General Information -->
