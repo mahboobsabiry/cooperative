@@ -68,7 +68,7 @@
                             <p class="pro-user-desc text-muted mb-1">{{ $position->title }}</p>
                             @if($position->position_number == 2 || $position->position_number == 3)
                             @else
-                                <p class="pro-user-desc text-primary mb-1">({{ $position->place->name }})</p>
+                                <p class="pro-user-desc text-primary mb-1">({{ $position->place->name ?? '' }})</p>
                             @endif
                             <!-- Position Star -->
                             <p class="user-info-rating">
@@ -158,7 +158,7 @@
                                         <select id="receiver" name="receiver" class="form-control select2 @error('receiver') form-control-danger @enderror">
                                             <option value="">@lang('form.chooseOne')</option>
                                             @foreach(\App\Models\Office\Position::all()->except(auth()->user()->employee->position->id) as $position)
-                                                <option value="{{ $position->title }}" @if($document) {{ $document->position_id == $position->id ? 'selected' : '' }} @endif>{{ $position->title }} ({{ $position->place }})</option>
+                                                <option value="{{ $position->title }}" @if($document) {{ $document->position_id == $position->id ? 'selected' : '' }} @endif>{{ $position->title }} ({{ $position->place->name ?? '' }})</option>
                                             @endforeach
                                         </select>
 
@@ -174,7 +174,7 @@
                                         <select id="cc" name="cc[]" class="form-control select2 @error('cc') form-control-danger @enderror" multiple>
                                             <option value="">@lang('form.chooseOne')</option>
                                             @foreach(\App\Models\Office\Position::all()->except(auth()->user()->employee->position->id) as $position)
-                                                <option value="{{ $position->title }}">{{ $position->title }} ({{ $position->place }})</option>
+                                                <option value="{{ $position->title }}">{{ $position->title }} ({{ $position->place->name ?? '' }})</option>
                                             @endforeach
                                         </select>
 
