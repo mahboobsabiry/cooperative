@@ -124,11 +124,11 @@
                         @lang('pages.hostel.hostel') -
                         @lang('pages.hostel.roomNumber')
                         {{ $employee->hostel->number }}
-                        @if($employee->hostel->place->code == 'P01')
+                        @if($employee->hostel->place && $employee->hostel->place->code == 'P01')
                             @lang('pages.hostel.section')
                             {{ $employee->hostel->section }}
                         @endif
-                        ({{ $employee->hostel->place->name }})
+                        ({{ $employee->hostel->place->name ?? '' }})
                     @else
                         @lang('global.home')
                     @endif
@@ -392,7 +392,7 @@
                 <div class="col-6 col-sm-5">
                     <p class="fw-semi-bold mb-1"><strong>موقعیت و کد بست:</strong></p>
                 </div>
-                <div class="col">{{ $employee->position->place->name . ' - ' . $employee->position_code->code }}</div>
+                <div class="col">{{ $employee->position->place->name ?? '' . ' - ' . $employee->position_code->code ?? '' }}</div>
             </div>
         @endif
 
