@@ -120,16 +120,16 @@
                                         <!--/==/ End of Position Number -->
 
                                         <!-- Place -->
-                                        <div class="form-group @error('place') has-danger @enderror">
+                                        <div class="form-group @error('place_id') has-danger @enderror">
                                             <p class="mb-2">موقعیت: <span class="tx-danger">*</span></p>
 
-                                            <select id="place" name="place" class="form-control select2 @error('place') form-control-danger @enderror">
+                                            <select id="place_id" name="place_id" class="form-control select2 @error('place_id') form-control-danger @enderror">
                                                 @foreach($places as $place)
                                                     <option value="{{ $place->id }}" {{ $position->place_id == $place->id ? 'selected' : '' }}>{{ $place->name }}</option>
                                                 @endforeach
                                             </select>
 
-                                            @error('place')
+                                            @error('place_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>

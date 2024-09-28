@@ -78,7 +78,8 @@ class PositionController extends Controller
     public function edit(Position $position)
     {
         $positions = Position::get();
-        return view('admin.office.positions.edit', compact('position', 'positions'));
+        $places = Place::all();
+        return view('admin.office.positions.edit', compact('position', 'positions', 'places'));
     }
 
     /**
@@ -106,7 +107,7 @@ class PositionController extends Controller
             ->log(trans('messages.positions.updatedPositionMsg'));
 
         $message = trans('messages.positions.updatedPositionMsg');
-        return redirect()->route('admin.office.positions.show', encrypt($position->id))->with([
+        return redirect()->route('admin.office.positions.show', $position->id)->with([
             'message'   => $message,
             'alertType' => 'success'
         ]);
