@@ -90,6 +90,7 @@ class PositionController extends Controller
         $request->validate([
             'title'     => 'required|min:3|max:255',
             'position_number'   => 'required',
+            'place_id'  => 'required',
             'desc'      => 'nullable'
         ]);
 
