@@ -150,16 +150,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Background -->
-                                <div class="row">
-                                    <div class="col-5 col-sm-4">
-                                        <p class="font-weight-bold mb-1">رزومه:</p>
-                                    </div>
-                                    <div class="col">
-                                        <p class="fst-italic text-400 mb-1">{!! $company->background ?? '' !!}</p>
-                                    </div>
-                                </div>
-
                                 <!-- Description -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
@@ -247,6 +237,9 @@
                             </div>
                             <!--/==/ End of General Information -->
                         </div>
+                        <hr>
+                        <h5 class="font-weight-bold">رزومه</h5>
+                        <p>{!! $company->background ?? '' !!}</p>
                     </div>
                 </div>
                 <!--/==/ End of Details Card -->

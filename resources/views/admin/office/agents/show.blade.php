@@ -247,6 +247,7 @@
                                     <th>@lang('pages.employees.docNumber')</th>
                                     <th>مدت اعتبار</th>
                                     <th>@lang('global.validationStatus')</th>
+                                    <th>ACTION</th>
                                 </tr>
                                 </thead>
 
@@ -363,6 +364,9 @@
                                                         }
                                                     @endphp
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.office.agents.renewal_company', $company->id) }}" class="btn btn-sm btn-outline-dark">تمدید</a>
                                             </td>
                                         </tr>
                                     @endforeach

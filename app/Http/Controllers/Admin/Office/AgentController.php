@@ -278,6 +278,65 @@ class AgentController extends Controller
         ]);
     }
 
+    // Renewal Company
+    public function renewal_company($id)
+    {
+        $company = Company::find($id);
+
+        return view('admin.office.agents.renewal_company', compact('company'));
+    }
+
+    // Renewal Agent Company
+    public function renewal_agent_company(Request $request, $id)
+    {
+        $company = Company::find($id);
+        $request->validate([
+            'from_date'     => 'required',
+            'to_date'       => 'required',
+            'doc_number'    => 'required'
+        ]);
+
+        // Request Company
+//        $req_company = Company::where('id', $request->company_id)->first();
+//
+//        // Get Saved Company and save
+//        $saved_company = Company::where('tin', $request->tin)->first();
+//        if (!empty($saved_company->agent_id)) {
+//            return back()->with(['message' => 'شرکت متذکره دارای نماینده میباشد.', 'alertType' => 'warning']);
+//        }
+
+        /**
+         * Save Company
+         */
+        $agent = Agent::where('id', $company->agent->id)->first();
+
+        if ($agent->company_name == $company->name) {
+            $agent->from_date   = $request->from_date;
+            $agent->to_date     = $request->to_date;
+            $agent->doc_number  = $request->doc_number;
+        } elseif ($agent->company_name2 == $company->name) {
+            $agent->from_date2   = $request->from_date;
+            $agent->to_date2     = $request->to_date;
+            $agent->doc_number2  = $request->doc_number;
+        } elseif ($agent->company_name3 == $company->name) {
+            $agent->from_date3   = $request->from_date;
+            $agent->to_date3     = $request->to_date;
+            $agent->doc_number3  = $request->doc_number;
+        }
+        $agent->background = $agent->background . '<br>' . 'نمایندگی نماینده هذا به شرکت ' . $company->name . ' از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' بر اساس مکتوب نمبر ' . $request->doc_number . ' تمدید گردید.' . '<br>' . $request->info;
+        $agent->save();
+
+        // Update Company Background
+        $company->update([
+            'background' => $company->background . '<br>' . 'نمایندگی محترم ' . $agent->name . ' از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' بر اساس مکتوب نمبر ' . $request->doc_number . ' تمدید گردید.' . '<br>' . $request->info
+        ]);
+
+        return redirect()->route('admin.office.agents.show', $agent->id)->with([
+            'message'   => ' موفقانه تمدید گردید!',
+            'alertType' => 'success'
+        ]);
+    }
+
     // Refresh Agent
     public function refresh_agent($id)
     {

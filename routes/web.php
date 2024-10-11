@@ -193,6 +193,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         // Agent Add Company Page
         Route::get('agent/add-company/{id}', [AgentController::class, 'add_company'])->name('agents.add_company');
         Route::post('agent/add-agent-company/{id}', [AgentController::class, 'add_agent_company'])->name('agents.add_agent_company');
+        // Agent Renew Company Page
+        Route::get('agent/renewal-company/{id}', [AgentController::class, 'renewal_company'])->name('agents.renewal_company');
+        Route::post('agent/renewal-agent-company/{id}', [AgentController::class, 'renewal_agent_company'])->name('agents.renewal_agent_company');
         Route::post('agent/refresh-agent/{id}', [AgentController::class, 'refresh_agent'])->name('agents.refresh_agent');
         Route::post('agent/refresh-colleague/{id}', [AgentController::class, 'refresh_colleague'])->name('agents.refresh_colleague');
         // Agent Add Colleagues Page
