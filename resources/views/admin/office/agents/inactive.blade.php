@@ -79,6 +79,7 @@
                                         <th>@lang('form.photo')</th>
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.phone')</th>
+                                        <th>نمبر تذکره</th>
                                         <th>@lang('global.address')</th>
                                         <th>ملاحظات</th>
                                         <th>@lang('global.extraInfo')</th>
@@ -98,6 +99,7 @@
 
                                             <td>{{ $agent->phone }}{{ $agent->phone2 ? ', ' : '' }} {{ $agent->phone2 ?? '' }}</td>
                                             <td>{{ $agent->address }}</td>
+                                            <td>{{ $agent->id_number }}</td>
                                             <td>{!! $agent->background !!}</td>
                                             <td>{{ $agent->info }}</td>
                                         </tr>

@@ -40,6 +40,7 @@ class AgentController extends Controller
         $agent->name    = $request->name;
         $agent->phone   = $request->phone;
         $agent->phone2  = $request->phone2;
+        $agent->id_number  = $request->id_number;
         $agent->address = $request->address;
         $agent->info    = $request->info;
 
@@ -87,6 +88,7 @@ class AgentController extends Controller
             'name'      => 'required|min:3|max:128',
             'phone'     => 'required|min:8|max:15|unique:agents,phone,' . $agent->id,
             'phone2'    => 'nullable|min:8|max:15',
+            'id_number' => 'required|min:3|max:128',
             'address'   => 'nullable|min:3|max:128',
             'info'      => 'nullable'
         ]);
@@ -95,6 +97,7 @@ class AgentController extends Controller
         $agent->name    = $request->name;
         $agent->phone   = $request->phone;
         $agent->phone2  = $request->phone2;
+        $agent->id_number  = $request->id_number;
         $agent->address = $request->address;
         $agent->info    = $request->info;
 
@@ -252,8 +255,6 @@ class AgentController extends Controller
             $company->agent_id  = $agent->id;
             $company->name      = $saved_company->name;
             $company->tin       = $saved_company->tin;
-            $activity_sector = implode(',', $request->input('activity_sector'));
-            $company->activity_sector = $activity_sector;
             $company->status    = 1;
         } else {
             $company = new Company();
@@ -266,7 +267,7 @@ class AgentController extends Controller
                 $company->tin       = $request->tin;
             }
             $activity_sector = implode(',', $request->input('activity_sector'));
-            $company->activity_sector      = $activity_sector;
+            $company->activity_sector = $activity_sector;
         }
 
         $company->save();
@@ -285,7 +286,7 @@ class AgentController extends Controller
         foreach ($agent->companies as $company) {
             // First Company
             if ($company->name == $agent->company_name) {
-                $to_date = Jalalian::fromFormat('Y-m-d', $agent->to_date)->toCarbon();
+                $to_date = Jalalian::fromFormat('Y/m/d', $agent->to_date)->toCarbon();
 
                 // Do Refresh When The Time Is Over
                 if ($to_date < today()) {
@@ -308,7 +309,7 @@ class AgentController extends Controller
 
             // Second Company
             if ($company->name == $agent->company_name2) {
-                $to_date = Jalalian::fromFormat('Y-m-d', $agent->to_date2)->toCarbon();
+                $to_date = Jalalian::fromFormat('Y/m/d', $agent->to_date2)->toCarbon();
 
                 // Do Refresh When The Time Is Over
                 if ($to_date < today()) {
@@ -331,7 +332,7 @@ class AgentController extends Controller
 
             // Third Company
             if ($company->name == $agent->company_name3) {
-                $to_date = Jalalian::fromFormat('Y-m-d', $agent->to_date3)->toCarbon();
+                $to_date = Jalalian::fromFormat('Y/m/d', $agent->to_date3)->toCarbon();
 
                 // Do Refresh When The Time Is Over
                 if ($to_date < today()) {
@@ -371,7 +372,7 @@ class AgentController extends Controller
     {
         $agent = Agent::find($id);
         foreach ($agent->colleagues as $colleague) {
-            $to_date = Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
+            $to_date = Jalalian::fromFormat('Y/m/d', $colleague->to_date)->toCarbon();
 
             // Do Refresh When The Time Is Over
             if ($to_date < today()) {
@@ -417,6 +418,7 @@ class AgentController extends Controller
         $request->validate([
             'name'          => 'required|min:3|max:128',
             'phone'         => 'required|min:8|max:15',
+            'id_number'     => 'required|min:3|max:128',
             'address'       => 'required|min:3|max:128',
             'from_date'     => 'required',
             'to_date'       => 'required',
@@ -428,6 +430,7 @@ class AgentController extends Controller
         $colleague->name        = $request->name;
         $colleague->phone       = $request->phone;
         $colleague->phone2      = $request->phone2;
+        $colleague->id_number   = $request->id_number;
         $colleague->from_date   = $request->from_date;
         $colleague->to_date     = $request->to_date;
         $colleague->doc_number  = $request->doc_number;

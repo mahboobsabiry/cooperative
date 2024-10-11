@@ -29,6 +29,7 @@ class StoreAgentRequest extends FormRequest
             'name'      => 'required|min:3|max:128',
             'phone'     => 'required|min:8|max:15|unique:agents,phone',
             'phone2'    => 'nullable|min:8|max:15',
+            'id_number' => 'required|min:3|max:128',
             'address'   => 'nullable|min:3|max:128',
             'info'      => 'nullable'
         ];

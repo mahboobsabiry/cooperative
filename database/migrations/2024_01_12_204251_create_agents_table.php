@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone')->unique();
             $table->string('phone2')->nullable();
+            $table->string('id_number')->unique();
             $table->string('address')->nullable();
 
             $table->string('from_date')->nullable();

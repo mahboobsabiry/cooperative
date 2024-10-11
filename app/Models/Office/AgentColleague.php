@@ -13,7 +13,7 @@ class AgentColleague extends Model
     use HasFactory, HasPhoto;
 
     protected $fillable = [
-        'agent_id', 'name', 'phone', 'phone2', 'address',
+        'agent_id', 'name', 'phone', 'phone2', 'id_number', 'address',
         'status', 'info', 'signature',
         'from_date', 'to_date', 'doc_number', 'background'
     ];

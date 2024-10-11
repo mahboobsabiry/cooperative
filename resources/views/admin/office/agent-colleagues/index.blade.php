@@ -83,6 +83,7 @@
                                         <th>@lang('pages.employees.docNumber')</th>
                                         <th>@lang('global.validationStatus')</th>
                                         <th>@lang('form.phone')</th>
+                                        <th>نمبر تذکره</th>
                                         <th>@lang('global.address')</th>
                                     </tr>
                                     </thead>
@@ -108,7 +109,7 @@
                                             <!-- Validation Date Status -->
                                             <td>
                                                 @php
-                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
+                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $colleague->to_date)->toCarbon();
 
                                                     // $diff_days = $to_date->diffInDays($from_date);
                                                     $valid_days = now()->diffInDays($to_date);
@@ -122,6 +123,7 @@
                                             <!--/==/ End of Validation Date Status -->
 
                                             <td>{{ $colleague->phone }}{{ $colleague->phone2 ? ', ' : '' }} {{ $colleague->phone2 ?? '' }}</td>
+                                            <td>{{ $colleague->id_number }}</td>
                                             <td>{{ $colleague->address }}</td>
                                         </tr>
                                     @endforeach

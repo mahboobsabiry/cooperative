@@ -51,11 +51,13 @@ class AgentColleagueController extends Controller
             'name'      => 'required|min:3|max:128',
             'phone'     => 'required|min:8|max:15',
             'phone2'    => 'nullable|min:8|max:15',
+            'id_number' => 'required|min:3|max:128',
             'address'   => 'required|min:3|max:128'
         ]);
         $colleague->name        = $request->name;
         $colleague->phone       = $request->phone;
         $colleague->phone2      = $request->phone2;
+        $colleague->id_number   = $request->id_number;
         $colleague->address     = $request->address;
         $colleague->info        = $request->info;
         //  Has File && Save Signature Scan

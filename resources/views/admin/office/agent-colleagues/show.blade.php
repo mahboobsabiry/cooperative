@@ -198,8 +198,8 @@
                                             <!-- Validation Date Status -->
                                             <td>
                                                 @php
-                                                    $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->from_date)->toCarbon();
-                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
+                                                    $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $colleague->from_date)->toCarbon();
+                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $colleague->to_date)->toCarbon();
                                                     $valid_days = $from_date->diffInDays($to_date);
                                                     echo $valid_days . ' روز';
                                                 @endphp
@@ -213,7 +213,7 @@
                                             <!-- Validation Date Status -->
                                             <td>
                                                 @php
-                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
+                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $colleague->to_date)->toCarbon();
 
                                                     // $diff_days = $to_date->diffInDays($from_date);
                                                     $valid_days = now()->diffInDays($to_date);
@@ -241,6 +241,12 @@
                                                 </div>
                                             </div>
                                         </td>
+                                    </tr>
+
+                                    <!-- ID Card Number -->
+                                    <tr>
+                                        <th class="font-weight-bold">نمبر تذکره:</th>
+                                        <td>{{ $colleague->id_number ?? '' }}</td>
                                     </tr>
                                     </tbody>
                                 </table>

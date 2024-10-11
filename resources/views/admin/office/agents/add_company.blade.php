@@ -124,7 +124,7 @@
                                         </div>
 
                                         <!-- Company Activity Sector -->
-                                        <div class="form-group @error('activity_sector') has-danger @enderror">
+                                        <div class="form-group @error('activity_sector') has-danger @enderror" id="as_div">
                                             <p class="mb-2">@lang('form.activity_sector'): <span class="tx-danger">*</span></p>
 
                                             <select class="form-control select2" name="activity_sector[]" multiple>
@@ -183,8 +183,10 @@
                 var company_id = $(this).val();
                 var a = $("#company_name").parent();
                 var b = $("#tin").parent();
+                var c = $("#as_div").parent();
 
                 if (!company_id == '') {
+                    c.find('#as_div').hide();
                     $.ajax({
                         type: 'get',
                         url: '{{ route('admin.office.agents.select.company') }}',
@@ -202,6 +204,7 @@
                 } else {
                     a.find('#company_name').val("");
                     b.find('#tin').val("");
+                    c.find('#as_div').show();
                 }
             });
         });

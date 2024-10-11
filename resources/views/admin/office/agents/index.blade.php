@@ -85,6 +85,7 @@
                                         <th>شرکت</th>
                                         <th>@lang('global.validationStatus')</th>
                                         <th>@lang('form.phone')</th>
+                                        <th>نمبر تذکره</th>
                                     </tr>
                                     </thead>
 
@@ -189,6 +190,7 @@
                                             <!--/==/ End of Validation Date Status -->
 
                                             <td>{{ $agent->phone }}{{ $agent->phone2 ? ', ' : '' }} {{ $agent->phone2 ?? '' }}</td>
+                                            <td>{{ $agent->id_number }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

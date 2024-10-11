@@ -86,6 +86,16 @@
                                             @enderror
                                         </div>
 
+                                        <!-- ID Card Number -->
+                                        <div class="form-group @error('id_number') has-danger @enderror">
+                                            <p class="mb-2"> نمبر تذکره: <span class="tx-danger">*</span></p>
+                                            <input type="text" id="id_number" class="form-control @error('id_number') form-control-danger @enderror" name="id_number" value="{{ old('id_number') }}" required>
+
+                                            @error('id_number')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
                                         <!-- Address -->
                                         <div class="form-group @error('address') has-danger @enderror">
                                             <p class="mb-2">@lang('global.address'): <span class="tx-danger">*</span></p>

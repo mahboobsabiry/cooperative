@@ -90,9 +90,19 @@
                                             @enderror
                                         </div>
 
+                                        <!-- ID Card Number -->
+                                        <div class="form-group @error('id_number') has-danger @enderror">
+                                            <p class="mb-2">4) نمبر تذکره: <span class="tx-danger">*</span></p>
+                                            <input type="text" id="id_number" class="form-control @error('id_number') form-control-danger @enderror" name="id_number" value="{{ old('id_number') }}" required>
+
+                                            @error('id_number')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
                                         <!-- Address -->
                                         <div class="form-group @error('address') has-danger @enderror">
-                                            <p class="mb-2">4) @lang('global.address'): <span class="tx-danger">*</span></p>
+                                            <p class="mb-2">5) @lang('global.address'): <span class="tx-danger">*</span></p>
                                             <input type="text" id="address" class="form-control @error('address') form-control-danger @enderror" name="address" value="{{ old('address') }}" required>
 
                                             @error('address')
@@ -102,7 +112,7 @@
 
                                         <!-- Description -->
                                         <div class="form-group @error('info') has-danger @enderror">
-                                            <p class="mb-2">5) @lang('form.extraInfo'):</p>
+                                            <p class="mb-2">6) @lang('form.extraInfo'):</p>
                                             <textarea name="info" class="form-control @error('info') form-control-danger @enderror">{{ old('info') }}</textarea>
 
                                             @error('info')
@@ -115,7 +125,7 @@
                                     <div class="col-md-6">
                                         <!-- Photo -->
                                         <div class="form-group @error('photo') has-danger @enderror">
-                                            <p class="mb-2">6) @lang('form.photo'):</p>
+                                            <p class="mb-2">7) @lang('form.photo'):</p>
                                             <input type="file" class="dropify" name="photo" accept="image/*" data-height="200" />
                                             @error('photo')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -125,7 +135,7 @@
 
                                         <!-- Signature -->
                                         <div class="form-group @error('signature') has-danger @enderror">
-                                            <p class="mb-2">7) امضاء:</p>
+                                            <p class="mb-2">8) امضاء:</p>
                                             <input type="file" class="dropify" name="signature" accept="image/*" data-height="200" />
                                             @error('signature')
                                             <div class="invalid-feedback">{{ $message }}</div>

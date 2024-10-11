@@ -78,6 +78,7 @@
                                         <th>@lang('form.photo')</th>
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.phone')</th>
+                                        <th>نمبر تذکره</th>
                                         <th>@lang('global.address')</th>
                                         <th>ملاحظات</th>
                                     </tr>
@@ -94,6 +95,7 @@
                                             </td>
                                             <td><a href="{{ route('admin.office.agent-colleagues.show', $colleague->id ) }}">{{ $colleague->name }}</a></td>
                                             <td>{{ $colleague->phone }}{{ $colleague->phone2 ? ', ' : '' }} {{ $colleague->phone2 ?? '' }}</td>
+                                            <td>{{ $colleague->id_number }}</td>
                                             <td>{{ $colleague->address }}</td>
                                             <td>{!! $colleague->background !!}</td>
                                         </tr>

@@ -169,10 +169,10 @@
                                         <td>{{ $agent->phone }} {{ $agent->phone2 ? ', ' : '' }} {{ $agent->phone2 }}</td>
                                     </tr>
 
-                                    <!-- Date of creation -->
+                                    <!-- ID Card Number -->
                                     <tr>
-                                        <th class="font-weight-bold">@lang('global.date'):</th>
-                                        <td>{{ \Morilog\Jalali\CalendarUtils::date('Y-m-d', $agent->created_at) }}</td>
+                                        <th class="font-weight-bold">نمبر تذکره:</th>
+                                        <td>{{ $agent->id_number }}</td>
                                     </tr>
                                     </tbody>
 
@@ -411,6 +411,7 @@
                                     <th>@lang('form.name')</th>
                                     <th>مافوق</th>
                                     <th>@lang('form.phone')</th>
+                                    <th>نمبر تذکره</th>
                                     <th>@lang('form.fromDate')</th>
                                     <th>@lang('form.toDate')</th>
                                     <th>@lang('pages.employees.docNumber')</th>
@@ -429,6 +430,7 @@
                                             </td>
                                             <td>{{ $colleague->agent->name }}</td>
                                             <td>{{ $colleague->phone ?? '' }} {{ $colleague->phone2? ', ' : '' }} {{ $colleague->phone2 ?? '' }}</td>
+                                            <td>{{ $colleague->id_number }}</td>
                                             <td>{{ $colleague->from_date }}</td>
                                             <td>{{ $colleague->to_date }}</td>
                                             <td>{{ $colleague->doc_number }}</td>
@@ -436,8 +438,8 @@
                                             <!-- Validation Duration -->
                                             <td>
                                                 @php
-                                                    $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->from_date)->toCarbon();
-                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
+                                                    $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $colleague->from_date)->toCarbon();
+                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $colleague->to_date)->toCarbon();
                                                     $valid_days = $to_date->diffInDays($from_date);
                                                     echo $valid_days;
                                                 @endphp
@@ -445,8 +447,8 @@
                                             <!-- Validation Status -->
                                             <td>
                                                 @php
-                                                    $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->from_date)->toCarbon();
-                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y-m-d', $colleague->to_date)->toCarbon();
+                                                    $from_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $colleague->from_date)->toCarbon();
+                                                    $to_date = \Morilog\Jalali\Jalalian::fromFormat('Y/m/d', $colleague->to_date)->toCarbon();
 
                                                     $valid_days = now()->diffInDays($to_date);
                                                     if ($to_date > today()) {
