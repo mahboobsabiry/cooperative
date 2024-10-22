@@ -209,11 +209,33 @@ class PositionController extends Controller
         $code = new PositionCode();
         $code->position_id  = $position->id;
         $code->code         = $request->code;
-        $code->info         = $request->code;
+        $code->info         = $request->info;
         $code->save();
 
         return redirect()->back()->with([
-            'message'   => 'کد بست موفقانه ذخیره شد.',
+            'message'   => 'کد بست موفقانه ذخیره گردید.',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Edit Code
+    public function edit_code(Request $request, $id)
+    {
+        // Position Code
+        $code = PositionCode::find($id);
+
+        // Validate
+        $request->validate([
+            'code'  => 'required|numeric|max:999|unique:position_codes,code,'.$code->id,
+        ]);
+
+        // Edit
+        $code->code         = $request->code;
+        $code->info         = $request->info;
+        $code->save();
+
+        return redirect()->back()->with([
+            'message'   => 'کد بست موفقانه ویرایش گردید.',
             'alertType' => 'success'
         ]);
     }

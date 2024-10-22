@@ -103,7 +103,7 @@
                                                 <!-- Parent Position -->
                                                 <td>{{ $code->position->parent->title ?? trans('pages.positions.afCustomsDep') }}</td>
                                                 <td>{{ $code->position->position_number }}</td>
-                                                <td>{{ $code->position->desc }}</td>
+                                                <td>{{ $code->info }}</td>
                                             </tr>
                                         @endif
                                     @endforeach

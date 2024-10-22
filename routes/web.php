@@ -128,6 +128,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
         Route::get('inactive-positions', [PositionController::class, 'inactive'])->name('positions.inactive');
         // Add Position Code
         Route::post('position/{id}/add-code', [PositionController::class, 'add_code'])->name('positions.add_code');
+        // Edit Position Code
+        Route::post('position/{id}/edit-code', [PositionController::class, 'edit_code'])->name('positions.edit_code');
 
         // Hostel
         Route::resource('hostel', HostelController::class);

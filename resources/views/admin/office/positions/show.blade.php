@@ -322,9 +322,26 @@
                                         <p class="fw-semi-bold mb-1">کد ها:</p>
                                     </div>
                                     <div class="col">
-                                        {{ $position->codes->count() }} ==> @foreach($position->codes as $code) ({{ $code->code }} - @if($code->employee) {{ $code->employee->name . ' ' . $code->employee->last_name }} @else <span class="text-danger">خالی</span>@endif)
-                                        {{ $position->codes && $position->codes->count() < $position->num_of_pos ? ' - ' : '' }} @endforeach
+                                        <!-- Position Codes -->
+                                        {{ $position->codes->count() }} ==>
+                                        @foreach($position->codes as $code)
+                                            (<a class="modal-effect"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#edit_code{{ $code->id }}">
+                                                {{ $code->code }}
+                                            </a>
 
+                                            @include('admin.office.positions.edit_code')
+                                            -
+                                            @if($code->employee)
+                                                {{ $code->employee->name . ' ' . $code->employee->last_name }}
+                                            @else
+                                                <span class="text-danger">خالی</span>
+                                            @endif)
+                                            {{ $position->codes && $position->codes->count() < $position->num_of_pos ? ' - ' : '' }}
+                                        @endforeach
+
+                                        <!-- Add New Code To the Position -->
                                         @if($position->codes && $position->codes->count() < $position->num_of_pos)
                                             <a class="modal-effect text-secondary"
                                                data-effect="effect-sign" data-toggle="modal"
@@ -344,63 +361,65 @@
                 <!--/==/ End of Details Card -->
 
                 <!-- Employees Card -->
-                <div class="card mb-2">
-                    <div class="card-header">
-                        <h4 class="card-title font-weight-bold">@lang('admin.sidebar.employees')</h4>
-                    </div>
-
-                    <div class="card-body">
-                        <!-- Table -->
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100" style="width: 100%;">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>@lang('form.name')</th>
-                                    <th>@lang('form.fatherName')</th>
-                                    <th>@lang('form.position')</th>
-                                    <th>@lang('form.positionCode')</th>
-                                    <th>@lang('form.phone')</th>
-                                    <th>@lang('form.currentProvince')</th>
-                                    <th>@lang('form.currentDistrict')</th>
-                                    <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
-                                    <th>@lang('form.introducer')</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                @foreach($position->employees as $employee)
-                                    <tr>
-                                        <td>{{ $employee->id }}</td>
-                                        <td>
-                                            @can('office_employee_view')
-                                                <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
-                                            @else
-                                                {{ $employee->name }} {{ $employee->last_name }}
-                                            @endcan
-                                        </td>
-                                        <td>{{ $employee->father_name ?? '' }}</td>
-                                        <td>{{ $employee->position->title ?? '' }} {{ $employee->position->position_number ?? '' }}</td>
-                                        <td>{{ $employee->position_code->code ?? '' }}</td>
-                                        <td class="tx-sm-12-f">
-                                            <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
-                                        </td>
-                                        <td>{{ $employee->current_province ?? '' }}</td>
-                                        <td>{{ $employee->current_district ?? '' }}</td>
-                                        <td>
-                                            {{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
-                                            {{ $employee->duty_position ? ' - ' : '' }}
-                                            {{ $employee->duty_position ?? '' }}
-                                        </td>
-                                        <td>{{ $employee->introducer ?? '' }}</td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                @if($position->num_of_pos > 1)
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <h4 class="card-title font-weight-bold">@lang('admin.sidebar.employees')</h4>
                         </div>
-                        <!--/==/ End of Table -->
+
+                        <div class="card-body">
+                            <!-- Table -->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered dataTable export-table border-top key-buttons display text-nowrap w-100" style="width: 100%;">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>@lang('form.name')</th>
+                                        <th>@lang('form.fatherName')</th>
+                                        <th>@lang('form.position')</th>
+                                        <th>@lang('form.positionCode')</th>
+                                        <th>@lang('form.phone')</th>
+                                        <th>@lang('form.currentProvince')</th>
+                                        <th>@lang('form.currentDistrict')</th>
+                                        <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
+                                        <th>@lang('form.introducer')</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    @foreach($position->employees as $employee)
+                                        <tr>
+                                            <td>{{ $employee->id }}</td>
+                                            <td>
+                                                @can('office_employee_view')
+                                                    <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
+                                                @else
+                                                    {{ $employee->name }} {{ $employee->last_name }}
+                                                @endcan
+                                            </td>
+                                            <td>{{ $employee->father_name ?? '' }}</td>
+                                            <td>{{ $employee->position->title ?? '' }} {{ $employee->position->position_number ?? '' }}</td>
+                                            <td>{{ $employee->position_code->code ?? '' }}</td>
+                                            <td class="tx-sm-12-f">
+                                                <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
+                                            </td>
+                                            <td>{{ $employee->current_province ?? '' }}</td>
+                                            <td>{{ $employee->current_district ?? '' }}</td>
+                                            <td>
+                                                {{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
+                                                {{ $employee->duty_position ? ' - ' : '' }}
+                                                {{ $employee->duty_position ?? '' }}
+                                            </td>
+                                            <td>{{ $employee->introducer ?? '' }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--/==/ End of Table -->
+                        </div>
                     </div>
-                </div>
+                @endif
                 <!--/==/ End of Employees Card -->
             </div>
         </div>
