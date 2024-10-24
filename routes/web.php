@@ -44,6 +44,11 @@ Route::get('/', function () {
     return redirect()->route('admin.dashboard');
 })->name('index');
 
+Route::get('/optimize', function () {
+    \Illuminate\Support\Facades\Artisan::call('optimize');
+    return 'DONE!';
+});
+
 Auth::routes(['register' => false]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
