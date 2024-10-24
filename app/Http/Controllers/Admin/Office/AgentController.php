@@ -296,19 +296,16 @@ class AgentController extends Controller
             'doc_number'    => 'required'
         ]);
 
-        // Request Company
-//        $req_company = Company::where('id', $request->company_id)->first();
-//
-//        // Get Saved Company and save
-//        $saved_company = Company::where('tin', $request->tin)->first();
-//        if (!empty($saved_company->agent_id)) {
-//            return back()->with(['message' => 'شرکت متذکره دارای نماینده میباشد.', 'alertType' => 'warning']);
-//        }
-
         /**
          * Save Company
          */
         $agent = Agent::where('id', $company->agent->id)->first();
+        $company->update([
+            'background'    => $company->background . 'از تاریخ ' . $company->agent->from_date . ' الی تاریخ ' . $company->agent->to_date. '  نظر به مکتوب نمبر ' . $company->agent->doc_number . '، ' . $company->agent->name . " را منحیث نماینده معرفی نمود.<br>",
+        ]);
+        $agent->update([
+            'background'    => $agent->background . 'از تاریخ ' . $agent->from_date . ' الی تاریخ ' . $agent->to_date . ' منحیث نماینده شرکت ' . $agent->company_name . '  نظر به مکتوب نمبر ' . $agent->doc_number . " معرفی گردید.<br>"
+        ]);
 
         if ($agent->company_name == $company->name) {
             $agent->from_date   = $request->from_date;
@@ -436,11 +433,11 @@ class AgentController extends Controller
             // Do Refresh When The Time Is Over
             if ($to_date < today()) {
                 $agent->update([
-                    'background'    => $agent->background . 'از تاریخ ' . $colleague->from_date . ' الی تاریخ ' . $colleague->to_date . '  نظر به مکتوب نمبر ' . $colleague->doc_number . ', ' . $colleague->name . " را منحیث همکار با خود داشت.<br>"
+                    'background'    => $agent->background . 'از تاریخ <b> ' . $colleague->from_date . '</b> الی تاریخ <b> ' . $colleague->to_date . '</b>  نظر به مکتوب نمبر ' . $colleague->doc_number . ', <b>' . $colleague->name . "</b> را منحیث همکار با خود داشت.<br>"
                 ]);
 
                 $colleague->update([
-                    'background'    => $colleague->background . 'از تاریخ ' . $colleague->from_date . ' الی تاریخ ' . $colleague->to_date. '  نظر به مکتوب نمبر ' . $colleague->doc_number . '، منحیث همکار ' . $colleague->agent->name . " معرفی گردید.<br>",
+                    'background'    => $colleague->background . 'از تاریخ <b> ' . $colleague->from_date . '</b> الی تاریخ <b> ' . $colleague->to_date. '</b>  نظر به مکتوب نمبر ' . $colleague->doc_number . '، منحیث همکار <b>' . $colleague->agent->name . "</b> معرفی گردید.<br>",
                     'agent_id'      => null,
                     'from_date'     => null,
                     'to_date'       => null,
@@ -517,5 +514,50 @@ class AgentController extends Controller
             'message'   => 'همکار موفقانه ثبت شد!',
             'alertType' => 'success'
         ]);
+    }
+
+    // Renewal Colleague
+    public function renewal_colleague(Request $request, $id)
+    {
+        $colleague = AgentColleague::find($id);
+
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'from_date'     => 'required',
+                'to_date'       => 'required',
+                'doc_number'    => 'required'
+            ]);
+
+            /**
+             * Save Company
+             */
+            $agent = Agent::where('id', $colleague->agent->id)->first();
+
+            $agent->update([
+                'background'    => $agent->background . 'از تاریخ <b> ' . $colleague->from_date . '</b> الی تاریخ <b> ' . $colleague->to_date . '</b>  نظر به مکتوب نمبر ' . $colleague->doc_number . ', <b>' . $colleague->name . "</b> را منحیث همکار با خود داشت.<br>"
+            ]);
+
+            $colleague->update([
+                'background'    => $colleague->background . 'از تاریخ <b> ' . $colleague->from_date . '</b> الی تاریخ <b> ' . $colleague->to_date. '</b>  نظر به مکتوب نمبر ' . $colleague->doc_number . '، منحیث همکار <b>' . $colleague->agent->name . "</b> معرفی گردید.<br>"
+            ]);
+            $colleague->from_date   = $request->from_date;
+            $colleague->to_date     = $request->to_date;
+            $colleague->doc_number  = $request->doc_number;
+
+            $colleague->background = $colleague->background . '<br>' . ' از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' بر اساس مکتوب نمبر ' . $request->doc_number . ' تمدید گردید.' . '<br>' . $request->info;
+            $colleague->save();
+
+            // Update Company Background
+            $agent->update([
+                'background' => $agent->background . '<br>' . 'همکاری محترم ' . $colleague->name . ' از تاریخ ' . $request->from_date . ' الی تاریخ ' . $request->to_date . ' بر اساس مکتوب نمبر ' . $request->doc_number . ' تمدید گردید.' . '<br>' . $request->info
+            ]);
+
+            return redirect()->route('admin.office.agents.show', $agent->id)->with([
+                'message'   => ' موفقانه تمدید گردید!',
+                'alertType' => 'success'
+            ]);
+        }
+
+        return view('admin.office.agents.renewal_colleague', compact('colleague'));
     }
 }

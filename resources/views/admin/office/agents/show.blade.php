@@ -247,7 +247,7 @@
                                     <th>@lang('pages.employees.docNumber')</th>
                                     <th>مدت اعتبار</th>
                                     <th>@lang('global.validationStatus')</th>
-                                    <th>ACTION</th>
+                                    <th>@lang('global.action')</th>
                                 </tr>
                                 </thead>
 
@@ -413,7 +413,6 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th>@lang('form.name')</th>
-                                    <th>مافوق</th>
                                     <th>@lang('form.phone')</th>
                                     <th>نمبر تذکره</th>
                                     <th>@lang('form.fromDate')</th>
@@ -422,6 +421,7 @@
                                     <th>@lang('global.address')</th>
                                     <th>مدت اعتبار</th>
                                     <th>@lang('global.validationStatus')</th>
+                                    <th>@lang('global.action')</th>
                                 </tr>
                                 </thead>
 
@@ -432,7 +432,6 @@
                                             <td>
                                                 <a href="{{ route('admin.office.agent-colleagues.show', $colleague->id) }}">{{ $colleague->name }}</a>
                                             </td>
-                                            <td>{{ $colleague->agent->name }}</td>
                                             <td>{{ $colleague->phone ?? '' }} {{ $colleague->phone2? ', ' : '' }} {{ $colleague->phone2 ?? '' }}</td>
                                             <td>{{ $colleague->id_number }}</td>
                                             <td>{{ $colleague->from_date }}</td>
@@ -461,6 +460,10 @@
                                                         echo "<span class='text-danger'>تاریخ ختم شده</span>";
                                                     }
                                                 @endphp
+                                            </td>
+                                            <!-- Action -->
+                                            <td>
+                                                <a href="{{ route('admin.office.agents.renewal_colleague', $colleague->id) }}" class="btn btn-sm btn-outline-dark">تمدید</a>
                                             </td>
                                         </tr>
                                     @endforeach
