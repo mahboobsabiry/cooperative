@@ -197,19 +197,19 @@
                     <!-- Sawaneh Number -->
                     <tr>
                         <th class="font-weight-bold">نمبر سوانح <span class="text-danger">*</span></th>
-                        <td colspan="5">{{ $asycuda_user->employee->emp_number }}</td>
+                        <td colspan="5" style="font-family: 'Times New Roman';">{{ $asycuda_user->employee->emp_number }}</td>
                     </tr>
 
                     <!-- Email Address -->
                     <tr>
                         <th class="font-weight-bold">ایمیل آدرس</th>
-                        <td colspan="5">{{ $asycuda_user->employee->email }}</td>
+                        <td colspan="5" style="font-family: 'Times New Roman';">{{ $asycuda_user->employee->email }}</td>
                     </tr>
 
                     <!-- Phone Number -->
                     <tr>
                         <th class="font-weight-bold">شماره تماس <span class="text-danger">*</span></th>
-                        <td colspan="5">{{ $asycuda_user->employee->phone }}</td>
+                        <td colspan="5" style="font-family: 'Times New Roman';">{{ $asycuda_user->employee->phone }}</td>
                     </tr>
 
                     <!-- Permanent Address -->
@@ -221,13 +221,13 @@
                     <!-- Custom Code -->
                     <tr>
                         <th class="font-weight-bold">کد گمرک مربوطه <span class="text-danger">*</span></th>
-                        <td colspan="5">{{ $asycuda_user->place->custom_code ?? '' }}</td>
+                        <td colspan="5" style="font-family: 'Times New Roman';">{{ $asycuda_user->place->custom_code ?? '' }}</td>
                     </tr>
 
                     <!-- Roles -->
                     <tr>
                         <th class="font-weight-bold">صلاحیت سیستمی <span class="text-danger">*</span></th>
-                        <td colspan="5">{{ $asycuda_user->roles }}</td>
+                        <td colspan="5" style="font-family: 'Times New Roman';">{{ $asycuda_user->roles }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -236,23 +236,26 @@
 
             <!-- Terms -->
             <div>
-                <p class="font-weight-bold" style="font-size: 22px; text-align: justify; text-justify: inter-word;">تعهد میدارم که معلومات فوق را درست درج نمودم و در صورت هر نوع مشکل مسئول میباشم. همچنان پسورد و صلاحیت خود را به اساس امر مقام بعد از تکمیل دوره آموزشی و بلدیت به سیستم اخذ نمودم؛ چون به تغییر کردن پسورد و مشخص کردن پسورد جدید برای خود بلدیت کامل دارم. بعد از تسلیم شدن یوزر و پسورد بزودترین فرصت پسورد یوزر خویش را تغییر داده و به هیچ شخص دیگر ارائه نمیکنم. در حصه حفظ اسرار اداره به اساس ماده 13 قانون گمرکات را جداً در نظر میگیرم. در صورت بروز شدن هرنوع تخلف، سوءاستفاده از بابت پسورد فوق مسئول و جوابگو میباشم و اگر به کدام مشکل تخنیکی روبرو گردیدم از بخش مربوطه خواهان کمک تخنیکی میگردم.</p>
+                <p class="font-weight-bold" style="font-size: 22px; text-align: justify; text-justify: inter-word;">تعهد میدارم که معلومات فوق را درست درج نمودم و در صورت هر نوع مشکل مسئول میباشم. همچنان پسورد و صلاحیت خود را به اساس امر مقام بعد از تکمیل دوره آموزشی و بلدیت به سیستم اخذ نمودم؛ چون به تغییر کردن پسورد و مشخص کردن پسورد جدید برای خود بلدیت کامل دارم. بعد از تسلیم شدن یوزر و پسورد بزودترین فرصت پسورد یوزر خویش را تغییر داده و به هیچ شخص دیگر ارائه نمیکنم. در حصه حفظ اسرار اداره به اساس ماده <span style="font-family: 'Times New Roman';">13</span> قانون گمرکات را جداً در نظر میگیرم. در صورت بروز شدن هرنوع تخلف، سوءاستفاده از بابت پسورد فوق مسئول و جوابگو میباشم و اگر به کدام مشکل تخنیکی روبرو گردیدم از بخش مربوطه خواهان کمک تخنیکی میگردم.</p>
             </div>
             <!--/==/ End of Terms -->
 
             <!-- Footer -->
-            <div class="grid-container" style="position:relative; font-size: 18px; line-height: 5px; font-weight: bold;">
+            <div class="grid-container" style="position:relative; font-size: 22px; line-height: 5px; font-weight: bold;">
                 <div class="grid-item">
-                    <div style="font-family: Calibri; margin-top: 20px;">
+                    <div style="font-family: Calibri; margin-top: 20px; line-height: normal;">
                         <p>نام استفاده کننده یوزر: {{ $asycuda_user->employee->name . ' ' . $asycuda_user->employee->last_name }}</p>
                         <p><span class="text-danger">*</span> امضاء:</p>
+                        @if($asycuda_user->employee->signature)
+                            <img src="{{ asset('storage/signatures/' . $asycuda_user->employee->signature) }}" alt="" width="120px" style="margin-top: -20px;">
+                        @endif
                     </div>
                 </div>
                 <div class="grid-item">
 
                 </div>
                 <div class="grid-item">
-                    <div class="mt-4">
+                    <div class="mt-4" style="line-height: 5px;">
                         <p>تائید مقام ذیصلاح: رئیس، آمر</p>
                         <p>نام و وظیفه: {{ $asycuda_user->place && $asycuda_user->place->custom_code == 'AF152' ? 'مفتی محمد نسیم محمدی' : 'مولوی عبدالله بلال' }}</p>
                         <p>{{ $asycuda_user->place && $asycuda_user->place->custom_code == 'AF152' ? 'آمر گمرک سرحدی حیرتان' : 'رئیس گمرک بلخ' }}</p>
