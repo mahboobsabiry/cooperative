@@ -221,7 +221,7 @@
                                 <!-- ID -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">ID:</p>
+                                        <p class="font-weight-bold mb-1">ID:</p>
                                     </div>
                                     <div class="col">ID-{{ $position->id }}</div>
                                 </div>
@@ -229,7 +229,7 @@
                                 <!-- Parent -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">زیر دستٍ:</p>
+                                        <p class="font-weight-bold mb-1">زیر دستٍ:</p>
                                     </div>
                                     <div class="col">{{ $position->parent->title ?? 'ریاست عمومی گمرکات' }}</div>
                                 </div>
@@ -237,7 +237,7 @@
                                 <!-- Position Title -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">عنوان بست:</p>
+                                        <p class="font-weight-bold mb-1">عنوان بست:</p>
                                     </div>
                                     <div class="col">{{ $position->title }}</div>
                                 </div>
@@ -245,7 +245,7 @@
                                 <!-- Position Number -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">نمبر بست:</p>
+                                        <p class="font-weight-bold mb-1">نمبر بست:</p>
                                     </div>
                                     <div class="col">{{ $position->position_number }}</div>
                                 </div>
@@ -253,7 +253,7 @@
                                 <!-- Number of Positions -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">تعداد بست:</p>
+                                        <p class="font-weight-bold mb-1">تعداد بست:</p>
                                     </div>
                                     <div class="col">{{ $position->num_of_pos }}</div>
                                 </div>
@@ -261,7 +261,7 @@
                                 <!-- Description -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1">معلومات اضافی:</p>
+                                        <p class="font-weight-bold mb-1">معلومات اضافی:</p>
                                     </div>
                                     <div class="col">
                                         <p class="fst-italic text-400 mb-1">{{ $position->info ?? '--' }}</p>
@@ -276,7 +276,7 @@
                                 <!-- Place -->
                                 <div class="row">
                                     <div class="col-6 col-sm-5">
-                                        <p class="fw-semi-bold mb-1">موقعیت:</p>
+                                        <p class="font-weight-bold mb-1">موقعیت:</p>
                                     </div>
                                     <div class="col">{{ $position->place->name ?? 'Unsigned' }} - {{ $position->place->custom_code ?? '' }}</div>
                                 </div>
@@ -284,7 +284,7 @@
                                 <!-- Number of Underhand Positions -->
                                 <div class="row">
                                     <div class="col-6 col-sm-5">
-                                        <p class="fw-semi-bold mb-1">تعداد بست های زیردست:</p>
+                                        <p class="font-weight-bold mb-1">تعداد بست های زیردست:</p>
                                     </div>
                                     <div class="col">{{ $position->children->count() }}</div>
                                 </div>
@@ -292,7 +292,7 @@
                                 <!-- Number of Employees -->
                                 <div class="row">
                                     <div class="col-6 col-sm-5">
-                                        <p class="fw-semi-bold mb-1">تعداد کارمندان این بست:</p>
+                                        <p class="font-weight-bold mb-1">تعداد کارمندان این بست:</p>
                                     </div>
                                     <div class="col">{{ $position->employees->count() }}</div>
                                 </div>
@@ -301,7 +301,7 @@
                                 @if($position->position_number > 4)
                                     <div class="row">
                                         <div class="col-6 col-sm-5">
-                                            <p class="fw-semi-bold mb-1">تعداد بست خالی:</p>
+                                            <p class="font-weight-bold mb-1">تعداد بست خالی:</p>
                                         </div>
                                         <div class="col">
                                             {{ $position->num_of_pos }}
@@ -319,19 +319,24 @@
                                 <!-- Position Codes -->
                                 <div class="row">
                                     <div class="col-6 col-sm-5">
-                                        <p class="fw-semi-bold mb-1">کد ها:</p>
+                                        <p class="font-weight-bold mb-1">کد ها:</p>
                                     </div>
                                     <div class="col">
                                         <!-- Position Codes -->
                                         {{ $position->codes->count() }} ==>
                                         @foreach($position->codes as $code)
                                             (<a class="modal-effect"
-                                               data-effect="effect-sign" data-toggle="modal"
-                                               href="#edit_code{{ $code->id }}">
+                                                data-effect="effect-sign" data-toggle="modal"
+                                                href="#show_code{{ $code->id }}" title="@lang('global.details')">
                                                 {{ $code->code }}
+                                            </a>&nbsp;
+                                            <a class="modal-effect text-secondary"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#edit_code{{ $code->id }}" title="@lang('global.edit')">
+                                                <i class="fe fe-edit"></i>
                                             </a>
 
-                                            @include('admin.office.positions.edit_code')
+                                            @include('admin.office.positions.show_edit_code')
                                             -
                                             @if($code->employee)
                                                 {{ $code->employee->name . ' ' . $code->employee->last_name }}
@@ -343,10 +348,10 @@
 
                                         <!-- Add New Code To the Position -->
                                         @if($position->codes && $position->codes->count() < $position->num_of_pos)
-                                            <a class="modal-effect text-secondary"
+                                            <a class="modal-effect btn btn-sm btn-outline-primary"
                                                data-effect="effect-sign" data-toggle="modal"
-                                               href="#add_code{{ $position->id }}">
-                                                @lang('global.add')
+                                               href="#add_code{{ $position->id }}" title="@lang('global.add')">
+                                                <i class="fas fa-plus-circle"></i>
                                             </a>
 
                                             @include('admin.office.positions.add_code')
