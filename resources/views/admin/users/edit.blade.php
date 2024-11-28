@@ -126,21 +126,6 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <!-- Place -->
-                                        <div class="form-group @error('place_id') has-danger @enderror">
-                                            <p class="mb-2">@lang('pages.place'):</p>
-                                            <select id="place_id" name="place_id" class="form-control select2 @error('place_id') form-control-danger @enderror">
-                                                <option value="">@lang('form.chooseOne')</option>
-                                                @foreach($places as $place)
-                                                    <option value="{{ $place->id }}" {{ $user->place_id == $place->id ? 'selected' : '' }}>{{ $place->name }} - {{ $place->custom_code }}</option>
-                                                @endforeach
-                                            </select>
-
-                                            @error('place_id')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
                                         @if($user->employee_id == null)
                                             <!-- Avatar -->
                                             <div class="form-group @error('avatar') has-danger @enderror">

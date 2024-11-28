@@ -79,12 +79,28 @@ return [
         'updatedEmpMsg'     => 'Employee information has been updated successfully!'
     ],
 
+    // Finance
+    'finance' => [
+        'budget'    => 'Budget',
+        'addBudget' => 'Add Budget',
+        'editBudget'    => 'Edit Budget',
+        'deleteBudget'  => 'Delete Budget'
+    ],
+
     'hostel' => [
         'hostel'    => 'Hostel',
         'numOfMembers'  => 'Number of Room Members',
         'roomNumber'    => 'Room Number',
         'roomSection'   => 'Room Section',
         'section'       => 'Section'
+    ],
+
+    // Office
+    'office' => [
+        'activeEmployees'   => 'Active Employees',
+        'inactiveEmployees' => 'Inactive Employees',
+        'user-lessEmployees'    => 'User-less Employees',
+        'userOwnerEmployees'    => 'User Owner Employees'
     ],
 
     'permissions' => [

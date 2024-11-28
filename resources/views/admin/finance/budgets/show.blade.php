@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', $employee->name . ' ' . $employee->last_name)
+@section('title', trans('global.details') . ' ' . $budget->title)
 <!-- Extra Styles -->
 @section('extra_css')
     @if(app()->getLocale() == 'en')
@@ -93,52 +93,52 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">@lang('pages.employees.employeeInfo')</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">@lang('global.details')</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.office.employees.index') }}">@lang('admin.sidebar.employees')</a>
+                        <a href="{{ route('admin.finance.budgets.index') }}">@lang('admin.sidebar.budgets')</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">@lang('pages.employees.employeeInfo')</li>
+                    <li class="breadcrumb-item active" aria-current="page">@lang('global.details')</li>
                 </ol>
             </div>
 
             <!-- Btn List -->
             <div class="btn btn-list">
                 <div class="d-flex">
-                    @can('office_employee_delete')
+                    @can('finance_budget_delete')
                         <div class="mr-2">
                             <!-- Delete -->
                             <a class="modal-effect btn btn-sm ripple btn-danger"
                                data-effect="effect-sign" data-toggle="modal"
-                               href="#delete_record{{ $employee->id }}"
-                               title="@lang('pages.employees.deleteEmployee')">
+                               href="#delete_record{{ $budget->id }}"
+                               title="@lang('global.details')">
                                 <i class="fe fe-trash"></i>
                                 @lang('global.delete')
                             </a>
 
-                            @include('admin.office.employees.delete')
+                            @include('admin.finance.budgets.delete')
                         </div>
-                @endcan
+                    @endcan
 
-                    @can('office_employee_edit')
+                    @can('finance_budget_edit')
                         <div class="mr-2">
                             <!-- Edit -->
                             <a class="btn ripple bg-dark btn-sm tx-white"
-                               href="{{ route('admin.office.employees.edit', $employee->id) }}">
+                               href="{{ route('admin.finance.budgets.edit', $budget->id) }}">
                                 <i class="fe fe-edit"></i>
                                 @lang('global.edit')
                             </a>
                         </div>
                     @endcan
 
-                    @can('office_employee_create')
+                    @can('finance_budget_create')
                         <div class="mr-2">
                             <!-- Add -->
                             <a class="btn ripple bg-primary btn-sm tx-white"
-                               href="{{ route('admin.office.employees.create') }}">
+                               href="{{ route('admin.finance.budgets.create') }}">
                                 <i class="fe fe-plus-circle"></i>
                                 @lang('global.add')
                             </a>
@@ -151,104 +151,7 @@
 
         <!-- Row Content -->
         <div class="row">
-            <div class="col-lg-4 col-md-12">
-                <!-- Profile Main Info -->
-                <div class="card custom-card">
-                    <div class="card-body text-center">
-                        <div class="main-profile-overview widget-user-image text-center">
-                            <div class="main-img-user">
-                                <img alt="avatar"
-                                     src="{{ $employee->image ?? asset('assets/images/avatar-default.jpeg') }}">
-                            </div>
-                        </div>
-
-                        <!-- Main Info -->
-                        <div class="item-user pro-user">
-                            <h4 class="pro-user-username text-dark mt-2 mb-0">
-                                <span>{{ $employee->name }}</span>
-                            </h4>
-
-                            <p class="pro-user-desc text-muted mb-1">{{ $employee->username ?? '' }}</p>
-
-                            <!-- Employee Star -->
-                            <p class="user-info-rating">
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <!--/==/ End of Profile Main Info -->
-
-                <!-- Contact Information -->
-                <div class="card custom-card">
-                    <div class="card-header custom-card-header">
-                        <div>
-                            <h6 class="card-title tx-15 tx-bold mb-0">
-                                اطلاعات لازم
-                            </h6>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="main-profile-contact-list main-profile-work-list">
-                            <!-- Status -->
-                            <div class="media">
-                                <div class="media-logo bg-light text-dark">
-                                    <i class="fe fe-message-square"></i>
-                                </div>
-                                <div class="media-body">
-                                    <span>وضعیت یوزر</span>
-                                    <div>
-                                        @if($employee->user)
-                                            @can('user_mgmt')
-                                                <a href="{{ route('admin.users.show', encrypt($employee->user->id)) }}" target="_blank">حساب کاربری BEAM دارد ({{ $employee->user->status == '1' ? 'فعال' : 'غیرفعال' }})</a>
-                                            @else
-                                                حساب کاربری BEAM دارد
-                                            @endcan
-                                        @else
-                                            حساب کاربری BEAM ندارد
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/==/ End of Status -->
-
-                            <!-- Phone Number -->
-                            <div class="media">
-                                <div class="media-logo bg-light text-dark">
-                                    <i class="fe fe-smartphone"></i>
-                                </div>
-                                <div class="media-body">
-                                    <span>@lang('form.phone')</span>
-                                    <div>
-                                        <a href="callto:{{ $employee->phone }}" class="ctd">{{ $employee->phone }}</a>
-                                        @if(!empty($employee->phone2))
-                                            , <a href="callto:{{ $employee->phone2 }}"
-                                                 class="ctd">{{ $employee->phone2 }}</a>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/==/ End of Phone Number -->
-
-                            <!-- Email Address -->
-                            <div class="media">
-                                <div class="media-logo bg-light text-dark">
-                                    <i class="fe fe-mail"></i>
-                                </div>
-                                <div class="media-body">
-                                    <span>@lang('form.email')</span>
-                                    <div>
-                                        <a href="mailto:{{ $employee->email }}" class="ctd">{{ $employee->email }}</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/==/ End of Email Address -->
-                        </div>
-                    </div>
-                </div>
-                <!--/==/ End of Contact Information -->
-            </div>
-            <div class="col-lg-8 col-md-12">
+            <div class="col-12">
                 <!-- Success Message -->
                 @include('admin.inc.alerts')
 
@@ -258,10 +161,10 @@
                         <!-- Heading -->
                         <div class="row font-weight-bold">
                             <div class="col-6">
-                                {{ $employee->name }}
+                                {{ $budget->title }}
                             </div>
                             <div class="col-6 {{ app()->getLocale() == 'en' ? 'text-right' : 'text-left' }}">
-                                <i class="fa fa-user-tie"></i> کارمند
+                                <i class="fas fa-dollar-sign"></i> بودجه
                             </div>
                         </div>
                     </div>
@@ -272,7 +175,7 @@
                             <div>
                                 تاریخ ثبت
                                 <br>
-                                <p class="text-muted small">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d h:i a', strtotime($employee->created_at)) }}</p>
+                                <p class="text-muted small">{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d h:i a', strtotime($budget->created_at)) }}</p>
                             </div>
                         </div>
                     </div>
@@ -287,9 +190,55 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body" style="background-color: #F7F9FCFF">
-                        <!-- Personal Information Table -->
-                        @include('admin.office.employees.inc.tables')
-                        <!--/==/ End of Personal Information -->
+                        <div class="row">
+                            <!-- Information -->
+                            <div class="col-md-6 p-2 m-1">
+                                <h5 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                    @lang('pages.employees.personalInfo')
+                                </h5>
+                                <!-- ID -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>ID:</strong></p>
+                                    </div>
+                                    <div class="col">ID-{{ $budget->id }}</div>
+                                </div>
+
+                                <!-- Title -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.title'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ $budget->title }}</div>
+                                </div>
+
+                                <!-- Code -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.code'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ $budget->code }}</div>
+                                </div>
+
+                                <!-- Amount -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.amount'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ $budget->amount }}</div>
+                                </div>
+
+                                <!-- Extra INFO -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('global.extraInfo'):</strong></p>
+                                    </div>
+                                    <div class="col">{{ $budget->info }}</div>
+                                </div>
+                            </div>
+                            <!--/==/ End of Information -->
+                        </div>
                     </div>
                 </div>
                 <!--/==/ End of Details Card -->

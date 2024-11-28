@@ -48,6 +48,7 @@ return [
         'articles'          => 'مقالات',
         'books'             => 'کتاب‌ها',
         'companies'         => 'شرکت ها',
+        'currencies'        => 'اسعار',
         'districts'         => 'ولسوالی ها',
         'employees'         => 'کارمندان',
         'galleries'         => 'گالری‌ها',

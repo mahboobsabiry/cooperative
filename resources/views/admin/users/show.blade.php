@@ -103,27 +103,13 @@
 
                             @if($user->employee)
                                 <!-- Position -->
-                                @can('office_position_view')
-                                    <a href="{{ route('admin.office.positions.show', $user->employee->position->id) }}" target="_blank" class="pro-user-desc mb-1">{{ $user->employee->position->title ?? '' }}</a>
-                                @else
-                                    <p class="pro-user-desc text-muted mb-1">{{ $user->employee->position->title ?? '' }}</p>
-                                @endcan
-                                @if($user->employee->on_duty == 1)
-                                    <p class="pro-user-desc text-muted mb-1">{{ $user->employee->duty_position ?? '' }}</p>
-                                @endif
-
-                                @if($user->employee->position->position_number == 2 || $user->employee->position->position_number == 3)
-                                @else
-                                    <p class="pro-user-desc text-muted mb-1">({{ $user->place->name ?? 'UNSIGNED' }})</p>
-                                @endif
+                                <p class="pro-user-desc text-muted mb-1">{{ $user->employee->position ?? '' }}</p>
                                 <!-- Employee Star -->
-                                @if($user->employee->position)
-                                    <p class="user-info-rating">
-                                        @for($i=1; $i<=$user->employee->position->position_number; $i++)
-                                            <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                        @endfor
-                                    </p>
-                                @endif
+                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
                                 <!--/==/ End of Employee Star -->
                             @else
                                 {{ $user->username }}
@@ -268,7 +254,7 @@
                                     <div class="col">{{ $user->name }}</div>
                                 </div>
 
-                                @if(auth()->user()->isEmployee())
+                                @if(auth()->user()->employee)
                                     <!-- Father Name -->
                                     <div class="row">
                                         <div class="col-5 col-sm-4">
@@ -278,13 +264,13 @@
                                     </div>
                                 @endif
 
-                                @if(auth()->user()->isEmployee())
-                                    <!-- Employee Number -->
+                                @if(auth()->user()->employee)
+                                    <!-- Employee Code -->
                                     <div class="row">
                                         <div class="col-5 col-sm-4">
-                                            <p class="fw-semi-bold mb-1"><strong>@lang('form.empNumber'): </strong></p>
+                                            <p class="fw-semi-bold mb-1"><strong>@lang('form.empCode'): </strong></p>
                                         </div>
-                                        <div class="col">{{ $user->employee->emp_number }}</div>
+                                        <div class="col">{{ $user->employee->emp_code }}</div>
                                     </div>
                                 @endif
 
@@ -296,36 +282,16 @@
                                     <div class="col"><a href="callto:{{ $user->phone }}">{{ $user->phone }}</a></div>
                                 </div>
 
-                                @if(auth()->user()->isEmployee())
+                                @if(auth()->user()->employee)
                                     <!-- Position -->
                                     <div class="row">
                                         <div class="col-5 col-sm-4">
                                             <p class="fw-semi-bold mb-1"><strong>@lang('form.position'): </strong></p>
                                         </div>
-                                        <div class="col">{{ $user->employee->position->title }}</div>
+                                        <div class="col">{{ $user->employee->position }}</div>
                                     </div>
 
                                 @endif
-
-                                @if(auth()->user()->isEmployee())
-                                    @if($user->employee->on_duty == 1)
-                                        <!-- Duty Position -->
-                                        <div class="row">
-                                            <div class="col-5 col-sm-4">
-                                                <p class="fw-semi-bold mb-1"><strong>@lang('form.dutyPosition'): </strong></p>
-                                            </div>
-                                            <div class="col">{{ $user->employee->duty_position }}</div>
-                                        </div>
-                                    @endif
-                                @endif
-
-                                <!-- Place -->
-                                <div class="row">
-                                    <div class="col-5 col-sm-4">
-                                        <p class="fw-semi-bold mb-1"><strong>موقعیت: </strong></p>
-                                    </div>
-                                    <div class="col">{{ $user->place->name ?? 'Unsigned' }} - {{ $user->place->custom_code ?? '' }}</div>
-                                </div>
 
                                 <!-- Description -->
                                 <div class="row">

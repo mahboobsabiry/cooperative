@@ -2,6 +2,7 @@
 
 return [
     'age'		    => 'عمر',
+    'amount'        => 'مبلغ',
     'appointmentNumber' => 'نمبر تقرر',
     'appointmentDate'   => 'تاریخ تقرر',
     'avatar'        => 'آواتار',
@@ -11,6 +12,7 @@ return [
     'code'          => 'کد',
     'confirm_password'  => 'تائید رمز عبور',
     'created_date'      => 'تاریخ ایجاد شده',
+    'currency'      => 'اسعار',
     'currentDistrict'   => 'ولسوالی فعلی',
     'currentProvince'   => 'ولایت فعلی',
     'cur_password'  => 'رمز عبور فعلی',
@@ -63,6 +65,7 @@ return [
     'startDuty'		=> 'شروع خدمت',
     'startJob'	    => 'شروع وظیفه',
     'status'		=> 'وضعیت',
+    'symbol'		=> 'سمبول',
     'tin'           => 'نمبر تشخیصیه',
     'title'         => 'عنوان',
     'toDate'	    => 'الی تاریخ',

@@ -80,12 +80,28 @@ return [
         'updatedEmpMsg'     => 'معلومات کارمند موفقانه بروز رسانی شد!'
     ],
 
+    // Finance
+    'finance' => [
+        'budget'    => 'بودجه',
+        'addBudget' => 'ثبت بودجه',
+        'editBudget'    => 'ویرایش بودجه',
+        'deleteBudget'  => 'حذف بودجه'
+    ],
+
     'hostel' => [
         'hostel'    => 'لیلیه',
         'numOfMembers'  => 'تعداد اعضای اتاق',
         'roomNumber'    => 'نمبر اتاق',
         'roomSection'   => 'سکشن اتاق',
         'section'       => 'سکشن'
+    ],
+
+    // Office
+    'office' => [
+        'activeEmployees'   => 'کارمندان فعال',
+        'inactiveEmployees' => 'کارمندان غیرفعال',
+        'user-lessEmployees'    => 'کارمندان فاقد حساب کاربری',
+        'userOwnerEmployees'    => 'کارمندان دارنده حساب کاربری'
     ],
 
     'permissions' => [

@@ -32,23 +32,13 @@ class UserController extends Controller
     // Index
     public function activeUsers()
     {
-        if (Auth::user()->place_id == null) {
-            $users = User::all()->where('status', 1);
-        } else {
-            $users = User::all()->where('place_id', Auth::user()->place->id)->where('status', 1);
-        }
-
+        $users = User::all()->where('status', 1);
         return view('admin.users.active', compact('users'));
     }
 
     public function inactiveUsers()
     {
-        if (Auth::user()->place_id == null) {
-            $users = User::all()->where('status', 0);
-        } else {
-            $users = User::all()->where('place_id', Auth::user()->place->id)->where('status', 0);
-        }
-
+        $users = User::all()->where('status', 0);
         return view('admin.users.inactive', compact('users'));
     }
     public function activities($id)
@@ -59,22 +49,16 @@ class UserController extends Controller
 
     public function index()
     {
-        if (Auth::user()->place_id == null) {
-            $users = User::all();
-        } else {
-            $users = User::all()->where('place_id', Auth::user()->place->id);
-        }
-
+        $users = User::all();
         return view('admin.users.index', compact('users'));
     }
 
     public function create()
     {
-        $places = Place::all();
-        $employees = Employee::whereDoesntHave('user')->get();
+        $employees = Employee::all();
         $roles = Role::all();
         $permissions = Permission::all();
-        return view('admin.users.create', compact('places', 'employees', 'roles', 'permissions'));
+        return view('admin.users.create', compact('employees', 'roles', 'permissions'));
     }
 
     // Select Employee
@@ -88,9 +72,9 @@ class UserController extends Controller
 
             if ($employee) {
                 // Assuming 'employee_name' is the field you want to retrieve
-                $employee_name = $employee->name . ' ' . $employee->last_name;
+                $employee_name = $employee->name;
                 $employee_username = $employee->username;
-                $employee_emp_number = $employee->emp_number;
+                $employee_emp_code = $employee->emp_code;
                 $employee_phone = $employee->phone;
                 $employee_email = $employee->email;
 
@@ -98,7 +82,7 @@ class UserController extends Controller
                 return response()->json([
                     'employee_name' => $employee_name,
                     'employee_username' => $employee_username,
-                    'employee_emp_number' => $employee_emp_number,
+                    'employee_emp_code' => $employee_emp_code,
                     'employee_phone' => $employee_phone,
                     'employee_email' => $employee_email
                 ]);
@@ -114,8 +98,12 @@ class UserController extends Controller
     {
         // Store into users table
         $user = new User();
-        $user->place_id     = $request->place_id;
-        $user->employee_id  = $request->employee_id;
+        if (!empty($request->employee_id)) {
+            $emp_id = $request->employee_id;
+        } else {
+            $emp_id = null;
+        }
+        $user->employee_id  = $emp_id;
         $user->name         = $request->name;
         $user->username     = $request->username;
         $user->phone        = $request->phone;
@@ -161,11 +149,10 @@ class UserController extends Controller
         $ID = decrypt($id);
         $user = User::find($ID);
 
-        $places = Place::all();
         $roles = Role::all();
         $permissions = Permission::all();
         $user->load('roles');
-        return view('admin.users.edit', compact('places', 'roles', 'permissions', 'user'));
+        return view('admin.users.edit', compact('roles', 'permissions', 'user'));
     }
 
     public function update(Request $request, $id)
@@ -198,11 +185,10 @@ class UserController extends Controller
 
         // Get Employee
         $employee   = $user->employee;
-        $user->place_id     = $request->place_id;
         if ($employee) {
             $user->employee_id  = $employee->id;
             $user->name         = $employee->name;
-            $user->username     = $employee->emp_number;
+            $user->username     = $employee->emp_code;
             $user->phone        = $employee->phone;
             $user->email        = $employee->email;
         } else {
@@ -211,7 +197,6 @@ class UserController extends Controller
             $user->username     = $request->username;
             $user->phone        = $request->phone;
             $user->email        = $request->email;
-            $user->is_admin = 0;
         }
 
         $user->info         = $request->info;
@@ -298,7 +283,7 @@ class UserController extends Controller
         /**
          * Update user password
          */
-        $user->update(['password' => Hash::make('14021403')]);
+        $user->update(['password' => Hash::make('14031404')]);
         return back()->with([
             'message'   => 'رمز عبور موفقانه بازیابی شد.',
             'alertType' => 'success'

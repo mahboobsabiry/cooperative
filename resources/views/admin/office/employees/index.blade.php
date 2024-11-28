@@ -73,13 +73,10 @@
                                         <th>#</th>
                                         <th>@lang('form.name')</th>
                                         <th>@lang('form.fatherName')</th>
-                                        <th>@lang('form.position')</th>
-                                        <th>@lang('form.positionCode')</th>
                                         <th>@lang('form.phone')</th>
-                                        <th>@lang('form.currentProvince')</th>
-                                        <th>@lang('form.currentDistrict')</th>
-                                        <th>@lang('form.onDuty')/@lang('pages.employees.mainPosition')</th>
-                                        <th>@lang('form.introducer')</th>
+                                        <th>@lang('global.address')</th>
+                                        <th>@lang('form.status')</th>
+                                        <th>@lang('global.createdDate')</th>
                                     </tr>
                                     </thead>
 
@@ -88,22 +85,15 @@
                                         <tr>
                                             <td>{{ $employee->id }}</td>
                                             <td>
-                                                <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }} {{ $employee->last_name }}</a>
+                                                <a href="{{ route('admin.office.employees.show', $employee->id) }}">{{ $employee->name }}</a>
                                             </td>
                                             <td>{{ $employee->father_name ?? '' }}</td>
-                                            <td>{{ $employee->position->title ?? '' }} - {{ $employee->position->position_number ?? '' }}</td>
-                                            <td>{{ $employee->position_code->code ?? '' }}</td>
                                             <td class="tx-sm-12-f">
                                                 <a href="callto:{{ $employee->phone ?? '' }}" class="ctd">{{ $employee->phone ?? '' }}</a>
                                             </td>
-                                            <td>{{ $employee->current_province ?? '' }}</td>
-                                            <td>{{ $employee->current_district ?? '' }}</td>
-                                            <td>
-                                                {{ $employee->on_duty == 0 ? trans('pages.employees.mainPosition') : trans('pages.employees.onDuty') }}
-                                                {{ $employee->duty_position ? ' - ' : '' }}
-                                                {{ $employee->duty_position ?? '' }}
-                                            </td>
-                                            <td>{{ $employee->introducer ?? '' }}</td>
+                                            <td>{{ $employee->address ?? '' }}</td>
+                                            <td>{{ $employee->status == 1 ? trans('global.active') : trans('global.inactive') }}</td>
+                                            <td>{{ $employee->created_at->diffForHumans() ?? '' }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

@@ -145,21 +145,6 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <!-- Place -->
-                                        <div class="form-group @error('place_id') has-danger @enderror">
-                                            <p class="mb-2">@lang('pages.place'):</p>
-                                            <select id="place_id" name="place_id" class="form-control select2 @error('place_id') form-control-danger @enderror">
-                                                <option value="">@lang('form.chooseOne')</option>
-                                                @foreach($places as $place)
-                                                    <option value="{{ $place->id }}">{{ $place->name }} - {{ $place->custom_code }}</option>
-                                                @endforeach
-                                            </select>
-
-                                            @error('place_id')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
                                         <!-- Avatar -->
                                         <div class="form-group @error('avatar') has-danger @enderror" id="avatar_div">
                                             <p class="mb-2">@lang('form.avatar'):</p>
@@ -271,7 +256,7 @@
                         dataType: 'json',
                         success: function (data) {
                             a.find('#name').val(data.employee_name);
-                            b.find('#username').val(data.employee_emp_number);
+                            b.find('#username').val(data.employee_emp_code);
                             c.find('#phone').val(data.employee_phone);
                             d.find('#email').val(data.employee_email);
                         },

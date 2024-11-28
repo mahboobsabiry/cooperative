@@ -19,11 +19,11 @@ class SettingsTableSeeder extends Seeder
         $settings = [
             [
                 'key'	=> 'mainTitle',
-                'value'	=> 'Pharmacy MIS',
+                'value'	=> 'BEAM SYSTEM',
             ],
             [
                 'key'	=> 'aboutText',
-                'value'	=> 'This is a text about pharmacy MIS',
+                'value'	=> 'This is a text about BEAM SYSTEM',
             ]
         ];
 

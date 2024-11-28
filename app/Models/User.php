@@ -29,7 +29,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'place_id',
         'employee_id',
         'name',
         'username',
@@ -61,12 +60,6 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // Place
-    public function place() : Relation
-    {
-        return $this->belongsTo(Place::class);
-    }
-
     // Morph Photo
     public function photo(): MorphOne
     {
@@ -83,35 +76,5 @@ class User extends Authenticatable
     public function employee()
     {
         return $this->belongsTo(Employee::class);
-    }
-
-    // Has Companies Activity License
-    public function coal()
-    {
-        return $this->hasMany(COAL::class);
-    }
-
-    // Admin
-    public function isAdmin()
-    {
-        return $this->is_admin == 0;
-    }
-
-    // Employee
-    public function isEmployee()
-    {
-        return $this->is_admin == 1;
-    }
-
-    // Has Many Assurance
-    public function assurances() : HasMany
-    {
-        return $this->hasMany(Assurance::class);
-    }
-
-    // Has Many Properties
-    public function properties() : HasMany
-    {
-        return $this->hasMany(Property::class);
     }
 }

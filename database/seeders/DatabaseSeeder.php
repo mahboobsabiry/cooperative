@@ -16,14 +16,11 @@ class DatabaseSeeder extends Seeder
             PermissionsTableSeeder::class,
             RolesTableSeeder::class,
             PermissionRoleSeeder::class,
-            PlaceSeeder::class,
             UsersTableSeeder::class,
             RoleUserSeeder::class,
             SettingsTableSeeder::class,
-            PositionsTableSeeder::class,
-            PositionCodeSeeder::class,
-            HostelsTableSeeder::class,
-            EmployeesTableSeeder::class
+            EmployeesTableSeeder::class,
+            CurrenciesTableSeeder::class
         ]);
     }
 }
