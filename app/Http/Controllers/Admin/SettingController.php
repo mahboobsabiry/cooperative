@@ -29,8 +29,8 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'key'   => 'required|regex:/^[\pL\s\-]+$/u||min:3|max:48|unique:settings,key',
-            'value' => 'required|regex:/^[\pL\s\-]+$/u||min:3'
+            'key'   => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:48|unique:settings,key',
+            'value' => 'required|min:3'
         ]);
 
         $setting = Setting::create($request->all());
@@ -54,7 +54,7 @@ class SettingController extends Controller
         // Validate
         $request->validate([
             'key'   => 'required|regex:/^[\pL\s\-]+$/u||min:3|max:48|unique:settings,key,'.$setting->id,
-            'value' => 'required|regex:/^[\pL\s\-]+$/u||min:3',
+            'value' => 'required|min:3',
         ]);
 
         // Save Record

@@ -1,12 +1,12 @@
 <div class="main-sidebar main-sidebar-sticky side-menu">
     <div class="sidemenu-logo">
         <a class="main-logo" href="{{ route('index') }}" target="_blank">
-            <span class="text-capitalize">BEAM</span>
-            <img src="{{ asset('img/logo.png') }}" class="header-brand-img desktop-logo" alt="logo">
-            <img src="{{ asset('img/logo.png') }}" class="header-brand-img icon-logo" alt="logo">
-            <img src="{{ asset('img/logo.png') }}" class="header-brand-img desktop-logo theme-logo"
+            <span class="text-capitalize"></span>
+            <img src="{{ asset('img/beam.png') }}" class="header-brand-img desktop-logo" alt="logo">
+            <img src="{{ asset('img/beam.png') }}" class="header-brand-img icon-logo" alt="logo">
+            <img src="{{ asset('img/beam.png') }}" class="header-brand-img desktop-logo theme-logo"
                  alt="logo">
-            <img src="{{ asset('img/logo.png') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
+            <img src="{{ asset('img/beam.png') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
         </a>
     </div>
 

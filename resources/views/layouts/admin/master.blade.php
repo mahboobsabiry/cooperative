@@ -10,7 +10,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Favicon -->
-        <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/x-icon"/>
+        <link rel="icon" href="{{ asset('img/beam.png') }}" type="image/x-icon"/>
 
         <!-- Title -->
         <title>@yield('title', config('app.name'))</title>
