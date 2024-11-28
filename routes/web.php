@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('admin.dashboard');
+    return view('website.index');
 })->name('index');
 
 Route::get('/optimize', function () {
