@@ -3,7 +3,7 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Password Reset Language Lines
+    | Password Reminder Language Lines
     |--------------------------------------------------------------------------
     |
     | The following language lines are the default lines which match reasons
@@ -12,9 +12,9 @@ return [
     |
     */
 
-    'reset'     => 'Sizning parolingiz tiklandi!',
-    'sent'      => 'Parolni tiklash havolasini elektron pochta orqali yubordik!',
-    'throttled' => 'Iltimos birozdan so‘ng qayta urinib ko‘ring.',
-    'token'     => 'Ushbu parolni qayta tiklash kodi noto‘g‘ri.',
-    'user'      => 'Ushbu elektron pochta manziliga ega foydalanuvchi topilmadi.',
+    'reset'     => 'رمز عبور شما بازگردانی شد!',
+    'sent'      => 'لینک بازگردانی رمز عبور به ایمیل شما ارسال شد.',
+    'throttled' => 'پیش از تلاش مجدد کمی صبر کنید.',
+    'token'     => 'مشخصه‌ی بازگردانی رمز عبور معتبر نیست.',
+    'user'      => 'ما کاربری با این نشانی ایمیل نداریم!',
 ];

@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Language Lines
@@ -12,6 +13,7 @@ return [
     |
     */
 
-    'failed'   => 'داسې ریکارډ شتون نلري چې د اعتبار معلومات سره سمون لري.',
-    'throttle' => 'دلته ډیر د ننوتلو هڅې شتون لري.:seconds لطفا د دویمې برخې وروسته هڅه وکړئ.',
+    'failed' => 'These credentials do not match our records.',
+    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+
 ];

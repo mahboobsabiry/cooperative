@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'about'         => 'باره سی',
-    'aboutUs'       => 'باره میز گه',
+    'about'         => 'درباره',
+    'aboutUs'       => 'درباره ما',
     'action'        => 'عمل',
     'active'        => 'فعال',
     'activity'      => 'فعالیت',
-    'activities'    => 'فعالیت لر',
-    'add'           => 'ثبت',
+    'activities'    => 'فعالیت ها',
+    'add'           => 'اضافه',
     'address'       => 'آدرس',
     'admin'         => 'ادمین',
     'afghani'       => 'افغانی',
@@ -69,7 +69,7 @@ return [
     'next'      => 'بعدی',
     'no'        => 'نخیر',
     'notFound'  => 'یافت نشد',
-    'number'    => 'رقم',
+    'number'    => 'شماره',
     'offline'   => 'آفلاین',
     'oh'		=> 'اوه',
     'online'    => 'آنلاین',
@@ -114,7 +114,9 @@ return [
     'you'       => 'شما',
 
     // New Translations
-    'day'           => 'کن',
+    'day'           => 'روز',
     'hour'		    => 'ساعت',
     'organization'	=> 'تشکیلات',
+    'general_info'  => 'معلومات عمومی',
+    'other_info'    => 'معلومات دیگر'
 ];

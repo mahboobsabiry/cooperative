@@ -8,7 +8,7 @@
                 <img src="{{ asset('assets/images/beam.png') }}" class="header-brand-img desktop-logo theme-logo" alt="logo">
                 <img src="{{ asset('assets/images/beam.png') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
             </a>
-            <a class="main-header-menu-icon" href="#" id="mainSidebarToggle"><span></span></a>
+            <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
         </div>
         <!--/==/ End of Logo -->
 

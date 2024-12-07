@@ -31,288 +31,12 @@
                         </div>
                     </div>
                     <!-- end slider one -->
-
-                    <!-- slider two start -->
-{{--                    <div id="htmlcaption1_28" class="nivo-html-caption em-slider-content-nivo">--}}
-{{--                        <div class="em_slider_inner container  text-center">--}}
-{{--                            <!--slider title 2 -->--}}
-{{--                            <div class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0s">--}}
-{{--                                <h2 class="em-slider-up-title">Open Your Eyes</h2>--}}
-{{--                            </div>--}}
-{{--                            <!--slider title 3 -->--}}
-{{--                            <div class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0s">--}}
-{{--                                <h1 class="em-slider-sub-title">This is the future</h1>--}}
-{{--                            </div>--}}
-{{--                            <div class="wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0s">--}}
-{{--                                <p  class="em-slider-descript">We provide the best tour & travels service </p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- OUR GOAL AREA  -->
-    <div class="search_form_area" id="goal">
-        <div class="container">
-            <div class="row">
-                <!-- area section title-->
-                <div class="col-md-12">
-                    <div class="section-title  t_center">
-                        <!-- title -->
-                        <h2>Start<span> Booking Now!</span></h2>
-                        <i class="fa fa-plane"></i>
-                        <!-- TEXT -->
-                        <p>We guid you to the beautiful World</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 col-sm-12 col-xs-12">
-                    <ul class="tourist-tab">
-                        <li class="active"><i class="fa fa-umbrella"></i><a data-toggle="tab" href="#service1">Tour</a></li>
-                        <li><i class="fa fa-hospital"></i><a data-toggle="tab" href="#service2">Health</a></li>
-                        <li><i class="fa fa-book"></i><a data-toggle="tab" href="#service3">Education</a></li>
-                        <li><i class="fa fa-arrow-right-arrow-left"></i><a data-toggle="tab" href="#service4">Import/Export</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-9 col-sm-12 col-xs-12">
-                    <div class="tab_area">
-                        <div class="tab-content">
-                            <div class="active in tab-pane fade " id="service1">
-                                <div class="single_tab">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="row">
-                                            <div class="main-search-form">
-                                                <form action="#">
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Type Keywords</label>
-                                                            <input class="form-control" name="keyword" type="text" placeholder="Keyword">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Enter Destination</label>
-                                                            <input type="text" name="destination" placeholder="Destination " class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field datetime">
-                                                            <label>Check In Date</label>
-                                                            <input type="date" name="checkin" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <label>Check Out Date</label>
-                                                        <div class="input-field datetime">
-                                                            <input type="date" name="checkout" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Number Of Guests </label>
-                                                            <input type="number" name="number" placeholder="Guest" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <input type="submit" value="⌕ Search" class="submit-btn th-bg">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade " id="service2">
-                                <div class="single_tab">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="row">
-                                            <div class="main-search-form">
-                                                <form action="#">
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Origin City</label>
-                                                            <select class="select">
-                                                                <option value="">Origin City</option>
-                                                                <option value="aye">America</option>
-                                                                <option value="eh">Canada</option>
-                                                                <option value="ooh">London</option>
-                                                                <option value="whoop">Bangladesh</option>
-                                                                <option value="whoop">Paris</option>
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Destination City</label>
-                                                            <select class="select">
-                                                                <option value="">Destination City</option>
-                                                                <option value="aye">America</option>
-                                                                <option value="eh">Canada</option>
-                                                                <option value="ooh">London</option>
-                                                                <option value="whoop">Bangladesh</option>
-                                                                <option value="whoop">Paris</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field datetime">
-                                                            <label>Deparature Date</label>
-                                                            <input type="date" name="checkin" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <label>Return Date</label>
-                                                        <div class="input-field datetime">
-                                                            <input type="date" name="checkout" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Flight Class</label>
-                                                            <select class="select">
-                                                                <option value="">Economic</option>
-                                                                <option value="aye">Economic</option>
-                                                                <option value="eh">Business</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Number Of Adult </label>
-                                                            <input type="number" name="number" placeholder="Adult" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Number Of Kids </label>
-                                                            <input type="number" name="kids" placeholder="Kids" class="form-control">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <input type="submit" value="⌕ Search" class="submit-btn th-bg">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade " id="service3">
-                                <div class="single_tab">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="row">
-                                            <div class="main-search-form">
-                                                <form action="#">
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field datetime">
-                                                            <label>Pickup Date Time</label>
-                                                            <input type="date" name="pickup" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Total Hours </label>
-                                                            <input type="number" name="hours" placeholder="Hours" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Pickup Location</label>
-                                                            <input class="form-control" name="keyword" type="text" placeholder="Pickup Location">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Drop Location</label>
-                                                            <input class="form-control" name="keyword" type="text" placeholder="Drop Location">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <input type="submit" value="⌕ Search" class="submit-btn th-bg">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade " id="service4">
-                                <div class="single_tab">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="row">
-                                            <div class="main-search-form">
-                                                <form action="#">
-
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Type Keword</label>
-                                                            <input class="form-control" name="keyword" type="text" placeholder="Keyword">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Select Location</label>
-                                                            <select class="select">
-                                                                <option value="">Select Location</option>
-                                                                <option value="aye">America</option>
-                                                                <option value="eh">Canada</option>
-                                                                <option value="ooh">London</option>
-                                                                <option value="whoop">Bangladesh</option>
-                                                                <option value="whoop">Paris</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field datetime">
-                                                            <label>Check In Date</label>
-                                                            <input type="date" name="pickup" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <label>Number Of Guest </label>
-                                                            <input type="number" name="hours" placeholder="Guest" class="form-control">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-4 col-xs-12 col-sm-4">
-                                                        <div class="input-field">
-                                                            <input type="submit" value="⌕ Search" class="submit-btn th-bg">
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Popular Packages -->
     <div class="popular_package_area">
         <div class="container">
             <div class="row">
@@ -320,10 +44,10 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center">
                         <!-- title -->
-                        <h2>Popular<span> Package</span></h2>
+                        <h2>@lang('website.messages.popularPackage')</h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>The packages will be here</p>
+                        <p>@lang('website.messages.popularPackageTxt')</p>
                     </div>
                 </div>
             </div>
@@ -530,87 +254,9 @@
             </div>
         </div>
     </div>
+    <!--/==/ End of Popular Packages -->
 
-    <!-- COUNTDOWN AREA	 -->
-    <div class="count_down_area" id="countdown">
-        <div class="container">
-            <div class="row ">
-                <div class="col-lg-9 col-md-9">
-                    <div class="count_down_title">
-                        <h2>On Going Limited  <span>Time Offer</span></h2>
-                        <h1>Discount 10-30% Off</h1>
-                    </div>
-                    <div class="counterdowns">
-                        <div class="counter">
-                            <div class="timer">
-                                <div class="autob" data-countdown="2024/12/19"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-lg-3 col-md-3 ">
-                    <div class="count_down_btn"><a href="#">Book Now</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="top_destination_area">
-        <div class="container">
-            <div class="row">
-                <!-- area section title-->
-                <div class="col-md-12">
-                    <div class="section-title  t_center">
-                        <!-- title -->
-                        <h2>Top <span> Destinations</span></h2>
-                        <i class="fa fa-plane"></i>
-                        <!-- TEXT -->
-                        <p>Top destinations in Turkey you should visit.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="destination_curousel owl-carousel curosel-style">
-                            <div class="col-md-12">
-                                <div class="single_destination">
-                                    <div class="destination_thumb"><img src="{{ asset('website/assets/images/dest1.jpg') }}" alt="" /></div>
-                                    <div class="destination_content">
-                                        <h1>Stanbol</h1>
-                                        <h2>Stanbol</h2>
-                                        <p>Dummy Data</p>
-                                        <div class="destination_button">
-                                            <a href="javascript:void(0);">More Details</a>
-                                            <a class="active" href="javascript:void(0);">Book Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="single_destination">
-                                    <div class="destination_thumb"><img src="{{ asset('website/assets/images/dest2.jpg') }}" alt="" /></div>
-                                    <div class="destination_content">
-                                        <h1>Beach</h1>
-                                        <h2>Ankara</h2>
-                                        <p>Dummy Text</p>
-                                        <div class="destination_button">
-                                            <a href="javascript:void(0);">More Details</a>
-                                            <a class="active" href="javascript:void(0);">Book Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
+    <!-- WHY CHOOSE BEA, -->
     <div class="feature_area_head">
         <div class="container">
             <div class="row">
@@ -618,15 +264,17 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center white_color">
                         <!-- title -->
-                        <h2>Why Choose <span> BEAM</span></h2>
+                        <h2>@lang('website.whyChoose') <span> @lang('website.beam')</span></h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
+                        <p>@lang('website.messages.servicesMsg')</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Services Area -->
     <div class="feature_area_main">
         <div class="container">
             <div class="row main_feature">
@@ -634,77 +282,85 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
                         <div class="feature-curousel owl-carousel curosel-style">
+                            <!-- EDUCATION -->
                             <div class="col-md-12">
                                 <div class="single_feature">
                                     <div class="feture_icon">
-                                        <i class="fa fa-car"></i>
+                                        <i class="fa fa-graduation-cap"></i>
                                     </div>
                                     <div class="feature_content">
-                                        <h2>Travel Arrangements</h2>
-                                        <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration.</p>
+                                        <h2>@lang('form.education')</h2>
+                                        <p>@lang('website.messages.educationTxt')</p>
                                     </div>
                                     <div class="feature_button">
-                                        <a href="#">Read More</a>
+                                        <a href="javascript:void(0);">@lang('website.readMore')</a>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- TOUR -->
                             <div class="col-md-12">
                                 <div class="single_feature">
                                     <div class="feture_icon">
                                         <i class="fa fa-plane"></i>
                                     </div>
                                     <div class="feature_content">
-                                        <h2>Cheap Flights</h2>
-                                        <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration.</p>
+                                        <h2>@lang('website.tour')</h2>
+                                        <p>@lang('website.messages.tourTxt')</p>
                                     </div>
                                     <div class="feature_button">
-                                        <a href="#">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="single_feature">
-                                    <div class="feture_icon">
-                                        <i class="fa fa-usd"></i>
-                                    </div>
-                                    <div class="feature_content">
-                                        <h2>Best Price Guarantee</h2>
-                                        <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration.</p>
-                                    </div>
-                                    <div class="feature_button">
-                                        <a href="#">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="single_feature">
-                                    <div class="feture_icon">
-                                        <i class="fa fa-usd"></i>
-                                    </div>
-                                    <div class="feature_content">
-                                        <h2>Best Price Guarantee</h2>
-                                        <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration.</p>
-                                    </div>
-                                    <div class="feature_button">
-                                        <a href="#">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="single_feature">
-                                    <div class="feture_icon">
-                                        <i class="fa fa-car"></i>
-                                    </div>
-                                    <div class="feature_content">
-                                        <h2>Travel Arrangements</h2>
-                                        <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration.</p>
-                                    </div>
-                                    <div class="feature_button">
-                                        <a href="#">Read More</a>
+                                        <a href="javascript:void(0)">@lang('website.readMore')</a>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- HEALTH -->
+                            <div class="col-md-12">
+                                <div class="single_feature">
+                                    <div class="feture_icon">
+                                        <i class="fa fa-clinic-medical"></i>
+                                    </div>
+                                    <div class="feature_content">
+                                        <h2>@lang('website.health')</h2>
+                                        <p>@lang('website.messages.healthTxt')</p>
+                                    </div>
+                                    <div class="feature_button">
+                                        <a href="javascript:void(0);">@lang('website.readMore')</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- REAL ESTATE CONSULTING -->
+                            <div class="col-md-12">
+                                <div class="single_feature">
+                                    <div class="feture_icon">
+                                        <i class="fa fa-landmark"></i>
+                                    </div>
+                                    <div class="feature_content">
+                                        <h2>@lang('website.realEstateConsulting')</h2>
+                                        <p>@lang('website.messages.realEstateTxt')</p>
+                                    </div>
+                                    <div class="feature_button">
+                                        <a href="javascript:void(0)">@lang('website.readMore')</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TRANSLATION SERVICES -->
+                            <div class="col-md-12">
+                                <div class="single_feature">
+                                    <div class="feture_icon">
+                                        <i class="fa fa-tram"></i>
+                                    </div>
+                                    <div class="feature_content">
+                                        <h2>@lang('website.translationServices')</h2>
+                                        <p>@lang('website.messages.translationTxt')</p>
+                                    </div>
+                                    <div class="feature_button">
+                                        <a href="javascript:void(0);">@lang('website.readMore')</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -713,7 +369,7 @@
         </div>
     </div>
 
-    <!--START PORTFOLIO AREA -->
+    <!--START PORTFOLIO AREA #GALLERY -->
     <div class="portfolio_area  " id="gallery">
         <div class="container-fluid">
             <div class="row">
@@ -721,10 +377,10 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center">
                         <!-- title -->
-                        <h2>Most Incredible  <span> Places</span></h2>
+                        <h2>@lang('website.messages.gallTitle')</h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
+                        <p>@lang('website.messages.gallSubTitle')</p>
 
                     </div>
                 </div>
@@ -739,15 +395,14 @@
                                     <div class="single_portfolio_thumb">
                                         <a href="single-portfolio.html">
                                             <img src="{{ asset('website/assets/images/1.jpg') }}" alt="" />
-
                                         </a>
                                         <div class="port_icon">
                                             <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{ asset('website/assets/images/1.jpg') }}"><i class="fa-regular fa-image"></i></a>
-                                            <a href="hotel.html"><i class="fa fa-link"></i></a>
+                                            <a href="javascript:void(0);"><i class="fa fa-link"></i></a>
                                         </div>
                                     </div>
                                     <div class="portfolio_content">
-                                        <h2>Place: <span>Barselona, Spain</span></h2>
+                                        <h2>Place: <span>Stanbul, Turkey</span></h2>
                                         <p>Captured By: <span>Anowar</span></p>
                                     </div>
                                 </div>
@@ -761,11 +416,11 @@
                                         </a>
                                         <div class="port_icon">
                                             <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{ asset('website/assets/images/2.jpg') }}"><i class="fa-regular fa-image"></i></a>
-                                            <a href="hotel.html"><i class="fa fa-link"></i></a>
+                                            <a href="javascript:void(0);"><i class="fa fa-link"></i></a>
                                         </div>
                                     </div>
                                     <div class="portfolio_content">
-                                        <h2>Place: <span>Read Madrid, Spain</span></h2>
+                                        <h2>Place: <span>Adana, Turkey</span></h2>
                                         <p>Captured By: <span>Hossain Khan</span></p>
                                     </div>
                                 </div>
@@ -779,11 +434,11 @@
                                         </a>
                                         <div class="port_icon">
                                             <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{ asset('website/assets/images/3.jpg') }}"><i class="fa-regular fa-image"></i></a>
-                                            <a href="hotel.html"><i class="fa fa-link"></i></a>
+                                            <a href="javascript:void(0);"><i class="fa fa-link"></i></a>
                                         </div>
                                     </div>
                                     <div class="portfolio_content">
-                                        <h2>Place: <span>Juventus, Italy</span></h2>
+                                        <h2>Place: <span>Ankara, Turkey</span></h2>
                                         <p>Captured By: <span>Anowar</span></p>
                                     </div>
                                 </div>
@@ -797,11 +452,11 @@
                                         </a>
                                         <div class="port_icon">
                                             <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{ asset('website/assets/images/4.jpg') }}"><i class="fa-regular fa-image"></i></a>
-                                            <a href="hotel.html"><i class="fa fa-link"></i></a>
+                                            <a href="javascript:void(0);"><i class="fa fa-link"></i></a>
                                         </div>
                                     </div>
                                     <div class="portfolio_content">
-                                        <h2>Place: <span>Barselona, Spain</span></h2>
+                                        <h2>Place: <span>Ezmir, Turkey</span></h2>
                                         <p>Captured By: <span>Anowar</span></p>
                                     </div>
                                 </div>
@@ -815,11 +470,11 @@
                                         </a>
                                         <div class="port_icon">
                                             <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{ asset('website/assets/images/5.jpg') }}"><i class="fa-regular fa-image"></i></a>
-                                            <a href="hotel.html"><i class="fa fa-link"></i></a>
+                                            <a href="javascript:void(0);"><i class="fa fa-link"></i></a>
                                         </div>
                                     </div>
                                     <div class="portfolio_content">
-                                        <h2>Place: <span>Man City, England</span></h2>
+                                        <h2>Place: <span>Ankara, Turkey</span></h2>
                                         <p>Captured By: <span>Anowar</span></p>
                                     </div>
                                 </div>
@@ -833,11 +488,11 @@
                                         </a>
                                         <div class="port_icon">
                                             <a class="portfolio-icon venobox vbox-item" data-gall="myportfolio" href="{{ asset('website/assets/images/1.jpg') }}"><i class="fa-regular fa-image"></i></a>
-                                            <a href="hotel.html"><i class="fa fa-link"></i></a>
+                                            <a href="javascript:void(0);"><i class="fa fa-link"></i></a>
                                         </div>
                                     </div>
                                     <div class="portfolio_content">
-                                        <h2>Place: <span>Barselona, Spain</span></h2>
+                                        <h2>Place: <span>Aya Sofia, Turkey</span></h2>
                                         <p>Captured By: <span>Anowar</span></p>
                                     </div>
                                 </div>
@@ -859,10 +514,10 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center">
                         <!-- title -->
-                        <h2>What travellers <span> Say</span></h2>
+                        <h2>@lang('website.messages.testimonialTitle')</h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
+                        <p>@lang('website.messages.testimonialSubTitle')</p>
                     </div>
                 </div>
             </div>
@@ -875,15 +530,15 @@
                             <div class="col-md-12">
                                 <div class="single_testimonial">
                                     <div class="em_test_thumb">
-                                        <img  src="{{ asset('website/assets/images/18.jpg') }}" alt="">
+                                        <img  src="{{ asset('website/assets/images/18.jpg') }}" alt="" width="80">
                                     </div>
                                     <div class="em_testi_text">
-                                        <p>Lorem ipsum dolor sit amet consec adipiscing elit, sed diam nonummy nibh euismo consectetuer once of adipiscing sed diam</p>
+                                        <p>@lang('website.messages.testimonialTxt1')</p>
                                     </div>
 
                                     <div class="em_testi_content">
                                         <div class="em_testi_title">
-                                            <h2>Mr. Anowar<span>Web Developer</span></h2>
+                                            <h2>@lang('website.messages.testimonialPerson1') <span>@lang('website.messages.testimonialPJob1')</span></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -892,15 +547,15 @@
                             <div class="col-md-12">
                                 <div class="single_testimonial">
                                     <div class="em_test_thumb">
-                                        <img  src="{{ asset('website/assets/images/18.jpg') }}" alt="">
+                                        <img  src="{{ asset('website/assets/images/team2.jpg') }}" alt="" width="80">
                                     </div>
                                     <div class="em_testi_text">
-                                        <p>Lorem ipsum dolor sit amet consec adipiscing elit, sed diam nonummy nibh euismo consectetuer once of adipiscing sed diam</p>
+                                        <p>@lang('website.messages.testimonialTxt2')</p>
                                     </div>
 
                                     <div class="em_testi_content">
                                         <div class="em_testi_title">
-                                            <h2>Adame Milne <span>Co-Founder</span></h2>
+                                            <h2>@lang('website.messages.testimonialPerson2') <span>@lang('website.messages.testimonialPJob2')</span></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -909,15 +564,15 @@
                             <div class="col-md-12">
                                 <div class="single_testimonial">
                                     <div class="em_test_thumb">
-                                        <img  src="{{ asset('website/assets/images/18.jpg') }}" alt="">
+                                        <img  src="{{ asset('website/assets/images/team1.jpg') }}" alt="" width="80">
                                     </div>
                                     <div class="em_testi_text">
-                                        <p>Lorem ipsum dolor sit amet consec adipiscing elit, sed diam nonummy nibh euismo consectetuer once of adipiscing sed diam</p>
+                                        <p>@lang('website.messages.testimonialTxt3')</p>
                                     </div>
 
                                     <div class="em_testi_content">
                                         <div class="em_testi_title">
-                                            <h2>Leonel Messi<span>The Boss</span></h2>
+                                            <h2>@lang('website.messages.testimonialPerson3') <span>@lang('website.messages.testimonialPJob3')</span></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -941,10 +596,10 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center">
                         <!-- title -->
-                        <h2>Latest Blog <span> Post</span></h2>
+                        <h2>@lang('website.messages.blogTitle')</h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
+                        <p>@lang('website.messages.blogSubTitle')</p>
                     </div>
                 </div>
             </div>
@@ -958,7 +613,7 @@
                             <!-- BLOG THUMB -->
                             <div class="blog_thumb_inner">
                                 <div class="tourist-blog-thumb ">
-                                    <a href="blog-details.html">
+                                    <a href="javascript:void(0);">
                                         <img src="{{ asset('website/assets/images/blog1.jpg') }}"  alt="blog1">
                                     </a>
                                 </div>
@@ -969,15 +624,15 @@
                                 <div class="tourist-blog-meta">
                                     <div class="tourist-blog-meta-left">
                                         <span><i class="fa fa-calendar"></i>January 3, 2024 </span>
-                                        <a href="#"><span><i class="fa fa-user"></i>tourist </span></a>
+                                        <a href="javascript:void(0)"><span><i class="fa fa-user"></i>tourist </span></a>
                                     </div>
                                 </div>
                                 <!-- BLOG TITLE -->
                                 <div class="blog-page-title ">
-                                    <h2><a href="blog-details.html">Earn Money Online Frome Awesome Online Market</a></h2>
+                                    <h2><a href="javascript:void(0);">UNDEFINED</a></h2>
                                 </div>
                                 <div class="blog_btn">
-                                    <a href="#">Learn More</a>
+                                    <a href="javascript:void(0);">@lang('website.readMore')</a>
                                 </div>
                             </div>
 
@@ -990,7 +645,7 @@
                             <!-- BLOG THUMB -->
                             <div class="blog_thumb_inner">
                                 <div class="tourist-blog-thumb ">
-                                    <a href="blog-details.html">
+                                    <a href="javascript:void(0);">
                                         <img src="{{ asset('website/assets/images/blog2.jpg') }}"  alt="blog1">
                                     </a>
                                 </div>
@@ -1001,15 +656,15 @@
                                 <div class="tourist-blog-meta">
                                     <div class="tourist-blog-meta-left">
                                         <span><i class="fa fa-calendar"></i>January 7, 2024 </span>
-                                        <a href="#"><span><i class="fa fa-user"></i>tourist </span></a>
+                                        <a href="javascript:void(0)"><span><i class="fa fa-user"></i>tourist </span></a>
                                     </div>
                                 </div>
                                 <!-- BLOG TITLE -->
                                 <div class="blog-page-title ">
-                                    <h2><a href="blog-details.html">Grow Your Business Creative Business Prepration</a></h2>
+                                    <h2><a href="javascript:void(0);">UNDEFINED</a></h2>
                                 </div>
                                 <div class="blog_btn">
-                                    <a href="#">Learn More</a>
+                                    <a href="javascript:void(0);">@lang('website.readMore')</a>
                                 </div>
                             </div>
 
@@ -1021,7 +676,7 @@
                             <!-- BLOG THUMB -->
                             <div class="blog_thumb_inner">
                                 <div class="tourist-blog-thumb ">
-                                    <a href="blog-details.html">
+                                    <a href="javascript:void(0);">
                                         <img src="{{ asset('website/assets/images/blog3.jpg') }}"  alt="blog1">
                                     </a>
                                 </div>
@@ -1032,15 +687,15 @@
                                 <div class="tourist-blog-meta">
                                     <div class="tourist-blog-meta-left">
                                         <span><i class="fa fa-calendar"></i>September 14, 2024 </span>
-                                        <a href="#"><span><i class="fa fa-user"></i>tourist </span></a>
+                                        <a href="javascript:void(0)"><span><i class="fa fa-user"></i>tourist </span></a>
                                     </div>
                                 </div>
                                 <!-- BLOG TITLE -->
                                 <div class="blog-page-title ">
-                                    <h2><a href="blog-details.html">Our Awesome Corporat Creative Communication</a></h2>
+                                    <h2><a href="javascript:void(0);">UNDEFINED</a></h2>
                                 </div>
                                 <div class="blog_btn">
-                                    <a href="#">Learn More</a>
+                                    <a href="javascript:void(0);">@lang('website.readMore')</a>
                                 </div>
                             </div>
 
@@ -1052,7 +707,7 @@
                             <!-- BLOG THUMB -->
                             <div class="blog_thumb_inner">
                                 <div class="tourist-blog-thumb ">
-                                    <a href="blog-details.html">
+                                    <a href="javascript:void(0);">
                                         <img src="{{ asset('website/assets/images/blog4.jpg') }}"  alt="blog1">
                                     </a>
                                 </div>
@@ -1063,15 +718,15 @@
                                 <div class="tourist-blog-meta">
                                     <div class="tourist-blog-meta-left">
                                         <span><i class="fa fa-calendar"></i>December 7, 2024 </span>
-                                        <a href="#"><span><i class="fa fa-user"></i>tourist </span></a>
+                                        <a href="javascript:void(0)"><span><i class="fa fa-user"></i>tourist </span></a>
                                     </div>
                                 </div>
                                 <!-- BLOG TITLE -->
                                 <div class="blog-page-title ">
-                                    <h2><a href="blog-details.html">Top Ten Freelancing</a></h2>
+                                    <h2><a href="javascript:void(0);">UNDEFINED</a></h2>
                                 </div>
                                 <div class="blog_btn">
-                                    <a href="#">Learn More</a>
+                                    <a href="javascript:void(0);">@lang('website.readMore')</a>
                                 </div>
                             </div>
 
@@ -1084,7 +739,7 @@
                             <!-- BLOG THUMB -->
                             <div class="blog_thumb_inner">
                                 <div class="tourist-blog-thumb ">
-                                    <a href="blog-details.html">
+                                    <a href="javascript:void(0);">
                                         <img src="{{ asset('website/assets/images/blog1.jpg') }}"  alt="blog1">
                                     </a>
                                 </div>
@@ -1095,26 +750,26 @@
                                 <div class="tourist-blog-meta">
                                     <div class="tourist-blog-meta-left">
                                         <span><i class="fa fa-calendar"></i>Nobember 1, 2024 </span>
-                                        <span><i class="fa fa-user"></i>tourist </span>
+                                        <a href="javascript:void(0)"><span><i class="fa fa-user"></i>tourist </span></a>
                                     </div>
                                 </div>
                                 <!-- BLOG TITLE -->
                                 <div class="blog-page-title ">
-                                    <h2><a href="blog-details.html">Theme Selling Website</a></h2>
+                                    <h2><a href="javascript:void(0);">UNDEFINED</a></h2>
                                 </div>
                                 <div class="blog_btn">
-                                    <a href="#">Learn More</a>
+                                    <a href="javascript:void(0);">@lang('website.readMore')</a>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!--/==/ BLOG_AREA END -->
 
-    <!-- BLOG_AREA END -->
+    <!-- SUBSCRIPTION AREA -->
     <div class="subscribe_area">
         <div class="container">
             <div class="row">
@@ -1122,10 +777,10 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center white_color">
                         <!-- title -->
-                        <h2>Subscribes  <span> Now</span></h2>
+                        <h2>@lang('website.messages.subscribeNow')</h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
+                        <p>@lang('website.messages.subscribeTxt')</p>
                     </div>
                 </div>
             </div>
@@ -1136,7 +791,7 @@
                             <div class="quote_form_inner">
                                 <div class="quote_form_field">
                                     <input type="email" name="email" placeholder="Email Address" />
-                                    <button class="quote_button" name="submit">Submit</button>
+                                    <button class="quote_button" name="submit">@lang('website.submit')</button>
                                 </div>
                             </div>
                         </form>
@@ -1154,10 +809,10 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center">
                         <!-- title -->
-                        <h2>Our Brand <span> Partner</span></h2>
+                        <h2>@lang('website.messages.brandTitle')</h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
+                        <p>@lang('website.messages.brandSubTitle')</p>
                     </div>
                 </div>
             </div>

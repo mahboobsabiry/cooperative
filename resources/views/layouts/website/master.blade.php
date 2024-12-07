@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
-<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'fa' || app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+<html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>BEAM Danismanlik</title>
+        <title>@lang('website.title')</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Favicon -->

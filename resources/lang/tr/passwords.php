@@ -1,9 +1,10 @@
 <?php
 
 return [
+
     /*
     |--------------------------------------------------------------------------
-    | Password Reminder Language Lines
+    | Password Reset Language Lines
     |--------------------------------------------------------------------------
     |
     | The following language lines are the default lines which match reasons
@@ -12,9 +13,10 @@ return [
     |
     */
 
-    'reset'     => 'ما خپل پاسورډ جوړ کړی دی',
-    'sent'      => 'د پاسورډ یادونې لیږل شوی.',
+    'reset' => 'Your password has been reset!',
+    'sent' => 'We have emailed your password reset link!',
     'throttled' => 'Please wait before retrying.',
-    'token'     => 'د دې کارن د بیاکتنې نښه ناباوره ده.',
-    'user'      => 'د کاروونکي د برېښناليک پتې سره کارن ونه موندل شو.',
+    'token' => 'This password reset token is invalid.',
+    'user' => "We can't find a user with that email address.",
+
 ];

@@ -1,48 +1,57 @@
 <?php
 
 return [
+    // Single
+    'place' => 'موقعیت',
+
     'dashboard' => [
         'addedEmpMsg'       => 'کارمند جدید موفقانه ثبت شد!',
         'latestAddedMembers' => 'آخرین اعضای ثبت شده',
         'ltMbParagMsg'       => 'لیست آخرین اعضای ثبت شده در سیستم!',
         'ltAdMbsParagMsg'    => 'مجموع اعضای ثبت شده بر اساس هفته ها، ماه ها و سال  ها!',
         'provsParagMsg'      => 'همه ولایات با فیصدی مجموع کاربران ثبت شده آن؛',
-        'totalUsers'	     => 'مجموع کاربران',
-        'totalActiveUsers'	 => 'مجموع کاربران فعال',
-        'totalInactiveUsers' => 'مجموع کاربران غیرفعال',
+    	'totalUsers'	     => 'مجموع کاربران',
+    	'totalActiveUsers'	 => 'مجموع کاربران فعال',
+    	'totalInactiveUsers' => 'مجموع کاربران غیرفعال',
 
-        'totalMembers'	     => 'مجموع اعضاء',
+    	'totalMembers'	     => 'مجموع اعضاء',
         'totalMembersSubHeaderMsg'  => 'مجموع کاربران ویبسایت با اعضای ثبت شده توسط آنان؛',
-        'totalActiveMembers' 	=> 'مجموع اعضای فعال',
-        'totalInactiveMembers' 	=> 'مجموع اعضای غیرفعال',
+    	'totalActiveMembers' 	=> 'مجموع اعضای فعال',
+    	'totalInactiveMembers' 	=> 'مجموع اعضای غیرفعال',
         'usersActivities'    => 'فعالیت های کاربران',
         'userAcParagMsg'     => 'تمام فعالیت های کاربران از جمله: ثبت و بروز رسانی معلومات اعضاء؛',
 
         // New Translations
-        'acInPositions'     => "فعال و غیرفعال پوزیتسیه‌لر",
-        'activePositions'   => "فعال پوزیتسیه‌لر",
-        'activityRate'      => "فعالیت مقداری",
-        'bcd'               => "بلخ بوژنه باشقرمه‌سی",
-        'coincidingWith'    => "بیلن مص کیلدی",
-        'convertedEmps'     => "اوزگرتیریلگن خادم‌لر",
-        'currentEmps'       => "حاضرگی خادملر",
+        'acInPositions'     => "بست های فعال و غیر فعال",
+        'activePositions'   => "بست های فعال",
+        'activityRate'      => "میزان فعالیت",
+        'bcd'               => "ریاست گمرک بلخ",
+        'coincidingWith'    => "مصادف با",
+        'convertedEmps'     => "کارمندان تبدیل شده",
+        'currentEmps'       => "کارمندان برحال",
         'customsDuty'       => "گمرک محصولی",
         'customsNonDuty'    => "غیرمحصولی",
-        'empBHousing'       => "اوی-جایگه اسوسلنگن خادم‌لر",
-        'empBStatus'        => "مقامی بویچه خادم‌لر",
-        'empsAtHome'        => "اویدگی خادم‌لر",
-        'empsAtHostel'      => "یوتاق‌سوندگی خادل‌لر",
-        'inactivePositions' => "فعال ایمس پوزیتسیه‌لر",
-        'places'            => "جای‌لر",
-        'todaysDate'        => "بوگونگی سنه",
+        'empBHousing'       => "کارمندان براساس بودوباش",
+        'empBStatus'        => "کارمندان براساس وضعیت",
+        'empsAtHome'        => "کارمندان در خانه",
+        'empsAtHostel'      => "کارمندان در لیلیه",
+        'inactivePositions' => "بست های غیرفعال",
+        'places'            => "موقعیت ها",
+        'todaysDate'        => "تاریخ امروز",
     ],
 
     'companies' => [
         'agent'     => 'نماینده',
-        'agents'    => 'نماینده لر',
+        'agent_col'     => 'همکاران نماینده',
+        'agent_cols'    => 'همکاران نماینده ها',
+        'agents'    => 'نماینده ها',
         'company'   => 'شرکت',
         'export'    => 'صادراتی',
-        'import'    => 'وارداتی'
+        'import'    => 'وارداتی',
+
+        // New Translations
+        'companies' => 'شرکت ها',
+        'company_info'  => 'معلومات شرکت'
     ],
 
     'employees' => [
@@ -71,12 +80,28 @@ return [
         'updatedEmpMsg'     => 'معلومات کارمند موفقانه بروز رسانی شد!'
     ],
 
+    // Finance
+    'finance' => [
+        'budget'    => 'بودجه',
+        'addBudget' => 'ثبت بودجه',
+        'editBudget'    => 'ویرایش بودجه',
+        'deleteBudget'  => 'حذف بودجه'
+    ],
+
     'hostel' => [
         'hostel'    => 'لیلیه',
-        'numOfMembers'  => 'اتاق اعضالری نی رقمی',
-        'roomNumber'    => 'اتاق رقمی',
-        'roomSection'   => 'اتاق سکشنی',
+        'numOfMembers'  => 'تعداد اعضای اتاق',
+        'roomNumber'    => 'نمبر اتاق',
+        'roomSection'   => 'سکشن اتاق',
         'section'       => 'سکشن'
+    ],
+
+    // Office
+    'office' => [
+        'activeEmployees'   => 'کارمندان فعال',
+        'inactiveEmployees' => 'کارمندان غیرفعال',
+        'user-lessEmployees'    => 'کارمندان فاقد حساب کاربری',
+        'userOwnerEmployees'    => 'کارمندان دارنده حساب کاربری'
     ],
 
     'permissions' => [
@@ -132,7 +157,7 @@ return [
         'personalInfo'      => 'معلومات شخصی',
         'provsUnderControl' => 'ولایات تحت کنترول',
         'totalMAddedByYou'  => 'لیست مجموع اعضای ثبت شده توسط شما!',
-        'totalMoney'        => 'مجموع پول',
+    	'totalMoney'        => 'مجموع پول',
         'updAUserDetMsg'    => 'معلومات شما موفقانه بروز رسانی شد!',
         'updatePassword'    => 'بروز رسانی رمز عبور',
         'updPwdErrMsg'      => 'رمز عبور را تکرارا وارد کنید!',
@@ -188,11 +213,13 @@ return [
         'myActivities'     => 'فعالیت های من',
         'overview'         => 'بررسی اجمالی',
         'personalInfo'     => 'اطلاعات شخصی',
+        'place'            => 'موقعیت',
         'rolesOf'          => 'صلاحیت های',
         'totalMAddedBy'    => 'لیست مجموع اعضای ثبت شده توسط ',
-        'user' 	           => 'کاربر',
+    	'user' 	           => 'کاربر',
         'userDetails'      => 'جزئیات کاربر',
+        'userForm'         => 'یوزر فورم',
         'userProfile'      => 'پروفایل کاربر',
-        'users'	           => 'کاربران'
+    	'users'	           => 'کاربران'
     ],
 ];

@@ -10,7 +10,7 @@
         <link rel="icon" href="{{ asset('img/beam.png') }}" type="image/x-icon"/>
 
         <!-- Title -->
-        <title>@yield('title', config('app.name') . ' | ' . trans('global.login'))</title>
+        <title>@yield('title', trans('website.title') . ' | ' . trans('global.login'))</title>
 
         <!---Fontawesome css-->
         <link href="{{ asset('backend/assets/plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">

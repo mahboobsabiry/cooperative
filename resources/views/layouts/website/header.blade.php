@@ -75,7 +75,7 @@
                             <li><a href="javascript:void(0);">@lang('website.contact')</a></li>
                         </ul>
                         <div class="donate-btn-header">
-                            <a class="dtbtn" href="#">Book Now</a>
+                            <a class="dtbtn" href="javascript:void(0)">Book Now</a>
                         </div>
                     </nav>
                 </div>
@@ -111,8 +111,6 @@
                     </li>
                 @endif
                 <!--/==/ End of Languages -->
-
-                <li><a href="javascript:void(0)">@lang('website.contact')</a></li>
             </ul>
         </nav>
     </div>

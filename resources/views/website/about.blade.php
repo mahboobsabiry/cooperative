@@ -27,10 +27,10 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center">
                         <!-- title -->
-                        <h2>Why Choose <span> BEAM</span></h2>
+                        <h2>@lang('website.whyChoose') <span> @lang('website.beam')</span></h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Because it is the best way to relax.</p>
+                        <p>@lang('website.messages.servicesMsg')</p>
                     </div>
                 </div>
             </div>
@@ -38,77 +38,85 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
                         <div class="feature-curousel owl-carousel curosel-style">
+                            <!-- EDUCATION -->
                             <div class="col-md-12">
                                 <div class="single_feature">
                                     <div class="feture_icon">
-                                        <i class="fa fa-car"></i>
+                                        <i class="fa fa-graduation-cap"></i>
                                     </div>
                                     <div class="feature_content">
-                                        <h2>Travel Arrangements</h2>
-                                        <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration.</p>
+                                        <h2>@lang('form.education')</h2>
+                                        <p>@lang('website.messages.educationTxt')</p>
                                     </div>
                                     <div class="feature_button">
-                                        <a href="#">Read More</a>
+                                        <a href="javascript:void(0);">@lang('website.readMore')</a>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- TOUR -->
                             <div class="col-md-12">
                                 <div class="single_feature">
                                     <div class="feture_icon">
                                         <i class="fa fa-plane"></i>
                                     </div>
                                     <div class="feature_content">
-                                        <h2>Cheap Flights</h2>
-                                        <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration.</p>
+                                        <h2>@lang('website.tour')</h2>
+                                        <p>@lang('website.messages.tourTxt')</p>
                                     </div>
                                     <div class="feature_button">
-                                        <a href="#">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="single_feature">
-                                    <div class="feture_icon">
-                                        <i class="fa fa-usd"></i>
-                                    </div>
-                                    <div class="feature_content">
-                                        <h2>Best Price Guarantee</h2>
-                                        <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration.</p>
-                                    </div>
-                                    <div class="feature_button">
-                                        <a href="#">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="single_feature">
-                                    <div class="feture_icon">
-                                        <i class="fa fa-usd"></i>
-                                    </div>
-                                    <div class="feature_content">
-                                        <h2>Best Price Guarantee</h2>
-                                        <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration.</p>
-                                    </div>
-                                    <div class="feature_button">
-                                        <a href="#">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="single_feature">
-                                    <div class="feture_icon">
-                                        <i class="fa fa-car"></i>
-                                    </div>
-                                    <div class="feature_content">
-                                        <h2>Travel Arrangements</h2>
-                                        <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration.</p>
-                                    </div>
-                                    <div class="feature_button">
-                                        <a href="#">Read More</a>
+                                        <a href="javascript:void(0)">@lang('website.readMore')</a>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- HEALTH -->
+                            <div class="col-md-12">
+                                <div class="single_feature">
+                                    <div class="feture_icon">
+                                        <i class="fa fa-clinic-medical"></i>
+                                    </div>
+                                    <div class="feature_content">
+                                        <h2>@lang('website.health')</h2>
+                                        <p>@lang('website.messages.healthTxt')</p>
+                                    </div>
+                                    <div class="feature_button">
+                                        <a href="javascript:void(0);">@lang('website.readMore')</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- REAL ESTATE CONSULTING -->
+                            <div class="col-md-12">
+                                <div class="single_feature">
+                                    <div class="feture_icon">
+                                        <i class="fa fa-landmark"></i>
+                                    </div>
+                                    <div class="feature_content">
+                                        <h2>@lang('website.realEstateConsulting')</h2>
+                                        <p>@lang('website.messages.realEstateTxt')</p>
+                                    </div>
+                                    <div class="feature_button">
+                                        <a href="javascript:void(0)">@lang('website.readMore')</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TRANSLATION SERVICES -->
+                            <div class="col-md-12">
+                                <div class="single_feature">
+                                    <div class="feture_icon">
+                                        <i class="fa fa-tram"></i>
+                                    </div>
+                                    <div class="feature_content">
+                                        <h2>@lang('website.translationServices')</h2>
+                                        <p>@lang('website.messages.translationTxt')</p>
+                                    </div>
+                                    <div class="feature_button">
+                                        <a href="javascript:void(0);">@lang('website.readMore')</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -140,7 +148,7 @@
     <div class="counter_area" id="fun-fact">
         <div class="container">
             <div class="row counter_main">
-                <!-- single counter -->
+                <!-- Happy Customers -->
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="single_counter">
                         <div class="single_counter_inner">
@@ -148,14 +156,12 @@
                                 <h1>3250</h1>
                             </div>
                             <div class="counter_title">
-                                <h4>
-                                    Happy Customers
-                                </h4>
+                                <h4>@lang('website.happyCustomers')</h4>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- single counter -->
+                <!-- Completed Project -->
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="single_counter">
                         <div class="single_counter_inner">
@@ -163,14 +169,12 @@
                                 <h1>1280</h1>
                             </div>
                             <div class="counter_title">
-                                <h4>
-                                    Completed Project
-                                </h4>
+                                <h4>@lang('website.completedProject')</h4>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- single counter -->
+                <!-- Cup Of Tea -->
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="single_counter">
                         <div class="single_counter_inner">
@@ -178,14 +182,12 @@
                                 <h1>4052</h1>
                             </div>
                             <div class="counter_title">
-                                <h4>
-                                    Cup Of Tea
-                                </h4>
+                                <h4>@lang('website.cupOfTea')</h4>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- single counter -->
+                <!-- Wining Award -->
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="single_counter">
                         <div class="single_counter_inner">
@@ -193,9 +195,7 @@
                                 <h1>1024</h1>
                             </div>
                             <div class="counter_title">
-                                <h4>
-                                    Wining Award
-                                </h4>
+                                <h4>@lang('website.winningAward')</h4>
                             </div>
                         </div>
                     </div>
@@ -212,10 +212,10 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center">
                         <!-- title -->
-                        <h2>What travellers <span> Say</span></h2>
+                        <h2>@lang('website.messages.testimonialTitle')</h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
+                        <p>@lang('website.messages.testimonialSubTitle')</p>
                     </div>
                 </div>
             </div>
@@ -228,15 +228,15 @@
                             <div class="col-md-12">
                                 <div class="single_testimonial">
                                     <div class="em_test_thumb">
-                                        <img  src="{{ asset('website/assets/images/18.jpg') }}" alt="">
+                                        <img  src="{{ asset('website/assets/images/18.jpg') }}" alt="" width="80">
                                     </div>
                                     <div class="em_testi_text">
-                                        <p>Lorem ipsum dolor sit amet consec adipiscing elit, sed diam nonummy nibh euismo consectetuer once of adipiscing sed diam</p>
+                                        <p>@lang('website.messages.testimonialTxt1')</p>
                                     </div>
 
                                     <div class="em_testi_content">
                                         <div class="em_testi_title">
-                                            <h2>Mr. Anowar<span>Web Developer</span></h2>
+                                            <h2>@lang('website.messages.testimonialPerson1') <span>@lang('website.messages.testimonialPJob1')</span></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -245,15 +245,15 @@
                             <div class="col-md-12">
                                 <div class="single_testimonial">
                                     <div class="em_test_thumb">
-                                        <img  src="{{ asset('website/assets/images/18.jpg') }}" alt="">
+                                        <img  src="{{ asset('website/assets/images/team2.jpg') }}" alt="" width="80">
                                     </div>
                                     <div class="em_testi_text">
-                                        <p>Lorem ipsum dolor sit amet consec adipiscing elit, sed diam nonummy nibh euismo consectetuer once of adipiscing sed diam</p>
+                                        <p>@lang('website.messages.testimonialTxt2')</p>
                                     </div>
 
                                     <div class="em_testi_content">
                                         <div class="em_testi_title">
-                                            <h2>Adame Milne <span>Co-Founder</span></h2>
+                                            <h2>@lang('website.messages.testimonialPerson2') <span>@lang('website.messages.testimonialPJob2')</span></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -262,15 +262,15 @@
                             <div class="col-md-12">
                                 <div class="single_testimonial">
                                     <div class="em_test_thumb">
-                                        <img  src="{{ asset('website/assets/images/18.jpg') }}" alt="">
+                                        <img  src="{{ asset('website/assets/images/team1.jpg') }}" alt="" width="80">
                                     </div>
                                     <div class="em_testi_text">
-                                        <p>Lorem ipsum dolor sit amet consec adipiscing elit, sed diam nonummy nibh euismo consectetuer once of adipiscing sed diam</p>
+                                        <p>@lang('website.messages.testimonialTxt3')</p>
                                     </div>
 
                                     <div class="em_testi_content">
                                         <div class="em_testi_title">
-                                            <h2>Leonel Messi<span>The Boss</span></h2>
+                                            <h2>@lang('website.messages.testimonialPerson3') <span>@lang('website.messages.testimonialPJob3')</span></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -286,6 +286,7 @@
     </div>
     <!-- END TESTIMONIAL AREA -->
 
+    <!-- SUBSCRIPTION AREA -->
     <div class="subscribe_area">
         <div class="container">
             <div class="row">
@@ -293,10 +294,10 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center white_color">
                         <!-- title -->
-                        <h2>Subscribes  <span> Now</span></h2>
+                        <h2>@lang('website.messages.subscribeNow')</h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
+                        <p>@lang('website.messages.subscribeTxt')</p>
                     </div>
                 </div>
             </div>
@@ -307,7 +308,7 @@
                             <div class="quote_form_inner">
                                 <div class="quote_form_field">
                                     <input type="email" name="email" placeholder="Email Address" />
-                                    <button class="quote_button" name="submit">Submit</button>
+                                    <button class="quote_button" name="submit">@lang('website.submit')</button>
                                 </div>
                             </div>
                         </form>
@@ -325,10 +326,10 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center">
                         <!-- title -->
-                        <h2>Our Brand <span> Partner</span></h2>
+                        <h2>@lang('website.messages.brandTitle')</h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
+                        <p>@lang('website.messages.brandSubTitle')</p>
                     </div>
                 </div>
             </div>

@@ -12,6 +12,6 @@ return [
     |
     */
 
-    'failed'   => 'Bunday maʼlumotlarga ega foydalanuvchi mavjud emas.',
-    'throttle' => 'Kirish uchun juda ko‘p urunishlar aniqlandi. Iltimos :seconds soniyadan so‘ng yana urinib ko‘ring.',
+    'failed'   => 'مشخصات وارد شده با اطلاعات ما سازگار نیست.',
+    'throttle' => 'دفعات تلاش شما برای ورود بیش از حد مجاز است. لطفا پس از :seconds ثانیه مجددا تلاش فرمایید.',
 ];

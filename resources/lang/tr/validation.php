@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -11,110 +12,112 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-    'accepted'        => 'باید ومنل شی :attribute.',
-    'active_url'      => ':attribute یو باوري لینک نه دی.',
-    'after'           => 'باید:attribute تر نن ورځې نیټې پورې :date.',
-    'after_or_equal'  => ':attribute باید وروستی نیټه وي یا د نیټې سره سمون ولري :date.',
-    'alpha'           => 'دا باید شامل نه وي :attribute یوازې په حرفو کې.',
-    'alpha_dash'      => 'دا باید شامل نه وي :attribute یوازې په حرفو کې، شمیرې او متره.',
-    'alpha_num'       => 'شمیرې او متره :attribute یوازې خطونه او شمیرې.',
-    'array'           => 'دا باید وي :attribute ًمیټرکس.',
-    'before'          => 'باید:attribute د تاریخ پخوا تاریخ وټاکئ :date.',
-    'before_or_equal' => ':attribute دا باید وي د تیر نیټې یا نیټې سره سمون خوري :date.',
-    'between'         => [
-        'numeric' => 'دا باید ارزښت وي :attribute ما بين:min او :max.',
-        'file'    => 'د دوتنې اندازه باید وي:attribute ما بين:min او :max كيلوبايت.',
-        'string'  => 'د متن حروف باید باید وي :attribute ما بين:min او :max.',
-        'array'   => 'شمیرې او متره :attribute د عناصرو په منځ کې :min او :max.',
+
+    'accepted' => 'The :attribute must be accepted.',
+    'active_url' => 'The :attribute is not a valid URL.',
+    'after' => 'The :attribute must be a date after :date.',
+    'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
+    'alpha' => 'The :attribute may only contain letters.',
+    'alpha_dash' => 'The :attribute may only contain letters, numbers, dashes and underscores.',
+    'alpha_num' => 'The :attribute may only contain letters and numbers.',
+    'array' => 'The :attribute must be an array.',
+    'before' => 'The :attribute must be a date before :date.',
+    'before_or_equal' => 'The :attribute must be a date before or equal to :date.',
+    'between' => [
+        'numeric' => 'The :attribute must be between :min and :max.',
+        'file' => 'The :attribute must be between :min and :max kilobytes.',
+        'string' => 'The :attribute must be between :min and :max characters.',
+        'array' => 'The :attribute must have between :min and :max items.',
     ],
-    'boolean'        => 'دا باید ارزښت وي :attribute او یا هم true یا false .',
-    'confirmed'      => 'د تایید ساحه د ساحې سره سمون نه لري:attribute.',
-    'date'           => ':attribute نېټه اعتبار نلري .',
-    'date_equals'    => 'دا باید وي :attribute د نیټې سره سم:date.',
-    'date_format'    => 'مطابقت نلري :attribute د شکل سره:format.',
-    'different'      => 'ساحې باید وي :attribute و :other مختلف.',
-    'digits'         => 'شمیرې او متره :attribute په :digits شمېر / شمېرې.',
-    'digits_between' => 'شمیرې او متره :attribute ما بين:min و :max شمېر / شمېرې .',
-    'dimensions'     => 'د :attribute د ناباوره انځور اړخونه لري.',
-    'distinct'       => 'د ساحې څخه :attribute د نقل ارزښت .',
-    'email'          => 'دا باید وي :attribute یو باوري بریښلیک پته جوړښت.',
-    'ends_with'      => 'The :attribute must end with one of the following: :values.',
-    'exists'         => 'مشخص ارزښت :attribute شتون نلري.',
-    'file'           => 'د :attribute دا باید یوه فایل وي.',
-    'filled'         => ':attribute لازمه ده.',
-    'gt'             => [
-        'numeric' => 'دا باید ارزښت وي :attribute په پرتله ډیر :value.',
-        'file'    => 'د دوتنې اندازه باید وي:attribute په پرتله ډیر :value كيلوبايت.',
-        'string'  => 'د متن اوږدوالی باید وي :attribute څخه زیات :value توري/توري.',
-        'array'   => 'شمیرې او متره :attribute له زیاتو څخه :value عناصر/عنصر.',
+    'boolean' => 'The :attribute field must be true or false.',
+    'confirmed' => 'The :attribute confirmation does not match.',
+    'date' => 'The :attribute is not a valid date.',
+    'date_equals' => 'The :attribute must be a date equal to :date.',
+    'date_format' => 'The :attribute does not match the format :format.',
+    'different' => 'The :attribute and :other must be different.',
+    'digits' => 'The :attribute must be :digits digits.',
+    'digits_between' => 'The :attribute must be between :min and :max digits.',
+    'dimensions' => 'The :attribute has invalid image dimensions.',
+    'distinct' => 'The :attribute field has a duplicate value.',
+    'email' => 'The :attribute must be a valid email address.',
+    'ends_with' => 'The :attribute must end with one of the following: :values.',
+    'exists' => 'The selected :attribute is invalid.',
+    'file' => 'The :attribute must be a file.',
+    'filled' => 'The :attribute field must have a value.',
+    'gt' => [
+        'numeric' => 'The :attribute must be greater than :value.',
+        'file' => 'The :attribute must be greater than :value kilobytes.',
+        'string' => 'The :attribute must be greater than :value characters.',
+        'array' => 'The :attribute must have more than :value items.',
     ],
     'gte' => [
-        'numeric' => 'دا باید ارزښت وي :attribute مساوی یا زیات :value.',
-        'file'    => 'د دوتنې اندازه باید وي:attribute لږترلږه :value كيلوبايت.',
-        'string'  => 'د متن اوږدوالی باید وي :attribute لږترلږه :value توري/توري.',
-        'array'   => 'شمیرې او متره :attribute لږ تر لږه :value عنصر / عناصر.',
+        'numeric' => 'The :attribute must be greater than or equal :value.',
+        'file' => 'The :attribute must be greater than or equal :value kilobytes.',
+        'string' => 'The :attribute must be greater than or equal :value characters.',
+        'array' => 'The :attribute must have :value items or more.',
     ],
-    'image'    => 'دا باید وي :attribute انځور.',
-    'in'       => ':attribute غير موجود.',
-    'in_array' => ':attribute غير موجود في :other.',
-    'integer'  => 'دا باید وي:attribute هو عدد صحيح.',
-    'ip'       => 'دا باید وي:attribute عنوان IP ریښتیا.',
-    'ipv4'     => 'دا باید وي:attribute عنوان IPv4 ریښتیا.',
-    'ipv6'     => 'دا باید وي:attribute عنوان IPv6 ریښتیا.',
-    'json'     => 'دا باید وي:attribute د اوریدلو ډول JSON.',
-    'lt'       => [
-        'numeric' => 'دا باید ارزښت وي :attribute لږ :value.',
-        'file'    => 'د دوتنې اندازه باید وي:attribute لږ :value كيلوبايت.',
-        'string'  => 'د متن اوږدوالی باید وي :attribute له کم څخه :value توري/توري.',
-        'array'   => 'شمیرې او متره :attribute له کم څخه :value عناصر/عنصر.',
+    'image' => 'The :attribute must be an image.',
+    'in' => 'The selected :attribute is invalid.',
+    'in_array' => 'The :attribute field does not exist in :other.',
+    'integer' => 'The :attribute must be an integer.',
+    'ip' => 'The :attribute must be a valid IP address.',
+    'ipv4' => 'The :attribute must be a valid IPv4 address.',
+    'ipv6' => 'The :attribute must be a valid IPv6 address.',
+    'json' => 'The :attribute must be a valid JSON string.',
+    'lt' => [
+        'numeric' => 'The :attribute must be less than :value.',
+        'file' => 'The :attribute must be less than :value kilobytes.',
+        'string' => 'The :attribute must be less than :value characters.',
+        'array' => 'The :attribute must have less than :value items.',
     ],
     'lte' => [
-        'numeric' => 'دا باید ارزښت وي :attribute نسبت برابر یا کوچنی :value.',
-        'file'    => 'د دوتنې اندازه باید له حد نه زیاته نه وي :attribute :value كيلوبايت.',
-        'string'  => 'د متن اوږدوالی باید له زیاتوالی نه وي:attribute :value توري/توري.',
-        'array'   => 'دا باید شامل نه وي :attribute له زیاتو څخه :value عناصر/عنصر.',
+        'numeric' => 'The :attribute must be less than or equal :value.',
+        'file' => 'The :attribute must be less than or equal :value kilobytes.',
+        'string' => 'The :attribute must be less than or equal :value characters.',
+        'array' => 'The :attribute must not have more than :value items.',
     ],
     'max' => [
-        'numeric' => 'دا باید ارزښت وي :attribute نسبت برابر یا کوچنی :max.',
-        'file'    => 'د دوتنې اندازه باید له حد نه زیاته وي :attribute :max كيلوبايت.',
-        'string'  => 'د متن اوږدوالی باید له زیاتوالی نه وي:attribute :max توري/توري.',
-        'array'   => 'دا باید شامل نه وي :attribute له زیاتو څخه :max عناصر/عنصر.',
+        'numeric' => 'The :attribute may not be greater than :max.',
+        'file' => 'The :attribute may not be greater than :max kilobytes.',
+        'string' => 'The :attribute may not be greater than :max characters.',
+        'array' => 'The :attribute may not have more than :max items.',
     ],
-    'mimes'     => 'دا باید د ډول دوسیه وي : :values.',
-    'mimetypes' => 'دا باید یوه فایل وي: :values.',
-    'min'       => [
-        'numeric' => 'دا باید ارزښت وي :attribute مساوی یا زیات :min.',
-        'file'    => 'د دوتنې اندازه باید وي:attribute لږترلږه :min كيلوبايت.',
-        'string'  => 'د متن اوږدوالی باید وي :attribute لږترلږه :min توري/توري.',
-        'array'   => 'شمیرې او متره :attribute لږ تر لږه :min عنصر / عناصر.',
+    'mimes' => 'The :attribute must be a file of type: :values.',
+    'mimetypes' => 'The :attribute must be a file of type: :values.',
+    'min' => [
+        'numeric' => 'The :attribute must be at least :min.',
+        'file' => 'The :attribute must be at least :min kilobytes.',
+        'string' => 'The :attribute must be at least :min characters.',
+        'array' => 'The :attribute must have at least :min items.',
     ],
-    'not_in'               => ':attribute موجود.',
-    'not_regex'            => 'فورمول :attribute غلط.',
-    'numeric'              => 'باید:attribute یو شمېره.',
-    'password'             => 'The password is incorrect.',
-    'present'              => 'باید چمتو شی :attribute.',
-    'regex'                => 'فورمول :attribute .غير صحيح.',
-    'required'             => ':attribute اړینه ده.',
-    'required_if'          => ':attribute که چیرې د اړتیا په صورت کې اړتیا وي:other مساو :value.',
-    'required_unless'      => ':attribute که نه :other مساو :values.',
-    'required_with'        => ':attribute که اړتیا وي شتون لري :values.',
-    'required_with_all'    => ':attribute که اړتیا وي شتون لري :values.',
-    'required_without'     => ':attribute د اړتیا پرته :values.',
-    'required_without_all' => ':attribute که اړتیا شتون نلري :values.',
-    'same'                 => 'اړینه ده :attribute سره :other.',
-    'size'                 => [
-        'numeric' => 'دا باید ارزښت وي :attribute سره برابر :size.',
-        'file'    => 'د دوتنې اندازه باید وي:attribute :size كيلوبايت.',
-        'string'  => 'شمیرې او متره متن :attribute په :size توري/توري په سمه توګه.',
-        'array'   => 'شمیرې او متره :attribute په :size عنصر/عناصر په سمه توګه.',
+    'not_in' => 'The selected :attribute is invalid.',
+    'not_regex' => 'The :attribute format is invalid.',
+    'numeric' => 'The :attribute must be a number.',
+    'password' => 'The password is incorrect.',
+    'present' => 'The :attribute field must be present.',
+    'regex' => 'The :attribute format is invalid.',
+    'required' => 'The :attribute field is required.',
+    'required_if' => 'The :attribute field is required when :other is :value.',
+    'required_unless' => 'The :attribute field is required unless :other is in :values.',
+    'required_with' => 'The :attribute field is required when :values is present.',
+    'required_with_all' => 'The :attribute field is required when :values are present.',
+    'required_without' => 'The :attribute field is required when :values is not present.',
+    'required_without_all' => 'The :attribute field is required when none of :values are present.',
+    'same' => 'The :attribute and :other must match.',
+    'size' => [
+        'numeric' => 'The :attribute must be :size.',
+        'file' => 'The :attribute must be :size kilobytes.',
+        'string' => 'The :attribute must be :size characters.',
+        'array' => 'The :attribute must contain :size items.',
     ],
-    'starts_with' => 'دا باید پیل شي :attribute د لاندې ارزښتونو څخه یو: :values',
-    'string'      => 'دا باید وي:attribute متن.',
-    'timezone'    => 'دا باید وي:attribute یو باوري نیټه.',
-    'unique'      => 'ارزښتونه :attribute کارول شوی.',
-    'uploaded'    => 'د پورته کولو توان نلري :attribute.',
-    'url'         => 'د لینک بڼه :attribute غلط.',
-    'uuid'        => ':attribute دا باید غیر رسمي وي UUID غږ.',
+    'starts_with' => 'The :attribute must start with one of the following: :values.',
+    'string' => 'The :attribute must be a string.',
+    'timezone' => 'The :attribute must be a valid zone.',
+    'unique' => 'The :attribute has already been taken.',
+    'uploaded' => 'The :attribute failed to upload.',
+    'url' => 'The :attribute format is invalid.',
+    'uuid' => 'The :attribute must be a valid UUID.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -125,50 +128,24 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
     ],
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used to swap attribute place-holders
-    | with something more reader friendly such as E-Mail Address instead
-    | of "email". This simply helps us make messages a little cleaner.
+    | The following language lines are used to swap our attribute placeholder
+    | with something more reader friendly such as "E-Mail Address" instead
+    | of "email". This simply helps us make our message more expressive.
     |
     */
-    'attributes' => [
-        'name'                  => 'نوم',
-        'username'              => 'د کارن نوم',
-        'email'                 => 'برېښلیک',
-        'first_name'            => 'لومړی نوم',
-        'last_name'             => 'وروستۍ نوم',
-        'password'              => 'پاسورډ',
-        'password_confirmation' => 'پاسورډ تایید کړه',
-        'city'                  => 'ښار',
-        'country'               => 'هېواد',
-        'address'               => 'د استوګنې پته',
-        'phone'                 => 'تلیفون',
-        'mobile'                => 'ګرځنده',
-        'age'                   => 'عمر',
-        'sex'                   => 'جنس',
-        'gender'                => 'جنس',
-        'day'                   => 'ورځ',
-        'month'                 => 'میاشت',
-        'year'                  => 'کال',
-        'hour'                  => 'ساعت',
-        'minute'                => 'دقیقې',
-        'second'                => 'ثانوي',
-        'title'                 => 'سرلیک',
-        'content'               => 'منځپانګې',
-        'description'           => 'تشریح',
-        'excerpt'               => 'لنډیز',
-        'date'                  => 'نېټه',
-        'time'                  => 'وخت',
-        'available'             => 'شته',
-        'size'                  => 'اندازه',
-    ],
+
+    'attributes' => [],
+
 ];

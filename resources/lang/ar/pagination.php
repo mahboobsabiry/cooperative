@@ -12,6 +12,6 @@ return [
     |
     */
 
-    'previous' => '&laquo; Oldingi',
-    'next'     => 'Keyingi &raquo;',
+    'previous' => '&laquo; قبلی',
+    'next'     => 'بعدی &raquo;',
 ];
