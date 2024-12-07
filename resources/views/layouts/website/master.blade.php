@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en-US">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'fa' || app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -40,7 +40,7 @@
         <script type="text/javascript" src="{{ asset('website/assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
     </head>
 
-    <body>
+    <body style="font-family: Calibri !important;">
         <!-- Loder Start-->
         <div class="loader-wrapper">
             <div class="loader"></div>

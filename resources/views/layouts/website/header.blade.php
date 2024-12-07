@@ -18,11 +18,10 @@
                 <div class="top-right-menu text-right">
                     <ul class="social-icons">
                         <li>
-                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                            <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fa-brands fa-google-plus-g"></i></a>
+                            <a href="{{ $setting['facebookLink'] ?? '' }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="{{ $setting['instagramLink'] ?? '' }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="{{ $setting['twitterLink'] ?? '' }}" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="{{ $setting['youtubeLink'] ?? '' }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -52,45 +51,28 @@
                 <div class="col-md-10 col-sm-10 col-xs-9">
                     <nav class="tourist_menu main-search-menu">
                         <ul class="sub-menu nav_scroll">
-                            <li><a href="#home">Home</a>
-                                <ul class="sub-menu">
-                                    <li><a href="index-2.html">Home Version One</a></li>
-                                    <li><a href="index-3.html">Home Verion Two</a></li>
-                                    <li><a href="index-4.html">Home Verion Three</a></li>
-                                    <li><a href="index-5.html">Home Verion Four</a></li>
-                                    <li><a href="index-6.html">Home Particle</a></li>
-                                    <li><a href="index-7.html">Home OnePage Version</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="#package">Package</a>
-                                <ul class="sub-menu">
-                                    <li><a href="package-1.html">Package One</a></li>
-                                    <li><a href="single-package.html">Single Package</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="hotel.html">Hotels</a></li>
-                            <li><a href="flight.html">Flight</a></li>
-                            <li><a href="#blog">BLog</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog.html">Blog Grid</a></li>
-                                    <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                    <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                    <li><a href="blog-left-sidebar-2column.html">Blog Left 2Column</a></li>
-                                    <li><a href="blog-right-sidebar-2column.html">Blog Right 2Column</a></li>
-                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
+                            <!-- Home -->
+                            <li class="{{ request()->url() == route('index') ? 'current' : '' }}"><a href="{{ route('index') }}">@lang('global.home')</a></li>
+                            <!-- About -->
+                            <li class="{{ request()->url() == route('about') ? 'current' : '' }}"><a href="{{ route('about') }}">@lang('global.about')</a></li>
+                            <li><a href="#package">@lang('website.package')</a></li>
+                            <li><a href="javascript:void(0);">@lang('website.hotels')</a></li>
+                            <li><a href="javascript:void(0);">@lang('website.flight')</a></li>
+                            <li><a href="#blog">@lang('website.blog')</a></li>
+
                             <!-- Languages -->
-                            <li><a href="javascript:void(0)">Languages (EN)</a>
-                                <ul class="sub-menu">
-                                    <li><a href="javascript:void(0)" style="color: red;">EN</a></li>
-                                    <li><a href="javascript:void(0)">TR</a></li>
-                                    <li><a href="javascript:void(0)">AR</a></li>
-                                    <li><a href="javascript:void(0)">FA</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact.html">Contact</a></li>
+                            @if(count(config('panel.available_languages', [])) > 1)
+                                <li><a href="javascript:void(0)">@lang('website.languages') ({{ strtoupper(app()->getLocale()) }})</a>
+                                    <ul class="sub-menu">
+                                        @foreach(config('panel.available_languages') as $langLocale => $langName)
+                                            <li><a href="{{ url()->current() }}?change_language={{ $langLocale }}" @if(app()->getLocale() == $langLocale) style="color: red;" @endif>{{ strtoupper($langLocale) }} ({{ $langName }})</a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endif
+                            <!--/==/ End of Languages -->
+
+                            <li><a href="javascript:void(0);">@lang('website.contact')</a></li>
                         </ul>
                         <div class="donate-btn-header">
                             <a class="dtbtn" href="#">Book Now</a>
@@ -109,36 +91,28 @@
     <div class="menu_area mobile-menu">
         <nav>
             <ul class="main-menu clearfix">
-                <li><a href="#home">Home</a>
-                    <ul class="sub-menu">
-                        <li><a href="index-2.html">Home Version One</a></li>
-                        <li><a href="index-3.html">Home Verion Two</a></li>
-                        <li><a href="index-4.html">Home Verion Three</a></li>
-                        <li><a href="index-5.html">Home Verion Four</a></li>
-                        <li><a href="index-6.html">Home Particle</a></li>
-                        <li><a href="index-7.html">Home OnePage Version</a></li>
-                    </ul>
-                </li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="#package">Package</a>
-                    <ul class="sub-menu">
-                        <li><a href="package-1.html">Package One</a></li>
-                        <li><a href="single-package.html">Single Package</a></li>
-                    </ul>
-                </li>
-                <li><a href="hotel.html">Hotels</a></li>
-                <li><a href="flight.html">Flight</a></li>
-                <li><a href="#blog">BLog</a>
-                    <ul class="sub-menu">
-                        <li><a href="blog.html">Blog Grid</a></li>
-                        <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                        <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                        <li><a href="blog-left-sidebar-2column.html">Blog Left 2Column</a></li>
-                        <li><a href="blog-right-sidebar-2column.html">Blog Right 2Column</a></li>
-                        <li><a href="blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="contact.html">Contact</a></li>
+                <!-- Home -->
+                <li class="{{ request()->url() == route('index') ? 'current' : '' }}"><a href="{{ route('index') }}">@lang('global.home')</a></li>
+                <!-- About -->
+                <li class="{{ request()->url() == route('about') ? 'current' : '' }}"><a href="{{ route('about') }}">@lang('global.about')</a></li>
+                <li><a href="#package">@lang('website.package')</a></li>
+                <li><a href="javascript:void(0);">@lang('website.hotels')</a></li>
+                <li><a href="javascript:void(0);">@lang('website.flight')</a></li>
+                <li><a href="#blog">@lang('website.blog')</a></li>
+
+                <!-- Languages -->
+                @if(count(config('panel.available_languages', [])) > 1)
+                    <li><a href="javascript:void(0)">Languages ({{ strtoupper(app()->getLocale()) }})</a>
+                        <ul class="sub-menu">
+                            @foreach(config('panel.available_languages') as $langLocale => $langName)
+                                <li><a href="{{ url()->current() }}?change_language={{ $langLocale }}" @if(app()->getLocale() == $langLocale) style="color: red;" @endif>{{ strtoupper($langLocale) }} ({{ $langName }})</a></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                @endif
+                <!--/==/ End of Languages -->
+
+                <li><a href="javascript:void(0)">@lang('website.contact')</a></li>
             </ul>
         </nav>
     </div>

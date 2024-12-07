@@ -13,4 +13,11 @@ class WebsiteController extends Controller
         $setting = Setting::pluck('value', 'key');
         return view('website.index', compact('setting'));
     }
+
+    // About
+    public function about()
+    {
+        $setting = Setting::pluck('value', 'key');
+        return view('website.about', compact('setting'));
+    }
 }

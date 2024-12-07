@@ -31,7 +31,7 @@
         <link href="{{ asset('backend/assets/plugins/flag-icon-css/css/flag-icon.min.css') }}" rel="stylesheet">
 
         <!---Style css-->
-        @if(app()->getLocale() == 'en')
+        @if(app()->getLocale() == 'en' || app()->getLocale() == 'tr')
             <link href="{{ asset('backend/assets/css/style.css') }}" rel="stylesheet">
             <link href="{{ asset('backend/assets/css/custom-style.css') }}" rel="stylesheet">
             <link href="{{ asset('backend/assets/css/skins.css') }}" rel="stylesheet">

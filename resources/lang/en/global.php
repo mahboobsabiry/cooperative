@@ -2,7 +2,7 @@
 
 return [
     'about'         => 'About',
-    'aboutUs'       => 'About US',
+    'aboutUs'       => 'About Us',
     'action'        => 'Action',
     'active'        => 'Active',
     'activity'      => 'Activity',

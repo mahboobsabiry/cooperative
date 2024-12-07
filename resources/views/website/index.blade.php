@@ -15,49 +15,44 @@
                         <div class="em_slider_inner container  text-center">
                             <!--slider title 2 -->
                             <div class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0s">
-                                <h2 class="em-slider-up-title">Open Your Eyes</h2>
+                                <h2 class="em-slider-up-title">@lang('website.messages.openYourEyes')</h2>
                             </div>
                             <!--slider title 3 -->
                             <div class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0s">
-                                <h1 class="em-slider-sub-title">To The Beautiful World</h1>
+                                <h1 class="em-slider-sub-title">@lang('website.messages.toTheBWorld')</h1>
                             </div>
                             <div class="wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0s">
-                                <p  class="em-slider-descript">We provide the best toure & travels service </p>
+                                <p  class="em-slider-descript">@lang('website.messages.sliderTxt1')</p>
                             </div>
                             <div class="em-slider-button wow  bounceInUp  em-button-button-area" data-wow-duration="3s" data-wow-delay="0.5s">
-                                <a class="em-active-button" href="#">Star A Tour</a>
-                                <a class="withput-active" href="#">About More</a>
+                                <a class="em-active-button" href="javascript:void(0)">Star A Tour</a>
+                                <a class="withput-active" href="{{ route('about') }}">@lang('global.about')</a>
                             </div>
                         </div>
                     </div>
                     <!-- end slider one -->
 
                     <!-- slider two start -->
-                    <div id="htmlcaption1_28" class="nivo-html-caption em-slider-content-nivo">
-                        <div class="em_slider_inner container  text-center">
-                            <!--slider title 2 -->
-                            <div class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0s">
-                                <h2 class="em-slider-up-title">Open Your Eyes</h2>
-                            </div>
-                            <!--slider title 3 -->
-                            <div class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0s">
-                                <h1 class="em-slider-sub-title">To The Beautiful World</h1>
-                            </div>
-                            <div class="wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0s">
-                                <p  class="em-slider-descript">We provide the best toure & travels service </p>
-                            </div>
-                            <div class="em-slider-button wow  bounceInUp  em-button-button-area" data-wow-duration="3s" data-wow-delay="0.5s">
-                                <a class="em-active-button" href="#">Star A Tour</a>
-                                <a class="withput-active" href="#">About More</a>
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div id="htmlcaption1_28" class="nivo-html-caption em-slider-content-nivo">--}}
+{{--                        <div class="em_slider_inner container  text-center">--}}
+{{--                            <!--slider title 2 -->--}}
+{{--                            <div class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0s">--}}
+{{--                                <h2 class="em-slider-up-title">Open Your Eyes</h2>--}}
+{{--                            </div>--}}
+{{--                            <!--slider title 3 -->--}}
+{{--                            <div class="wow slideInLeft" data-wow-duration="2s" data-wow-delay="0s">--}}
+{{--                                <h1 class="em-slider-sub-title">This is the future</h1>--}}
+{{--                            </div>--}}
+{{--                            <div class="wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0s">--}}
+{{--                                <p  class="em-slider-descript">We provide the best tour & travels service </p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
-
             </div>
-
         </div>
     </div>
+
     <!-- OUR GOAL AREA  -->
     <div class="search_form_area" id="goal">
         <div class="container">
@@ -69,18 +64,17 @@
                         <h2>Start<span> Booking Now!</span></h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
-
+                        <p>We guid you to the beautiful World</p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-12 col-xs-12">
                     <ul class="tourist-tab">
-                        <li class="active"><i class="fa fa-home"></i><a data-toggle="tab" href="#service1">Hotels</a></li>
-                        <li><i class="fa fa-plane"></i><a data-toggle="tab" href="#service2">Flight</a></li>
-                        <li><i class="fa fa-ship"></i><a data-toggle="tab" href="#service3">Ship</a></li>
-                        <li><i class="fa fa-umbrella"></i><a data-toggle="tab" href="#service4">Tour</a></li>
+                        <li class="active"><i class="fa fa-umbrella"></i><a data-toggle="tab" href="#service1">Tour</a></li>
+                        <li><i class="fa fa-hospital"></i><a data-toggle="tab" href="#service2">Health</a></li>
+                        <li><i class="fa fa-book"></i><a data-toggle="tab" href="#service3">Education</a></li>
+                        <li><i class="fa fa-arrow-right-arrow-left"></i><a data-toggle="tab" href="#service4">Import/Export</a></li>
                     </ul>
                 </div>
                 <div class="col-md-9 col-sm-12 col-xs-12">
@@ -329,7 +323,7 @@
                         <h2>Popular<span> Package</span></h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
+                        <p>The packages will be here</p>
                     </div>
                 </div>
             </div>
@@ -338,23 +332,23 @@
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="single_package">
                         <div class="pack_thumb">
-                            <img src="assets/images/pk1.jpg" alt="" />
+                            <img src="{{ asset('website/assets/images/pk1.jpg') }}" alt="" />
                             <div class="package_price">
-                                <span>$940</span>
+                                <span>$0</span>
                             </div>
                         </div>
                         <div class="package_content">
                             <div class="package_meta">
-                                <span><i class="fa fa-user"></i>Number Of Days: 2</span>
-                                <span><i class="fa fa-calendar"></i>Persons: 2</span>
+                                <span><i class="fa fa-user"></i>Number Of Days: 0</span>
+                                <span><i class="fa fa-calendar"></i>Persons: 0</span>
                             </div>
                             <div class="package_title">
-                                <h2><a href="single-pack.html">Barselona Football Tour</a></h2>
-                                <span>Barselona, Spain</span>
+                                <h2><a href="javascript:void(0);">UNDEFINED</a></h2>
+                                <span>UNDEFINED PLACE</span>
                             </div>
                             <div class="package_content_inner">
                                 <div class="package_btn">
-                                    <a href="single-pack.html">Details</a>
+                                    <a href="javascript:void(0);">Details</a>
                                 </div>
                                 <div class="package_ratting">
                                     <i class="fa fa-star"></i>
@@ -371,23 +365,23 @@
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="single_package">
                         <div class="pack_thumb">
-                            <img src="assets/images/pk2.jpg" alt="" />
+                            <img src="{{ asset('website/assets/images/pk2.jpg') }}" alt="" />
                             <div class="package_price">
-                                <span>$820</span>
+                                <span>$0</span>
                             </div>
                         </div>
                         <div class="package_content">
                             <div class="package_meta">
-                                <span><i class="fa fa-user"></i>Number Of Days: 2</span>
-                                <span><i class="fa fa-calendar"></i>Persons: 2</span>
+                                <span><i class="fa fa-user"></i>Number Of Days: 0</span>
+                                <span><i class="fa fa-calendar"></i>Persons: 0</span>
                             </div>
                             <div class="package_title">
-                                <h2><a href="single-pack.html">Real Madrid Vocation</a></h2>
-                                <span>Madrid, Spain</span>
+                                <h2><a href="javascript:void(0);">UNDEFINED</a></h2>
+                                <span>UNDEFINED PLACE</span>
                             </div>
                             <div class="package_content_inner">
                                 <div class="package_btn">
-                                    <a href="single-pack.html">Details</a>
+                                    <a href="javascript:void(0);">Details</a>
                                 </div>
                                 <div class="package_ratting">
                                     <i class="fa fa-star"></i>
@@ -404,23 +398,23 @@
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="single_package">
                         <div class="pack_thumb">
-                            <img src="assets/images/pk3.jpg" alt="" />
+                            <img src="{{ asset('website/assets/images/pk3.jpg') }}" alt="" />
                             <div class="package_price">
-                                <span>$640</span>
+                                <span>$0</span>
                             </div>
                         </div>
                         <div class="package_content">
                             <div class="package_meta">
-                                <span><i class="fa fa-user"></i>Number Of Days: 2</span>
-                                <span><i class="fa fa-calendar"></i>Persons: 2</span>
+                                <span><i class="fa fa-user"></i>Number Of Days: 0</span>
+                                <span><i class="fa fa-calendar"></i>Persons: 0</span>
                             </div>
                             <div class="package_title">
-                                <h2><a href="single-pack.html">Brazil Stunning Places</a></h2>
-                                <span>Combodia, Brazil</span>
+                                <h2><a href="javascript:void(0);">UNDEFINED</a></h2>
+                                <span>UNDEFINED PLACE</span>
                             </div>
                             <div class="package_content_inner">
                                 <div class="package_btn">
-                                    <a href="single-pack.html">Details</a>
+                                    <a href="javascript:void(0);">Details</a>
                                 </div>
                                 <div class="package_ratting">
                                     <i class="fa fa-star"></i>
@@ -437,23 +431,23 @@
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="single_package">
                         <div class="pack_thumb">
-                            <img src="assets/images/pk3.jpg" alt="" />
+                            <img src="{{ asset('website/assets/images/pk3.jpg') }}" alt="" />
                             <div class="package_price">
-                                <span>$940</span>
+                                <span>$0</span>
                             </div>
                         </div>
                         <div class="package_content">
                             <div class="package_meta">
-                                <span><i class="fa fa-user"></i>Number Of Days: 2</span>
-                                <span><i class="fa fa-calendar"></i>Persons: 2</span>
+                                <span><i class="fa fa-user"></i>Number Of Days: 0</span>
+                                <span><i class="fa fa-calendar"></i>Persons: 0</span>
                             </div>
                             <div class="package_title">
-                                <h2><a href="single-pack.html">France Stunning Places</a></h2>
-                                <span>Paris, France</span>
+                                <h2><a href="javascript:void(0);">UNDEFINED</a></h2>
+                                <span>UNDEFINED PLACE</span>
                             </div>
                             <div class="package_content_inner">
                                 <div class="package_btn">
-                                    <a href="single-pack.html">Details</a>
+                                    <a href="javascript:void(0);">Details</a>
                                 </div>
                                 <div class="package_ratting">
                                     <i class="fa fa-star"></i>
@@ -470,56 +464,56 @@
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="single_package">
                         <div class="pack_thumb">
-                            <img src="assets/images/pk1.jpg" alt="" />
+                            <img src="{{ asset('website/assets/images/pk1.jpg') }}" alt="" />
+                            <div class="package_price">
+                                <span>$0</span>
+                            </div>
+                        </div>
+                        <div class="package_content">
+                            <div class="package_meta">
+                                <span><i class="fa fa-user"></i>Number Of Days: 0</span>
+                                <span><i class="fa fa-calendar"></i>Persons: 0</span>
+                            </div>
+                            <div class="package_title">
+                                <h2><a href="javascript:void(0);">UNDEFINED</a></h2>
+                                <span>UNDEFINED PLACE</span>
+                            </div>
+                            <div class="package_content_inner">
+                                <div class="package_btn">
+                                    <a href="javascript:void(0);">Details</a>
+                                </div>
+                                <div class="package_ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SINGLE PACKAGE -->
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="single_package">
+                        <div class="pack_thumb">
+                            <img src="{{ asset('website/assets/images/pk2.jpg') }}" alt="" />
                             <div class="package_price">
                                 <span>$740</span>
                             </div>
                         </div>
                         <div class="package_content">
                             <div class="package_meta">
-                                <span><i class="fa fa-user"></i>Number Of Days: 2</span>
-                                <span><i class="fa fa-calendar"></i>Persons: 2</span>
+                                <span><i class="fa fa-user"></i>Number Of Days: 0</span>
+                                <span><i class="fa fa-calendar"></i>Persons: 0</span>
                             </div>
                             <div class="package_title">
-                                <h2><a href="single-pack.html">Barselona Football Tour</a></h2>
-                                <span>Barselona, Spain</span>
+                                <h2><a href="javascript:void(0);">UNDEFINED</a></h2>
+                                <span>UNDEFINED PLACE</span>
                             </div>
                             <div class="package_content_inner">
                                 <div class="package_btn">
-                                    <a href="single-pack.html">Details</a>
-                                </div>
-                                <div class="package_ratting">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- SINGLE PACKAGE -->
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="single_package">
-                        <div class="pack_thumb">
-                            <img src="assets/images/pk2.jpg" alt="" />
-                            <div class="package_price">
-                                <span>$740</span>
-                            </div>
-                        </div>
-                        <div class="package_content">
-                            <div class="package_meta">
-                                <span><i class="fa fa-user"></i>Number Of Days: 2</span>
-                                <span><i class="fa fa-calendar"></i>Persons: 2</span>
-                            </div>
-                            <div class="package_title">
-                                <h2><a href="single-pack.html">Barselona Football Tour</a></h2>
-                                <span>Barselona, Spain</span>
-                            </div>
-                            <div class="package_content_inner">
-                                <div class="package_btn">
-                                    <a href="single-pack.html">Details</a>
+                                    <a href="javascript:void(0);">Details</a>
                                 </div>
                                 <div class="package_ratting">
                                     <i class="fa fa-star"></i>
@@ -571,8 +565,7 @@
                         <h2>Top <span> Destinations</span></h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
-
+                        <p>Top destinations in Turkey you should visit.</p>
                     </div>
                 </div>
             </div>
@@ -584,12 +577,12 @@
                                 <div class="single_destination">
                                     <div class="destination_thumb"><img src="{{ asset('website/assets/images/dest1.jpg') }}" alt="" /></div>
                                     <div class="destination_content">
-                                        <h1>FC Barselona</h1>
-                                        <h2>Spain</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim on veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip extra one Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod commodo consequat awesome dolore porem.</p>
+                                        <h1>Stanbol</h1>
+                                        <h2>Stanbol</h2>
+                                        <p>Dummy Data</p>
                                         <div class="destination_button">
-                                            <a href="#">More Details</a>
-                                            <a class="active" href="#">Book Now</a>
+                                            <a href="javascript:void(0);">More Details</a>
+                                            <a class="active" href="javascript:void(0);">Book Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -598,12 +591,12 @@
                                 <div class="single_destination">
                                     <div class="destination_thumb"><img src="{{ asset('website/assets/images/dest2.jpg') }}" alt="" /></div>
                                     <div class="destination_content">
-                                        <h1>Bocka Juniors</h1>
-                                        <h2>Argentina</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim on veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip extra one Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod commodo consequat awesome dolore porem.</p>
+                                        <h1>Beach</h1>
+                                        <h2>Ankara</h2>
+                                        <p>Dummy Text</p>
                                         <div class="destination_button">
-                                            <a href="#">More Details</a>
-                                            <a class="active" href="#">Book Now</a>
+                                            <a href="javascript:void(0);">More Details</a>
+                                            <a class="active" href="javascript:void(0);">Book Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -625,7 +618,7 @@
                 <div class="col-md-12">
                     <div class="section-title  t_center white_color">
                         <!-- title -->
-                        <h2>Why Choose <span> Tourist</span></h2>
+                        <h2>Why Choose <span> BEAM</span></h2>
                         <i class="fa fa-plane"></i>
                         <!-- TEXT -->
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm</p>
@@ -939,6 +932,7 @@
         </div>
     </div>
     <!-- END TESTIMONIAL AREA -->
+
     <!-- START BLOG AREA -->
     <div class="blog_area" id="blog">
         <div class="container">
@@ -1119,6 +1113,7 @@
             </div>
         </div>
     </div>
+
     <!-- BLOG_AREA END -->
     <div class="subscribe_area">
         <div class="container">
@@ -1150,6 +1145,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Brands -->
     <div class="brand_area">
         <div class="container">
             <div class="row">
