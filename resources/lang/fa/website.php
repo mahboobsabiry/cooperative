@@ -1,17 +1,19 @@
 <?php
 
 return [
-    'title' => 'شرکت خدمات مشورتی بی‌ام',
+    'title' => 'شرکت خدمات مشورتی بی‌ایم',
 
     // General
-    'aboutBeam'     => 'درباره بی‌ام',
+    'aboutBeam'     => 'درباره بی‌ایم',
     'actionCenter'  => 'مرکز عمل',
-    'beam'          => 'بی‌ام',
+    'allRightsReserved' => 'تمامی حقوق محفوظ است',
+    'beam'          => 'بی‌ایم',
     'blog'      => 'بلاگ',
     'blogs'     => 'بلاگ ها',
     'contact'   => 'تماس',
     'contactUs' => 'تماس با ما',
     'contributeNow' => 'مشترک شوید',
+    'copyright'     => 'حق کاپی',
     'flight'        => 'پرواز',
     'follow'        => 'تعقیب',
     'followUs'      => 'ما را تعقیب کنید',
@@ -29,6 +31,7 @@ return [
     'register'      => 'ثبت',
     'restaurant'    => 'رستورانت',
     'restaurants'   => 'رستورانت ها',
+    'sendMsg'       => 'ارسال پیام',
     'submit'        => 'ارسال',
     'support'       => 'حمایت',
     'terms'         => 'قوانین',
@@ -42,7 +45,7 @@ return [
         'openYourEyes'  => 'چشمان تان را',
         'toTheBWorld'   => 'به جهان زیبا باز کنید',
         //
-        'servicesMsg'   => 'شرکت مشورتی بی‌ام در عرصه های مختلف برای شما عالیترین خدمات را ارائه می‌کند',
+        'servicesMsg'   => 'شرکت مشورتی بی‌ایم در عرصه های مختلف برای شما عالیترین خدمات را ارائه می‌کند',
         'sliderTxt1'    => 'ما بهترین خدمات را ارائه میکنیم',
 
         // Popular Packages
@@ -67,7 +70,7 @@ return [
 
         // Testimonials
         'testimonialTitle'  => 'سفرکننده گان چه می‌گویند',
-        'testimonialSubTitle'  => 'نظریات و بازخورد های آنان درباره بی‌ام',
+        'testimonialSubTitle'  => 'نظریات و بازخورد های آنان درباره بی‌ایم',
         'testimonialTxt1'   => 'من چنین جاهای زیبا و دلنشین را در زندگی ام تجربه نکرده بودم. واقعا از گشتن و از خدمات شما لذت بردم و خوشحالم که با شما آشنا شدم.',
         'testimonialPerson1'=> 'آقا انور',
         'testimonialPJob1'  => 'سیاح',
@@ -92,4 +95,8 @@ return [
     'completedProject'  => 'پروژه تکمیل شده',
     'cupOfTea'          => 'گیلاس چای',
     'winningAward'      => 'جوایز برنده شده',
+
+    // Contact Page
+    'ourOffice' => 'اداره ما',
+    'location'  => 'موقعیت'
 ];

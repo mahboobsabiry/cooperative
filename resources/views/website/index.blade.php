@@ -819,54 +819,53 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="brand_carousel owl-carousel curosel-style">
-                        <!--single brand -->
+                        <!-- Dunyagoz Hospital -->
                         <div class="col-md-12">
                             <div class="single_brand">
-                                <div class="brand_thumb">
-                                    <img src="{{ asset('website/assets/images/brand1.png') }}"  alt="brand1">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="single_brand">
-                                <div class="brand_thumb">
-                                    <img src="{{ asset('website/assets/images/brand2.png') }}"  alt="brand1">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="single_brand">
-                                <div class="brand_thumb">
-                                    <img src="{{ asset('website/assets/images/brand3.png') }}"  alt="brand1">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="single_brand">
-                                <div class="brand_thumb">
-                                    <img src="{{ asset('website/assets/images/brand4.png') }}"  alt="brand1">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="single_brand">
-                                <div class="brand_thumb">
-                                    <img src="{{ asset('website/assets/images/brand5.png') }}"  alt="brand1">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="single_brand">
-                                <div class="brand_thumb">
-                                    <img src="{{ asset('website/assets/images/brand6.png') }}"  alt="brand1">
+                                <div class="brand_thumb" title="Dünyagöz Hospital">
+                                    <img src="{{ asset('website/img/brands/dunyagoz-gray.jpeg') }}" alt="Dünyagöz Hospital" style="border: 1px solid #cccccc;">
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Gelisim University -->
+                        <div class="col-md-12">
+                            <div class="single_brand">
+                                <div class="brand_thumb" title="İstanbul Gelişim Üniversitesi">
+                                    <img src="{{ asset('website/img/brands/gelisim.png') }}"  alt="İstanbul Gelişim Üniversitesi" style="border: 1px solid #cccccc;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kolan Hospital Group -->
+                        <div class="col-md-12">
+                            <div class="single_brand">
+                                <div class="brand_thumb" title="Kolan Hospital Group">
+                                    <img src="{{ asset('website/img/brands/kolan-gray.png') }}"  alt="Kolan Hospital Group" style="border: 1px solid #cccccc;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- İstanbul Ticaret Üniversitesi -->
+                        <div class="col-md-12">
+                            <div class="single_brand">
+                                <div class="brand_thumb" title="İstanbul Ticaret Üniversitesi">
+                                    <img src="{{ asset('website/img/brands/ticaret-gray.png') }}"  alt="İstanbul Ticaret Üniversitesi" style="border: 1px solid #cccccc;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Medipol Acıbadem -->
+                        <div class="col-md-12">
+                            <div class="single_brand">
+                                <div class="brand_thumb" title="Medipol Acıbadem">
+                                    <img src="{{ asset('website/img/brands/medipol-gray.png') }}"  alt="Medipol Acıbadem" style="border: 1px solid #cccccc;">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

@@ -6,6 +6,7 @@ return [
     // General
     'aboutBeam'     => 'BEAM Hakkında',
     'actionCenter'  => 'Eylem Merkezi',
+    'allRightsReserved' => 'Her seye haqe mafooz',
     'beam'          => 'Beam',
     'blog'          => 'Blog',
     'blogs'         => 'Bloglar',
@@ -29,6 +30,7 @@ return [
     'register'      => 'Kayıt olmak',
     'restaurant'    => 'Restoran',
     'restaurants'   => 'Restoranlar',
+    'sendMsg'       => 'Send Message',
     'submit'        => 'Gönder',
     'support'       => 'Destek',
     'terms'         => 'Şartlar',
@@ -91,4 +93,8 @@ return [
     'completedProject'  => 'Tamamlanmış Proje',
     'cupOfTea'          => 'Bir Fincan Çay',
     'winningAward'      => 'Kazanan Ödül',
+
+    // Contact Page
+    'ourOffice' => 'Our Office',
+    'location'  => 'Location'
 ];

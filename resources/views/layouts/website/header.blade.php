@@ -3,18 +3,21 @@
     <div class="container">
         <div class="row">
             <!-- TOP LEFT -->
-            <div class="col-xs-12 col-md-8 col-sm-7">
+            <div class="col-xs-12 col-md-10 col-sm-9">
                 <div class="top-address">
                     <p>
                         <span><i class="fa fa-phone"></i>{{ $setting['address'] ?? '1st New Street, Ankara' }}</span>
+                        <!-- Phone Number -->
                         <a href="callto:{{ $setting['phone'] ?? '' }}"><i class="fa fa-phone"></i>{{ $setting['phone'] ?? '' }}</a>
+                        @if($setting['secondPhone']) <a href="callto:{{ $setting['secondPhone'] ?? '' }}">{{ $setting['secondPhone'] ?? '' }}</a>@endif
+                        <!-- Email Address -->
                         <a href="mailto:{{ $setting['email'] ?? '' }}"><i class="fa fa-envelope-o"></i>{{ $setting['email'] ?? '' }}</a>
                     </p>
                 </div>
             </div>
 
             <!-- TOP RIGHT -->
-            <div class="col-xs-12 col-md-4 col-sm-5">
+            <div class="col-xs-12 col-md-2 col-sm-3">
                 <div class="top-right-menu text-right">
                     <ul class="social-icons">
                         <li>
@@ -72,7 +75,7 @@
                             @endif
                             <!--/==/ End of Languages -->
 
-                            <li><a href="javascript:void(0);">@lang('website.contact')</a></li>
+                            <li><a href="{{ route('website.contact') }}">@lang('website.contact')</a></li>
                         </ul>
                         <div class="donate-btn-header">
                             <a class="dtbtn" href="javascript:void(0)">Book Now</a>

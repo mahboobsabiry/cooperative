@@ -29,11 +29,35 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'key'   => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:48|unique:settings,key',
-            'value' => 'required|min:3'
+            'key'       => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:48|unique:settings,key',
+            'value_tr'  => 'required|min:3'
         ]);
 
-        $setting = Setting::create($request->all());
+        $setting = new Setting();
+        $setting->key = $request->key;
+        $setting->value_tr = $request->value_tr;
+        // Farsi
+        if ($request->value_fa) {
+            $value_fa = $request->value_fa;
+        } else {
+            $value_fa = $request->value_tr;
+        }
+        // Arabic
+        if ($request->value_ar) {
+            $value_ar = $request->value_ar;
+        } else {
+            $value_ar = $request->value_tr;
+        }
+        // English
+        if ($request->value_en) {
+            $value_en = $request->value_en;
+        } else {
+            $value_en = $request->value_tr;
+        }
+        $setting->value_fa = $value_fa;
+        $setting->value_ar = $value_ar;
+        $setting->value_en = $value_en;
+        $setting->save();
 
         activity('added')
             ->causedBy(Auth::user())
@@ -54,11 +78,34 @@ class SettingController extends Controller
         // Validate
         $request->validate([
             'key'   => 'required|regex:/^[\pL\s\-]+$/u||min:3|max:48|unique:settings,key,'.$setting->id,
-            'value' => 'required|min:3',
+            'value_tr' => 'required|min:3',
         ]);
 
         // Save Record
-        $setting->update($request->all());
+        $setting->key = $request->key;
+        $setting->value_tr = $request->value_tr;
+        // Farsi
+        if ($request->value_fa) {
+            $value_fa = $request->value_fa;
+        } else {
+            $value_fa = $request->value_tr;
+        }
+        // Arabic
+        if ($request->value_ar) {
+            $value_ar = $request->value_ar;
+        } else {
+            $value_ar = $request->value_tr;
+        }
+        // English
+        if ($request->value_en) {
+            $value_en = $request->value_en;
+        } else {
+            $value_en = $request->value_tr;
+        }
+        $setting->value_fa = $value_fa;
+        $setting->value_ar = $value_ar;
+        $setting->value_en = $value_en;
+        $setting->save();
 
         activity('updated')
             ->causedBy(Auth::user())

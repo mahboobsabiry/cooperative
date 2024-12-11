@@ -106,7 +106,7 @@
                                                        data-toggle="tooltip-primary" title="@lang('global.offline')"></i>
                                                 </span>
                                             @endif
-                                            <a href="{{ route('admin.users.show', $user->id) }}" class="ctd">{{ $user->name }}</a>
+                                            <a href="{{ route('admin.users.show', encrypt($user->id)) }}" class="ctd">{{ $user->name }}</a>
                                         </td>
                                         <td>{{ $user->username }}</td>
                                         <!-- Phone Number -->

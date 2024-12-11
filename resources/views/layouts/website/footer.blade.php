@@ -102,14 +102,27 @@
             <!--footer widget 4 -->
             <div class=" col-md-3 col-sm-6 last">
                 <div class="widget widget_get_quote">
-                    <h2 class="widget-title">@lang('global.address')</h2>
+                    <h2 class="widget-title">@lang('global.aboutUs')</h2>
                     <div class="footer-address">
                         <p class="company_info">{{ $setting['aboutText'] }}</p>
                         <div class="footer_address_inner">
                             <ul><li><i class="fa fa-map-marker"></i><p>@lang('global.address'): {{ $setting['address'] }}</p></li></ul>
-                            <ul><li><i class="fa fa-phone"></i><p>@lang('form.phone'): {{ $setting['phone'] }}</p></li></ul>
-                            <ul><li><i class="fa fa-envelope-o"></i><p>@lang('form.email'): {{ $setting['email'] }}</p></li></ul>
-                            <ul><li><i class="fa fa-globe"></i><p>@lang('website.website'): beamdanishmanlik.co.tr</p></li></ul>
+                            <!-- Phone Number -->
+                            <ul>
+                                <li>
+                                    <i class="fa fa-phone"></i>
+                                    <p>
+                                        @lang('form.phone'): <a href="callto:{{ $setting['phone'] }}">{{ $setting['phone'] }}</a>
+                                        @if($setting['secondPhone'])
+                                            , <a href="callto:{{ $setting['secondPhone'] }}">{{ $setting['secondPhone'] }}</a>
+                                        @endif
+                                    </p>
+                                </li>
+                            </ul>
+                            <!-- Email Address -->
+                            <ul><li><i class="fa fa-envelope-o"></i><p>@lang('form.email'): <a href="mailto:{{ $setting['email'] }}">{{ $setting['email'] }}</a></p></li></ul>
+                            <!-- Website -->
+                            <ul><li><i class="fa fa-globe"></i><p>@lang('website.website'): <a href="beamdanishmanlik.com.tr">beamdanishmanlik.com.tr</a></p></li></ul>
                         </div>
                     </div>
                 </div>
@@ -126,7 +139,7 @@
             <div class="col-md-6 col-sm-6">
                 <div class="copy-right-text">
                     <!-- FOOTER COPYRIGHT TEXT -->
-                    <p>Copyright <b style="color: #ff8337;">{{ \Morilog\Jalali\Jalalian::now()->getYear() }}</b> © <b style="color: #ff8337;">{{ config('app.name') }}</b> All Rights Reserved. </p>
+                    <p>@lang('website.copyright') <b style="color: #ff8337;">{{ \Morilog\Jalali\Jalalian::now()->getYear() }}</b> © <b style="color: #ff8337;">@lang('website.title')</b> @lang('website.allRightsReserved'). </p>
                 </div>
             </div>
             <div class="col-md-6 col-sm-6">

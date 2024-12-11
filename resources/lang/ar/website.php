@@ -1,17 +1,19 @@
 <?php
 
 return [
-    'title' => 'شركة الخدمات الاستشارية بی‌ام',
+    'title' => 'شركة الخدمات الاستشارية بی‌ایم',
 
     // General
-    'aboutBeam'     => 'نبذة عن بی‌ام',
+    'aboutBeam'     => 'نبذة عن بی‌ایم',
     'actionCenter'  => 'مرکز العمل',
-    'beam'          => 'بی‌ام',
+    'allRightsReserved' => 'جمیع الحقوق محفوظة',
+    'beam'          => 'بی‌ایم',
     'blog'      => 'مدونة',
     'blogs'     => 'المدونات',
     'contact'   => 'اتصال',
     'contactUs' => 'اتصال بنا',
     'contributeNow' => 'ساهم الآن',
+    'copyright'     => 'حق المطبوع',
     'flight'        => 'رحلة جوية',
     'follow'        => 'تابع',
     'followUs'      => 'تابعنا',
@@ -29,6 +31,7 @@ return [
     'register'      => 'يسجل',
     'restaurant'    => 'مطعم',
     'restaurants'   => 'مطاعم',
+    'sendMsg'       => 'ارسال پیام',
     'submit'        => 'يُقدِّم',
     'support'       => 'يدعم',
     'terms'         => 'شروط',
@@ -42,7 +45,7 @@ return [
         'openYourEyes'  => 'افتح عينيك',
         'toTheBWorld'   => 'على العالم الجميل',
         //
-        'servicesMsg'   => 'تقدم لك شركة بی‌ام الاستشارية أفضل الخدمات في مختلف المجالات',
+        'servicesMsg'   => 'تقدم لك شركة بی‌ایم الاستشارية أفضل الخدمات في مختلف المجالات',
         'sliderTxt1'    => 'نحن نقدم أفضل الخدمات',
 
         // Popular Packages
@@ -67,7 +70,7 @@ return [
 
         // Testimonials
         'testimonialTitle'  => 'ماذا يقول المسافرون؟',
-        'testimonialSubTitle'  => 'آرائهم وملاحظاتهم حول بی‌ام',
+        'testimonialSubTitle'  => 'آرائهم وملاحظاتهم حول بی‌ایم',
         'testimonialTxt1'   => 'لم يسبق لي تجربة مثل هذه الأماكن الجميلة والممتعة في حياتي. لقد استمتعت حقًا بالتصفح وخدمتك ويسعدني مقابلتك.',
         'testimonialPerson1'=> 'السيد أنور',
         'testimonialPJob1'  => 'سائح',
@@ -92,4 +95,8 @@ return [
     'completedProject'  => 'پروژه تکمیل شده',
     'cupOfTea'          => 'شاي الكرز',
     'winningAward'      => 'الجوائز التي فاز بها',
+
+    // Contact Page
+    'ourOffice' => 'ادارتنا',
+    'location'  => 'موقع'
 ];

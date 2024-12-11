@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WebsiteController::class, 'index'])->name('index');
 Route::get('/about', [WebsiteController::class, 'about'])->name('about');
+Route::get('/contact', [WebsiteController::class, 'contact'])->name('website.contact');
 
 Route::get('/optimize', function () {
     Artisan::call('optimize');

@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-@section('title', config('app.name') . ' ~ ' . trans('admin.dashboard.dashboard'))
+@section('title', trans('website.title') . ' ~ ' . trans('admin.dashboard.dashboard'))
 @section('content')
     <div class="container-fluid">
         <!-- Page Header -->

@@ -13,7 +13,7 @@
         <link rel="icon" href="{{ asset('img/beam.png') }}" type="image/x-icon"/>
 
         <!-- Title -->
-        <title>@yield('title', config('app.name'))</title>
+        <title>@yield('title', trans('website.title'))</title>
 
         <!---Fontawesome css-->
         <link href="{{ asset('backend/assets/plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">

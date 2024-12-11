@@ -73,7 +73,17 @@
                                             @endif
                                         </td>
                                         <td>{{ $setting->key }}</td>
-                                        <td>{{ $setting->value }}</td>
+                                        <td>
+                                            @if(app()->getLocale() == 'tr')
+                                                {{ \Illuminate\Support\Str::limit($setting->value_tr, 70, '...') }}
+                                            @elseif(app()->getLocale() == 'fa')
+                                                {{ \Illuminate\Support\Str::limit($setting->value_fa, 70, '...') }}
+                                            @elseif(app()->getLocale() == 'ar')
+                                                {{ \Illuminate\Support\Str::limit($setting->value_ar, 70, '...') }}
+                                            @else
+                                                {{ \Illuminate\Support\Str::limit($setting->value_en, 70, '...') }}
+                                            @endif
+                                        </td>
                                         <td>
                                             @if(app()->getLocale() == 'en')
                                                 {{ date_format($setting->created_at, 'Y-F-d / h:i A') }}

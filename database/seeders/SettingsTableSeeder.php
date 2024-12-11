@@ -19,11 +19,10 @@ class SettingsTableSeeder extends Seeder
         $settings = [
             [
                 'key'	=> 'mainTitle',
-                'value'	=> 'BEAM SYSTEM',
-            ],
-            [
-                'key'	=> 'aboutText',
-                'value'	=> 'This is a text about BEAM SYSTEM',
+                'value_tr'  => 'BEAM Danışmanlık Hizmetleri Şirketi',
+                'value_ar'  => 'ركة الخدمات الاستشارية بی‌ام',
+                'value_fa'  => 'شرکت خدمات مشورتی بی‌ام',
+                'value_en'  => 'BEAM Consulting Services Company',
             ]
         ];
 

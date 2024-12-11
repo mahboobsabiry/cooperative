@@ -6,12 +6,14 @@ return [
     // General
     'aboutBeam'     => 'About Beam',
     'actionCenter'  => 'Action Center',
+    'allRightsReserved' => 'All Rights Reserved',
     'beam'          => 'Beam',
     'blog'          => 'Blog',
     'blogs'         => 'Blogs',
     'contact'       => 'Contact',
     'contactUs'     => 'Contact Us',
     'contributeNow' => 'Contribute Now',
+    'copyright'     => 'Copyright',
     'flight'        => 'Flight',
     'follow'        => 'Follow',
     'followUs'      => 'Follow Us',
@@ -29,6 +31,7 @@ return [
     'register'      => 'Register',
     'restaurant'    => 'Restaurant',
     'restaurants'   => 'Restaurants',
+    'sendMsg'       => 'Send Message',
     'submit'        => 'Submit',
     'support'       => 'Support',
     'terms'         => 'Terms',
@@ -91,4 +94,8 @@ return [
     'completedProject'  => 'Completed Project',
     'cupOfTea'          => 'Cup Of Tea',
     'winningAward'      => 'Winning Award',
+
+    // Contact Page
+    'ourOffice' => 'Our Office',
+    'location'  => 'Location'
 ];

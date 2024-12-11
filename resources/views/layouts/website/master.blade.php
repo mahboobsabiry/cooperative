@@ -40,7 +40,7 @@
         <script type="text/javascript" src="{{ asset('website/assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
     </head>
 
-    <body style="font-family: Calibri !important;">
+    <body style="font-family: Calibri, sans-serif, Tahoma !important;">
         <!-- Loder Start-->
         <div class="loader-wrapper">
             <div class="loader"></div>

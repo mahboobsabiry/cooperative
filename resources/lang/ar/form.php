@@ -65,6 +65,7 @@ return [
     'startDuty'		=> 'شروع خدمت',
     'startJob'	    => 'شروع وظیفه',
     'status'		=> 'وضعیت',
+    'subject'		=> 'موضوع',
     'symbol'		=> 'سمبول',
     'tin'           => 'نمبر تشخیصیه',
     'title'         => 'عنوان',

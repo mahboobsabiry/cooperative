@@ -21,12 +21,42 @@
                         @enderror
                     </div>
 
-                    <!-- Value -->
-                    <div class="form-group @error('value') has-danger @enderror">
-                        <label class="form-label">@lang('form.value'): <span class="tx-danger">*</span></label>
-                        <textarea id="value" class="form-control @error('value') form-control-danger @enderror" name="value" placeholder="@lang('form.value')" required>{{ old('value') }}</textarea>
+                    <!-- Value TR -->
+                    <div class="form-group @error('value_tr') has-danger @enderror">
+                        <label class="form-label">Turkce: <span class="tx-danger">*</span></label>
+                        <textarea id="value_tr" class="form-control @error('value_tr') form-control-danger @enderror" name="value_tr" placeholder="Turkce" required>{{ old('value_tr') }}</textarea>
 
-                        @error('value')
+                        @error('value_tr')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Value FA -->
+                    <div class="form-group @error('value_fa') has-danger @enderror">
+                        <label class="form-label">فارسی: <span class="tx-danger">*</span></label>
+                        <textarea id="value_fa" class="form-control @error('value_fa') form-control-danger @enderror" name="value_fa" placeholder="فارسی">{{ old('value_fa') }}</textarea>
+
+                        @error('value_fa')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Value AR -->
+                    <div class="form-group @error('value_ar') has-danger @enderror">
+                        <label class="form-label">العربیه: <span class="tx-danger">*</span></label>
+                        <textarea id="value_ar" class="form-control @error('value_ar') form-control-danger @enderror" name="value_ar" placeholder="العربیه">{{ old('value_ar') }}</textarea>
+
+                        @error('value_ar')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Value EN -->
+                    <div class="form-group @error('value_en') has-danger @enderror">
+                        <label class="form-label">English: <span class="tx-danger">*</span></label>
+                        <textarea id="value_en" class="form-control @error('value_en') form-control-danger @enderror" name="value_en" placeholder="English">{{ old('value_en') }}</textarea>
+
+                        @error('value_en')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
