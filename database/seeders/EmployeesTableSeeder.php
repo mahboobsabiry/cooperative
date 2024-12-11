@@ -15,6 +15,7 @@ class EmployeesTableSeeder extends Seeder
     {
         $employees = [
             [
+                'position'      => 'سهام‌دار',
                 'name'          => 'عتیق الرحمن صابری',
                 'father_name'   => 'عبدالحنان صابری',
                 'emp_code'      => 'EMP-001',
@@ -24,19 +25,6 @@ class EmployeesTableSeeder extends Seeder
                 'phone2'        => null,
                 'email'         => null,
                 'address'       => 'تخار - تالقان',
-                'signature'     => null,
-                'info'          => null
-            ],
-            [
-                'name'          => 'محبوب الرحمن صابری',
-                'father_name'   => 'محمد الله صابری',
-                'emp_code'      => 'EMP-002',
-                'nid_number'    => '1399-1003-15450',
-                'birth_date'    => '1376/01/28',
-                'phone'         => '0711481544',
-                'phone2'        => null,
-                'email'         => null,
-                'address'       => 'تخار - رستاق',
                 'signature'     => null,
                 'info'          => null
             ]

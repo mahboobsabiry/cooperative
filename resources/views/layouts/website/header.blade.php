@@ -9,7 +9,7 @@
                         <span><i class="fa fa-phone"></i>{{ $setting['address'] ?? '1st New Street, Ankara' }}</span>
                         <!-- Phone Number -->
                         <a href="callto:{{ $setting['phone'] ?? '' }}"><i class="fa fa-phone"></i>{{ $setting['phone'] ?? '' }}</a>
-                        @if($setting['secondPhone']) <a href="callto:{{ $setting['secondPhone'] ?? '' }}">{{ $setting['secondPhone'] ?? '' }}</a>@endif
+                        @if(!empty($setting['secondPhone'])) <a href="callto:{{ $setting['secondPhone'] ?? '' }}">{{ $setting['secondPhone'] ?? '' }}</a>@endif
                         <!-- Email Address -->
                         <a href="mailto:{{ $setting['email'] ?? '' }}"><i class="fa fa-envelope-o"></i>{{ $setting['email'] ?? '' }}</a>
                     </p>
