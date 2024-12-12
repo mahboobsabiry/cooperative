@@ -93,6 +93,41 @@ class SettingsTableSeeder extends Seeder
                 'value_fa'  => 'services@beamdanismanlik.com.tr',
                 'value_ar'  => 'services@beamdanismanlik.com.tr',
                 'value_en'  => 'services@beamdanismanlik.com.tr',
+            ],
+            [
+                'key'	=> 'educationTxt',
+                'value_tr'  => 'Sizlere en iyi ve en uygun eğitim hizmetlerini sunuyoruz. İlkokuldan koleje ve üniversiteye.',
+                'value_fa'  => 'ما بهترین و راحت ترین خدمات تحصیلی را برای شما فراهم می‌کنیم. از مکتب ابتدائیه شروع تا کالیج و دانشگاه.',
+                'value_ar'  => 'نحن نقدم لك أفضل الخدمات التعليمية وأكثرها ملاءمة. من المدرسة الابتدائية إلى الكلية والجامعة.',
+                'value_en'  => 'We provide the best and comfortable education services for our people. From School to College and University.',
+            ],
+            [
+                'key'	=> 'tourTxt',
+                'value_tr'  => 'Turizm hizmetlerimizle Türkiye\'nin her yerinde en huzurlu yerlerini ziyaret edebilirsiniz.',
+                'value_fa'  => 'با خدمات گردشگری ما شما می‌توانید پرآرامش ترین مکان ها را در هرجای ترکیه دیدار نمایید.',
+                'value_ar'  => 'مع خدماتنا السياحية، يمكنك زيارة الأماكن الأكثر هدوءًا في أي مكان في تركيا.',
+                'value_en'  => 'With tour services you can visit beautiful and heart-touching places all over Turkey.',
+            ],
+            [
+                'key'	=> 'healthTxt',
+                'value_tr'  => 'Sıcak ve sağlıklı görünün. Bedenin sağlığı Allah\'ın nimetinin bir parçasıdır. Bu alanda eşsiz hizmetlerimizden yararlanabilirsiniz.',
+                'value_fa'  => 'خود را گرم و صحتمند نگاه کنید. سلامتی بدن جزئی از نعمات پروردگار است. شما می‌توانید از خدمات بی‌نظیر ما در این عرصه بهره‌مند شوید.',
+                'value_ar'  => 'تبدو دافئة وصحية. صحة الجسد من نعم الله. يمكنك الاستفادة من خدماتنا الفريدة في هذا المجال.',
+                'value_en'  => 'Keep yourself warm and heal your body, you can enjoy our best services in this area.',
+            ],
+            [
+                'key'	=> 'realEstateTxt',
+                'value_tr'  => 'Türkiye\'nin en iyi lokasyonlarında bulunan gayrimenkul ve arsa alım satımı alanında danışmanlık hizmetlerimizden yararlanabilirsiniz.',
+                'value_fa'  => 'شما میتوانید در عرصه خرید و تجارت املاک و زمین که در بهترین موقعیت های ترکیه قرار دارند، از خدمات مشورتی ما مستفید شوید.',
+                'value_ar'  => 'يمكنكم الاستفادة من خدماتنا الاستشارية في مجال شراء وتجارة العقارات والأراضي الواقعة في أفضل المواقع في تركيا.',
+                'value_en'  => 'You can buy and trade with the best houses and villas located in the best part of Turkey-Land.',
+            ],
+            [
+                'key'	=> 'translationTxt',
+                'value_tr'  => 'Çeviri hizmetlerimizden yararlanarak her türlü makale, metin ve kitabı, hatta kendi metinlerinizi bile istediğiniz dile hızlı ve doğru bir şekilde çevirebilirsiniz.',
+                'value_fa'  => 'شما هر نوع مقالات، متن ها و کتاب های خویش و حتی متون خاص خویش را به صورت سریع و دقیق با استفاده از خدمات ترجمانی ما به هر زبان که میخواهید، ترجمه نمائید',
+                'value_ar'  => 'يمكنك ترجمة أي نوع من المقالات والنصوص والكتب وحتى النصوص الخاصة بك بسرعة ودقة باستخدام خدمات الترجمة لدينا إلى أي لغة تريدها.',
+                'value_en'  => 'You can translate every kind of your articles, posts, books and even any special words with fast and complete services in any languages.',
             ]
         ];
 

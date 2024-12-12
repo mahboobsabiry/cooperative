@@ -290,7 +290,7 @@
                                     </div>
                                     <div class="feature_content">
                                         <h2>@lang('form.education')</h2>
-                                        <p>@lang('website.messages.educationTxt')</p>
+                                        <p>{{ $setting['educationTxt'] ?? '' }}</p>
                                     </div>
                                     <div class="feature_button">
                                         <a href="javascript:void(0);">@lang('website.readMore')</a>
@@ -306,7 +306,7 @@
                                     </div>
                                     <div class="feature_content">
                                         <h2>@lang('website.tour')</h2>
-                                        <p>@lang('website.messages.tourTxt')</p>
+                                        <p>{{ $setting['tourTxt'] ?? '' }}</p>
                                     </div>
                                     <div class="feature_button">
                                         <a href="javascript:void(0)">@lang('website.readMore')</a>
@@ -322,7 +322,7 @@
                                     </div>
                                     <div class="feature_content">
                                         <h2>@lang('website.health')</h2>
-                                        <p>@lang('website.messages.healthTxt')</p>
+                                        <p>{{ $setting['healthTxt'] ?? '' }}</p>
                                     </div>
                                     <div class="feature_button">
                                         <a href="javascript:void(0);">@lang('website.readMore')</a>
@@ -338,7 +338,7 @@
                                     </div>
                                     <div class="feature_content">
                                         <h2>@lang('website.realEstateConsulting')</h2>
-                                        <p>@lang('website.messages.realEstateTxt')</p>
+                                        <p>{{ $setting['realEstateTxt'] ?? '' }}</p>
                                     </div>
                                     <div class="feature_button">
                                         <a href="javascript:void(0)">@lang('website.readMore')</a>
@@ -354,7 +354,7 @@
                                     </div>
                                     <div class="feature_content">
                                         <h2>@lang('website.translationServices')</h2>
-                                        <p>@lang('website.messages.translationTxt')</p>
+                                        <p>{{ $setting['translationTxt'] ?? '' }}</p>
                                     </div>
                                     <div class="feature_button">
                                         <a href="javascript:void(0);">@lang('website.readMore')</a>
