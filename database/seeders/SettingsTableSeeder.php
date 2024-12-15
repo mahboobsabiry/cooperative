@@ -54,10 +54,10 @@ class SettingsTableSeeder extends Seeder
             ],
             [
                 'key'	=> 'youtubeLink',
-                'value_tr'  => 'https://youtube.com/beam.global',
-                'value_fa'  => 'https://youtube.com/beam.global',
-                'value_ar'  => 'https://youtube.com/beam.global',
-                'value_en'  => 'https://youtube.com/beam.global',
+                'value_tr'  => 'https://youtube.com/@BEAM.Global',
+                'value_fa'  => 'https://youtube.com/@BEAM.Global',
+                'value_ar'  => 'https://youtube.com/@BEAM.Global',
+                'value_en'  => 'https://youtube.com/@BEAM.Global',
             ],
             [
                 'key'	=> 'address',
