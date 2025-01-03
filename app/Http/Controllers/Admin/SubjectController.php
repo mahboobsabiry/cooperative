@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Category;
+use App\Models\Admin\Subject;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class SubjectController extends Controller
 {
     // Index
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.index', compact('categories'));
+        $subjects = Subject::all();
+        return view('admin.subjects.index', compact('subjects'));
     }
 
     // Store
@@ -23,39 +23,39 @@ class CategoryController extends Controller
             'info'  => 'nullable'
         ]);
 
-        $category = new Category();
-        $category->title    = $request->title;
-        $category->info     = $request->info;
-        $category->save();
+        $subject = new Subject();
+        $subject->title    = $request->title;
+        $subject->info     = $request->info;
+        $subject->save();
 
-        return redirect()->back()->with([
+        return redirect()->route('admin.subjects.index')->with([
             'message'   => 'موفقانه ثبت شد',
             'alertType' => 'success'
         ]);
     }
 
     // Update
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Subject $subject)
     {
         $request->validate([
             'title' => 'required|max:255',
             'info'  => 'nullable'
         ]);
 
-        $category->title    = $request->title;
-        $category->info     = $request->info;
-        $category->save();
+        $subject->title    = $request->title;
+        $subject->info     = $request->info;
+        $subject->save();
 
-        return redirect()->back()->with([
+        return redirect()->route('admin.subjects.index')->with([
             'message'   => 'موفقانه ویرایش شد',
             'alertType' => 'success'
         ]);
     }
 
     // Delete
-    public function destroy(Request $request, Category $category)
+    public function destroy(Subject $subject)
     {
-        $category->delete();
+        $subject->delete();
 
         return redirect()->back()->with([
             'message'   => 'موفقانه حذف شد',

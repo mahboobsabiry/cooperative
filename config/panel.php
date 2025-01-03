@@ -3,11 +3,11 @@
 return [
     'date_format'         => 'Y-m-d',
     'time_format'         => 'H:i:s',
-    'primary_language'    => 'tr',
+    'primary_language'    => 'fa',
     'available_languages' => [
-        'tr' => 'Turkish',
         'fa' => 'فارسی',
-        'ar' => 'العربیه',
+        'ps' => 'پشتو',
+        'uz' => 'ازبیکی',
         'en' => 'English'
     ],
 ];

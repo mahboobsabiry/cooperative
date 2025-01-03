@@ -3,10 +3,10 @@
         <!-- Logo -->
         <div class="main-header-left">
             <a class="main-logo d-lg-none" href="{{ route('admin.dashboard') }}">
-                <img src="{{ asset('assets/images/beam.png') }}" class="header-brand-img desktop-logo" alt="logo">
-                <img src="{{ asset('assets/images/beam.png') }}" class="header-brand-img icon-logo" alt="logo">
-                <img src="{{ asset('assets/images/beam.png') }}" class="header-brand-img desktop-logo theme-logo" alt="logo">
-                <img src="{{ asset('assets/images/beam.png') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
+                <img src="{{ asset('assets/images/logo.png') }}" class="header-brand-img desktop-logo" alt="logo">
+                <img src="{{ asset('assets/images/logo.png') }}" class="header-brand-img icon-logo" alt="logo">
+                <img src="{{ asset('assets/images/logo.png') }}" class="header-brand-img desktop-logo theme-logo" alt="logo">
+                <img src="{{ asset('assets/images/logo.png') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
             </a>
             <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
         </div>

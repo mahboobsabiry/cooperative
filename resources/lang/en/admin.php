@@ -49,7 +49,6 @@ return [
         'articles'          => 'Articles',
         'books'             => 'Books',
         'companies'         => 'Companies',
-        'currencies'        => 'Currencies',
         'districts'         => 'Districts',
         'employees'         => 'Employees',
         'galleries'         => 'Galleries',

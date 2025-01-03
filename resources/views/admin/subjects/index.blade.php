@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-@section('title', 'کتگوری ها')
+@section('title', 'مضامین')
 @section('extra_css')
     <!---DataTables css-->
     <link href="{{ asset('backend/assets/plugins/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
@@ -13,10 +13,11 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">{{ __('کتگوری ها') }}</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">{{ __('مضامین') }}</h2>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('کتگوری ها') }}</li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('مضامین') }}</li>
                 </ol>
             </div>
 
@@ -27,7 +28,7 @@
                    data-toggle="modal" href="#new_record">
                     <i class="fe fe-plus-circle"></i> @lang('global.new')
                 </a>
-                @include('admin.categories.create')
+                @include('admin.subjects.create')
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -44,13 +45,16 @@
 
                         <!-- Table Title -->
                         <div>
-                            <h6 class="card-title mb-1">{{ __('کتگوری ها') }} ({{ $categories->count() }})</h6>
-                            <p class="text-muted card-sub-title">Exporting data from a table can often be a key part of a complex application. The Buttons extension for DataTables provides three plug-ins that provide overlapping functionality for data export:</p>
+                            <h6 class="card-title font-weight-bold mb-1">{{ __('مضامین') }} ({{ $subjects->count() }})</h6>
+                            <p class="text-muted card-sub-title">Exporting data from a table can often be a key part of
+                                a complex application. The Buttons extension for DataTables provides three plug-ins that
+                                provide overlapping functionality for data export:</p>
                         </div>
 
                         <!-- Table -->
                         <div class="table-responsive">
-                            <table id="exportexample" class="table table-bordered border-t0 key-buttons text-nowrap w-100" >
+                            <table id="exportexample"
+                                   class="table table-bordered border-t0 key-buttons text-nowrap w-100">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -62,25 +66,26 @@
                                 </thead>
 
                                 <tbody>
-                                @foreach($categories as $category)
+                                @foreach($subjects as $subject)
                                     <tr>
-                                        @include('admin.categories.ed')
+                                        @include('admin.subjects.ed')
                                         <td>
                                             @if(app()->getLocale() == 'en')
                                                 {{ $loop->iteration }}
                                             @else
-                                                <span class="tx-bold">{{ \Morilog\Jalali\CalendarUtils::convertNumbers($loop->iteration) }}</span>
+                                                <span
+                                                    class="tx-bold">{{ \Morilog\Jalali\CalendarUtils::convertNumbers($loop->iteration) }}</span>
                                             @endif
                                         </td>
-                                        <td>{{ $category->title }}</td>
-                                        <td>{{ \Illuminate\Support\Str::limit($category->info, 200, '...') }}</td>
+                                        <td>{{ $subject->title }}</td>
+                                        <td>{{ \Illuminate\Support\Str::limit($subject->info, 200, '...') }}</td>
                                         <td>
                                             @if(app()->getLocale() == 'en')
-                                                {{ date_format($category->created_at, 'Y-F-d / h:i A') }}
+                                                {{ date_format($subject->created_at, 'Y-F-d / h:i A') }}
                                             @else
                                                 <span class="tx-bold">
                                                 @php
-                                                    $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d / h:i A - %A', strtotime($categories->created_at)); // 1395-02-19
+                                                    $date = \Morilog\Jalali\CalendarUtils::strftime('Y-m-d / h:i A - %A', strtotime($subject->created_at)); // 1395-02-19
                                                     echo \Morilog\Jalali\CalendarUtils::convertNumbers($date);
                                                 @endphp
                                                 </span>
@@ -88,12 +93,16 @@
                                         </td>
                                         <td>
                                             <!-- Edit -->
-                                            <a class="modal-effect btn btn-sm ripple btn-info" data-effect="effect-sign" data-toggle="modal" href="#edit_record{{ $category->id }}" title="@lang('global.edit')">
+                                            <a class="modal-effect btn btn-sm ripple btn-info" data-effect="effect-sign"
+                                               data-toggle="modal" href="#edit_record{{ $subject->id }}"
+                                               title="@lang('global.edit')">
                                                 <i class="fe fe-edit"></i>
                                             </a>
 
                                             <!-- Delete -->
-                                            <a class="modal-effect btn btn-sm ripple btn-danger" data-effect="effect-sign" data-toggle="modal" href="#delete_record{{ $category->id }}" title="@lang('global.delete')">
+                                            <a class="modal-effect btn btn-sm ripple btn-danger"
+                                               data-effect="effect-sign" data-toggle="modal"
+                                               href="#delete_record{{ $subject->id }}" title="@lang('global.delete')">
                                                 <i class="fe fe-delete"></i>
                                             </a>
                                         </td>

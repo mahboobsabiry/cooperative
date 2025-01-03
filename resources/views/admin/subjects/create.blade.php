@@ -3,12 +3,12 @@
         <div class="modal-content modal-content-demo">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h6 class="modal-title">ثبت کتگوری جدید <i class="fe fe-plus-circle"></i></h6>
+                <h6 class="modal-title">@lang('global.add') <i class="fe fe-plus-circle"></i></h6>
                 <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.categories.store') }}" class="" data-parsley-validate="">
+            <form method="post" action="{{ route('admin.subjects.store') }}" class="" data-parsley-validate="">
                 @csrf
                 <div class="modal-body">
                     <!-- Title -->
@@ -24,7 +24,7 @@
                     <!-- Info -->
                     <div class="form-group @error('info') has-danger @enderror">
                         <label class="form-label">@lang('global.extraInfo'): <span class="tx-danger">*</span></label>
-                        <textarea id="info" class="form-control @error('info') form-control-danger @enderror" name="info" placeholder="@lang('global.extraInfo')" required>{{ old('info') }}</textarea>
+                        <textarea id="info" class="form-control @error('info') form-control-danger @enderror" name="info" placeholder="@lang('global.extraInfo')">{{ old('info') }}</textarea>
 
                         @error('info')
                         <div class="invalid-feedback">{{ $message }}</div>

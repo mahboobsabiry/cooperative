@@ -10,10 +10,10 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Favicon -->
-        <link rel="icon" href="{{ asset('img/beam.png') }}" type="image/x-icon"/>
+        <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/x-icon"/>
 
         <!-- Title -->
-        <title>@yield('title', trans('website.title'))</title>
+        <title>@yield('title', 'کتابخانه')</title>
 
         <!---Fontawesome css-->
         <link href="{{ asset('backend/assets/plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">

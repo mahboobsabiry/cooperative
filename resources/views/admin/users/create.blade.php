@@ -114,9 +114,7 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Password -->
-                                    </div>
 
-                                    <div class="col-md-6">
                                         <!-- Information -->
                                         <div class="form-group @error('info') has-danger @enderror">
                                             <p class="mb-2">@lang('global.extraInfo'):</p>
@@ -127,7 +125,9 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Information -->
+                                    </div>
 
+                                    <div class="col-md-6">
                                         <!-- Avatar -->
                                         <div class="form-group @error('avatar') has-danger @enderror" id="avatar_div">
                                             <p class="mb-2">@lang('form.avatar'):</p>
@@ -219,43 +219,6 @@
             if($('input[type="checkbox"]').parents('.checkboxes')){
                 $('input[type="checkbox"]').prop('checked', '')
             }
-        });
-
-        // Select Employee
-        $(document).ready(function() {
-            $(document).on('change', '#employee_id', function () {
-                var employee_id = $(this).val();
-                var a = $("#name").parent();
-                var b = $("#username").parent();
-                var c = $("#phone").parent();
-                var d = $("#email").parent();
-
-                if (!employee_id == '') {
-                    $("#avatar_div").hide();
-                    $.ajax({
-                        type: 'get',
-                        url: '{{ route('admin.users.select.employee') }}',
-                        data: { 'employee_id': employee_id },
-                        dataType: 'json',
-                        success: function (data) {
-                            a.find('#name').val(data.employee_name);
-                            b.find('#username').val(data.employee_emp_code);
-                            c.find('#phone').val(data.employee_phone);
-                            d.find('#email').val(data.employee_email);
-                        },
-                        error: function () {
-                            alert("ERROR");
-                            $(".errorMsg").html(data.error);
-                        }
-                    });
-                } else {
-                    a.find('#name').val("");
-                    b.find('#username').val("");
-                    c.find('#phone').val("");
-                    d.find('#email').val("");
-                    $("#avatar_div").show();
-                }
-            });
         });
     </script>
 @endsection

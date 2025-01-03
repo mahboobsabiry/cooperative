@@ -45,7 +45,7 @@ return [
         'updatedBookMsg'    => 'Book has been updated successfully!',
     ],
 
-    'categories' => [
+    'subjects' => [
         'addedRecordMsg'      => 'Added successfully!',
         'updatedRecordMsg'    => 'Updated successfully!',
         'deletedRecordMsg'    => 'Deleted successfully!'

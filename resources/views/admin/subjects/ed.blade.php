@@ -1,5 +1,5 @@
 <!-- Edit -->
-<div class="modal" id="edit_record{{ $category->id }}">
+<div class="modal" id="edit_record{{ $subject->id }}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo">
             <!-- Modal Header -->
@@ -9,14 +9,14 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.categories.update', $category->id) }}" class="" data-parsley-validate="">
+            <form method="post" action="{{ route('admin.subjects.update', $subject->id) }}" class="" data-parsley-validate="">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
                     <!-- Title -->
                     <div class="form-group @error('title') has-danger @enderror">
                         <label class="form-label">@lang('form.title'): <span class="tx-danger">*</span></label>
-                        <input type="text" id="title" class="form-control @error('title') form-control-danger @enderror" name="title" value="{{ $category->title ?? old('title') }}" placeholder="@lang('form.title')" required>
+                        <input type="text" id="title" class="form-control @error('title') form-control-danger @enderror" name="title" value="{{ $subject->title ?? old('title') }}" placeholder="@lang('form.title')" required>
 
                         @error('title')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -26,7 +26,7 @@
                     <!-- Info -->
                     <div class="form-group @error('info') has-danger @enderror">
                         <label class="form-label">@lang('global.extraInfo'): <span class="tx-danger">*</span></label>
-                        <textarea id="info" class="form-control @error('info') form-control-danger @enderror" name="info" placeholder="@lang('global.extraInfo')" required>{{ $category->info ?? old('info') }}</textarea>
+                        <textarea id="info" class="form-control @error('info') form-control-danger @enderror" name="info" placeholder="@lang('global.extraInfo')">{{ $subject->info ?? old('info') }}</textarea>
 
                         @error('info')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -45,17 +45,17 @@
 <!--/==/ End of Edit -->
 
 <!-- Delete -->
-<div class="modal" id="delete_record{{ $setting->id }}">
+<div class="modal" id="delete_record{{ $subject->id }}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h6 class="modal-title">@lang('pages.settings.deleteSetting') <i class="fe fe-delete"></i></h6>
+                <h6 class="modal-title">@lang('global.delete') <i class="fe fe-delete"></i></h6>
                 <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.settings.destroy', $setting->id) }}" class="" data-parsley-validate="">
+            <form method="post" action="{{ route('admin.subjects.destroy', $subject->id) }}" class="" data-parsley-validate="">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">

@@ -110,9 +110,7 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Email -->
-                                    </div>
 
-                                    <div class="col-md-6">
                                         <!-- Information -->
                                         <div class="form-group @error('info') has-danger @enderror">
                                             <p class="mb-2">@lang('global.extraInfo'):</p>
@@ -123,7 +121,9 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Information -->
+                                    </div>
 
+                                    <div class="col-md-6">
                                         <!-- Avatar -->
                                         <div class="form-group @error('avatar') has-danger @enderror">
                                             <p class="mb-2">

@@ -10,11 +10,11 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['subject_id', 'name', 'author_name', 'closet_number', 'shelf_number', 'status', 'info'];
 
     // Belongs to Category
-    public function category() : Relation
+    public function subject() : Relation
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Subject::class);
     }
 }

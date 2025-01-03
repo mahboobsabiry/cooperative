@@ -44,7 +44,7 @@
 
                         <!-- Table Title -->
                         <div>
-                            <h6 class="card-title mb-1">@lang('admin.sidebar.permissions')</h6>
+                            <h6 class="card-title font-weight-bold mb-1">@lang('admin.sidebar.settings') ({{ $settings->count() }})</h6>
                             <p class="text-muted card-sub-title">Exporting data from a table can often be a key part of a complex application. The Buttons extension for DataTables provides three plug-ins that provide overlapping functionality for data export:</p>
                         </div>
 

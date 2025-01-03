@@ -2,11 +2,11 @@
     <div class="sidemenu-logo">
         <a class="main-logo" href="{{ route('index') }}" target="_blank">
             <span class="text-capitalize"></span>
-            <img src="{{ asset('img/beam.png') }}" class="header-brand-img desktop-logo" alt="logo">
-            <img src="{{ asset('img/beam.png') }}" class="header-brand-img icon-logo" alt="logo">
-            <img src="{{ asset('img/beam.png') }}" class="header-brand-img desktop-logo theme-logo"
+            <img src="{{ asset('img/logo.png') }}" class="header-brand-img desktop-logo" alt="logo">
+            <img src="{{ asset('img/logo.png') }}" class="header-brand-img icon-logo" alt="logo">
+            <img src="{{ asset('img/logo.png') }}" class="header-brand-img desktop-logo theme-logo"
                  alt="logo">
-            <img src="{{ asset('img/beam.png') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
+            <img src="{{ asset('img/logo.png') }}" class="header-brand-img icon-logo theme-logo" alt="logo">
         </a>
     </div>
 
@@ -21,6 +21,13 @@
             </li>
 
             <li class="nav-label">{{ __('صفحات') }}</li>
+            <!-- Categories -->
+            <li class="nav-item {{ request()->url() == route('admin.subjects.index') || request()->is('admin/subjects/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.subjects.index') }}">
+                    <i class="fe fe-book"></i><span
+                        class="sidemenu-label">مضامین</span>
+                </a>
+            </li>
 
             <!-- Applications -->
             <li class="nav-label">@lang('admin.sidebar.applications')</li>
