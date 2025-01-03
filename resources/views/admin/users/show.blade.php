@@ -87,11 +87,7 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                @if($user->employee)
-                                    <img alt="avatar" src="{{ $user->employee->image ?? asset('assets/images/avatar-default.jpeg') }}">
-                                @else
-                                    <img alt="avatar" src="{{ $user->image ?? asset('assets/images/avatar-default.jpeg') }}">
-                                @endif
+                                <img alt="avatar" src="{{ $user->image ?? asset('assets/images/avatar-default.jpeg') }}">
                             </div>
                         </div>
 
@@ -101,19 +97,13 @@
                                 <span>{{ $user->name }}</span>
                             </h4>
 
-                            @if($user->employee)
-                                <!-- Position -->
-                                <p class="pro-user-desc text-muted mb-1">{{ $user->employee->position ?? '' }}</p>
-                                <!-- Employee Star -->
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
-                                <!--/==/ End of Employee Star -->
-                            @else
-                                {{ $user->username }}
-                            @endif
+                            {{ $user->username }}
+
+                            <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                            <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                            <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                            <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                            <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
                         </div>
                     </div>
                 </div>
@@ -254,26 +244,6 @@
                                     <div class="col">{{ $user->name }}</div>
                                 </div>
 
-                                @if(auth()->user()->employee)
-                                    <!-- Father Name -->
-                                    <div class="row">
-                                        <div class="col-5 col-sm-4">
-                                            <p class="fw-semi-bold mb-1"><strong>@lang('form.fatherName'): </strong></p>
-                                        </div>
-                                        <div class="col">{{ $user->employee->father_name }}</div>
-                                    </div>
-                                @endif
-
-                                @if(auth()->user()->employee)
-                                    <!-- Employee Code -->
-                                    <div class="row">
-                                        <div class="col-5 col-sm-4">
-                                            <p class="fw-semi-bold mb-1"><strong>@lang('form.empCode'): </strong></p>
-                                        </div>
-                                        <div class="col">{{ $user->employee->emp_code }}</div>
-                                    </div>
-                                @endif
-
                                 <!-- Phone Number -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
@@ -281,17 +251,6 @@
                                     </div>
                                     <div class="col"><a href="callto:{{ $user->phone }}">{{ $user->phone }}</a></div>
                                 </div>
-
-                                @if(auth()->user()->employee)
-                                    <!-- Position -->
-                                    <div class="row">
-                                        <div class="col-5 col-sm-4">
-                                            <p class="fw-semi-bold mb-1"><strong>@lang('form.position'): </strong></p>
-                                        </div>
-                                        <div class="col">{{ $user->employee->position }}</div>
-                                    </div>
-
-                                @endif
 
                                 <!-- Description -->
                                 <div class="row">

@@ -26,56 +26,6 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'name'      => 'setting_mgmt' // Manage app settings
-            ],
-
-            // Finance
-            [
-                'name'      => 'finance_view'
-            ],
-            // Currencies
-            [
-                'name'      => 'finance_currency_view'
-            ],
-            [
-                'name'      => 'finance_currency_create'
-            ],
-            [
-                'name'      => 'finance_currency_edit'
-            ],
-            [
-                'name'      => 'finance_currency_delete'
-            ],
-
-            // Budgets
-            [
-                'name'      => 'finance_budget_view'
-            ],
-            [
-                'name'      => 'finance_budget_create'
-            ],
-            [
-                'name'      => 'finance_budget_edit'
-            ],
-            [
-                'name'      => 'finance_budget_delete'
-            ],
-
-            // ========== Office ==========
-            [
-                'name'      => 'office_view'
-            ],
-            // Employees
-            [
-                'name'      => 'office_employee_view'
-            ],
-            [
-                'name'      => 'office_employee_create'
-            ],
-            [
-                'name'      => 'office_employee_edit'
-            ],
-            [
-                'name'      => 'office_employee_delete'
             ]
         ];
 

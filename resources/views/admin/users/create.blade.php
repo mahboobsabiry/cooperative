@@ -60,23 +60,6 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <!-- Employee -->
-                                        <div class="form-group @error('employee_id') has-danger @enderror">
-                                            <p class="mb-2"> کارمند: </p>
-
-                                            <select id="employee_id" name="employee_id" class="form-control select2 @error('employee_id') form-control-danger @enderror">
-                                                <option value="">@lang('form.chooseOne')</option>
-                                                @foreach($employees as $employee)
-                                                    <option value="{{ $employee->id }}">{{ $employee->name }} {{ $employee->last_name }}</option>
-                                                @endforeach
-                                            </select>
-
-                                            @error('employee_id')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                            <span class="text-danger errorMsg"></span>
-                                        </div>
-
                                         <!-- Name -->
                                         <div class="form-group @error('name') has-danger @enderror" id="name_div">
                                             <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
@@ -131,7 +114,9 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Password -->
+                                    </div>
 
+                                    <div class="col-md-6">
                                         <!-- Information -->
                                         <div class="form-group @error('info') has-danger @enderror">
                                             <p class="mb-2">@lang('global.extraInfo'):</p>
@@ -142,9 +127,7 @@
                                             @enderror
                                         </div>
                                         <!--/==/ End of Information -->
-                                    </div>
 
-                                    <div class="col-md-6">
                                         <!-- Avatar -->
                                         <div class="form-group @error('avatar') has-danger @enderror" id="avatar_div">
                                             <p class="mb-2">@lang('form.avatar'):</p>

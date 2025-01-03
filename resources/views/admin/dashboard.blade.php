@@ -5,7 +5,7 @@
         <!-- Page Header -->
         <div class="page-header">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">Welcome to <span class="font-weight-bold text-success" style="font-family: 'Times New Roman'; text-decoration: underline;">BEAM</span>!</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">Welcome to <span class="font-weight-bold text-success" style="font-family: 'Times New Roman'; text-decoration: underline;">LIB</span>!</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('index') }}" target="_blank">@lang('global.home')</a>
                     </li>
@@ -71,42 +71,6 @@
                 </div>
             @endcan
             <!--/==/ End of Users Card -->
-
-            <!-- Employees -->
-            @can('office_employee_view')
-                <div class="col-sm-6 col-xl-3 col-lg-6">
-                    <div class="card custom-card">
-                        <div class="card-body dash1">
-                            <div class="d-flex">
-                                <p class="mb-1 tx-inverse font-weight-bold">@lang('admin.sidebar.employees')</p>
-                                <div class="{{ app()->getLocale() == 'en' ? 'ml-auto' : 'mr-auto' }}">
-                                    <i class="fa fa-user-tie fs-20 text-dark"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="dash-25">{{ count(\App\Models\Office\Employee::all()) }}</h3>
-                            </div>
-                            <div class="progress mb-1">
-                                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100"
-                                     class="progress-bar progress-bar-xs wd-100p bg-dark" role="progressbar"></div>
-                            </div>
-                            <div class="expansion-label d-flex">
-                                <span class="font-weight-bold">@lang('pages.office.activeEmployees')&nbsp;&nbsp;</span>
-                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 1)->count() > \App\Models\Office\Employee::all()->where('status', 0)->count() ? 'up' : 'down' }} text-dark"></i>
-                                    {{ \App\Models\Office\Employee::all()->where('status', 1)->count() }}
-                                </span>
-                                <span class="font-weight-bold">@lang('pages.office.inactiveEmployees')&nbsp;&nbsp;</span>
-                                <span class="{{ app()->getLocale() == 'en' ? 'mr-auto' : 'ml-auto' }}">
-                                    <i class="fas fa-caret-{{ \App\Models\Office\Employee::all()->where('status', 0)->count() > \App\Models\Office\Employee::all()->where('status', 1)->count() ? 'up' : 'down' }} text-dark"></i>
-                                    {{ \App\Models\Office\Employee::all()->where('status', 0)->count() }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endcan
-            <!--/==/ End of Employees -->
         </div>
         <!--/==/ End of First Cards Row -->
 

@@ -18,22 +18,11 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->delete();
         $users = [
             [
-                'employee_id'       => null,
                 'name'              => 'Admin',
-                'username'          => '1402',
-                'email'             => 'admin@admin.com',
-                'password'          => Hash::make('1402'),
-                'info'              => 'This is some information.',
-                'remember_token'    => null
-            ],
-            [
-                'employee_id'       => null,
-                'name'              => 'Semi-Admin',
                 'username'          => '1403',
-                'email'             => 'semi-admin@admin.com',
+                'email'             => 'admin@admin.com',
                 'password'          => Hash::make('1403'),
                 'info'              => 'This is some information.',
-                'is_admin'          => 0,
                 'remember_token'    => null
             ]
         ];

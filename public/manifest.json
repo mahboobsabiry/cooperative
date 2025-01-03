@@ -1,0 +1,17 @@
+{
+    "name": "BEAM",
+    "short_name": "BEAM",
+    "description": "BEAM",
+    "start_url": "http://beam.af",
+    "display": "standalone",
+    "background_color": "#EBEAEA",
+    "theme_color": "#F9FAFB",
+    "orentation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/img/beam.png",
+            "type": "image/png",
+            "sizes": "*"
+        }
+    ]
+}
