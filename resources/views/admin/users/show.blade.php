@@ -87,7 +87,9 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                <img alt="avatar" src="{{ $user->image ?? asset('assets/images/avatar-default.jpeg') }}">
+                                <a href="{{ $user->image ?? asset('assets/images/users/no-image.png') }}" target="_blank">
+                                    <img alt="avatar" src="{{ $user->image ?? asset('assets/images/users/no-image.png') }}">
+                                </a>
                             </div>
                         </div>
 
@@ -250,6 +252,14 @@
                                         <p class="fw-semi-bold mb-1"><strong>@lang('form.phone'): </strong></p>
                                     </div>
                                     <div class="col"><a href="callto:{{ $user->phone }}">{{ $user->phone }}</a></div>
+                                </div>
+
+                                <!-- Email Address -->
+                                <div class="row">
+                                    <div class="col-5 col-sm-4">
+                                        <p class="fw-semi-bold mb-1"><strong>@lang('form.email'): </strong></p>
+                                    </div>
+                                    <div class="col"><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></div>
                                 </div>
 
                                 <!-- Description -->

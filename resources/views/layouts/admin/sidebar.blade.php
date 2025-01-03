@@ -21,11 +21,19 @@
             </li>
 
             <li class="nav-label">{{ __('صفحات') }}</li>
-            <!-- Categories -->
+            <!-- Subjects -->
             <li class="nav-item {{ request()->url() == route('admin.subjects.index') || request()->is('admin/subjects/*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.subjects.index') }}">
                     <i class="fe fe-book"></i><span
                         class="sidemenu-label">مضامین</span>
+                </a>
+            </li>
+
+            <!-- Books -->
+            <li class="nav-item {{ request()->url() == route('admin.books.index') || request()->is('admin/books/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.books.index') }}">
+                    <i class="fe fe-book-open"></i><span
+                        class="sidemenu-label">کتاب ها</span>
                 </a>
             </li>
 

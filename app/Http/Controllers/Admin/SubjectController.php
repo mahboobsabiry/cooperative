@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Book;
 use App\Models\Admin\Subject;
 use Illuminate\Http\Request;
 
@@ -32,6 +33,12 @@ class SubjectController extends Controller
             'message'   => 'موفقانه ثبت شد',
             'alertType' => 'success'
         ]);
+    }
+
+    // Show
+    public function show(Subject $subject)
+    {
+        return view('admin.subjects.show', compact('subject'));
     }
 
     // Update

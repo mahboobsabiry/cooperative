@@ -29,18 +29,6 @@ class UserController extends Controller
         ]);
     }
 
-    // Index
-    public function activeUsers()
-    {
-        $users = User::all()->where('status', 1);
-        return view('admin.users.active', compact('users'));
-    }
-
-    public function inactiveUsers()
-    {
-        $users = User::all()->where('status', 0);
-        return view('admin.users.inactive', compact('users'));
-    }
     public function activities($id)
     {
         $user = User::findOrFail($id);
@@ -65,6 +53,19 @@ class UserController extends Controller
     {
         // Store into users table
         $user = new User();
+
+        // If has Avatar Image
+        if ($request->hasFile('avatar')) {
+            $img = $request->file('avatar');
+            if ($img->isValid()) {
+                $extension = $img->getClientOriginalExtension();
+                $imgName = rand(11111, 99999) . '.' . $extension;
+                $imgPath = public_path('assets/images/users/') . $imgName;
+                Image::make($img)->save($imgPath);
+            }
+
+            $user->avatar = $imgName;
+        }
         $user->name         = $request->name;
         $user->username     = $request->username;
         $user->phone        = $request->phone;
@@ -73,13 +74,6 @@ class UserController extends Controller
 
         $user->info         = $request->info;
         $user->save();
-
-        //  Has File && Save Avatar Image
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $fileName = 'user-' . time() . rand(111, 99999) . '.' . $avatar->getClientOriginalExtension();
-            $user->storeImage($avatar->storeAs('users', $fileName, 'public'));
-        }
 
         $user->roles()->sync($request->input('roles', []));
         $user->permissions()->sync($request->input('permissions', []));
@@ -121,7 +115,7 @@ class UserController extends Controller
         $ID = decrypt($id);
         $user = User::find($ID);
         $request->validate([
-            'avatar'    => 'image|mimes:jpg,png',
+            'avatar'    => 'nullable|image|mimes:jpg,png',
             'name'      => 'required',
             'username'  => 'required|unique:users,username,' . $user->id,
             'phone'     => 'nullable|min:8|max:15|unique:users,phone,' . $user->id,
@@ -133,6 +127,28 @@ class UserController extends Controller
             'info'      => 'nullable'
         ]);
 
+        // If has Avatar Image
+        if ($request->hasFile('avatar')) {
+            $img = $request->file('avatar');
+            if ($img->isValid()) {
+                $extension = $img->getClientOriginalExtension();
+                $imgName = rand(11111, 99999) . '.' . $extension;
+                $imgPath = public_path('assets/images/users/') . $imgName;
+                if ($user->avatar) {
+                    // Delete from path and storage
+                    if (file_exists($imgPath.$user->avatar)) {
+                        unlink($imgPath.$user->avatar);
+                    }
+                }
+
+                Image::make($img)->save($imgPath);
+            }
+
+            $avatar = $imgName;
+        } else {
+            $avatar = $user->avatar;
+        }
+        $user->avatar       = $avatar;
         $user->name         = $request->name;
         $user->username     = $request->username;
         $user->phone        = $request->phone;
@@ -171,7 +187,14 @@ class UserController extends Controller
          */
         $ID = decrypt($id);
         $user = User::find($ID);
+        if ($user->avatar) {
+            $imgPath = public_path('assets/images/users/');
 
+            // Delete from path and storage
+            if (file_exists($imgPath.$user->avatar)) {
+                unlink($imgPath.$user->avatar);
+            }
+        }
         $user->delete();
 
         /**

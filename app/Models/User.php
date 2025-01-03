@@ -3,16 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Asycuda\COAL;
-use App\Models\Examination\Property;
-use App\Models\Office\Employee;
-use App\Models\Warehouse\Assurance;
-use App\Traits\HasPhoto;
-use App\Traits\HasTazkira;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -21,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasPhoto;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +21,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'avatar',
         'name',
         'username',
         'phone',
@@ -58,15 +51,16 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // Morph Photo
-    public function photo(): MorphOne
-    {
-        return $this->morphOne(Photo::class, 'transaction');
-    }
-
     // Activities
     public function activities()
     {
         return Activity::all()->where('causer_id', $this->id);
+    }
+
+    // Avatar Attribute
+    public function getImageAttribute()
+    {
+        $avatar = asset('assets/images/users/' . $this->avatar);
+        return $avatar;
     }
 }

@@ -31,7 +31,7 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Reset Password -->
-                <a class="btn btn-secondary text-white btn-sm" href="{{ route('admin.users.reset_pswd', $user->id) }}" onclick="return confirm('آیا مطمئن هستید؟ رمز عبور به طور خودکار به 14021403 تغییر خواهد کرد.');">
+                <a class="btn btn-secondary text-white btn-sm" href="{{ route('admin.users.reset_pswd', $user->id) }}" onclick="return confirm('آیا مطمئن هستید؟ رمز عبور به طور خودکار به 14031404 تغییر خواهد کرد.');">
                     بازیابی رمز عبور
                     <i class="typcn typcn-lock-open"></i>
                 </a>
@@ -129,7 +129,7 @@
                                             <p class="mb-2">
                                                 <!-- Delete Avatar -->
                                                 <span class="caption">
-                                                <img src="{{ $user->image }}" class="img-fluid float-left" style="height: 30px;">
+                                                <img src="{{ $user->image ?? asset('assets/images/users/no-image.png') }}" class="img-fluid float-left" style="height: 30px;">
                                             </span>
                                                 @lang('form.avatar'):
                                             </p>
