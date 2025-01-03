@@ -67,6 +67,17 @@
                                         </div>
                                         <!--/==/ End of Name -->
 
+                                        <!-- Username -->
+                                        <div class="form-group @error('username') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.username'): <span class="tx-danger">*</span></p>
+                                            <input type="text" id="username" class="form-control @error('username') form-control-danger @enderror" name="username" value="{{ $user->username ?? old('username') }}" placeholder="@lang('form.username')" required>
+
+                                            @error('username')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Name -->
+
                                         <!-- Phone Number -->
                                         <div class="form-group @error('phone') has-danger @enderror">
                                             <p class="mb-2">@lang('form.phone'):</p>
@@ -80,8 +91,8 @@
 
                                         <!-- Email -->
                                         <div class="form-group @error('email') has-danger @enderror">
-                                            <p class="mb-2">@lang('form.email'): <span class="tx-danger">*</span></p>
-                                            <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $user->email ?? old('email') }}" placeholder="@lang('form.email')" required>
+                                            <p class="mb-2">@lang('form.email'):</p>
+                                            <input type="email" id="email" class="form-control @error('email') form-control-danger @enderror" name="email" value="{{ $user->email ?? old('email') }}" placeholder="@lang('form.email')">
 
                                             @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>

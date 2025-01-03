@@ -59,7 +59,7 @@
                     @if(auth()->user()->image)
                         <img alt="@lang('form.avatar')" src="{{ auth()->user()->image }}">
                     @else
-                        <img alt="@lang('form.avatar')" src="{{ asset('assets/images/avatar-default.jpeg') }}">
+                        <img alt="@lang('form.avatar')" src="{{ asset('assets/images/users/no-image.jpeg') }}">
                     @endif
                 </a>
 

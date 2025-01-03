@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 use Spatie\Activitylog\Models\Activity;
 
 class AdminController extends Controller
@@ -108,21 +109,43 @@ class AdminController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            'avatar'    => 'image|mimes:jpg,png',
+            'avatar'    => 'nullable|image|mimes:jpg,png',
             'name'      => 'required|min:2|max:64',
+            'username'  => 'nullable|min:2|max:64|unique:users,username,'.$user->id,
             'phone'     => 'nullable|min:8|max:15|unique:users,phone,'.$user->id,
             'email'     => 'required|min:8|max:128|unique:users,email,'.$user->id,
             'info'      => 'nullable'
         ]);
 
-        $user->update($request->all());
-        //  Has File
+        // If has Avatar Image
         if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $fileName = 'user-' . time() . '.' . $avatar->getClientOriginalExtension();
-            $user->updateImage($avatar->storeAs('users', $fileName, 'public'));
+            $img = $request->file('avatar');
+            if ($img->isValid()) {
+                $extension = $img->getClientOriginalExtension();
+                $imgName = rand(11111, 99999) . '.' . $extension;
+                $imgPath = public_path('assets/images/users/') . $imgName;
+                if ($user->avatar) {
+                    // Delete from path and storage
+                    if (file_exists($imgPath.$user->avatar)) {
+                        unlink($imgPath.$user->avatar);
+                    }
+                }
+
+                Image::make($img)->save($imgPath);
+            }
+
+            $avatar = $imgName;
+        } else {
+            $avatar = $user->avatar;
         }
 
+        $user->avatar   = $avatar;
+        $user->name     = $request->name;
+        $user->username = $request->username;
+        $user->phone    = $request->phone;
+        $user->email    = $request->email;
+        $user->info     = $request->info;
+        $user->save();
         $message = trans('messages.users.updateUserMsg');
 
         return redirect()->route('admin.profile')->with('success', $message);

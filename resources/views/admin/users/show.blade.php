@@ -87,8 +87,8 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                <a href="{{ $user->image ?? asset('assets/images/users/no-image.png') }}" target="_blank">
-                                    <img alt="avatar" src="{{ $user->image ?? asset('assets/images/users/no-image.png') }}">
+                                <a href="{{ $user->image ?? asset('assets/images/users/no-image.jpeg') }}" target="_blank">
+                                    <img alt="avatar" src="{{ $user->image ?? asset('assets/images/users/no-image.jpeg') }}">
                                 </a>
                             </div>
                         </div>
