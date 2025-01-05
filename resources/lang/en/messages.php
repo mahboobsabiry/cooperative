@@ -37,12 +37,12 @@ return [
     ],
 
     'books' => [
-        'addedBookMsg'      => 'Book has been added successfully!',
-        'deletedBookMsg'    => 'Book has been deleted successfully!',
-        'delBookFileMsg'    => 'Book file has been deleted successfully!',
-        'bookActive'        => 'Book has been activated successfully!',
-        'bookInactive'      => 'Book has been inactivated successfully!',
-        'updatedBookMsg'    => 'Book has been updated successfully!',
+        'addedBookMsg'      => 'Deposit has been added successfully!',
+        'deletedBookMsg'    => 'Deposit has been deleted successfully!',
+        'delBookFileMsg'    => 'Deposit file has been deleted successfully!',
+        'bookActive'        => 'Deposit has been activated successfully!',
+        'bookInactive'      => 'Deposit has been inactivated successfully!',
+        'updatedBookMsg'    => 'Deposit has been updated successfully!',
     ],
 
     'subjects' => [

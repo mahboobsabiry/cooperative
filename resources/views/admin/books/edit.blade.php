@@ -62,7 +62,7 @@
                                 @method('PUT')
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <!-- Subject  -->
+                                        <!-- Member  -->
                                         <div class="form-group @error('subject_id') has-danger @enderror">
                                             <p class="mb-2">{{ __('مضمون') }}: <span class="tx-danger">*</span></p>
                                             <select name="subject_id" class="form-control select2">
@@ -76,7 +76,7 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Subject -->
+                                        <!--/==/ End of Member -->
 
                                         <!-- Name -->
                                         <div class="form-group @error('name') has-danger @enderror">

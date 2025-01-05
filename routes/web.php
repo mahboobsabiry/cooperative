@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\BookController;
-use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\DepositController;
+use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
@@ -67,8 +67,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // Settings
     Route::resource('settings', SettingController::class);
 
-    // Subjects
-    Route::resource('subjects', SubjectController::class);
-    // Books
-    Route::resource('books', BookController::class);
+    // Members
+    Route::resource('members', MemberController::class);
+    // Deposits
+    Route::resource('deposits', DepositController::class);
 });

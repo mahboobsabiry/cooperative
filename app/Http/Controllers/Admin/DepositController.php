@@ -3,24 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Book;
-use App\Models\Admin\Subject;
+use App\Models\Admin\Deposit;
+use App\Models\Admin\Member;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
-class BookController extends Controller
+class DepositController extends Controller
 {
     // Index
     public function index()
     {
-        $books = Book::all();
+        $books = Deposit::all();
         return view('admin.books.index', compact('books'));
     }
 
     // Create
     public function create()
     {
-        $subjects = Subject::all();
+        $subjects = Member::all();
         return view('admin.books.create', compact('subjects'));
     }
 
@@ -37,7 +37,7 @@ class BookController extends Controller
         ]);
 
         // Books
-        $book = new Book();
+        $book = new Deposit();
         $book->subject_id   = $request->subject_id;
 
         // If has Image
@@ -67,20 +67,20 @@ class BookController extends Controller
     }
 
     // Show
-    public function show(Book $book)
+    public function show(Deposit $book)
     {
         return view('admin.books.show', compact('book'));
     }
 
     // Edit
-    public function edit(Book $book)
+    public function edit(Deposit $book)
     {
-        $subjects = Subject::all();
+        $subjects = Member::all();
         return view('admin.books.edit', compact('book', 'subjects'));
     }
 
     // Update
-    public function update(Request $request, Book $book)
+    public function update(Request $request, Deposit $book)
     {
         $request->validate([
             'subject_id'    => 'required',
@@ -132,7 +132,7 @@ class BookController extends Controller
     }
 
     // Delete
-    public function destroy(Book $book)
+    public function destroy(Deposit $book)
     {
         // Get category Image path
         $imgPath = public_path('assets/images/books/');

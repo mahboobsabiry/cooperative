@@ -65,7 +65,7 @@ return [
     'startDuty'		=> 'Start Duty',
     'startJob'		=> 'Start Job',
     'status'		=> 'Status',
-    'subject'		=> 'Subject',
+    'subject'		=> 'Member',
     'symbol'		=> 'Symbol',
     'tin'           => 'TIN',
     'title'         => 'Title',

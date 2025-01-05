@@ -148,7 +148,7 @@
                                     <div class="col">ID-{{ $book->id }}</div>
                                 </div>
 
-                                <!-- Subject -->
+                                <!-- Member -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
                                         <p class="fw-semi-bold mb-1"><strong>{{ __('مضمون') }}: </strong></p>

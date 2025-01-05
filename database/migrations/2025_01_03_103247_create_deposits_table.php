@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('deposits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('subject_id');
-            $table->string('img')->nullable();
-            $table->string('name');
-            $table->string('author_name')->nullable();
-            $table->integer('closet_number')->default(1);
-            $table->integer('shelf_number')->default(1);
+            $table->unsignedBigInteger('member_id');
+            $table->string('title');
+            $table->double('amount');
+            $table->integer('year');
+            $table->string('month');
+            $table->integer('month_number');
             $table->tinyInteger('status')->default(1);
             $table->text('info')->nullable();
             $table->timestamps();
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('deposits');
     }
 };
