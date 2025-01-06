@@ -36,7 +36,7 @@ return [
         'updatedArticleMsg'    => 'مقاله موفقانه بروزرسانی شد!',
     ],
 
-    'books' => [
+    'deposits' => [
         'addedBookMsg'      => 'کتاب موفقانه ثبت شد!',
         'deletedBookMsg'    => 'کتاب موفقانه حذف شد!',
         'delBookFileMsg'    => 'فایل موفقانه حذف شد!',

@@ -39,7 +39,7 @@
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                <a class="btn ripple btn-primary" href="{{ route('admin.books.create') }}">
+                <a class="btn ripple btn-primary" href="{{ route('admin.deposits.create') }}">
                     <i class="fe fe-plus-circle"></i> @lang('global.new')
                 </a>
             </div>
@@ -82,9 +82,9 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <!-- Image -->
-                                        <td><img src="{{ $user->image ?? asset('assets/images/books/no-image.png') }}" width="50" class="rounded-1"></td>
+                                        <td><img src="{{ $user->image ?? asset('assets/images/deposits/no-image.png') }}" width="50" class="rounded-1"></td>
                                         <!-- Name -->
-                                        <td><a href="{{ route('admin.books.show', $book->id) }}">{{ $book->name }}</a></td>
+                                        <td><a href="{{ route('admin.deposits.show', $book->id) }}">{{ $book->name }}</a></td>
                                         <td>{{ $book->author_name }}</td>
                                         <!-- Closet Number -->
                                         <td class="tx-sm-12-f">{{ $book->closet_number }}</td>

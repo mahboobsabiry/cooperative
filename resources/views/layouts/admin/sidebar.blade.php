@@ -21,19 +21,19 @@
             </li>
 
             <li class="nav-label">{{ __('صفحات') }}</li>
-            <!-- Subjects -->
-            <li class="nav-item {{ request()->url() == route('admin.subjects.index') || request()->is('admin/subjects/*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.subjects.index') }}">
-                    <i class="fe fe-book"></i><span
-                        class="sidemenu-label">مضامین</span>
+            <!-- Members -->
+            <li class="nav-item {{ request()->url() == route('admin.members.index') || request()->is('admin/members/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.members.index') }}">
+                    <i class="fe fe-users"></i><span
+                        class="sidemenu-label">اعضاء</span>
                 </a>
             </li>
 
-            <!-- Books -->
-            <li class="nav-item {{ request()->url() == route('admin.books.index') || request()->is('admin/books/*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.books.index') }}">
-                    <i class="fe fe-book-open"></i><span
-                        class="sidemenu-label">کتاب ها</span>
+            <!-- Deposits -->
+            <li class="nav-item {{ request()->url() == route('admin.deposits.index') || request()->is('admin/deposits/*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.deposits.index') }}">
+                    <i class="fe fe-dollar-sign"></i><span
+                        class="sidemenu-label">سپرده‌ها</span>
                 </a>
             </li>
 

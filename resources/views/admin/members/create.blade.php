@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'ثبت کتاب جدید')
+@section('title', 'ثبت عضو جدید')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---Fileupload css-->
@@ -23,8 +23,8 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a
                             href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.books.index') }}">کتاب‌ها</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">@lang('global.new')</li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.members.index') }}">اعضاء</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('ثبت عضو جدید') }}</li>
                 </ol>
             </div>
 
@@ -52,32 +52,16 @@
 
                             <!-- Form Title -->
                             <div>
-                                <h6 class="card-title font-weight-bold mb-1">ثبت کتاب جدید</h6>
-                                <p class="text-muted card-sub-title">تعداد کتاب های موجود
-                                    ({{ \App\Models\Admin\Deposit::all()->count() }})</p>
+                                <h6 class="card-title font-weight-bold mb-1">{{ __('ثبت عضو جدید') }}</h6>
+                                <p class="text-muted card-sub-title">{{ __('تعداد اعضای موجود') }}
+                                    ({{ \App\Models\Admin\Member::all()->count() }})</p>
                             </div>
 
                             <!-- Form -->
-                            <form method="post" action="{{ route('admin.books.store') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('admin.members.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <!-- Member  -->
-                                        <div class="form-group @error('subject_id') has-danger @enderror">
-                                            <p class="mb-2">{{ __('مضمون') }}: <span class="tx-danger">*</span></p>
-                                            <select name="subject_id" class="form-control select2">
-                                                <option value="">@lang('form.chooseOne')</option>
-                                                @foreach($subjects as $subject)
-                                                    <option value="{{ $subject->id }}">{{ $subject->title }}</option>
-                                                @endforeach
-                                            </select>
-
-                                            @error('subject_id')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!--/==/ End of Member -->
-
                                         <!-- Name -->
                                         <div class="form-group @error('name') has-danger @enderror" id="name_div">
                                             <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
@@ -91,49 +75,91 @@
                                         </div>
                                         <!--/==/ End of Name -->
 
-                                        <!-- Author Name -->
-                                        <div class="form-group @error('author_name') has-danger @enderror"
+                                        <!-- Father Name -->
+                                        <div class="form-group @error('father_name') has-danger @enderror"
                                              id="author_name">
-                                            <p class="mb-2">{{ __('نام مولف') }}:</p>
-                                            <input type="text" id="author_name"
-                                                   class="form-control @error('author_name') form-control-danger @enderror"
-                                                   name="author_name" value="{{ old('author_name') }}">
+                                            <p class="mb-2">@lang('form.fatherName'): <span class="tx-danger">*</span></p>
+                                            <input type="text" id="father_name"
+                                                   class="form-control @error('father_name') form-control-danger @enderror"
+                                                   name="father_name" value="{{ old('father_name') }}" required>
 
-                                            @error('author_name')
+                                            @error('father_name')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Author Name -->
+                                        <!--/==/ End of Father Name -->
 
-                                        <!-- Closet Number -->
-                                        <div class="form-group @error('closet_number') has-danger @enderror">
-                                            <p class="mb-2">{{ __('نمبر الماری') }}: <span class="tx-danger">*</span>
-                                            </p>
-                                            <input type="number" id="closet_number"
-                                                   class="form-control @error('closet_number') form-control-danger @enderror"
-                                                   name="closet_number" value="{{ old('closet_number') }}" required>
+                                        <!-- Position -->
+                                        <div class="form-group @error('position') has-danger @enderror">
+                                            <p class="mb-2">{{ __('وظیفه') }}:</p>
+                                            <input type="number" id="position"
+                                                   class="form-control @error('position') form-control-danger @enderror"
+                                                   name="position" value="{{ old('position') }}">
 
-                                            @error('closet_number')
+                                            @error('position')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Closet Number -->
+                                        <!--/==/ End of Position -->
 
-                                        <!-- Shelf Number -->
-                                        <div class="form-group @error('shelf_number') has-danger @enderror">
-                                            <p class="mb-2">{{ __('نمبر قفسه') }}: <span class="tx-danger">*</span></p>
-                                            <input type="number" id="shelf_number"
-                                                   class="form-control @error('shelf_number') form-control-danger @enderror"
-                                                   name="shelf_number" value="{{ old('shelf_number') }}" required>
+                                        <!-- Phone Number -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group @error('phone') has-danger @enderror">
+                                                    <p class="mb-2">{{ __('شماره تماس') }}: <span class="tx-danger">*</span></p>
+                                                    <input type="text" id="phone"
+                                                           class="form-control @error('phone') form-control-danger @enderror"
+                                                           name="phone" value="{{ old('phone') }}" required>
 
-                                            @error('shelf_number')
+                                                    @error('phone')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group @error('phone2') has-danger @enderror">
+                                                    <p class="mb-2">{{ __('شماره تماس') }} 2:</p>
+                                                    <input type="text" id="phone2"
+                                                           class="form-control @error('phone2') form-control-danger @enderror"
+                                                           name="phone2" value="{{ old('phone2') }}">
+
+                                                    @error('phone2')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/==/ End of Phone Number -->
+
+                                        <!-- Email -->
+                                        <div class="form-group @error('email') has-danger @enderror">
+                                            <p class="mb-2">@lang('form.email'):</p>
+                                            <input type="email" id="email"
+                                                   class="form-control @error('email') form-control-danger @enderror"
+                                                   name="email" value="{{ old('email') }}">
+
+                                            @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Shelf Number -->
+                                        <!--/==/ End of Email -->
                                     </div>
 
                                     <div class="col-md-6">
+                                        <!-- Address -->
+                                        <div class="form-group @error('address') has-danger @enderror">
+                                            <p class="mb-2">@lang('global.address'):</p>
+                                            <input type="text" id="address"
+                                                   class="form-control @error('address') form-control-danger @enderror"
+                                                   name="address" value="{{ old('address') }}">
+
+                                            @error('address')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <!--/==/ End of Address -->
+
                                         <!-- Information -->
                                         <div class="form-group @error('info') has-danger @enderror">
                                             <p class="mb-2">@lang('global.extraInfo'):</p>
@@ -147,16 +173,16 @@
                                         </div>
                                         <!--/==/ End of Information -->
 
-                                        <!-- Image -->
-                                        <div class="form-group @error('img') has-danger @enderror">
-                                            <p class="mb-2">{{ __('تصویر پوش کتاب') }}:</p>
-                                            <input type="file" class="dropify" name="img" accept="image/*"
+                                        <!-- Avatar Image -->
+                                        <div class="form-group @error('avatar') has-danger @enderror">
+                                            <p class="mb-2">{{ __('عکس') }}:</p>
+                                            <input type="file" class="dropify" name="avatar" accept="image/*"
                                                    data-height="200"/>
-                                            @error('img')
+                                            @error('avatar')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <!--/==/ End of Image -->
+                                        <!--/==/ End of Avatar Image -->
 
                                         <div class="form-group float-left">
                                             <button class="btn ripple btn-primary rounded-2"
@@ -197,18 +223,5 @@
 
     <!-- Form-elements js-->
     <script src="{{ asset('backend/assets/js/form-elements.js') }}"></script>
-    <script>
-        $('.select-all').click(function () {
-            if ($('input[type="checkbox"]').parents('.checkboxes')) {
-                $('input[type="checkbox"]').prop('checked', 'checked')
-            }
-        });
-
-        $('.deselect-all').click(function () {
-            if ($('input[type="checkbox"]').parents('.checkboxes')) {
-                $('input[type="checkbox"]').prop('checked', '')
-            }
-        });
-    </script>
 @endsection
 <!--/==/ End of Extra Scripts -->

@@ -44,7 +44,7 @@ class MemberController extends Controller
             if ($img->isValid()) {
                 $extension = $img->getClientOriginalExtension();
                 $imgName = rand(11111, 99999) . '.' . $extension;
-                $path = public_path('assets/images/books/');
+                $path = public_path('assets/images/members/');
                 $imgPath = $path . $imgName;
                 Image::make($img)->save($imgPath);
             }
@@ -71,13 +71,13 @@ class MemberController extends Controller
     // Show
     public function show(Member $member)
     {
-        return view('admin.subjects.show', compact('member'));
+        return view('admin.members.show', compact('member'));
     }
 
     // Edit
     public function edit(Member $member)
     {
-        return view('admin.subjects.edit', compact('member'));
+        return view('admin.members.edit', compact('member'));
     }
 
     // Update
@@ -99,7 +99,7 @@ class MemberController extends Controller
             if ($img->isValid()) {
                 $extension = $img->getClientOriginalExtension();
                 $imgName = rand(11111, 99999) . '.' . $extension;
-                $path = public_path('assets/images/books/');
+                $path = public_path('assets/images/members/');
                 $imgPath = $path . $imgName;
 
                 // Delete from path and storage
@@ -137,7 +137,7 @@ class MemberController extends Controller
     // Delete
     public function destroy(Member $member)
     {
-        $path = public_path('assets/images/books/');
+        $path = public_path('assets/images/members/');
 
         // Delete from path and storage
         if ($member->avatar) {

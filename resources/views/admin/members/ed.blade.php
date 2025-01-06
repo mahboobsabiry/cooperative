@@ -9,7 +9,7 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.subjects.update', $subject->id) }}" class="" data-parsley-validate="">
+            <form method="post" action="{{ route('admin.members.update', $subject->id) }}" class="" data-parsley-validate="">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
@@ -55,7 +55,7 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.subjects.destroy', $subject->id) }}" class="" data-parsley-validate="">
+            <form method="post" action="{{ route('admin.members.destroy', $subject->id) }}" class="" data-parsley-validate="">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">

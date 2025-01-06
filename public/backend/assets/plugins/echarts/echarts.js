@@ -24535,7 +24535,7 @@ function createListFromArray(data, seriesModel, ecModel) {
             if (categoryAxesModels && categoryAxesModels[dimName]) {
                 // If given value is a category string
                 if (typeof val === 'string') {
-                    // Lazy get subjects
+                    // Lazy get members
                     categories[dimName] = categories[dimName]
                         || categoryAxesModels[dimName].getCategories();
                     val = indexOf(categories[dimName], val);
@@ -25974,7 +25974,7 @@ var axisModelCommonMixin = {
     },
 
     /**
-     * Get subjects
+     * Get members
      */
     getCategories: function () {
         return this.get('type') === 'category'
@@ -39949,9 +39949,9 @@ var CATEGORY_DEFAULT_VISUAL_INDEX = -1;
  *                                             ],
  *                                            required when mappingMethod is 'piecewise'.
  *                                            Visual for only each piece can be specified.
- * @param {Array.<string|Object>=} [option.subjects] ['cate1', 'cate2']
+ * @param {Array.<string|Object>=} [option.members] ['cate1', 'cate2']
  *                                            required when mappingMethod is 'category'.
- *                                            If no option.subjects, subjects is set
+ *                                            If no option.members, members is set
  *                                            as [0, 1, 2, ...].
  * @param {boolean} [option.loop=false] Whether loop mapping when mappingMethod is 'category'.
  * @param {(Array|Object|*)} [option.visual]  Visual data.
@@ -40019,7 +40019,7 @@ var VisualMapping = function (option) {
     else if (mappingMethod === 'category') {
         thisOption.categories
             ? preprocessForSpecifiedCategory(thisOption)
-            // subjects is ordinal when thisOption.subjects not specified,
+            // members is ordinal when thisOption.members not specified,
             // which need no more preprocess except normalize visual.
             : normalizeVisualRange(thisOption, true);
     }
@@ -40167,7 +40167,7 @@ function preprocessForPiecewise(thisOption) {
 }
 
 function preprocessForSpecifiedCategory(thisOption) {
-    // Hash subjects.
+    // Hash members.
     var categories = thisOption.categories;
     var visual = thisOption.visual;
 
@@ -40193,7 +40193,7 @@ function preprocessForSpecifiedCategory(thisOption) {
         visual = setVisualToOption(thisOption, visualArr);
     }
 
-    // Remove subjects that has no visual,
+    // Remove members that has no visual,
     // then we can mapping them to CATEGORY_DEFAULT_VISUAL_INDEX.
     for (var i = categories.length - 1; i >= 0; i--) {
         if (visual[i] == null) {
@@ -40481,7 +40481,7 @@ VisualMapping.findPieceIndex = function (value, pieceList, findClosestWhenOutsid
                 // It is supposed to compare value according to value type of dimension,
                 // but currently value type can exactly be string or number.
                 // Compromise for numeric-like string (like '12'), especially
-                // in the case that visualMap.subjects is ['22', '33'].
+                // in the case that visualMap.members is ['22', '33'].
                 || (typeof pieceValue === 'string' && pieceValue === value + '')
             ) {
                 return i;
@@ -40715,7 +40715,7 @@ function buildVisualMapping(
     ) {
         opt.mappingMethod = 'category';
         opt.loop = true;
-        // subjects is ordinal, so do not set opt.subjects.
+        // members is ordinal, so do not set opt.members.
     }
     else {
         opt.mappingMethod = 'linear';
@@ -42117,7 +42117,7 @@ var GraphSeries = extendSeriesModel({
         nodeScaleRatio: 0.6,
         // cursor: null,
 
-        // subjects: [],
+        // members: [],
 
         // data: []
         // Or
@@ -65831,7 +65831,7 @@ var VisualMapModel = extendComponentModel({
 
                 if (symbolSize != null) {
                     var max = -Infinity;
-                    // symbolSize can be object when subjects defined.
+                    // symbolSize can be object when members defined.
                     eachVisual(symbolSize, function (value) {
                         value > max && (max = value);
                     });
@@ -67193,7 +67193,7 @@ var PiecewiseModel = VisualMapModel.extend({
     /**
      * Order Rule:
      *
-     * option.subjects / option.pieces / option.text / option.selected:
+     * option.members / option.pieces / option.text / option.selected:
      *     If !option.inverse,
      *     Order when vertical: ['top', ..., 'bottom'].
      *     Order when horizontal: ['left', ..., 'right'].
@@ -67216,7 +67216,7 @@ var PiecewiseModel = VisualMapModel.extend({
     defaultOption: {
         selected: null,             // Object. If not specified, means selected.
                                     // When pieces and splitNumber: {'0': true, '5': true}
-                                    // When subjects: {'cate1': false, 'cate3': true}
+                                    // When members: {'cate1': false, 'cate3': true}
                                     // When selected === false, means all unselected.
 
         minOpen: false,             // Whether include values that smaller than `min`.
@@ -67234,7 +67234,7 @@ var PiecewiseModel = VisualMapModel.extend({
                                     // symbol, symbolSize}, which customize the range or visual
                                     // coding of the certain piece. Besides, see "Order Rule".
         categories: null,           // category names, like: ['some1', 'some2', 'some3'].
-                                    // Attr min/max are ignored when subjects set. See "Order Rule"
+                                    // Attr min/max are ignored when members set. See "Order Rule"
         splitNumber: 5,             // If set to 5, auto split five pieces equally.
                                     // If set to 0 and component type not set, component type will be
                                     // determined as "continuous". (It is less reasonable but for ec2
@@ -67264,7 +67264,7 @@ var PiecewiseModel = VisualMapModel.extend({
         this.resetExtent();
 
         /**
-         * 'pieces', 'subjects', 'splitNumber'
+         * 'pieces', 'members', 'splitNumber'
          * @type {string}
          */
         var mode = this._mode = this._determineMode();

@@ -57,7 +57,7 @@ return [
         'tourTxt'       => 'With tour services you can visit beautiful and heart-touching places all over Turkey.',
         'healthTxt'     => 'Keep yourself warm and heal your body, you can enjoy our best services in this area.',
         'realEstateTxt' => 'You can buy and trade with the best houses and villas located in the best part of Turkey-Land.',
-        'translationTxt'    => 'You can translate every kind of your articles, posts, books and even any special words with fast and complete services in any languages.',
+        'translationTxt'    => 'You can translate every kind of your articles, posts, deposits and even any special words with fast and complete services in any languages.',
 
         // Blog Posts
         'blogTitle'     => 'Latest Blog Posts',
@@ -76,7 +76,7 @@ return [
         'testimonialTxt2'   => 'I feel very different with amazing view that I visited during my journey with you. I think everybody need this kind of travel in their life at least once in a year.',
         'testimonialPerson2'=> 'Arif Ahmadi',
         'testimonialPJob2'  => 'Teacher',
-        'testimonialTxt3'   => 'I was searching about the best and fast way to translate my articles and my books. Then I found you and made me the happiest person in the world.',
+        'testimonialTxt3'   => 'I was searching about the best and fast way to translate my articles and my deposits. Then I found you and made me the happiest person in the world.',
         'testimonialPerson3'=> 'Prof. Farid Nigma',
         'testimonialPJob3'  => 'Researcher',
 

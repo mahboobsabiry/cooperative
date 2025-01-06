@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', trans('global.edit') . ' ' . $book->name)
+@section('title', 'ثبت کتاب جدید')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---Fileupload css-->
@@ -19,19 +19,19 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">@lang('global.edit')</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">@lang('global.new')</h2>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.books.index') }}">{{ __('کتاب‌ها') }}</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('admin.books.show', $book->id) }}">@lang('global.details')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">@lang('global.edit') {{ $book->name }}</li>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.deposits.index') }}">کتاب‌ها</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@lang('global.new')</li>
                 </ol>
             </div>
 
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Back -->
-                <a class="btn btn-dark btn-sm" href="{{ url()->previous() }}">
+                <a class="btn btn-orange btn-sm btn-with-icon" href="{{ url()->previous() }}">
                     @lang('global.back')
                     <i class="fe fe-arrow-left"></i>
                 </a>
@@ -52,14 +52,14 @@
 
                             <!-- Form Title -->
                             <div>
-                                <h6 class="card-title font-weight-bold mb-1">@lang('global.edit') {{ $book->name }}</h6>
-                                <p class="text-muted card-sub-title">You can add new record here.</p>
+                                <h6 class="card-title font-weight-bold mb-1">ثبت کتاب جدید</h6>
+                                <p class="text-muted card-sub-title">تعداد کتاب های موجود
+                                    ({{ \App\Models\Admin\Deposit::all()->count() }})</p>
                             </div>
 
                             <!-- Form -->
-                            <form method="post" action="{{ route('admin.books.update', $book->id) }}" data-parsley-validate="" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('admin.deposits.store') }}" enctype="multipart/form-data">
                                 @csrf
-                                @method('PUT')
                                 <div class="row">
                                     <div class="col-md-6">
                                         <!-- Member  -->
@@ -68,7 +68,7 @@
                                             <select name="subject_id" class="form-control select2">
                                                 <option value="">@lang('form.chooseOne')</option>
                                                 @foreach($subjects as $subject)
-                                                    <option value="{{ $subject->id }}" {{ $book->subject_id == $subject->id ? 'selected' : '' }}>{{ $subject->title }}</option>
+                                                    <option value="{{ $subject->id }}">{{ $subject->title }}</option>
                                                 @endforeach
                                             </select>
 
@@ -79,9 +79,11 @@
                                         <!--/==/ End of Member -->
 
                                         <!-- Name -->
-                                        <div class="form-group @error('name') has-danger @enderror">
+                                        <div class="form-group @error('name') has-danger @enderror" id="name_div">
                                             <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
-                                            <input type="text" id="name" class="form-control @error('name') form-control-danger @enderror" name="name" value="{{ $book->name ?? old('name') }}" required>
+                                            <input type="text" id="name"
+                                                   class="form-control @error('name') form-control-danger @enderror"
+                                                   name="name" value="{{ old('name') }}" required>
 
                                             @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -90,9 +92,12 @@
                                         <!--/==/ End of Name -->
 
                                         <!-- Author Name -->
-                                        <div class="form-group @error('author_name') has-danger @enderror" id="author_name">
+                                        <div class="form-group @error('author_name') has-danger @enderror"
+                                             id="author_name">
                                             <p class="mb-2">{{ __('نام مولف') }}:</p>
-                                            <input type="text" id="author_name" class="form-control @error('author_name') form-control-danger @enderror" name="author_name" value="{{ $book->author_name ?? old('author_name') }}">
+                                            <input type="text" id="author_name"
+                                                   class="form-control @error('author_name') form-control-danger @enderror"
+                                                   name="author_name" value="{{ old('author_name') }}">
 
                                             @error('author_name')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -102,8 +107,11 @@
 
                                         <!-- Closet Number -->
                                         <div class="form-group @error('closet_number') has-danger @enderror">
-                                            <p class="mb-2">{{ __('نمبر الماری') }}: <span class="tx-danger">*</span></p>
-                                            <input type="number" id="closet_number" class="form-control @error('closet_number') form-control-danger @enderror" name="closet_number" value="{{ $book->closet_number ?? old('closet_number') }}" required>
+                                            <p class="mb-2">{{ __('نمبر الماری') }}: <span class="tx-danger">*</span>
+                                            </p>
+                                            <input type="number" id="closet_number"
+                                                   class="form-control @error('closet_number') form-control-danger @enderror"
+                                                   name="closet_number" value="{{ old('closet_number') }}" required>
 
                                             @error('closet_number')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -114,7 +122,9 @@
                                         <!-- Shelf Number -->
                                         <div class="form-group @error('shelf_number') has-danger @enderror">
                                             <p class="mb-2">{{ __('نمبر قفسه') }}: <span class="tx-danger">*</span></p>
-                                            <input type="number" id="shelf_number" class="form-control @error('shelf_number') form-control-danger @enderror" name="shelf_number" value="{{ $book->shelf_number ?? old('shelf_number') }}" required>
+                                            <input type="number" id="shelf_number"
+                                                   class="form-control @error('shelf_number') form-control-danger @enderror"
+                                                   name="shelf_number" value="{{ old('shelf_number') }}" required>
 
                                             @error('shelf_number')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -127,7 +137,9 @@
                                         <!-- Information -->
                                         <div class="form-group @error('info') has-danger @enderror">
                                             <p class="mb-2">@lang('global.extraInfo'):</p>
-                                            <textarea name="info" class="form-control @error('info') form-control-danger @enderror" placeholder="@lang('global.extraInfo')">{{ $book->info ?? old('info') }}</textarea>
+                                            <textarea name="info"
+                                                      class="form-control @error('info') form-control-danger @enderror"
+                                                      placeholder="@lang('global.extraInfo')">{{ old('info') }}</textarea>
 
                                             @error('info')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -138,7 +150,8 @@
                                         <!-- Image -->
                                         <div class="form-group @error('img') has-danger @enderror">
                                             <p class="mb-2">{{ __('تصویر پوش کتاب') }}:</p>
-                                            <input type="file" class="dropify" name="img" accept="image/*" data-height="200" />
+                                            <input type="file" class="dropify" name="img" accept="image/*"
+                                                   data-height="200"/>
                                             @error('img')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -146,7 +159,8 @@
                                         <!--/==/ End of Image -->
 
                                         <div class="form-group float-left">
-                                            <button class="btn ripple btn-primary rounded-2" type="submit">@lang('global.save')</button>
+                                            <button class="btn ripple btn-primary rounded-2"
+                                                    type="submit">@lang('global.save')</button>
                                         </div>
                                     </div>
                                 </div>
@@ -182,9 +196,19 @@
     <script src="{{ asset('backend/assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
 
     <!-- Form-elements js-->
-    <script src="{{ asset('backend/assets/js/advanced-form-elements.js') }}"></script>
-
-    <!-- Form-elements js-->
     <script src="{{ asset('backend/assets/js/form-elements.js') }}"></script>
+    <script>
+        $('.select-all').click(function () {
+            if ($('input[type="checkbox"]').parents('.checkboxes')) {
+                $('input[type="checkbox"]').prop('checked', 'checked')
+            }
+        });
+
+        $('.deselect-all').click(function () {
+            if ($('input[type="checkbox"]').parents('.checkboxes')) {
+                $('input[type="checkbox"]').prop('checked', '')
+            }
+        });
+    </script>
 @endsection
 <!--/==/ End of Extra Scripts -->

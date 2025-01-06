@@ -36,7 +36,7 @@ return [
         'updatedArticleMsg'    => 'Article has been updated successfully!',
     ],
 
-    'books' => [
+    'deposits' => [
         'addedBookMsg'      => 'Deposit has been added successfully!',
         'deletedBookMsg'    => 'Deposit has been deleted successfully!',
         'delBookFileMsg'    => 'Deposit file has been deleted successfully!',
@@ -45,7 +45,7 @@ return [
         'updatedBookMsg'    => 'Deposit has been updated successfully!',
     ],
 
-    'subjects' => [
+    'members' => [
         'addedRecordMsg'      => 'Added successfully!',
         'updatedRecordMsg'    => 'Updated successfully!',
         'deletedRecordMsg'    => 'Deleted successfully!'

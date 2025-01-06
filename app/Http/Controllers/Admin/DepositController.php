@@ -14,14 +14,14 @@ class DepositController extends Controller
     public function index()
     {
         $books = Deposit::all();
-        return view('admin.books.index', compact('books'));
+        return view('admin.deposits.index', compact('books'));
     }
 
     // Create
     public function create()
     {
         $subjects = Member::all();
-        return view('admin.books.create', compact('subjects'));
+        return view('admin.deposits.create', compact('subjects'));
     }
 
     // Store
@@ -46,7 +46,7 @@ class DepositController extends Controller
             if ($img->isValid()) {
                 $extension = $img->getClientOriginalExtension();
                 $imgName = rand(11111, 99999) . '.' . $extension;
-                $imgPath = public_path('assets/images/books/') . $imgName;
+                $imgPath = public_path('assets/images/deposits/') . $imgName;
                 Image::make($img)->save($imgPath);
             }
 
@@ -60,7 +60,7 @@ class DepositController extends Controller
         $book->info             = $request->info;
         $book->save();
 
-        return redirect()->route('admin.books.index')->with([
+        return redirect()->route('admin.deposits.index')->with([
             'message'   => 'موفقانه ثبت شد',
             'alertType' => 'success'
         ]);
@@ -69,14 +69,14 @@ class DepositController extends Controller
     // Show
     public function show(Deposit $book)
     {
-        return view('admin.books.show', compact('book'));
+        return view('admin.deposits.show', compact('book'));
     }
 
     // Edit
     public function edit(Deposit $book)
     {
         $subjects = Member::all();
-        return view('admin.books.edit', compact('book', 'subjects'));
+        return view('admin.deposits.edit', compact('book', 'subjects'));
     }
 
     // Update
@@ -100,7 +100,7 @@ class DepositController extends Controller
             if ($img->isValid()) {
                 $extension = $img->getClientOriginalExtension();
                 $imgName = rand(11111, 99999) . '.' . $extension;
-                $path = public_path('assets/images/books/');
+                $path = public_path('assets/images/deposits/');
                 $imgPath = $path . $imgName;
 
                 // Delete from path and storage
@@ -125,7 +125,7 @@ class DepositController extends Controller
         $book->info             = $request->info;
         $book->save();
 
-        return redirect()->route('admin.books.index')->with([
+        return redirect()->route('admin.deposits.index')->with([
             'message'   => 'موفقانه ویرایش شد',
             'alertType' => 'success'
         ]);
@@ -135,7 +135,7 @@ class DepositController extends Controller
     public function destroy(Deposit $book)
     {
         // Get category Image path
-        $imgPath = public_path('assets/images/books/');
+        $imgPath = public_path('assets/images/deposits/');
 
         // Delete from path and storage
         if (file_exists($imgPath.$book->img)) {
@@ -144,7 +144,7 @@ class DepositController extends Controller
 
         $book->delete();
 
-        return redirect()->route('admin.books.index')->with([
+        return redirect()->route('admin.deposits.index')->with([
             'message'   => 'موفقانه حذف شد',
             'alertType' => 'success'
         ]);

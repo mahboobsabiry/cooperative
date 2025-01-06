@@ -13,7 +13,7 @@
         <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/x-icon"/>
 
         <!-- Title -->
-        <title>@yield('title', 'کتابخانه')</title>
+        <title>@yield('title', 'گروه تعاون')</title>
 
         <!---Fontawesome css-->
         <link href="{{ asset('backend/assets/plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">

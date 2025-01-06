@@ -46,7 +46,7 @@ return [
     'sidebar' => [
         'applications'      => 'آپلیکیشن ها',
         'articles'          => 'مقالات',
-        'books'             => 'کتاب‌ها',
+        'deposits'             => 'کتاب‌ها',
         'companies'         => 'شرکت ها',
         'districts'         => 'ولسوالی ها',
         'employees'         => 'کارمندان',

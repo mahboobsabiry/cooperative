@@ -47,7 +47,7 @@ return [
     'sidebar' => [
         'applications'      => 'Applications',
         'articles'          => 'Articles',
-        'books'             => 'Books',
+        'deposits'             => 'Books',
         'companies'         => 'Companies',
         'districts'         => 'Districts',
         'employees'         => 'Employees',

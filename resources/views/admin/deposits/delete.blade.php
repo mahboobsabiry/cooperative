@@ -9,7 +9,7 @@
             </div>
 
             <!-- Form -->
-            <form method="post" action="{{ route('admin.books.destroy', $book->id) }}" data-parsley-validate="">
+            <form method="post" action="{{ route('admin.deposits.destroy', $book->id) }}" data-parsley-validate="">
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">

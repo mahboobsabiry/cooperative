@@ -1,11 +1,11 @@
 @extends('layouts.admin.master')
-@section('title', 'کتابخانه' . ' ~ ' . trans('admin.dashboard.dashboard'))
+@section('title', 'سیستم گروه تعاون' . ' ~ ' . trans('admin.dashboard.dashboard'))
 @section('content')
     <div class="container-fluid">
         <!-- Page Header -->
         <div class="page-header">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">Welcome to <span class="font-weight-bold text-success" style="font-family: 'Times New Roman'; text-decoration: underline;">LIB</span>!</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">خوش آمدید به  <span class="font-weight-bold text-success">{{ __('سیستم گروه تعاون') }}</span>!</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('index') }}" target="_blank">@lang('global.home')</a>
                     </li>
