@@ -59,6 +59,8 @@
                                     <th>#</th>
                                     <th>@lang('form.image')</th>
                                     <th>@lang('form.name')</th>
+                                    <th>@lang('form.fatherName')</th>
+                                    <th>{{ __('مجموع سپرده های موجود') }}</th>
                                     <th>@lang('global.extraInfo')</th>
                                     <th>@lang('global.createdDate')</th>
                                 </tr>
@@ -73,12 +75,14 @@
                                                 <img src="{{ $member->image ?? asset('assets/images/members/no-image.jpeg') }}" alt="" width="60">
                                             </a>
                                         </td>
-                                        <!-- Title -->
+                                        <!-- Name -->
                                         <td>
                                             <a href="{{ route('admin.members.show', $member->id) }}">
                                                 {{ $member->name }}
                                             </a>
                                         </td>
+                                        <td>{{ $member->father_name }}</td>
+                                        <td>{{ $member->deposit_amount }}<sup>اف</sup></td>
                                         <!-- Info -->
                                         <td>{{ \Illuminate\Support\Str::limit($member->info, 200, '...') }}</td>
                                         <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($member->created_at)) }}</td>

@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'ثبت عضو جدید')
+@section('title', 'ویرایش عضو ' . $member->name)
 <!-- Extra Styles -->
 @section('extra_css')
     <!---Fileupload css-->
@@ -19,12 +19,12 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">@lang('global.new')</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">@lang('global.edit')</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a
                             href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('admin.members.index') }}">اعضاء</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('ثبت عضو جدید') }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('ویرایش عضو') }} {{ $member->name }}</li>
                 </ol>
             </div>
 
@@ -52,14 +52,15 @@
 
                             <!-- Form Title -->
                             <div>
-                                <h6 class="card-title font-weight-bold mb-1">{{ __('ثبت عضو جدید') }}</h6>
+                                <h6 class="card-title font-weight-bold mb-1">{{ __('ویرایش عضو') }}</h6>
                                 <p class="text-muted card-sub-title">{{ __('تعداد اعضای موجود') }}
                                     ({{ \App\Models\Admin\Member::all()->count() }})</p>
                             </div>
 
                             <!-- Form -->
-                            <form method="post" action="{{ route('admin.members.store') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('admin.members.update', $member->id) }}" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="row">
                                     <div class="col-md-6">
                                         <!-- Name -->
@@ -67,7 +68,7 @@
                                             <p class="mb-2">@lang('form.name'): <span class="tx-danger">*</span></p>
                                             <input type="text" id="name"
                                                    class="form-control @error('name') form-control-danger @enderror"
-                                                   name="name" value="{{ old('name') }}" required>
+                                                   name="name" value="{{ $member->name ?? old('name') }}" required>
 
                                             @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -81,7 +82,7 @@
                                             <p class="mb-2">@lang('form.fatherName'): <span class="tx-danger">*</span></p>
                                             <input type="text" id="father_name"
                                                    class="form-control @error('father_name') form-control-danger @enderror"
-                                                   name="father_name" value="{{ old('father_name') }}" required>
+                                                   name="father_name" value="{{ $member->father_name ?? old('father_name') }}" required>
 
                                             @error('father_name')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -94,7 +95,7 @@
                                             <p class="mb-2">{{ __('وظیفه') }}:</p>
                                             <input type="text" id="position"
                                                    class="form-control @error('position') form-control-danger @enderror"
-                                                   name="position" value="{{ old('position') }}">
+                                                   name="position" value="{{ $member->position ?? old('position') }}">
 
                                             @error('position')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -109,7 +110,7 @@
                                                     <p class="mb-2">{{ __('شماره تماس') }}: <span class="tx-danger">*</span></p>
                                                     <input type="text" id="phone"
                                                            class="form-control @error('phone') form-control-danger @enderror"
-                                                           name="phone" value="{{ old('phone') }}" required>
+                                                           name="phone" value="{{ $member->phone ?? old('phone') }}" required>
 
                                                     @error('phone')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -122,7 +123,7 @@
                                                     <p class="mb-2">{{ __('شماره تماس') }} 2:</p>
                                                     <input type="text" id="phone2"
                                                            class="form-control @error('phone2') form-control-danger @enderror"
-                                                           name="phone2" value="{{ old('phone2') }}">
+                                                           name="phone2" value="{{ $member->phone2 ?? old('phone2') }}">
 
                                                     @error('phone2')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -137,7 +138,7 @@
                                             <p class="mb-2">@lang('form.email'):</p>
                                             <input type="email" id="email"
                                                    class="form-control @error('email') form-control-danger @enderror"
-                                                   name="email" value="{{ old('email') }}">
+                                                   name="email" value="{{ $member->email ?? old('email') }}">
 
                                             @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -152,7 +153,7 @@
                                             <p class="mb-2">@lang('global.address'):</p>
                                             <input type="text" id="address"
                                                    class="form-control @error('address') form-control-danger @enderror"
-                                                   name="address" value="{{ old('address') }}">
+                                                   name="address" value="{{ $member->address ?? old('address') }}">
 
                                             @error('address')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -165,7 +166,7 @@
                                             <p class="mb-2">@lang('global.extraInfo'):</p>
                                             <textarea name="info"
                                                       class="form-control @error('info') form-control-danger @enderror"
-                                                      placeholder="@lang('global.extraInfo')">{{ old('info') }}</textarea>
+                                                      placeholder="@lang('global.extraInfo')">{{ $member->info ?? old('info') }}</textarea>
 
                                             @error('info')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -178,6 +179,12 @@
                                             <p class="mb-2">{{ __('عکس') }}:</p>
                                             <input type="file" class="dropify" name="avatar" accept="image/*"
                                                    data-height="200"/>
+
+                                            @if($member->avatar)
+                                                <a href="{{ $member->image }}" target="_blank">
+                                                    <img src="{{ $member->image }}" alt="" width="50">
+                                                </a>
+                                            @endif
                                             @error('avatar')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
