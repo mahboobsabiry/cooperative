@@ -68,6 +68,103 @@
         <div class="row">
             <div class="col-md-4">
                 <!-- Right Side -->
+                <div class="">
+                    <!-- Profile Main Info -->
+                    <div class="card custom-card">
+                        <div class="card-body text-center">
+                            <div class="main-profile-overview widget-user-image text-center">
+                                <div class="main-img-user">
+                                    <img alt="avatar"
+                                         src="{{ $member->image ?? asset('assets/images/members/no-image.jpeg') }}">
+                                </div>
+                            </div>
+
+                            <!-- Main Info -->
+                            <div class="item-user pro-user">
+                                <h4 class="pro-user-username text-dark mt-2 mb-0">
+                                    <span>{{ $member->name }}</span>
+                                </h4>
+
+                                <p class="pro-user-desc text-muted mb-1">{{ $member->position }}</p>
+
+                                <!-- Employee Star -->
+                                <p class="user-info-rating">
+                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                    <a href="javascript:void(0);"><i class="fa fa-star text-warning"> </i></a>
+                                </p>
+                                <!--/==/ End of Employee Star -->
+                            </div>
+                        </div>
+                    </div>
+                    <!--/==/ End of Profile Main Info -->
+
+                    <!-- Contact Information -->
+                    <div class="card custom-card">
+                        <div class="card-header custom-card-header">
+                            <div>
+                                <h6 class="card-title tx-15 tx-bold mb-0">
+                                    اطلاعات لازم
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="main-profile-contact-list main-profile-work-list">
+                                <!-- Status -->
+                                <div class="media">
+                                    <div class="media-logo bg-light text-dark">
+                                        <i class="fe fe-message-square"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span>@lang('form.status')</span>
+                                        <div>
+                                            @if($member->status == 1)
+                                                <span class="text-success">@lang('global.active')</span>
+                                            @else
+                                                <span class="text-danger">@lang('global.inactive')</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/==/ End of Status -->
+
+                                <!-- Phone Number -->
+                                <div class="media">
+                                    <div class="media-logo bg-light text-dark">
+                                        <i class="fe fe-smartphone"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span>@lang('form.phone')</span>
+                                        <div>
+                                            <a href="callto:{{ $member->phone }}">{{ $member->phone }}</a>
+                                            @if(!empty($member->phone2))
+                                                , <a href="callto:{{ $member->phone2 }}">{{ $member->phone2 }}</a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/==/ End of Phone Number -->
+
+                                <!-- Email Address -->
+                                <div class="media">
+                                    <div class="media-logo bg-light text-dark">
+                                        <i class="fe fe-mail"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <span>@lang('form.email')</span>
+                                        <div>
+                                            <a href="mailto:{{ $member->email }}" class="ctd">{{ $member->email }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/==/ End of Email Address -->
+                            </div>
+                        </div>
+                    </div>
+                    <!--/==/ End of Contact Information -->
+                </div>
             </div>
             <div class="col-md-8">
                 <!-- Success Message -->
@@ -104,7 +201,7 @@
                 <!-- Details -->
                 <div class="card mb-2">
                     <!-- Personal Information -->
-                    <div class="card-header tx-15 tx-bold">
+                    <div class="card-header tx-15 font-weight-bold">
                         @lang('global.details')
                     </div>
 

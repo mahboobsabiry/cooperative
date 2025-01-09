@@ -36,19 +36,15 @@
             <div class="col-lg-12">
                 <!-- Table Card -->
                 <div class="card custom-card overflow-hidden">
+                    <!-- Table Title -->
+                    <div class="card-header">
+                        <h6 class="card-title font-weight-bold mb-1">{{ __('اعضاء') }} ({{ $members->count() }})</h6>
+                    </div>
+
                     <!-- Table Card Body -->
                     <div class="card-body">
                         <!-- Messages -->
                         @include('admin.inc.alerts')
-
-                        <!-- Table Title -->
-                        <div>
-                            <h6 class="card-title font-weight-bold mb-1">{{ __('اعضاء') }} ({{ $members->count() }}
-                                )</h6>
-                            <p class="text-muted card-sub-title">Exporting data from a table can often be a key part of
-                                a complex application. The Buttons extension for DataTables provides three plug-ins that
-                                provide overlapping functionality for data export:</p>
-                        </div>
 
                         <!-- Table -->
                         <div class="table-responsive">
