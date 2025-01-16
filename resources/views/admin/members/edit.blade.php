@@ -180,10 +180,19 @@
                                             <input type="file" class="dropify" name="avatar" accept="image/*"
                                                    data-height="200"/>
 
+                                            <!-- Delete Avatar -->
                                             @if($member->avatar)
-                                                <a href="{{ $member->image }}" target="_blank">
-                                                    <img src="{{ $member->image }}" alt="" width="50">
-                                                </a>
+                                                <span class="caption">
+                                                    <a href="{{ $member->image }}" target="_blank">
+                                                        <img src="{{ $member->image }}" class="img-fluid float-left"
+                                                             style="height: 30px;">
+                                                    </a>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <!-- Delete -->
+                                                    <a onclick="return confirm('{{ trans('global.areYouSure') }}');" class="text-danger float-left" href="{{ route('admin.members.delete.avatar', $member->id) }}" title="@lang('global.delete')">
+                                                        <i class="fe fe-trash"></i>
+                                                    </a>
+                                                </span>
                                             @endif
                                             @error('avatar')
                                             <div class="invalid-feedback">{{ $message }}</div>

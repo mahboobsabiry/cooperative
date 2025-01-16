@@ -56,7 +56,7 @@
             <!-- Profile -->
             <div class="dropdown main-profile-menu">
                 <a class="main-img-user" href="javascript:void(0);">
-                    @if(auth()->user()->image)
+                    @if(auth()->user()->avatar)
                         <img alt="@lang('form.avatar')" src="{{ auth()->user()->image }}">
                     @else
                         <img alt="@lang('form.avatar')" src="{{ asset('assets/images/users/no-image.jpeg') }}">

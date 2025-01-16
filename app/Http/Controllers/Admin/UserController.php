@@ -159,13 +159,6 @@ class UserController extends Controller
 
         $user->roles()->sync($request->input('roles', []));
         $user->permissions()->sync($request->input('permissions', []));
-        //  Has File
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $fileName = 'user-' . time() . '.' . $avatar->getClientOriginalExtension();
-            $user->updateImage($avatar->storeAs('users', $fileName, 'public'));
-        }
-
         activity('updated')
             ->causedBy(Auth::user())
             ->performedOn($user)
@@ -175,6 +168,28 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.show', encrypt($user->id))->with([
             'message'   => $message,
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Delete User Avatar
+    public function deleteUserAvatar($id)
+    {
+        $user = User::find($id);
+        if ($user->avatar) {
+            $img = asset('assets/images/users/' . $user->avatar);
+            // Delete from path and storage
+            if (file_exists($img)) {
+                unlink($img);
+            }
+        }
+
+        $user->update([
+            'avatar'    => null,
+        ]);
+
+        return back()->with([
+            'message'   => 'تصویر موفقانه حذف شد',
             'alertType' => 'success'
         ]);
     }

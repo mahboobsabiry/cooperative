@@ -66,10 +66,15 @@
                                 @foreach($members as $member)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <!-- IMAGE -->
                                         <td>
-                                            <a href="{{ $member->image ?? asset('assets/images/members/no-image.jpeg') }}" target="_blank">
-                                                <img src="{{ $member->image ?? asset('assets/images/members/no-image.jpeg') }}" alt="" width="60">
-                                            </a>
+                                            @if($member->avatar)
+                                                <a href="{{ $member->image }}" target="_blank">
+                                                    <img src="{{ $member->image }}" alt="" width="60">
+                                                </a>
+                                            @else
+                                                <img src="{{ asset('assets/images/members/no-image.jpeg') }}" alt="" width="60">
+                                            @endif
                                         </td>
                                         <!-- Name -->
                                         <td>

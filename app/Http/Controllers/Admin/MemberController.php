@@ -62,7 +62,7 @@ class MemberController extends Controller
         $member->info           = $request->info;
         $member->save();
 
-        return redirect()->route('admin.members.index')->with([
+        return redirect()->route('admin.members.show', $member->id)->with([
             'message'   => 'موفقانه ثبت شد',
             'alertType' => 'success'
         ]);
@@ -128,8 +128,30 @@ class MemberController extends Controller
         $member->info           = $request->info;
         $member->save();
 
-        return redirect()->route('admin.members.index')->with([
+        return redirect()->route('admin.members.show', $member->id)->with([
             'message'   => 'موفقانه ویرایش شد',
+            'alertType' => 'success'
+        ]);
+    }
+
+    // Delete Member Avatar
+    public function deleteMemberAvatar($id)
+    {
+        $member = Member::find($id);
+        if ($member->avatar) {
+            $img = asset('assets/images/members/' . $member->avatar);
+            // Delete from path and storage
+            if (file_exists($img)) {
+                unlink($img);
+            }
+        }
+
+        $member->update([
+            'avatar'    => null,
+        ]);
+
+        return back()->with([
+            'message'   => 'تصویر موفقانه حذف شد',
             'alertType' => 'success'
         ]);
     }

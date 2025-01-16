@@ -48,7 +48,11 @@
                     <div class="card-body text-center">
                         <div class="main-profile-overview widget-user-image text-center">
                             <div class="main-img-user">
-                                <img alt="avatar" src="{{ $user->image ?? asset('assets/images/users/no-image.jpeg') }}">
+                                @if($user->avatar)
+                                    <img alt="avatar" src="{{ $user->image }}">
+                                @else
+                                    <img alt="avatar" src="{{ asset('assets/images/users/no-image.jpeg') }}">
+                                @endif
                             </div>
                         </div>
                         <div class="item-user pro-user">
@@ -267,6 +271,5 @@
 @section('extra_js')
     <script src="{{ asset('backend/assets/js/pages/user-scripts.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/toastr/toastr.min.js') }}"></script>
-
 @endsection
 <!--/==/ End of Extra Scripts -->

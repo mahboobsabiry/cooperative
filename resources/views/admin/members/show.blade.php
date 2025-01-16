@@ -74,8 +74,11 @@
                         <div class="card-body text-center">
                             <div class="main-profile-overview widget-user-image text-center">
                                 <div class="main-img-user">
-                                    <img alt="avatar"
-                                         src="{{ $member->image ?? asset('assets/images/members/no-image.jpeg') }}">
+                                    @if($member->avatar)
+                                        <img alt="avatar" src="{{ $member->image }}">
+                                    @else
+                                        <img alt="avatar" src="{{ asset('assets/images/members/no-image.jpeg') }}">
+                                    @endif
                                 </div>
                             </div>
 

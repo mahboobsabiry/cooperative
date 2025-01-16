@@ -128,9 +128,19 @@
                                         <div class="form-group @error('avatar') has-danger @enderror">
                                             <p class="mb-2">
                                                 <!-- Delete Avatar -->
-                                                <span class="caption">
-                                                <img src="{{ $user->image ?? asset('assets/images/users/no-image.png') }}" class="img-fluid float-left" style="height: 30px;">
-                                            </span>
+                                                @if($user->avatar)
+                                                    <span class="caption">
+                                                        <a href="{{ $user->image }}" target="_blank">
+                                                            <img src="{{ $user->image }}" class="img-fluid float-left"
+                                                                 style="height: 30px;">
+                                                        </a>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <!-- Delete -->
+                                                        <a onclick="return confirm('{{ trans('global.areYouSure') }}');" class="text-danger float-left" href="{{ route('admin.users.delete.avatar', $user->id) }}" title="@lang('global.delete')">
+                                                            <i class="fe fe-trash"></i>
+                                                        </a>
+                                                    </span>
+                                                 @endif
                                                 @lang('form.avatar'):
                                             </p>
                                             <p></p>

@@ -57,6 +57,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // Users
     Route::resource('users', UserController::class);
+    Route::get('delete-user-avatar/{id}', [UserController::class, 'deleteUserAvatar'])->name('users.delete.avatar');
     // Update User Status
     Route::post('update-user-status', [UserController::class, 'updateUserStatus'])->name('updateUserStatus');
     // Reset Password
@@ -69,6 +70,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // Members
     Route::resource('members', MemberController::class);
+    Route::get('delete-member-avatar/{id}', [MemberController::class, 'deleteMemberAvatar'])->name('members.delete.avatar');
     // Deposits
     Route::resource('deposits', DepositController::class);
 });
