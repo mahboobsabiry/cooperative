@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 <!-- Title -->
-@section('title', 'کتاب‌ها')
+@section('title', 'سپرده‌ها')
 <!-- Extra Styles -->
 @section('extra_css')
     <!---DataTables css-->
@@ -28,20 +28,17 @@
         <div class="page-header">
             <!-- Breadcrumb -->
             <div>
-                <h2 class="main-content-title tx-24 mg-b-5">کتاب‌ها</h2>
+                <h2 class="main-content-title tx-24 mg-b-5">{{ __('سپرده‌ها') }}</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a
                             href="{{ route('admin.dashboard') }}">@lang('admin.dashboard.dashboard')</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">کتاب‌ها</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('سپرده‌ها') }}</li>
                 </ol>
             </div>
 
             <!-- Btn List -->
             <div class="btn btn-list">
                 <!-- Add New -->
-                <a class="btn ripple btn-primary" href="{{ route('admin.deposits.create') }}">
-                    <i class="fe fe-plus-circle"></i> @lang('global.new')
-                </a>
             </div>
         </div>
         <!--/==/ End of Page Header -->
@@ -58,7 +55,7 @@
 
                         <!-- Table Title -->
                         <div>
-                            <h6 class="card-title font-weight-bold mb-1">{{ __('کتاب ها') }} ({{ $books->count() }})</h6>
+                            <h6 class="card-title font-weight-bold mb-1">{{ __('سپرده‌ها') }} ({{ $deposits->sum('amount') }})</h6>
                             <p class="text-muted card-sub-title"></p>
                         </div>
 
@@ -68,30 +65,26 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-center">{{ __('تصویر پوش کتاب') }}</th>
-                                    <th class="text-center">@lang('form.name')</th>
-                                    <th class="text-center">{{ __('مولف') }}</th>
-                                    <th class="text-center">نمبر الماری</th>
-                                    <th class="text-center">نمبر قفسه</th>
-                                    <th class="text-center">@lang('global.createdDate')</th>
+                                    <th class="text-center">{{ __('سال') }}</th>
+                                    <th class="text-center">{{ __('ماه') }}</th>
+                                    <th class="text-center">{{ __('پرداخت کننده (عضو)') }}</th>
+                                    <th class="text-center">{{ __('تاریخ پرداخت') }}</th>
+                                    <th class="text-center">{{ __('معلومات اضافی') }}</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @foreach($books as $book)
+                                @foreach($deposits as $deposit)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <!-- Image -->
-                                        <td><img src="{{ $user->image ?? asset('assets/images/deposits/no-image.png') }}" width="50" class="rounded-1"></td>
-                                        <!-- Name -->
-                                        <td><a href="{{ route('admin.deposits.show', $book->id) }}">{{ $book->name }}</a></td>
-                                        <td>{{ $book->author_name }}</td>
-                                        <!-- Closet Number -->
-                                        <td class="tx-sm-12-f">{{ $book->closet_number }}</td>
-                                        <!-- Shelf Number -->
-                                        <td class="tx-sm-12-f">{{ $book->shelf_number }}</td>
+                                        <td>{{ $deposit->year }}</td>
+                                        <td>{{ $deposit->month }} ({{ $deposit->month_number }})</td>
+                                        <!-- Member Name -->
+                                        <td><a href="{{ route('admin.members.show', $deposit->member->id) }}">{{ $deposit->member->name }}</a></td>
                                         <!-- Created Date -->
-                                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($book->created_at)) }}</td>
+                                        <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($deposit->created_at)) }}</td>
+                                        <!-- Extra Info -->
+                                        <td>{{ str()->limit($deposit->info, 200, '...') }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
