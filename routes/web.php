@@ -68,9 +68,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     // Settings
     Route::resource('settings', SettingController::class);
 
-    // Members
+    // ---- Members ----
     Route::resource('members', MemberController::class);
     Route::get('delete-member-avatar/{id}', [MemberController::class, 'deleteMemberAvatar'])->name('members.delete.avatar');
+    Route::match(['get', 'post'], 'add-member-deposit/{id}', [MemberController::class, 'addMemberDeposit'])->name('members.add.deposit');
+
     // Deposits
     Route::resource('deposits', DepositController::class);
 });

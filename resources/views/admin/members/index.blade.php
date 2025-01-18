@@ -53,7 +53,7 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>@lang('form.image')</th>
+                                    <th>{{ __('تصویر') }}</th>
                                     <th>@lang('form.name')</th>
                                     <th>@lang('form.fatherName')</th>
                                     <th>{{ __('مجموع سپرده های موجود') }}</th>

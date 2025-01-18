@@ -158,7 +158,7 @@
                                     <div class="media-body">
                                         <span>@lang('form.email')</span>
                                         <div>
-                                            <a href="mailto:{{ $member->email }}" class="ctd">{{ $member->email }}</a>
+                                            <a href="mailto:{{ $member->email }}">{{ $member->email }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -291,7 +291,7 @@
 
                             <!-- Other Information -->
                             <div class="col-lg col-xxl-5 mt-4 mt-lg-0 offset-xxl-1">
-                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">{{ __('معلومات دیگر') }}</h6>
+                                <h6 class="fw-semi-bold ls mb-3 text-uppercase font-weight-bold">{{ __('معلومات سپرده‌ها') }}</h6>
                                 <!-- Deposits -->
                                 <div class="row">
                                     <div class="col-5 col-sm-4">
@@ -305,7 +305,7 @@
                                     <div class="col-5 col-sm-4">
                                         <p class="fw-semi-bold mb-1"><strong>{{ __('مجموع سپرده ها') }}: </strong></p>
                                     </div>
-                                    <div class="col">{{ $member->deposit_number }}</div>
+                                    <div class="col">{{ $member->deposit_amount }}</div>
                                 </div>
                             </div>
                             <!--/==/ End of Other Information -->
@@ -316,6 +316,60 @@
             </div>
         </div>
         <!--/==/ End of Row Content -->
+
+        <!-- Deposits -->
+        <div class="card mb-2">
+            <!-- Card Header -->
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="font-weight-bold">{{ __('سپرده‌ها') }} ({{ $member->deposits->sum('amount') }})<sup>اف</sup></h5>
+                    </div>
+
+                    <div class="col-md-6 text-left">
+                        <a class="btn btn-primary btn-sm" href="{{ route('admin.members.add.deposit', $member->id) }}">{{ __('ثبت سپرده جدید') }}</a>
+                    </div>
+                </div>
+            </div>
+            <!--/==/ End of Card Header -->
+
+            <div class="card-body">
+                <!-- Table -->
+                <div class="table-responsive mt-2">
+                    <table class="table table-bordered export-table border-top key-buttons display text-nowrap w-100">
+                        <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center">{{ __('عنوان') }}</th>
+                            <th class="text-center">{{ __('سال') }}</th>
+                            <th class="text-center">{{ __('ماه') }}</th>
+                            <th class="text-center">{{ __('مبلغ') }}</th>
+                            <th class="text-center">{{ __('تاریخ پرداخت') }}</th>
+                            <th class="text-center">{{ __('معلومات اضافی') }}</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        @foreach($member->deposits as $deposit)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $deposit->title }}</td>
+                                <td>{{ $deposit->year }}</td>
+                                <td>{{ $deposit->month }} ({{ $deposit->month_number }})</td>
+                                <td>{{ $deposit->amount }}<sup>اف</sup><</td>
+                                <!-- Created Date -->
+                                <td>{{ \Morilog\Jalali\CalendarUtils::strftime('Y-m-d', strtotime($deposit->created_at)) }}</td>
+                                <!-- Extra Info -->
+                                <td>{{ str()->limit($deposit->info, 200, '...') }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!--/==/ End of Table -->
+            </div>
+        </div>
+        <!--/==/ End of Deposits -->
     </div>
 @endsection
 <!--/==/ End of Page Content -->

@@ -43,19 +43,19 @@
         <div class="row">
             <div class="col-lg-12">
                 <!-- Card -->
-                <div class="card custom-card overflow-hidden">
+                <div class="card">
+                    <!-- Form Title -->
+                    <div class="card-header">
+                        <h6 class="card-title font-weight-bold mb-1">{{ __('ویرایش عضو') }}</h6>
+                        <p class="text-muted card-sub-title">{{ __('تعداد اعضای موجود') }}
+                            ({{ \App\Models\Admin\Member::all()->count() }})</p>
+                    </div>
+
                     <!-- Card Body -->
                     <div class="card-body">
                         <div class="">
                             <!-- Errors Message -->
                             @include('admin.inc.alerts')
-
-                            <!-- Form Title -->
-                            <div>
-                                <h6 class="card-title font-weight-bold mb-1">{{ __('ویرایش عضو') }}</h6>
-                                <p class="text-muted card-sub-title">{{ __('تعداد اعضای موجود') }}
-                                    ({{ \App\Models\Admin\Member::all()->count() }})</p>
-                            </div>
 
                             <!-- Form -->
                             <form method="post" action="{{ route('admin.members.update', $member->id) }}" enctype="multipart/form-data">

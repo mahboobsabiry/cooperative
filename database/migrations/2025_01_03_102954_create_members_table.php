@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('phone2')->nullable();
             $table->string('email')->nullable();
             $table->string('address')->nullable();
-            $table->double('deposit_amount')->default(0.0);
-            $table->tinyInteger('status')->default(0);
+            $table->double('deposit_amount')->default(0);
+            $table->tinyInteger('status')->default(1);
             $table->text('info')->nullable();
             $table->timestamps();
         });

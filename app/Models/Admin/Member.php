@@ -24,4 +24,16 @@ class Member extends Model
         $image = asset('assets/images/members/' . $this->avatar);
         return $image;
     }
+
+    // Years
+    public static function years() {
+        $years = ['1403', '1404', '1405', '1406', '1407', '1408', '1409', '1410', '1411', '1412', '1413', '1414', '1415', '1416', '1417', '1418', '1419', '1420'];
+        return $years;
+    }
+
+    // Months
+    public static function months() {
+        $months = ['حمل', 'ثور', 'جوزا', 'سرطان', 'اسد', 'سنبله', 'میزان', 'عقرب', 'قوس', 'جدی', 'دلو', 'حوت'];
+        return $months;
+    }
 }

@@ -175,4 +175,29 @@ class MemberController extends Controller
             'alertType' => 'success'
         ]);
     }
+
+    // Add Deposit
+    public function addMemberDeposit(Request $request, $id)
+    {
+        $member = Member::find($id);
+
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'title' => 'required|max:255',
+                'year'  => 'required|numeric|min:1403|max:1420',
+                'month' => 'required|numeric|min:1|max:12',
+                'deposit_amount'    => 'required',
+                'info'              => 'nullable'
+            ]);
+
+            $member->deposits->update($request->all());
+
+            return redirect()->route('admin.members.show', $member->id)->with([
+                'message'   => 'سپرده موفقانه ثبت گردید.',
+                'alertType' => 'success'
+            ]);
+        }
+
+        return view('admin.members.add_deposit', compact('member'));
+    }
 }
